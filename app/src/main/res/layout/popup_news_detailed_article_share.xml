@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup_share_root_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000"
+    android:focusable="false" >
+
+    <LinearLayout
+        android:id="@+id/popu_outside_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/news_detailed_share_layout"
+        android:background="@color/transparent"
+        android:clickable="true"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/news_detailed_share_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:background="#F5ededed"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/popup_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:background="@color/transparent"
+                android:gravity="center_horizontal"
+                android:textSize="12sp"
+                android:textColor="#898989"
+                android:text="@string/share_my_profile" />
+
+            <HorizontalScrollView
+                android:id="@+id/hsv_line_one"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:fadeScrollbars="false"
+                android:scrollbars="none"
+                android:visibility="gone" >
+
+                <LinearLayout
+                    android:id="@+id/icons_ll_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dip"
+                    android:paddingLeft="8dip"
+                    android:paddingRight="8dip"
+                    android:paddingTop="10dip" >
+                </LinearLayout>
+            </HorizontalScrollView>
+			<View 
+			    android:id="@+id/line"
+			    android:layout_width="match_parent"
+			    android:layout_height="1px"
+			    android:background="#c9c9c9"
+			    android:layout_margin="10dp"
+			    android:visibility="gone" />
+            <HorizontalScrollView
+                android:id="@+id/hsv_line_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:fadeScrollbars="false"
+                android:scrollbars="none"
+                android:visibility="gone"
+                android:layout_marginBottom="10dp" >
+
+                <LinearLayout
+                    android:id="@+id/icons_ll_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dip"
+                    android:paddingLeft="8dip"
+                    android:paddingRight="8dip"
+                    android:paddingTop="10dip" >
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent" >
+
+            <Button
+                android:id="@+id/share_gv_btn"
+                android:layout_width="match_parent"
+                android:layout_height="49dip"
+                android:background="#20525252"
+                android:text="@string/cancel"
+                android:textSize="13sp"
+                android:textColor="@color/black_text" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

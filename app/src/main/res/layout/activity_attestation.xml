@@ -1,0 +1,130 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    tools:context="com.wealoha.social.ui.attestation.AttestationActivity"
+    android:id="@+id/root_view" >
+
+    <RelativeLayout 
+        android:id="@+id/menu_bar"
+        style="@style/aloha_title_container"
+        android:background="@drawable/layout_silde" >
+
+        <ImageView
+            android:id="@+id/attestation_back_tv"
+            style="@style/aloha_title_back_btn"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:id="@+id/attestation_title"
+            style="@style/aloha_title"
+            android:text="@string/attestation_str" />
+
+        <TextView
+            android:id="@+id/attestation_next_tv"
+            style="@style/aloha_title_red_btn"
+            android:text="@string/continued" />
+    </RelativeLayout>
+	<RelativeLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_below="@id/menu_bar">
+        
+        <!-- unlock attestation title bar , 解锁页面的标题栏-->
+        <RelativeLayout 
+        	android:id="@+id/unlock_menu_bar"
+	        style="@style/aloha_title_container"
+	        android:background="@color/white_color"
+	        android:visibility="gone"
+	        android:layout_alignParentTop="true" >
+	
+	        <ImageView
+	            android:id="@+id/unlock_attestation_back_tv"
+	            style="@style/aloha_title_back_btn"
+	            android:contentDescription="@null" />
+	
+	        <TextView
+	            android:id="@+id/unlock_attestation_next_tv"
+	            style="@style/aloha_title_red_btn"
+	            android:text="@string/signin" />
+	    </RelativeLayout>
+	    <!-- unlock attestation title bar end-->
+	    
+	    <LinearLayout 
+	        android:id="@+id/input_view_layout"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_centerInParent="true"
+		    android:orientation="vertical">
+	        <TextView
+		        android:id="@+id/password_state"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="5dip"
+		        android:gravity="center"
+		        android:text="@string/input_pw_attestation_str"
+		        android:textColor="@color/black_text"
+		        android:textSize="16sp" />
+	        <TextView 
+		        android:id="@+id/user_phone_num"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:gravity="center"
+		        android:layout_marginBottom="20dip"
+		        android:textColor="@color/gray_aaaaaa"
+		        android:textSize="13sp"/>
+	        <View
+		        android:id="@+id/line_one"
+		        android:layout_width="match_parent"
+		        android:layout_height="1px"
+		        android:background="@color/nav_line" />
+		    <EditText
+		        android:id="@+id/password_et"
+		        android:layout_width="match_parent"
+		        android:layout_height="44dip"
+		        android:background="@android:color/white"
+		        android:gravity="center"
+		        android:inputType="textPassword"
+		        android:textSize="20sp" />
+		    <View
+		        android:layout_width="match_parent"
+		        android:layout_height="1px"
+		        android:background="@color/nav_line" />
+		</LinearLayout>
+	    
+	    
+	    <TextView 
+	        android:id="@+id/other_account_login"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentBottom="true"
+	        android:text="@string/sign_out_current_account"
+	        android:gravity="center"
+	        android:textSize="13sp"
+	        android:textColor="@color/black_text"
+	        android:layout_margin="25dp"/>
+	    
+	    <!-- loading -->
+	    <RelativeLayout
+	        android:id="@+id/loading_popup"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:background="@drawable/prompt_pop_fillet"
+		    android:gravity="center"
+		    android:padding="20dp"
+		    android:layout_centerInParent="true"
+		    android:visibility="gone" >
+		
+		    <ProgressBar
+		        android:id="@+id/login_gif_view"
+		        android:layout_width="40dip"
+		        android:layout_height="40dip"
+		        android:layout_centerInParent="true"
+		        style="@android:style/Widget.ProgressBar" />
+
+		</RelativeLayout>
+		<!-- loading end -->
+	</RelativeLayout>
+
+</RelativeLayout>

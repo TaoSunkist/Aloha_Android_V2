@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/config_details_container"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/menu_bar"
+        style="@style/aloha_title_container" >
+
+        <ImageView
+            android:id="@+id/config_details_back"
+            style="@style/aloha_title_back_btn"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:id="@+id/config_detail_title"
+            style="@style/aloha_title"
+            android:text="@string/set_profile" />
+
+        <TextView
+            android:id="@+id/config_save_tv"
+            style="@style/aloha_title_red_btn"
+            android:text="@string/save" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/nav_line" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/act_bg" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/config_details_userphoto_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/act_bg"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="20dp" >
+
+                <com.wealoha.social.view.custom.CircleImageView
+                    android:id="@+id/config_details_userphoto_civ"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/edit"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/nav_line" />
+
+            <RelativeLayout
+                android:id="@+id/config_details_username_rl"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/id_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/aloha_id" />
+
+                <EditText
+                    android:id="@+id/config_details_username_et"
+                    style="@style/aloha_listitem_btn_right"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignEnd="@+id/id_tv"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignRight="@+id/id_tv"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginStart="10dip"
+                    android:layout_toEndOf="@+id/id_tv"
+                    android:layout_toRightOf="@+id/id_tv"
+                    android:background="@null"
+                    android:focusable="true"
+                    android:gravity="end|center_vertical"
+                    android:maxLength="20"
+                    android:minWidth="20dp"
+                    android:singleLine="true" />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/id_tv"
+                    android:layout_alignStart="@id/id_tv" />
+            </RelativeLayout>
+
+            <!--
+            <RelativeLayout
+                android:id="@+id/config_details_area"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/location_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/location" />
+
+                <ImageView
+                    android:id="@+id/location_iv"
+                    style="@style/aloha_listitem_btn_right_back"
+                    android:contentDescription="@null" />
+
+                <TextView
+                    android:id="@+id/config_details_area_tv"
+                    style="@style/aloha_listitem_btn_right"
+                    android:layout_toLeftOf="@id/location_iv"
+                    android:layout_toStartOf="@id/location_iv"
+                     />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/location_tv"
+                    android:layout_alignStart="@id/location_tv"
+                     />
+            </RelativeLayout>
+            -->
+
+            <RelativeLayout
+                android:id="@+id/config_details_age"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/age_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/age" />
+
+                <ImageView
+                    android:id="@+id/age_iv"
+                    style="@style/aloha_listitem_btn_right_back"
+                    android:contentDescription="@null" />
+
+                <TextView
+                    android:id="@+id/config_details_age_tv"
+                    style="@style/aloha_listitem_btn_right"
+                    android:layout_toLeftOf="@id/age_iv"
+                    android:layout_toStartOf="@id/age_iv" />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/age_tv"
+                    android:layout_alignStart="@id/age_tv" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/config_details_height"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/height_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/height" />
+
+                <ImageView
+                    android:id="@+id/height_iv"
+                    style="@style/aloha_listitem_btn_right_back"
+                    android:contentDescription="@null" />
+
+                <TextView
+                    android:id="@+id/config_details_height_tv"
+                    style="@style/aloha_listitem_btn_right"
+                    android:layout_toLeftOf="@id/height_iv"
+                    android:layout_toStartOf="@id/height_iv" />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/height_tv"
+                    android:layout_alignStart="@id/height_tv" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/config_details_weight"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/weight_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/weight" />
+
+                <ImageView
+                    android:id="@+id/weight_iv"
+                    style="@style/aloha_listitem_btn_right_back"
+                    android:contentDescription="@null" />
+
+                <TextView
+                    android:id="@+id/config_details_weight_tv"
+                    style="@style/aloha_listitem_btn_right"
+                    android:layout_toLeftOf="@id/weight_iv"
+                    android:layout_toStartOf="@id/weight_iv" />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/weight_tv"
+                    android:layout_alignStart="@id/weight_tv" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/config_details_stature"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@color/background"
+                android:clickable="true"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:id="@+id/config_details_stature_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/figure" />
+
+                <!-- 注意，这几个Radio的tag是提交给API用的，不要修改 -->
+
+                <RadioGroup
+                    android:id="@+id/config_details_stature_rg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_below="@id/config_details_stature_tv"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/radio_bear"
+                        style="@style/aloha_config_details_radio"
+                        android:tag="Bear"
+                        android:text="@string/bear" />
+
+                    <RadioButton
+                        android:id="@+id/radio_muscle"
+                        style="@style/aloha_config_details_radio"
+                        android:tag="Muscle"
+                        android:text="@string/muscle" />
+
+                    <RadioButton
+                        android:id="@+id/radio_average"
+                        style="@style/aloha_config_details_radio"
+                        android:tag="Average"
+                        android:text="@string/average" />
+
+                    <RadioButton
+                        android:id="@+id/radio_slim"
+                        style="@style/aloha_config_details_radio"
+                        android:tag="Slim"
+                        android:text="@string/slim" />
+                </RadioGroup>
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/config_details_stature_tv"
+                    android:layout_alignStart="@id/config_details_stature_tv" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/config_details_goal"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@color/background"
+                android:clickable="true"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:id="@+id/config_details_goal_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/goal" />
+
+                <!-- 注意，这几个CheckBox的tag是提交给API用的，不要修改 -->
+
+                <CheckBox
+                    android:id="@+id/config_details_goal_cb1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/config_details_goal_tv"
+                    android:layout_alignStart="@id/config_details_goal_tv"
+                    android:layout_below="@id/config_details_goal_tv"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/selector_details_redaio_btn"
+                    android:button="@null"
+                    android:paddingBottom="6dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="6dp"
+                    android:tag="Relationship"
+                    android:text="@string/lovers"
+                    android:textColor="@color/gray_text"
+                    android:textSize="12sp" />
+
+                <CheckBox
+                    android:id="@+id/config_details_goal_cb2"
+                    style="@style/aloha_config_details_radio"
+                    android:layout_below="@id/config_details_goal_tv"
+                    android:layout_toEndOf="@id/config_details_goal_cb1"
+                    android:layout_toRightOf="@id/config_details_goal_cb1"
+                    android:tag="Friends"
+                    android:text="@string/friend" />
+
+                <CheckBox
+                    android:id="@+id/config_details_goal_cb3"
+                    style="@style/aloha_config_details_radio"
+                    android:layout_below="@id/config_details_goal_tv"
+                    android:layout_toEndOf="@id/config_details_goal_cb2"
+                    android:layout_toRightOf="@id/config_details_goal_cb2"
+                    android:tag="Other"
+                    android:text="@string/others" />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/config_details_goal_tv"
+                    android:layout_alignStart="@id/config_details_goal_tv" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/config_details_introduction"
+                style="@style/aloha_listitem_btn_container"
+                android:layout_height="70dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:id="@+id/config_details_introduction_tvf"
+                    style="@style/aloha_listitem_btn_left"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/about" />
+
+                <ImageView
+                    android:id="@+id/config_details_introduction_iv"
+                    style="@style/aloha_listitem_btn_right_back"
+                    android:contentDescription="@null" />
+
+                <TextView
+                    android:id="@+id/config_details_introduction_tv"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/config_details_introduction_iv"
+                    android:layout_below="@id/config_details_introduction_tvf"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    android:ellipsize="marquee"
+                    android:gravity="bottom"
+                    android:maxLines="1"
+                    android:textColor="@color/gray_text"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/nav_line" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/act_bg" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

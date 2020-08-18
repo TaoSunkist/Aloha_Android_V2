@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:id="@+id/root_view"
+    android:background="@drawable/layout_silde_01"
+    android:paddingBottom="8dp" >
+
+    <com.wealoha.social.view.custom.CircleImageView
+        android:id="@+id/item_feed_notice_comment_userhead_cv"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="15dip"
+        android:layout_marginStart="15dip"
+        android:layout_marginTop="8dip"
+        android:clickable="true"
+        android:src="@drawable/myotee2" />
+
+    <RelativeLayout
+        android:id="@+id/title_wrap_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/item_feed_notice_comment_userhead_cv"
+        android:layout_toEndOf="@id/item_feed_notice_comment_userhead_cv"
+        android:minHeight="70dip" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:padding="7dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/item_feed_notice_time_stamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4dip"
+                android:layout_marginEnd="4dip"
+                android:textColor="@color/time_stamp_text"
+                android:textSize="12sp"
+                android:text="sdfasd" />
+
+            <ImageView
+                android:id="@+id/item_feed_notice_img_iv"
+                android:layout_width="38dip"
+                android:layout_height="38dip"
+                android:clickable="true"
+                android:src="@drawable/icon_scan"
+                android:contentDescription="@string/app_name" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_feed_notice_comment_username_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_marginStart="10dip"
+            android:layout_marginTop="16dip"
+            android:layout_toLeftOf="@id/linearLayout1"
+            android:layout_toStartOf="@id/linearLayout1"
+            android:textStyle="bold"
+            android:textColor="@color/black_text"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/item_feed_notice_comment_body_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_feed_notice_comment_username_tv"
+            android:layout_marginLeft="10dip"
+            android:layout_marginStart="10dip"
+            android:layout_marginTop="5dp"
+            android:layout_toLeftOf="@id/linearLayout1"
+            android:layout_toStartOf="@id/linearLayout1"
+            android:textColor="@color/black_text"
+            android:textSize="13sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

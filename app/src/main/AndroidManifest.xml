@@ -1,0 +1,823 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.wealoha.social">
+
+    <uses-sdk android:targetSdkVersion="20" />
+    <!-- BEGIN 二维码运行需要的权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission
+        android:name="android.permission.MANAGE_DOCUMENTS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
+
+    <!-- 高德地图需要权限 -->
+    <!--
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission
+        android:name="android.permission.CHANGE_CONFIGURATION"
+        tools:ignore="ProtectedPermissions" />
+
+    <!-- <uses-permission android:name="androd.permission.INSTALL_PACKAGES" /> -->
+    <!-- 小米自定义权限 -->
+    <permission
+        android:name="com.wealoha.social.permission.MIPUSH_RECEIVE"
+        android:protectionLevel="signatureOrSystem" />
+    <!-- 这里com.xiaomi.mipushdemo改成app的包名 -->
+    <uses-permission android:name="com.wealoha.social.permission.MIPUSH_RECEIVE" />
+
+    <application
+        android:name=".AppApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:theme="@style/AppBaseTheme">
+        <!-- 配置发布的应用商店。注意！！打包前一定要修改成对应的商店 -->
+        <meta-data
+            android:name="ANDROID_STORE"
+            android:value="Official" />
+        <!-- name,value必须在一行或者两行紧挨着 -->
+        <!-- Facebook的照片 -->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationName"
+            android:value="@string/app_name" />
+        <!-- 内部版本号。注意！！打包前像后端询问新版本 -->
+
+        <!-- App呼起服务 -->
+        <service
+            android:name=".launch.LaunchService"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="006e7dfdcf8f190e42c57b681eec9bcd" />
+        <!-- android:value="006e7dfdcf8f190e42c57b681eec9bcd" /> -->
+        <!-- android:value="73278501802b8a21b9ff26f6e6104481" /> -->
+
+
+        <!-- 定位service -->
+        <service android:name=".services.AppLocationService" />
+        <!-- 配置SDK核心服务 -->
+        <receiver
+            android:name=".receive.MonitorNoticeColumnClearBroadcast"
+            android:enabled="true"></receiver>
+
+        <!-- 网络状态广播 -->
+        <receiver
+            android:name=".ConnectionChangeRecevier"
+            android:label="NetworkConnection">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".activity.WelcomeAct"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppStartLoad">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/welcome/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.NaviIntroActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppStartLoadTranslucent">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- web 呼起app时的控制 -->
+        <activity
+            android:name=".activity.WebLaunchActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppStartLoadTranslucent">
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.VIEW" />-->
+
+            <!--                <category android:name="android.intent.category.DEFAULT" />-->
+            <!--                <category android:name="android.intent.category.BROWSABLE" />-->
+            <!--            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".activity.CropImageActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/cropimage/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.LoginAct"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/login/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.RegisterAct"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/register/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.StatementAct"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:port="1000"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.VerifyAct"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/verify/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.UserDataAct"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/userdata/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+
+
+        <!-- 崩溃统计 -->
+        <meta-data
+            android:name="com.crashlytics.ApiKey"
+            android:value="1b7f51036d733dffb2caf5f3ea80d3ce310427fa" />
+
+        <activity
+            android:name=".activity.AdvancedFeaturesAct"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/advancedfeatured/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.ConfigDetailsAct"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/configdetails/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.ChangePasswordAct"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/configpassword/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+
+        <!-- Match -->
+        <!-- 背景必需透明 -->
+        <activity
+            android:name=".activity.MainAct"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/match/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.LeaveCommentAct"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/leavecomment/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.PicSendActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/picsend/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.wealoha.social.ui.dialogue.DialogueActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/dialogue/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.NewPasswordAct"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/newpassword/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.ConfigIntroductionAct"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/introduction/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <!--        <activity android:name=".activity.SelectPicPopupWindow" />-->
+        <activity
+            android:name=".activity.LocationAct"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/location/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.InvitationCodeAct"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/invitation/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <!-- Fragment代理 -->
+        <activity
+            android:name=".activity.FragmentWrapperActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/fragment-to-activity/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.AlerPhoneNumActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/AlerPhoneNumActivity-activity/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.OAuthSinaAct"
+            android:label="@string/app_name"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/o_auth_sina/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.ImgCropingActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".activity.FeedNoticeAct"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/feed_notice/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.ConfigInstagramAct"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/config_instagram/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.ChatBigImgAct"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/chat_big_img/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.InstagramWebViewAct"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/instagram_web/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.ConfigHaveInstagramConfig"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/config_have_instagram/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.LocationForFeedAct"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/location_for_feed/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.FindYouAct"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/find_you/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.FilterSettingAct"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.VIEW" />-->
+
+            <!--                <category android:name="android.intent.category.DEFAULT" />-->
+            <!--                <category android:name="android.intent.category.BROWSABLE" />-->
+            <!--            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".activity.LauncherImgAct"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.VIEW" />-->
+
+            <!--                <category android:name="android.intent.category.DEFAULT" />-->
+            <!--                <category android:name="android.intent.category.BROWSABLE" />-->
+            <!--            </intent-filter>-->
+        </activity>
+        <!-- 高德地图 -->
+        <activity
+            android:name=".activity.GDMapAct"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"></activity>
+
+        <receiver android:name=".receive.AlarmReceiver"></receiver>
+
+        <!-- 小米PUsh -->
+        <service
+            android:name="com.xiaomi.push.service.XMPushService"
+            android:enabled="true"
+            android:process=":pushservice" />
+        <service
+            android:name="com.xiaomi.mipush.sdk.PushMessageHandler"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name="com.xiaomi.mipush.sdk.MessageHandleService"
+            android:enabled="true" />
+        <!-- 注：此service必须在2.2.5版本以后（包括2.2.5版本）加入 -->
+        <receiver
+            android:name="com.xiaomi.push.service.receivers.NetworkStatusReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.xiaomi.push.service.receivers.PingReceiver"
+            android:exported="false"
+            android:process=":pushservice">
+            <intent-filter>
+                <action android:name="com.xiaomi.push.PING_TIMER" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".push.XmPushBroadcast"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.xiaomi.mipush.ERROR" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".receive.NetworkConnectChangedReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".services.DownloadService"
+            android:label="DownloadService"></service>
+
+        <activity
+            android:name=".activity.WebActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".activity.CaptureActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/CaptureActivity/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.TagFeedAct"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/tag_feed/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.NewAlohaActivity"
+            android:label="@string/title_activity_new_aloha">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/NewAlohaActivity/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.FeedCommentActivity"
+            android:label="@string/title_activity_new_aloha"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/FeedCommentActivity/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.ProFeatureAct"
+            android:label="@string/title_activity_new_aloha">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/NewAlohaActivity/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LocationActivity"
+            android:label="@string/title_activity_location"></activity>
+        <activity
+            android:name=".activity.TestAct"
+            android:label="testact">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.topic.TopicDetailActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/topic/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.lock.CheckPasswordAct">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.lock.GestureLockAct"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.privacy.PrivacyActivity"
+            android:label="@string/title_activity_privacy">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/privacy_act/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.wealoha.social.ui.attestation.AttestationActivity"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/attestation_act/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

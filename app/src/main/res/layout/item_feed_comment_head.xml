@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/header_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:gravity="center_vertical"
+    android:background="@color/white_color" >
+	<FrameLayout 
+	    android:id="@+id/header_feed_root"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentTop="true" />
+    <RelativeLayout
+	    android:id="@+id/user_list"
+	    android:layout_width="match_parent"
+	    android:layout_height="53dp"
+	    android:clickable="true"
+	    android:paddingLeft="9dp"
+	    android:paddingStart="9dp"
+	    android:paddingEnd="9dp"
+	    android:layout_below="@id/header_feed_root"
+	    android:background="@drawable/layout_silde_white_bg" >
+	</RelativeLayout>
+	<RelativeLayout 
+	    android:id="@+id/privacy_comment_sign"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/user_list"
+	    android:background="@color/yellow">
+	    <TextView 
+	        android:id="@+id/privacy_comment_sign_view"
+	        android:layout_width="wrap_content"
+	        android:layout_height="30dp"
+	        android:layout_centerInParent="true"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentStart="true"
+	        android:gravity="center"
+	        android:text="@string/privacy_comment_sign"
+	        android:visibility="gone"/>
+	    <TextView 
+	        android:id="@+id/privacy_link"
+	        android:layout_width="wrap_content"
+	        android:layout_height="30dp"
+	        android:gravity="center"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignParentEnd="true"
+	        android:visibility="gone"/>
+	</RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/title_wrap_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_marginLeft="75dp"
+        android:layout_marginStart="75dp"
+        android:layout_below="@id/privacy_comment_sign"
+        android:clickable="true" >
+
+        <TextView
+            android:id="@+id/item_feed_comment_head_load_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:text="@string/load_comment_leaven"
+            android:textColor="@color/light_gray_text"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/item_feed_comment_pb"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="25dip"
+            android:layout_height="25dip"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@id/item_feed_comment_head_load_tv"
+            android:layout_toEndOf="@id/item_feed_comment_head_load_tv" />
+    </RelativeLayout>
+
+</RelativeLayout>

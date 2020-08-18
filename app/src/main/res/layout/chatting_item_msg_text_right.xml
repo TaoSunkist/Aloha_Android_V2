@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:padding="6dp" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_sendtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="#bfbfbf"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <com.wealoha.social.view.custom.CircleImageView
+            android:id="@+id/userhead_iv"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/myotee2" />
+
+        <RelativeLayout
+            android:id="@+id/tv_chatcontent_fl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/userhead_iv"
+            android:background="@drawable/buddle_red"
+            android:gravity="left|center"
+            android:longClickable="true" >
+
+            <TextView
+                android:id="@+id/tv_chatcontent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:longClickable="true"
+                android:maxWidth="200dp"
+                android:textColor="#FFFFFF"
+                android:textColorLink="#FFFFFF"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/iv_chatcontent_fl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/userhead_iv"
+            android:clickable="true"
+            android:gravity="left|center"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <ImageView
+                android:id="@+id/iv_chatcontent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:longClickable="true" />
+
+            <ImageView
+                android:id="@+id/iv_chatcontent_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bubble_kuang_me"
+                android:clickable="true"
+                android:focusable="true" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/resend_tv"
+            android:layout_width="30dip"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:layout_toLeftOf="@+id/tv_chatcontent_fl"
+            android:clickable="true"
+            android:src="@drawable/warning_3x"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/right_pb_tv"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="20dip"
+            android:layout_height="20dip"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:layout_toLeftOf="@+id/tv_chatcontent_fl"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/resend_iv"
+            android:layout_width="30dip"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:layout_toLeftOf="@+id/iv_chatcontent_fl"
+            android:clickable="true"
+            android:src="@drawable/warning_3x"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/right_pb"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="20dip"
+            android:layout_height="20dip"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:layout_toLeftOf="@+id/iv_chatcontent_fl"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</LinearLayout>

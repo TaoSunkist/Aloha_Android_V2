@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true" >
+
+    <FrameLayout
+        android:id="@+id/capture_frame"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <SurfaceView
+            android:id="@+id/capture_preview_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/wrap_viewfinder_rl"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1.1"
+            android:background="@color/transparent" >
+
+            <com.wealoha.social.zxing.ViewfinderView
+                android:id="@+id/capture_viewfinder_view"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/capture_user_capture_rl"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:background="@color/white_color" >
+
+            <ImageView
+                android:id="@+id/ewm_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/menu_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="48dip"
+        android:background="@color/transparent" >
+
+        <ImageView
+            android:id="@+id/capture_flashlight"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:clickable="true"
+            android:scaleType="center"
+            android:src="@drawable/camera_back" />
+
+        <TextView
+            android:id="@+id/capture_top_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:paddingBottom="10dip"
+            android:paddingTop="10dip"
+            android:text="@string/scan_qr_code"
+            android:textColor="#ffffffff"
+            android:textSize="13.0sp" />
+
+        <TextView
+            android:id="@+id/capture_scan_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dip"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="@string/capture_select_img"
+            android:textColor="@color/red_one"
+            android:textSize="13.0sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:paddingEnd="8dip"
+    android:paddingLeft="8dip"
+    android:paddingStart="8dip"
+    android:paddingTop="8dip" >
+
+    <com.wealoha.social.view.custom.CircleImageView
+        android:id="@+id/item_new_aloha_user_photo"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/myotee2" />
+
+    <TextView
+        android:id="@+id/item_new_aloha_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_toEndOf="@id/item_new_aloha_user_photo"
+        android:layout_toRightOf="@id/item_new_aloha_user_photo"
+        android:textColor="@color/black_text"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/user_infos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_new_aloha_user_name"
+        android:layout_margin="3dp"
+        android:layout_toEndOf="@id/item_new_aloha_user_photo"
+        android:layout_toRightOf="@id/item_new_aloha_user_photo"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/gray_text"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/item_new_aloha_user_photo_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_infos"
+        android:layout_margin="3dp"
+        android:layout_toEndOf="@id/item_new_aloha_user_photo"
+        android:layout_toRightOf="@id/item_new_aloha_user_photo"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/gray_text"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/item_new_aloha_macht_or_not"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="3dp"
+        android:paddingEnd="10dp"
+        android:paddingRight="10dp"
+        android:paddingStart="10dp"
+        android:text="@string/matched"
+        android:textColor="@color/gray_text"
+        android:textSize="12sp"
+        android:visibility="invisible" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignLeft="@id/item_new_aloha_user_name"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@id/item_new_aloha_user_name"
+        android:layout_below="@id/item_new_aloha_user_photo"
+        android:layout_marginTop="6dip"
+        android:background="@color/line" />
+
+</RelativeLayout>

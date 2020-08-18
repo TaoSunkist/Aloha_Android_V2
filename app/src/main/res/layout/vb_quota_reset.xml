@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_more_to_explore_now" />
+
+    <TextView
+        android:id="@+id/countdown_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="02:22:55"
+        android:textColor="@color/red_one"
+        android:textSize="18sp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="Accelerate"
+        android:text="@string/speed_up" />
+
+</LinearLayout>

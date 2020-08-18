@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fff" >
+
+    <RelativeLayout
+        android:id="@+id/menu_bar"
+        style="@style/aloha_title_container" >
+
+        <ImageView
+            android:id="@+id/instagram_back"
+            style="@style/aloha_title_back_btn" />
+
+        <TextView
+            android:id="@+id/instagram_title"
+            style="@style/aloha_title"
+            android:text="@string/instagram" />
+    </RelativeLayout>
+    <ProgressBar 
+        android:id="@+id/instagram_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+        android:progress="10"
+        android:max="100"/>
+
+    <WebView
+        android:id="@+id/instagram_web_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+         />
+
+</LinearLayout>

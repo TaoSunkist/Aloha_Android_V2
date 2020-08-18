@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_feed_first_photo_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/gray_text" >
+     <TextureView 
+        android:id="@+id/textureview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <FrameLayout 
+        android:id="@+id/mediaplayer_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true">
+	    <ImageView
+	        android:id="@+id/item_feed_parise_iv"
+	        android:layout_width="30dp"
+	        android:layout_height="30dp"
+	        android:layout_gravity="center"
+	        android:contentDescription="@null"
+	        android:src="@drawable/feed_like_large"
+	        android:clickable="true"
+	        android:visibility="invisible" />
+    </FrameLayout>
+    <TextView
+        android:id="@+id/sound_switch"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black_transpant_50"
+        android:gravity="center"
+        android:text="@string/touch_video_prompt"
+        android:textColor="@color/white_color"
+        android:textSize="13sp"
+        android:visibility="visible" />
+    <RelativeLayout 
+        android:id="@+id/cover_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_color">
+        <ImageView
+	        android:id="@+id/video_image"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:contentDescription="@null" />
+        <ImageView
+	        android:id="@+id/start_image"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@drawable/play_btn"
+        	android:contentDescription="@null"
+        	android:layout_centerInParent="true" />
+        <ProgressBar 
+            android:id="@+id/progress_bar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="20dp"
+            android:visibility="gone"
+            style="@android:style/Widget.ProgressBar.Large"/>
+    </RelativeLayout>
+</RelativeLayout>

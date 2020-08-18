@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/first_aloha_title"
+        style="@style/dialog_aloha_prompt_title"
+        android:background="@color/app_background"
+        android:gravity="center"
+        android:paddingBottom="12dip"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="12dip"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/first_aloha_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app_background"
+        android:gravity="center"
+        android:lineSpacingExtra="3dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textColor="@color/black_text" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/close_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/dialog_click_selector"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="@string/ok_i_know"
+            android:textColor="@color/red"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/vertical_line"
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/line"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/close_tv_02"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/dialog_click_selector"
+            android:gravity="center"
+            android:padding="20dp"
+            android:text="@string/ok_i_know"
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>

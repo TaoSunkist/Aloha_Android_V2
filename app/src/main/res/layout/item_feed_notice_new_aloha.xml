@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dip"
+    android:paddingTop="15dip"
+    android:id="@+id/root_view"
+    android:background="@drawable/layout_silde_01" >
+
+    <ImageView
+        android:id="@+id/item_feed_notice_new_aloha_icon_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/item_feed_notice_comment_feed_rl"
+        android:layout_marginLeft="15dip"
+        android:layout_marginTop="2dip"
+        android:background="@drawable/fire"
+        android:contentDescription="@string/app_name" />
+
+    <TextView
+        android:id="@+id/item_feed_notice_new_aloha_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/item_feed_notice_new_aloha_icon_iv"
+        android:layout_marginLeft="10dip"
+        android:layout_marginStart="10dip"
+        android:layout_toEndOf="@id/item_feed_notice_new_aloha_icon_iv"
+        android:layout_toRightOf="@id/item_feed_notice_new_aloha_icon_iv"
+        android:textColor="@color/black_text"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/item_feed_notice_new_aloha_stamp_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/item_feed_notice_new_aloha_icon_iv"
+        android:layout_alignParentRight="true"
+        android:paddingRight="4dip"
+        android:textColor="@color/time_stamp_text"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:id="@+id/item_feed_notice_new_aloha_wrap_users_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/item_feed_notice_new_aloha_title_tv"
+        android:layout_below="@id/item_feed_notice_new_aloha_title_tv"
+        android:layout_marginTop="13dip"
+        android:layout_toRightOf="@id/item_feed_notice_new_aloha_icon_iv"
+        android:orientation="horizontal" >
+    </LinearLayout>
+
+</RelativeLayout>

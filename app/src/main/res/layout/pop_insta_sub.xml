@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="5dp"
+    android:paddingLeft="10dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp" >
+    <ImageView
+        android:id="@+id/insta_rectangle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/insta_rectangle"
+        android:contentDescription="@null"/>
+    <TextView 
+        android:id="@+id/insta_sub_text"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:padding="8dp"
+        android:layout_below="@id/insta_rectangle"
+        android:background="@drawable/shape_advanced_text"
+        android:text="@string/instagram"
+        android:textColor="#ffff"
+        android:textSize="15sp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+         />
+</RelativeLayout>

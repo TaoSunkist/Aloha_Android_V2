@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/launch" >
+
+    <Button
+        android:id="@+id/cancle"
+        style="@style/login_register_btn"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@null"
+        android:onClick="cancel"
+        android:text="@string/cancel"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:id="@+id/container_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cancle"
+        android:gravity="left"
+        android:orientation="vertical"
+        android:paddingLeft="40dp" >
+
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/areacode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:text="@string/china_86"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text=" ▼"
+                android:textColor="#fff"
+                android:textSize="8sp" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/login_account"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/phone_number"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textColorHint="#50ffffff"
+            android:textCursorDrawable="@null"
+            android:textSize="22sp" />
+
+        <EditText
+            android:id="@+id/login_password"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:digits="`1234567890-=~!@#$%^&amp;*()_+qwertyuiop[]\asdfaghjkl&apos;zxcvbnm,./QWERTYUIOP{}|ASDFGHJKL:&quot;ZXCVBNM&lt;>"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textColorHint="#50ffffff"
+            android:textCursorDrawable="@null"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:layout_alignParentBottom="true" >
+
+        <Button
+            android:id="@+id/login_btn"
+            android:layout_width="190dp"
+            android:layout_height="45dp"
+            android:background="@drawable/selector_register_btns"
+            android:text="@string/signin"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/forgot_pw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:paddingTop="10dp"
+            android:text="@string/forgot_password"
+            android:textColor="#7fffffff"
+            android:textSize="14sp"
+            android:layout_below="@id/login_btn"
+            android:layout_marginTop="16dp"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+</RelativeLayout>

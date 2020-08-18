@@ -1,0 +1,76 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+androidExtensions {
+    experimental = true
+}
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.wealoha.social"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        renderscriptTargetApi 21
+        renderscriptSupportModeEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    testImplementation 'junit:junit:4.12'
+    implementation 'commons-io:commons-io:2.4'
+    implementation 'com.android.support:support-v4:25.2.0'
+
+    implementation 'com.squareup.picasso:picasso:2.4.0'
+    implementation 'com.squareup.retrofit:retrofit:1.7.1' // 1.9.0
+    kapt('com.squareup.dagger:dagger-compiler:1.2.2')
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+    /* network request core */
+    implementation 'com.squareup.okhttp3:okhttp:4.7.2'
+    /* json parse */
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'javax.inject:javax.inject:1'
+    implementation 'com.github.moove-it:fakeit:v0.7'
+//    annotationProcessor "org.androidannotations:androidannotations:3.0+"
+
+    implementation 'org.apache.httpcomponents:httpclient-android:4.3.5.1'
+    implementation 'org.apache.commons:commons-collections4:4.0'
+
+    /* Lifecycles only (without ViewModel or LiveData) */
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    implementation "androidx.core:core-ktx:1.3.1"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.72"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.72"
+    /* EventBus */
+
+    /* rxjava support */
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
+    /* https://github.com/JakeWharton/RxRelay */
+    implementation 'com.jakewharton.rxrelay2:rxrelay:2.1.1'
+}

@@ -1,0 +1,162 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setting_notification"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    tools:context="me.cu.app.ui.SettingNotificationActivity" >
+
+    <RelativeLayout
+        android:id="@+id/menu_bar"
+        style="@style/aloha_title_container" >
+
+        <ImageView
+            android:id="@+id/setting_notification_back_tv"
+            style="@style/aloha_title_back_btn"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:id="@+id/setting_notification_menu_bar_tv"
+            style="@style/aloha_title"
+            android:text="@string/setting_notification" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/nav_line" >
+        </View>
+    </RelativeLayout>
+    <!-- 最外层所有控件的布局 -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/menu_bar" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical" >
+
+            <!-- 讯息通知部分 -->
+            <TextView
+                style="@style/aloha_notifacation_seting_item_title"
+                android:text="@string/setting_notification_title_privacy" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+
+            <RelativeLayout style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/switch_notify_show_detail_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/setting_notification_show_message_summary" />
+
+                <com.wealoha.social.view.custom.SlideSwitch
+                    android:id="@+id/switch_notify_show_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
+                     />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+
+            <TextView
+                style="@style/aloha_notifacation_seting_item_title"
+                android:layout_marginTop="0dp"
+                android:text="@string/setting_notification_title_preference" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+
+            <RelativeLayout style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/switch_ring_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/setting_notification_ring_tone" />
+
+                <com.wealoha.social.view.custom.SlideSwitch
+                    android:id="@+id/switch_ring"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
+                     />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/switch_ring_tv"
+                    android:layout_alignStart="@id/switch_ring_tv"
+                     />
+            </RelativeLayout>
+
+            <RelativeLayout style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/switch_vibration_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/setting_notification_vibration" />
+
+                <com.wealoha.social.view.custom.SlideSwitch
+                    android:id="@+id/switch_vibration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
+                     />
+            </RelativeLayout>
+	
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dip"
+                android:background="@color/act_bg" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/prefer_notify_setting_rl"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/prefer_notify_setting_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/prefer_setting_notification_itemtitle" />
+
+                <ImageView
+                    android:id="@+id/prefer_notify_setting_iv"
+                    style="@style/aloha_listitem_btn_right_back"
+                    android:contentDescription="@null" />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

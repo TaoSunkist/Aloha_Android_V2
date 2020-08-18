@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:id="@+id/menu_bar"
+        android:layout_width="match_parent"
+        android:layout_height="40dip" >
+
+        <TextView
+            android:id="@+id/config_back_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:paddingLeft="10dip"
+            android:textColor="@color/black_text"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/profile_user_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black_text"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/darker_gray" >
+        </View>
+    </RelativeLayout>
+    <com.wealoha.social.view.custom.SlideViewList
+        android:id="@+id/black_content_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </com.wealoha.social.view.custom.SlideViewList>
+
+</LinearLayout>

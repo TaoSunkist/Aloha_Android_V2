@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minWidth="1000dp"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/canceled"
+            style="@style/login_register_btn"
+            android:layout_alignParentLeft="true"
+            android:background="@null"
+            android:text="@string/cancel"
+            android:textColor="@color/red_one" />
+
+        <Button
+            android:id="@+id/confirmation"
+            style="@style/login_register_btn"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:text="@string/confirm"
+            android:textColor="@color/red_one" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/nav_line" />
+
+    <DatePicker
+        android:id="@+id/dialog_picker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:calendarViewShown="false" />
+
+</LinearLayout>

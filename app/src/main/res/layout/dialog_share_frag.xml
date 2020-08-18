@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:id="@+id/cover_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#b4000000"
+        android:clickable="true" />
+
+    <RelativeLayout
+        android:id="@+id/content_root"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/act_bg" >
+        <RelativeLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:padding="15dp">
+            <TextView
+	            android:id="@+id/cancle_tv"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentEnd="true"
+	            android:layout_alignParentRight="true"
+	            android:layout_alignParentTop="true"
+	            android:textColor="@color/gray_text"
+	            android:text="@string/close_str"
+	            android:textSize="14sp" />
+	
+	        <TextView
+	            android:id="@+id/title_tv"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@id/cancle_tv"
+	            android:layout_marginBottom="10dp"
+	            android:text="@string/opening_function_introduced_to_a_friend_str"
+	            android:textSize="16sp" />
+	
+	        <TextView
+	            android:id="@+id/content_tv"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@id/title_tv"
+	            android:lineSpacingExtra="5dip"
+	            android:layout_marginBottom="10dp"
+	            android:text="@string/introduction_of_advanced_functions_str"
+	            android:textSize="14sp" />
+	
+	        <TextView
+	            android:id="@+id/rule_tv"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@id/content_tv"
+	            android:layout_marginBottom="10dp"
+	            android:text="@string/matters_need_attention_str"
+	            android:textSize="12sp" />
+        </RelativeLayout>
+
+        <HorizontalScrollView
+            android:id="@+id/apps_scorl"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:overScrollMode="never"
+            android:scrollbars="@null" >
+
+            <LinearLayout
+                android:id="@+id/apps_root"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_above="@id/apps_scorl"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:layout_weight="1"
+                android:background="@color/line" />
+
+            <TextView
+                android:id="@+id/share_func_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="@string/send_invite_to_someone_str"
+                android:textColor="@color/gray_text"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:layout_weight="1"
+                android:background="@color/line" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

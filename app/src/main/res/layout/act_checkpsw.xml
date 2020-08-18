@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:background="@color/act_bg"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/menu_bar"
+        style="@style/aloha_title_container" >
+
+        <ImageView
+            android:id="@+id/change_pwd_back_tv"
+            style="@style/aloha_title_back_btn"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/aloha_title"
+            android:text="@string/change_password" />
+
+        <TextView
+            android:id="@+id/next"
+            style="@style/aloha_title_red_btn"
+            android:text="@string/save" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/nav_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/layout_silde" >
+
+        <EditText
+            android:id="@+id/check_password"
+            style="@style/aloha_listitem_btn_left"
+            android:layout_width="match_parent"
+            android:background="@null"
+            android:gravity="start"
+            android:hint="@string/old_pwd"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+</LinearLayout>

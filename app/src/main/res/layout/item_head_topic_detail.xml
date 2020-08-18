@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/topic_detail_title_rl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/act_bg" >
+
+    <RelativeLayout
+        android:id="@+id/topic_detail_photo_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/topic_detail_photo_iv"
+            android:layout_width="match_parent"
+            android:layout_height="220dip"
+            android:background="@color/gray_text"
+            android:contentDescription="@null"
+            android:scaleType="fitXY" />
+
+        <ProgressBar
+            android:id="@+id/topic_detail_head_img_pb"
+            style="@android:style/Widget.Holo.Light.ProgressBar.Inverse"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/topic_detail_sumrary_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topic_detail_photo_rl"
+        android:background="@color/act_bg"
+        android:lineSpacingExtra="2dip"
+        android:paddingStart="15dip"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip"
+        android:paddingEnd="15dip"
+        android:paddingTop="15dip"
+        android:paddingBottom="10dip"
+        android:textColor="@color/black_text"
+        android:textSize="13sp" />
+
+</RelativeLayout>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup_alert_user_icon_view_root_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#22000000"
+    android:clickable="true"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:padding="8dip" >
+
+    <LinearLayout
+        android:id="@+id/font_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_pop_fillet"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dip"
+            android:clickable="true"
+            android:gravity="center" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/logout_confirm"
+                android:textColor="@color/gray_text"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/popu_alert_line_one"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dip"
+            android:background="@color/rl_back_color" />
+
+        <RelativeLayout
+            android:id="@+id/logout_btn"
+            android:layout_width="match_parent"
+            android:layout_height="35dip"
+            android:clickable="true"
+            android:gravity="center" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/logout"
+                android:textColor="#1E90FF"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dip"
+            android:background="@color/rl_back_color" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/popu_alert_line_two"
+        android:layout_width="match_parent"
+        android:layout_height="5dip"
+        android:layout_below="@+id/font_ll"
+        android:background="#00000000" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dip"
+        android:layout_below="@id/font_ll"
+        android:background="@drawable/shape_pop_fillet" >
+
+        <TextView
+            android:id="@+id/cancel_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:textColor="#1E90FF"
+            android:textSize="20dip" />
+    </RelativeLayout>
+
+</LinearLayout>

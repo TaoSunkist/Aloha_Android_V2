@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/white_color">
+  	<RelativeLayout
+        android:id="@+id/menu_bar"
+        style="@style/aloha_title_container"
+        android:background="@drawable/layout_silde">
+
+        <ImageView
+            android:id="@+id/back"
+            style="@style/aloha_title_back_btn"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/aloha_title"
+            android:layout_width="wrap_content" />
+    </RelativeLayout>
+
+    <com.wealoha.social.view.custom.LockView
+        android:id="@+id/lock_view"
+        android:layout_width="288dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_above="@id/lock_view"
+        android:layout_below="@id/menu_bar"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+        <TextView 
+			android:id="@+id/text_view"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:layout_marginBottom="5dp"
+			android:textColor="@color/black_text"
+			android:textSize="16sp"/>
+		<TextView 
+			android:id="@+id/user_phone_num"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:visibility="gone"
+			android:textSize="13sp"
+			android:textColor="@color/gray_aaaaaa"/>
+    </LinearLayout>
+    <TextView 
+        android:id="@+id/forget_psw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:gravity="center"
+        android:text="@string/forgot_pw"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/black_text"
+        android:textSize="13sp" />
+    <TextView 
+        android:id="@+id/other_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:gravity="center"
+        android:text="@string/other_account_login"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/black_text"
+        android:textSize="13sp" />
+</RelativeLayout>

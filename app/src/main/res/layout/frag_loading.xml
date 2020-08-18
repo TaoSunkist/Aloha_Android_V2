@@ -1,0 +1,102 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/loading_container_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:animateLayoutChanges="true"
+    android:background="#ffffff" >
+
+    <com.wealoha.social.view.custom.WaterView
+        android:id="@+id/circle1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+	<RelativeLayout 
+	    android:id="@+id/user_photo_layout"
+	    android:layout_width="120dp"
+	    android:layout_height="120dp"
+	    android:layout_centerHorizontal="true">
+	    <com.wealoha.social.view.custom.CircleImageView
+	        xmlns:app="http://schemas.android.com/apk/res-auto"
+	        android:id="@+id/user_photo"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:layout_centerHorizontal="true"
+	        app:border_color="@color/light_red"
+	        app:border_width="1dp" />
+	    <ImageView
+	        android:id="@+id/sign_icon"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:contentDescription="@null"
+	        android:src="@drawable/big_search"
+	        android:visibility="invisible" />
+	</RelativeLayout>
+    <!-- 背景的圆 -->
+
+    <TextView
+        android:id="@+id/wait_text"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:text="@string/search_ing"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/net_error_tv"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:text="@string/network_error"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:id="@+id/wait_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible" >
+
+        <TextView
+            android:id="@+id/wait_text_01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="@string/no_more_to_explore_now"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/wait_text_02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="@string/next_aloha_time"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/countdown_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/red_one"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/btn_reset_quota"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/shape_aloha_load"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="@string/speed_up"
+            android:textColor="@color/red"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</RelativeLayout>

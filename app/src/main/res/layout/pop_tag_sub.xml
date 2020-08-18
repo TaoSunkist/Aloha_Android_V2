@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="true">
+
+    <ImageView
+        android:id="@+id/insta_rectangle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:src="@drawable/tag_anchor_top"
+        android:contentDescription="@string/app_name"
+        android:layout_marginTop="1px" />
+
+    <LinearLayout
+        android:id="@+id/content_container"
+        android:layout_width="wrap_content"
+        android:layout_height="33dp"
+        android:layout_below="@id/insta_rectangle"
+        android:background="@drawable/shape_atone_view"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/insta_sub_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="#ffff"
+            android:textSize="13sp" />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/insta_rectangle_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:layout_below="@id/content_container"
+        android:src="@drawable/tag_anchor_bottom"
+        android:visibility="invisible"
+        android:contentDescription="@string/app_name" />
+
+</RelativeLayout>

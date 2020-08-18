@@ -1,0 +1,358 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setting_notification"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    tools:context="me.cu.app.ui.SettingNotificationActivity" >
+
+    <RelativeLayout
+        android:id="@+id/menu_bar"
+        style="@style/aloha_title_container" >
+
+        <ImageView
+            android:id="@+id/setting_notification_back_tv"
+            style="@style/aloha_title_back_btn"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:id="@+id/setting_notification_menu_bar_tv"
+            style="@style/aloha_title"
+            android:text="@string/prefer_setting_notification" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/nav_line" >
+        </View>
+    </RelativeLayout>
+    <!-- 最外层所有控件的布局 -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/menu_bar" >
+
+        <LinearLayout
+            android:id="@+id/items_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical" >
+
+            <!-- aloha的提醒 -->
+
+            <TextView
+                android:id="@+id/aloha_noty_tv"
+                style="@style/aloha_notifacation_seting_item_title"
+                android:text="@string/setting_notification_title_aloha_push" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/aloha_close_rl"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/notif_aloha_close_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/setting_notification_post_close" />
+
+                <CheckBox
+                    android:id="@+id/aloha_close"
+                    style="@style/AppleCheckBoxStyle"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                     />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/notif_aloha_close_tv"
+                    android:layout_alignStart="@id/notif_aloha_close_tv"
+                     />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/aloha_everyone_rl"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/notif_aloha_everyone_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/setting_notification_post_everyone" />
+
+                <CheckBox
+                    android:id="@+id/aloha_everyone"
+                    style="@style/AppleCheckBoxStyle"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                     />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/notif_aloha_everyone_tv"
+                    android:layout_alignStart="@id/notif_aloha_everyone_tv"
+                     />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+            <!-- aloha的提醒結束 -->
+            <!-- tag的提醒 -->
+
+            <TextView
+                android:id="@+id/tag_noty_tv"
+                style="@style/aloha_notifacation_seting_item_title"
+                android:text="@string/setting_notification_title_post_tag" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/tag_close_rl"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/notif_tag_close_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/setting_notification_post_close" />
+
+                <CheckBox
+                    android:id="@+id/tag_close"
+                    style="@style/AppleCheckBoxStyle"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                     />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/notif_tag_close_tv"
+                    android:layout_alignStart="@id/notif_tag_close_tv"
+                     />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/tag_everyone_rl"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/notif_tag_everyone_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/setting_notification_post_everyone" />
+
+                <CheckBox
+                    android:id="@+id/tag_everyone"
+                    style="@style/AppleCheckBoxStyle"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                     />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/notif_tag_everyone_tv"
+                    android:layout_alignStart="@id/notif_tag_everyone_tv"
+                     />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/tag_matcher_rl"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/notif_tag_matcher_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/setting_notification_post_matcher" />
+
+                <CheckBox
+                    android:id="@+id/tag_matcher"
+                    style="@style/AppleCheckBoxStyle"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                     />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+            <!-- tag的提醒結束 -->
+            <!-- 贊的提醒 -->
+
+            <TextView
+                android:id="@+id/praise_noty_tv"
+                style="@style/aloha_notifacation_seting_item_title"
+                android:text="@string/setting_notification_title_post_like" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/like_close_rl"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/notif_like_close_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/setting_notification_post_close" />
+
+                <CheckBox
+                    android:id="@+id/like_close"
+                    style="@style/AppleCheckBoxStyle"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                     />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/notif_like_close_tv"
+                    android:layout_alignStart="@id/notif_like_close_tv"
+                     />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/like_everyone_rl"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/notif_like_everyone_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/setting_notification_post_everyone" />
+
+                <CheckBox
+                    android:id="@+id/like_everyone"
+                    style="@style/AppleCheckBoxStyle"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                     />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/notif_like_everyone_tv"
+                    android:layout_alignStart="@id/notif_like_everyone_tv"
+                     />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/like_matcher_rl"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/notif_like_matcher_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/setting_notification_post_matcher" />
+
+                <CheckBox
+                    android:id="@+id/like_matcher"
+                    style="@style/AppleCheckBoxStyle"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                     />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+            <!-- 贊的提醒結束 -->
+
+
+            <!-- 留言的提醒 -->
+
+            <TextView
+                android:id="@+id/comment_noty_tv"
+                style="@style/aloha_notifacation_seting_item_title"
+                android:text="@string/setting_notification_title_post_comment" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/comment_close_rl"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/notif_comment_close_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/setting_notification_post_close" />
+
+                <CheckBox
+                    android:id="@+id/comment_close"
+                    style="@style/AppleCheckBoxStyle"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                     />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/notif_comment_close_tv"
+                    android:layout_alignStart="@id/notif_comment_close_tv"
+                     />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/comment_everyone_rl"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/notif_comment_everyone_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/setting_notification_post_everyone" />
+
+                <CheckBox
+                    android:id="@+id/comment_everyone"
+                    style="@style/AppleCheckBoxStyle"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                     />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/notif_comment_everyone_tv"
+                    android:layout_alignStart="@id/notif_comment_everyone_tv"
+                     />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/comment_matcher_rl"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/notif_comment_matcher_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/setting_notification_post_matcher" />
+
+                <CheckBox
+                    android:id="@+id/comment_matcher"
+                    style="@style/AppleCheckBoxStyle"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                     />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/act_bg" />
+            <!-- 留言的提醒結束 -->
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

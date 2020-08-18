@@ -1,0 +1,38 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.wealoha.social.activity.UserListActivity" >
+
+    <RelativeLayout
+        android:id="@+id/user_list_title"
+        style="@style/aloha_title_container" >
+
+        <ImageView
+            android:id="@+id/user_list_back_iv"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:clickable="true"
+            android:scaleType="center"
+            android:src="@drawable/nav_back" />
+
+        <TextView
+            android:id="@+id/user_list_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/black_text"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/user_list_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/user_list_title"
+        android:dividerHeight="-1px"
+        android:scrollbars="none" >
+    </ListView>
+
+</RelativeLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:id="@+id/menu_bar"
+        style="@style/aloha_title_container" >
+
+        <ImageView
+            android:id="@+id/faq_canceled"
+            style="@style/aloha_title_back_btn" />
+
+        <TextView
+            android:id="@+id/faq_statement_title"
+            android:text="@string/faq"
+            style="@style/aloha_title" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/light_gray_icon" >
+        </View>
+    </RelativeLayout>
+    <WebView 
+        android:id="@+id/faq_statement_web"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"/>
+	
+</LinearLayout>

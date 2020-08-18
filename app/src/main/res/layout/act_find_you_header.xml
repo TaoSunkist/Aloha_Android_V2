@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/act_bg"
+    android:orientation="vertical" >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@null" />
+
+    <RelativeLayout
+        android:id="@+id/find_you_title_rl"
+        style="@style/aloha_listitem_btn_container" >
+
+        <TextView
+            android:id="@+id/find_you_title_tv"
+            style="@style/aloha_listitem_btn_left"
+            android:text="@string/find_you_title"
+            android:textColor="@color/gray_text"
+            android:textSize="13sp" />
+
+        <View
+            style="@style/aloha_listitem_line"
+            android:layout_alignLeft="@id/find_you_title_tv" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/find_you_user_rl"
+        style="@style/aloha_listitem_btn_container"
+        android:layout_height="wrap_content"
+        android:padding="10dp" >
+
+        <com.wealoha.social.view.custom.CircleImageView
+            android:id="@+id/find_you_pic_left"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/search_persion" />
+
+        <TextView
+            android:id="@+id/find_you_username_tv"
+            style="@style/aloha_listitem_btn"
+            android:layout_toRightOf="@id/find_you_pic_left"
+            android:text="@string/not_find_the_person"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/find_you_list_title_rl"
+        style="@style/aloha_listitem_btn_container"
+        android:layout_height="60dp" >
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line"
+            android:layout_alignParentTop="true" />
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@color/act_bg"
+            android:layout_below="@id/line1" />
+
+        <View
+            android:id="@+id/line3"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line"
+            android:layout_below="@id/line2" />
+
+        <TextView
+            android:id="@+id/find_you_list_title_tv"
+            style="@style/aloha_listitem_btn_left"
+            android:text="@string/find_you_aloha_list_title"
+            android:textColor="@color/gray_text"
+            android:layout_marginTop="10dp"
+            android:textSize="13sp"
+            android:layout_below="@id/line3" />
+
+        <View
+            style="@style/aloha_listitem_line"
+            android:layout_alignLeft="@id/find_you_list_title_tv" />
+    </RelativeLayout>
+
+</LinearLayout>

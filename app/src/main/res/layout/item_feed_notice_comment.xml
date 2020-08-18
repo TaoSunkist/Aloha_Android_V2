@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="8dip"
+    android:paddingRight="8dip"
+    android:paddingTop="8dip" >
+
+    <RelativeLayout
+        android:id="@+id/item_feed_notice_comment_feed_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="@string/Unkown_Error" />
+
+        <ImageView
+            android:id="@+id/feed_like_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="5dip"
+            android:layout_toRightOf="@id/title_tv"
+            android:layout_toEndOf="@id/title_tv"
+            android:background="@drawable/feed_like"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:id="@+id/item_feed_notice_comment_time_stamp_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/feed_like_iv"
+            android:layout_toEndOf="@id/feed_like_iv"
+            android:text="@string/time_afterDay" />
+
+        <ImageView
+            android:id="@+id/feed_img_iv"
+            android:layout_width="30dip"
+            android:layout_height="30dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_launcher"
+            android:contentDescription="@string/app_name" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/wrap_user_icon_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_feed_notice_comment_feed_ll"
+        android:orientation="horizontal"
+        android:paddingBottom="5dip"
+        android:paddingTop="3dip" >
+
+        <com.wealoha.social.view.custom.CircleImageView
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:src="@drawable/ic_launcher" />
+    </LinearLayout>
+
+</RelativeLayout>

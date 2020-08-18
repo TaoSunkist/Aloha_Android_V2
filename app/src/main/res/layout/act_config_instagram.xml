@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/menu_bar"
+        style="@style/aloha_title_container" >
+
+        <ImageView
+            android:id="@+id/config_instagram_back"
+            style="@style/aloha_title_back_btn"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:id="@+id/instagram_title"
+            style="@style/aloha_title"
+            android:text="@string/instagram" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/nav_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@color/act_bg" >
+
+        <ImageView
+            android:id="@+id/insta_arrow"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:scaleType="center"
+            android:src="@drawable/insta_single_arrow"
+            android:contentDescription="@null" />
+
+        <ImageView
+            android:id="@+id/insta_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/insta_arrow"
+            android:layout_toStartOf="@id/insta_arrow"
+            android:scaleType="center"
+            android:src="@drawable/insta_logo"
+            android:contentDescription="@null" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/insta_arrow"
+            android:layout_toEndOf="@id/insta_arrow"
+            android:scaleType="center"
+            android:contentDescription="@null"
+            android:src="@drawable/insta_aloha" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/act_bg"
+        android:padding="15dp"
+        android:text="@string/instagram_chose_type"
+        android:textColor="@color/gray_text"
+        android:textSize="13sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line" />
+
+    <RelativeLayout
+        android:id="@+id/instagram_first_rl"
+        style="@style/aloha_listitem_btn_container" >
+
+        <TextView
+            android:id="@+id/instagram_first_tv"
+            style="@style/aloha_listitem_btn_left"
+            android:text="@string/instagram_six_months" />
+
+        <CheckBox
+            android:id="@+id/instagram_first_cb"
+            style="@style/AppleCheckBoxStyle"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+             />
+
+        <View
+            style="@style/aloha_listitem_line"
+            android:layout_alignLeft="@id/instagram_first_tv"
+            android:layout_alignStart="@id/instagram_first_tv"
+             />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/instagram_scound_rl"
+        style="@style/aloha_listitem_btn_container" >
+
+        <TextView
+            android:id="@+id/instagram_scound_tv"
+            style="@style/aloha_listitem_btn_left"
+            android:text="@string/instagram_all" />
+
+        <CheckBox
+            android:id="@+id/instagram_scound_cb"
+            style="@style/AppleCheckBoxStyle"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+             />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line" />
+
+    <Button
+        android:id="@+id/instagram_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/red"
+        android:text="@string/instagram_start"
+        android:textColor="#fff"
+        android:textSize="13sp" />
+
+</LinearLayout>

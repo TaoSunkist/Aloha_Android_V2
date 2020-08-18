@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#99333333"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/copy_sms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dip"
+        android:text="复制"
+        android:textColor="@color/background" />
+
+    <TextView
+        android:id="@+id/del_sms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dip"
+        android:text="删除"
+        android:textColor="@color/background" />
+
+</LinearLayout>

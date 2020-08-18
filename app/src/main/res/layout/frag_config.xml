@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/act_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/menu_bar"
+        style="@style/aloha_title_container" >
+
+        <ImageView
+            android:id="@+id/config_back_tv"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:clickable="true"
+            android:contentDescription="@null"
+            android:scaleType="center"
+            android:src="@drawable/nav_back" />
+
+        <TextView
+            android:id="@+id/profile_user_name_tv"
+            style="@style/aloha_title"
+            android:text="@string/setting" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/nav_line" >
+        </View>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dip"
+                android:background="@color/act_bg" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/config_detals_rl"
+                style="@style/aloha_listitem_btn_container"
+                android:layout_height="wrap_content"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
+
+                <RelativeLayout
+                    android:id="@+id/wrap_config_username_rl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp" >
+
+                    <TextView
+                        android:id="@+id/config_username_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black_text"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/config_username_edit_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/config_username_tv"
+                        android:text="@string/set_profile"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="13sp" />
+                    
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/detals_iv"
+                    style="@style/aloha_listitem_btn_right_back"
+                    android:contentDescription="@null" />
+
+                <com.wealoha.social.view.custom.CircleImageView
+                    android:id="@+id/config_userphoto_civ"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/detals_iv"
+                    android:layout_toStartOf="@id/detals_iv" />
+               
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/private_set_rl"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="@drawable/rl_back_selector"
+                android:clickable="true" >
+ <View
+                     android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="15dip"
+        android:layout_alignParentTop="true"
+        android:background="@color/line"
+                     />
+                <TextView
+                    android:id="@+id/private_set_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/private_set_str" />
+
+                <ImageView
+                    style="@style/aloha_listitem_btn_right_back"
+                    android:contentDescription="@null" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dip"
+                android:background="@color/act_bg" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/praise_post_list"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/praise_post"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/praised_post" />
+
+                <ImageView
+                    android:id="@+id/praise_post_iv"
+                    style="@style/aloha_listitem_btn_right_back"
+                    android:contentDescription="@null" />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/praise_post"
+                    android:layout_alignStart="@id/praise_post" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/tag_post_list"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/tag_post"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/taged_post" />
+
+                <ImageView
+                    android:id="@+id/tag_post_iv"
+                    style="@style/aloha_listitem_btn_right_back"
+                    android:contentDescription="@null" />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/tag_post"
+                    android:layout_alignStart="@id/tag_post" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/config_advanced_rl"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/advanced_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/advanced_features" />
+
+                <View
+                    android:id="@+id/height_config_sub"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:layout_toEndOf="@id/advanced_tv"
+                    android:layout_toRightOf="@id/advanced_tv"
+                    android:background="@drawable/config_frag_sub"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/advanced_iv"
+                    style="@style/aloha_listitem_btn_right_back"
+                    android:contentDescription="@null" />
+
+                <TextView
+                    android:id="@+id/config_advanced_tv"
+                    style="@style/aloha_listitem_btn_right"
+                    android:layout_toLeftOf="@id/advanced_iv"
+                    android:layout_toStartOf="@id/advanced_iv"
+                    android:text="@string/Invite_friend_to_open" />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/advanced_tv"
+                    android:layout_alignStart="@id/advanced_tv" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/config_instagram_rl"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/instagram_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/instagram" />
+
+                <View
+                    android:id="@+id/config_insta_sub"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:layout_toEndOf="@id/instagram_tv"
+                    android:layout_toRightOf="@id/instagram_tv"
+                    android:background="@drawable/config_frag_sub"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/instagram_iv"
+                    style="@style/aloha_listitem_btn_right_back"
+                    android:contentDescription="@null" />
+
+                <TextView
+                    android:id="@+id/config_instagram_tv"
+                    style="@style/aloha_listitem_btn_right"
+                    android:layout_toLeftOf="@id/instagram_iv"
+                    android:layout_toStartOf="@id/instagram_iv" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dip"
+                android:background="@color/act_bg" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/config_phone_rl"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/phone_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/phone_number" />
+
+                <ImageView
+                    android:id="@+id/phone_iv"
+                    style="@style/aloha_listitem_btn_right_back"
+                    android:contentDescription="@null" />
+
+                <TextView
+                    android:id="@+id/config_phone_tv"
+                    style="@style/aloha_listitem_btn_right"
+                    android:layout_toLeftOf="@id/phone_iv"
+                    android:layout_toStartOf="@id/phone_iv" />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/phone_tv"
+                    android:layout_alignStart="@id/phone_tv" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/config_password_rl"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/password_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/change_password" />
+
+                <ImageView
+                    android:id="@+id/password_iv"
+                    style="@style/aloha_listitem_btn_right_back"
+                    android:contentDescription="@null" />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/password_tv"
+                    android:layout_alignStart="@id/password_tv" />
+            </RelativeLayout>
+
+           <!--  <RelativeLayout
+                android:id="@+id/config_lock_rl"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/lock_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/change_password" />
+
+                <ImageView
+                    android:id="@+id/lock_iv"
+                    style="@style/aloha_listitem_btn_right_back"
+                    android:contentDescription="@null" />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/lock_tv"
+                    android:layout_alignStart="@id/lock_tv" />
+            </RelativeLayout> -->
+
+            <RelativeLayout
+                android:id="@+id/config_news_rl"
+                style="@style/aloha_listitem_btn_container"
+                android:clickable="true" >
+
+                <TextView
+                    android:id="@+id/news_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/new_message_notice" />
+
+                <ImageView
+                    android:id="@+id/news_iv"
+                    style="@style/aloha_listitem_btn_right_back"
+                    android:contentDescription="@null" />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/news_tv"
+                    android:layout_alignStart="@id/news_tv" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/config_blacklist_rl"
+                android:visibility="gone"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/blacklist_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/black_list" />
+
+                <ImageView
+                    android:id="@+id/blacklist_iv"
+                    style="@style/aloha_listitem_btn_right_back"
+                    android:contentDescription="@null" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dip"
+                android:background="@color/act_bg" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/config_cleancache_rl"
+                style="@style/aloha_listitem_btn_container"
+                android:clickable="true" >
+
+                <TextView
+                    android:id="@+id/cleancache_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/cleanup_cache" />
+
+                <TextView
+                    android:id="@+id/cleancache_iv"
+                    style="@style/aloha_listitem_btn_right"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:padding="10dip" />
+
+                <TextView
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/cleancache_tv"
+                    android:layout_alignStart="@id/cleancache_tv" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/config_opinion_rl"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/opinion_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/feedback" />
+
+                <ImageView
+                    android:id="@+id/opinion_iv"
+                    style="@style/aloha_listitem_btn_right_back"
+                    android:contentDescription="@null" />
+
+                <TextView
+                    android:id="@+id/config_version_tv"
+                    style="@style/aloha_listitem_btn_right"
+                    android:layout_toLeftOf="@id/opinion_iv"
+                    android:layout_toStartOf="@id/opinion_iv" />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/opinion_tv"
+                    android:layout_alignStart="@id/opinion_tv" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/config_question_rl"
+                style="@style/aloha_listitem_btn_container"
+                android:visibility="gone" >
+
+                <TextView
+                    android:id="@+id/question_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/faq" />
+
+                <ImageView
+                    android:id="@+id/question_iv"
+                    style="@style/aloha_listitem_btn_right_back"
+                    android:contentDescription="@null" />
+
+                <View
+                    style="@style/aloha_listitem_line"
+                    android:layout_alignLeft="@id/question_tv"
+                    android:layout_alignStart="@id/question_tv" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/config_newversion_rl"
+                style="@style/aloha_listitem_btn_container" >
+
+                <TextView
+                    android:id="@+id/newversion_tv"
+                    style="@style/aloha_listitem_btn_left"
+                    android:text="@string/check_new_version" />
+
+                <ImageView
+                    android:id="@+id/newversion_iv"
+                    style="@style/aloha_listitem_btn_right_back"
+                    android:contentDescription="@null" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dip"
+                android:background="@color/act_bg" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:id="@+id/config_logout_rl"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="#fff"
+                android:clickable="true" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="@string/logout"
+                    android:textColor="@color/red"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@color/act_bg" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

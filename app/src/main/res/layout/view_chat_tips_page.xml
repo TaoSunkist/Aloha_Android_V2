@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="25dip" >
+
+    <TextView
+        android:id="@+id/chat_tips_page_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Oops...NO match yet" />
+
+    <TextView
+        android:id="@+id/chat_tips_page_description_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chat_tips_page_title_tv"
+        android:layout_marginTop="10dip"
+        android:text="You can start conversation when someone and you &quot;Aloha&quot; each other" />
+
+    <TextView
+        android:id="@+id/chat_tips_page_red_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red_one"
+        android:layout_below="@id/chat_tips_page_description_tv"
+        android:layout_marginTop="10dip"
+        android:text="You can start conversation when someone and you &quot;Aloha&quot; each other" />
+
+    <ImageView
+        android:id="@+id/chat_tips_page_red_arrow_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/chat_tips_page_red_title_tv"
+        android:background="@drawable/test_chat_tips_page" />
+
+</RelativeLayout>

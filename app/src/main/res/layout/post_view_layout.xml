@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/layout_silde"
+    android:orientation="vertical" >
+	
+	<!-- 头像 名称 时间戳 -->
+    <RelativeLayout
+        android:id="@+id/post_view_title"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:padding="5dip"
+        android:background="@drawable/layout_silde" >
+
+        <com.wealoha.social.view.custom.CircleImageView
+            android:id="@+id/user_photo"
+            android:layout_width="37dip"
+            android:layout_height="37dip"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:src="@drawable/aloha_heart" />
+
+
+		<TextView
+			android:id="@+id/user_name"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:gravity="center"
+			android:singleLine="true"
+			android:textColor="@color/black_text"
+			android:textSize="12sp"
+			android:layout_marginLeft="5dip"
+			android:layout_marginStart="5dip"
+			android:layout_toEndOf="@id/user_photo"
+			android:layout_toRightOf="@id/user_photo"
+			android:text="sdfsdfadf" />
+
+        <TextView
+            android:id="@+id/time_stamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@drawable/feed_clock"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/feed_clock"
+            android:singleLine="true"
+            android:textColor="@color/medium_gray_text"
+            android:textSize="12sp"
+            android:text="ddd" />
+    </RelativeLayout>
+	
+	<!-- 图片或视频 -->
+    <RelativeLayout
+        android:id="@+id/content_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:background="@color/gray_text" >
+        <ImageView
+            android:id="@+id/post_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:contentDescription="@null"/>
+        <SurfaceView 
+            android:id="@+id/post_video"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+        <ImageView
+            android:id="@+id/praise_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:contentDescription="@null"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+    </RelativeLayout>
+    
+	<!-- 地理位置和post的文本 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip" >
+
+        <LinearLayout
+            android:id="@+id/text_content_root"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/user_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="9dp"
+                android:drawableLeft="@drawable/location"
+                android:drawablePadding="5dp"
+                android:drawableStart="@drawable/location"
+                android:ellipsize="middle"
+                android:gravity="center"
+                android:maxLength="30"
+                android:singleLine="true"
+                android:textColor="@color/gray_text"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/introduction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="9dp"
+                android:ellipsize="none"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="2dp"
+                android:textColor="@color/black_text"
+                android:textSize="13sp"
+                android:visibility="gone" />
+        </LinearLayout>
+        
+		<!-- 点赞，留言，举报等 -->        <RelativeLayout
+            android:id="@+id/menu_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="11dp" >
+
+            <TextView
+                android:id="@+id/praise_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="29dp"
+                android:background="@drawable/shape_feedholder_menu"
+                android:clickable="true"
+                android:drawableLeft="@drawable/feed_like"
+                android:drawablePadding="5dp"
+                android:drawableStart="@drawable/feed_like"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/praise"
+                android:textColor="@color/medium_gray_text"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/message_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="29dp"
+                android:layout_marginLeft="10dip"
+                android:layout_marginStart="10dip"
+                android:layout_toEndOf="@id/praise_tv"
+                android:layout_toRightOf="@id/praise_tv"
+                android:background="@drawable/shape_feedholder_menu"
+                android:clickable="true"
+                android:drawableLeft="@drawable/feed_comment"
+                android:drawablePadding="5dp"
+                android:drawableStart="@drawable/feed_comment"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/comment"
+                android:textColor="@color/medium_gray_text"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/share_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="29dp"
+                android:layout_marginLeft="10dip"
+                android:layout_marginStart="10dip"
+                android:layout_toEndOf="@id/message_tv"
+                android:layout_toRightOf="@id/message_tv"
+                android:background="@drawable/shape_feedholder_menu"
+                android:drawableLeft="@drawable/ico_share"
+                android:drawablePadding="5dp"
+                android:drawableStart="@drawable/ico_share"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/web_act_share"
+                android:textColor="@color/medium_gray_text"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/more_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="29dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/shape_feedholder_menu"
+                android:clickable="true"
+                android:contentDescription="@null"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:scaleType="center"
+                android:src="@drawable/feed_more" />
+        </RelativeLayout>
+    </LinearLayout>
+    
+    <!-- timeline 中，post下面的评论列表，只显示几条 -->
+    <LinearLayout
+        android:id="@+id/post_interact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/red_one"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/praise_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/feed_like"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/feed_like" />
+
+        <LinearLayout
+            android:id="@+id/comment_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <TextView
+            android:id="@+id/open_comment_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/open_comment_list" />
+    </LinearLayout>
+    <!-- 结束 -->
+</LinearLayout>

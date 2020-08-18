@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Match Loading动画 -->
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shareInterpolator="false"
+    >
+    <!--<objectAnimator-->
+        <!--android:duration="3000"-->
+        <!--android:propertyName="x"-->
+        <!--android:repeatCount="infinite"-->
+        <!--android:repeatMode="reverse"-->
+        <!--android:valueTo="-400"-->
+        <!--android:valueType="floatType" />-->
+
+    <!-- 中心不变，xy缩放
+     50%p 是父元素50%边距
+     -->
+    <scale android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+        android:duration="3000"
+        android:fromXScale="1"
+        android:toXScale="6"
+        android:fromYScale="1"
+        android:toYScale="6"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:fillBefore="true"
+        android:fillAfter="false"
+        />
+
+    <alpha
+        android:fromAlpha="1.0"
+        android:toAlpha="0.6"
+        android:duration="1400"
+        android:fillBefore="true"
+        android:fillAfter="false"
+        />
+
+    <set android:interpolator="@android:anim/decelerate_interpolator">
+        <!-- 启动重叠下，避免卡住 -->
+        <!--<scale-->
+            <!--android:duration="1600"-->
+            <!--android:fromXScale="0.8"-->
+            <!--android:toXScale="1.4"-->
+            <!--android:fromYScale="0.8"-->
+            <!--android:toYScale="1.4"-->
+            <!--android:pivotX="50%p"-->
+            <!--android:pivotY="50%p"-->
+            <!--android:startOffset="1000"-->
+            <!--android:fillBefore="false"-->
+            <!--android:fillAfter="true"-->
+            <!--/>-->
+
+        <alpha
+            android:duration="1600"
+            android:fromAlpha="0.6"
+            android:toAlpha="0.0"
+            android:startOffset="1400"
+            android:fillBefore="false"
+            android:fillAfter="true"
+            />
+    </set>
+
+
+
+</set>

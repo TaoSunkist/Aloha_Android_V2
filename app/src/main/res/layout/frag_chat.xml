@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <RelativeLayout style="@style/aloha_title_container" >
+
+        <TextView
+            android:id="@+id/title_bar"
+            style="@style/aloha_title"
+            android:layout_width="wrap_content"
+            android:text="@string/chat" />
+
+        <View
+            android:id="@+id/usercenter_line_one"
+            style="@style/aloha_title_line"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/chat_tips_page_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" >
+    </RelativeLayout>
+
+    <!--
+         <com.wealoha.social.custom.swipe.SwipeMenuListView
+        android:id="@+id/frag_chat_obj_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:dividerHeight="-1px" />-->
+    <ListView
+        android:id="@+id/frag_chat_obj_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:dividerHeight="-1px" />
+
+    <RelativeLayout
+        android:id="@+id/chat_bg_no_chat_data_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dip"
+            android:text="@string/title_chat_no_people_str"
+            android:textColor="@color/black_text"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dip"
+            android:paddingLeft="35dip"
+            android:paddingRight="35dip"
+            android:text="@string/des_chat_no_people_str"
+            android:textColor="@color/gray_text"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/chat_arror"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="35dip"
+            android:layout_marginRight="35dp"
+            android:paddingLeft="35dip"
+            android:paddingRight="35dip"
+            android:text="@string/found_more_friend_str"
+            android:textColor="@color/red_one"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/chat_arror"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="55dp"
+            android:paddingBottom="5dip"
+            android:src="@drawable/arror" />
+    </RelativeLayout>
+
+</LinearLayout>

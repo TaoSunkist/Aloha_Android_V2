@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/web_root_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.wealoha.social.WebActivity" >
+
+    <RelativeLayout
+        android:id="@+id/menu_bar"
+        style="@style/aloha_title_container" >
+
+        <ImageView
+            android:id="@+id/faq_canceled"
+            style="@style/aloha_title_back_btn" />
+
+        <ImageView
+            android:id="@+id/faq_share"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:layout_alignParentRight="true"
+            android:padding="15dip"
+            android:src="@drawable/aloha_more" />
+
+        <TextView
+            android:id="@+id/faq_statement_title"
+            style="@style/aloha_title" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/light_gray_icon" >
+        </View>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/detailed_contents_layout"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <com.wealoha.social.view.custom.AlohaWebView
+            android:id="@+id/web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:layerType="software" >
+        </com.wealoha.social.view.custom.AlohaWebView>
+    </LinearLayout>
+
+</LinearLayout>

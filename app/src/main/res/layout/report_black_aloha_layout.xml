@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup_report_root_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    android:clickable="true"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:paddingBottom="6dip"
+    android:paddingTop="6dip" >
+
+    <TextView
+        android:id="@+id/popup_title"
+        style="@style/aloha_superdialog_text"
+        android:layout_height="60dp"
+        android:paddingLeft="6dip"
+        android:paddingRight="6dip"
+        android:textColor="@color/red"
+        android:textSize="18sp" />
+
+    <View
+        android:id="@+id/remove_tag_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line"
+        android:paddingLeft="6dip"
+        android:paddingRight="6dip" />
+
+    <TextView
+        android:id="@+id/remove_tag"
+        style="@style/aloha_superdialog_text"
+        android:background="@drawable/dialog_click_selector"
+        android:paddingLeft="6dip"
+        android:paddingRight="6dip"
+        android:text="@string/unAloha" />
+
+    <View
+        android:id="@+id/popup_title_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line"
+        android:paddingLeft="6dip"
+        android:paddingRight="6dip" />
+
+    <TextView
+        android:id="@+id/popup_delete"
+        style="@style/aloha_superdialog_text"
+        android:background="@drawable/dialog_click_selector"
+        android:paddingLeft="6dip"
+        android:paddingRight="6dip"
+        android:text="@string/delete" />
+
+    <View
+        android:id="@+id/popup_delete_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line"
+        android:paddingLeft="6dip"
+        android:paddingRight="6dip" />
+
+    <TextView
+        android:id="@+id/popup_logout"
+        style="@style/aloha_superdialog_text"
+        android:background="@drawable/dialog_click_selector"
+        android:paddingLeft="6dip"
+        android:paddingRight="6dip"
+        android:text="@string/logout" />
+
+    <View
+        android:id="@+id/popup_logout_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line"
+        android:paddingLeft="6dip"
+        android:paddingRight="6dip" />
+
+    <TextView
+        android:id="@+id/report_user"
+        style="@style/aloha_superdialog_text"
+        android:background="@drawable/dialog_click_selector"
+        android:paddingLeft="6dip"
+        android:paddingRight="6dip"
+        android:text="@string/report_inappropriate_content" />
+
+    <View
+        android:id="@+id/report_user_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line"
+        android:paddingLeft="6dip"
+        android:paddingRight="6dip" />
+
+    <TextView
+        android:id="@+id/black_user"
+        style="@style/aloha_superdialog_text"
+        android:background="@drawable/dialog_click_selector"
+        android:paddingLeft="6dip"
+        android:paddingRight="6dip"
+        android:text="@string/add_to_black_list" />
+
+    <View
+        android:id="@+id/black_user_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line"
+        android:paddingLeft="6dip"
+        android:paddingRight="6dip" />
+
+    <TextView
+        android:id="@+id/dislike_user"
+        style="@style/aloha_superdialog_text"
+        android:background="@drawable/dialog_click_selector"
+        android:paddingLeft="6dip"
+        android:paddingRight="6dip"
+        android:text="@string/unAloha" />
+
+</LinearLayout>

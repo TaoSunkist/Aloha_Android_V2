@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup_report_root_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    android:clickable="true"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:paddingTop="6dip" >
+
+    <TextView
+        android:id="@+id/popup_aloha_title"
+        style="@style/aloha_superdialog_text"
+        android:layout_width="150dip"
+        android:layout_height="60dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/red"
+        android:textSize="18sp" />
+
+    <View
+        android:id="@+id/popup_line_one"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray_text"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/popup_box_one"
+        style="@style/aloha_superdialog_text"
+        android:layout_marginLeft="0dip"
+        android:background="@drawable/dialog_click_selector"
+        android:paddingLeft="15dip"
+        android:text="刪除"
+        android:visibility="gone" />
+
+    <View
+        android:id="@+id/popup_line_two"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/popup_box_two"
+        style="@style/aloha_superdialog_text"
+        android:layout_marginLeft="0dip"
+        android:background="@drawable/dialog_click_selector"
+        android:paddingLeft="15dip"
+        android:text="複製"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/aloha_nope_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/reset_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/reset_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/reset_title"
+            android:layout_centerHorizontal="true"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/reset_ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</LinearLayout>

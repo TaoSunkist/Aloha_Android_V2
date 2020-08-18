@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frag_root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+	        android:id="@+id/menu_bar"
+	        style="@style/aloha_title_container"
+	        android:background="@drawable/layout_silde" >
+
+	        <ImageView
+	            android:id="@+id/config_details_back"
+	            style="@style/aloha_title_back_btn"
+	            android:contentDescription="@null" />
+	
+	        <TextView
+	            android:id="@+id/config_detail_title"
+	            style="@style/aloha_title"
+	            android:text="@string/photo" />
+	
+	    </RelativeLayout>
+        <ListView 
+		    android:id="@+id/list"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"/>
+    </LinearLayout>
+	
+	<LinearLayout 
+	    android:id="@+id/tags_method_container"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:visibility="gone"
+	    android:layout_gravity="bottom">
+	    <TextView 
+	        android:id="@+id/remove_tag"
+	        android:layout_width="0dp"
+	        android:layout_weight="1"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:padding="15dp"
+	        android:textColor="@color/white_color"
+	        android:text="@string/remove_tag"
+	        android:background="@color/yellow"
+	        android:visibility="gone" />
+	    <TextView 
+	        android:id="@+id/take_to_mine"
+	        android:layout_width="0dp"
+	        android:layout_weight="1"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:padding="15dp"
+	        android:textColor="@color/white_color"
+	        android:text="@string/take_to_mine"
+	        android:background="@color/red"
+	        android:visibility="gone" />
+	</LinearLayout>
+</FrameLayout>

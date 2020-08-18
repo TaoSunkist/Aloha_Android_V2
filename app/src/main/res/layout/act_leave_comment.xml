@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:id="@+id/container_layout" >
+
+    <RelativeLayout
+        android:id="@+id/menu_bar"
+        style="@style/aloha_title_container" >
+
+        <ImageView
+            android:id="@+id/config_back_tv"
+            style="@style/aloha_title_back_btn" />
+
+        <TextView
+            android:id="@+id/profile_user_name_tv"
+            style="@style/aloha_title"
+            android:text="@string/leave_comment" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/nav_line" />
+    </RelativeLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/comment_list_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+         android:layout_weight="1" >
+
+        <ListView
+            android:id="@+id/comments_content_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:dividerHeight="-1px" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line" />
+
+    <LinearLayout
+        android:id="@+id/comments_sent_container"
+        style="@style/aloha_message_container"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/comments_content_et"
+            style="@style/aloha_message"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:hint="@string/comment"
+            android:maxLength="300" />
+
+        <TextView
+            android:id="@+id/comments_send_tv"
+            style="@style/aloha_message_send"
+            android:clickable="true"
+            android:text="@string/send_message" />
+    </LinearLayout>
+
+</LinearLayout>

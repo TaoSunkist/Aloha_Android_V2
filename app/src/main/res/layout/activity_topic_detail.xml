@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    tools:context="com.wealoha.social.ui.topic.TopicDetailActivity" >
+
+    <LinearLayout
+        android:id="@+id/topic_detail_back_tv_rl"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/nav_bg"
+        android:clickable="true"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/topic_detail_back_rl"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:id="@+id/topic_detail_back_iv"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:clickable="true"
+                android:contentDescription="@null"
+                android:scaleType="center"
+                android:src="@drawable/nav_back" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="4" >
+
+            <TextView
+                android:id="@+id/topic_detail_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:gravity="center"
+                android:singleLine="true"
+                android:textColor="@color/black_text"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/topic_detail_send_photo_rl"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/topic_detail_send_photo_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:paddingEnd="0dip"
+                android:paddingLeft="0dip"
+                android:paddingRight="8dip"
+                android:paddingStart="8dip"
+                android:text="@string/send_photo_str"
+                android:textColor="@color/light_red"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topic_detail_back_tv_rl" >
+
+        <ListView
+            android:id="@+id/topic_detail_list_lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@null"
+            android:cacheColorHint="@android:color/transparent"
+            android:scrollbars="@null"
+            android:dividerHeight="@dimen/profile_list_divider"
+             />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</RelativeLayout>
