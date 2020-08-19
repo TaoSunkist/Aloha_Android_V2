@@ -20,7 +20,7 @@ import com.wealoha.social.activity.FragmentWrapperActivity;
 import com.wealoha.social.activity.FragmentWrapperActivity.ActivityResultCallback;
 import com.wealoha.social.activity.MainAct;
 import com.wealoha.social.api.topic.bean.HashTag;
-import com.wealoha.social.beans.remotelog.ClientLogService;
+import com.wealoha.social.api.ClientLogService;
 import com.wealoha.social.commons.CacheManager;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.CacheKey;

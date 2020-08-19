@@ -20,7 +20,7 @@ import com.amap.api.location.LocationProviderProxy;
 import com.wealoha.social.AppApplication;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
-import com.wealoha.social.beans.location.LocationService;
+import com.wealoha.social.api.LocationService;
 import com.wealoha.social.inject.Injector;
 import com.wealoha.social.utils.XL;
 

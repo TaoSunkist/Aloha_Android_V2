@@ -30,7 +30,7 @@ import com.wealoha.social.api.user.User2Service;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.beans.common.ConstantsService;
+import com.wealoha.social.api.ConstantsService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.ui.lock.GestureLockAct;
 import com.wealoha.social.utils.ContextUtil;

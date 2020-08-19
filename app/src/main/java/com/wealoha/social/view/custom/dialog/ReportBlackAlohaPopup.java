@@ -32,7 +32,7 @@ import com.wealoha.social.adapter.ProfileListAdapter;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.beans.feed.FeedService;
+import com.wealoha.social.api.FeedService;
 import com.wealoha.social.beans.message.ImageMessage;
 import com.wealoha.social.beans.message.Message;
 import com.wealoha.social.beans.user.UserService;

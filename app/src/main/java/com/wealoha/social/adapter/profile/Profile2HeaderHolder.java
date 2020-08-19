@@ -44,7 +44,7 @@ import com.wealoha.social.api.user.bean.User;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.message.InboxSession;
 import com.wealoha.social.beans.message.InboxSessionResult;
-import com.wealoha.social.beans.message.MessageService;
+import com.wealoha.social.api.MessageService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
 import com.wealoha.social.commons.GlobalConstants.WhereIsComeFrom;

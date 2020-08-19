@@ -1,4 +1,4 @@
-package com.wealoha.social.beans.comment
+package com.wealoha.social.api
 
 import com.wealoha.social.api.comment.Comment2GetData
 import com.wealoha.social.beans.CommentResult

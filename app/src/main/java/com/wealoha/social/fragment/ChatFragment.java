@@ -51,7 +51,7 @@ import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.message.InboxSession;
 import com.wealoha.social.beans.message.InboxSessionResult;
 import com.wealoha.social.beans.message.Message;
-import com.wealoha.social.beans.message.MessageService;
+import com.wealoha.social.api.MessageService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.CacheKey;
 import com.wealoha.social.commons.JsonController;

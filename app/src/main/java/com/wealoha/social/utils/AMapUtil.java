@@ -11,8 +11,6 @@ import retrofit.client.Response;
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.text.TextUtils;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationListener;
@@ -22,11 +20,10 @@ import com.google.gson.Gson;
 import com.wealoha.social.AppApplication;
 import com.wealoha.social.ContextConfig;
 import com.wealoha.social.api.locationservice.LocationServiceAPI;
-import com.wealoha.social.api.locationservice.bean.LocationServiceBean;
 import com.wealoha.social.api.locationservice.bean.LocationServiceStatus;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
-import com.wealoha.social.beans.location.LocationService;
+import com.wealoha.social.api.LocationService;
 import com.wealoha.social.inject.Injector;
 
 public class AMapUtil implements AMapLocationListener {

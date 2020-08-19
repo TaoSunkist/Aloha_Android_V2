@@ -1,7 +1,8 @@
-package com.wealoha.social.beans.match
+package com.wealoha.social.api
 
 import com.wealoha.social.beans.Result
 import com.wealoha.social.beans.ResultData
+import com.wealoha.social.beans.MatchData
 import com.wealoha.social.beans.region.RegionResult
 import com.wealoha.social.impl.ServerUrlImpl
 import retrofit.Callback

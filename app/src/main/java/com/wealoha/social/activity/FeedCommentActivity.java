@@ -45,7 +45,7 @@ import com.wealoha.social.beans.IResultDataErrorCode;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.beans.comment.CommentService;
+import com.wealoha.social.api.CommentService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.fragment.Profile2Fragment;
 import com.wealoha.social.utils.DockingBeanUtils;

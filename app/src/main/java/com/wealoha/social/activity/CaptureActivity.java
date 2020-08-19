@@ -42,7 +42,7 @@ import com.wealoha.social.ContextConfig;
 import com.wealoha.social.R;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.user.ProfileData;
-import com.wealoha.social.beans.user.ProfileService;
+import com.wealoha.social.api.ProfileService;
 import com.wealoha.social.commons.AlohaThreadPool;
 import com.wealoha.social.commons.AlohaThreadPool.ENUM_Thread_Level;
 import com.wealoha.social.commons.GlobalConstants;

@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 
 import javax.inject.Inject;
 
-import com.wealoha.social.beans.remotelog.ClientLogService;
+import com.wealoha.social.api.ClientLogService;
 import com.wealoha.social.inject.Injector;
 
 /**

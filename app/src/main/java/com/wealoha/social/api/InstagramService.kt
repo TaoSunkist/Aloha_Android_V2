@@ -1,4 +1,4 @@
-package com.wealoha.social.beans.instagram
+package com.wealoha.social.api
 
 import com.wealoha.social.beans.AuthData
 import com.wealoha.social.beans.Result

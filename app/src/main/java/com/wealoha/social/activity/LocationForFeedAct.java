@@ -43,7 +43,7 @@ import com.wealoha.social.adapter.LocationForFeedAdapter;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.location.Location;
 import com.wealoha.social.beans.location.LocationResult;
-import com.wealoha.social.beans.location.LocationService;
+import com.wealoha.social.api.LocationService;
 import com.wealoha.social.utils.AMapUtil;
 import com.wealoha.social.utils.AMapUtil.LocationCallback;
 import com.wealoha.social.utils.ToastUtil;

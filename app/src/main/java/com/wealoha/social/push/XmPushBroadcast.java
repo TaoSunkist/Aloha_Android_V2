@@ -14,7 +14,7 @@ import com.google.gson.reflect.TypeToken;
 import com.squareup.otto.Bus;
 import com.wealoha.social.AppApplication;
 import com.wealoha.social.ContextConfig;
-import com.wealoha.social.beans.user.ProfileService;
+import com.wealoha.social.api.ProfileService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.event.push.NewNotifyEvent;
 import com.wealoha.social.inject.Injector;

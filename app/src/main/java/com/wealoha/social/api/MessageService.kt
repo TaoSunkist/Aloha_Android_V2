@@ -1,7 +1,10 @@
-package com.wealoha.social.beans.message
+package com.wealoha.social.api
 
 import com.wealoha.social.beans.Result
 import com.wealoha.social.beans.ResultData
+import com.wealoha.social.beans.message.InboxMessageResult
+import com.wealoha.social.beans.message.InboxSessionResult
+import com.wealoha.social.beans.message.UnreadData
 import com.wealoha.social.impl.ServerUrlImpl
 import retrofit.Callback
 import retrofit.http.*

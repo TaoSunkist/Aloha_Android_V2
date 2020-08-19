@@ -1,7 +1,6 @@
 package com.wealoha.social.endpoint;
 
 import java.lang.reflect.Field;
-import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +16,7 @@ import org.apache.commons.collections4.MapUtils;
 
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.common.ApiEndpointData;
-import com.wealoha.social.beans.common.ConstantsService;
+import com.wealoha.social.api.ConstantsService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.inject.Injector;
 import com.wealoha.social.utils.ContextUtil;

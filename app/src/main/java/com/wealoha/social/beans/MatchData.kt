@@ -1,8 +1,5 @@
-package com.wealoha.social.beans.match
+package com.wealoha.social.beans
 
-import com.wealoha.social.beans.Image
-import com.wealoha.social.beans.ResultData
-import com.wealoha.social.beans.User
 import com.wealoha.social.beans.imagemap.HasImageMap
 import java.io.Serializable
 

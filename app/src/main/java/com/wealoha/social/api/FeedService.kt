@@ -1,4 +1,4 @@
-package com.wealoha.social.beans.feed
+package com.wealoha.social.api
 
 import com.wealoha.social.beans.FeedResult
 import com.wealoha.social.beans.ImageUploadResult

@@ -13,7 +13,6 @@ import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
@@ -67,7 +66,7 @@ import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.message.ImageMessage;
 import com.wealoha.social.beans.message.InboxMessageResult;
 import com.wealoha.social.beans.message.Message;
-import com.wealoha.social.beans.message.MessageService;
+import com.wealoha.social.api.MessageService;
 import com.wealoha.social.beans.message.TextMessage;
 import com.wealoha.social.commons.CacheManager;
 import com.wealoha.social.commons.GlobalConstants;
