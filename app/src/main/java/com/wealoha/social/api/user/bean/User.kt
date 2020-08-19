@@ -180,10 +180,10 @@ class User(
             )
         }
 
-        fun parseInt(str: String): Int {
+        fun parseInt(str: String?): Int {
             var temp = 0
             if (!TextUtils.isEmpty(str)) {
-                temp = str.toInt()
+                temp = str?.toInt() ?: 0
             }
             return temp
         }

@@ -319,7 +319,7 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
 			if (mNextCursorId == null) {
 				mHasMore = false;
 			}
-			List<Message> list = result.data.list;
+			List<Message> list = (List<Message>) result.data.list;
 			Collections.reverse(list);
 			// if (list != null && list.size() > 0) {
 			// mMessage = list.get(list.size() - 1);

@@ -114,7 +114,7 @@ public class Post implements Serializable {
 			userTag.tagCenterY = tag.getTagCenterY().floatValue();
 			userTag.tagMe = tagme;
 			userTag.tagUserId = tag.getUser().getId();
-			userTag.tagUserName = tag.getUser().getName();
+			userTag.setUsername(tag.getUser().getName());
 			userTags.add(userTag);
 		}
 		return userTags;

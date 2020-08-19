@@ -177,7 +177,7 @@ public class TagFeedAct extends BaseFragAct implements OnTouchListener, OnClickL
 			if (result.getParcelableExtra(User.TAG) != null) {
 				UserTags userTags = new UserTags();
 				User user = (User) result.getParcelableExtra(User.TAG);
-				userTags.tagUserName = user.name;
+				userTags.setUsername(user.name);
 				userTags.tagUserId = user.id;
 				userTags.tagAnchorX = mInitX / mTagsContainer.getWidth();
 				userTags.tagAnchorY = mInitY / mTagsContainer.getHeight();
@@ -191,7 +191,6 @@ public class TagFeedAct extends BaseFragAct implements OnTouchListener, OnClickL
 	/**
 	 * @Title: checkSingleTag
 	 * @Description: 同一个人的标签只能有一个，关闭旧的重复标签
-	 * @param onePopup
 	 * @return boolean 返回类型
 	 */
 	private void checkSingleTag(String userid) {

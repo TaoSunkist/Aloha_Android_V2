@@ -574,7 +574,7 @@ public class ConfigFragment extends BaseFragment implements IConfigView {
 	public void refreshInstagramSuccess(Result<InstagramResult> result) {
 		if (result != null) {
 			if (result.isOk() && isAdded()) {
-				Map<String, Object> instagram = result.data.instagram;
+				Map<String, Object> instagram = (Map<String, Object>) result.data.instagram;
 				// bundle.
 				if (instagram == null && mInstagramTv != null) {
 					instagramBundle = null;

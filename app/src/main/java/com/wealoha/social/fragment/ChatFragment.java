@@ -72,7 +72,7 @@ import com.wealoha.social.view.custom.dialog.ListItemDialog.ListItemType;
 
 /**
  * 聊天会话
- * 
+ *
  * @author sunkist
  * @author superman
  * @author javamonk
@@ -253,13 +253,13 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
 			if (cached != null) {
 				init = true;// 如果存在本地数据
 				this.inboxSessions = cached.list;
-				this.newMessagMap = cached.newMessageMap;
+				this.newMessagMap = (Map<String, Message>) cached.newMessageMap;
 				computeUnread();
 			}
 		}
 		if (!init) {
 			this.inboxSessions = new ArrayList<InboxSession>();
-			this.newMessagMap = new HashMap<String, Message>();
+			this.newMessagMap = new HashMap<>();
 		}
 		initChatListView(inboxSessions, newMessagMap);
 
@@ -343,7 +343,7 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
 				// 缓存第一页
 				save(CacheKey.FirstPageInboxSession, result.data);
 				inboxSessions = result.data.list;
-				newMessagMap = result.data.newMessageMap;
+				newMessagMap = (Map<String, Message>) result.data.newMessageMap;
 			} else {
 				inboxSessions.addAll(result.data.list);
 				newMessagMap.putAll(result.data.newMessageMap);
@@ -540,7 +540,7 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
 							InboxSession session = result.data.list.get(0);
 							if (inboxSessions == null) {
 								inboxSessions = new ArrayList<InboxSession>();
-								newMessagMap = new HashMap<String, Message>();
+								newMessagMap = new HashMap<>();
 							}
 							Iterator<InboxSession> it = inboxSessions.iterator();
 							while (it.hasNext()) {

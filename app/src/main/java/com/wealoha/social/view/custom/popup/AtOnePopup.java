@@ -147,7 +147,7 @@ public class AtOnePopup implements OnTouchListener, OnClickListener, OnGestureLi
 		mCallback = callback;
 		mCanMove = canMove;
 		findViews(mParentContainer);
-		mContent.setText(mUserTags.tagUserName);
+		mContent.setText(mUserTags.getUsername());
 		// 先设置为隐藏，防止初始化位置的时候视图闪动
 		mPopupView.setVisibility(View.INVISIBLE);
 		mPopupView.post(new Runnable() {

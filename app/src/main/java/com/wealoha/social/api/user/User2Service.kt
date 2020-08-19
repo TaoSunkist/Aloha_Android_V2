@@ -7,6 +7,7 @@ import com.wealoha.social.api.common.BaseListApiService.NoResultCallback
 import com.wealoha.social.api.common.bean.Image
 import com.wealoha.social.api.user.bean.User
 import com.wealoha.social.api.user.dto.UserDTO
+import com.wealoha.social.beans.IResultDataErrorCode
 import com.wealoha.social.beans.Result
 import com.wealoha.social.beans.ResultData
 import com.wealoha.social.callback.CallbackImpl
@@ -107,7 +108,7 @@ class User2Service {
                 if (result == null || !result.isOk) {
                     callback.fail(ApiErrorCode.fromResult(result), null)
                 } else {
-                    saveCurrentUser(result.data.user)
+                    saveCurrentUser(result.data?.user)
                     callback.success(transPro2DataToUser(result.data))
                 }
             }
@@ -118,12 +119,12 @@ class User2Service {
         })
     }
 
-    private fun transPro2DataToUser(proData: Profile2Data): User? {
-        val userDto = proData.user
+    private fun transPro2DataToUser(proData: Profile2Data?): User? {
+        val userDto = proData?.user
         // userDto.aloha = proData.liked;
         // userDto.match = proData.friend;
         val img =
-            Image.fromDTO(proData.imageMap!![userDto!!.avatarImageId])
+            Image.fromDTO(proData?.imageMap!![userDto!!.avatarImageId])
         return User.Companion.fromDTO(userDto, img)
     }
 
@@ -183,9 +184,9 @@ class User2Service {
                     response: Response
                 ) {
                     if (result != null && result.isOk) {
-                        contextUtil!!.profeatureEnable = result.data.filterEnable
+                        contextUtil!!.profeatureEnable = result.data?.filterEnable == true
                         val regions =
-                            result.data.selectedRegion as ArrayList<String?>
+                            result.data?.selectedRegion as ArrayList<String?>
                         if (regions != null && regions.size > 0) {
                             contextUtil!!.filterRegion = regions[regions.size - 1]
                         } else {
@@ -222,7 +223,7 @@ class User2Service {
                     if (result != null && result.isOk) {
                         if (result.isOk) {
                             callbackImpl.success()
-                        } else if (result.data.error == ResultData.ERROR_INVALID_PASSWORD) {
+                        } else if (result.data?.error == IResultDataErrorCode.ERROR_INVALID_PASSWORD) {
                             callbackImpl.failure()
                             // ToastUtil.shortToast(AppApplication.getInstance(),
                             // R.string.login_password_is_invalid_title);
