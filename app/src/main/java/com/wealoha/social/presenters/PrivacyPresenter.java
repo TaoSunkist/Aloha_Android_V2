@@ -7,8 +7,8 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 import com.wealoha.social.ContextConfig;
-import com.wealoha.social.api.privacy.UserSettingPrivacyAPI;
-import com.wealoha.social.api.privacy.data.PrivacyData;
+import com.wealoha.social.api.UserSettingPrivacyAPI;
+import com.wealoha.social.beans.PrivacyData;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.ui.privacy.IPrivacyView;

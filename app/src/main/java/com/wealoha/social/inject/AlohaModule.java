@@ -113,7 +113,7 @@ import com.wealoha.social.api.notify2.service.UserListService;
 import com.wealoha.social.api.post.PostAPI;
 import com.wealoha.social.api.post.PostService;
 import com.wealoha.social.api.post.TopicPostService;
-import com.wealoha.social.api.privacy.UserSettingPrivacyAPI;
+import com.wealoha.social.api.UserSettingPrivacyAPI;
 import com.wealoha.social.api.profile.service.Profile2Service;
 import com.wealoha.social.api.topic.TopicAPI;
 import com.wealoha.social.api.topic.TopicService;

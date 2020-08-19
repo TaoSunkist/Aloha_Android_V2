@@ -1,4 +1,4 @@
-package com.wealoha.social.api.privacy.data;
+package com.wealoha.social.beans;
 
 import com.wealoha.social.beans.ResultData;
 

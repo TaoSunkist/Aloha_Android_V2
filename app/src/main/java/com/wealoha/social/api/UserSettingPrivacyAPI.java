@@ -1,4 +1,4 @@
-package com.wealoha.social.api.privacy;
+package com.wealoha.social.api;
 
 import retrofit.Callback;
 import retrofit.http.Field;
@@ -6,7 +6,7 @@ import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
 
-import com.wealoha.social.api.privacy.data.PrivacyData;
+import com.wealoha.social.beans.PrivacyData;
 import com.wealoha.social.beans.Result;
 
 /**
