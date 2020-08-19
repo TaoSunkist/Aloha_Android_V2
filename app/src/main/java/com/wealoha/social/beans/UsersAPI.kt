@@ -27,11 +27,8 @@ import com.sina.weibo.sdk.net.WeiboParameters
  * @author SINA
  * @since 2014-03-03
  */
-class UsersAPI(
-    context: Context?,
-    appKey: String?,
-    accessToken: Oauth2AccessToken?
-) : AbsOpenAPI(context, appKey, accessToken) {
+class UsersAPI(context: Context?, appKey: String?, accessToken: Oauth2AccessToken?) :
+    AbsOpenAPI(context, appKey, accessToken) {
     companion object {
         private const val READ_USER = 0
         private const val READ_USER_BY_DOMAIN = 1
@@ -93,113 +90,5 @@ class UsersAPI(
             HTTPMETHOD_GET,
             listener
         )
-    }
-
-    /**
-     * 通过个性化域名获取用户资料以及用户最新的一条微博。
-     *
-     * @param domain
-     * 需要查询的个性化域名（请注意：是http://weibo.com/xxx后面的xxx部分）
-     * @param listener
-     * 异步请求回调接口
-     */
-    fun domainShow(domain: String?, listener: RequestListener?) {
-        // WeiboParameters params = new WeiboParameters(mAppKey);
-        val params = WeiboParameters()
-        params.put("domain", domain)
-        requestAsync(
-            sAPIList[READ_USER_BY_DOMAIN],
-            params,
-            HTTPMETHOD_GET,
-            listener
-        )
-    }
-
-    /**
-     * 批量获取用户的粉丝数、关注数、微博数。
-     *
-     * @param uids
-     * 需要获取数据的用户UID，多个之间用逗号分隔，最多不超过100个
-     * @param listener
-     * 异步请求回调接口
-     */
-    fun counts(uids: LongArray, listener: RequestListener?) {
-        val params = buildCountsParams(uids)
-        requestAsync(
-            sAPIList[READ_USER_COUNT],
-            params,
-            AbsOpenAPI.Companion.HTTPMETHOD_GET,
-            listener
-        )
-    }
-    /**
-     * -----------------------------------------------------------------------
-     * 请注意：以下方法匀均同步方法。如果开发者有自己的异步请求机制，请使用该函数。
-     * -----------------------------------------------------------------------
-     */
-    /**
-     * @see .show
-     */
-    fun showSync(uid: Long): String? {
-        // WeiboParameters params = new WeiboParameters(mAppKey);
-        val params = WeiboParameters()
-        params.put("uid", uid)
-        return requestSync(
-            sAPIList[READ_USER],
-            params,
-            AbsOpenAPI.Companion.HTTPMETHOD_GET
-        )
-    }
-
-    /**
-     * @see .show
-     */
-    fun showSync(screen_name: String?): String? {
-        // WeiboParameters params = new WeiboParameters(mAppKey);
-        val params = WeiboParameters()
-        params.put("screen_name", screen_name)
-        return requestSync(
-            sAPIList[READ_USER],
-            params,
-            AbsOpenAPI.Companion.HTTPMETHOD_GET
-        )
-    }
-
-    /**
-     * @see .domainShow
-     */
-    fun domainShowSync(domain: String?): String? {
-        // WeiboParameters params = new WeiboParameters(mAppKey);
-        val params = WeiboParameters()
-        params.put("domain", domain)
-        return requestSync(
-            sAPIList[READ_USER_BY_DOMAIN],
-            params,
-            AbsOpenAPI.Companion.HTTPMETHOD_GET
-        )
-    }
-
-    /**
-     * @see .counts
-     */
-    fun countsSync(uids: LongArray): String? {
-        val params = buildCountsParams(uids)
-        return requestSync(
-            sAPIList[READ_USER_COUNT],
-            params,
-            AbsOpenAPI.Companion.HTTPMETHOD_GET
-        )
-    }
-
-    private fun buildCountsParams(uids: LongArray): WeiboParameters {
-        // WeiboParameters params = new WeiboParameters(mAppKey);
-        val params = WeiboParameters()
-        val strb = StringBuilder()
-        for (cid in uids) {
-            strb.append(cid).append(",")
-        }
-        strb.deleteCharAt(strb.length - 1)
-        params.put("uids", strb.toString())
-        return params
     }
 }

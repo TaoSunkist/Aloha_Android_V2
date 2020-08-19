@@ -18,7 +18,7 @@ class User : Parcelable, Serializable {
 	var birthday // yyyy-MM-dd
             : String? = null
     @kotlin.jvm.JvmField
-	var age // TODO 改成int！！！
+	var age
             : String? = null
     @kotlin.jvm.JvmField
 	var height // 1+
