@@ -1,4 +1,4 @@
-package com.wealoha.social.api.share.bean;
+package com.wealoha.social.beans;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

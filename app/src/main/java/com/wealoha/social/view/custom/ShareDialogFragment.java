@@ -40,7 +40,7 @@ import com.tencent.mm.sdk.modelmsg.WXTextObject;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.wealoha.social.R;
-import com.wealoha.social.api.share.bean.ShareApp;
+import com.wealoha.social.beans.ShareApp;
 import com.wealoha.social.beans.ImageUploadResult;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.PromotionGetData;
