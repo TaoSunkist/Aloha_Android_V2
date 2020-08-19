@@ -93,7 +93,7 @@ public class PostsListFragment extends BaseFragment implements OnClickListener, 
 		if (reset) {
 			pro2Adt.resetState();
 		}
-		pro2Adt.loadEarlyPage(50, contextUtil.getCurrentUser().id, new LoadCallback() {
+		pro2Adt.loadEarlyPage(50, contextUtil.getCurrentUser().getId(), new LoadCallback() {
 
 			@Override
 			public void success(boolean hasEarly, boolean hasLate) {

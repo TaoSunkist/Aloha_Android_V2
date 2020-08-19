@@ -150,14 +150,14 @@ public class CommentAdapter extends BaseAdapter/* implements OnSlideListener */{
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		Comment comment = mComments.get(position);
-		picasso.load(ImageUtil.getImageUrl(mUsers.get(comment.userId).avatarImage.id, viewHolder.userPhoto.getWidth(), CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(viewHolder.userPhoto);
-		viewHolder.userName.setText(mUsers.get(comment.userId).name);
+		picasso.load(ImageUtil.getImageUrl(mUsers.get(comment.userId).getAvatarImage().getId(), viewHolder.userPhoto.getWidth(), CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(viewHolder.userPhoto);
+		viewHolder.userName.setText(mUsers.get(comment.userId).getName());
 		viewHolder.timeAgo.setText(TimeUtil.getDistanceTimeForApp(leaveCommentAct, d.getTime(), comment.createTimeMillis));
 
 		String commentText = comment.comment;
 		if (comment.replyUserId != null) {
 			// 如果是回覆
-			String replyUser = mUsers.get(comment.replyUserId).name;
+			String replyUser = mUsers.get(comment.replyUserId).getName();
 			commentText = context.getString(R.string.comment_in_reply, replyUser, commentText);
 		}
 		viewHolder.content.setText(commentText);

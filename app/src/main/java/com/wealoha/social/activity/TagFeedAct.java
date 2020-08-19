@@ -177,8 +177,8 @@ public class TagFeedAct extends BaseFragAct implements OnTouchListener, OnClickL
 			if (result.getParcelableExtra(User.TAG) != null) {
 				UserTags userTags = new UserTags();
 				User user = (User) result.getParcelableExtra(User.TAG);
-				userTags.setUsername(user.name);
-				userTags.tagUserId = user.id;
+				userTags.setUsername(user.getName());
+				userTags.tagUserId = user.getId();
 				userTags.tagAnchorX = mInitX / mTagsContainer.getWidth();
 				userTags.tagAnchorY = mInitY / mTagsContainer.getHeight();
 				checkSingleTag(userTags.tagUserId);

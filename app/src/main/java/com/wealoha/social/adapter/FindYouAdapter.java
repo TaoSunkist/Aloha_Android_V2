@@ -102,15 +102,15 @@ public class FindYouAdapter extends BaseAdapter {
 			// convertView = mListItem.initView(user);
 			holder = (ViewHolder) convertView.getTag();
 		}
-		picasso.load(ImageUtil.getImageUrl(user.avatarImage.id, 100, CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(holder.userPhoto);
+		picasso.load(ImageUtil.getImageUrl(user.getAvatarImage().getId(), 100, CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(holder.userPhoto);
 		// 标出高亮
 		if (mHighlightMap == null || mHighlightMap.size() <= 0) {
-			holder.userName.setText(user.name);
+			holder.userName.setText(user.getName());
 		} else {
-			holder.userName.setText(StringUtil.foregroundHight(user.name, mHighlightMap.get(user.id)));
+			holder.userName.setText(StringUtil.foregroundHight(user.getName(), mHighlightMap.get(user.getId())));
 		}
 
-		if (user.match) {
+		if (user.getMatch()) {
 			holder.matchOrNot.setVisibility(View.VISIBLE);
 		} else {
 			holder.matchOrNot.setVisibility(View.GONE);

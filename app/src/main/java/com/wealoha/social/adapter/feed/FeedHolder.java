@@ -550,7 +550,7 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 			break;
 		case R.id.share_tv:
 			new PopupStore(regionNodeUtil).showShareProfileUrl02(mFrag.getActivity().getString(R.string.share_post),//
-																	(BaseFragAct) mFrag.getActivity(), mPost.getUser().getName(), StringUtil.sharePostWebUrl(contextUtil.getCurrentUser().id, "", mPost, StringUtil.ME_PROFILE_COPY_LINK), mPost.getImage().getUrl(100, 100));
+																	(BaseFragAct) mFrag.getActivity(), mPost.getUser().getName(), StringUtil.sharePostWebUrl(contextUtil.getCurrentUser().getId(), "", mPost, StringUtil.ME_PROFILE_COPY_LINK), mPost.getImage().getUrl(100, 100));
 			break;
 		case R.id.praise_count:
 			openUserList();
@@ -776,11 +776,11 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 	public void removeMyTag() {
 
 		if (contextUtil.getCurrentUser() != null) {
-			feed2Service.removeTag(mPost.getPostId(), contextUtil.getCurrentUser().id, new NoResultCallback() {
+			feed2Service.removeTag(mPost.getPostId(), contextUtil.getCurrentUser().getId(), new NoResultCallback() {
 
 				@Override
 				public void success() {
-					removeTag(contextUtil.getCurrentUser().id);
+					removeTag(contextUtil.getCurrentUser().getId());
 				}
 
 				@Override

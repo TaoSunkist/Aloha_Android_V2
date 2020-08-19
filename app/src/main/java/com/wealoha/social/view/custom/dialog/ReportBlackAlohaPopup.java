@@ -257,13 +257,13 @@ public class ReportBlackAlohaPopup implements OnClickListener {
 
 		if (user != null) {
 			mUser = user;
-			if (user.block) {
+			if (user.getBlock()) {
 				mBlack.setText(R.string.remove_from_black_list);
 			} else {
 				mBlack.setText(R.string.add_to_black_list);
 			}
 		} else {
-			mUser = new User();
+			mUser =  User.Companion.fake();
 		}
 
 		// 举报user
@@ -306,7 +306,7 @@ public class ReportBlackAlohaPopup implements OnClickListener {
 			report();
 			break;
 		case R.id.black_user:
-			if (mUser.block) {
+			if (mUser.getBlock()) {
 				removeFromBlack();
 			} else {
 				black();
@@ -393,7 +393,7 @@ public class ReportBlackAlohaPopup implements OnClickListener {
 	/**
 	 * @Title: report
 	 * @Description: 举报用户或FEED
-	 * @param 设定文件
+	 * @param
 	 * @return void 返回类型
 	 * @throws
 	 */
@@ -437,7 +437,7 @@ public class ReportBlackAlohaPopup implements OnClickListener {
 	/**
 	 * @Title: black
 	 * @Description: 加入黑名单
-	 * @param 设定文件
+	 * @param
 	 * @return void 返回类型
 	 * @throws
 	 */
@@ -448,7 +448,7 @@ public class ReportBlackAlohaPopup implements OnClickListener {
 			public void success(Result<ResultData> arg0, Response arg1) {
 				XL.i(TAG, "black user:success");
 				ToastUtil.shortToast(AppApplication.getInstance(), R.string.add_to_black_list_success);
-				mUser.block = true;
+				mUser.setBlock(true);
 			}
 
 			@Override
@@ -461,7 +461,7 @@ public class ReportBlackAlohaPopup implements OnClickListener {
 	/**
 	 * @Title: black
 	 * @Description: 移除黑名单
-	 * @param 设定文件
+	 * @param
 	 * @return void 返回类型
 	 * @throws
 	 */
@@ -476,7 +476,7 @@ public class ReportBlackAlohaPopup implements OnClickListener {
 
 			@Override
 			public void success(Result<ResultData> result, Response arg1) {
-				mUser.block = false;
+				mUser.setBlock(false);
 				ToastUtil.shortToast(context, R.string.remove_from_black_list_success);
 				XL.i(TAG, "移除黑名單成功");
 			}

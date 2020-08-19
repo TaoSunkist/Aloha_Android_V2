@@ -121,35 +121,62 @@ class User(
         }
 
         @JvmStatic
-        fun fromDTO(dto: UserDTO?): User? {
-            var user: User? = null
-            if (dto != null) {
-                user = User(
-                    dto.id,
-                    dto.name,
-                    dto.birthday,
-                    dto.age,
-                    dto.height,  //
-                    dto.weight,
-                    dto.me,
-                    dto.regionCode,
-                    dto.region,
-                    dto.zodiac,  //
-                    dto.summary,
-                    dto.selfPurposes,
-                    dto.selfTag,
-                    Image.fromDTO(dto.avatarImage),  //
-                    dto.profileIncomplete,
-                    dto.alohaCount,
-                    dto.alohaGetCount,  //
-                    dto.aloha,
-                    dto.match,
-                    dto.postCount,
-                    dto.block,
-                    dto.hasPrivacy
-                )
-            }
-            return user
+        fun fromDTO(dto: UserDTO): User {
+            //com.wealoha.social.beans.User()
+//        user.age = userDto.age.toString()
+//        user.aloha = userDto.aloha
+//        user.alohaCount = userDto.alohaCount
+//        user.alohaGetCount = userDto.alohaGetCount
+//        user.avatarImageId = userDto.avatarImageId
+//        user.birthday = userDto.birthday
+//        user.block = userDto.block
+//        user.hasPrivacy = userDto.hasPrivacy
+//        user.height = userDto.height.toString()
+//        user.id = userDto.id
+//        user.match = userDto.match
+//        user.me = userDto.me
+//        User.getName() = userDto.name
+//        user.postCount = userDto.postCount
+//        user.profileIncomplete = userDto.profileIncomplete
+//        user.regionCode = userDto.regionCode
+//        user.region = userDto.region
+//        user.selfPurposes = userDto.selfPurposes
+//        user.selfTag = userDto.selfTag
+//        user.summary = userDto.summary
+//        user.weight = userDto.weight.toString()
+//        user.zodiac = userDto.zodiac
+//        val image = com.wealoha.social.beans.Image()
+//        image.id = userDto.avatarImageId
+//        image.height = userDto.avatarImage!!.height
+//        image.width = userDto.avatarImage!!.width
+//        image.urlPatternWidth = userDto.avatarImage!!.urlPatternWidth
+//        image.urlPatternWidthHeight = userDto.avatarImage!!.urlPatternWidthHeight
+//        image.type = userDto.avatarImage!!.type
+//        user.avatarImage = image
+            return User(
+                dto.id,
+                dto.name,
+                dto.birthday,
+                dto.age,
+                dto.height,  //
+                dto.weight,
+                dto.me,
+                dto.regionCode,
+                dto.region,
+                dto.zodiac,  //
+                dto.summary,
+                dto.selfPurposes,
+                dto.selfTag,
+                Image.fromDTO(dto.avatarImage),  //
+                dto.profileIncomplete,
+                dto.alohaCount,
+                dto.alohaGetCount,  //
+                dto.aloha,
+                dto.match,
+                dto.postCount,
+                dto.block,
+                dto.hasPrivacy
+            )
         }
 
         @JvmStatic

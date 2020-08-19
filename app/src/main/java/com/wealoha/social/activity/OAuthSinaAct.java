@@ -292,7 +292,6 @@ public class OAuthSinaAct extends BaseFragAct {
 
 	/**
 	 * @Description:
-	 * @param result
 	 * @see:
 	 * @since:
 	 * @description
@@ -308,11 +307,11 @@ public class OAuthSinaAct extends BaseFragAct {
 				if (result != null) {
 					if (result.isOk()) {
 						Bundle bundle = new Bundle();
-						result.data.user.accessToken = sinaTokenBean.accessToken;
+						result.data.user.setAccessToken(sinaTokenBean.accessToken);
 						bundle.putParcelable(User.TAG, result.data.user);
-						contextUtil.setCurrentSinaWbToken(result.data.user.accessToken);
+						contextUtil.setCurrentSinaWbToken(result.data.user.getAccessToken());
 						afterSinaLoginSuccess(result.data.user, result.data.t);
-						if (result.data.user.profileIncomplete) {
+						if (result.data.user.getProfileIncomplete()) {
 							startActivityAndCleanTask(GlobalConstants.IntentAction.INTENT_URI_USER_DATA, null);
 						} else {
 							startActivityAndCleanTask(GlobalConstants.IntentAction.INTENT_URI_MAIN, null);

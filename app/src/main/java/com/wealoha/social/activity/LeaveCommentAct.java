@@ -162,8 +162,6 @@ public class LeaveCommentAct extends BaseFragAct implements OnItemClickListener,
     }
 
     /**
-     * @param feed2
-     * @param 设定文件
      * @return void 返回类型
      * @throws
      * @Title: loadComment
@@ -199,7 +197,6 @@ public class LeaveCommentAct extends BaseFragAct implements OnItemClickListener,
     }
 
     /**
-     * @param 设定文件
      * @return void 返回类型
      * @throws
      * @Title: refreshView
@@ -416,9 +413,9 @@ public class LeaveCommentAct extends BaseFragAct implements OnItemClickListener,
             mCommentEt.requestFocus();
             imm.showSoftInput(mCommentEt, 0);
             mCommentEt.setText("");
-            mCommentEt.setHint(mResources.getString(R.string.report_hint) + mUserMap.get(comment.userId).name + ":");
+            mCommentEt.setHint(mResources.getString(R.string.report_hint) + mUserMap.get(comment.userId).getName() + ":");
             commentType = false;
-            fromUser = mUserMap.get(comment.userId).id;
+            fromUser = mUserMap.get(comment.userId).getId();
 
             final int fp = position;
             final View v = view;

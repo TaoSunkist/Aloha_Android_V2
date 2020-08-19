@@ -223,10 +223,10 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
 				InboxSession inboxSession = (InboxSession) parent.getItemAtPosition(position);
 				if (inboxSession != null) {
 					sessionIdTemp = inboxSession.id;
-					new ListItemDialog(getActivity(), (ViewGroup) view).showListItemPopup(ChatFragment.this, inboxSession.user.name, ListItemType.DELETE);
+					new ListItemDialog(getActivity(), (ViewGroup) view).showListItemPopup(ChatFragment.this, inboxSession.user.getName(), ListItemType.DELETE);
 					// new ReportBlackAlohaPopup().showPopup(PopupType.DELETE,
 					// PostType.SESSION,
-					// inboxSession.id, inboxSession.user.name,
+					// inboxSession.id, inboxSession.User.getName(),
 					// inboxSession.user);
 				} else {
 					ToastUtil.shortToast(getActivity(), R.string.is_not_work);
@@ -296,7 +296,7 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
 		// 获取当前的inboxSession
 		final InboxSession inboxSession = (InboxSession) parent.getAdapter().getItem(position);
 		// 清空通知栏中push过来的sessionID通知
-		NoticeBarController.getInstance(mMainAct).removeSession(inboxSession.user.id);
+		NoticeBarController.getInstance(mMainAct).removeSession(inboxSession.user.getId());
 		// 通过bundle传递到对话界面
 		Bundle bundle = new Bundle();
 		bundle.putString("sessionId", inboxSession.id);

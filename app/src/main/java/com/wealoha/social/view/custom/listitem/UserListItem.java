@@ -40,7 +40,7 @@ public class UserListItem {
 			return null;
 		}
 		mUser = user;
-		picasso.load(ImageUtil.getImageUrl(mUser.avatarImage.id, 100, CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(mUserPhoto);
+		picasso.load(ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), 100, CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(mUserPhoto);
 
 		return container;
 	}

@@ -78,23 +78,23 @@ public class ProfileInfoHolder {
 	}
 
 	public void initData() {
-		// mUsername.setText("" + mUser.name);
-		mWord.setText(mUser.summary);
-		List<String> regionNames = regionNodeUtil.getRegionNames(mUser.regionCode, 2);
+		// mUsername.setText("" + mUser.getName());
+		mWord.setText(mUser.getSummary());
+		List<String> regionNames = regionNodeUtil.getRegionNames(mUser.getRegionCode(), 2);
 		// FIXME 地區
 		Collections.reverse(regionNames);
 		if (regionNames.size() > 2) {
 			regionNames.remove(0);
 		}
 		mFind.setText(StringUtil.join(", ", regionNames));
-		String brith = mUser.age + " · " + mUser.height + " · " + mUser.weight;
-		String userTag = contextUtil.getUserTag(mUser.selfTag);
+		String brith = mUser.getAge() + " · " + mUser.getHeight() + " · " + mUser.getWeight();
+		String userTag = contextUtil.getUserTag(mUser.getSelfTag());
 		if (userTag != null) {
 			brith += " · " + userTag;
 		}
 		mBrith.setText(brith);
 		// 寻找
-		String purposes = contextUtil.formatPurposes(mUser.selfPurposes);
+		String purposes = contextUtil.formatPurposes(mUser.getSelfPurposes());
 		if (StringUtil.isNotEmpty(purposes)) {
 			mFindWoman.setVisibility(View.VISIBLE);
 			mFindWoman.setText(context.getResources().getString(R.string.seek_for, purposes));

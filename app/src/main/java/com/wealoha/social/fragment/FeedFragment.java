@@ -272,7 +272,7 @@ public class FeedFragment extends BaseFragment implements OnClickListener,
 	 * @Description: 第一次登陆出现的引导弹层
 	 */
 	public void openGuideDialog() {
-		if (!singleFeedFlag && contextUtil.getCurrentUser() != null && !contextUtil.getCurrentUser().isShowFeedDialog) {
+		if (!singleFeedFlag && contextUtil.getCurrentUser() != null && !contextUtil.getCurrentUser().isShowFeedDialog()) {
 			viewHeader = LayoutInflater.from(context).inflate(R.layout.item_feed_header, new ListView(context), false);
 			TextView title = (TextView) viewHeader.findViewById(R.id.first_aloha_title);
 
@@ -300,7 +300,7 @@ public class FeedFragment extends BaseFragment implements OnClickListener,
 		}
 		mListView.removeHeaderView(viewHeader);
 		User user = contextUtil.getCurrentUser();
-		user.isShowFeedDialog = true;
+		user.setShowFeedDialog(true);
 		contextUtil.setCurrentUser(user);
 		removeNofeedCover();
 	}
@@ -308,7 +308,7 @@ public class FeedFragment extends BaseFragment implements OnClickListener,
 	private void removeNofeedCover() {
 		// XL.i("REMOVE_COVER", syncLastPageBool + "----MSG:" +
 		// mResult.list.size());
-		if (!singleFeedFlag && contextUtil.getCurrentUser() != null && !contextUtil.getCurrentUser().isShowFeedDialog) {
+		if (!singleFeedFlag && contextUtil.getCurrentUser() != null && !contextUtil.getCurrentUser().isShowFeedDialog()) {
 			return;
 		}
 		if (mResult == null) {
@@ -644,7 +644,7 @@ public class FeedFragment extends BaseFragment implements OnClickListener,
 			Log.i("LOAD_MEMORY", "++++++" + i);
 			Feed feed = mResult.list.get(i);
 			picasso.load(ImageUtil.getImageUrl(feed.imageId, mImageWidth, CropMode.ScaleCenterCrop)).fetch();
-			picasso.load(ImageUtil.getImageUrl(mResult.userMap.get(feed.userId).avatarImageId, GlobalConstants.ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop)).fetch();
+			picasso.load(ImageUtil.getImageUrl(mResult.userMap.get(feed.userId).getAvatarImageId(), GlobalConstants.ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop)).fetch();
 		}
 	}
 
@@ -832,7 +832,7 @@ public class FeedFragment extends BaseFragment implements OnClickListener,
 		}
 		if (tagFeed != null) {
 			if (tagFeed.tagMe != null && tagFeed.tagMe) {
-				feedService.removeTag(tagFeed.postId, mCurrentUser.id, removeTagCallback);
+				feedService.removeTag(tagFeed.postId, mCurrentUser.getId(), removeTagCallback);
 			}
 		}
 	}
@@ -913,7 +913,7 @@ public class FeedFragment extends BaseFragment implements OnClickListener,
 				ArrayList<UserTags> usertags = (ArrayList<UserTags>) mResult.list.get(0).userTags;
 				for (int i = 0; i < usertags.size(); i++) {
 					UserTags tag = usertags.get(i);
-					if (tag.tagUserId.equals(mCurrentUser.id)) {
+					if (tag.tagUserId.equals(mCurrentUser.getId())) {
 						usertags.remove(i);
 						i--;
 					}

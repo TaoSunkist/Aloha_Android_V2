@@ -273,8 +273,8 @@ public class FindYouAct extends BaseFragAct implements TextWatcher, OnItemClickL
 			User user = result.data.user;
 			if (user != null) {
 				currentUser = user;
-				headerUserName.setText(StringUtil.foregroundHight(user.name, result.data.keyword));
-				picasso.load(ImageUtil.getImageUrl(user.avatarImage.id,//
+				headerUserName.setText(StringUtil.foregroundHight(user.getName(), result.data.keyword));
+				picasso.load(ImageUtil.getImageUrl(user.getAvatarImage().getId(),//
 													100, CropMode.ScaleCenterCrop))//
 				.placeholder(R.drawable.search_persion)//
 				.into(headerUserPhoto);

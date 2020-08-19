@@ -97,7 +97,7 @@ public class MatchPopupWindow extends PopupWindow {
 
 			@Override
 			public void onClick(View v) {
-				new ChatUtil().chatWith(mUser.id);
+				new ChatUtil().chatWith(mUser.getId());
 				dismiss();
 			}
 		});
@@ -118,7 +118,7 @@ public class MatchPopupWindow extends PopupWindow {
 
 	public void init(Bitmap b, User user) {
 		if (user == null) {
-			user = new User();
+			user = User.Companion.fake();
 			return;
 		}
 		mUser = user;
@@ -133,16 +133,16 @@ public class MatchPopupWindow extends PopupWindow {
 
 		// Log.i("ALOHA_MATCHPOPUP", userphoto);
 		int px = UiUtils.dip2px(mContext, 130);
-		picasso.load(ImageUtil.getImageUrl(mUser.avatarImage.id, px, CropMode.ScaleCenterCrop))//
+		picasso.load(ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), px, CropMode.ScaleCenterCrop))//
 				.placeholder(R.color.gray_text)//
 				.into(mUserPhoto);
 		if (contextUtil.getCurrentUser() != null) {
-			picasso.load(ImageUtil.getImageUrl(contextUtil.getCurrentUser().avatarImage.id, px, CropMode.ScaleCenterCrop))//
+			picasso.load(ImageUtil.getImageUrl(contextUtil.getCurrentUser().getAvatarImage().getId(), px, CropMode.ScaleCenterCrop))//
 					.placeholder(R.color.gray_text)//
 					.into(mMyPhoto);
 		}
 
-		mUserName.setText(mContext.getString(R.string.someone_aloha_you, mUser.name));
+		mUserName.setText(mContext.getString(R.string.someone_aloha_you, mUser.getName()));
 	}
 
 	public void show(View view) {

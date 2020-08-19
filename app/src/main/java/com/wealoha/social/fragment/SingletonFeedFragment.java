@@ -313,7 +313,7 @@ public class SingletonFeedFragment extends BaseFragment implements Holder2FragCa
 	private void removeCurrentUserTag() {
 		final Post post = (Post) feedAdapter.getItem(0);
 		if (post != null) {
-			feedService.removeTag(post.getPostId(), contextUtil.getCurrentUser().id, new NoResultCallback() {
+			feedService.removeTag(post.getPostId(), contextUtil.getCurrentUser().getId(), new NoResultCallback() {
 
 				@Override
 				public void success() {

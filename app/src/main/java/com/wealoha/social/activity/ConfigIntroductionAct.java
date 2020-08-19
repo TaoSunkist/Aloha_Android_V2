@@ -121,7 +121,7 @@ public class ConfigIntroductionAct extends BaseFragAct implements OnClickListene
 			return;
 		}
 		RequestParams params = new RequestParams();
-		// params.addBodyParameter("name", AppApplication.user.name);
+		// params.addBodyParameter("name", AppApplication.User.getName());
 		params.addBodyParameter("summary", mIntroductionContent);
 		contextUtil.addGeneralHttpHeaders(params);
 		SyncEntProtocol.getInstance().send(HttpMethod.POST, GlobalConstants.ServerUrl.CHANGE_PROFILE, params, new RequestCallBack<String>() {

@@ -1,116 +1,159 @@
 package com.wealoha.social.beans
 
-import android.os.Parcel
 import android.os.Parcelable
+import com.mooveit.library.Fakeit
+import com.wealoha.social.api.user.dto.UserDTO
 import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
-import java.util.*
 
 @Parcelize
-class User : Parcelable, Serializable {
-    @kotlin.jvm.JvmField
-	var id: String? = null
-    @kotlin.jvm.JvmField
-	var type: String? = null
-    @kotlin.jvm.JvmField
-	var name: String? = null
-    @kotlin.jvm.JvmField
-	var birthday // yyyy-MM-dd
-            : String? = null
-    @kotlin.jvm.JvmField
-	var age
-            : String? = null
-    @kotlin.jvm.JvmField
-	var height // 1+
-            : String? = null
-    @kotlin.jvm.JvmField
-	var weight // 1+
-            : String? = null
+data class User(
+    var id: String,
+    var type: String? = null,
+    var name: String,
+    var birthday // yyyy-MM-dd
+    : String? = null,
+    var age
+    : String? = null,
+    var height // 1+
+    : String? = null,
+    var weight // 1+
+    : String? = null,
 
     /** 我当前所在的页面是否指向我自己  */
-	@kotlin.jvm.JvmField
-	var me = false
+    var me: Boolean = false,
 
     /** 地区  */
-	@kotlin.jvm.JvmField
-	var regionCode: String? = null
-    @kotlin.jvm.JvmField
-	var region: List<String>? = null
+    var regionCode: String? = null,
+    var region: List<String>? = null,
 
     /** 星座  */
-	@kotlin.jvm.JvmField
-	var zodiac: String? = null
+    var zodiac: String? = null,
 
     /** 摘要简介  */
-	@kotlin.jvm.JvmField
-	var summary: String? = null
+    var summary: String? = null,
 
     /** 感兴趣的类型  */
-	@kotlin.jvm.JvmField
-	var selfPurposes: List<String>? = null
+    var selfPurposes: List<String>? = null,
 
     /** 我自己的类型  */
-	@kotlin.jvm.JvmField
-	var selfTag: String? = null
+    var selfTag: String? = null,
 
     /** 头像  */
-	@kotlin.jvm.JvmField
-	var avatarImage: Image? = null
-    @kotlin.jvm.JvmField
-	var avatarImageId: String? = null
+    var avatarImage: Image,
+    var avatarImageId: String,
 
     // public int distance;
-	@kotlin.jvm.JvmField
-	var createTimeMillis: Long = 0
+    var createTimeMillis: Long = 0,
 
     /** 资料不完整 强制跳  */
-	@kotlin.jvm.JvmField
-	var profileIncomplete = false
+    var profileIncomplete: Boolean = false,
 
     /** 他喜欢多少人  */
-	@kotlin.jvm.JvmField
-	var alohaCount = 0
+    var alohaCount: Int = 0,
 
     /** 他被多少人喜欢  */
-	@kotlin.jvm.JvmField
-	var alohaGetCount = 0
+    var alohaGetCount: Int = 0,
 
     /** 是否喜欢过他  */
-	@kotlin.jvm.JvmField
-	var aloha = false
+    var aloha: Boolean,
 
     /** 匹配  */
-	@kotlin.jvm.JvmField
-	var match = false
-    @kotlin.jvm.JvmField
-	var postCount = 0
+    var match: Boolean = false,
+    var postCount: Int = 0,
 
-    @kotlin.jvm.JvmField
-	@Deprecated("")
-    var t: String? = null
-    var phoneNum: String? = null
-    @kotlin.jvm.JvmField
-	var block = false
-    @kotlin.jvm.JvmField
-	var accessToken: String? = null
-    var isUpdate = false
+    @Deprecated("")
+    var t: String? = null,
+    var phoneNum: String,
+    var block: Boolean = false,
+    var accessToken: String,
+    var isUpdate: Boolean = false,
 
     /** 是否显示首次aloha time over后的提示  */
-	@kotlin.jvm.JvmField
-	var isShowAlohaTimeDialog = false
+    var isShowAlohaTimeDialog: Boolean = false,
 
     /** 是否显示首次feed的引导  */
-	@kotlin.jvm.JvmField
-	var isShowFeedDialog = false
-    @kotlin.jvm.JvmField
-	var hasPrivacy = false
-
+    var isShowFeedDialog: Boolean = false,
+    var hasPrivacy: Boolean = false
+) : Parcelable, Serializable {
     companion object {
         /**
          *
          */
         private const val serialVersionUID = 5164011748109511531L
+
         @kotlin.jvm.JvmField
-		val TAG = User::class.java.simpleName
+        val TAG = User::class.java.simpleName
+
+        fun fake(): User {
+            val avatarImage = Image.fake();
+            return User(
+                id = System.currentTimeMillis().toString(),
+                type = System.currentTimeMillis().toString(),
+                name = System.currentTimeMillis().toString(),
+                birthday = System.currentTimeMillis().toString(),
+                age = System.currentTimeMillis().toString(),
+                height = System.currentTimeMillis().toString(),
+                weight = System.currentTimeMillis().toString(),
+                me = (0..1).random() == 1,
+                regionCode = System.currentTimeMillis().toString(),
+                region = (0..4).map { Fakeit.app().name() },
+                zodiac = System.currentTimeMillis().toString(),
+                summary = System.currentTimeMillis().toString(),
+                selfPurposes = (0..4).map { Fakeit.app().name() },
+                selfTag = System.currentTimeMillis().toString(),
+                avatarImage = avatarImage,
+                avatarImageId = avatarImage.id,
+                createTimeMillis = System.currentTimeMillis(),
+                profileIncomplete = (0..1).random() == 1,
+                alohaCount = (0..1000).random(),
+                alohaGetCount = (0..1000).random(),
+                aloha = (0..1).random() == 1,
+                match = (0..1).random() == 1,
+                postCount = (0..1000).random(),
+                t = System.currentTimeMillis().toString(),
+                phoneNum = System.currentTimeMillis().toString(),
+                accessToken = System.currentTimeMillis().toString(),
+                isUpdate = true,
+                isShowAlohaTimeDialog = (0..1).random() == 1,
+                isShowFeedDialog = (0..1).random() == 1,
+                hasPrivacy = (0..1).random() == 1
+            )
+        }
+
+        fun init(userDto: UserDTO): User {
+            val user = fake()
+            user.age = userDto.age.toString()
+            user.aloha = userDto.aloha
+            user.alohaCount = userDto.alohaCount
+            user.alohaGetCount = userDto.alohaGetCount
+            user.avatarImageId = userDto.avatarImageId
+            user.birthday = userDto.birthday
+            user.block = userDto.block
+            user.hasPrivacy = userDto.hasPrivacy
+            user.height = userDto.height.toString()
+            user.id = userDto.id
+            user.match = userDto.match
+            user.me = userDto.me
+            user.name = userDto.name
+            user.postCount = userDto.postCount
+            user.profileIncomplete = userDto.profileIncomplete
+            user.regionCode = userDto.regionCode
+            user.region = userDto.region
+            user.selfPurposes = userDto.selfPurposes
+            user.selfTag = userDto.selfTag
+            user.summary = userDto.summary
+            user.weight = userDto.weight.toString()
+            user.zodiac = userDto.zodiac
+            val image = Image.fake()
+            image.id = userDto.avatarImageId
+            image.height = userDto.avatarImage!!.height
+            image.width = userDto.avatarImage!!.width
+            image.urlPatternWidth = userDto.avatarImage!!.urlPatternWidth
+            image.urlPatternWidthHeight = userDto.avatarImage!!.urlPatternWidthHeight
+            image.type = userDto.avatarImage!!.type
+            user.avatarImage = image
+            return user
+        }
     }
 }

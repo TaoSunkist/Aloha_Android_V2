@@ -288,7 +288,7 @@ public class Feed2Fragment extends BaseFragment implements IFeedsView {
     private String gerCurrentUserId() {
         String currentId = null;
         if (contextUtil.getCurrentUser() != null) {
-            currentId = contextUtil.getCurrentUser().id;// 当前用户的userid，用来判feed
+            currentId = contextUtil.getCurrentUser().getId();// 当前用户的userid，用来判feed
             // 是否有自己的标签
         }
         return currentId;

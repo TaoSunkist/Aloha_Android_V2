@@ -1073,7 +1073,7 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 
 	private void refreshFeedList(Intent result) {
 		if (TextUtils.isEmpty(userid)) {
-			userid = contextUtil.getCurrentUser().id;
+			userid = contextUtil.getCurrentUser().getId();
 		}
 		if (result != null) {
 			isRefreshHeadIcon = result.getBooleanExtra("isRefreshHeadIcon", false);

@@ -215,7 +215,7 @@ public final class CaptureActivity extends BaseFragAct implements SurfaceHolder.
 					}
 				});
 				if (mUser != null && NetworkUtil.isNetworkAvailable()) {
-					Bitmap thumb = ImageUtil.handPic(ImageUtil.getImageUrl(mUser.avatarImage.id, GlobalConstants.ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop));
+					Bitmap thumb = ImageUtil.handPic(ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), GlobalConstants.ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop));
 					if (thumb != null) {
 						thumb = ImageUtil.drawRound(thumb, (int) (CaptureActivity.this.mScreenWidth * 0.009f + 0.5f));
 						bit = ImageUtil.getTwoDimentsionalCode(bitmap, thumb);
@@ -463,7 +463,7 @@ public final class CaptureActivity extends BaseFragAct implements SurfaceHolder.
 							}
 							if (result.isOk()) {
 								Bundle bundle = new Bundle();
-								result.data.user.me = false;
+								result.data.user.setMe(false);
 								bundle.putParcelable(User.TAG, result.data.user);
 								bundle.putString("refer_key", GlobalConstants.WhereIsComeFrom.SCANNER_TO_PROFILE);
 								startFragment(Profile2Fragment.class, bundle, true);

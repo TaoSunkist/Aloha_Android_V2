@@ -654,7 +654,7 @@ public class Profile2HeaderHolder implements OnTouchListener {
 		// 移除翻牌子列表中的人
 		if (AppApplication.mUserList != null && AppApplication.mUserList.size() > 0) {
 			for (com.wealoha.social.beans.User user : AppApplication.mUserList) {
-				if (user.id.equals(mUser.getId())) {
+				if (user.getId().equals(mUser.getId())) {
 					AppApplication.mUserList.remove(user);
 					XL.i(TAG, "AppApplication success:" + AppApplication.mUserList.contains(mUser));
 					break;

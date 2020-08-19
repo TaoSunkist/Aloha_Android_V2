@@ -286,7 +286,7 @@ public class ShareDialogFragment extends Fragment implements IWeiboHandler.Respo
 		Bundle bundle = new Bundle();
 		bundle.putString("permalink", "http://wealoha.com/get");
 		bundle.putString("code", data.promotionCode);
-		bundle.putString("imgUrl", ImageUtil.getImageUrl(contextUtil.getCurrentUser().avatarImage.id, UiUtils.dip2px(//
+		bundle.putString("imgUrl", ImageUtil.getImageUrl(contextUtil.getCurrentUser().getAvatarImage().getId(), UiUtils.dip2px(//
 		getActivity(), GlobalConstants.ImageSize.AVATAR_ROUND_SMALL), CropMode.ScaleCenterCrop));
 		ShareStore.shareSina(getActivity(), bundle, this, new ShareCallbackImpl() {
 
@@ -328,7 +328,7 @@ public class ShareDialogFragment extends Fragment implements IWeiboHandler.Respo
 		}
 		// FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
 		// 获取分享到Facebook的图片
-		ImageUtil.getFacebookShareImage(contextUtil.getCurrentUser(), ImageUtil.getImageUrl(contextUtil.getCurrentUser().avatarImage.id, UiUtils.dip2px(//
+		ImageUtil.getFacebookShareImage(contextUtil.getCurrentUser(), ImageUtil.getImageUrl(contextUtil.getCurrentUser().getAvatarImage().getId(), UiUtils.dip2px(//
 		getActivity(), GlobalConstants.ImageSize.AVATAR_ROUND_SMALL), CropMode.ScaleCenterCrop), new CallbackImpl() {
 
 			@Override

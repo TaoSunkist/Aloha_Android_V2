@@ -317,8 +317,8 @@ public class FeedItemHolder implements OnClickListener, ListItemCallback {
         // Log.i("FEED_IMAGE", "image width:" +
         // mFeedImage.getDrawingCache().getWidth());
         String upperName = null;
-        if (!TextUtils.isEmpty(mUser.name)) {
-            upperName = mUser.name.toUpperCase(Locale.getDefault());
+        if (!TextUtils.isEmpty(mUser.getName())) {
+            upperName = mUser.getName().toUpperCase(Locale.getDefault());
         }
 
         // 地理位置
@@ -333,7 +333,7 @@ public class FeedItemHolder implements OnClickListener, ListItemCallback {
         // mLocation.setText("999999");
         mUsername.setText(upperName);
         mTime.setText(TimeUtil.getDistanceTimeForApp(context, new Date().getTime(), mFeed.createTimeMillis));
-        picasso.load(ImageUtil.getImageUrl(mUser.avatarImage.id, GlobalConstants.ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop)).noFade().into(mUserPhoto);
+        picasso.load(ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), GlobalConstants.ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop)).noFade().into(mUserPhoto);
         mUserPhoto.setOnClickListener(this);
         mMore.setOnClickListener(this);
 
@@ -751,7 +751,7 @@ public class FeedItemHolder implements OnClickListener, ListItemCallback {
                 createListItemDialog();
                 break;
             case R.id.item_feed_praise_list:
-                if (mUser.me) {
+                if (mUser.getMe()) {
                     bundle = new Bundle();
                     bundle.putInt("listtype", SwipeMenuListFragment.LISTTYPE_PRAISE);
                     bundle.putInt("feedLikeCount", getLikeCount());
@@ -765,7 +765,7 @@ public class FeedItemHolder implements OnClickListener, ListItemCallback {
                 Intent intent = new Intent(contextUtil.getForegroundAct(), GDMapAct.class);
                 intent.putExtra("latitude", mFeed.latitude);
                 intent.putExtra("longitude", mFeed.longitude);
-                intent.putExtra("userphoto", mUser.avatarImageId);
+                intent.putExtra("userphoto", mUser.getAvatarImageId());
                 intent.putExtra("venueAbroad", mFeed.venueAbroad);
                 contextUtil.getForegroundAct().startActivity(intent);
                 break;
@@ -798,9 +798,9 @@ public class FeedItemHolder implements OnClickListener, ListItemCallback {
         if (mFeed.tagMe != null && mFeed.tagMe) {
             itemType[index++] = ListItemType.DELETE_TAG_ITEM;
         }
-        if (mUser.me) {
+        if (mUser.getMe()) {
             itemType[index++] = ListItemType.DELETE_FEED_ITEM;
-            title = mUser.name;
+            title = mUser.getName();
         } else {
             itemType[index++] = ListItemType.REPORT_FEED_ITEM;
             title = context.getResources().getString(R.string.report_inappropriate_content);
@@ -892,7 +892,7 @@ public class FeedItemHolder implements OnClickListener, ListItemCallback {
             }
         }
         if (contextUtil.getCurrentUser() != null) {
-            mFeedService.removeTag(mFeed.postId, contextUtil.getCurrentUser().id, new Callback<ResultData>() {
+            mFeedService.removeTag(mFeed.postId, contextUtil.getCurrentUser().getId(), new Callback<ResultData>() {
 
                 @Override
                 public void success(ResultData result, Response arg1) {

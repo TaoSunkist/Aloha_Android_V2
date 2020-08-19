@@ -67,7 +67,7 @@ public class FileTools {
 		if (initAlohaFolder()) {
 			if (user != null) {
 				sBuilder = new StringBuilder();
-				sBuilder.append(user.id);
+				sBuilder.append(user.getId());
 				sBuilder.append(System.currentTimeMillis());
 				sBuilder.append(".jpg");
 			}
@@ -85,7 +85,7 @@ public class FileTools {
 			if (user != null) {
 				sBuilder = new StringBuilder(ALOHA_FILE_FOLDER.getAbsolutePath());
 				sBuilder.append("/");
-				sBuilder.append(user.id);
+				sBuilder.append(user.getId());
 				sBuilder.append(System.currentTimeMillis());
 				sBuilder.append(".jpg");
 			}

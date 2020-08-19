@@ -95,11 +95,11 @@ public class ChatListAdapter extends BaseAdapter/* implements OnSlideListener */
 			chatListHolder = (ViewHolder) convertView.getTag();
 		}
 		InboxSession session = getItem(position);
-		Image image = session.user.avatarImage;
-		picasso.load(ImageUtil.getImageUrl(image.id, GlobalConstants.ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(chatListHolder.item_chat_user_photo);
-		chatListHolder.item_chat_user_name.setText(mSessionList.get(position).user.name);
+		Image image = session.user.getAvatarImage();
+		picasso.load(ImageUtil.getImageUrl(image.getId(), GlobalConstants.ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(chatListHolder.item_chat_user_photo);
+		chatListHolder.item_chat_user_name.setText(mSessionList.get(position).user.getName());
 		chatListHolder.item_chat_time_stamp.setText(TimeUtil.getDistanceTimeForApp(mMainAct, new Date().getTime(), session.updateTimeMillis));
-		String userid = mSessionList.get(position).user.id;
+		String userid = mSessionList.get(position).user.getId();
 		// 显示最新一条摘要
 		String messageSummary = mChatUtil.getMessageSummary(mMessageMap.get(userid));
 		chatListHolder.item_chat_content_tv.getLayoutParams().width = mContentWidth;

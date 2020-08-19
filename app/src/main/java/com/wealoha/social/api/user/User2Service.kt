@@ -108,7 +108,7 @@ class User2Service {
                 if (result == null || !result.isOk) {
                     callback.fail(ApiErrorCode.fromResult(result), null)
                 } else {
-                    saveCurrentUser(result.data?.user)
+                    saveCurrentUser(result.data?.user!!)
                     callback.success(transPro2DataToUser(result.data))
                 }
             }
@@ -134,41 +134,11 @@ class User2Service {
      * @param userDto
      * @return void
      */
-    private fun saveCurrentUser(userDto: UserDTO?) {
+    private fun saveCurrentUser(userDto: UserDTO) {
         if (!userDto!!.me || userDto == null) {
             return
         }
-        val user = com.wealoha.social.beans.User()
-        user.age = userDto.age.toString()
-        user.aloha = userDto.aloha
-        user.alohaCount = userDto.alohaCount
-        user.alohaGetCount = userDto.alohaGetCount
-        user.avatarImageId = userDto.avatarImageId
-        user.birthday = userDto.birthday
-        user.block = userDto.block
-        user.hasPrivacy = userDto.hasPrivacy
-        user.height = userDto.height.toString()
-        user.id = userDto.id
-        user.match = userDto.match
-        user.me = userDto.me
-        user.name = userDto.name
-        user.postCount = userDto.postCount
-        user.profileIncomplete = userDto.profileIncomplete
-        user.regionCode = userDto.regionCode
-        user.region = userDto.region
-        user.selfPurposes = userDto.selfPurposes
-        user.selfTag = userDto.selfTag
-        user.summary = userDto.summary
-        user.weight = userDto.weight.toString()
-        user.zodiac = userDto.zodiac
-        val image = com.wealoha.social.beans.Image()
-        image.id = userDto.avatarImageId
-        image.height = userDto.avatarImage!!.height
-        image.width = userDto.avatarImage!!.width
-        image.urlPatternWidth = userDto.avatarImage!!.urlPatternWidth
-        image.urlPatternWidthHeight = userDto.avatarImage!!.urlPatternWidthHeight
-        image.type = userDto.avatarImage!!.type
-        user.avatarImage = image
+        val user = com.wealoha.social.beans.User.init(userDto)
         contextUtil!!.currentUser = user
     }
 

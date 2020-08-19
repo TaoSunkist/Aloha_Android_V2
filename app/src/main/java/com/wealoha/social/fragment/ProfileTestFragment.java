@@ -180,7 +180,7 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
     }
 
     private User getUser() {
-        if (currentUser == null || currentUser.me) {
+        if (currentUser == null || currentUser.getMe()) {
             return contextUtil.getCurrentUser();
         }
         return currentUser;
@@ -194,7 +194,7 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
         if (currentUser == null) {
             currentUser = contextUtil.getCurrentUser();
         }
-        mIsMe = getUser().me;
+        mIsMe = getUser().getMe();
         // mIsMe = contextUtil.getCusrrentUser().id.equals(currentUser.id);
         if (mIsMe && getActivity() instanceof MainAct) {
             currentUser = contextUtil.getCurrentUser();
@@ -213,8 +213,8 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
 
         // 名字转成风骚的大写~~
         String upper = null;
-        if (!TextUtils.isEmpty(currentUser.name)) {
-            upper = currentUser.name.toUpperCase(Locale.getDefault());
+        if (!TextUtils.isEmpty(currentUser.getName())) {
+            upper = currentUser.getName().toUpperCase(Locale.getDefault());
         }
         mUsername.setText(upper);
     }
@@ -229,7 +229,7 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
         // mTitleBlur.setBackground(mTitleBarBg);
 
         list.setOnScrollListener(this);
-        mIsMe = contextUtil.getCurrentUser().id.equals(getUser().id);
+        mIsMe = contextUtil.getCurrentUser().getId().equals(getUser().getId());
         // 下拉刷新控件
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setProgressViewOffset(false, 0, UiUtils.dip2px(context, 70));
@@ -264,20 +264,20 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
             boolean isRefreshHeadIcon = BaseFragAct.isRefreshHeadIcon;
             if (isRefreshHeadIcon) {
                 BaseFragAct.isRefreshHeadIcon = !isRefreshHeadIcon;
-                bundle.putString("userId", user.id);
+                bundle.putString("userId", user.getId());
                 getLoaderManager().restartLoader(LOADER_REFRESH_ONRESUME, bundle, ProfileTestFragment.this);
                 profileHeader.loadHeadCache(1);
             }
         }
         if (user != null) {
-            bundle.putString("userId", user.id);
+            bundle.putString("userId", user.getId());
             getLoaderManager().restartLoader(LOADER_REFRESH, bundle, this);
         }
         // if (profileAdapter != null) {
         // profileAdapter.notifyDataSetChanged();
         // }
         if (mIsMe && mUsername != null && contextUtil.getCurrentUser() != null) {
-            mUsername.setText(contextUtil.getCurrentUser().name.toUpperCase(Locale.getDefault()));
+            mUsername.setText(contextUtil.getCurrentUser().getName().toUpperCase(Locale.getDefault()));
         }
         super.onResume();
     }
@@ -291,7 +291,7 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
      * @date:2015-2-9
      */
     private void byPostIdDelFeed() {
-        if (currentUser != null && currentUser.me && !TextUtils.isEmpty(GlobalConstants.AppConstact.mDelPostId)) {
+        if (currentUser != null && currentUser.getMe() && !TextUtils.isEmpty(GlobalConstants.AppConstact.mDelPostId)) {
             if (mResult != null) {
                 Feed feed = new Feed();
                 feed.postId = GlobalConstants.AppConstact.mDelPostId;
@@ -381,7 +381,7 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
         }
 
         XL.i("CURSOR_TEST", "from:" + from);
-        mFeedService.userFeed(getUser().id, mCursor, mCount, new Callback<Result<FeedResult>>() {
+        mFeedService.userFeed(getUser().getId(), mCursor, mCount, new Callback<Result<FeedResult>>() {
 
             @Override
             public void success(Result<FeedResult> result, Response arg1) {
@@ -501,7 +501,7 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
 
         if (loader.getId() == LOADER_REFRESH_ONRESUME) {
             if (result.data != null && result.data.user != null) {
-                if (result.data.user.me) {
+                if (result.data.user.getMe()) {
                     contextUtil.setCurrentUser(result.data.user);
                 }
                 currentUser = result.data.user;
@@ -515,7 +515,7 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
             // result.data.user, mIsMe));
         } else if (loader.getId() == LOADER_REFRESH) {
             if (result.data != null && result.data.user != null) {
-                if (result.data.user.me) {
+                if (result.data.user.getMe()) {
                     contextUtil.setCurrentUser(result.data.user);
                 }
                 currentUser = result.data.user;
@@ -545,7 +545,7 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
      */
     @Override
     public void refreshData() {
-        profileHeader.refreshHeader(getUser().id);
+        profileHeader.refreshHeader(getUser().getId());
     }
 
     @Override
@@ -560,14 +560,14 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
     @Override
     public void onRefresh() {
         Bundle bundle = new Bundle();
-        bundle.putString("userId", getUser().id);
+        bundle.putString("userId", getUser().getId());
         // getLoaderManager().restartLoader(LOADER_REFRESH, bundle, this);
         firstPage = true;
         feedLoading = false;
         mCursor = "notnull";
         mResult = null;
         if (profileHeader != null) {
-            profileHeader.refreshIcon(getUser().id);
+            profileHeader.refreshIcon(getUser().getId());
         }
 
         if (profileAdapter != null) {
@@ -616,7 +616,7 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
      * @date:2015-1-12
      */
     private void controlOtherUser() {
-        if (currentUser.me) {
+        if (currentUser.getMe()) {
             new PopupStore(regionNodeUtil).showShareProfilePopup(mBaseFragAct, currentUser, null);
         } else {
             new PopupStore(regionNodeUtil).showShareProfilePopup(mBaseFragAct, contextUtil.getCurrentUser(), currentUser);

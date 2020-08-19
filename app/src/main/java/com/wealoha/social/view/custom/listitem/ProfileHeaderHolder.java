@@ -258,7 +258,7 @@ public class ProfileHeaderHolder {
         // 默认选项
         // mGridPic.setChecked(true);
         if (user == null) {
-            mUser = new User();
+            mUser = User.Companion.fake();
         }
         mUser = user;
         mIsMe = isMe;
@@ -282,13 +282,13 @@ public class ProfileHeaderHolder {
             mAloha.setVisibility(View.VISIBLE);
             mOtherPopCount.setVisibility(View.GONE);
 
-            mAlohaCountTv.setText("" + mUser.alohaCount);
-            mPopCountTv.setText("" + mUser.alohaGetCount);
+            mAlohaCountTv.setText("" + mUser.getAloha());
+            mPopCountTv.setText("" + mUser.getAlohaGetCount());
 
             // 为透明渐变效果做准备
             mBorderHeight = UiUtils.dip2px(mContext, 160);
 
-        } else if (mUser.hasPrivacy) {
+        } else if (mUser.getHasPrivacy()) {
             // 被对方拉黑
             // 为透明渐变效果做准备
             mBorderHeight = UiUtils.dip2px(mContext, 160);
@@ -304,9 +304,9 @@ public class ProfileHeaderHolder {
             mAloha.setVisibility(View.GONE);
             mOther.setVisibility(View.VISIBLE);
             mOtherPopCount.setVisibility(View.VISIBLE);
-            mOtherPopCount.setText(mUser.alohaGetCount + mContext.getString(R.string.profile_aloha_get));
+            mOtherPopCount.setText(mUser.getAlohaGetCount() + mContext.getString(R.string.profile_aloha_get));
             // 已匹配
-            if (mUser.match) {
+            if (mUser.getMatch()) {
                 mOtherMatch.setVisibility(View.VISIBLE);
                 mOtherChat.setVisibility(View.VISIBLE);
 
@@ -319,7 +319,7 @@ public class ProfileHeaderHolder {
                 mOtherChatText.setTextSize(13);
                 mOtherChatImg.setImageResource(R.drawable.profile_chat);
                 // 已经喜欢
-            } else if (mUser.aloha) {
+            } else if (mUser.getAloha()) {
                 mOtherChat.setVisibility(View.VISIBLE);
                 mOtherMatch.setVisibility(View.GONE);
 
@@ -340,7 +340,7 @@ public class ProfileHeaderHolder {
                 mOtherMatchImg.setImageResource(R.drawable.profile_heart);
             }
         }
-        mPopCountTv.setText(mUser.alohaGetCount + "");
+        mPopCountTv.setText(mUser.getAlohaGetCount() + "");
 
     }
 
@@ -366,11 +366,11 @@ public class ProfileHeaderHolder {
         switch (tag) {
             case 0:
                 requestCreator = picasso//
-                        .load(ImageUtil.getImageUrl(mUser.avatarImage.id, UiUtils.dip2px(mContext, ImageSize.AVATAR_ROUND_SMALL), CropMode.ScaleCenterCrop));
+                        .load(ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), UiUtils.dip2px(mContext, ImageSize.AVATAR_ROUND_SMALL), CropMode.ScaleCenterCrop));
                 break;
             case 1:
                 requestCreator = picasso//
-                        .load(ImageUtil.getImageUrl(mUser.avatarImage.id, UiUtils.dip2px(mContext, ImageSize.AVATAR_ROUND_SMALL), CropMode.ScaleCenterCrop)).skipMemoryCache();
+                        .load(ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), UiUtils.dip2px(mContext, ImageSize.AVATAR_ROUND_SMALL), CropMode.ScaleCenterCrop)).skipMemoryCache();
                 break;
         }
         //
@@ -398,7 +398,7 @@ public class ProfileHeaderHolder {
             return;
         }
         // FIXME 数值提取
-        final String url = ImageUtil.getImageUrl(mUser.avatarImage.id, 320, CropMode.ScaleCenterCrop);
+        final String url = ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), 320, CropMode.ScaleCenterCrop);
         XL.d(TAG, "头像: " + url);
         blurTarget = new Target() {
 
@@ -497,7 +497,7 @@ public class ProfileHeaderHolder {
                 break;
             case R.id.profile_other_match:
                 Log.i("PROFILE_TEST", "-----------");
-                if (mUser.match) {
+                if (mUser.getMatch()) {
                     // match過，那麼就是取消aloha
                     openAreYouSureDialog();
                 } else {
@@ -507,8 +507,8 @@ public class ProfileHeaderHolder {
 
                 break;
             case R.id.profile_other_chat:
-                if (mUser.match) {
-                    getUserSessionId(mUser.id);
+                if (mUser.getMatch()) {
+                    getUserSessionId(mUser.getId());
                 } else {
                     openAreYouSureDialog();
                 }
@@ -678,7 +678,7 @@ public class ProfileHeaderHolder {
     }
 
     private void dislike() {
-        mUserService.dislikeUser(mUser.id, new Callback<Result<ResultData>>() {
+        mUserService.dislikeUser(mUser.getId(), new Callback<Result<ResultData>>() {
 
             @Override
             public void success(Result<ResultData> arg0, Response arg1) {
@@ -686,9 +686,9 @@ public class ProfileHeaderHolder {
                 // 刷新数据
                 // ((RefreshData) mFrag).refreshData();
                 // popup.dismiss();
-                refreshHeader(mUser.id);
+                refreshHeader(mUser.getId());
                 if (mParentFrag != null) {
-                    mParentFrag.setResultForUnaloha(mUser.id);
+                    mParentFrag.setResultForUnaloha(mUser.getId());
                 }
             }
 
@@ -700,14 +700,14 @@ public class ProfileHeaderHolder {
     }
 
     private void aloho() {
-        mMatchService.like(mUser.id, whereIsComeFrom, new Callback<Result<ResultData>>() {
+        mMatchService.like(mUser.getId(), whereIsComeFrom, new Callback<Result<ResultData>>() {
 
             @Override
             public void success(Result<ResultData> arg0, Response arg1) {
-                refreshHeader(mUser.id);
+                refreshHeader(mUser.getId());
                 if (AppApplication.mUserList != null && AppApplication.mUserList.size() > 0) {
                     for (User user : AppApplication.mUserList) {
-                        if (user.id.equals(mUser.id)) {
+                        if (user.getId().equals(mUser.getId())) {
                             AppApplication.mUserList.remove(user);
                             break;
                         }
@@ -725,7 +725,7 @@ public class ProfileHeaderHolder {
             Iterator<User> it = AppApplication.mUserList.iterator();
             while (it.hasNext()) {
                 User u = it.next();
-                if (mUser.id.equals(u.id)) {
+                if (mUser.getId().equals(u.getId())) {
                     it.remove();
                     break;
                 }
@@ -746,7 +746,7 @@ public class ProfileHeaderHolder {
             public void success(Result<ProfileData> result, Response arg1) {
                 if (result != null && result.isOk()) {
                     mUser = result.data.user;
-                    if (mUser.me) {
+                    if (mUser.getMe()) {
                         contextUtil.setCurrentUser(mUser);
                     }
                     initView();
@@ -780,8 +780,8 @@ public class ProfileHeaderHolder {
                 if (result == null || !result.isOk()) {
                     return;
                 }
-                XL.i("PROFILE_HEADER_HOLDER", "NEW:" + (mUser.avatarImage.id.equals(result.data.user.avatarImage.id)));
-                if (!mUser.avatarImage.id.equals(result.data.user.avatarImage.id) || !isUseable) {
+                XL.i("PROFILE_HEADER_HOLDER", "NEW:" + (mUser.getAvatarImage().getId().equals(result.data.user.getAvatarImage().getId())));
+                if (!mUser.getAvatarImage().getId().equals(result.data.user.getAvatarImage().getId()) || !isUseable) {
                     mUser = result.data.user;
                     isUseable = false;
                     loadUserHeader();
@@ -811,7 +811,7 @@ public class ProfileHeaderHolder {
     public void refreshHeaderByCurrent() {
         if (contextUtil.getCurrentUser() != null) {
             mUser = contextUtil.getCurrentUser();
-            refreshHeader(mUser.id);
+            refreshHeader(mUser.getId());
         }
     }
 
@@ -853,7 +853,7 @@ public class ProfileHeaderHolder {
         popUpWindow.setTouchable(true);
         popUpWindow.setWidth(LayoutParams.MATCH_PARENT);
         popUpWindow.setHeight(LayoutParams.MATCH_PARENT);
-        String url = ImageUtil.getImageUrl(mUser.avatarImage.id, 640, CropMode.ScaleCenterCrop);
+        String url = ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), 640, CropMode.ScaleCenterCrop);
         // FIXME 应该先显示小图,大图家在完毕显示大图
 
         picasso.load(url).into(avactor);

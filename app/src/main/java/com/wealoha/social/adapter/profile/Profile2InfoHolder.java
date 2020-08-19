@@ -67,7 +67,7 @@ public class Profile2InfoHolder {
 	}
 
 	public void initData() {
-		// mUsername.setText("" + mUser.name);
+		// mUsername.setText("" + mUser.getName());
 		mWord.setText(mUser.getSummary());
 		// List<String> regionNames = regionNodeUtil.getRegionNames(mUser.getRegionCode(), 2);
 		// // FIXME 地區

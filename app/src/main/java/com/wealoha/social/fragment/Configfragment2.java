@@ -56,7 +56,7 @@ public class Configfragment2 extends BasePreferenceFragment {
 	@Override
 	public void initBlockItems() {
 		mProItem = new ProfileBlockItem(this, R.string.set_profile, null,//
-		mUser.name, ImageUtil.getImageUrl(mUser.avatarImage.id, ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop),//
+		mUser.getName(), ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop),//
 		true, false);
 
 		mAdvanceItem = new SimpleBlockItem(this, R.string.advanced_features, getString(R.string.Invite_friend_to_open), true, true);
