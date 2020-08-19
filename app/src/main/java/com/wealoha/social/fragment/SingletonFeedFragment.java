@@ -33,7 +33,7 @@ import com.wealoha.social.adapter.feed.FeedHolder;
 import com.wealoha.social.adapter.feed.VideoFeedHolder;
 import com.wealoha.social.api.common.ApiErrorCode;
 import com.wealoha.social.api.common.BaseListApiService.NoResultCallback;
-import com.wealoha.social.api.feed.service.SingletonFeedService;
+import com.wealoha.social.api.SingletonFeedService;
 import com.wealoha.social.api.post.bean.Post;
 import com.wealoha.social.utils.XL;
 import com.wealoha.social.widget.BaseListApiAdapter.LoadCallback;

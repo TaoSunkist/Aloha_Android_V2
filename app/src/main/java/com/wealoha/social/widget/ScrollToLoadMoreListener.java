@@ -3,7 +3,7 @@ package com.wealoha.social.widget;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 
-import com.wealoha.social.api.feed.service.Feed2Service;
+import com.wealoha.social.api.Feed2Service;
 
 /**
  * 通过滚动加载更多

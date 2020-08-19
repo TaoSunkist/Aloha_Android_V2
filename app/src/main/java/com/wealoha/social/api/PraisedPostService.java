@@ -1,4 +1,4 @@
-package com.wealoha.social.api.feed.service;
+package com.wealoha.social.api;
 
 import javax.inject.Inject;
 
@@ -8,9 +8,8 @@ import retrofit.client.Response;
 
 import com.wealoha.social.api.common.ApiErrorCode;
 import com.wealoha.social.api.common.Direct;
-import com.wealoha.social.api.feed.Feed2API;
-import com.wealoha.social.api.feed.FeedGetData;
 import com.wealoha.social.api.post.bean.Post;
+import com.wealoha.social.beans.FeedGetData;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.utils.XL;
 

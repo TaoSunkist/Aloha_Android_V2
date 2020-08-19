@@ -1,4 +1,4 @@
-package com.wealoha.social.api.feed;
+package com.wealoha.social.api;
 
 import retrofit.Callback;
 import retrofit.http.Field;
@@ -7,8 +7,10 @@ import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Query;
 
+import com.wealoha.social.beans.FeedGetData;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
+import com.wealoha.social.beans.UserListGetData;
 
 public interface Feed2API {
 

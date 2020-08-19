@@ -1,4 +1,4 @@
-package com.wealoha.social.api.feed;
+package com.wealoha.social.beans;
 
 import java.util.List;
 import java.util.Map;

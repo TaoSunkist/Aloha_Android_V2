@@ -18,7 +18,7 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 import com.wealoha.social.R;
-import com.wealoha.social.api.feed.bean.UserTag;
+import com.wealoha.social.beans.UserTag;
 import com.wealoha.social.api.post.bean.Post;
 import com.wealoha.social.fragment.SingletonFeedFragment;
 import com.wealoha.social.inject.Injector;

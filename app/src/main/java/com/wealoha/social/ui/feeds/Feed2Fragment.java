@@ -40,23 +40,20 @@ import com.wealoha.social.adapter.feed.Feed2Adapter;
 import com.wealoha.social.adapter.feed.FeedHolder;
 import com.wealoha.social.adapter.feed.VideoFeedHolder;
 import com.wealoha.social.api.common.ApiErrorCode;
-import com.wealoha.social.api.feed.service.Feed2Service;
+import com.wealoha.social.api.Feed2Service;
 import com.wealoha.social.api.topic.bean.HashTag;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.event.feed.MediaPlayEvent;
 import com.wealoha.social.fragment.BaseFragment;
 import com.wealoha.social.presenters.FeedsPresenter;
 import com.wealoha.social.push.notification.NotificationCount;
-import com.wealoha.social.store.PopupStore;
 import com.wealoha.social.utils.ContextUtil;
-import com.wealoha.social.utils.FontUtil;
 import com.wealoha.social.utils.FontUtil.Font;
 import com.wealoha.social.utils.NetworkUtil;
 import com.wealoha.social.utils.UiUtils;
 import com.wealoha.social.utils.XL;
 import com.wealoha.social.view.custom.dialog.ListItemDialog;
 import com.wealoha.social.view.custom.dialog.ListItemDialog.ListItemType;
-import com.wealoha.social.view.custom.dialog.LogoutAndClearActDialogBuilder;
 import com.wealoha.social.widget.BaseListApiAdapter.LoadCallback;
 
 public class Feed2Fragment extends BaseFragment implements IFeedsView {

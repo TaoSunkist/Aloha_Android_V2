@@ -29,7 +29,7 @@ import android.widget.TextView;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.activity.TagFeedAct;
-import com.wealoha.social.api.feed.bean.UserTag;
+import com.wealoha.social.beans.UserTag;
 import com.wealoha.social.beans.feed.UserTags;
 import com.wealoha.social.fragment.Profile2Fragment;
 import com.wealoha.social.inject.Injector;

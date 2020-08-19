@@ -1,4 +1,4 @@
-package com.wealoha.social.api.feed.dto;
+package com.wealoha.social.beans;
 
 public class UserTagsDTO {
 

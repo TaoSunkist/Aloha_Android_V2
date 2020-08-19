@@ -5,7 +5,7 @@ import java.util.List;
 import com.wealoha.social.api.comment.dto.Comment2DTO;
 import com.wealoha.social.api.common.dto.ImageDTO;
 import com.wealoha.social.api.common.dto.VideoDTO;
-import com.wealoha.social.api.feed.bean.FeedType;
+import com.wealoha.social.beans.FeedType;
 import com.wealoha.social.api.topic.dto.HashTagDTO;
 import com.wealoha.social.api.topic.dto.TopicPostTagDTO;
 import com.wealoha.social.api.user.dto.UserDTO;

@@ -1,4 +1,4 @@
-package com.wealoha.social.api.feed.bean;
+package com.wealoha.social.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,7 +7,6 @@ import java.util.Map;
 
 import com.wealoha.social.api.common.bean.Image;
 import com.wealoha.social.api.common.dto.ImageDTO;
-import com.wealoha.social.api.feed.dto.UserTagsDTO;
 import com.wealoha.social.api.user.bean.User;
 import com.wealoha.social.api.user.dto.UserDTO;
 

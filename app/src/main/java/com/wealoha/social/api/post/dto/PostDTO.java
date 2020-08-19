@@ -3,7 +3,7 @@ package com.wealoha.social.api.post.dto;
 import java.util.List;
 
 import com.wealoha.social.api.comment.dto.Comment2DTO;
-import com.wealoha.social.api.feed.dto.UserTagsDTO;
+import com.wealoha.social.beans.UserTagsDTO;
 import com.wealoha.social.api.topic.dto.HashTagDTO;
 
 /**

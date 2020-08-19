@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 
 import com.squareup.picasso.Picasso;
 import com.wealoha.social.adapter.feed.BaseFeedHolder.Holder2FragCallback;
-import com.wealoha.social.api.feed.bean.FeedType;
-import com.wealoha.social.api.feed.service.Feed2Service;
+import com.wealoha.social.beans.FeedType;
+import com.wealoha.social.api.Feed2Service;
 import com.wealoha.social.api.post.bean.Post;
 import com.wealoha.social.ui.feeds.Feed2Fragment;
 import com.wealoha.social.utils.UiUtils;

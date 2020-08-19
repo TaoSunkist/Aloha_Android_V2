@@ -1,4 +1,4 @@
-package com.wealoha.social.api.feed.service;
+package com.wealoha.social.api;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +18,10 @@ import com.wealoha.social.api.common.ApiErrorCode;
 import com.wealoha.social.api.common.Direct;
 import com.wealoha.social.api.common.bean.Image;
 import com.wealoha.social.api.common.bean.Video;
-import com.wealoha.social.api.feed.Feed2API;
-import com.wealoha.social.api.feed.FeedGetData;
-import com.wealoha.social.api.feed.UserListGetData;
-import com.wealoha.social.api.feed.bean.FeedType;
-import com.wealoha.social.api.feed.bean.UserTag;
+import com.wealoha.social.beans.FeedGetData;
+import com.wealoha.social.beans.FeedType;
+import com.wealoha.social.beans.UserListGetData;
+import com.wealoha.social.beans.UserTag;
 import com.wealoha.social.api.post.bean.Post;
 import com.wealoha.social.api.post.dto.PostDTO;
 import com.wealoha.social.api.topic.bean.HashTag;

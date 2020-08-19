@@ -18,10 +18,9 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import com.squareup.picasso.Picasso;
-import com.wealoha.social.AppApplication;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
-import com.wealoha.social.api.feed.bean.FeedType;
+import com.wealoha.social.beans.FeedType;
 import com.wealoha.social.api.post.bean.Post;
 import com.wealoha.social.api.post.bean.TopicPost;
 import com.wealoha.social.api.post.bean.TopicPosts;
@@ -32,7 +31,6 @@ import com.wealoha.social.inject.Injector;
 import com.wealoha.social.utils.FontUtil;
 import com.wealoha.social.utils.FontUtil.Font;
 import com.wealoha.social.utils.UiUtils;
-import com.wealoha.social.utils.XL;
 
 public class TopicDetailAdapter extends BaseAdapter implements OnClickListener {
 
