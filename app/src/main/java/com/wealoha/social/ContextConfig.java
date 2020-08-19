@@ -6,7 +6,7 @@ import android.content.SharedPreferences.Editor;
 
 import com.wealoha.social.beans.Image;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.beans.setting.PushSettingResult;
+import com.wealoha.social.beans.PushSettingResult;
 import com.wealoha.social.commons.GlobalConstants;
 
 /**

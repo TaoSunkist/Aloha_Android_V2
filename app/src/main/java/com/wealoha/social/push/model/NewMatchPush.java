@@ -20,7 +20,7 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.ContextConfig;
 import com.wealoha.social.R;
 import com.wealoha.social.beans.Result;
-import com.wealoha.social.beans.user.ProfileData;
+import com.wealoha.social.beans.ProfileData;
 import com.wealoha.social.api.ProfileService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.interfaces.NotifyPush;

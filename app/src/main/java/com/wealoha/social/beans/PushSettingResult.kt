@@ -1,4 +1,4 @@
-package com.wealoha.social.beans.setting
+package com.wealoha.social.beans
 
 import com.wealoha.social.beans.ResultData
 

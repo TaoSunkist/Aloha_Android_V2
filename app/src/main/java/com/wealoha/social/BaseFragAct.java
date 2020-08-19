@@ -64,7 +64,7 @@ import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.api.ClientLogService;
-import com.wealoha.social.beans.sina.AccessTokenKeeper;
+import com.wealoha.social.beans.AccessTokenKeeper;
 import com.wealoha.social.api.AuthService;
 import com.wealoha.social.callback.IBackKeyCallback;
 import com.wealoha.social.commons.AlohaThreadPool;

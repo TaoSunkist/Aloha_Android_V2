@@ -1,6 +1,4 @@
-package com.wealoha.social.beans.location
-
-import com.wealoha.social.beans.ResultData
+package com.wealoha.social.beans
 
 class LocationResult : ResultData() {
     @kotlin.jvm.JvmField

@@ -28,8 +28,8 @@ import com.wealoha.social.AsyncLoader;
 import com.wealoha.social.R;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
-import com.wealoha.social.beans.setting.PushSettingResult;
-import com.wealoha.social.beans.setting.SettingService;
+import com.wealoha.social.beans.PushSettingResult;
+import com.wealoha.social.api.SettingService;
 import com.wealoha.social.utils.FontUtil.Font;
 import com.wealoha.social.utils.ToastUtil;
 

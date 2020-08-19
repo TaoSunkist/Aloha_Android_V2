@@ -5,7 +5,7 @@ import android.view.View.OnClickListener;
 
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.instagram.InstagramResult;
-import com.wealoha.social.beans.user.PromotionGetData;
+import com.wealoha.social.beans.PromotionGetData;
 import com.wealoha.social.view.custom.dialog.ListItemDialog.ListItemCallback;
 
 public interface IConfigView extends OnClickListener, //

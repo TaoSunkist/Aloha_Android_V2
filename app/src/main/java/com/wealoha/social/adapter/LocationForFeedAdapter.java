@@ -11,7 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.wealoha.social.R;
-import com.wealoha.social.beans.location.Location;
+import com.wealoha.social.beans.Location;
 
 public class LocationForFeedAdapter extends BaseAdapter {
 

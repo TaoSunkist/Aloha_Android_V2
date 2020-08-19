@@ -15,7 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.wealoha.social.R;
-import com.wealoha.social.beans.region.Regions;
+import com.wealoha.social.beans.Regions;
 import com.wealoha.social.utils.FontUtil;
 
 /**

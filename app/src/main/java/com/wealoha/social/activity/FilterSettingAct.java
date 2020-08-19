@@ -30,7 +30,7 @@ import com.wealoha.social.api.user.MatchSettingData;
 import com.wealoha.social.api.user.User2API;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
-import com.wealoha.social.beans.user.PromotionGetData;
+import com.wealoha.social.beans.PromotionGetData;
 import com.wealoha.social.utils.AMapUtil;
 import com.wealoha.social.utils.AMapUtil.LocationCallback;
 import com.wealoha.social.utils.ContextUtil;

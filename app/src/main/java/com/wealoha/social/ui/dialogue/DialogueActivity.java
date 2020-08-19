@@ -58,7 +58,7 @@ import com.wealoha.social.beans.message.Message;
 import com.wealoha.social.api.MessageService;
 import com.wealoha.social.beans.message.TextMessage;
 import com.wealoha.social.beans.message.UnreadData;
-import com.wealoha.social.beans.user.ProfileData;
+import com.wealoha.social.beans.ProfileData;
 import com.wealoha.social.api.ProfileService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.event.AnginSendSmsEvent;

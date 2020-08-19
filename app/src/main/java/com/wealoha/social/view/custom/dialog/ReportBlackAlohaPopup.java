@@ -35,7 +35,7 @@ import com.wealoha.social.beans.User;
 import com.wealoha.social.api.FeedService;
 import com.wealoha.social.beans.message.ImageMessage;
 import com.wealoha.social.beans.message.Message;
-import com.wealoha.social.beans.user.UserService;
+import com.wealoha.social.api.UserService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.event.AnginSendSmsEvent;
 import com.wealoha.social.event.ControlUserEvent;

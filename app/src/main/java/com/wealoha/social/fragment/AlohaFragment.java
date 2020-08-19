@@ -57,7 +57,7 @@ import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.api.MatchService;
-import com.wealoha.social.beans.user.UserService;
+import com.wealoha.social.api.UserService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
 import com.wealoha.social.commons.GlobalConstants.WhereIsComeFrom;

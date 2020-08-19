@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.wealoha.social.beans.sina
+package com.wealoha.social.beans
 
 import android.content.Context
 import com.sina.weibo.sdk.auth.Oauth2AccessToken

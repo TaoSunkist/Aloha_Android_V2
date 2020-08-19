@@ -42,7 +42,7 @@ import com.wealoha.social.R;
 import com.wealoha.social.beans.AuthData;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
-import com.wealoha.social.beans.user.UserRegisterService;
+import com.wealoha.social.api.UserRegisterService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.JsonController;
 import com.wealoha.social.utils.FontUtil;

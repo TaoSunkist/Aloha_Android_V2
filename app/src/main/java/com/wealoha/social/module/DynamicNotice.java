@@ -7,8 +7,8 @@ import java.util.Map;
 import com.wealoha.social.beans.Feed;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.beans.notify.Notify;
-import com.wealoha.social.beans.notify.NotifyResult;
+import com.wealoha.social.beans.Notify;
+import com.wealoha.social.beans.NotifyResult;
 
 /**
  * @author:sunkist

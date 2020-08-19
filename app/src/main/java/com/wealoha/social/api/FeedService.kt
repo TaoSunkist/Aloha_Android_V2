@@ -4,7 +4,7 @@ import com.wealoha.social.beans.FeedResult
 import com.wealoha.social.beans.ImageUploadResult
 import com.wealoha.social.beans.Result
 import com.wealoha.social.beans.ResultData
-import com.wealoha.social.beans.user.UserListResult
+import com.wealoha.social.beans.UserListResult
 import com.wealoha.social.impl.ServerUrlImpl
 import retrofit.Callback
 import retrofit.http.*

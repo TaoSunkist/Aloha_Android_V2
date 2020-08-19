@@ -1,4 +1,4 @@
-package com.wealoha.social.beans.location
+package com.wealoha.social.beans
 
 import android.text.TextUtils
 import java.io.Serializable

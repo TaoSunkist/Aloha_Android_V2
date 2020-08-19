@@ -2,7 +2,6 @@ package com.wealoha.social.view.custom;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -44,8 +43,8 @@ import com.wealoha.social.R;
 import com.wealoha.social.api.share.bean.ShareApp;
 import com.wealoha.social.beans.ImageUploadResult;
 import com.wealoha.social.beans.Result;
-import com.wealoha.social.beans.user.PromotionGetData;
-import com.wealoha.social.beans.user.UserService;
+import com.wealoha.social.beans.PromotionGetData;
+import com.wealoha.social.api.UserService;
 import com.wealoha.social.callback.CallbackImpl;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.impl.ShareCallbackImpl;

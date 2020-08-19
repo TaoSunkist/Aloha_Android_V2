@@ -1,4 +1,4 @@
-package com.wealoha.social.beans.notify
+package com.wealoha.social.beans
 
 import com.wealoha.social.beans.User
 import com.wealoha.social.impl.DynamicType

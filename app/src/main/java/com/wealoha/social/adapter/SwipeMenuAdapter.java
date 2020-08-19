@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso;
 import com.wealoha.social.R;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.beans.user.UserListResult;
+import com.wealoha.social.beans.UserListResult;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.inject.Injector;
 import com.wealoha.social.utils.FontUtil;

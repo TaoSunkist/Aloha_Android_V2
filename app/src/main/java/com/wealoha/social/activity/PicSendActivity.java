@@ -46,7 +46,7 @@ import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.api.FeedService;
 import com.wealoha.social.beans.feed.UserTags;
-import com.wealoha.social.beans.location.Location;
+import com.wealoha.social.beans.Location;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.inject.Injector;
 import com.wealoha.social.utils.ContextUtil;
