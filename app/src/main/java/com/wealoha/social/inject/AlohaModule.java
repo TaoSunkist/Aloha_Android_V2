@@ -96,9 +96,7 @@ import com.wealoha.social.api.Feed2Service;
 import com.wealoha.social.api.PraisedPostService;
 import com.wealoha.social.api.SingletonFeedService;
 import com.wealoha.social.api.TagedPostService;
-import com.wealoha.social.api.LocationServiceAPI;
 import com.wealoha.social.beans.Json2ObjectByTypeSerializer;
-import com.wealoha.social.api.Notify2API;
 import com.wealoha.social.beans.Notify2Type;
 import com.wealoha.social.beans.AbsNotify2DTO;
 import com.wealoha.social.beans.NewAlohaNotify2DTO;
@@ -116,16 +114,10 @@ import com.wealoha.social.api.TopicService;
 import com.wealoha.social.api.User2Service;
 import com.wealoha.social.api.ConstantsService;
 import com.wealoha.social.api.CountService;
-import com.wealoha.social.api.OauthService;
-import com.wealoha.social.api.LocationService;
-import com.wealoha.social.api.MatchService;
 import com.wealoha.social.beans.message.ImageMessage;
 import com.wealoha.social.beans.message.Message;
 import com.wealoha.social.beans.message.MessageSerializer;
-import com.wealoha.social.api.MessageService;
 import com.wealoha.social.beans.message.TextMessage;
-import com.wealoha.social.api.FindYouService;
-import com.wealoha.social.api.ProfileService;
 import com.wealoha.social.api.UserService;
 import com.wealoha.social.cache.ImageRender;
 import com.wealoha.social.commons.CacheManager;
@@ -353,7 +345,6 @@ import dagger.Provides;
                 Notify2Service.class, // 通知2
                 Feed2Service.class, // 通知2
                 Comment2Service.class, UserListService.class,//
-                LocationService.class,//
                 AppLocationService.class,//
                 TagedPostService.class,//
                 PraisedPostService.class,//
@@ -733,18 +724,6 @@ public class AlohaModule {
 
     @Provides
     @Singleton
-    MatchService provideMatchService(RestAdapter restAdapter) {
-        return restAdapter.create(MatchService.class);
-    }
-
-    @Provides
-    @Singleton
-    MessageService provideMessageService(RestAdapter restAdapter) {
-        return restAdapter.create(MessageService.class);
-    }
-
-    @Provides
-    @Singleton
     UserService provideUserService(RestAdapter restAdapter) {
         return restAdapter.create(UserService.class);
     }
@@ -759,12 +738,6 @@ public class AlohaModule {
     @Singleton
     ImageRender provideImageRender(Picasso picasso) {
         return new ImageRender();
-    }
-
-    @Provides
-    @Singleton
-    FindYouService provideFindYouService(RestAdapter restAdapter) {
-        return restAdapter.create(FindYouService.class);
     }
 
     @Provides
@@ -791,41 +764,23 @@ public class AlohaModule {
         return restAdapter.create(ConstantsService.class);
     }
 
-    @Provides
-    @Singleton
-    ProfileService provideProfileService(RestAdapter restAdapter) {
-        return restAdapter.create(ProfileService.class);
-    }
-
-    @Provides
-    @Singleton
-    OauthService provideOauthService() {
-        Gson gson = new GsonBuilder() //
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES) //
-                // .registerTypeAdapter(Date.class, new DateTypeAdapter()) //
-                .create();
-        RestAdapter restAdapter = new RestAdapter.Builder() //
-                .setEndpoint("https://api.instagram.com") //
-                .setConverter(new GsonConverter(gson, "UTF-8")) //
-                // .setLog(logger) //
-                .setClient(new OkClient())//
-                .setLogLevel(LogLevel.FULL) //
-                .build();
-
-        return restAdapter.create(OauthService.class);
-    }
-
-    @Provides
-    @Singleton
-    LocationService provideLocationService(RestAdapter restAdapter) {
-        return restAdapter.create(LocationService.class);
-    }
-
-    @Provides
-    @Singleton
-    Notify2API provideNotify2API(RestAdapter restAdapter) {
-        return restAdapter.create(Notify2API.class);
-    }
+//    @Provides
+//    @Singleton
+//    OauthService provideOauthService() {
+//        Gson gson = new GsonBuilder() //
+//                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES) //
+//                // .registerTypeAdapter(Date.class, new DateTypeAdapter()) //
+//                .create();
+//        RestAdapter restAdapter = new RestAdapter.Builder() //
+//                .setEndpoint("https://api.instagram.com") //
+//                .setConverter(new GsonConverter(gson, "UTF-8")) //
+//                // .setLog(logger) //
+//                .setClient(new OkClient())//
+//                .setLogLevel(LogLevel.FULL) //
+//                .build();
+//
+//        return restAdapter.create(OauthService.class);
+//    }
 
     /**
      * 事件总线
@@ -843,11 +798,4 @@ public class AlohaModule {
     ServerApi provideFeed2API(RestAdapter restAdapter) {
         return restAdapter.create(ServerApi.class);
     }
-
-    @Provides
-    @Singleton
-    LocationServiceAPI provideLocationServiceAPI(RestAdapter restAdapter) {
-        return restAdapter.create(LocationServiceAPI.class);
-    }
-
 }

@@ -22,7 +22,7 @@ import com.wealoha.social.utils.XL;
 public class UserListService extends AbsBaseService<User2, String> {
 
 	@Inject
-	Notify2API notify2api;
+	ServerApi notify2api;
 
 	public UserListService() {
 		Injector.inject(this);

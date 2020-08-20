@@ -19,9 +19,9 @@ import com.wealoha.social.AppApplication;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.ContextConfig;
 import com.wealoha.social.R;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ProfileData;
-import com.wealoha.social.api.ProfileService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.interfaces.NotifyPush;
 import com.wealoha.social.push.notification.NewMatchNotification;
@@ -32,7 +32,7 @@ import com.wealoha.social.utils.Utils;
 
 public class NewMatchPush extends BasePush implements NotifyPush<NewMatchNotification> {
 	@Inject
-	ProfileService mProfileService;
+	ServerApi mProfileService;
 	@Inject
 	ContextUtil contextUtil;
 	private String ALOHA_PUSH_Notification_New_Match = "ALOHA_PUSH_Notification_New_Match";

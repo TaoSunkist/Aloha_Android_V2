@@ -36,10 +36,10 @@ import com.squareup.picasso.Picasso;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.adapter.FindYouAdapter;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.FindYouResult;
-import com.wealoha.social.api.FindYouService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.fragment.Profile2Fragment;
 import com.wealoha.social.utils.FontUtil;
@@ -54,7 +54,7 @@ public class FindYouAct extends BaseFragAct implements TextWatcher, OnItemClickL
 		OnTouchListener, OnEditorActionListener {
 
 	@Inject
-	FindYouService findyouService;
+	ServerApi findyouService;
 	@Inject
 	Picasso picasso;
 	@Inject

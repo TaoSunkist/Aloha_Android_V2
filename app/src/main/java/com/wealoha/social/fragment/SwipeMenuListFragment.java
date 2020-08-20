@@ -43,7 +43,6 @@ import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.ProfileData;
-import com.wealoha.social.api.ProfileService;
 import com.wealoha.social.beans.UserListResult;
 import com.wealoha.social.api.UserService;
 import com.wealoha.social.commons.GlobalConstants;
@@ -64,7 +63,7 @@ public class SwipeMenuListFragment extends BaseFragment implements ListItemCallb
     @Inject
     ServerApi mFeedService;
     @Inject
-    ProfileService mProfileService;
+    ServerApi mProfileService;
     @Inject
     Context mContext;
     @Inject

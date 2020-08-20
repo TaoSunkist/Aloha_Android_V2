@@ -34,7 +34,6 @@ import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.ProfileData;
-import com.wealoha.social.api.ProfileService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.fragment.Profile2Fragment;
 import com.wealoha.social.fragment.SingletonFeedFragment;
@@ -56,7 +55,7 @@ public class LaunchBroadcastReceiver extends BroadcastReceiver {
 	@Inject
 	ContextUtil contextUtil;
 	@Inject
-	ProfileService mProfileService;
+	ServerApi mProfileService;
 	@Inject
 	SingletonFeedService feedService;
 	@Inject

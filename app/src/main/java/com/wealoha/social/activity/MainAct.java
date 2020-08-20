@@ -71,7 +71,6 @@ import com.wealoha.social.beans.common.ConstantsData;
 import com.wealoha.social.api.ConstantsService;
 import com.wealoha.social.beans.common.CountData;
 import com.wealoha.social.api.CountService;
-import com.wealoha.social.api.MessageService;
 import com.wealoha.social.beans.message.UnreadData;
 import com.wealoha.social.beans.PushSettingResult;
 import com.wealoha.social.commons.GlobalConstants;
@@ -144,7 +143,7 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 	@InjectView(R.id.feed_frag_rb_subscript_secound)
 	TextView feedSubSecound;
 	@Inject
-	MessageService mMessageService;
+	ServerApi mMessageService;
 	@InjectView(R.id.aloha_frag_rb_subscript)
 	TextView alohaSub;
 

@@ -57,13 +57,13 @@ import com.squareup.picasso.Picasso;
 import com.wealoha.social.AsyncLoader;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.AuthData;
 import com.wealoha.social.beans.ImageUploadResult;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.ProfileData;
-import com.wealoha.social.api.ProfileService;
 import com.wealoha.social.api.UserService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
@@ -213,7 +213,7 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Res
     UserService userService;
 
     @Inject
-    ProfileService profileService;
+    ServerApi profileService;
     @Inject
     protected Bus bus;
 

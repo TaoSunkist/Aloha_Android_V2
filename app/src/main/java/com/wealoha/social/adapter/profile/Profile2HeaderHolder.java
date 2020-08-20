@@ -36,6 +36,7 @@ import com.squareup.picasso.Target;
 import com.wealoha.social.AppApplication;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.ApiErrorCode;
 import com.wealoha.social.api.BaseListApiService.ApiCallback;
 import com.wealoha.social.api.BaseListApiService.NoResultCallback;
@@ -44,7 +45,6 @@ import com.wealoha.social.beans.User2;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.message.InboxSession;
 import com.wealoha.social.beans.message.InboxSessionResult;
-import com.wealoha.social.api.MessageService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
 import com.wealoha.social.commons.GlobalConstants.WhereIsComeFrom;
@@ -71,7 +71,7 @@ public class Profile2HeaderHolder implements OnTouchListener {
 	@Inject
 	BlurRendererLite blurRendererLite;
 	@Inject
-	MessageService mMessageService;
+	ServerApi mMessageService;
 
 	@InjectView(R.id.layout)
 	ViewGroup mLayout;

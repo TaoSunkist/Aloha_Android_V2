@@ -11,12 +11,12 @@ import android.util.Log;
 
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.message.ImageMessage;
 import com.wealoha.social.beans.message.InboxSession;
 import com.wealoha.social.beans.message.InboxSessionResult;
 import com.wealoha.social.beans.message.Message;
-import com.wealoha.social.api.MessageService;
 import com.wealoha.social.beans.message.TextMessage;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.inject.Injector;
@@ -36,7 +36,7 @@ public class ChatUtil {
 	@Inject
 	Context context;
 	@Inject
-	MessageService messageService;
+	ServerApi messageService;
 	@Inject
 	ContextUtil contextUtil;
 

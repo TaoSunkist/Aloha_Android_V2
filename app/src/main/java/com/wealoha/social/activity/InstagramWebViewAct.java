@@ -30,7 +30,6 @@ import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.AuthData;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.instagram.AccessToken;
-import com.wealoha.social.api.OauthService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.utils.ContextUtil;
 import com.wealoha.social.utils.FontUtil;
@@ -40,7 +39,7 @@ import com.wealoha.social.utils.XL;
 public class InstagramWebViewAct extends BaseFragAct implements OnClickListener {
 
 	@Inject
-	OauthService mOauthService;
+	ServerApi mOauthService;
 	@Inject
 	ServerApi mInstagramService;
 	@Inject

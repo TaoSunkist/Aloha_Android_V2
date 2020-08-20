@@ -18,16 +18,16 @@ import com.amap.api.location.AMapLocationListener;
 import com.amap.api.location.LocationManagerProxy;
 import com.amap.api.location.LocationProviderProxy;
 import com.wealoha.social.AppApplication;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
-import com.wealoha.social.api.LocationService;
 import com.wealoha.social.inject.Injector;
 import com.wealoha.social.utils.XL;
 
 public class AppLocationService extends Service implements AMapLocationListener {
 
 	@Inject
-	LocationService locactionService;
+	ServerApi locactionService;
 	private LocationManagerProxy mLocationManagerProxy;
 	private Double[] location = { null, null };
 

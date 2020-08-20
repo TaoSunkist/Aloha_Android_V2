@@ -19,19 +19,18 @@ import com.amap.api.location.LocationProviderProxy;
 import com.google.gson.Gson;
 import com.wealoha.social.AppApplication;
 import com.wealoha.social.ContextConfig;
-import com.wealoha.social.api.LocationServiceAPI;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.LocationServiceStatus;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
-import com.wealoha.social.api.LocationService;
 import com.wealoha.social.inject.Injector;
 
 public class AMapUtil implements AMapLocationListener {
 
 	@Inject
-	LocationService locactionService;
+	ServerApi locactionService;
 	@Inject
-	LocationServiceAPI locactionServiceAPI;
+	ServerApi locactionServiceAPI;
 	@Inject
 	ContextUtil mContextUt;
 	public LocationCallback mLocaCallback;

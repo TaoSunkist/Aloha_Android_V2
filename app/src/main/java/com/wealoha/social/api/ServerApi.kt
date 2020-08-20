@@ -1,6 +1,10 @@
 package com.wealoha.social.api
 
 import com.wealoha.social.beans.*
+import com.wealoha.social.beans.instagram.AccessToken
+import com.wealoha.social.beans.message.InboxMessageResult
+import com.wealoha.social.beans.message.InboxSessionResult
+import com.wealoha.social.beans.message.UnreadData
 import com.wealoha.social.impl.ServerUrlImpl
 import retrofit.Callback
 import retrofit.http.*
@@ -889,5 +893,409 @@ interface ServerApi{
     fun setAuto(
         @Field("autoSync") autoSync: Boolean,  //
         callback: Callback<Result<AuthData?>?>?
+    )
+
+    @FormUrlEncoded
+    @POST(ServerUrlImpl.LOCATION)
+    fun location( //
+        @Field("name") uid: String?,  //
+        @Field("coordinate") coordinate: String?,  //
+        @Field("latitude") latitude: Double?,  //
+        @Field("longitude") longitude: Double?,  //
+        @Field("count") count: Int?,  //
+        @Field("cursor") cursor: String?,  //
+        callback: Callback<Result<LocationResult?>?>?
+    )
+
+    @FormUrlEncoded
+    @POST(ServerUrlImpl.LOCATION_RECORD)
+    fun locationRecord( //
+        @Field("latitude") latitude: Double?,  //
+        @Field("longitude") longitude: Double?,
+        callback: Callback<Result<ResultData?>?>?
+    )
+
+    @FormUrlEncoded
+    @POST("/v1/stat/logdata")
+    fun logData(
+        @Field("data") dataStr: String?,
+        callback: Callback<Result<ResultData?>?>?
+    )
+    /**
+     * 通知列表
+     *
+     * @param cursor
+     * @param count
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(ServerUrlImpl.FIND_YOU)
+    fun findYou(
+        @Field("keyword") keyword: String?,
+        @Field("count") count: Int?,
+        callback: Callback<Result<FindYouResult?>?>?
+    )
+
+    /**
+     * 默认圈人列表
+     *
+     * @param cursor
+     * @param count
+     * @return
+     */
+    @GET(ServerUrlImpl.TAG_SUGGEST)
+    fun defaultTagUsers(callback: Callback<Result<FindYouResult?>?>?)
+
+    /**
+     * 返回数据
+     */
+    @GET(ServerUrlImpl.LOAD_OTHER_USER_DATA)
+    fun findRandom(
+        @Query("latitude") latitude: Double?,
+        @Query("longitude") longitude: Double?
+    ): Result<MatchData?>?
+
+    /**
+     * 返回数据
+     */
+    @GET(ServerUrlImpl.LOAD_OTHER_USER_DATA)
+    fun findRandom(
+        @Query("latitude") latitude: Double?,
+        @Query("longitude") longitude: Double?,
+        callback: Callback<Result<MatchData?>?>?
+    )
+
+    /**
+     * 重置配额，并且返回数据
+     *
+     * @param resetQuota
+     */
+    @GET(ServerUrlImpl.LOAD_OTHER_USER_DATA)
+    fun findWithResetQuota(
+        @Query("latitude") latitude: Double?,
+        @Query("longitude") longitude: Double?,
+        @Query("resetQuota") resetQuota: Boolean
+    ): Result<MatchData?>?
+    /**
+     * Aloha一个用户
+     *
+     * @param userId
+     * @return
+     */
+    // @POST(ServerUrlImpl.ALOHA_LIKE)
+    // @FormUrlEncoded
+    // public Result<ResultData> like(@Field("userId") String userId);
+    /**
+     * Aloha一个用户
+     *
+     * @param userId
+     * @return
+     */
+    @POST(ServerUrlImpl.ALOHA_LIKE)
+    @FormUrlEncoded
+    fun like(
+        @Field("userId") userId: String?,
+        @Field("refer") refer: String?,
+        callback: Callback<Result<ResultData?>?>?
+    )
+
+    @POST(ServerUrlImpl.ALOHA_LIKE)
+    @FormUrlEncoded
+    fun like(
+        @Field("userId") userId: String?,
+        @Field("refer") refer: String?
+    ): Result<ResultData?>?
+
+    /**
+     * Nope一个用户
+     *
+     * @param userId
+     * @return
+     */
+    @POST(ServerUrlImpl.ALOHA_DISLIKE)
+    @FormUrlEncoded
+    fun dislike(@Field("userId") userId: String?): Result<ResultData?>?
+
+    /**
+     * @Description:
+     * @param filterRegion
+     * regions里选择的key或者空(可以不传，产品叫做『智能推荐』)
+     * @param filterAgeRangeStart
+     * 年龄区间，无不限制不传
+     * @param filterAgeRangeEnd
+     * 年龄区间，无不限制不传
+     *
+     * @return
+     * @see:
+     * @since:
+     * @description
+     * @author: sunkist
+     * @date:2015年7月9日
+     */
+    @POST("/v1/user/setting/match")
+    @FormUrlEncoded
+    fun reqRegions(
+        @Field("filterRegion") filterRegion: String?,  //
+        @Field("filterAgeRangeStart") filterAgeRangeStart: Int,  //
+        @Field("filterAgeRangeEnd") filterAgeRangeEnd: Int,  //
+        callback: Callback<Result<RegionResult?>?>?
+    )
+
+    @GET(ServerUrlImpl.GET_THE_SESSION_LIST)
+    fun sessions(
+        @Query("cursor") cursor: String?,
+        @Query("count") count: Int
+    ): Result<InboxSessionResult?>?
+
+    @GET(ServerUrlImpl.GET_THE_SESSION_LIST)
+    fun sessions(
+        @Query("cursor") cursor: String?,
+        @Query("count") count: Int,
+        callback: Callback<Result<InboxSessionResult?>?>?
+    )
+
+    @GET(ServerUrlImpl.GET_SMS_LIST)
+    fun sessionMessages(
+        @Query("sessionId") sessionId: String?,
+        @Query("cursor") cursor: String?,
+        @Query("count") count: Int
+    ): Result<InboxMessageResult?>?
+
+    /**
+     * 获取单个会话
+     *
+     * @param sessionId
+     * 对方用户id
+     * @return
+     */
+    @GET(ServerUrlImpl.GET_SINGLE_SESSION)
+    fun getInboxSession(
+        @Query("sessionId") sessionId: String?,
+        callback: Callback<Result<InboxSessionResult?>?>?
+    )
+
+    /**
+     * 创建一个会话
+     *
+     * @param sessionId
+     * 要建立聊天的用户
+     */
+    @POST(ServerUrlImpl.CREATE_SESSION)
+    @FormUrlEncoded
+    fun post(
+        @Field("sessionId") sessionId: String?,
+        callback: Callback<Result<InboxSessionResult?>?>?
+    )
+
+    /**
+     * 清理会话未读数
+     *
+     * @param sessionId
+     * @param callback
+     */
+    @POST(ServerUrlImpl.INBOX_SESSION_CLEAR_UNREAD)
+    @FormUrlEncoded
+    fun clearUnread(
+        @Field("sessionId") sessionId: String?,
+        callback: Callback<Result<ResultData?>?>?
+    )
+
+    /**
+     * @Description:清理未读数不需要
+     * @param sessionId
+     * @return
+     * @see:
+     * @since:
+     * @description
+     * @author: sunkist
+     * @date:2015-2-11
+     */
+    @POST(ServerUrlImpl.INBOX_SESSION_CLEAR_UNREAD)
+    @FormUrlEncoded
+    fun clearUnread(@Field("sessionId") sessionId: String?): Result<ResultData?>?
+
+    /**
+     * 清理会话未读数
+     *
+     * @param sessionId
+     * @param callback
+     */
+    @POST(ServerUrlImpl.PUSH_BINDING)
+    @FormUrlEncoded
+    fun bindPushToUser(
+        @Field("token") token: String?,
+        callback: Callback<Result<ResultData?>?>?
+    )
+
+    /**
+     * 取未读会话数
+     *
+     * @param callback
+     */
+    @GET(ServerUrlImpl.INBOX_SESSION_UNREAD)
+    fun unread(callback: Callback<Result<UnreadData?>?>?)
+
+    /**
+     * 获取单个session
+     *
+     * @param sessionId
+     * @param callback
+     */
+    @GET(ServerUrlImpl.INBOX_SESSION_GET)
+    fun sessionGet(
+        @Query("sessionId") sessionId: String?,
+        callback: Callback<Result<InboxSessionResult?>?>?
+    )
+
+    /**
+     * @Description: Multipart 中的Part使用 RestAdapter 的转换器来转换，也可以实现 TypedOutput
+     * 来自己处理序列化。
+     * @param token
+     * @param callback
+     * @see:
+     * @since:
+     * @description 聊天发送信息[图片]
+     * @author: sunkist
+     * @date:2014-12-30
+     */
+    @Multipart
+    @POST(ServerUrlImpl.SEND_TO_USER_IMG)
+    fun sendMsgImage(
+        @Part("image") file: TypedFile?,
+        @Part("toUserId") toUserId: String?,
+        @Part("state") state: String?,
+        callback: Callback<Result<InboxMessageResult?>?>?
+    )
+
+    /**
+     * @Description:
+     * @param token
+     * @param callback
+     * @see:
+     * @since:
+     * @description 聊天发送信息[信息]
+     * @author: sunkist
+     * @date:2014-12-30
+     */
+    @FormUrlEncoded
+    @POST(ServerUrlImpl.SEND_TEXT_SMS)
+    fun sendMsgText(
+        @Field("text") text: String?,
+        @Field("toUserId") toUserId: String?,
+        @Field("state") state: String?,
+        callback: Callback<Result<InboxMessageResult?>?>?
+    )
+
+    /**
+     * @Description:删除单条消息
+     * @param text
+     * @param toUserId
+     * @param state
+     * @param callback
+     * @see:
+     * @since:
+     * @description
+     * @author: sunkist
+     * @date:2015-1-5
+     */
+    @FormUrlEncoded
+    @POST(ServerUrlImpl.DEL_SINGLE_SMS)
+    fun delSingleSms(
+        @Field("sessionId") sessionId: String?,
+        @Field("messageId") messageId: String?,
+        callback: Callback<Result<ResultData?>?>?
+    )
+
+    @GET("/v1/feed/notify2")
+    fun getNotifies(
+        @Query("cursor") cursor: String?,
+        @Query("count") count: Int?,
+        @Query("aloha") aloha: Boolean?,
+        callback: Callback<Result<NotifyGetData?>?>?
+    )
+
+    @POST("/v1/feed/notify2/clearUnread")
+    fun clearUnread(callback: Callback<Result<ResultData?>?>?)
+
+    @GET("/v1/feed/notify2/mergeUsers")
+    fun getMergeUsers(
+        @Query("notifyId") notifyId: String?,
+        @Query("count") count: Int?,
+        @Query("cursor") cursor: String?,
+        callback: Callback<Result<MergeUsersGetData?>?>?
+    )
+
+    @POST("/oauth/access_token")
+    @FormUrlEncoded
+    fun accessToken(
+        @Field("client_id") clientId: String?,  //
+        @Field("client_secret") clientSecret: String?,  //
+        @Field("grant_type") grant_type: String?,  //
+        @Field("redirect_uri") redirectUri: String?,  //
+        @Field("code") code: String?
+    ): AccessToken?
+
+    @POST("/oauth/access_token")
+    @FormUrlEncoded
+    fun accessToken(
+        @Field("client_id") clientId: String?,  //
+        @Field("client_secret") clientSecret: String?,  //
+        @Field("grant_type") grant_type: String?,  //
+        @Field("redirect_uri") redirectUri: String?,  //
+        @Field("code") code: String?,  //
+        callback: Callback<AccessToken?>?
+    )
+
+    /**
+     * 获取一个用户的profile
+     *
+     * @param userId
+     * @return
+     */
+    @GET(ServerUrlImpl.USER_PROFILE_VIEW)
+    fun view(@Query("id") userId: String?): Result<ProfileData?>?
+
+    /**
+     * 获取一个用户的profile
+     *
+     * @param userId
+     * @return
+     */
+    @GET(ServerUrlImpl.USER_PROFILE_VIEW)
+    fun view(
+        @Query("id") userId: String?,
+        callback: Callback<Result<ProfileData?>?>?
+    )
+
+    /**
+     * 获取一个用户的profile
+     *
+     * @param userId
+     * @return
+     */
+    @POST(ServerUrlImpl.USER_PROFILE_VIEW)
+    @FormUrlEncoded
+    fun getUserProfile(
+        @Field("id") userId: String?,
+        callback: Callback<Result<ProfileData?>?>?
+    )
+
+    /**
+     * @Description: 记录名片点击
+     * @param userId
+     * @param callback
+     * @see:
+     * @since:
+     * @description userId 名片用户 shareByUserId 分享名片的用户
+     * @author: sunkist
+     * @param callback
+     * @date:2015-1-13
+     */
+    @POST(ServerUrlImpl.RECORD_CARD_CLICK)
+    @FormUrlEncoded
+    fun recordCardClick(
+        @Field("userId") userId: String?,
+        @Field("shareByUserId") shareByUserId: String?,
+        callback: Callback<Result<ResultData?>?>?
     )
 }

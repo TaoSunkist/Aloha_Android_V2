@@ -51,7 +51,7 @@ public class Notify2Service extends AbsBaseService<Notify2, Boolean> {
 	private static final String TAG = Notify2Service.class.getSimpleName();
 
 	@Inject
-	Notify2API notify2api;
+	ServerApi notify2api;
 	@Inject
 	Context mContext;
 

@@ -8,9 +8,9 @@ import retrofit.client.Response;
 import android.text.TextUtils;
 
 import com.wealoha.social.ContextConfig;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
-import com.wealoha.social.api.MessageService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.inject.Injector;
 
@@ -31,7 +31,7 @@ public class PushUtil {
 	@Inject
 	ContextUtil contextUtil;
 	@Inject
-	MessageService mMessageService;
+	ServerApi mMessageService;
 
 	public PushUtil() {
 		Injector.inject(this);

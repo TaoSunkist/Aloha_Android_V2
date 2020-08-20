@@ -40,10 +40,10 @@ import com.wealoha.social.AppApplication;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.adapter.LocationForFeedAdapter;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.Location;
 import com.wealoha.social.beans.LocationResult;
-import com.wealoha.social.api.LocationService;
 import com.wealoha.social.utils.AMapUtil;
 import com.wealoha.social.utils.AMapUtil.LocationCallback;
 import com.wealoha.social.utils.ToastUtil;
@@ -53,7 +53,7 @@ public class LocationForFeedAct extends BaseFragAct implements OnClickListener, 
 		TextWatcher, OnItemClickListener, OnEditorActionListener, OnFocusChangeListener {
 
 	@Inject
-	LocationService locationService;
+	ServerApi locationService;
 	@InjectView(R.id.location_list)
 	ListView mList;
 	@InjectView(R.id.location_feed_back_tv)

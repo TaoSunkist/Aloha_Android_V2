@@ -40,9 +40,9 @@ import com.google.zxing.client.result.ResultParser;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.ContextConfig;
 import com.wealoha.social.R;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.ProfileData;
-import com.wealoha.social.api.ProfileService;
 import com.wealoha.social.commons.AlohaThreadPool;
 import com.wealoha.social.commons.AlohaThreadPool.ENUM_Thread_Level;
 import com.wealoha.social.commons.GlobalConstants;
@@ -80,7 +80,7 @@ public final class CaptureActivity extends BaseFragAct implements SurfaceHolder.
 	private static final int PARSE_BARCODE_FAIL = 300;
 	private static final int PARSE_BARCODE_SUC = 200;
 	@Inject
-	ProfileService mProfileService;
+	ServerApi mProfileService;
 	@Inject
 	ContextUtil mContextUtil;
 	@InjectView(R.id.ewm_iv)

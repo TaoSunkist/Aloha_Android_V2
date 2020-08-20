@@ -46,12 +46,12 @@ import com.wealoha.social.AsyncLoader;
 import com.wealoha.social.R;
 import com.wealoha.social.activity.MainAct;
 import com.wealoha.social.adapter.ChatListAdapter;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.message.InboxSession;
 import com.wealoha.social.beans.message.InboxSessionResult;
 import com.wealoha.social.beans.message.Message;
-import com.wealoha.social.api.MessageService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.CacheKey;
 import com.wealoha.social.commons.JsonController;
@@ -102,7 +102,7 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
 	FontUtil fontUtil;
 
 	@Inject
-	MessageService messageService;
+	ServerApi messageService;
 
 	/** 是否还有最新数据 */
 	private String mNextCursorId;

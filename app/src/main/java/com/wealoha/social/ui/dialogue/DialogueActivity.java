@@ -48,6 +48,7 @@ import com.wealoha.social.AsyncLoader;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.adapter.ChatMsgViewAdapter;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Image;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
@@ -55,11 +56,9 @@ import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.message.ImageMessage;
 import com.wealoha.social.beans.message.InboxMessageResult;
 import com.wealoha.social.beans.message.Message;
-import com.wealoha.social.api.MessageService;
 import com.wealoha.social.beans.message.TextMessage;
 import com.wealoha.social.beans.message.UnreadData;
 import com.wealoha.social.beans.ProfileData;
-import com.wealoha.social.api.ProfileService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.event.AnginSendSmsEvent;
 import com.wealoha.social.event.SessionNewMessageEvent;
@@ -123,10 +122,10 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
     @Inject
     ContextUtil mContextUtil;
     @Inject
-    MessageService mMessageService;
+    ServerApi mMessageService;
     private static final int LOADER_LOAD_MESSAGES = 0;
     @Inject
-    ProfileService mProfileService;
+    ServerApi mProfileService;
     private ChatMsgViewAdapter mAdapter;
     private String mNextCursorId;
     private boolean mHasMore = true;

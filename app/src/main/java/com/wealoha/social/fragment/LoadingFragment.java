@@ -63,7 +63,6 @@ import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.MatchData;
-import com.wealoha.social.api.MatchService;
 import com.wealoha.social.beans.PromotionGetData;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.impl.Listeners;
@@ -93,7 +92,7 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
     @Inject
     Context context;
     @Inject
-    MatchService matchService;
+    ServerApi matchService;
     @Inject
     ContextUtil contextUtil;
     @Inject

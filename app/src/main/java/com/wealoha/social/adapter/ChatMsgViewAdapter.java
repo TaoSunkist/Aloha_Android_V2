@@ -60,13 +60,13 @@ import com.squareup.picasso.Transformation;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.activity.WebActivity;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.message.ImageMessage;
 import com.wealoha.social.beans.message.InboxMessageResult;
 import com.wealoha.social.beans.message.Message;
-import com.wealoha.social.api.MessageService;
 import com.wealoha.social.beans.message.TextMessage;
 import com.wealoha.social.commons.CacheManager;
 import com.wealoha.social.commons.GlobalConstants;
@@ -130,7 +130,7 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
     private User mUser;// Myself
     private String mSessionId;
     @Inject
-    MessageService mMessageService;
+    ServerApi mMessageService;
     // state计数器
     private static AtomicInteger mStateCounter = new AtomicInteger(new Random(System.currentTimeMillis()).nextInt(10000));
 
