@@ -1457,8 +1457,8 @@ interface ServerApi {
     fun reqAlertUserInfo(
         @Field("name") username: String,
         @Field("birthday") birthday: String,  //
-        @Field("height") height: String,
-        @Field("weight") weight: String,  //
+        @Field("height") height: Int,
+        @Field("weight") weight: Int,  //
         @Field("selfTag") selfTag: String,
         @Field("regionCode") regionCode: String,  //
         @Field("selfPurpose") selfPurpose: String,

@@ -12,7 +12,7 @@ data class UserDTO(
     var id: String,
     var name: String,
     // yyyy-MM-dd
-    var birthday: String? = null,
+    var birthday: String,
     var age: Int = 0,
     var height: Int = 0,
     var weight: Int = 0,
@@ -21,14 +21,14 @@ data class UserDTO(
     var me: Boolean = false,
 
     /** 地区  */
-    var regionCode: String? = null,
-    var region: List<String>? = null,
+    var regionCode: String,
+    var region: List<String>,
 
     /** 星座  */
     var zodiac: String? = null,
 
     /** 摘要简介  */
-    var summary: String? = null,
+    var summary: String,
 
     /** 感兴趣的类型  */
     var selfPurposes: List<String>? = null,

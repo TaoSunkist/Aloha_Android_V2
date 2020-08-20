@@ -11,19 +11,19 @@ data class User(
     var type: String? = null,
     var name: String,
     // yyyy-MM-dd
-    var birthday: String? = null,
-    var age: String? = null,
-    var height: String? = null,
-    var weight: String? = null,
+    var birthday: String,
+    var age: Int,
+    var height: Int,
+    var weight: Int,
     /** 我当前所在的页面是否指向我自己  */
     var me: Boolean = false,
     /** 地区  */
-    var regionCode: String? = null,
-    var region: List<String>? = null,
+    var regionCode: String,
+    var region: List<String>,
     /** 星座  */
     var zodiac: String? = null,
     /** 摘要简介  */
-    var summary: String? = null,
+    var summary: String,
     /** 感兴趣的类型  */
     var selfPurposes: List<String>? = null,
     /** 我自己的类型  */
@@ -65,9 +65,9 @@ data class User(
                 type = System.currentTimeMillis().toString(),
                 name = System.currentTimeMillis().toString(),
                 birthday = System.currentTimeMillis().toString(),
-                age = System.currentTimeMillis().toString(),
-                height = System.currentTimeMillis().toString(),
-                weight = System.currentTimeMillis().toString(),
+                age = System.currentTimeMillis().toInt(),
+                height = System.currentTimeMillis().toInt(),
+                weight = System.currentTimeMillis().toInt(),
                 me = (0..1).random() == 1,
                 regionCode = System.currentTimeMillis().toString(),
                 region = (0..4).map { Fakeit.app().name() },
@@ -95,7 +95,7 @@ data class User(
 
         fun init(userDto: UserDTO): User {
             val user = fake()
-            user.age = userDto.age.toString()
+            user.age = userDto.age
             user.aloha = userDto.aloha
             user.alohaCount = userDto.alohaCount
             user.alohaGetCount = userDto.alohaGetCount
@@ -103,7 +103,7 @@ data class User(
             user.birthday = userDto.birthday
             user.block = userDto.block
             user.hasPrivacy = userDto.hasPrivacy
-            user.height = userDto.height.toString()
+            user.height = userDto.height
             user.id = userDto.id
             user.match = userDto.match
             user.me = userDto.me
@@ -115,7 +115,7 @@ data class User(
             user.selfPurposes = userDto.selfPurposes
             user.selfTag = userDto.selfTag
             user.summary = userDto.summary
-            user.weight = userDto.weight.toString()
+            user.weight = userDto.weight
             user.zodiac = userDto.zodiac
             val image = Image.fake()
             image.id = userDto.avatarImageId

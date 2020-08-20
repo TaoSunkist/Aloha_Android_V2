@@ -31,6 +31,13 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+<<<<<<< HEAD
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+=======
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+
+>>>>>>> branch 'develop' of http://git.cuapp.me/git/aloha-android.git
     -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -54,6 +61,21 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:theme="@style/AppBaseTheme">
+
+        <!--
+             <meta-data
+            android:name="INTERNAL_VERSION"
+<<<<<<< HEAD
+            android:value="1.6.0" />
+=======
+            android:value="1.6.0" />
+
+>>>>>>> branch 'develop' of http://git.cuapp.me/git/aloha-android.git
+        -->
+        <!-- name,value必须在一行或者两行紧挨着 -->
+        <!-- 必须在一行 -->
+
+
         <!-- 配置发布的应用商店。注意！！打包前一定要修改成对应的商店 -->
         <meta-data
             android:name="ANDROID_STORE"
@@ -67,7 +89,6 @@
             android:name="com.facebook.sdk.ApplicationName"
             android:value="@string/app_name" />
         <!-- 内部版本号。注意！！打包前像后端询问新版本 -->
-
         <!-- App呼起服务 -->
         <service
             android:name=".launch.LaunchService"
@@ -95,6 +116,26 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
+
+        <!-- qq分享sdk -->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1103691791" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- qq分享sdk结束 -->
 
         <activity
             android:name=".activity.WelcomeAct"
@@ -130,12 +171,17 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppStartLoadTranslucent">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.VIEW" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
-            <!--                <category android:name="android.intent.category.DEFAULT" />-->
-            <!--                <category android:name="android.intent.category.BROWSABLE" />-->
-            <!--            </intent-filter>-->
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/WebLaunchActivity/"
+                    android:scheme="aloha" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activity.CropImageActivity"
@@ -235,7 +281,22 @@
                     android:scheme="aloha" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.MainAct"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/main/"
+                    android:scheme="aloha" />
+            </intent-filter>
+        </activity>
 
         <!-- 崩溃统计 -->
         <meta-data
@@ -292,23 +353,23 @@
         </activity>
 
         <!-- Match -->
-        <!-- 背景必需透明 -->
-        <activity
-            android:name=".activity.MainAct"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+        <!--        &lt;!&ndash; 背景必需透明 &ndash;&gt;-->
+        <!--        <activity-->
+        <!--            android:name=".activity.MatchAct"-->
+        <!--            android:label="@string/app_name"-->
+        <!--            android:screenOrientation="portrait" >-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="android.intent.action.VIEW" />-->
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+        <!--                <category android:name="android.intent.category.DEFAULT" />-->
+        <!--                <category android:name="android.intent.category.BROWSABLE" />-->
 
-                <data
-                    android:host="wealoha.com"
-                    android:path="/match/"
-                    android:scheme="aloha" />
-            </intent-filter>
-        </activity>
+        <!--                <data-->
+        <!--                    android:host="wealoha.com"-->
+        <!--                    android:path="/match/"-->
+        <!--                    android:scheme="aloha" />-->
+        <!--            </intent-filter>-->
+        <!--        </activity>-->
         <activity
             android:name=".activity.LeaveCommentAct"
             android:label="@string/app_name"
@@ -393,7 +454,6 @@
                     android:scheme="aloha" />
             </intent-filter>
         </activity>
-        <!--        <activity android:name=".activity.SelectPicPopupWindow" />-->
         <activity
             android:name=".activity.LocationAct"
             android:label="@string/app_name"
@@ -597,23 +657,33 @@
             android:name=".activity.FilterSettingAct"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.VIEW" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
-            <!--                <category android:name="android.intent.category.DEFAULT" />-->
-            <!--                <category android:name="android.intent.category.BROWSABLE" />-->
-            <!--            </intent-filter>-->
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/FilterSettingAct/"
+                    android:scheme="aloha" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activity.LauncherImgAct"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.VIEW" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
-            <!--                <category android:name="android.intent.category.DEFAULT" />-->
-            <!--                <category android:name="android.intent.category.BROWSABLE" />-->
-            <!--            </intent-filter>-->
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wealoha.com"
+                    android:path="/LauncherImgAct/"
+                    android:scheme="aloha" />
+            </intent-filter>
         </activity>
         <!-- 高德地图 -->
         <activity
@@ -761,7 +831,9 @@
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.topic.TopicDetailActivity">
+        <activity
+            android:name=".ui.topic.TopicDetailActivity"
+            android:label="@string/title_activity_topic_detail">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -774,14 +846,16 @@
                     android:scheme="aloha" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.lock.CheckPasswordAct">
+        <activity
+            android:name=".ui.lock.CheckPasswordAct"
+            android:label="@string/title_activity_topic_detail">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.lock.GestureLockAct"
-            >
+            android:label="@string/title_activity_topic_detail">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -805,6 +879,7 @@
         </activity>
         <activity
             android:name="com.wealoha.social.ui.attestation.AttestationActivity"
+            android:label="@string/title_activity_attestation"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

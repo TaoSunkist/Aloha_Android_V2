@@ -10,7 +10,7 @@ class UserService {
         val shared = UserService()
     }
 
-    fun login(): Single<Result<AuthData>> {
+    fun login(mUserName: String, password: String): Single<Result<AuthData>> {
         return Single.create<Result<AuthData>> {
             Thread.sleep(500)
             if (Random.nextInt(0, 50) > 10) {

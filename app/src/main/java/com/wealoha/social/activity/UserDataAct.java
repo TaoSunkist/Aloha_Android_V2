@@ -275,8 +275,8 @@ public class UserDataAct extends BaseFragAct implements OnClickListener {
         }
 
         user.setName(username);
-        user.setHeight(height);
-        user.setWeight(weight);
+        user.setHeight(Integer.parseInt(height));
+        user.setWeight(Integer.parseInt(weight));
         user.setBirthday(birthday);
         user.setRegionCode(regionCode);
         userDataPerfect();

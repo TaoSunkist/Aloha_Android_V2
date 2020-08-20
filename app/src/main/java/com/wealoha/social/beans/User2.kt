@@ -174,9 +174,9 @@ class User2(
                 oldUser.id,
                 oldUser.name,
                 oldUser.birthday,
-                parseInt(oldUser.age),
-                parseInt(oldUser.height),  //
-                parseInt(oldUser.weight),
+                oldUser.age,
+                oldUser.height,  //
+                oldUser.weight,
                 oldUser.me,
                 oldUser.regionCode,
                 oldUser.region,
@@ -196,7 +196,7 @@ class User2(
             )
         }
 
-        fun parseInt(str: String?): Int {
+        private fun parseInt(str: String?): Int {
             var temp = 0
             if (!TextUtils.isEmpty(str)) {
                 temp = str?.toInt() ?: 0

@@ -16,11 +16,11 @@ public class DockingBeanUtils {
 
     public static User transUser(User2 apiUser2) {
         User user = User.Companion.fake();
-        user.setAge(String.valueOf(apiUser2.getAge()));
+        user.setAge(apiUser2.getAge());
         user.setAlohaCount(apiUser2.getAlohaCount());
         user.setAlohaGetCount(apiUser2.getAlohaGetCount());
         user.setBirthday(apiUser2.getBirthday());
-        user.setHeight(String.valueOf(apiUser2.getHeight()));
+        user.setHeight(apiUser2.getHeight());
         user.setId(apiUser2.getId());
         user.setName(apiUser2.getName());
         user.setPostCount(apiUser2.getPostCount());
@@ -28,7 +28,7 @@ public class DockingBeanUtils {
         user.setSelfPurposes(apiUser2.getSelfPurposes());
         user.setSelfTag(apiUser2.getSelfTag());
         user.setSummary(apiUser2.getSummary());
-        user.setWeight(String.valueOf(apiUser2.getWeight()));
+        user.setWeight(apiUser2.getWeight());
         user.setZodiac(apiUser2.getZodiac());
         user.setAvatarImage(Image.Companion.fake());
         user.getAvatarImage().setHeight(apiUser2.getAvatarCommonImage().getHeight());

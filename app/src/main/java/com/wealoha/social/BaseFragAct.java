@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import org.apache.commons.io.IOUtils;
 
+import io.reactivex.disposables.CompositeDisposable;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -109,6 +110,8 @@ import com.xiaomi.mipush.sdk.MiPushClient;
  * @Date:2014-10-23
  */
 public abstract class BaseFragAct extends FragmentActivity implements HasCache, IBackKeyCallback {
+
+    public CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     /**
      * 通过点击通知去聊天列表页面.
@@ -977,6 +980,7 @@ public abstract class BaseFragAct extends FragmentActivity implements HasCache, 
     @Override
     protected void onDestroy() {
         // unregisterReceiver(receiver);
+        compositeDisposable.clear();
         super.onDestroy();
     }
 
@@ -1198,5 +1202,4 @@ public abstract class BaseFragAct extends FragmentActivity implements HasCache, 
     private boolean checkGestureLockEnable() {
         return TextUtils.isEmpty(ContextConfig.getInstance().getStringWithFilename(GestureLockAct.LOCK_PASSWORD, null));
     }
-
 }

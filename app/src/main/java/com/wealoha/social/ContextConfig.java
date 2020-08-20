@@ -91,9 +91,9 @@ public class ContextConfig extends PreferenceUtil {
         editor.putString(TYPE, user.getType());
         editor.putString(NAME, user.getName());
         editor.putString(BIRTHDAY, user.getBirthday());
-        editor.putString(AGE, user.getAge());
-        editor.putString(HEIGHT, user.getHeight());
-        editor.putString(WEIGHT, user.getWeight());
+        editor.putInt(AGE, user.getAge());
+        editor.putInt(HEIGHT, user.getHeight());
+        editor.putInt(WEIGHT, user.getWeight());
         editor.putString(REGIONCODE, user.getRegionCode());
         // editor.putString(REGION, user.region);
         editor.putString(SUMMARY, user.getSummary());
@@ -118,9 +118,9 @@ public class ContextConfig extends PreferenceUtil {
         user.setType(mPreferences.getString(TYPE, ""));
         user.setName(mPreferences.getString(NAME, ""));
         user.setBirthday(mPreferences.getString(BIRTHDAY, ""));
-        user.setAge(mPreferences.getString(AGE, ""));
-        user.setHeight(mPreferences.getString(HEIGHT, ""));
-        user.setWeight(mPreferences.getString(WEIGHT, ""));
+        user.setAge(mPreferences.getInt(AGE, 0));
+        user.setHeight(mPreferences.getInt(HEIGHT, 0));
+        user.setWeight(mPreferences.getInt(WEIGHT, 0));
         user.setRegionCode(mPreferences.getString(REGIONCODE, ""));
         user.setSummary(mPreferences.getString(SUMMARY, user.getSummary()));
         user.setSelfTag(mPreferences.getString(SELFTAG, user.getSelfTag()));

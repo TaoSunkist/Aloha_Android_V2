@@ -476,14 +476,15 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Res
         if (mUser == null || mTempUser == null) {
             return true;
         }
-        if (mUser.getName() != null && !mUser.getName().equals(mTempUser.getName())) {
+        mUser.getName();
+        if (!mUser.getName().equals(mTempUser.getName())) {
             return false;
         }
 
-        if (mUser.getWeight() != null && !mUser.getWeight().equals(mTempUser.getWeight())) {
+        if (mUser.getWeight() != 0 && mUser.getWeight() != (mTempUser.getWeight())) {
             return false;
         }
-        if (mUser.getHeight() != null && !mUser.getHeight().equals(mTempUser.getHeight())) {
+        if (mUser.getHeight() != 0 && mUser.getHeight() != (mTempUser.getHeight())) {
             return false;
         }
         // if (mUser.regionCode != null && !mUser.regionCode.equals(mTempUser.regionCode)) {
@@ -492,7 +493,7 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Res
         // if (mUser.region != null && !mUser.region.equals(mTempUser.region)) {
         // return false;
         // }
-        if (mUser.getBirthday() != null && !mUser.getBirthday().equals(mTempUser.getBirthday())) {
+        if (!mUser.getBirthday().equals(mTempUser.getBirthday())) {
             return false;
         }
         if (mUser.getSelfTag() != null && !mUser.getSelfTag().equals(mTempUser.getSelfTag())) {
@@ -655,12 +656,12 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Res
         // 身高
         String height = (String) mHeightTv.getTag();
         if (!TextUtils.isEmpty(height)) {
-            mTempUser.setHeight(height);
+            mTempUser.setHeight(Integer.parseInt(height));
         }
         // 体重
         String weight = (String) mWeightTv.getTag();
         if (!TextUtils.isEmpty(height)) {
-            mTempUser.setWeight(weight);
+            mTempUser.setWeight(Integer.parseInt(weight));
         }
 
         // 已经是从tag里取的了
@@ -982,14 +983,14 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Res
         mUserName.setText(TextUtils.isEmpty(mUser.getName()) ? "" : mUser.getName());
 
         // 年龄
-        mAgeTv.setText(TextUtils.isEmpty(mUser.getAge()) ? "" : mUser.getAge());
+        mAgeTv.setText(String.valueOf(mUser.getAge()));
         mAgeTv.setTag(TextUtils.isEmpty(mUser.getBirthday()) ? "" : mUser.getBirthday());
         // 身高
-        mHeightTv.setText(TextUtils.isEmpty(mUser.getHeight()) ? "" : mUser.getHeight() + "cm");
-        mHeightTv.setTag(TextUtils.isEmpty(mUser.getHeight()) ? "" : mUser.getHeight() + "");
+        mHeightTv.setText(mUser.getHeight() + "cm");
+        mHeightTv.setTag(mUser.getHeight() + "");
         // 体重
-        mWeightTv.setText(TextUtils.isEmpty(mUser.getWeight()) ? "" : mUser.getWeight() + "kg");
-        mWeightTv.setTag(TextUtils.isEmpty(mUser.getWeight()) ? "" : mUser.getWeight());
+        mWeightTv.setText(mUser.getWeight() + "kg");
+        mWeightTv.setTag(mUser.getWeight());
         // introduction
         mIntroductionTv.setText(TextUtils.isEmpty(mUser.getSummary()) ? "" : mUser.getSummary());
         // if (!TextUtils.isEmpty(mUser.regionCode)) {
