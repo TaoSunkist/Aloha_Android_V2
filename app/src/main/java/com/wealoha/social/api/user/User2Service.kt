@@ -1,6 +1,7 @@
 package com.wealoha.social.api.user
 
 import com.squareup.otto.Bus
+import com.wealoha.social.api.ServerApi
 import com.wealoha.social.api.common.ApiErrorCode
 import com.wealoha.social.api.common.BaseListApiService.ApiCallback
 import com.wealoha.social.api.common.BaseListApiService.NoResultCallback
@@ -21,7 +22,7 @@ import javax.inject.Inject
 class User2Service {
     @JvmField
     @Inject
-    var user2Api: User2API? = null
+    var user2Api: ServerApi? = null
 
     @JvmField
     @Inject

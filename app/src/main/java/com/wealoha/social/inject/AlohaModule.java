@@ -116,7 +116,6 @@ import com.wealoha.social.api.UserSettingPrivacyAPI;
 import com.wealoha.social.api.profile.service.Profile2Service;
 import com.wealoha.social.api.topic.TopicAPI;
 import com.wealoha.social.api.topic.TopicService;
-import com.wealoha.social.api.user.User2API;
 import com.wealoha.social.api.user.User2Service;
 import com.wealoha.social.api.CommentService;
 import com.wealoha.social.api.ConstantsService;
@@ -914,12 +913,6 @@ public class AlohaModule {
     @Singleton
     LocationServiceAPI provideLocationServiceAPI(RestAdapter restAdapter) {
         return restAdapter.create(LocationServiceAPI.class);
-    }
-
-    @Provides
-    @Singleton
-    User2API provideUser2API(RestAdapter restAdapter) {
-        return restAdapter.create(User2API.class);
     }
 
     @Provides

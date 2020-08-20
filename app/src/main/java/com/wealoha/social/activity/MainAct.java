@@ -63,8 +63,8 @@ import com.wealoha.social.AppApplication;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.ContextConfig;
 import com.wealoha.social.R;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.MatchSettingData;
-import com.wealoha.social.api.user.User2API;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.common.ConstantsData;
@@ -186,7 +186,7 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 	@Inject
 	Picasso picasso;
 	@Inject
-	User2API mUserAPI;
+	ServerApi mUserAPI;
 	private Context mContext;
 	private Handler mHandler;
 	private Dialog mIsFirstEnterFeedsDialog;

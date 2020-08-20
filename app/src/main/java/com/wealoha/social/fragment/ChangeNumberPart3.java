@@ -27,7 +27,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.wealoha.social.R;
-import com.wealoha.social.api.user.User2API;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.utils.FontUtil;
@@ -39,7 +39,7 @@ import com.wealoha.social.view.custom.popup.LoadingPopup;
 public class ChangeNumberPart3 extends BaseFragment implements OnClickListener {
 
 	@Inject
-	User2API user2Api;
+	ServerApi user2Api;
 	@InjectView(R.id.security_code_et)
 	EditText codeEdit;
 	@InjectView(R.id.next_tv)

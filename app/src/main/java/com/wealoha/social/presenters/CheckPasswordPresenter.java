@@ -7,7 +7,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import android.text.TextUtils;
 
-import com.wealoha.social.api.user.User2API;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.ui.lock.CheckPasswordView;
@@ -16,7 +16,7 @@ import com.wealoha.social.utils.StringUtil;
 public class CheckPasswordPresenter extends AbsPresenter {
 
 	@Inject
-	User2API userAPI;
+	ServerApi userAPI;
 	private CheckPasswordView gestureLockView;
 
 	public CheckPasswordPresenter(CheckPasswordView glv) {

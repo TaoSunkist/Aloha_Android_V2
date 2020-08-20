@@ -28,7 +28,7 @@ import butterknife.OnClick;
 
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
-import com.wealoha.social.api.user.User2API;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.fragment.PhoneAreaFragment.ChangePhoneAreaCallback;
@@ -40,7 +40,7 @@ import com.wealoha.social.view.custom.popup.LoadingPopup;
 public class ChangeNumberPart2 extends BaseFragment implements OnClickListener, OnTouchListener, ChangePhoneAreaCallback {
 
 	@Inject
-	User2API user2Api;
+	ServerApi user2Api;
 
 	@InjectView(R.id.phone_num_et)
 	EditText phoneNumEdit;
