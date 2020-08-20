@@ -19,7 +19,7 @@ import com.wealoha.social.BaseFragAct
 import com.wealoha.social.R
 import com.wealoha.social.api.ServerApi
 import com.wealoha.social.api.User2Service
-import com.wealoha.social.api.UserService
+import com.wealoha.social.api.RxUserService
 import com.wealoha.social.beans.*
 import com.wealoha.social.commons.GlobalConstants
 import com.wealoha.social.extension.observeOnMainThread
@@ -183,7 +183,7 @@ class LoginAct : BaseFragAct(), View.OnClickListener {
         }
         mUserName = StringUtil.appendPhoneNum(callingCode, username)
         password = StringUtil.md5(password)
-        UserService.shared.login(
+        RxUserService.shared.login(
             mUserName,
             password
         ).observeOnMainThread(onSuccess = { result ->

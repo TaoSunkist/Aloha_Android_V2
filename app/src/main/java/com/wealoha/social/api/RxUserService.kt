@@ -5,9 +5,9 @@ import com.wealoha.social.beans.Result
 import io.reactivex.Single
 import kotlin.random.Random
 
-class UserService {
+class RxUserService {
     companion object {
-        val shared = UserService()
+        val shared = RxUserService()
     }
 
     fun login(mUserName: String, password: String): Single<Result<AuthData>> {
