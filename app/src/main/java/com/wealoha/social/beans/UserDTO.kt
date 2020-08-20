@@ -1,7 +1,6 @@
 package com.wealoha.social.beans
 
 import com.mooveit.library.Fakeit
-import com.wealoha.social.api.common.dto.ImageDTO
 
 /**
  *
@@ -60,11 +59,11 @@ data class UserDTO(
     var hasPrivacy: Boolean = false,
 
     @JvmField
-    var avatarImage: ImageDTO? = null
+    var avatarImage: ImageCommonDto? = null
 ) {
     companion object {
         fun fake(): UserDTO {
-            val avatarImage = ImageDTO.fake();
+            val avatarImage = ImageCommonDto.fake();
 
             return UserDTO(
                 id = System.currentTimeMillis().toString(),

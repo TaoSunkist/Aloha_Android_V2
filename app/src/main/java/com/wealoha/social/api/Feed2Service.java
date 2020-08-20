@@ -13,10 +13,10 @@ import android.util.Log;
 
 import com.squareup.picasso.Picasso;
 import com.wealoha.social.api.comment.bean.PostComment;
-import com.wealoha.social.api.common.bean.CommonImage;
+import com.wealoha.social.beans.CommonImage;
 import com.wealoha.social.beans.ApiErrorCode;
 import com.wealoha.social.beans.Direct;
-import com.wealoha.social.api.common.bean.CommonVideo;
+import com.wealoha.social.beans.CommonVideo;
 import com.wealoha.social.beans.FeedGetData;
 import com.wealoha.social.beans.FeedType;
 import com.wealoha.social.beans.UserListGetData;

@@ -1,4 +1,4 @@
-package com.wealoha.social.api.common.bean;
+package com.wealoha.social.beans;
 
 import java.io.Serializable;
 
@@ -6,7 +6,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import com.wealoha.social.api.common.dto.ImageDTO;
 import com.wealoha.social.utils.ImageUtil;
 import com.wealoha.social.utils.ImageUtil.CropMode;
 
@@ -35,12 +34,12 @@ public class CommonImage implements Serializable {
         this.urlPatternWidthHeight = urlPatternWidthHeight;
     }
 
-    public static CommonImage fromDTO(ImageDTO imageDTO) {
-        if (imageDTO == null) {
+    public static CommonImage fromDTO(ImageCommonDto imageCommonDto) {
+        if (imageCommonDto == null) {
             return null;
         } else {
-            return new CommonImage(imageDTO.imageId, imageDTO.width, imageDTO.height, //
-                    imageDTO.urlPatternWidth, imageDTO.urlPatternWidthHeight);
+            return new CommonImage(imageCommonDto.imageId, imageCommonDto.width, imageCommonDto.height, //
+                    imageCommonDto.urlPatternWidth, imageCommonDto.urlPatternWidthHeight);
         }
     }
 

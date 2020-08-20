@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.wealoha.social.api.common.bean.CommonImage;
-import com.wealoha.social.api.common.dto.ImageDTO;
-
 public class UserTag implements Serializable {
 
 	/**
@@ -29,7 +26,7 @@ public class UserTag implements Serializable {
 		this.user2 = user2;
 	}
 
-	public static List<UserTag> fromDTOList(List<UserTagsDTO> userTagDTOList, Map<String, UserDTO> userMap, Map<String, ImageDTO> imageMap) {
+	public static List<UserTag> fromDTOList(List<UserTagsDTO> userTagDTOList, Map<String, UserDTO> userMap, Map<String, ImageCommonDto> imageMap) {
 		if (userTagDTOList == null || userMap == null || imageMap == null) {
 			return null;
 		}

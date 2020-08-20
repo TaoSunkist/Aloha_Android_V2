@@ -1,7 +1,5 @@
 package com.wealoha.social.beans;
 
-import com.wealoha.social.api.common.dto.ImageDTO;
-
 public class HashTagDTO {
 
 	// itemId: "",
@@ -14,7 +12,7 @@ public class HashTagDTO {
 
 	public String itemId;
 	public String name;
-	public ImageDTO backgroundImage;
+	public ImageCommonDto backgroundImage;
 	public String summary;
 	public int postCount;
 	public String url;

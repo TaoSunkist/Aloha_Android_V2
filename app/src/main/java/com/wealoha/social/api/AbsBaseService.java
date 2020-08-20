@@ -12,10 +12,10 @@ import android.text.TextUtils;
 import com.wealoha.social.api.comment.bean.PostComment;
 import com.wealoha.social.api.comment.dto.Comment2DTO;
 import com.wealoha.social.api.comment.dto.CommentDTO;
-import com.wealoha.social.api.common.bean.CommonImage;
-import com.wealoha.social.api.common.bean.CommonVideo;
-import com.wealoha.social.api.common.dto.ImageDTO;
-import com.wealoha.social.api.common.dto.VideoDTO;
+import com.wealoha.social.beans.CommonImage;
+import com.wealoha.social.beans.CommonVideo;
+import com.wealoha.social.beans.ImageCommonDto;
+import com.wealoha.social.beans.VideoCommonDTO;
 import com.wealoha.social.beans.FeedType;
 import com.wealoha.social.beans.UserTag;
 import com.wealoha.social.beans.UserTagsDTO;
@@ -51,8 +51,8 @@ public abstract class AbsBaseService<E, P> implements BaseListApiService<E, P> {
     }
 
     protected Post getPost(PostDTO postDto, Map<String, UserDTO> userMap,//
-                           Map<String, ImageDTO> imageMap,//
-                           Map<String, VideoDTO> videoMap,//
+                           Map<String, ImageCommonDto> imageMap,//
+                           Map<String, VideoCommonDTO> videoMap,//
                            Map<String, Integer> commentCount,//
                            Map<String, Integer> praiseCount) {
         return getPost(postDto, userMap, imageMap, videoMap, commentCount, praiseCount, null);
@@ -73,8 +73,8 @@ public abstract class AbsBaseService<E, P> implements BaseListApiService<E, P> {
      * @return Post
      */
     protected Post getPost(PostDTO postDto, Map<String, UserDTO> userMap,//
-                           Map<String, ImageDTO> imageMap,//
-                           Map<String, VideoDTO> videoMap,//
+                           Map<String, ImageCommonDto> imageMap,//
+                           Map<String, VideoCommonDTO> videoMap,//
                            Map<String, Integer> commentCountMap,//
                            Map<String, Integer> praiseCountMap, String currentUserid) {
 
@@ -117,7 +117,7 @@ public abstract class AbsBaseService<E, P> implements BaseListApiService<E, P> {
      * @param imageMap
      * @return void
      */
-    protected List<PostComment> transCommentDTOList2PostCommentList(List<Comment2DTO> dtoList, Map<String, UserDTO> userMap, Map<String, ImageDTO> imageMap) {
+    protected List<PostComment> transCommentDTOList2PostCommentList(List<Comment2DTO> dtoList, Map<String, UserDTO> userMap, Map<String, ImageCommonDto> imageMap) {
         if (dtoList == null) {
             return null;
         }
@@ -138,7 +138,7 @@ public abstract class AbsBaseService<E, P> implements BaseListApiService<E, P> {
         return postCommentList;
     }
 
-    protected List<User2> getUsers(List<String> userIds, Map<String, UserDTO> userMap, Map<String, ImageDTO> imageMap) {
+    protected List<User2> getUsers(List<String> userIds, Map<String, UserDTO> userMap, Map<String, ImageCommonDto> imageMap) {
         if (CollectionUtils.isEmpty(userIds)) {
             return Collections.emptyList();
         }
@@ -149,7 +149,7 @@ public abstract class AbsBaseService<E, P> implements BaseListApiService<E, P> {
         return result;
     }
 
-    protected List<User2> getUsers(List<UserDTO> userList, Map<String, ImageDTO> imageMap) {
+    protected List<User2> getUsers(List<UserDTO> userList, Map<String, ImageCommonDto> imageMap) {
         if (CollectionUtils.isEmpty(userList) || imageMap == null) {
             return Collections.emptyList();
         }
@@ -160,7 +160,7 @@ public abstract class AbsBaseService<E, P> implements BaseListApiService<E, P> {
         return user2s;
     }
 
-    protected User2 getUser(String userId, Map<String, UserDTO> userMap, Map<String, ImageDTO> imageMap) {
+    protected User2 getUser(String userId, Map<String, UserDTO> userMap, Map<String, ImageCommonDto> imageMap) {
         UserDTO userDTO = userMap.get(userId);
         if (userDTO == null) {
             return null;
@@ -169,20 +169,20 @@ public abstract class AbsBaseService<E, P> implements BaseListApiService<E, P> {
         return User2.fromDTO(userDTO, getImage(userDTO.avatarImageId, imageMap));
     }
 
-    protected CommonImage getImage(String imageId, Map<String, ImageDTO> imageMap) {
-        ImageDTO imageDTO = imageMap.get(imageId);
-        if (imageDTO == null) {
+    protected CommonImage getImage(String imageId, Map<String, ImageCommonDto> imageMap) {
+        ImageCommonDto imageCommonDto = imageMap.get(imageId);
+        if (imageCommonDto == null) {
             return null;
         }
-        return CommonImage.fromDTO(imageDTO);
+        return CommonImage.fromDTO(imageCommonDto);
     }
 
-    protected CommonVideo getVideo(String Videoid, Map<String, VideoDTO> videoMap) {
-        VideoDTO videoDTO = videoMap.get(Videoid);
-        if (videoDTO == null) {
+    protected CommonVideo getVideo(String Videoid, Map<String, VideoCommonDTO> videoMap) {
+        VideoCommonDTO videoCommonDTO = videoMap.get(Videoid);
+        if (videoCommonDTO == null) {
             return null;
         }
-        return CommonVideo.fromDTO(videoDTO);
+        return CommonVideo.fromDTO(videoCommonDTO);
     }
 
     @Override
@@ -201,7 +201,7 @@ public abstract class AbsBaseService<E, P> implements BaseListApiService<E, P> {
      *            原始的图片列表
      * @return 如果任意一个参数 为空 ， 那么返回值也为空
      */
-    public List<UserTag> gerUserTagList(List<UserTagsDTO> userTagDTOList, Map<String, UserDTO> userMap, Map<String, ImageDTO> imageMap) {
+    public List<UserTag> gerUserTagList(List<UserTagsDTO> userTagDTOList, Map<String, UserDTO> userMap, Map<String, ImageCommonDto> imageMap) {
         if (userTagDTOList == null || userMap == null || imageMap == null) {
             return null;
         }

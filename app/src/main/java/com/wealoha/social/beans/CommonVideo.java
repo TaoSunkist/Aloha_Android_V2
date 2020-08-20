@@ -1,8 +1,6 @@
-package com.wealoha.social.api.common.bean;
+package com.wealoha.social.beans;
 
 import java.io.Serializable;
-
-import com.wealoha.social.api.common.dto.VideoDTO;
 
 /***
  * @author superman
@@ -30,14 +28,14 @@ public class CommonVideo implements Serializable {
 	/***
 	 * TODO
 	 * 
-	 * @param videoDTO
+	 * @param videoCommonDTO
 	 * @return 参数为空，则返回值为空
 	 */
-	public static CommonVideo fromDTO(VideoDTO videoDTO) {
-		if (videoDTO == null) {
+	public static CommonVideo fromDTO(VideoCommonDTO videoCommonDTO) {
+		if (videoCommonDTO == null) {
 			return null;
 		}
-		return new CommonVideo(videoDTO.videoId, videoDTO.width, videoDTO.height, videoDTO.url);
+		return new CommonVideo(videoCommonDTO.videoId, videoCommonDTO.width, videoCommonDTO.height, videoCommonDTO.url);
 	}
 
 	public static long getSerialversionuid() {

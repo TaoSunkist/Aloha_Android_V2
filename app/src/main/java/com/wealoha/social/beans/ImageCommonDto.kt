@@ -1,4 +1,4 @@
-package com.wealoha.social.api.common.dto
+package com.wealoha.social.beans
 
 import com.wealoha.social.utils.Dimens
 
@@ -8,7 +8,7 @@ import com.wealoha.social.utils.Dimens
  * @author javamonk
  * @createTime 2015年2月25日 上午11:31:07
  */
-class ImageDTO(
+class ImageCommonDto(
     @JvmField
     var imageId: String,
     @JvmField
@@ -22,8 +22,8 @@ class ImageDTO(
     var type: String? = null
 ) {
     companion object {
-        fun fake(): ImageDTO {
-            return ImageDTO(
+        fun fake(): ImageCommonDto {
+            return ImageCommonDto(
                 imageId = System.currentTimeMillis().toString(),
                 width = Dimens.purchaseableItemWidth,
                 height = Dimens.purchaseableItemHeight

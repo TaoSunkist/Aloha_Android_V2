@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.wealoha.social.api.comment.dto.Comment2DTO;
 import com.wealoha.social.api.comment.dto.CommentDTO;
-import com.wealoha.social.api.common.bean.CommonImage;
+import com.wealoha.social.beans.CommonImage;
 import com.wealoha.social.beans.User2;
 
 public class PostComment implements Serializable {

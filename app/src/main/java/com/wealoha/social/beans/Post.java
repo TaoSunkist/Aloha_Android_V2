@@ -6,10 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.wealoha.social.api.comment.bean.PostComment;
-import com.wealoha.social.api.common.bean.CommonImage;
-import com.wealoha.social.api.common.bean.CommonVideo;
-import com.wealoha.social.api.common.dto.ImageDTO;
-import com.wealoha.social.api.common.dto.VideoDTO;
 import com.wealoha.social.beans.feed.UserTags;
 
 /**
@@ -138,7 +134,7 @@ public class Post implements Serializable {
 		return false;
 	}
 
-	public static Post fromDTO(PostDTO postDTO, Map<String, UserDTO> userMap, Map<String, ImageDTO> imageMap, Map<String, VideoDTO> video, Map<String, Integer> commentCountMap, Map<String, Integer> praiseCountMap) {
+	public static Post fromDTO(PostDTO postDTO, Map<String, UserDTO> userMap, Map<String, ImageCommonDto> imageMap, Map<String, VideoCommonDTO> video, Map<String, Integer> commentCountMap, Map<String, Integer> praiseCountMap) {
 		List<UserTag> userTagList = UserTag.fromDTOList(postDTO.userTags, userMap, imageMap);
 
 		UserDTO userDTO = userMap.get(postDTO.userId);
@@ -173,7 +169,7 @@ public class Post implements Serializable {
 		postDTO.hasMoreComment);
 	}
 
-	public static List<Post> fromPostDTOList(List<PostDTO> dtoList, Map<String, UserDTO> userMap, Map<String, ImageDTO> imageMap, Map<String, VideoDTO> videoMap, Map<String, Integer> commentCountMap, Map<String, Integer> praiseCountMap) {
+	public static List<Post> fromPostDTOList(List<PostDTO> dtoList, Map<String, UserDTO> userMap, Map<String, ImageCommonDto> imageMap, Map<String, VideoCommonDTO> videoMap, Map<String, Integer> commentCountMap, Map<String, Integer> praiseCountMap) {
 		List<Post> postList = new ArrayList<>();
 		for (PostDTO postDTO : dtoList) {
 			Post post = Post.fromDTO(postDTO, userMap, imageMap, videoMap, commentCountMap, praiseCountMap);

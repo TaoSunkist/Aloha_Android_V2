@@ -2,8 +2,6 @@ package com.wealoha.social.beans;
 
 import java.io.Serializable;
 
-import com.wealoha.social.api.common.bean.CommonImage;
-
 public class HashTag implements Serializable {
 
 	/**

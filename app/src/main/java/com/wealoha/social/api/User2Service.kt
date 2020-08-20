@@ -4,7 +4,7 @@ import com.squareup.otto.Bus
 import com.wealoha.social.beans.ApiErrorCode
 import com.wealoha.social.api.BaseListApiService.ApiCallback
 import com.wealoha.social.api.BaseListApiService.NoResultCallback
-import com.wealoha.social.api.common.bean.CommonImage
+import com.wealoha.social.beans.CommonImage
 import com.wealoha.social.beans.User2
 import com.wealoha.social.beans.UserDTO
 import com.wealoha.social.beans.*

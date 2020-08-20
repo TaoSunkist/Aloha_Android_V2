@@ -2,7 +2,6 @@ package com.wealoha.social.beans
 
 import android.os.Parcelable
 import android.text.TextUtils
-import com.wealoha.social.api.common.bean.CommonImage
 import kotlinx.android.parcel.Parcelize
 import org.apache.commons.lang3.builder.ToStringBuilder
 import org.apache.commons.lang3.builder.ToStringStyle

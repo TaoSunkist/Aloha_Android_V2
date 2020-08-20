@@ -3,8 +3,6 @@ package com.wealoha.social.beans;
 import java.util.List;
 
 import com.wealoha.social.api.comment.dto.Comment2DTO;
-import com.wealoha.social.api.common.dto.ImageDTO;
-import com.wealoha.social.api.common.dto.VideoDTO;
 
 public class TopicPostDTO {
 
@@ -20,8 +18,8 @@ public class TopicPostDTO {
 	public Boolean venueAbroad;
 	public UserDTO user;
 	public List<TopicPostTagDTO> userTags;
-	public ImageDTO image;
-	public VideoDTO video;
+	public ImageCommonDto image;
+	public VideoCommonDTO video;
 	public boolean tagMe;
 	public boolean liked;
 	public int commentCount;
