@@ -662,7 +662,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 					mContentEdit.setTag(null);
 					UiUtils.hideKeyBoard(getActivity());
 					List<PostComment> postcommentlist = null;
-					postcommentlist = PostComment.fromCommentDTOList(result.getData().list);
+					postcommentlist = PostComment.Companion.fromCommentDTOList(result.getData().list);
 					mFeedCommentAdapter.appendListItem(Direct.Late, postcommentlist);
 					mFeedCommentAdapter.notifyDataSetChanged();
 					mContentListView.smoothScrollToPosition(mFeedCommentAdapter.getCount());// 因为listview

@@ -882,7 +882,7 @@ public class PopupStore {
                         // 分享到qq
 
                         url = StringUtil.sharePostWebUrl(post.getUser2().getId(), toUser.getId(), post, StringUtil.OTHER_PROFILE_TO_SHARE_WXF);
-                        String imgUrl = ImageUtil.getImageUrl(post.getCommonImage().getImageId(), ImageSize.CHAT_THUMB, CropMode.ScaleCenterCrop);
+                        String imgUrl = ImageUtil.getImageUrl(post.getCommonImage().getId(), ImageSize.CHAT_THUMB, CropMode.ScaleCenterCrop);
                         ShareStore.shareToQQ(baseFragAct, url, "1", "2", imgUrl);
                         // ShareStore.shareToWX(baseFragAct, null, imgUrl);
                         break;

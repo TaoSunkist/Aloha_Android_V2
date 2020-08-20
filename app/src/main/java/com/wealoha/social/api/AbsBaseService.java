@@ -103,7 +103,7 @@ public abstract class AbsBaseService<E, P> implements BaseListApiService<E, P> {
             praiseCount = praiseCountMap.get(postDto.userId);
         }
 
-        return Post.fromDTO(postDto, commonImage, commonVideo, user2, userTagList,//
+        return Post.Companion.fromDTO(postDto, commonImage, commonVideo, user2, userTagList,//
                 commentCount == null ? 0 : commentCount,//
                 praiseCount == null ? 0 : praiseCount, Post.hasTagForMe(userTagList, currentUserid),//
                 recentCommentList, null);
@@ -132,7 +132,7 @@ public abstract class AbsBaseService<E, P> implements BaseListApiService<E, P> {
                 replyUser2 = User2.fromDTO(dto.replyUser, CommonImage.fromDTO(dto.replyUser.avatarImage));
             }
 
-            PostComment postComment = PostComment.fromComment2DTO(dto, replyUser2, user2);
+            PostComment postComment = PostComment.Companion.fromComment2DTO(dto, replyUser2, user2);
             postCommentList.add(postComment);
         }
         return postCommentList;

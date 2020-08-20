@@ -32,7 +32,7 @@ public class DockingBeanUtils {
         user.setZodiac(apiUser2.getZodiac());
         user.setAvatarImage(Image.Companion.fake());
         user.getAvatarImage().setHeight(apiUser2.getAvatarCommonImage().getHeight());
-        user.getAvatarImage().setId(apiUser2.getAvatarCommonImage().getImageId());
+        user.getAvatarImage().setId(apiUser2.getAvatarCommonImage().getId());
         user.getAvatarImage().setWidth(apiUser2.getAvatarCommonImage().getWidth());
         user.setHasPrivacy(apiUser2.hasPrivacy());
         user.setAloha(apiUser2.isAloha());

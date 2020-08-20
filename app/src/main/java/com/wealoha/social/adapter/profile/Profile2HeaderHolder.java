@@ -764,7 +764,7 @@ public class Profile2HeaderHolder implements OnTouchListener {
 	 * @return void
 	 */
 	private void refreshIco(User2 refreshUser2) {
-		if (!mUser2.getAvatarCommonImage().getImageId().equals(refreshUser2.getAvatarCommonImage().getImageId())) {
+		if (!mUser2.getAvatarCommonImage().getId().equals(refreshUser2.getAvatarCommonImage().getId())) {
 			mUser2 = refreshUser2;
 			loadUserHeader();
 		}

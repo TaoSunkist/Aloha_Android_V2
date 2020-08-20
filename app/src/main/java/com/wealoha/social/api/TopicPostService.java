@@ -214,9 +214,9 @@ public class TopicPostService extends AbsBaseService<TopicPost> {
 	/**
 	 * {@link CommentDTO} list 转换为渲染视图的 {@link PostComment} List
 	 * 
-	 * @param dtoList
-	 * @param userMap
-	 * @param imageMap
+	 * dtoList
+	 * userMap
+	 * imageMap
 	 * @return void
 	 */
 	private List<PostComment> transComment2DTOListToPostCommentList(List<Comment2DTO> dtoList) {
@@ -227,7 +227,7 @@ public class TopicPostService extends AbsBaseService<TopicPost> {
 		for (Comment2DTO dto : dtoList) {
 			User2 user2 = User2.fromDTO(dto.user, CommonImage.fromDTO(dto.user.avatarImage));
 			User2 replyUser2 = User2.fromDTO(dto.replyUser, CommonImage.fromDTO(dto.replyUser.avatarImage));
-			PostComment postComment = PostComment.fromComment2DTO(dto, replyUser2, user2);
+			PostComment postComment = PostComment.Companion.fromComment2DTO(dto, replyUser2, user2);
 			postCommentList.add(postComment);
 		}
 		return postCommentList;

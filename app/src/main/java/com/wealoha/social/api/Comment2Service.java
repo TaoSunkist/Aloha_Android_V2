@@ -109,7 +109,7 @@ public class Comment2Service extends AbsBaseService<PostComment, String> {
 		for (CommentDTO commentDTO : data.list) {
 			User2 user2 = getUser(commentDTO.userId, data.userMap, data.imageMap);
 			User2 replyUser2 = getUser(commentDTO.replyUserId, data.userMap, data.imageMap);
-			result.add(PostComment.fromCommentDTO(commentDTO, replyUser2, user2));
+			result.add(PostComment.Companion.fromCommentDTO(commentDTO, replyUser2, user2));
 		}
 		return result;
 	}
