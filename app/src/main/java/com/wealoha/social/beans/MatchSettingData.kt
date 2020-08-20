@@ -1,7 +1,5 @@
-package com.wealoha.social.api.user
+package com.wealoha.social.beans
 
-import com.wealoha.social.beans.ResultData
-import com.wealoha.social.beans.Regions
 import java.io.Serializable
 import java.util.*
 

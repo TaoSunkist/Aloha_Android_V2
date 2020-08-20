@@ -26,7 +26,7 @@ import com.wealoha.social.AppApplication;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.LocationActivity;
 import com.wealoha.social.R;
-import com.wealoha.social.api.user.MatchSettingData;
+import com.wealoha.social.beans.MatchSettingData;
 import com.wealoha.social.api.user.User2API;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;

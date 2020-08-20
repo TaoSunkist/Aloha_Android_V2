@@ -22,7 +22,7 @@ import com.wealoha.social.beans.UserTagsDTO;
 import com.wealoha.social.api.post.bean.Post;
 import com.wealoha.social.api.post.dto.PostDTO;
 import com.wealoha.social.api.user.bean.User;
-import com.wealoha.social.api.user.dto.UserDTO;
+import com.wealoha.social.beans.UserDTO;
 
 /**
  * @author javamonk

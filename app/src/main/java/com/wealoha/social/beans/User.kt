@@ -2,7 +2,6 @@ package com.wealoha.social.beans
 
 import android.os.Parcelable
 import com.mooveit.library.Fakeit
-import com.wealoha.social.api.user.dto.UserDTO
 import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
@@ -11,76 +10,52 @@ data class User(
     var id: String,
     var type: String? = null,
     var name: String,
-    var birthday // yyyy-MM-dd
-    : String? = null,
-    var age
-    : String? = null,
-    var height // 1+
-    : String? = null,
-    var weight // 1+
-    : String? = null,
-
+    // yyyy-MM-dd
+    var birthday: String? = null,
+    var age: String? = null,
+    var height: String? = null,
+    var weight: String? = null,
     /** 我当前所在的页面是否指向我自己  */
     var me: Boolean = false,
-
     /** 地区  */
     var regionCode: String? = null,
     var region: List<String>? = null,
-
     /** 星座  */
     var zodiac: String? = null,
-
     /** 摘要简介  */
     var summary: String? = null,
-
     /** 感兴趣的类型  */
     var selfPurposes: List<String>? = null,
-
     /** 我自己的类型  */
     var selfTag: String? = null,
-
     /** 头像  */
     var avatarImage: Image,
     var avatarImageId: String,
-
-    // public int distance;
     var createTimeMillis: Long = 0,
-
     /** 资料不完整 强制跳  */
     var profileIncomplete: Boolean = false,
-
     /** 他喜欢多少人  */
     var alohaCount: Int = 0,
-
     /** 他被多少人喜欢  */
     var alohaGetCount: Int = 0,
-
     /** 是否喜欢过他  */
     var aloha: Boolean,
-
     /** 匹配  */
     var match: Boolean = false,
     var postCount: Int = 0,
-
     @Deprecated("")
     var t: String? = null,
     var phoneNum: String,
     var block: Boolean = false,
     var accessToken: String,
     var isUpdate: Boolean = false,
-
     /** 是否显示首次aloha time over后的提示  */
     var isShowAlohaTimeDialog: Boolean = false,
-
     /** 是否显示首次feed的引导  */
     var isShowFeedDialog: Boolean = false,
     var hasPrivacy: Boolean = false
 ) : Parcelable, Serializable {
     companion object {
-        /**
-         *
-         */
-        private const val serialVersionUID = 5164011748109511531L
 
         @kotlin.jvm.JvmField
         val TAG = User::class.java.simpleName

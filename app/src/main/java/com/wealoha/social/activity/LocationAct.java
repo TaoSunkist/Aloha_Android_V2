@@ -23,7 +23,7 @@ import butterknife.InjectView;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.adapter.LocationAdapter;
-import com.wealoha.social.api.user.MatchSettingData;
+import com.wealoha.social.beans.MatchSettingData;
 import com.wealoha.social.beans.RegionNode;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.utils.FontUtil;

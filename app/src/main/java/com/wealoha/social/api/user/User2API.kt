@@ -1,8 +1,6 @@
 package com.wealoha.social.api.user
 
-import com.wealoha.social.beans.Result
-import com.wealoha.social.beans.ResultData
-import com.wealoha.social.beans.PromotionGetData
+import com.wealoha.social.beans.*
 import retrofit.Callback
 import retrofit.http.*
 

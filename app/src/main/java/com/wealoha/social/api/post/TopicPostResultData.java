@@ -7,7 +7,7 @@ import com.wealoha.social.api.common.dto.ImageDTO;
 import com.wealoha.social.api.common.dto.VideoDTO;
 import com.wealoha.social.api.post.dto.TopicPostDTO;
 import com.wealoha.social.api.topic.dto.HashTagDTO;
-import com.wealoha.social.api.user.dto.UserDTO;
+import com.wealoha.social.beans.UserDTO;
 import com.wealoha.social.beans.ResultData;
 
 /**

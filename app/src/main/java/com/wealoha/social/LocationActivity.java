@@ -7,7 +7,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.wealoha.social.adapter.LocationListAdapter;
-import com.wealoha.social.api.user.MatchSettingData;
+import com.wealoha.social.beans.MatchSettingData;
 
 public class LocationActivity extends BaseFragAct {
 	@InjectView(R.id.location_country_listview)

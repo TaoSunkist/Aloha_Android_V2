@@ -3,7 +3,7 @@ package com.wealoha.social.api.user.bean
 import android.os.Parcelable
 import android.text.TextUtils
 import com.wealoha.social.api.common.bean.Image
-import com.wealoha.social.api.user.dto.UserDTO
+import com.wealoha.social.beans.UserDTO
 import kotlinx.android.parcel.Parcelize
 import org.apache.commons.lang3.builder.ToStringBuilder
 import org.apache.commons.lang3.builder.ToStringStyle
@@ -15,15 +15,6 @@ import java.io.Serializable
  */
 @Parcelize
 class User(
-    // public static User toOldUser(User user) {
-    // com.wealoha.social.beans.User oldUse = new com.wealoha.social.beans.User();
-    // oldUse.id = user.getId();
-    // oldUse.age = String.valueOf(user.getAge());
-    // oldUse.aloha = user.isAloha();
-    // oldUse.alohaCount = user.getAlohaCount();
-    // oldUse.avatarImage
-    // return new com.wealoha.social.beans.User();
-    // }
     val id: String?,
     val name: String?,
     val birthday: String?,

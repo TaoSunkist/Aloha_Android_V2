@@ -1,8 +1,7 @@
-package com.wealoha.social.api.user.dto
+package com.wealoha.social.beans
 
 import com.mooveit.library.Fakeit
 import com.wealoha.social.api.common.dto.ImageDTO
-import com.wealoha.social.beans.Image
 
 /**
  *

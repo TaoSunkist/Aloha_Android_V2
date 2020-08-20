@@ -8,7 +8,6 @@ import java.util.Map;
 import com.wealoha.social.api.common.bean.Image;
 import com.wealoha.social.api.common.dto.ImageDTO;
 import com.wealoha.social.api.user.bean.User;
-import com.wealoha.social.api.user.dto.UserDTO;
 
 public class UserTag implements Serializable {
 

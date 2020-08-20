@@ -1,6 +1,6 @@
 package com.wealoha.social.api.comment.dto;
 
-import com.wealoha.social.api.user.dto.UserDTO;
+import com.wealoha.social.beans.UserDTO;
 
 public class Comment2DTO {
 

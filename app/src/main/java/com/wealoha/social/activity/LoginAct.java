@@ -28,7 +28,7 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.wealoha.social.ActivityManager;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
-import com.wealoha.social.api.user.MatchSettingData;
+import com.wealoha.social.beans.MatchSettingData;
 import com.wealoha.social.api.user.User2API;
 import com.wealoha.social.api.user.User2Service;
 import com.wealoha.social.beans.AuthData;

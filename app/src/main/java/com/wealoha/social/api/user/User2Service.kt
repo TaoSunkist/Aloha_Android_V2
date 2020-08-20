@@ -6,10 +6,8 @@ import com.wealoha.social.api.common.BaseListApiService.ApiCallback
 import com.wealoha.social.api.common.BaseListApiService.NoResultCallback
 import com.wealoha.social.api.common.bean.Image
 import com.wealoha.social.api.user.bean.User
-import com.wealoha.social.api.user.dto.UserDTO
-import com.wealoha.social.beans.IResultDataErrorCode
-import com.wealoha.social.beans.Result
-import com.wealoha.social.beans.ResultData
+import com.wealoha.social.beans.UserDTO
+import com.wealoha.social.beans.*
 import com.wealoha.social.callback.CallbackImpl
 import com.wealoha.social.event.RefreshFilterBtnEvent
 import com.wealoha.social.inject.Injector
