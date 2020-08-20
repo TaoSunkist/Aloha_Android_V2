@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 
 import javax.inject.Inject;
 
-import com.wealoha.social.api.ClientLogService;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.inject.Injector;
 
 /**
@@ -19,7 +19,7 @@ import com.wealoha.social.inject.Injector;
 public class RemoteLogUtil {
 
 	@Inject
-	ClientLogService remoteLogService;
+	ServerApi remoteLogService;
 
 	ExecutorService executorService = Executors.newFixedThreadPool(1);
 

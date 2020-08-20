@@ -494,4 +494,95 @@ interface ServerApi{
         @Field("guid") guid: String?,
         callback: Callback<Result<ResultData?>?>?
     )
+
+    /**
+     *
+     * @param callback
+     */
+    @POST(ServerUrlImpl.LOGOUT_URL)
+    fun unauth(callback: Callback<Result<ResultData?>?>?)
+
+    // @FormUrlEncoded
+    // @POST(GlobalConstants.ServerUrlPath.PUSH_UNBINDING)
+    // Result<ResultData> bind(@Field("tokenGetui") String tokenGetui);
+    @FormUrlEncoded
+    @POST(ServerUrlImpl.PUSH_UNBINDING)
+    fun unbind(
+        @Field("token") token: String?,
+        callback: Callback<Result<ResultData?>?>?
+    )
+
+    @POST(ServerUrlImpl.CLIENT_LOG)
+    @FormUrlEncoded
+    fun log(
+        @Field("message") message: String?,
+        @Field("exception") exception: String?,  //
+        @Field("timestamp") createTime: Long?
+    ): Result<ResultData?>?
+
+    /**
+     * @Description:从通知列表进入的Comment(第一次请求), 客户端传入参数postId, cursor, count, needCtx=true：
+     * 返回cursor上下各一半count的数据list, preCursorId(向前|上)游标,
+     * nextCursorId(向后|下)游标
+     * @param postId
+     * @param cursor
+     * @param count
+     * @param callback
+     * @see:
+     * @since:
+     * @description
+     * @author: sunkist
+     * @date:2015年3月11日
+     */
+    @GET(ServerUrlImpl.GET_COMMENT)
+    fun getFirstComment2s(
+        @Query("postId") postId: String?,
+        @Query("cursor") cursor: String?,  //
+        @Query("count") count: Int,  //
+        @Query("needCtx") needCtx: Boolean,
+        callback: Callback<Result<Comment2GetData?>?>?
+    )
+
+    /**
+     * @Description:客户端继续取数据， 传入postId, cursor, count, direct=[desc(向下)|asc(向上)]
+     * 返回cursor在direct方向上的count条记录list和在次方向上的nextCursorId
+     * @param postId
+     * @param cursor
+     * @param count
+     * @param direct
+     * @param callback
+     * @see:
+     * @since:
+     * @description
+     * @author: sunkist
+     * @date:2015年3月11日
+     */
+    @GET(ServerUrlImpl.GET_COMMENT)
+    fun byDirectGetComment2s(
+        @Query("postId") postId: String?,
+        @Query("cursor") cursor: String?,  //
+        @Query("count") count: Int,  //
+        @Query("direct") direct: String?,
+        callback: Callback<Result<Comment2GetData?>?>?
+    )
+
+    /**
+     * @Title: postComment
+     * @Description: 发送评论
+     * @param @param postId
+     * @param @param userid
+     * @param @param comment
+     * @param @param callback 设定文件
+     * @return void 返回类型
+     * @throws
+     */
+    @FormUrlEncoded
+    @POST(ServerUrlImpl.POST_COMMENT)
+    fun sendComment(
+        @Field("postId") postId: String?,  //
+        @Field("replyUserId") userid: String?,  //
+        @Field("comment") comment: String?,  //
+        callback: Callback<Result<Comment2GetData?>?>?
+    )
+
 }

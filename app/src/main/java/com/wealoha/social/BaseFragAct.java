@@ -60,12 +60,11 @@ import com.wealoha.social.activity.LauncherImgAct;
 import com.wealoha.social.activity.MainAct;
 import com.wealoha.social.activity.NaviIntroActivity;
 import com.wealoha.social.activity.WelcomeAct;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.api.ClientLogService;
 import com.wealoha.social.beans.AccessTokenKeeper;
-import com.wealoha.social.api.AuthService;
 import com.wealoha.social.beans.User2;
 import com.wealoha.social.callback.IBackKeyCallback;
 import com.wealoha.social.commons.AlohaThreadPool;
@@ -120,7 +119,7 @@ public abstract class BaseFragAct extends FragmentActivity implements HasCache, 
      */
     public static final String ACTION_BY_NOTICE_TO_DIALOGUE = "by_notice_to_dialogue";
     @Inject
-    public ClientLogService mClientLogService;
+    public ServerApi mClientLogService;
     public static String TAG = TopicDetailActivity.class.getSimpleName();
     @Inject
     public JsonController mJsonController;
@@ -135,7 +134,7 @@ public abstract class BaseFragAct extends FragmentActivity implements HasCache, 
     @Inject
     PushUtil pushUtil;
     @Inject
-    AuthService authService;
+    ServerApi authService;
     @Inject
     public Bus bus;
     public static boolean isRefreshHeadIcon;

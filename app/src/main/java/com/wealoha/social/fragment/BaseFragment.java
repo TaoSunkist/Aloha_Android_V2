@@ -19,8 +19,8 @@ import com.wealoha.social.R;
 import com.wealoha.social.activity.FragmentWrapperActivity;
 import com.wealoha.social.activity.FragmentWrapperActivity.ActivityResultCallback;
 import com.wealoha.social.activity.MainAct;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.HashTag;
-import com.wealoha.social.api.ClientLogService;
 import com.wealoha.social.commons.CacheManager;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.CacheKey;
@@ -39,7 +39,7 @@ import com.wealoha.social.view.custom.popup.LoadingPopup;
 public abstract class BaseFragment extends Fragment implements HasCache, ActivityResultCallback {
 
 	@Inject
-	public ClientLogService mClientLogService;
+	public ServerApi mClientLogService;
 	protected String TAG = getClass().getSimpleName();
 	@Inject
 	public JsonController mJsonController;

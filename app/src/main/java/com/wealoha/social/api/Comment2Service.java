@@ -23,7 +23,7 @@ import com.wealoha.social.inject.Injector;
 public class Comment2Service extends AbsBaseService<PostComment, String> {
 
 	@Inject
-	Comment2API comment2api;
+	ServerApi comment2api;
 
 	public Comment2Service() {
 		Injector.inject(this);

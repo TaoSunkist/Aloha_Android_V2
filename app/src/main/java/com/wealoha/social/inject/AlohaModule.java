@@ -91,7 +91,6 @@ import com.wealoha.social.adapter.profile.Profile2ImageHolder;
 import com.wealoha.social.adapter.profile.Profile2ImagesAdapter;
 import com.wealoha.social.adapter.profile.Profile2InfoHolder;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.api.Comment2API;
 import com.wealoha.social.api.Comment2Service;
 import com.wealoha.social.api.Feed2Service;
 import com.wealoha.social.api.PraisedPostService;
@@ -129,10 +128,8 @@ import com.wealoha.social.beans.message.Message;
 import com.wealoha.social.beans.message.MessageSerializer;
 import com.wealoha.social.api.MessageService;
 import com.wealoha.social.beans.message.TextMessage;
-import com.wealoha.social.api.ClientLogService;
 import com.wealoha.social.api.FindYouService;
 import com.wealoha.social.api.SettingService;
-import com.wealoha.social.api.AuthService;
 import com.wealoha.social.api.ConnectService;
 import com.wealoha.social.api.ProfileService;
 import com.wealoha.social.api.UserPromotionService;
@@ -768,12 +765,6 @@ public class AlohaModule {
 
     @Provides
     @Singleton
-    AuthService provideAuthService(RestAdapter restAdapter) {
-        return restAdapter.create(AuthService.class);
-    }
-
-    @Provides
-    @Singleton
     ConnectService provideConnectService(RestAdapter restAdapter) {
         return restAdapter.create(ConnectService.class);
     }
@@ -806,12 +797,6 @@ public class AlohaModule {
     @Singleton
     CommentService provideImageRender(RestAdapter restAdapter) {
         return restAdapter.create(CommentService.class);
-    }
-
-    @Provides
-    @Singleton
-    ClientLogService provideClientLogService(RestAdapter restAdapter) {
-        return restAdapter.create(ClientLogService.class);
     }
 
     @Provides
@@ -884,12 +869,6 @@ public class AlohaModule {
     @Singleton
     Notify2API provideNotify2API(RestAdapter restAdapter) {
         return restAdapter.create(Notify2API.class);
-    }
-
-    @Provides
-    @Singleton
-    Comment2API provideComment2API(RestAdapter restAdapter) {
-        return restAdapter.create(Comment2API.class);
     }
 
     /**
