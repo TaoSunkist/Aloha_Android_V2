@@ -8,7 +8,7 @@ import retrofit.client.Response;
 import com.wealoha.social.api.common.AbsBaseService;
 import com.wealoha.social.api.common.ApiErrorCode;
 import com.wealoha.social.api.common.Direct;
-import com.wealoha.social.api.notify2.MergeUsersGetData;
+import com.wealoha.social.beans.MergeUsersGetData;
 import com.wealoha.social.api.notify2.Notify2API;
 import com.wealoha.social.api.user.bean.User;
 import com.wealoha.social.beans.Result;

@@ -5,6 +5,8 @@ import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Query;
 
+import com.wealoha.social.beans.MergeUsersGetData;
+import com.wealoha.social.beans.NotifyGetData;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 

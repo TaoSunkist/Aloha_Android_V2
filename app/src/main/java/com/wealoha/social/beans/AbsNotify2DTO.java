@@ -1,4 +1,4 @@
-package com.wealoha.social.api.notify2.dto;
+package com.wealoha.social.beans;
 
 /**
  * Notify2的数据传输对象，和API保持一致

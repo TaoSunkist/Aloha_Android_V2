@@ -1,4 +1,4 @@
-package com.wealoha.social.api.notify2.dto;
+package com.wealoha.social.beans;
 
 /**
  * 
