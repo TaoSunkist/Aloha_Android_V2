@@ -1,9 +1,6 @@
 package com.wealoha.social.api
 
-import com.wealoha.social.beans.FeedGetData
-import com.wealoha.social.beans.Result
-import com.wealoha.social.beans.ResultData
-import com.wealoha.social.beans.UserListGetData
+import com.wealoha.social.beans.*
 import retrofit.Callback
 import retrofit.http.*
 
@@ -150,4 +147,24 @@ interface ServerApi{
         @Query("longitude") longitude: String?,
         callback: Callback<Result<FeedGetData?>?>?
     )
+
+    /**
+     * 话题页获取话题相关的post
+     *
+     * @param cursor
+     * @param count
+     * @param callback
+     * @return void
+     */
+    @GET("/v1/hashtag/post")
+    fun getTopicPosts(
+        @Query("itemId") id: String?,
+        @Query("cursor") cursor: String?,
+        @Query("count") count: Int?,
+        callback: Callback<Result<TopicPostResultData?>?>?
+    )
+
+    @GET("/v1/hashtag/activity/list")
+    fun getHashTag(callback: Callback<Result<HashTagResultData?>?>?)
+
 }

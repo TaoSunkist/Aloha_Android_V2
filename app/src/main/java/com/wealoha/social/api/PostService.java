@@ -1,4 +1,4 @@
-package com.wealoha.social.api.post;
+package com.wealoha.social.api;
 
 import javax.inject.Inject;
 

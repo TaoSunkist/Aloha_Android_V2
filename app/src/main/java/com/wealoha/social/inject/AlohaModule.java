@@ -110,9 +110,8 @@ import com.wealoha.social.beans.PostLikeNotify2DTO;
 import com.wealoha.social.beans.PostTagNotify2DTO;
 import com.wealoha.social.api.notify2.service.Notify2Service;
 import com.wealoha.social.api.notify2.service.UserListService;
-import com.wealoha.social.api.post.PostAPI;
-import com.wealoha.social.api.post.PostService;
-import com.wealoha.social.api.post.TopicPostService;
+import com.wealoha.social.api.PostService;
+import com.wealoha.social.api.TopicPostService;
 import com.wealoha.social.api.UserSettingPrivacyAPI;
 import com.wealoha.social.api.profile.service.Profile2Service;
 import com.wealoha.social.api.topic.TopicAPI;
@@ -942,9 +941,4 @@ public class AlohaModule {
         return restAdapter.create(TopicAPI.class);
     }
 
-    @Provides
-    @Singleton
-    PostAPI providePostAPI(RestAdapter restAdapter) {
-        return restAdapter.create(PostAPI.class);
-    }
 }

@@ -1,4 +1,4 @@
-package com.wealoha.social.api.post;
+package com.wealoha.social.api;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,7 @@ import retrofit.client.Response;
 import android.text.TextUtils;
 
 import com.wealoha.social.R;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.api.comment.bean.PostComment;
 import com.wealoha.social.api.comment.dto.Comment2DTO;
 import com.wealoha.social.api.comment.dto.CommentDTO;
@@ -34,7 +35,7 @@ import com.wealoha.social.utils.XL;
 public class TopicPostService extends AbsBaseService<TopicPost> {
 
 	@Inject
-	PostAPI postAPI;
+	ServerApi postAPI;
 	private TopicPosts mTopicPosts;
 
 	public void getHashTagResult(final ServiceListResultCallback<HashTag> serviceListResultCallback) {
