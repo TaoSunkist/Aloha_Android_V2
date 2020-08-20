@@ -1,7 +1,4 @@
-package com.wealoha.social.api.comment.dto;
-
-import com.wealoha.social.api.comment.bean.PostComment;
-import com.wealoha.social.beans.UserDTO;
+package com.wealoha.social.beans;
 
 /**
  * @author:sunkist

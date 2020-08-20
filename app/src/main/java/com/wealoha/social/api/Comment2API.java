@@ -1,4 +1,4 @@
-package com.wealoha.social.api.comment;
+package com.wealoha.social.api;
 
 import retrofit.Callback;
 import retrofit.http.Field;
@@ -7,6 +7,7 @@ import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Query;
 
+import com.wealoha.social.beans.Comment2GetData;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.impl.ServerUrlImpl;
 

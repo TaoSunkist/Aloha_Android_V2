@@ -1,6 +1,6 @@
 package com.wealoha.social.api
 
-import com.wealoha.social.api.comment.Comment2GetData
+import com.wealoha.social.beans.Comment2GetData
 import com.wealoha.social.beans.CommentResult
 import com.wealoha.social.beans.Result
 import com.wealoha.social.beans.ResultData

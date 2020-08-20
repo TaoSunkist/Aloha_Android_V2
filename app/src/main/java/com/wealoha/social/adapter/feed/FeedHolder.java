@@ -43,7 +43,7 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.activity.GDMapAct;
 import com.wealoha.social.activity.WebActivity;
-import com.wealoha.social.api.comment.bean.PostComment;
+import com.wealoha.social.beans.PostComment;
 import com.wealoha.social.beans.ApiErrorCode;
 import com.wealoha.social.api.BaseListApiService.NoResultCallback;
 import com.wealoha.social.beans.UserTag;

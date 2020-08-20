@@ -1,4 +1,4 @@
-package com.wealoha.social.api.comment.service;
+package com.wealoha.social.api;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,12 +11,9 @@ import org.apache.commons.collections4.CollectionUtils;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-import com.wealoha.social.api.BaseListApiService;
-import com.wealoha.social.api.comment.Comment2API;
-import com.wealoha.social.api.comment.Comment2GetData;
-import com.wealoha.social.api.comment.bean.PostComment;
-import com.wealoha.social.api.comment.dto.CommentDTO;
-import com.wealoha.social.api.AbsBaseService;
+import com.wealoha.social.beans.Comment2GetData;
+import com.wealoha.social.beans.PostComment;
+import com.wealoha.social.beans.CommentDTO;
 import com.wealoha.social.beans.Direct;
 import com.wealoha.social.beans.ApiErrorCode;
 import com.wealoha.social.beans.User2;

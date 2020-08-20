@@ -12,7 +12,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.squareup.picasso.Picasso;
-import com.wealoha.social.api.comment.bean.PostComment;
+import com.wealoha.social.beans.PostComment;
 import com.wealoha.social.beans.CommonImage;
 import com.wealoha.social.beans.ApiErrorCode;
 import com.wealoha.social.beans.Direct;

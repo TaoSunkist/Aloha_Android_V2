@@ -1,12 +1,7 @@
-package com.wealoha.social.api.comment;
+package com.wealoha.social.beans;
 
 import java.util.List;
 import java.util.Map;
-
-import com.wealoha.social.api.comment.dto.CommentDTO;
-import com.wealoha.social.beans.ImageCommonDto;
-import com.wealoha.social.beans.UserDTO;
-import com.wealoha.social.beans.ResultData;
 
 /**
  * @author:sunkist

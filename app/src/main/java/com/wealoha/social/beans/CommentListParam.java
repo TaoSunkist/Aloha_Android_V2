@@ -1,4 +1,4 @@
-package com.wealoha.social.api.comment.service;
+package com.wealoha.social.beans;
 
 /**
  * 

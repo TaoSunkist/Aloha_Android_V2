@@ -11,9 +11,9 @@ import retrofit.client.Response;
 import android.text.TextUtils;
 
 import com.wealoha.social.R;
-import com.wealoha.social.api.comment.bean.PostComment;
-import com.wealoha.social.api.comment.dto.Comment2DTO;
-import com.wealoha.social.api.comment.dto.CommentDTO;
+import com.wealoha.social.beans.PostComment;
+import com.wealoha.social.beans.Comment2DTO;
+import com.wealoha.social.beans.CommentDTO;
 import com.wealoha.social.beans.CommonImage;
 import com.wealoha.social.beans.CommonVideo;
 import com.wealoha.social.api.common.service.AbsBaseService;
