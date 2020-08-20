@@ -8,7 +8,7 @@ import android.widget.AbsListView.OnScrollListener;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.wealoha.social.activity.FragmentWrapperActivity.ActivityResultCallback;
-import com.wealoha.social.api.topic.bean.HashTag;
+import com.wealoha.social.beans.HashTag;
 import com.wealoha.social.ui.base.ScrollToLoadView;
 import com.wealoha.social.view.custom.dialog.ListItemDialog.ListItemCallback;
 

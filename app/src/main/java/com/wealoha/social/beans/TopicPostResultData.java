@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.wealoha.social.api.common.dto.ImageDTO;
 import com.wealoha.social.api.common.dto.VideoDTO;
-import com.wealoha.social.api.topic.dto.HashTagDTO;
 
 /**
  * 话题功能部分请求新版的post 接口，新版post接口返回的数据和旧版中由postdto 转换后的post结构一致

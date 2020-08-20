@@ -1,4 +1,4 @@
-package com.wealoha.social.api.topic.dto;
+package com.wealoha.social.beans;
 
 import com.wealoha.social.beans.UserDTO;
 

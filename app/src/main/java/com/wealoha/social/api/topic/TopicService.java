@@ -11,9 +11,10 @@ import android.content.Context;
 
 import com.wealoha.social.AppApplication;
 import com.wealoha.social.api.common.service.BaseService;
-import com.wealoha.social.api.topic.bean.HashTag;
-import com.wealoha.social.api.topic.dto.HashTagDTO;
+import com.wealoha.social.beans.HashTag;
+import com.wealoha.social.beans.HashTagDTO;
 import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.TopicData;
 import com.wealoha.social.inject.Injector;
 import com.wealoha.social.utils.AMapUtil;
 import com.wealoha.social.utils.AMapUtil.LocationCallback;

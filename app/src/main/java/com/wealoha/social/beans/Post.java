@@ -10,7 +10,6 @@ import com.wealoha.social.api.common.bean.Image;
 import com.wealoha.social.api.common.bean.Video;
 import com.wealoha.social.api.common.dto.ImageDTO;
 import com.wealoha.social.api.common.dto.VideoDTO;
-import com.wealoha.social.api.topic.bean.HashTag;
 import com.wealoha.social.beans.feed.UserTags;
 
 /**

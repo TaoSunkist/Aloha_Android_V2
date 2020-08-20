@@ -41,7 +41,7 @@ import com.wealoha.social.adapter.feed.FeedHolder;
 import com.wealoha.social.adapter.feed.VideoFeedHolder;
 import com.wealoha.social.api.common.ApiErrorCode;
 import com.wealoha.social.api.Feed2Service;
-import com.wealoha.social.api.topic.bean.HashTag;
+import com.wealoha.social.beans.HashTag;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.event.feed.MediaPlayEvent;
 import com.wealoha.social.fragment.BaseFragment;

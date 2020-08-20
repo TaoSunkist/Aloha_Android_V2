@@ -33,7 +33,7 @@ import com.wealoha.social.activity.MainAct;
 import com.wealoha.social.activity.PicSendActivity;
 import com.wealoha.social.activity.WebActivity;
 import com.wealoha.social.beans.TopicPosts;
-import com.wealoha.social.api.topic.bean.HashTag;
+import com.wealoha.social.beans.HashTag;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.presenters.TopicDetailPresenter;

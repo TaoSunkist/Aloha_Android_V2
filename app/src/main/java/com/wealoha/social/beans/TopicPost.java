@@ -3,8 +3,6 @@ package com.wealoha.social.beans;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.wealoha.social.api.topic.bean.HashTag;
-
 public class TopicPost {
 
 	/**

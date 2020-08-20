@@ -3,8 +3,6 @@ package com.wealoha.social.beans;
 import java.util.List;
 
 import com.wealoha.social.api.comment.dto.Comment2DTO;
-import com.wealoha.social.beans.UserTagsDTO;
-import com.wealoha.social.api.topic.dto.HashTagDTO;
 
 /**
  * 

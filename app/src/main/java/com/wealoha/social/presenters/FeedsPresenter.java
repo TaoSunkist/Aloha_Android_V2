@@ -11,7 +11,7 @@ import com.wealoha.social.api.common.service.BaseService.ServiceResultCallback;
 import com.wealoha.social.api.PostService;
 import com.wealoha.social.api.TopicPostService;
 import com.wealoha.social.beans.Post;
-import com.wealoha.social.api.topic.bean.HashTag;
+import com.wealoha.social.beans.HashTag;
 import com.wealoha.social.inject.Injector;
 import com.wealoha.social.model.feeds.AdvertisementModel;
 import com.wealoha.social.model.feeds.IAdvertisementModel;

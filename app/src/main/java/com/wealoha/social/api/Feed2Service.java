@@ -24,7 +24,7 @@ import com.wealoha.social.beans.UserListGetData;
 import com.wealoha.social.beans.UserTag;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.PostDTO;
-import com.wealoha.social.api.topic.bean.HashTag;
+import com.wealoha.social.beans.HashTag;
 import com.wealoha.social.beans.User2;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;

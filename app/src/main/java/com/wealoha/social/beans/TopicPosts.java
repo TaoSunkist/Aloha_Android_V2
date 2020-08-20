@@ -2,8 +2,6 @@ package com.wealoha.social.beans;
 
 import java.util.List;
 
-import com.wealoha.social.api.topic.bean.HashTag;
-
 /**
  * 话题页下获取的最新和最热的post集合
  * 

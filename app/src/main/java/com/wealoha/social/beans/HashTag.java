@@ -1,9 +1,8 @@
-package com.wealoha.social.api.topic.bean;
+package com.wealoha.social.beans;
 
 import java.io.Serializable;
 
 import com.wealoha.social.api.common.bean.Image;
-import com.wealoha.social.api.topic.dto.HashTagDTO;
 
 public class HashTag implements Serializable {
 
