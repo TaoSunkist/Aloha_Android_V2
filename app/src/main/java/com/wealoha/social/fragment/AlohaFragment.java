@@ -57,7 +57,6 @@ import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.api.UserService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
 import com.wealoha.social.commons.GlobalConstants.WhereIsComeFrom;
@@ -94,7 +93,7 @@ public class AlohaFragment extends BaseFragment implements LoaderCallbacks<Resul
     static public final int nope = 1111;
     static public final int aloha = 2222;
     @Inject
-    UserService mUserService;
+    ServerApi mUserService;
     @InjectView(R.id.ms_report_iv_container)
     RelativeLayout mReportContainerl;
     @InjectView(R.id.nope_btn_container)
@@ -719,7 +718,6 @@ public class AlohaFragment extends BaseFragment implements LoaderCallbacks<Resul
     }
 
     /**
-     * @param 设定文件
      * @return void 返回类型
      * @throws
      * @Title: report

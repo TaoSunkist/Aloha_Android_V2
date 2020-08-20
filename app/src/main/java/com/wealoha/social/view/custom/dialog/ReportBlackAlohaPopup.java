@@ -35,7 +35,6 @@ import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.message.ImageMessage;
 import com.wealoha.social.beans.message.Message;
-import com.wealoha.social.api.UserService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.event.AnginSendSmsEvent;
 import com.wealoha.social.event.ControlUserEvent;
@@ -58,7 +57,7 @@ public class ReportBlackAlohaPopup implements OnClickListener {
 	@Inject
 	ServerApi mFeedService;
 	@Inject
-	UserService mUserService;
+	ServerApi mUserService;
 	@Inject
 	FontUtil mFontUtil;
 	@Inject

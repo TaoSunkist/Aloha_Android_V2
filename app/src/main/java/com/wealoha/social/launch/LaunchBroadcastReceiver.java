@@ -133,18 +133,18 @@ public class LaunchBroadcastReceiver extends BroadcastReceiver {
 	}
 
 	private void reqPostWebCallApp(String postid, String shareByUserId) {
-		feedService2.feedWebCallAlohaApp(postid, shareByUserId, new Callback<ResultData>() {
-
-			@Override
-			public void failure(RetrofitError arg0) {
-
-			}
-
-			@Override
-			public void success(ResultData arg0, Response arg1) {
-
-			}
-		});
+//		feedService2.feedWebCallAlohaApp(postid, shareByUserId, new Callback<ResultData>() {
+//
+//			@Override
+//			public void failure(RetrofitError arg0) {
+//
+//			}
+//
+//			@Override
+//			public void success(ResultData arg0, Response arg1) {
+//
+//			}
+//		});
 	}
 
 	/**

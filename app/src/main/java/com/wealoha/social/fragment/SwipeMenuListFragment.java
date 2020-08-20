@@ -44,7 +44,6 @@ import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.ProfileData;
 import com.wealoha.social.beans.UserListResult;
-import com.wealoha.social.api.UserService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.event.ControlUserEvent;
 import com.wealoha.social.utils.FontUtil;
@@ -59,7 +58,7 @@ public class SwipeMenuListFragment extends BaseFragment implements ListItemCallb
         OnClickListener, OnScrollListener, OnItemLongClickListener {
 
     @Inject
-    UserService mUserService;
+    ServerApi mUserService;
     @Inject
     ServerApi mFeedService;
     @Inject

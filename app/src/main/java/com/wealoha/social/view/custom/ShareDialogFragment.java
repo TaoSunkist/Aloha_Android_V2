@@ -40,11 +40,11 @@ import com.tencent.mm.sdk.modelmsg.WXTextObject;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.wealoha.social.R;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.ShareApp;
 import com.wealoha.social.beans.ImageUploadResult;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.PromotionGetData;
-import com.wealoha.social.api.UserService;
 import com.wealoha.social.callback.CallbackImpl;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.impl.ShareCallbackImpl;
@@ -75,7 +75,7 @@ public class ShareDialogFragment extends Fragment implements IWeiboHandler.Respo
 	@Inject
 	ContextUtil contextUtil;
 	@Inject
-	UserService mUserService;
+	ServerApi mUserService;
 	@Inject
 	Context mContext;
 	LoadingPopup popup;

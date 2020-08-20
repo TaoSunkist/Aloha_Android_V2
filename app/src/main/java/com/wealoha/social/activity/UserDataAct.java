@@ -36,13 +36,13 @@ import com.wealoha.social.ActivityManager;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.ContextConfig;
 import com.wealoha.social.R;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.AuthData;
 import com.wealoha.social.beans.Image;
 import com.wealoha.social.beans.ImageUploadResult;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.api.UserService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
 import com.wealoha.social.utils.ContextUtil;
@@ -95,7 +95,7 @@ public class UserDataAct extends BaseFragAct implements OnClickListener {
     @Inject
     Context context;
     @Inject
-    UserService userService;
+    ServerApi userService;
     private BasePickerDialog mPickerDialog;
     private TimePickerDialog mTimePicdialog;
     private static final int LOACTION_TAG = 1;
@@ -357,7 +357,6 @@ public class UserDataAct extends BaseFragAct implements OnClickListener {
      * loading 弹层
      *
      * @param isShow
-     * @param where
      * @return void
      */
     public void showDialog(boolean isShow) {

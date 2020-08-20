@@ -9,11 +9,11 @@ import android.content.Context;
 
 import com.wealoha.social.ContextConfig;
 import com.wealoha.social.R;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.common.ConstantsData;
 import com.wealoha.social.api.ConstantsService;
 import com.wealoha.social.beans.instagram.InstagramResult;
-import com.wealoha.social.api.UserService;
 import com.wealoha.social.commons.AlohaThreadPool;
 import com.wealoha.social.commons.AlohaThreadPool.ENUM_Thread_Level;
 import com.wealoha.social.commons.GlobalConstants;
@@ -34,7 +34,7 @@ public class ConfigPresenter extends AbsPresenter {
 	// 缓存的状态
 	private int mClearCacheStatus;
 	@Inject
-	UserService mUserService;
+	ServerApi mUserService;
 
 	public ConfigPresenter(Context ctx, IConfigView iConfigView) {
 		mIConfigView = iConfigView;

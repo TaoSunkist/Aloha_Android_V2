@@ -57,7 +57,6 @@ import com.wealoha.social.beans.FeedResult;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.ProfileData;
-import com.wealoha.social.api.UserService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.impl.Listeners;
 import com.wealoha.social.store.PopupStore;
@@ -77,7 +76,7 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
     @Inject
     ServerApi matchService;
     @Inject
-    UserService userService;
+    ServerApi userService;
     @Inject
     ServerApi profileService;
     @Inject

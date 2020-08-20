@@ -38,7 +38,6 @@ import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.api.UserService;
 import com.wealoha.social.beans.User2;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
@@ -67,7 +66,7 @@ public class PopupStore {
     @Inject
     FontUtil fontUtil;
     @Inject
-    UserService mUserService;
+    ServerApi mUserService;
     @Inject
     Context mContext;
     @Inject

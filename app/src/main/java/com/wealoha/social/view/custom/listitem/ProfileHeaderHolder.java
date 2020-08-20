@@ -52,7 +52,6 @@ import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.message.InboxSession;
 import com.wealoha.social.beans.message.InboxSessionResult;
 import com.wealoha.social.beans.ProfileData;
-import com.wealoha.social.api.UserService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
 import com.wealoha.social.fragment.ProfileTestFragment;
@@ -200,7 +199,7 @@ public class ProfileHeaderHolder {
     @Inject
     FontUtil fontUtil;
     @Inject
-    UserService mUserService;
+    ServerApi mUserService;
 
     public User mUser;
     private boolean mIsMe;

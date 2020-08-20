@@ -118,7 +118,6 @@ import com.wealoha.social.beans.message.ImageMessage;
 import com.wealoha.social.beans.message.Message;
 import com.wealoha.social.beans.message.MessageSerializer;
 import com.wealoha.social.beans.message.TextMessage;
-import com.wealoha.social.api.UserService;
 import com.wealoha.social.cache.ImageRender;
 import com.wealoha.social.commons.CacheManager;
 import com.wealoha.social.commons.CustomHttpDownloader;
@@ -720,12 +719,6 @@ public class AlohaModule {
     @Singleton
     ApiEndpoint provideApiEndpoint() {
         return new ApiEndpoint();
-    }
-
-    @Provides
-    @Singleton
-    UserService provideUserService(RestAdapter restAdapter) {
-        return restAdapter.create(UserService.class);
     }
 
     @Provides
