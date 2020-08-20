@@ -623,7 +623,7 @@ public class ContextUtil {
             if (result.isOk()) {
                 return;
             }
-            if (result.status == Result.STATUS_CODE_FORBIDEN) {
+            if (result.getStatus() == Result.STATUS_CODE_FORBIDEN) {
                 // 票过期了
                 XL.d(TAG, "票过期啦!!");
                 // setCurrentTicket(null);

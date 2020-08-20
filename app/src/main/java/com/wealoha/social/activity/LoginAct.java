@@ -185,12 +185,11 @@ public class LoginAct extends BaseFragAct implements OnClickListener {
 				}
 				if (result != null) {
 					if (result.isOk()) {
-						afterMobileLoginSuccess(mUserName, result.data.user, result.data.t);
-						// getProfeatureSetting();
+						afterMobileLoginSuccess(mUserName, result.getData().getUser(), result.getData().getT());
 						mUser2Service.getProfeatureSetting();
-					} else if (result.data.error == 451) {// "用戶被封禁"
+					} else if (result.getData().error == 451) {// "用戶被封禁"
 						ToastUtil.shortToast(LoginAct.this, R.string.failed);
-					} else if (result.data.error == 401) {
+					} else if (result.getData().error == 401) {
 						ToastUtil.shortToast(LoginAct.this, R.string.login_failed);
 					} else {
 						ToastUtil.shortToast(LoginAct.this, R.string.login_failed);
@@ -213,8 +212,8 @@ public class LoginAct extends BaseFragAct implements OnClickListener {
 			@Override
 			public void success(Result<MatchSettingData> result, Response response) {
 				if (result != null && result.isOk()) {
-					contextUtil.setProfeatureEnable(result.data.filterEnable);
-					ArrayList<String> regions = (ArrayList<String>) result.data.selectedRegion;
+					contextUtil.setProfeatureEnable(result.getData().filterEnable);
+					ArrayList<String> regions = (ArrayList<String>) result.getData().selectedRegion;
 					if (regions != null && regions.size() > 0) {
 						contextUtil.setFilterRegion(regions.get(regions.size() - 1));
 					}
@@ -285,7 +284,6 @@ public class LoginAct extends BaseFragAct implements OnClickListener {
 	/**
 	 * @Title: forgotToServer
 	 * @Description: 向服务器请求验证码
-	 * @param 设定文件
 	 * @return void 返回类型
 	 * @throws
 	 */
@@ -318,11 +316,11 @@ public class LoginAct extends BaseFragAct implements OnClickListener {
 						// 请求成功跳转
 						startActivity(GlobalConstants.IntentAction.INTENT_URI_VERIFY, bundle);
 						ToastUtil.shortToast(mContext, getString(R.string.verification_code_has_been_sent));
-					} else if (result.status == Result.STATUS_CODE_THRESHOLD_HIT) {
+					} else if (result.getStatus() == Result.STATUS_CODE_THRESHOLD_HIT) {
 						ToastUtil.shortToast(mContext, getString(R.string.register_frequent_request));
 						// showSingleAlohaDialog(mContext,
 						// R.string.register_frequent_request, null);
-					} else if (result.data.error == ResultData.ERROR_USER_NOT_FOUND) {
+					} else if (result.getData().error == ResultData.ERROR_USER_NOT_FOUND) {
 						ToastUtil.shortToast(mContext, getString(R.string.register_mobile_error_noregister));
 						// showSingleAlohaDialog(mContext,
 						// R.string.register_mobile_error_noregister, null);

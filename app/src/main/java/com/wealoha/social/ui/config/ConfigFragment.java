@@ -473,7 +473,7 @@ public class ConfigFragment extends BaseFragment implements IConfigView {
 		}
 		int loaderId = resultLoader.getId();
 		if (loaderId == REQUEST_CODE_CODE_LOAD) {
-			PromotionGetData r = (PromotionGetData) result.data;
+			PromotionGetData r = (PromotionGetData) result.getData();
 			if (result.isOk()) {
 				contextUtil.setProfeatureEnable(!r.alohaGetLocked);
 				Intent intent = new Intent(getActivity(), ProFeatureAct.class);
@@ -573,7 +573,7 @@ public class ConfigFragment extends BaseFragment implements IConfigView {
 	public void refreshInstagramSuccess(Result<InstagramResult> result) {
 		if (result != null) {
 			if (result.isOk() && isAdded()) {
-				Map<String, Object> instagram = (Map<String, Object>) result.data.instagram;
+				Map<String, Object> instagram = (Map<String, Object>) result.getData().instagram;
 				// bundle.
 				if (instagram == null && mInstagramTv != null) {
 					instagramBundle = null;

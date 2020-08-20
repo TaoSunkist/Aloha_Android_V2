@@ -301,8 +301,8 @@ public class UserDataAct extends BaseFragAct implements OnClickListener {
             public void success(Result<ImageUploadResult> result, Response arg1) {
                 if (result != null && result.isOk()) {
                     user.setAvatarImage(Image.Companion.fake());
-                    user.getAvatarImage().setId(result.data.imageId);
-                    user.getAvatarImage().setUrl(result.data.imageUrl);
+                    user.getAvatarImage().setId(result.getData().imageId);
+                    user.getAvatarImage().setUrl(result.getData().imageUrl);
                 } else {
                     ToastUtil.shortToast(UserDataAct.this, R.string.failed);
                 }
@@ -330,12 +330,12 @@ public class UserDataAct extends BaseFragAct implements OnClickListener {
                 if (result != null) {
                     if (result.isOk()) {
                         // 成功，进入邀请码页面
-                        contextUtil.setCurrentUser(result.data.user);
+                        contextUtil.setCurrentUser(result.getData().getUser());
                         startActivity(GlobalConstants.IntentAction.INTENT_URI_INVITATION);
                         finish();
-                    } else if (result.data.error == ResultData.ERROR_USERNAME_USED) {
+                    } else if (result.getData().error == ResultData.ERROR_USERNAME_USED) {
                         ToastUtil.longToast(UserDataAct.this, getString(R.string.username_unavailable));
-                    } else if (result.data.error == ResultData.ERROR_INVALID_SUMMARY) {
+                    } else if (result.getData().error == ResultData.ERROR_INVALID_SUMMARY) {
                         ToastUtil.longToast(UserDataAct.this, getString(R.string.intro_has_illegalword));
                     } else {
                         ToastUtil.shortToast(UserDataAct.this, R.string.is_not_work);

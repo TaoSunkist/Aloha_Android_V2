@@ -119,7 +119,6 @@ public class ContextConfig extends PreferenceUtil {
         user.setName(mPreferences.getString(NAME, ""));
         user.setBirthday(mPreferences.getString(BIRTHDAY, ""));
         user.setAge(mPreferences.getString(AGE, ""));
-        user.setT(mPreferences.getString(T, ""));
         user.setHeight(mPreferences.getString(HEIGHT, ""));
         user.setWeight(mPreferences.getString(WEIGHT, ""));
         user.setRegionCode(mPreferences.getString(REGIONCODE, ""));

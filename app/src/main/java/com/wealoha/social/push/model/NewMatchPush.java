@@ -98,7 +98,7 @@ public class NewMatchPush extends BasePush implements NotifyPush<NewMatchNotific
 					if (result.isOk()) {
 						BaseFragAct act = (BaseFragAct) contextUtil.getForegroundAct();
 						if (act != null) {
-							act.showMatchPopup(result.data.user);
+							act.showMatchPopup(result.getData().user);
 						}
 					}
 

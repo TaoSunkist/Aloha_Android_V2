@@ -142,14 +142,14 @@ public class ConfigIntroductionAct extends BaseFragAct implements OnClickListene
 				}.getType());
 				if (result.isOk()) {
 					ToastUtil.longToast(ConfigIntroductionAct.this, getString(R.string.successfully_saved));
-					contextUtil.setCurrentUser(result.data.user);
+					contextUtil.setCurrentUser(result.getData().user);
 					Intent intent = new Intent();
 					intent.putExtra("introduction", mIntroductionContent);
 					setResult(FLAG, intent);
 					finish();
-				} else if (result.data.error == 200503) {
+				} else if (result.getData().error == 200503) {
 					ToastUtil.longToast(ConfigIntroductionAct.this, getString(R.string.username_unavailable));
-				} else if (result.data.error == 200522) {
+				} else if (result.getData().error == 200522) {
 					ToastUtil.longToast(ConfigIntroductionAct.this, getString(R.string.intro_has_illegalword));
 				} else {
 					ToastUtil.longToast(ConfigIntroductionAct.this, getString(R.string.Unkown_Error));

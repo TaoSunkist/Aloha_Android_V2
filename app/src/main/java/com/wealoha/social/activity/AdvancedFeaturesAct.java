@@ -184,7 +184,7 @@ public class AdvancedFeaturesAct extends BaseFragAct implements LoaderManager.Lo
 		int loaderId = resultLoader.getId();
 
 		if (loaderId == REQUEST_CODE_CODE_LOAD) {
-			PromotionGetData r = (PromotionGetData) result.data;
+			PromotionGetData r = (PromotionGetData) result.getData();
 			if (result.isOk()) {
 				updateData(r);
 			} else {

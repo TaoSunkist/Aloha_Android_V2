@@ -307,17 +307,17 @@ public class OAuthSinaAct extends BaseFragAct {
 				if (result != null) {
 					if (result.isOk()) {
 						Bundle bundle = new Bundle();
-						result.data.user.setAccessToken(sinaTokenBean.accessToken);
-						bundle.putParcelable(User.TAG, result.data.user);
-						contextUtil.setCurrentSinaWbToken(result.data.user.getAccessToken());
-						afterSinaLoginSuccess(result.data.user, result.data.t);
-						if (result.data.user.getProfileIncomplete()) {
+						result.getData().getUser().setAccessToken(sinaTokenBean.accessToken);
+						bundle.putParcelable(User.TAG, result.getData().getUser());
+						contextUtil.setCurrentSinaWbToken(result.getData().getUser().getAccessToken());
+						afterSinaLoginSuccess(result.getData().getUser(), result.getData().getT());
+						if (result.getData().getUser().getProfileIncomplete()) {
 							startActivityAndCleanTask(GlobalConstants.IntentAction.INTENT_URI_USER_DATA, null);
 						} else {
 							startActivityAndCleanTask(GlobalConstants.IntentAction.INTENT_URI_MAIN, null);
 						}
 						finish();
-					} else if (451 == result.status) {
+					} else if (451 == result.getStatus()) {
 						// ToastUtil.shortToast(mContext, "該賬號已被封停");
 						ToastUtil.shortToast(mContext, R.string.failed);
 						finish();

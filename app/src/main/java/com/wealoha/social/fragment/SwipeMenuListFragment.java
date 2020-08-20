@@ -140,7 +140,7 @@ public class SwipeMenuListFragment extends BaseFragment implements ListItemCallb
             case CREAT_ADAPTER:
                 boolean showMatch = mListType == LISTTYPE_LIKE || mListType == LISTTYPE_POPULARITY;
                 if (mResult != null && mSwipeList != null) {
-                    mSwipeAdapter = new SwipeMenuAdapter(mResult.data, showMatch);
+                    mSwipeAdapter = new SwipeMenuAdapter(mResult.getData(), showMatch);
                     mSwipeList.setAdapter(mSwipeAdapter);
                 }
 
@@ -186,17 +186,17 @@ public class SwipeMenuListFragment extends BaseFragment implements ListItemCallb
                 if (mUsers == null) {
                     mUsers = new ArrayList<User>();
                 }
-                mUsers.addAll(result.data.list);
-                cursor = result.data.nextCursorId;
+                mUsers.addAll(result.getData().list);
+                cursor = result.getData().nextCursorId;
                 if (TextUtils.isEmpty(cursor) || "null".equals(cursor)) {
                     removeFooterView();
                 }
                 // 更新人氣列表表頭
                 if (mListType == LISTTYPE_POPULARITY && unlockCount != null) {
-                    unlockCount.setText(context.getResources().getString(R.string.showing_latest_followers, result.data.alohaGetUnlockCount));
+                    unlockCount.setText(context.getResources().getString(R.string.showing_latest_followers, result.getData().alohaGetUnlockCount));
                 }
             } else {
-                XL.i(TAG, result.data.error + "");
+                XL.i(TAG, result.getData().error + "");
                 addFooterView(false);
             }
         }
@@ -562,7 +562,7 @@ public class SwipeMenuListFragment extends BaseFragment implements ListItemCallb
                 }
                 for (User user : mUsers) {
                     if (user.getId().equals(userid)) {
-                        user.setMatch(result.data.user.getMatch());
+                        user.setMatch(result.getData().user.getMatch());
                         mSwipeAdapter.notifyDataSetChangedByList(mUsers);
                         break;
                     }

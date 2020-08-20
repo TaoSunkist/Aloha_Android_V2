@@ -63,7 +63,7 @@ public class Feed2Service extends AbsBaseService<Post, String> {
 				if (result == null || !result.isOk()) {
 					callback.fail(ApiErrorCode.fromResult(result), null);
 				} else {
-					callback.success(transResult2List(result.data, userid), result.data.nextCursorId);
+					callback.success(transResult2List(result.getData(), userid), result.getData().nextCursorId);
 				}
 			}
 		});
@@ -91,7 +91,7 @@ public class Feed2Service extends AbsBaseService<Post, String> {
 				if (result == null || !result.isOk()) {
 					callback.fail(ApiErrorCode.fromResult(result), null);
 				} else {
-					callback.success(transUserListGetData2List(result.data));
+					callback.success(transUserListGetData2List(result.getData()));
 				}
 			}
 		});

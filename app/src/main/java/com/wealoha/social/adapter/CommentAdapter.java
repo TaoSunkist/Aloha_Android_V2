@@ -68,7 +68,7 @@ public class CommentAdapter extends BaseAdapter/* implements OnSlideListener */{
 
 	public void notifyDataSetChangedByDelete(List<Comment> comment) {
 		if (comment != null) {
-			// this.mUsers.putAll(result.data.userMap);
+			// this.mUsers.putAll(result.getData().userMap);
 			this.mComments = comment;
 			this.notifyDataSetChanged();
 		}
@@ -76,9 +76,9 @@ public class CommentAdapter extends BaseAdapter/* implements OnSlideListener */{
 
 	public void notifyDataSetChanged(Result<CommentResult> result) {
 		if (result != null) {
-			this.mUsers.putAll(result.data.userMap);
+			this.mUsers.putAll(result.getData().userMap);
 			// 放到數據開頭
-			this.mComments.addAll(result.data.list);
+			this.mComments.addAll(result.getData().list);
 			notifyDataSetChanged();
 		}
 	}
@@ -93,10 +93,10 @@ public class CommentAdapter extends BaseAdapter/* implements OnSlideListener */{
 	}
 
 	public void notifyDataSetChangedOnTop(Result<CommentResult> result) {
-		if (result != null && result.data.list.size() > 0) {
-			this.mUsers.putAll(result.data.userMap);
+		if (result != null && result.getData().list.size() > 0) {
+			this.mUsers.putAll(result.getData().userMap);
 			// 放到數據開頭
-			this.mComments.addAll(0, result.data.list);
+			this.mComments.addAll(0, result.getData().list);
 			notifyDataSetChanged();
 		}
 	}
@@ -109,9 +109,9 @@ public class CommentAdapter extends BaseAdapter/* implements OnSlideListener */{
 	 * @throws
 	 */
 	public void notifyDataSetAllChanged(Result<CommentResult> result) {
-		if (result != null && result.data.list.size() > 0) {
-			this.mUsers = result.data.userMap;
-			this.mComments = result.data.list;
+		if (result != null && result.getData().list.size() > 0) {
+			this.mUsers = result.getData().userMap;
+			this.mComments = result.getData().list;
 			notifyDataSetChanged();
 		}
 	}

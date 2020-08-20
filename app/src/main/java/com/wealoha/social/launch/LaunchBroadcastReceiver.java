@@ -254,7 +254,7 @@ public class LaunchBroadcastReceiver extends BroadcastReceiver {
 			@Override
 			public void success(Result<ProfileData> result, Response arg1) {
 				if (result != null && result.isOk()) {
-					startProfileFragment(Profile2Fragment.class, result.data.user);
+					startProfileFragment(Profile2Fragment.class, result.getData().user);
 				}
 			}
 

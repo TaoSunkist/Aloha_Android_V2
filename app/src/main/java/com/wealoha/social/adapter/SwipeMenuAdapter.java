@@ -60,8 +60,8 @@ public class SwipeMenuAdapter extends BaseAdapter {
     }
 
     public void notifyDataSetChanged(Result<UserListResult> result) {
-        if (result != null && result.data.list.size() > 0) {
-            mUsers.addAll(result.data.list);
+        if (result != null && result.getData().list.size() > 0) {
+            mUsers.addAll(result.getData().list);
             super.notifyDataSetChanged();
         }
     }

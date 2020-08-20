@@ -1,7 +1,7 @@
 package com.wealoha.social.beans
 
 /**
- * API响应的result.data
+ * API响应的result.getData()
  *
  * @author javamonk
  * @see

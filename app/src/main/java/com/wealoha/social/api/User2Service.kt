@@ -19,6 +19,7 @@ import java.util.*
 import javax.inject.Inject
 
 class User2Service {
+
     @JvmField
     @Inject
     var user2Api: ServerApi? = null
@@ -39,38 +40,36 @@ class User2Service {
      * @param callback
      * @return void
      */
-    fun dislike(userid: String?, callback: NoResultCallback) {
-        user2Api!!.dislikeUser(
-            userid,
-            object : Callback<Result<ResultData?>?> {
-                override fun success(
-                    result: Result<ResultData?>?,
-                    arg1: Response
-                ) {
-                    if (result == null || !result.isOk) {
-                        callback.fail(ApiErrorCode.fromResult(result), null)
-                    } else {
-                        callback.success()
-                    }
+    fun dislike(userid: String, callback: NoResultCallback) {
+        user2Api!!.dislikeUser(userid, object : Callback<Result<ResultData>> {
+            override fun success(
+                result: Result<ResultData>,
+                arg1: Response
+            ) {
+                if (!result.isOk) {
+                    callback.fail(ApiErrorCode.fromResult(result), null)
+                } else {
+                    callback.success()
                 }
+            }
 
-                override fun failure(error: RetrofitError) {
-                    callback.fail(null, error)
-                }
-            })
+            override fun failure(error: RetrofitError) {
+                callback.fail(null, error)
+            }
+        })
     }
 
     fun aloha(
-        userid: String?,
-        refer: String?,
+        userid: String,
+        refer: String,
         callback: NoResultCallback
     ) {
         user2Api!!.aloha(
             userid,
             refer,
-            object : Callback<Result<ResultData?>?> {
+            object : Callback<Result<ResultData>> {
                 override fun success(
-                    result: Result<ResultData?>?,
+                    result: Result<ResultData>,
                     arg1: Response
                 ) {
                     if (result == null || !result.isOk) {
@@ -95,8 +94,8 @@ class User2Service {
      * @return void
      */
     fun userProfile(
-        userid: String?,
-        callback: ApiCallback<User2?>
+        userid: String,
+        callback: ApiCallback<User2>
     ) {
         user2Api!!.userProfile(userid, object : Callback<Result<Profile2Data>?> {
             override fun success(
@@ -173,7 +172,7 @@ class User2Service {
      * @date:2015年7月30日
      */
     fun verifyPassword(
-        pw: String?,
+        pw: String,
         callbackImpl: CallbackImpl
     ) {
         user2Api!!.verifyPassword(

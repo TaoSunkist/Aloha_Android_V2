@@ -199,7 +199,7 @@ public class ChangeNumberPart3 extends BaseFragment implements OnClickListener {
 					contextUtil.setAccountPhoneNumber(phonenum);
 					getActivity().setResult(Activity.RESULT_OK);
 					getActivity().finish();
-				} else if (result.data.error == 200528) {
+				} else if (result.getData().error == 200528) {
 					securityCodeError.setVisibility(View.VISIBLE);
 				} else {
 					ToastUtil.longToast(getActivity(), R.string.Unkown_Error);

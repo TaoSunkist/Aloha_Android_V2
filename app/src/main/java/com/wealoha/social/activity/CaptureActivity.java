@@ -463,8 +463,8 @@ public final class CaptureActivity extends BaseFragAct implements SurfaceHolder.
 							}
 							if (result.isOk()) {
 								Bundle bundle = new Bundle();
-								result.data.user.setMe(false);
-								bundle.putParcelable(User.TAG, result.data.user);
+								result.getData().user.setMe(false);
+								bundle.putParcelable(User.TAG, result.getData().user);
 								bundle.putString("refer_key", GlobalConstants.WhereIsComeFrom.SCANNER_TO_PROFILE);
 								startFragment(Profile2Fragment.class, bundle, true);
 								finish();

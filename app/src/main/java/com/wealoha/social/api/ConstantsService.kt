@@ -17,7 +17,7 @@ import retrofit.http.GET
  */
 interface ConstantsService {
     @GET(ServerUrlImpl.CONSTANTS)
-    operator fun get(callback: Callback<Result<ConstantsData?>?>?)
+    operator fun get(callback: Callback<Result<ConstantsData>>)
 
     /**
      * API可用的入口
@@ -25,5 +25,5 @@ interface ConstantsService {
      * @return
      */
     @GET(ServerUrlImpl.CONSTANTS_API_ENDPOINT)
-    fun apiEndpoing(): Result<ApiEndpointData?>?
+    fun apiEndpoing(): Result<ApiEndpointData>
 }

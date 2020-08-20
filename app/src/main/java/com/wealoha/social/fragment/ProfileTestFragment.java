@@ -385,24 +385,24 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
 
                 if (result != null && result.isOk()) {
                     // XL.d("mFeedService", mResult)
-                    result.data.resetFeed(currentUser);
+                    result.getData().resetFeed(currentUser);
                     if (firstPage) {
-                        mResult = result.data;
-                        profileAdapter.notifyTopDataSetChanged(result.data);
+                        mResult = result.getData();
+                        profileAdapter.notifyTopDataSetChanged(result.getData());
                         // 允許下拉刷新
                         // scrollLoadMore = true;
                         firstPage = false;
                     } else {
-                        mResult.commentCountMap.putAll(result.data.commentCountMap);
-                        mResult.getImageMap().putAll(result.data.getImageMap());
-                        mResult.likeCountMap.putAll(result.data.likeCountMap);
-                        mResult.userMap.putAll(result.data.userMap);
-                        mResult.list.addAll(result.data.list);
-                        // mResult.videoMap.putAll(result.data.videoMap);
-                        profileAdapter.notifyDataSetChanged(result.data);
+                        mResult.commentCountMap.putAll(result.getData().commentCountMap);
+                        mResult.getImageMap().putAll(result.getData().getImageMap());
+                        mResult.likeCountMap.putAll(result.getData().likeCountMap);
+                        mResult.userMap.putAll(result.getData().userMap);
+                        mResult.list.addAll(result.getData().list);
+                        // mResult.videoMap.putAll(result.getData().videoMap);
+                        profileAdapter.notifyDataSetChanged(result.getData());
                     }
                     XL.i("CURSOR_TEST", "current:" + mCursor);
-                    mCursor = result.data.nextCursorId;
+                    mCursor = result.getData().nextCursorId;
                     XL.i("CURSOR_TEST", "next:" + mCursor);
                 }
                 feedLoading = false;
@@ -497,11 +497,11 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
         }
 
         if (loader.getId() == LOADER_REFRESH_ONRESUME) {
-            if (result.data != null && result.data.user != null) {
-                if (result.data.user.getMe()) {
-                    contextUtil.setCurrentUser(result.data.user);
+            if (result.getData() != null && result.getData().user != null) {
+                if (result.getData().user.getMe()) {
+                    contextUtil.setCurrentUser(result.getData().user);
                 }
-                currentUser = result.data.user;
+                currentUser = result.getData().user;
                 // 更新profile header
                 if (profileHeader != null) {
                     profileHeader.refresh(getUser());
@@ -509,13 +509,13 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
             }
             // profileAdapter.notifyHeaderDataSetChanged(new
             // ProfileHeaderHolder().getView(profileAdapter,
-            // result.data.user, mIsMe));
+            // result.getData().user, mIsMe));
         } else if (loader.getId() == LOADER_REFRESH) {
-            if (result.data != null && result.data.user != null) {
-                if (result.data.user.getMe()) {
-                    contextUtil.setCurrentUser(result.data.user);
+            if (result.getData() != null && result.getData().user != null) {
+                if (result.getData().user.getMe()) {
+                    contextUtil.setCurrentUser(result.getData().user);
                 }
-                currentUser = result.data.user;
+                currentUser = result.getData().user;
                 // 更新profile header
                 if (profileHeader != null) {
                     profileHeader.refreshExceptIcon(getUser());

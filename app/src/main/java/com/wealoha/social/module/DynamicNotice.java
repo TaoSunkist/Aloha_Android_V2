@@ -33,11 +33,11 @@ public class DynamicNotice {
 	 */
 	public void assemblyDynamicItem(Result<NotifyResult> result) {
 
-		List<Notify> notifies = result.data.list;
-		Map<String, Feed> feedMap = result.data.postMap;
-		Map<String, User> userMap = result.data.userMap;
-		Map<String, Integer> likeCountMap = result.data.likeCountMap;
-		Map<String, Integer> commentCountMap = result.data.commentCountMap;
+		List<Notify> notifies = result.getData().list;
+		Map<String, Feed> feedMap = result.getData().postMap;
+		Map<String, User> userMap = result.getData().userMap;
+		Map<String, Integer> likeCountMap = result.getData().likeCountMap;
+		Map<String, Integer> commentCountMap = result.getData().commentCountMap;
 		// 循环拼装数据
 		for (int i = 0; i < notifies.size(); i++) {
 			Notify notify = notifies.get(i);

@@ -120,7 +120,7 @@ public class Notify2Service extends AbsBaseService<Notify2, Boolean> {
 				XL.d(TAG, "加载数据成功");
 				if (result != null && result.isOk()) {
 					// 成功，拼装数据
-					callback.success(trans(result.data), result.data.nextCursorId);
+					callback.success(trans(result.getData()), result.getData().nextCursorId);
 				} else {
 					callback.fail(ApiErrorCode.fromResult(result), null);
 				}

@@ -486,7 +486,7 @@ public class PreferSettingNotificationFragment extends BaseFragment implements L
 		int loader = resultLoader.getId();
 		if (loader == REQUEST_CODE_LOAD_SETTING) {
 			// 加载完，更新按钮状态
-			PushSettingResult r = (PushSettingResult) result.data;
+			PushSettingResult r = (PushSettingResult) result.getData();
 			initCheckBox(r);
 		}
 

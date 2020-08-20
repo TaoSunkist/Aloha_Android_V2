@@ -43,8 +43,6 @@ data class User(
     /** 匹配  */
     var match: Boolean = false,
     var postCount: Int = 0,
-    @Deprecated("")
-    var t: String? = null,
     var phoneNum: String,
     var block: Boolean = false,
     var accessToken: String,
@@ -86,7 +84,6 @@ data class User(
                 aloha = (0..1).random() == 1,
                 match = (0..1).random() == 1,
                 postCount = (0..1000).random(),
-                t = System.currentTimeMillis().toString(),
                 phoneNum = System.currentTimeMillis().toString(),
                 accessToken = System.currentTimeMillis().toString(),
                 isUpdate = true,

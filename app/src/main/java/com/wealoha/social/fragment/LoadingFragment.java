@@ -450,7 +450,7 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
                         return;
                     }
                     if (result.isOk()) {
-                        PromotionGetData r = (PromotionGetData) result.data;
+                        PromotionGetData r = (PromotionGetData) result.getData();
                         contextUtil.setProfeatureEnable(!r.alohaGetLocked);
                         Intent intent = new Intent(getActivity(), ProFeatureAct.class);
                         intent.putExtra(PromotionGetData.TAG, r);
@@ -497,7 +497,7 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
 
             @Override
             public void success(Result<MatchData> result, Response arg1) {
-                hasQuoraReset = (result.data.quotaReset > 0);
+                hasQuoraReset = (result.getData().quotaReset > 0);
                 resetQuota();
             }
 
@@ -680,12 +680,12 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
 
         if (loader.getId() == LOADER_LOAD_MATCH) {
             if (result != null) {
-                if (result.isOk() && result.data.list != null && result.data.list.size() > 0) {
+                if (result.isOk() && result.getData().list != null && result.getData().list.size() > 0) {
                     // 有下一批用户
-                    AppApplication.mUserList = result.data.list;
+                    AppApplication.mUserList = result.getData().list;
                     XL.i("HOME_KEY", "list size:" + AppApplication.mUserList.size());
                     // 设置标签的数据
-                    mainAct.setRecommendSourceMap(result.data.recommendSourceMap);
+                    mainAct.setRecommendSourceMap(result.getData().recommendSourceMap);
                     Collections.shuffle(AppApplication.mUserList);
                     exitAnim.setFillAfter(true);
                     fragexitAnim.setFillAfter(true);
@@ -694,16 +694,16 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
                     mUserPhotoRoot.startAnimation(exitAnim);
                     // circle1.stopAnimation();
                     startingAloha();
-                } else if (result.data.error == 200518) {// 当前时段没有更多匹配了，需要重置配额或者等下个时段
-                    startTimingInterface(result.data);
+                } else if (result.getData().error == 200518) {// 当前时段没有更多匹配了，需要重置配额或者等下个时段
+                    startTimingInterface(result.getData());
                     // ToastUtil.shortToast(getActivity(), "200518");
-                } else if (result.data.error == 200531) {// 没有搜寻到过滤条件范围内的人
+                } else if (result.getData().error == 200531) {// 没有搜寻到过滤条件范围内的人
                     // ToastUtil.shortToast(getActivity(), "200531");
                     showFilterResult();
-                } else if (result.data.error == 200519) {// 没有更多了
+                } else if (result.getData().error == 200519) {// 没有更多了
                     // ToastUtil.shortToast(getActivity(), "200519");
                     showFilterNoResult();
-                } else if (result.data.error == 200532) {// 服务挂了，稍候再试
+                } else if (result.getData().error == 200532) {// 服务挂了，稍候再试
                     // ToastUtil.shortToast(getActivity(), "200532");
                     showServerFucked();
                 } else {

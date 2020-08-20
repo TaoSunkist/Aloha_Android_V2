@@ -165,7 +165,7 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
 
                         @Override
                         public void success(Result<UnreadData> result, Response arg1) {
-                            changeBackKeyUI(result.data.count);
+                            changeBackKeyUI(result.getData().count);
                         }
 
                         public void failure(RetrofitError e) {
@@ -253,7 +253,7 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
 
             @Override
             public void success(Result<ProfileData> arg0, Response arg1) {
-                mDialogueP.getDialogueHolder().setToUser(arg0.data.user);
+                mDialogueP.getDialogueHolder().setToUser(arg0.getData().user);
                 bus.post(new SessionNewMessageEvent(null, null));
                 designUi();
             }
@@ -317,11 +317,11 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
                 if (mNextCursorId == null) {
                     firstPage = true;
                 }
-                mNextCursorId = result.data.nextCursorId;
+                mNextCursorId = result.getData().nextCursorId;
                 if (mNextCursorId == null) {
                     mHasMore = false;
                 }
-                List<Message> list = (List<Message>) result.data.list;
+                List<Message> list = (List<Message>) result.getData().list;
                 Collections.reverse(list);
                 // if (list != null && list.size() > 0) {
                 // mMessage = list.get(list.size() - 1);

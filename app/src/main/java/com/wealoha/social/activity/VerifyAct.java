@@ -257,16 +257,16 @@ public class VerifyAct extends BaseFragAct implements OnClickListener {
                 }.getType());
                 ToastUtil.shortToast(VerifyAct.this, getString(R.string.verification_code_has_been_sent));
                 if (result != null && result.isOk()) {
-                    // afterMobileLoginSuccess(phoneNum, result.data.user,
-                    // result.data.t);
+                    // afterMobileLoginSuccess(phoneNum, result.getData().user,
+                    // result.getData().t);
                     Bundle bundle = new Bundle();
                     bundle.putString("username", phoneNum);
                     bundle.putString("code", code);
                     startActivity(GlobalConstants.IntentAction.INTENT_URI_NEWPASSWORD, bundle);
                     finish();
-                } else if (ResultData.MOBILE_ERROR == result.data.error) {
+                } else if (ResultData.MOBILE_ERROR == result.getData().error) {
                     ToastUtil.longToast(VerifyAct.this, R.string.register_mobile_error);
-                } else if (ResultData.REGISTERED_ERROR == result.data.error) {
+                } else if (ResultData.REGISTERED_ERROR == result.getData().error) {
                     ToastUtil.longToast(VerifyAct.this, R.string.mobile_error);
                 } else {
                     ToastUtil.longToast(VerifyAct.this, R.string.verification_code_has_been_sent_but_faile);
@@ -302,11 +302,11 @@ public class VerifyAct extends BaseFragAct implements OnClickListener {
                 }
                 if (result.isOk()) {
                     ToastUtil.shortToast(VerifyAct.this, getString(R.string.verification_code_has_been_sent));
-                    afterMobileLoginSuccess(phoneNum, result.data.user, result.data.t);
+                    afterMobileLoginSuccess(phoneNum, result.getData().getUser(), result.getData().getT());
                     finish();
-                } else if (ResultData.ERROR_INVALID_MOBILE_VERIFY_CODE == result.data.error) {
+                } else if (ResultData.ERROR_INVALID_MOBILE_VERIFY_CODE == result.getData().error) {
                     ToastUtil.longToast(VerifyAct.this, R.string.verification_code_has_been_sent_but_faile);
-                } else if (ResultData.ERROR_MOBILE_NUMBER_REGISTERED == result.data.error) {
+                } else if (ResultData.ERROR_MOBILE_NUMBER_REGISTERED == result.getData().error) {
                     ToastUtil.longToast(VerifyAct.this, R.string.Invalid_phone_number_str);
                 } else {
                     ToastUtil.longToast(VerifyAct.this, R.string.Unkown_Error);
@@ -377,11 +377,11 @@ public class VerifyAct extends BaseFragAct implements OnClickListener {
                             if (result.isOk()) {
                                 ToastUtil.shortToast(VerifyAct.this, getString(R.string.verification_code_has_been_sent));
                                 startTimer();
-                            } else if (ResultData.MOBILE_ERROR == result.data.error) {
+                            } else if (ResultData.MOBILE_ERROR == result.getData().error) {
                                 ToastUtil.longToast(VerifyAct.this, R.string.register_mobile_error);
-                            } else if (ResultData.REGISTERED_ERROR == result.data.error) {
+                            } else if (ResultData.REGISTERED_ERROR == result.getData().error) {
                                 ToastUtil.longToast(VerifyAct.this, R.string.mobile_error);
-                            } else if (Result.STATUS_CODE_THRESHOLD_HIT == result.status) {
+                            } else if (Result.STATUS_CODE_THRESHOLD_HIT == result.getStatus()) {
                                 ToastUtil.longToast(VerifyAct.this, R.string.get_code_frequent_req);
                             } else {
                                 ToastUtil.longToast(VerifyAct.this, R.string.Unkown_Error);

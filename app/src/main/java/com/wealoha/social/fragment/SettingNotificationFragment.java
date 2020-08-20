@@ -136,7 +136,7 @@ public class SettingNotificationFragment extends BaseFragment implements LoaderM
         int loader = resultLoader.getId();
         if (loader == REQUEST_CODE_LOAD_SETTING) {
             // 加载完，更新按钮状态
-            PushSettingResult r = (PushSettingResult) result.data;
+            PushSettingResult r = (PushSettingResult) result.getData();
             if (!r.pushEnable) {
                 switchRing.setChecked(false);
                 switchVibration.setChecked(false);

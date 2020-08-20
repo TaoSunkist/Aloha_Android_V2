@@ -48,7 +48,7 @@ public class TopicPostService extends AbsBaseService<TopicPost> {
 			@Override
 			public void success(Result<HashTagResultData> hashTagResult, Response arg1) {
 				if (hashTagResult != null && hashTagResult.isOk()) {
-					List<HashTag> hashTags = transHashTagDTO2HashTag(hashTagResult.data.list);
+					List<HashTag> hashTags = transHashTagDTO2HashTag(hashTagResult.getData().list);
 					serviceListResultCallback.success(hashTags);
 				} else {
 					serviceListResultCallback.failer();
@@ -90,8 +90,8 @@ public class TopicPostService extends AbsBaseService<TopicPost> {
 				if (result != null && result.isOk()) {
 					// TopicPosts topicPosts = new TopicPosts();
 					callback.beforeSuccess();
-					List<Post> newPostsList = transTopicPosts2Posts(result.data.list);
-					List<Post> hotPostsList = transTopicPosts2Posts(result.data.hot);
+					List<Post> newPostsList = transTopicPosts2Posts(result.getData().list);
+					List<Post> hotPostsList = transTopicPosts2Posts(result.getData().hot);
 					if (FIRST_PAGE.equals(cursorId)) {// 首次拉取数据
 						if (hotPostsList != null && hotPostsList.size() > 0) {
 							list.add(getTopicTitleItem4Hot());
@@ -102,7 +102,7 @@ public class TopicPostService extends AbsBaseService<TopicPost> {
 							list.add(getTopicTitleItem4New());
 							list.addAll(transPostsList2GridList(newPostsList));
 						}
-						HashTag hashTag = HashTag.fromDTO(result.data.hashtag);
+						HashTag hashTag = HashTag.fromDTO(result.getData().hashtag);
 						mTopicPosts.setHashTag(hashTag);
 					} else {// 最新数据翻页
 						list.addAll(transPostsList2GridList(newPostsList));
@@ -110,10 +110,10 @@ public class TopicPostService extends AbsBaseService<TopicPost> {
 					mTopicPosts.setPosts(list);
 					callback.success(mTopicPosts);
 
-					if (TextUtils.isEmpty(result.data.nextCursorId)) {
+					if (TextUtils.isEmpty(result.getData().nextCursorId)) {
 						callback.nomore();
 					}
-					cursorId = result.data.nextCursorId;
+					cursorId = result.getData().nextCursorId;
 				} else {
 					callback.failer();
 				}

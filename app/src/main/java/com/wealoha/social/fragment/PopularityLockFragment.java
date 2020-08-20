@@ -65,7 +65,7 @@ public class PopularityLockFragment extends BaseFragment implements OnClickListe
 						return;
 					}
 					if (result.isOk()) {
-						PromotionGetData r = (PromotionGetData) result.data;
+						PromotionGetData r = (PromotionGetData) result.getData();
 						Bundle bundle = new Bundle();
 						bundle.putSerializable(PromotionGetData.TAG, r);
 						startActivity(GlobalConstants.IntentAction.INTENT_URI_ADVANCEDFEATURED, bundle);

@@ -99,9 +99,9 @@ public class BlackListFragment extends BaseFragment implements OnSlideListener, 
                 Log.i("DELETE_COMMENT", arg0.result);
                 if (result.isOk()) {
                     // result中还有nextcursorid,这里先只用comments和userMap
-                    mBTUsers = result.data.list;
+                    mBTUsers = result.getData().list;
                     // 更新
-                    if (result.data.list.size() > 0) {
+                    if (result.getData().list.size() > 0) {
                         refreshView();
                     }
 

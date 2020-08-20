@@ -403,9 +403,9 @@ public class FeedFragment extends BaseFragment implements OnClickListener,
 				return;
 			}
 			// 为了渲染视图，重新组装usertags
-			result.data.resetFeed(mCurrentUser);
-			setNextCursor(result.data.nextCursorId);
-			notifyAdapterDataChanged(isRefresh, result.data);
+			result.getData().resetFeed(mCurrentUser);
+			setNextCursor(result.getData().nextCursorId);
+			notifyAdapterDataChanged(isRefresh, result.getData());
 			syncLastPageBool = true;
 			if (isAdded())
 				removeNofeedCover();
@@ -469,8 +469,8 @@ public class FeedFragment extends BaseFragment implements OnClickListener,
 					if (result.isOk()) {
 						// cacheFlag = false;
 						// syncLastPageBool = false;
-						result.data.resetFeed(mCurrentUser);
-						mResult = result.data;
+						result.getData().resetFeed(mCurrentUser);
+						mResult = result.getData();
 						mProfileAdapter.clearData();
 						mProfileAdapter.notifyTopDataSetChanged(mResult);
 
@@ -480,9 +480,9 @@ public class FeedFragment extends BaseFragment implements OnClickListener,
 							changeViewByTags(false);
 						}
 
-					} else if (result.data.error == 404) {
+					} else if (result.getData().error == 404) {
 						ToastUtil.longToast(mBaseFragAct, R.string.deleted_or_nohave_user_by_service);
-					} else if (result.data.error == 451) {
+					} else if (result.getData().error == 451) {
 						ToastUtil.longToast(mBaseFragAct, R.string.deleted_user_by_service);
 					} else {
 						ToastUtil.longToast(mBaseFragAct, R.string.Unkown_Error);

@@ -21,5 +21,5 @@ interface CountService {
      * @param callback
      */
     @GET(ServerUrlImpl.COUNT)
-    fun count(callback: Callback<Result<CountData?>?>?)
+    fun count(callback: Callback<Result<CountData>>)
 }

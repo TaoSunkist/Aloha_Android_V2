@@ -984,10 +984,10 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
         @Override
         public void success(Result<InboxMessageResult> result, Response arg1) {
             if (result != null && result.isOk()) {
-                final Message newMessage = result.data.list.get(0);
+                final Message newMessage = result.getData().list.get(0);
                 sendingMessageSuccess(newMessage);
                 // changeUI(View.GONE, View.GONE);
-            } else if (result.data.error == ResultData.ERROR_BLOCK_BY_OTHER) {
+            } else if (result.getData().error == ResultData.ERROR_BLOCK_BY_OTHER) {
                 // 發送失敗
                 ToastUtil.shortToast(mContext, mContext.getString(R.string.failed_to_send_message_cause_blocked));
                 sendingMessageFail(mState);

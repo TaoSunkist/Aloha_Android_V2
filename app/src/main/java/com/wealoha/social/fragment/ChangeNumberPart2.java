@@ -154,11 +154,11 @@ public class ChangeNumberPart2 extends BaseFragment implements OnClickListener, 
 					bundle.putString("password", password);
 					bundle.putString("phonenum", phonenum);
 					((BaseFragAct) getActivity()).startFragmentForResult(ChangeNumberPart3.class, bundle, true, ChangeNumberPart1.CHANGE_NUM_REQUEST_CODE, 0, 0);
-				} else if (result.data.error == 200516) {
+				} else if (result.getData().error == 200516) {
 					resid = R.string.the_phone_had_registed;
-				} else if (result.data.error == 200520) {
+				} else if (result.getData().error == 200520) {
 					resid = R.string.phone_num_incorrect_format;
-				} else if (result.status == 503) {
+				} else if (result.getStatus() == 503) {
 					resid = R.string.register_too_multifarious;
 				}
 				if (resid != -1)

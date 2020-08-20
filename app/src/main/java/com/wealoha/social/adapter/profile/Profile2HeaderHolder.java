@@ -678,8 +678,8 @@ public class Profile2HeaderHolder implements OnTouchListener {
 					return;
 				}
 				if (result != null && result.isOk()) {
-					if (result.data.list != null && result.data.list.size() != 0) {
-						InboxSession inboxSession = result.data.list.get(0);
+					if (result.getData().list != null && result.getData().list.size() != 0) {
+						InboxSession inboxSession = result.getData().list.get(0);
 						Bundle inboxSessionBundle = new Bundle();
 						inboxSessionBundle.putString("sessionId", inboxSession.id);
 						((BaseFragAct) mFrag.getActivity()).startActivity(GlobalConstants.IntentAction.INTENT_URI_DIALOGUE, inboxSessionBundle);
@@ -702,8 +702,8 @@ public class Profile2HeaderHolder implements OnTouchListener {
 									@Override
 									public void success(Result<InboxSessionResult> arg0, Response arg1) {
 										if (arg0 != null && arg0.isOk()) {
-											if (arg0.data.list != null && arg0.data.list.size() != 0) {
-												InboxSession inboxSession = arg0.data.list.get(0);
+											if (arg0.getData().list != null && arg0.getData().list.size() != 0) {
+												InboxSession inboxSession = arg0.getData().list.get(0);
 												Bundle inboxSessionBundle = new Bundle();
 												inboxSessionBundle.putString("sessionId", inboxSession.id);
 												((BaseFragAct) mFrag.getActivity()).startActivity(GlobalConstants.IntentAction.INTENT_URI_DIALOGUE, inboxSessionBundle);

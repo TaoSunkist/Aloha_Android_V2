@@ -70,8 +70,8 @@ public class ConfigPresenter extends AbsPresenter {
 			@Override
 			public void success(Result<ConstantsData> result, Response arg1) {
 				if (result != null && result.isOk()) {
-					if (result.data.hasUpdateVersion) {
-						mIConfigView.updateDialog(result.data.updateDetails);
+					if (result.getData().hasUpdateVersion) {
+						mIConfigView.updateDialog(result.getData().updateDetails);
 					} else {
 						ToastUtil.longToast(mCtx, R.string.no_new_version);
 					}

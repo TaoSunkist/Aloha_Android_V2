@@ -140,7 +140,7 @@ public class FindYouAct extends BaseFragAct implements TextWatcher, OnItemClickL
 			@Override
 			public void success(Result<FindYouResult> result, Response arg1) {
 				if (result != null && result.isOk()) {
-					mDefUsersResult = result.data;
+					mDefUsersResult = result.getData();
 					initAdapterWithDefUsers();
 				}
 			}
@@ -243,8 +243,8 @@ public class FindYouAct extends BaseFragAct implements TextWatcher, OnItemClickL
 			}
 
 			// 返回的关键字和当前关键字是否一样，不一样则说明返回的结果已经过期
-			if (!TextUtils.isEmpty(result.data.keyword)) {
-				if (!result.data.keyword.equals(mKeyword)) {
+			if (!TextUtils.isEmpty(result.getData().keyword)) {
+				if (!result.getData().keyword.equals(mKeyword)) {
 					return;
 				}
 			} else {
@@ -252,14 +252,14 @@ public class FindYouAct extends BaseFragAct implements TextWatcher, OnItemClickL
 			}
 
 			// 初始化aloha list 列表
-			if (result.data.list.size() > 0) {
+			if (result.getData().list.size() > 0) {
 				headerAlohaListTitle.setVisibility(View.VISIBLE);
-				mFindYouResult = result.data;
+				mFindYouResult = result.getData();
 				mFindYouAdapter.clearData();
 				mFindYouAdapter.setData(mFindYouResult);
 				mFindYouAdapter.notifyDataSetChanged();
 
-				XL.i("FIND_YOU_TEST", "size:" + result.data.list.size());
+				XL.i("FIND_YOU_TEST", "size:" + result.getData().list.size());
 			} else {
 				// 隐藏aloha list
 				if (mFindYouAdapter != null) {
@@ -270,18 +270,18 @@ public class FindYouAct extends BaseFragAct implements TextWatcher, OnItemClickL
 			}
 
 			// 初始化搜寻结果
-			User user = result.data.user;
+			User user = result.getData().user;
 			if (user != null) {
 				currentUser = user;
-				headerUserName.setText(StringUtil.foregroundHight(user.getName(), result.data.keyword));
+				headerUserName.setText(StringUtil.foregroundHight(user.getName(), result.getData().keyword));
 				picasso.load(ImageUtil.getImageUrl(user.getAvatarImage().getId(),//
 													100, CropMode.ScaleCenterCrop))//
 				.placeholder(R.drawable.search_persion)//
 				.into(headerUserPhoto);
 			} else {
 				currentUser = null;
-				if (!TextUtils.isEmpty(result.data.keyword)) {
-					headerUserName.setText(StringUtil.foregroundHight(context.getResources().getString(R.string.not_find_the_person) + result.data.keyword, result.data.keyword));
+				if (!TextUtils.isEmpty(result.getData().keyword)) {
+					headerUserName.setText(StringUtil.foregroundHight(context.getResources().getString(R.string.not_find_the_person) + result.getData().keyword, result.getData().keyword));
 				}
 			}
 

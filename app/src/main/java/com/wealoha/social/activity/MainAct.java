@@ -510,7 +510,7 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 			@Override
 			public void success(Result<PushSettingResult> arg0, Response arg1) {
 				if (arg0 != null && arg0.isOk()) {
-					ContextConfig.getInstance().putPushSetConfig(arg0.data);
+					ContextConfig.getInstance().putPushSetConfig(arg0.getData());
 				} else {
 				}
 			}
@@ -749,10 +749,10 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 				}
 				if (result.isOk()) {
 					XL.d(TAG, "有新版本可以更新");
-					contextUtil.setHasNewestVersion(result.data.hasUpdateVersion);
-					contextUtil.setNewVersionDetails(result.data.updateDetails);
-					contextUtil.setStartImageIntervalMinutes(result.data.startupImageShowIntervalMinutes);
-					Map<String, String> startupImageMap = result.data.startupImageMap;
+					contextUtil.setHasNewestVersion(result.getData().hasUpdateVersion);
+					contextUtil.setNewVersionDetails(result.getData().updateDetails);
+					contextUtil.setStartImageIntervalMinutes(result.getData().startupImageShowIntervalMinutes);
+					Map<String, String> startupImageMap = result.getData().startupImageMap;
 					// 下面两行测试数据，可以测试开机画面
 					if (startupImageMap != null && startupImageMap.size() > 0) {
 						// 有开机画面了，根据手机尺寸取一张下载，下次显示
@@ -805,13 +805,13 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 						public void success(Result<CountData> result, Response response) {
 							// 触发tab的红点
 							if (result != null && result.isOk()) {
-								NotificationCount.setCommentCount(result.data.newNotifyCount);
-								if (result.data.newFeed) {
-									showOrHideTabFeedNotice(result.data.newFeed, result.data.newNotifyCount);
+								NotificationCount.setCommentCount(result.getData().newNotifyCount);
+								if (result.getData().newFeed) {
+									showOrHideTabFeedNotice(result.getData().newFeed, result.getData().newNotifyCount);
 								}
 								// 发通知
 								// busSentEvent(new
-								// NotifyCountEvent(result.data.newNotifyCount));
+								// NotifyCountEvent(result.getData().newNotifyCount));
 								// newPostNotify();
 							}
 						}
@@ -1109,7 +1109,7 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 			@Override
 			public void success(Result<UnreadData> result, Response arg1) {
 				if (result != null && result.isOk()) {
-					setChatSub(result.data.count);
+					setChatSub(result.getData().count);
 				}
 			}
 		});
@@ -1281,7 +1281,7 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 				mOpenFilter.setEnabled(true);
 				if (result != null && result.isOk()) {
 					Intent intent = new Intent(MainAct.this, FilterSettingAct.class);
-					intent.putExtra(MatchSettingData.TAG, result.data);
+					intent.putExtra(MatchSettingData.TAG, result.getData());
 					startActivity(intent);
 					overridePendingTransition(R.anim.sliding_in_down2up, R.anim.stop);
 				} else {

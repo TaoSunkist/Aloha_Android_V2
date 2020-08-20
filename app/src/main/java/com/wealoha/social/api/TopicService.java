@@ -52,7 +52,7 @@ public class TopicService implements BaseService<HashTagDTO> {
 
 			@Override
 			public void success(Result<TopicData> result, Response arg1) {
-				transHashTagDTO2HashTag(result.data.tag);
+				transHashTagDTO2HashTag(result.getData().tag);
 				// callback.
 			}
 

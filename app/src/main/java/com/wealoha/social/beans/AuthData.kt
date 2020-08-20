@@ -1,8 +1,13 @@
 package com.wealoha.social.beans
 
-class AuthData : ResultData() {
-    @kotlin.jvm.JvmField
-    var t: String? = null
-    @kotlin.jvm.JvmField
-    var user: User? = null
+data class AuthData(
+    var t: String,
+    var user: User
+) : ResultData() {
+    companion object {
+        fun fake(): AuthData {
+            val user = User.fake()
+            return AuthData(t = System.currentTimeMillis().toString(), user = user)
+        }
+    }
 }

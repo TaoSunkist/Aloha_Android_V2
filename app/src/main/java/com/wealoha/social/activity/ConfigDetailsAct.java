@@ -604,17 +604,17 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Res
                     return;
                 }
                 if (result.isOk()) {
-                    // Log.i("CONFIG_USER", "user:" + result.data.user);
+                    // Log.i("CONFIG_USER", "user:" + result.getData().user);
                     ToastUtil.shortToast(mContext, getString(R.string.successfully_saved));
-                    contextUtil.setCurrentUser(result.data.user);
+                    contextUtil.setCurrentUser(result.getData().getUser());
                     // Log.i("CONFIG_USER", "user current:" +
                     // contextUtil.getCurrentUser());
                     isRefreshHeadIcon = true;
                     setResult();
                     finish();
-                } else if (result.data.error == ResultData.ERROR_USERNAME_USED) {
+                } else if (result.getData().error == ResultData.ERROR_USERNAME_USED) {
                     ToastUtil.shortToast(mContext, getString(R.string.username_unavailable));
-                } else if (result.data.error == ResultData.ERROR_INVALID_SUMMARY) {
+                } else if (result.getData().error == ResultData.ERROR_INVALID_SUMMARY) {
                     ToastUtil.shortToast(mContext, getString(R.string.username_unavailable));
                 }
             }
@@ -857,7 +857,7 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Res
             public void success(Result<ImageUploadResult> result, Response arg1) {
                 mLoadingDialog.dismiss();
                 if (result != null && result.isOk()) {
-                    mImgid = result.data.imageId;
+                    mImgid = result.getData().imageId;
                     mHandler.sendMessage(sendMsgToHandler(GlobalConstants.AppConstact.DISPLAY_HAND_PIC, path));
                     setResult();
                 } else {
@@ -914,7 +914,7 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Res
         }
         switch (loader.getId()) {
             case LOADER_GET_PROFILE:
-                mUser = result.data.user;
+                mUser = result.getData().user;
                 initData();
                 initHandler();
                 break;

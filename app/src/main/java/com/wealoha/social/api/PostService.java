@@ -31,15 +31,15 @@ public class PostService extends AbsBaseService<Post> {
 			public void success(Result<FeedGetData> result, Response arg1) {
 				if (result != null && result.isOk()) {
 					list.addAll(//
-					Post.fromPostDTOList(result.data.list, //
-											result.data.userMap, //
-											result.data.imageMap,//
-											result.data.videoMap, //
-											result.data.commentCountMap,//
-											result.data.likeCountMap));
+					Post.fromPostDTOList(result.getData().list, //
+											result.getData().userMap, //
+											result.getData().imageMap,//
+											result.getData().videoMap, //
+											result.getData().commentCountMap,//
+											result.getData().likeCountMap));
 					callback.success(list);
 
-					cursorId = result.data.nextCursorId;
+					cursorId = result.getData().nextCursorId;
 					if (TextUtils.isEmpty(cursorId)) {
 						callback.nomore();
 					}

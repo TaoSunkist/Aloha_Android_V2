@@ -182,11 +182,11 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 				@Override
 				public void success(Result<FeedGetData> result, Response arg1) {
 					if (result != null && result.isOk()) {
-						if (result.data.list.get(0) != null) {
+						if (result.getData().list.get(0) != null) {
 							if(!isVisible()){
 								return;
 							}
-							mPost = Post.fromDTO(result.data.list.get(0), result.data.userMap, result.data.imageMap, result.data.videoMap, result.data.commentCountMap, result.data.likeCountMap);
+							mPost = Post.fromDTO(result.getData().list.get(0), result.getData().userMap, result.getData().imageMap, result.getData().videoMap, result.getData().commentCountMap, result.getData().likeCountMap);
 							initView(bundle);
 						}
 					}
@@ -662,14 +662,14 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 					mContentEdit.setTag(null);
 					UiUtils.hideKeyBoard(getActivity());
 					List<PostComment> postcommentlist = null;
-					postcommentlist = PostComment.fromCommentDTOList(result.data.list);
+					postcommentlist = PostComment.fromCommentDTOList(result.getData().list);
 					mFeedCommentAdapter.appendListItem(Direct.Late, postcommentlist);
 					mFeedCommentAdapter.notifyDataSetChanged();
 					mContentListView.smoothScrollToPosition(mFeedCommentAdapter.getCount());// 因为listview
 					// 有头布局，所以这个地方不用-1
-				} else if (result.data.error == IResultDataErrorCode.ERROR_INVALID_COMMENT) {
+				} else if (result.getData().error == IResultDataErrorCode.ERROR_INVALID_COMMENT) {
 					ToastUtil.shortToast(getActivity(), getString(R.string.comment_has_illegalword));
-				} else if (result.data.error == IResultDataErrorCode.ERROR_BLOCK_BY_OTHER) {
+				} else if (result.getData().error == IResultDataErrorCode.ERROR_BLOCK_BY_OTHER) {
 					ToastUtil.shortToastCenter(getActivity(), getString(R.string.otherside_black_current_user));
 				} else {
 					ToastUtil.shortToastCenter(getActivity(), getString(R.string.Unkown_Error));

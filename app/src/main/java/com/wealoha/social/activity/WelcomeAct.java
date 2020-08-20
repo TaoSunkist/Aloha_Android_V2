@@ -260,11 +260,11 @@ public class WelcomeAct extends BaseFragAct implements OnClickListener {
                     public void success(Result<AuthData> result, Response response) {
                         if (result != null) {
                             if (result.isOk()) {
-                                result.data.user.setAccessToken(mAccessToken.getToken());
-                                contextUtil.setCurrentSinaWbToken(result.data.user.getAccessToken());
-                                afterSinaLoginSuccess(result.data.user, result.data.t);
+                                result.getData().getUser().setAccessToken(mAccessToken.getToken());
+                                contextUtil.setCurrentSinaWbToken(result.getData().getUser().getAccessToken());
+                                afterSinaLoginSuccess(result.getData().getUser(), result.getData().getT());
                                 XL.d("SinaAccess", mAccessToken.getToken());
-                                if (result.data.user.getProfileIncomplete()) {
+                                if (result.getData().getUser().getProfileIncomplete()) {
                                     startActivityAndCleanTask(GlobalConstants.IntentAction.INTENT_URI_USER_DATA, null);
                                 } else {
                                     startActivityAndCleanTask(GlobalConstants.IntentAction.INTENT_URI_MAIN, null);

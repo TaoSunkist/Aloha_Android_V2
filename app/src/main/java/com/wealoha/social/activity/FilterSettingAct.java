@@ -214,7 +214,7 @@ public class FilterSettingAct extends BaseFragAct implements OnClickListener, On
 				if (result != null) {
 					if (result.isOk()) {
 						Intent intent = new Intent(FilterSettingAct.this, ProFeatureAct.class);
-						intent.putExtra(PromotionGetData.TAG, result.data);
+						intent.putExtra(PromotionGetData.TAG, result.getData());
 						startActivity(intent);
 					} else {
 						ToastUtil.shortToast(mContext, R.string.network_error);

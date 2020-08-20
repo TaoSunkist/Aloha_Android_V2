@@ -140,7 +140,7 @@ public class ChangePasswordAct extends BaseFragAct implements OnClickListener {
 					if (result.isOk()) {
 						ToastUtil.shortToast(ChangePasswordAct.this, getString(R.string.modify_success));
 						finish();
-					} else if (result.data.error == 200509) {
+					} else if (result.getData().error == 200509) {
 						// showSingleAlohaDialog(mContext,
 						// R.string.old_password_is_not_correct, null);
 						ToastUtil.shortToast(ChangePasswordAct.this, R.string.old_password_is_not_correct);

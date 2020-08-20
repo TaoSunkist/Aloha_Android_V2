@@ -413,13 +413,13 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 						mContentEdit.setTag(null);
 						UiUtils.hideKeyBoard(FeedCommentActivity.this);
 
-						List<PostComment> postcommentlist = mComment2Service.trans(result.data);
+						List<PostComment> postcommentlist = mComment2Service.trans(result.getData());
 						mFeedCommentAdapter.appendListItem(Direct.Late, postcommentlist);
 
 						mContentListView.smoothScrollToPosition(mFeedCommentAdapter.getCount() - 1);
-					} else if (result.data.error == IResultDataErrorCode.ERROR_INVALID_COMMENT) {
+					} else if (result.getData().error == IResultDataErrorCode.ERROR_INVALID_COMMENT) {
 						ToastUtil.shortToast(FeedCommentActivity.this, getString(R.string.comment_has_illegalword));
-					} else if (result.data.error == IResultDataErrorCode.ERROR_BLOCK_BY_OTHER) {
+					} else if (result.getData().error == IResultDataErrorCode.ERROR_BLOCK_BY_OTHER) {
 						ToastUtil.shortToastCenter(FeedCommentActivity.this, getString(R.string.otherside_black_current_user));
 					} else {
 						ToastUtil.shortToastCenter(FeedCommentActivity.this, getString(R.string.Unkown_Error));

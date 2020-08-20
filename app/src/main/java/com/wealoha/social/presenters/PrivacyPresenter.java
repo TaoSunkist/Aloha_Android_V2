@@ -33,7 +33,7 @@ public class PrivacyPresenter extends AbsPresenter {
 			@Override
 			public void success(Result<PrivacyData> result, Response arg1) {
 				if (result != null && result.isOk()) {
-					mIPrivacyView.setPrivacyRange(result.data.matchExcludeDistanceKm);
+					mIPrivacyView.setPrivacyRange(result.getData().matchExcludeDistanceKm);
 				} else {
 					mIPrivacyView.setPrivacyRange(ContextConfig.getInstance().getIntWithFilename(GlobalConstants.TAGS.PRIVACY_RANGE));
 				}

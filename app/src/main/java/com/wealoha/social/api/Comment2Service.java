@@ -63,11 +63,11 @@ public class Comment2Service extends AbsBaseService<PostComment, String> {
 						String cursorid;
 						// 拼装数据
 						if (direct == Direct.Early) {
-							cursorid = result.data.nextCursorId;
+							cursorid = result.getData().nextCursorId;
 						} else {
-							cursorid = result.data.lateCursorId;
+							cursorid = result.getData().lateCursorId;
 						}
-						callback.success(trans(result.data), cursorid);
+						callback.success(trans(result.getData()), cursorid);
 					} else {
 						callback.fail(ApiErrorCode.fromResult(result), null);
 					}
@@ -92,7 +92,7 @@ public class Comment2Service extends AbsBaseService<PostComment, String> {
 			public void success(Result<Comment2GetData> result, Response arg1) {
 				if (result != null && result.isOk()) {
 					// 拼装数据
-					callback.success(trans(result.data), result.data.lateCursorId, result.data.nextCursorId);
+					callback.success(trans(result.getData()), result.getData().lateCursorId, result.getData().nextCursorId);
 				} else {
 					callback.fail(ApiErrorCode.fromResult(result), null);
 				}

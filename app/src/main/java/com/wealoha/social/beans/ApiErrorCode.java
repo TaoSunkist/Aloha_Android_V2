@@ -99,10 +99,10 @@ public enum ApiErrorCode {
 			return Ok;
 		}
 
-		if (result.status != Ok.value) {
-			return valuesMap.get(result.status);
+		if (result.getStatus() != Ok.value) {
+			return valuesMap.get(result.getStatus());
 		}
 
-		return valuesMap.get(result.data.error);
+		return valuesMap.get(result.getData().error);
 	}
 }

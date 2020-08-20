@@ -341,14 +341,14 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
 			nextPageLoading = false;
 			if (mNextCursorId == null) {
 				// 缓存第一页
-				save(CacheKey.FirstPageInboxSession, result.data);
-				inboxSessions = result.data.list;
-				newMessagMap = (Map<String, Message>) result.data.newMessageMap;
+				save(CacheKey.FirstPageInboxSession, result.getData());
+				inboxSessions = result.getData().list;
+				newMessagMap = (Map<String, Message>) result.getData().newMessageMap;
 			} else {
-				inboxSessions.addAll(result.data.list);
-				newMessagMap.putAll(result.data.newMessageMap);
+				inboxSessions.addAll(result.getData().list);
+				newMessagMap.putAll(result.getData().newMessageMap);
 			}
-			mNextCursorId = result.data.nextCursorId;
+			mNextCursorId = result.getData().nextCursorId;
 			if (mNextCursorId == null) {
 				// 没有下一页了
 				hasNextPage = false;
@@ -536,8 +536,8 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
 
 					@Override
 					public void success(Result<InboxSessionResult> result, Response arg1) {
-						if (result != null && result.isOk() && result.data.list != null && result.data.list.size() > 0) {
-							InboxSession session = result.data.list.get(0);
+						if (result != null && result.isOk() && result.getData().list != null && result.getData().list.size() > 0) {
+							InboxSession session = result.getData().list.get(0);
 							if (inboxSessions == null) {
 								inboxSessions = new ArrayList<InboxSession>();
 								newMessagMap = new HashMap<>();
@@ -551,7 +551,7 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
 								}
 							}
 							inboxSessions.add(0, session);
-							newMessagMap.putAll(result.data.newMessageMap);
+							newMessagMap.putAll(result.getData().newMessageMap);
 
 							mChatListAdapter.notifyDataChage(inboxSessions, newMessagMap);
 

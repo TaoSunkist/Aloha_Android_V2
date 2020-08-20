@@ -103,7 +103,6 @@ public class NewPasswordAct extends BaseFragAct implements OnClickListener {
 	/**
 	 * @Title: saveLogin
 	 * @Description: 先向服务器发送新密码
-	 * @param 设定文件
 	 * @return void 返回类型
 	 * @throws
 	 */
@@ -154,8 +153,8 @@ public class NewPasswordAct extends BaseFragAct implements OnClickListener {
 					// ToastUtil.longToast(NewPasswordAct.this,
 					// R.string.signin);
 					login(newPassword);
-					// afterMobileLoginSuccess(mUserName, result.data.user,
-					// result.data.t);
+					// afterMobileLoginSuccess(mUserName, result.getData().user,
+					// result.getData().t);
 				} else {
 				}
 				// ToastUtil.longToast(mContext, arg0.result);
@@ -167,7 +166,6 @@ public class NewPasswordAct extends BaseFragAct implements OnClickListener {
 	/**
 	 * @Title: login
 	 * @Description: 登录
-	 * @param 设定文件
 	 * @return void 返回类型
 	 * @throws
 	 */
@@ -188,10 +186,10 @@ public class NewPasswordAct extends BaseFragAct implements OnClickListener {
 					if (result.isOk()) {
 						// TODO 需要清楚本地的其他用户数据
 						ToastUtil.shortToast(NewPasswordAct.this, getString(R.string.login_success));
-						afterMobileLoginSuccess(mUserName, result.data.user, result.data.t);
-					} else if (result.data.error == 451) {
+						afterMobileLoginSuccess(mUserName, result.getData().getUser(), result.getData().getT());
+					} else if (result.getData().error == 451) {
 						ToastUtil.shortToast(NewPasswordAct.this, getString(R.string.login_proscribe));
-					} else if (result.data.error == 401) {
+					} else if (result.getData().error == 401) {
 						ToastUtil.shortToast(NewPasswordAct.this, getString(R.string.login_failed));
 					} else {
 						ToastUtil.shortToast(NewPasswordAct.this, R.string.Unkown_Error);

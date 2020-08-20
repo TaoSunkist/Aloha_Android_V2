@@ -39,10 +39,10 @@ public class CustomGsonConverter extends GsonConverter {
 		if (result instanceof Result) {
 			@SuppressWarnings("unchecked")
 			Result<ResultData> r = (Result<ResultData>) result;
-			XL.d(TAG, "Result: " + r.status);
+			XL.d(TAG, "Result: " + r.getStatus());
 
 			if (!r.isOk()) {
-				if (r.status == Result.STATUS_CODE_FORBIDEN) {
+				if (r.getStatus() == Result.STATUS_CODE_FORBIDEN) {
 					// 票被踢了
 					XL.w(TAG, "票无效，发送事件..");
 					bus.post(new TicketInvalidEvent());
@@ -50,8 +50,8 @@ public class CustomGsonConverter extends GsonConverter {
 			}
 
 			// 将imageMap存到cache中
-			if (r.data != null && r.data instanceof HasImageMap) {
-				ImageCache.setToCache(((HasImageMap) r.data).getImageMap());
+			if (r.getData() != null && r.getData() instanceof HasImageMap) {
+				ImageCache.setToCache(((HasImageMap) r.getData()).getImageMap());
 			}
 		}
 		return result;

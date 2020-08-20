@@ -82,10 +82,10 @@ public class ChatUtil {
 				if (result == null) {
 					return;
 				}
-				if (result.isOk() && result.data.list != null && result.data.list.size() != 0) {
+				if (result.isOk() && result.getData().list != null && result.getData().list.size() != 0) {
 					InboxSession inboxSession;
 					Bundle inboxSessionBundle = new Bundle();
-					for (InboxSession inboxS : result.data.list) {
+					for (InboxSession inboxS : result.getData().list) {
 						if (inboxS != null) {
 							inboxSession = inboxS;
 							inboxSessionBundle.putString("sessionId", inboxSession.id);
@@ -119,10 +119,10 @@ public class ChatUtil {
 			public void success(Result<InboxSessionResult> result, Response arg1) {
 				if (result == null || !result.isOk()) {
 					return;
-				} else if (result.data.list != null) {
+				} else if (result.getData().list != null) {
 					InboxSession inboxSession;
 					Bundle inboxSessionBundle = new Bundle();
-					for (InboxSession inboxS : result.data.list) {
+					for (InboxSession inboxS : result.getData().list) {
 						if (inboxS != null) {
 							inboxSession = inboxS;
 							inboxSessionBundle.putString("sessionId", inboxSession.id);

@@ -10,16 +10,14 @@ import java.io.Serializable
  * @copyright wealoha.com
  * @Date:2014-10-27
  */
-class Result<T : ResultData?> : Serializable {
+class Result<T : ResultData>(
     /**
      * @see me.cu.app.config.Constants.HttpStatus
      */
-    @kotlin.jvm.JvmField
-    var status = 0
+    var status: Int = 0,
 
-    @kotlin.jvm.JvmField
     var data: T? = null// 外层没有错误(200)
-    // 内存没有错误(0)
+) {
 
     /**
      * 响应是否ok
@@ -29,9 +27,13 @@ class Result<T : ResultData?> : Serializable {
     val isOk: Boolean
         get() =// 外层没有错误(200)
             // 内存没有错误(0)
-            status == STATUS_CODE_OK && (data == null || data?.error == ResultData.Companion.ERROR_NO_ERROR)
+            status == STATUS_CODE_OK && (data == null || data?.error == ResultData.ERROR_NO_ERROR)
 
     companion object {
+        fun <T : ResultData> success(data: T): Result<T> {
+            return Result(data = data, status = 200)
+        }
+
         private const val serialVersionUID = 6540499880692897496L
 
         /* 成功 */

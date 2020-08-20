@@ -97,7 +97,7 @@ public class ApiEndpointSelector {
 									return;
 								}
 
-								ApiEndpointData data = result.data;
+								ApiEndpointData data = result.getData();
 								if (data.ip != null && data.ip.size() > 0) {
 									for (String ip : data.ip) {
 										XL.i(TAG, "测试'" + host + "'返回的ip'" + ip + "'..");
@@ -140,7 +140,7 @@ public class ApiEndpointSelector {
 					Result<ApiEndpointData> result = constantsService.apiEndpoing();
 					if (result != null) {
 						if (result.isOk()) {
-							ApiEndpointData data = result.data;
+							ApiEndpointData data = result.getData();
 							testImageEndpoint(data.imageTestUrlMap);
 						}
 					}

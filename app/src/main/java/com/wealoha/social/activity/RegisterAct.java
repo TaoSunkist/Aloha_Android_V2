@@ -155,11 +155,11 @@ public class RegisterAct extends BaseFragAct implements OnClickListener {
 										bundle.putString(GlobalConstants.AppConstact.PASSWORD, pw);
 										startActivity(GlobalConstants.IntentAction.INTENT_URI_VERIFY, bundle);
 										ToastUtil.longToast(RegisterAct.this, getString(R.string.verification_code_has_been_sent));
-									} else if (ResultData.MOBILE_ERROR == result.data.error) {
+									} else if (ResultData.MOBILE_ERROR == result.getData().error) {
 										ToastUtil.shortToast(RegisterAct.this, R.string.mobile_error);
-									} else if (ResultData.REGISTERED_ERROR == result.data.error) {
+									} else if (ResultData.REGISTERED_ERROR == result.getData().error) {
 										ToastUtil.shortToast(RegisterAct.this, R.string.register_mobile_error);
-									} else if ("503".equals(String.valueOf(result.status))) {
+									} else if ("503".equals(String.valueOf(result.getStatus()))) {
 										ToastUtil.shortToast(RegisterAct.this, R.string.get_code_frequent_req);
 									} else {
 										ToastUtil.shortToast(RegisterAct.this, R.string.Unkown_Error);
