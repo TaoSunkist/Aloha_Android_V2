@@ -4,7 +4,9 @@ import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
+import com.wealoha.social.beans.HashTagResultData;
 import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.TopicPostResultData;
 
 public interface PostAPI {
 

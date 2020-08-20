@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.wealoha.social.api.profeature.bean.Profeature;
+import com.wealoha.social.beans.Profeature;
 
 public class ProfeatureAdapter extends BaseAdapter {
 

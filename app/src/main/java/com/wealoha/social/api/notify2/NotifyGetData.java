@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.wealoha.social.api.common.dto.ImageDTO;
 import com.wealoha.social.api.notify2.dto.AbsNotify2DTO;
-import com.wealoha.social.api.post.dto.PostDTO;
+import com.wealoha.social.beans.PostDTO;
 import com.wealoha.social.beans.UserDTO;
 import com.wealoha.social.beans.ResultData;
 

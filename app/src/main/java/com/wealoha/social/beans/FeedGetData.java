@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.wealoha.social.api.common.dto.ImageDTO;
 import com.wealoha.social.api.common.dto.VideoDTO;
-import com.wealoha.social.api.post.dto.PostDTO;
 
 public class FeedGetData extends ResultData {
 

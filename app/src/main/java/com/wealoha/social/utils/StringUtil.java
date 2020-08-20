@@ -43,7 +43,7 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 import com.wealoha.social.R;
-import com.wealoha.social.api.post.bean.Post;
+import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.push.notification.InboxMessageNewNotification;
 

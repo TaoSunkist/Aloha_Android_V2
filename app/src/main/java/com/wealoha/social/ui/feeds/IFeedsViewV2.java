@@ -2,7 +2,7 @@ package com.wealoha.social.ui.feeds;
 
 import java.util.List;
 
-import com.wealoha.social.api.post.bean.Post;
+import com.wealoha.social.beans.Post;
 import com.wealoha.social.ui.base.ScrollToLoadView;
 
 public interface IFeedsViewV2 extends ScrollToLoadView {

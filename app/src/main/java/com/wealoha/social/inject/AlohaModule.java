@@ -100,7 +100,7 @@ import com.wealoha.social.api.TagedPostService;
 import com.wealoha.social.api.locationservice.LocationServiceAPI;
 import com.wealoha.social.api.notify2.Json2ObjectByTypeSerializer;
 import com.wealoha.social.api.notify2.Notify2API;
-import com.wealoha.social.api.notify2.bean.Notify2Type;
+import com.wealoha.social.beans.Notify2Type;
 import com.wealoha.social.api.notify2.dto.AbsNotify2DTO;
 import com.wealoha.social.api.notify2.dto.NewAlohaNotify2DTO;
 import com.wealoha.social.api.notify2.dto.PostCommentNotify2DTO;

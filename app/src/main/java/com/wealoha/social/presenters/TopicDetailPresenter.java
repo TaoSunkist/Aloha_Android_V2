@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import com.wealoha.social.api.common.service.BaseService.ServiceObjResultCallback;
 import com.wealoha.social.api.post.TopicPostService;
-import com.wealoha.social.api.post.bean.TopicPosts;
+import com.wealoha.social.beans.TopicPosts;
 import com.wealoha.social.api.topic.bean.HashTag;
 import com.wealoha.social.ui.topic.ITopicDetailView;
 

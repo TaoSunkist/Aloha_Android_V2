@@ -2,7 +2,7 @@ package com.wealoha.social.ui.topic;
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.wealoha.social.api.post.bean.TopicPosts;
+import com.wealoha.social.beans.TopicPosts;
 import com.wealoha.social.view.custom.dialog.ListItemDialog.ListItemCallback;
 
 /**

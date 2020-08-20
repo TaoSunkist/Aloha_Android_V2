@@ -1,4 +1,4 @@
-package com.wealoha.social.api.profeature.bean;
+package com.wealoha.social.beans;
 
 import android.content.Context;
 

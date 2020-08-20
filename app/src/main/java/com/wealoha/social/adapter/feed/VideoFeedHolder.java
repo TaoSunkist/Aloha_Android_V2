@@ -32,7 +32,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.wealoha.social.R;
-import com.wealoha.social.api.post.bean.Post;
+import com.wealoha.social.beans.Post;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
 import com.wealoha.social.inject.Injector;
 import com.wealoha.social.utils.OnClickListenerUtil;

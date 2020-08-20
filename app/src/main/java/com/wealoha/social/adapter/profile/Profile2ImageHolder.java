@@ -22,7 +22,7 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.adapter.feed.AbsViewHolder;
 import com.wealoha.social.beans.FeedType;
-import com.wealoha.social.api.post.bean.Post;
+import com.wealoha.social.beans.Post;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.fragment.FeedCommentFragment;
 import com.wealoha.social.fragment.Profile2Fragment;

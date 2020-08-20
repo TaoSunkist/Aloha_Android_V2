@@ -1,11 +1,8 @@
 package com.wealoha.social.ui.topic;
 
-import java.util.regex.Matcher;
-
 import javax.inject.Inject;
 
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import android.text.Spannable;
@@ -14,15 +11,12 @@ import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
-import android.text.style.URLSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -38,12 +32,11 @@ import com.wealoha.social.R;
 import com.wealoha.social.activity.MainAct;
 import com.wealoha.social.activity.PicSendActivity;
 import com.wealoha.social.activity.WebActivity;
-import com.wealoha.social.api.post.bean.TopicPosts;
+import com.wealoha.social.beans.TopicPosts;
 import com.wealoha.social.api.topic.bean.HashTag;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.presenters.TopicDetailPresenter;
-import com.wealoha.social.utils.FontUtil;
 import com.wealoha.social.utils.UiUtils;
 import com.wealoha.social.view.custom.dialog.ListItemDialog;
 import com.wealoha.social.view.custom.dialog.ListItemDialog.ListItemType;

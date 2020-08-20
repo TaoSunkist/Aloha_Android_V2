@@ -8,7 +8,7 @@ import retrofit.client.Response;
 
 import com.wealoha.social.api.common.ApiErrorCode;
 import com.wealoha.social.api.common.Direct;
-import com.wealoha.social.api.post.bean.Post;
+import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.FeedGetData;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.utils.XL;

@@ -1,4 +1,4 @@
-package com.wealoha.social.api.post.dto;
+package com.wealoha.social.beans;
 
 import java.util.List;
 

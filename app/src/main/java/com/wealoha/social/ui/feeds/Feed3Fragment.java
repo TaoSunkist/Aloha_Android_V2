@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import butterknife.InjectView;
 
 import com.wealoha.social.R;
-import com.wealoha.social.api.post.bean.Post;
+import com.wealoha.social.beans.Post;
 import com.wealoha.social.fragment.BaseFragment;
 import com.wealoha.social.presenters.FeedsPresenter;
 import com.wealoha.social.utils.XL;

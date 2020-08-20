@@ -28,7 +28,7 @@ import com.wealoha.social.api.common.ApiErrorCode;
 import com.wealoha.social.api.common.BaseListApiService.ApiListCallback;
 import com.wealoha.social.api.common.Direct;
 import com.wealoha.social.api.SingletonFeedService;
-import com.wealoha.social.api.post.bean.Post;
+import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;

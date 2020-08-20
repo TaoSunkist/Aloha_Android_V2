@@ -10,7 +10,7 @@ import android.text.TextUtils;
 import com.wealoha.social.api.common.service.AbsBaseService;
 import com.wealoha.social.api.Feed2API;
 import com.wealoha.social.beans.FeedGetData;
-import com.wealoha.social.api.post.bean.Post;
+import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.Result;
 
 public class PostService extends AbsBaseService<Post> {

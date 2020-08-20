@@ -14,7 +14,7 @@ import butterknife.InjectView;
 import com.squareup.picasso.Picasso;
 import com.wealoha.social.R;
 import com.wealoha.social.beans.FeedType;
-import com.wealoha.social.api.post.bean.Post;
+import com.wealoha.social.beans.Post;
 import com.wealoha.social.ui.feeds.IFeedsViewV2;
 import com.wealoha.social.utils.UiUtils;
 import com.wealoha.social.view.custom.CircleImageView;

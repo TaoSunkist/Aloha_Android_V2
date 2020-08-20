@@ -2,7 +2,7 @@ package com.wealoha.social.adapter.feed;
 
 import android.view.View;
 
-import com.wealoha.social.api.post.bean.Post;
+import com.wealoha.social.beans.Post;
 
 public abstract class BaseFeedHolder extends AbsViewHolder {
 

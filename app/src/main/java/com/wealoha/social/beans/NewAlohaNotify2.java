@@ -1,4 +1,4 @@
-package com.wealoha.social.api.notify2.bean;
+package com.wealoha.social.beans;
 
 import java.io.Serializable;
 import java.util.List;

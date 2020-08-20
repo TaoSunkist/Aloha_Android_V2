@@ -48,7 +48,7 @@ import com.wealoha.social.api.common.ApiErrorCode;
 import com.wealoha.social.api.common.BaseListApiService.NoResultCallback;
 import com.wealoha.social.beans.UserTag;
 import com.wealoha.social.api.Feed2Service;
-import com.wealoha.social.api.post.bean.Post;
+import com.wealoha.social.beans.Post;
 import com.wealoha.social.api.user.bean.User;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;

@@ -1,4 +1,4 @@
-package com.wealoha.social.api.post.bean;
+package com.wealoha.social.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,12 +10,8 @@ import com.wealoha.social.api.common.bean.Image;
 import com.wealoha.social.api.common.bean.Video;
 import com.wealoha.social.api.common.dto.ImageDTO;
 import com.wealoha.social.api.common.dto.VideoDTO;
-import com.wealoha.social.beans.FeedType;
-import com.wealoha.social.beans.UserTag;
-import com.wealoha.social.api.post.dto.PostDTO;
 import com.wealoha.social.api.topic.bean.HashTag;
 import com.wealoha.social.api.user.bean.User;
-import com.wealoha.social.beans.UserDTO;
 import com.wealoha.social.beans.feed.UserTags;
 
 /**

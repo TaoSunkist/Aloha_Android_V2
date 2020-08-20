@@ -17,7 +17,7 @@ import butterknife.OnClick;
 
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
-import com.wealoha.social.api.profeature.bean.Profeature;
+import com.wealoha.social.beans.Profeature;
 import com.wealoha.social.beans.PromotionGetData;
 import com.wealoha.social.utils.FontUtil;
 import com.wealoha.social.view.custom.ShareDialogFragment;

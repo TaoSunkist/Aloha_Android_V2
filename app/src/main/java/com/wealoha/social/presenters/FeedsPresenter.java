@@ -6,21 +6,17 @@ import javax.inject.Inject;
 
 import android.content.Context;
 
-import com.wealoha.social.AppApplication;
-import com.wealoha.social.ContextConfig;
 import com.wealoha.social.api.common.service.BaseService.ServiceListResultCallback;
 import com.wealoha.social.api.common.service.BaseService.ServiceResultCallback;
 import com.wealoha.social.api.post.PostService;
 import com.wealoha.social.api.post.TopicPostService;
-import com.wealoha.social.api.post.bean.Post;
+import com.wealoha.social.beans.Post;
 import com.wealoha.social.api.topic.bean.HashTag;
 import com.wealoha.social.inject.Injector;
 import com.wealoha.social.model.feeds.AdvertisementModel;
 import com.wealoha.social.model.feeds.IAdvertisementModel;
 import com.wealoha.social.ui.feeds.IFeedsView;
 import com.wealoha.social.ui.feeds.IFeedsViewV2;
-import com.wealoha.social.utils.AMapUtil;
-import com.wealoha.social.utils.AMapUtil.LocationCallback;
 
 /**
  * @author:sunkist

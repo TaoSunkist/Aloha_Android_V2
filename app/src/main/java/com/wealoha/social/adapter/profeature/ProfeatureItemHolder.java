@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wealoha.social.R;
-import com.wealoha.social.api.profeature.bean.Profeature;
+import com.wealoha.social.beans.Profeature;
 
 public class ProfeatureItemHolder {
 

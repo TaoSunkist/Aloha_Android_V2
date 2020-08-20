@@ -1,14 +1,11 @@
-package com.wealoha.social.api.post;
+package com.wealoha.social.beans;
 
 import java.util.List;
 import java.util.Map;
 
 import com.wealoha.social.api.common.dto.ImageDTO;
 import com.wealoha.social.api.common.dto.VideoDTO;
-import com.wealoha.social.api.post.dto.TopicPostDTO;
 import com.wealoha.social.api.topic.dto.HashTagDTO;
-import com.wealoha.social.beans.UserDTO;
-import com.wealoha.social.beans.ResultData;
 
 /**
  * 话题功能部分请求新版的post 接口，新版post接口返回的数据和旧版中由postdto 转换后的post结构一致

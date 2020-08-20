@@ -68,7 +68,7 @@ import com.wealoha.social.api.Feed2API;
 import com.wealoha.social.beans.FeedGetData;
 import com.wealoha.social.beans.FeedType;
 import com.wealoha.social.api.Feed2Service;
-import com.wealoha.social.api.post.bean.Post;
+import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.IResultDataErrorCode;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;

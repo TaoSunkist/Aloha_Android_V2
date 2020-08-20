@@ -1,4 +1,4 @@
-package com.wealoha.social.api.post.bean;
+package com.wealoha.social.beans;
 
 import java.util.ArrayList;
 import java.util.List;

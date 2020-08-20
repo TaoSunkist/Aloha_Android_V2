@@ -40,7 +40,7 @@ import com.wealoha.social.api.comment.bean.PostComment;
 import com.wealoha.social.api.comment.service.Comment2Service;
 import com.wealoha.social.api.common.ApiErrorCode;
 import com.wealoha.social.api.common.Direct;
-import com.wealoha.social.api.post.bean.Post;
+import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.IResultDataErrorCode;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;

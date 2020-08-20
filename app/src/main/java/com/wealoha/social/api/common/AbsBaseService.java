@@ -19,8 +19,8 @@ import com.wealoha.social.api.common.dto.VideoDTO;
 import com.wealoha.social.beans.FeedType;
 import com.wealoha.social.beans.UserTag;
 import com.wealoha.social.beans.UserTagsDTO;
-import com.wealoha.social.api.post.bean.Post;
-import com.wealoha.social.api.post.dto.PostDTO;
+import com.wealoha.social.beans.Post;
+import com.wealoha.social.beans.PostDTO;
 import com.wealoha.social.api.user.bean.User;
 import com.wealoha.social.beans.UserDTO;
 
