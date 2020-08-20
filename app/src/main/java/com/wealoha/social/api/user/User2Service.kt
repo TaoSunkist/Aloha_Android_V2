@@ -5,7 +5,7 @@ import com.wealoha.social.api.common.ApiErrorCode
 import com.wealoha.social.api.common.BaseListApiService.ApiCallback
 import com.wealoha.social.api.common.BaseListApiService.NoResultCallback
 import com.wealoha.social.api.common.bean.Image
-import com.wealoha.social.api.user.bean.User
+import com.wealoha.social.api.user.bean.User2
 import com.wealoha.social.beans.UserDTO
 import com.wealoha.social.beans.*
 import com.wealoha.social.callback.CallbackImpl
@@ -96,7 +96,7 @@ class User2Service {
      */
     fun userProfile(
         userid: String?,
-        callback: ApiCallback<User?>
+        callback: ApiCallback<User2?>
     ) {
         user2Api!!.userProfile(userid, object : Callback<Result<Profile2Data>?> {
             override fun success(
@@ -117,13 +117,13 @@ class User2Service {
         })
     }
 
-    private fun transPro2DataToUser(proData: Profile2Data?): User? {
+    private fun transPro2DataToUser(proData: Profile2Data?): User2? {
         val userDto = proData?.user
         // userDto.aloha = proData.liked;
         // userDto.match = proData.friend;
         val img =
             Image.fromDTO(proData?.imageMap!![userDto!!.avatarImageId])
-        return User.Companion.fromDTO(userDto, img)
+        return User2.Companion.fromDTO(userDto, img)
     }
 
     /***

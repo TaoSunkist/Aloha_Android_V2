@@ -1,6 +1,6 @@
 package com.wealoha.social.beans;
 
-import com.wealoha.social.api.user.bean.User;
+import com.wealoha.social.api.user.bean.User2;
 
 /**
  * 
@@ -12,16 +12,16 @@ public class PostTagNotify2 extends AbsNotify2 {
 
 	private static final long serialVersionUID = -346708852583028562L;
 	private final Post post;
-	private final User fromUser;
+	private final User2 fromUser2;
 
-	public PostTagNotify2(Notify2Type type, boolean unread, String notifyid, long updateTimeMillis, User fromUser, Post post) {
+	public PostTagNotify2(Notify2Type type, boolean unread, String notifyid, long updateTimeMillis, User2 fromUser2, Post post) {
 		super(type, unread, notifyid, updateTimeMillis);
-		this.fromUser = fromUser;
+		this.fromUser2 = fromUser2;
 		this.post = post;
 	}
 
-	public User getFromUser() {
-		return fromUser;
+	public User2 getFromUser2() {
+		return fromUser2;
 	}
 
 	public Post getPost() {

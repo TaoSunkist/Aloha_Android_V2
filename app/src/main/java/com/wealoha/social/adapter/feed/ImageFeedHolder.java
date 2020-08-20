@@ -220,7 +220,7 @@ public class ImageFeedHolder extends BaseFeedHolder implements OnClickListener {
 		List<UserTag> userTagList = post.getUserTags();
 		if (userTagList != null && userTagList.size() >= 0) {
 			for (int i = 0; i < userTagList.size(); i++) {
-				if (userTagList.get(i).getUser().isMe()) {
+				if (userTagList.get(i).getUser2().isMe()) {
 					createAtOnePopup(userTagList.get(i));
 					break;
 				}
@@ -249,8 +249,8 @@ public class ImageFeedHolder extends BaseFeedHolder implements OnClickListener {
 	 *            设定文件
 	 */
 	private void createAtOnePopup(UserTag userTag) {
-		XL.i("Profile2HeaderHolder", "null---" + userTag.getUser().getAvatarImage());
-		XL.i("Profile2HeaderHolder", "post null---" + mPost.getUserTags().get(0).getUser().getAvatarImage());
+		XL.i("Profile2HeaderHolder", "null---" + userTag.getUser2().getAvatarImage());
+		XL.i("Profile2HeaderHolder", "post null---" + mPost.getUserTags().get(0).getUser2().getAvatarImage());
 		AtOnePopup2 atOne = new AtOnePopup2(mFrag.getActivity(), rootView, userTag);
 		atOnesList.add(atOne);
 		atOne.initAtPopup(false, null);

@@ -17,7 +17,7 @@ import com.wealoha.social.api.comment.bean.PostComment;
 import com.wealoha.social.api.comment.dto.CommentDTO;
 import com.wealoha.social.api.common.AbsBaseService;
 import com.wealoha.social.api.common.Direct;
-import com.wealoha.social.api.user.bean.User;
+import com.wealoha.social.api.user.bean.User2;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.inject.Injector;
 
@@ -108,9 +108,9 @@ public class Comment2Service extends AbsBaseService<PostComment, String> {
 		}
 		List<PostComment> result = new ArrayList<PostComment>(data.list.size());
 		for (CommentDTO commentDTO : data.list) {
-			User user = getUser(commentDTO.userId, data.userMap, data.imageMap);
-			User replyUser = getUser(commentDTO.replyUserId, data.userMap, data.imageMap);
-			result.add(PostComment.fromCommentDTO(commentDTO, replyUser, user));
+			User2 user2 = getUser(commentDTO.userId, data.userMap, data.imageMap);
+			User2 replyUser2 = getUser(commentDTO.replyUserId, data.userMap, data.imageMap);
+			result.add(PostComment.fromCommentDTO(commentDTO, replyUser2, user2));
 		}
 		return result;
 	}

@@ -11,7 +11,7 @@ import com.wealoha.social.api.common.bean.Video;
 import com.wealoha.social.api.common.dto.ImageDTO;
 import com.wealoha.social.api.common.dto.VideoDTO;
 import com.wealoha.social.api.topic.bean.HashTag;
-import com.wealoha.social.api.user.bean.User;
+import com.wealoha.social.api.user.bean.User2;
 import com.wealoha.social.beans.feed.UserTags;
 
 /**
@@ -38,7 +38,7 @@ public class Post implements Serializable {
 	private final Double latitude;
 	private final Double longitude;
 	private final Boolean venueAbroad;
-	private final User user;
+	private final User2 user2;
 	private final List<UserTag> userTags;
 	private final Image image;
 	private final Video video;
@@ -50,7 +50,7 @@ public class Post implements Serializable {
 	private HashTag hashtag;
 	private boolean hasMoreComment;
 
-	public Post(String postId, FeedType type, String description, long createTimeMillis, boolean mine, boolean liked, boolean tagMe, String venue, String venueId, Double latitude, Double longitude, Boolean venueAbroad, User user, List<UserTag> userTags, Image image, Video video, int commentCount, int praiseCount, List<PostComment> recentComment, HashTag hashtag, boolean hasMoreComment) {
+	public Post(String postId, FeedType type, String description, long createTimeMillis, boolean mine, boolean liked, boolean tagMe, String venue, String venueId, Double latitude, Double longitude, Boolean venueAbroad, User2 user2, List<UserTag> userTags, Image image, Video video, int commentCount, int praiseCount, List<PostComment> recentComment, HashTag hashtag, boolean hasMoreComment) {
 		super();
 		this.postId = postId;
 		this.type = type;
@@ -64,7 +64,7 @@ public class Post implements Serializable {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.venueAbroad = venueAbroad;
-		this.user = user;
+		this.user2 = user2;
 		this.userTags = userTags;
 		this.image = image;
 		this.video = video;
@@ -75,7 +75,7 @@ public class Post implements Serializable {
 		this.hasMoreComment = hasMoreComment;
 	}
 
-	public static Post fromDTO(PostDTO postdto, Image image, Video video, User user, List<UserTag> userTags, int commentCount, int praiseCount, boolean tagMe, List<PostComment> recentComment, HashTag hashtag) {
+	public static Post fromDTO(PostDTO postdto, Image image, Video video, User2 user2, List<UserTag> userTags, int commentCount, int praiseCount, boolean tagMe, List<PostComment> recentComment, HashTag hashtag) {
 		return new Post(//
 		postdto.postId,//
 		FeedType.fromValue(postdto.type),//
@@ -89,7 +89,7 @@ public class Post implements Serializable {
 		postdto.latitude,//
 		postdto.longitude, //
 		postdto.venueAbroad,//
-		user,//
+				user2,//
 		userTags,//
 		image,//
 		video,//
@@ -109,8 +109,8 @@ public class Post implements Serializable {
 			userTag.tagCenterX = tag.getTagCenterX().floatValue();
 			userTag.tagCenterY = tag.getTagCenterY().floatValue();
 			userTag.tagMe = tagme;
-			userTag.tagUserId = tag.getUser().getId();
-			userTag.setUsername(tag.getUser().getName());
+			userTag.tagUserId = tag.getUser2().getId();
+			userTag.setUsername(tag.getUser2().getName());
 			userTags.add(userTag);
 		}
 		return userTags;
@@ -132,7 +132,7 @@ public class Post implements Serializable {
 
 		// if (TextUtils.isEmpty(userId)) {
 		for (UserTag userTag : userTagList) {
-			if (userTag.getUser().isMe()) {
+			if (userTag.getUser2().isMe()) {
 				return true;
 			}
 		}
@@ -145,10 +145,10 @@ public class Post implements Serializable {
 
 		UserDTO userDTO = userMap.get(postDTO.userId);
 		Image image = null;
-		User user = null;
+		User2 user2 = null;
 		if (userDTO != null) {
 			image = Image.fromDTO(imageMap.get(userDTO.avatarImageId));
-			user = User.fromDTO(userDTO, image);
+			user2 = User2.fromDTO(userDTO, image);
 		}
 
 		return new Post(//
@@ -164,7 +164,7 @@ public class Post implements Serializable {
 		postDTO.latitude,//
 		postDTO.longitude,//
 		postDTO.venueAbroad,//
-		user,//
+				user2,//
 		userTagList,//
 		Image.fromDTO(imageMap.get(postDTO.imageId)),//
 		Video.fromDTO(video.get(postDTO.videoId)),//
@@ -224,8 +224,8 @@ public class Post implements Serializable {
 		return venueAbroad;
 	}
 
-	public User getUser() {
-		return user;
+	public User2 getUser2() {
+		return user2;
 	}
 
 	public List<UserTag> getUserTags() {

@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.wealoha.social.api.common.bean.Image;
 import com.wealoha.social.api.common.dto.ImageDTO;
-import com.wealoha.social.api.user.bean.User;
+import com.wealoha.social.api.user.bean.User2;
 
 public class UserTag implements Serializable {
 
@@ -19,15 +19,15 @@ public class UserTag implements Serializable {
 	public final Double tagAnchorY;
 	public final Double tagCenterX;
 	public final Double tagCenterY;
-	public final User user;
+	public final User2 user2;
 
-	public UserTag(Double tagAnchorX, Double tagAnchorY, Double tagCenterX, Double tagCenterY, User user) {
+	public UserTag(Double tagAnchorX, Double tagAnchorY, Double tagCenterX, Double tagCenterY, User2 user2) {
 		super();
 		this.tagAnchorX = tagAnchorX;
 		this.tagAnchorY = tagAnchorY;
 		this.tagCenterX = tagCenterX;
 		this.tagCenterY = tagCenterY;
-		this.user = user;
+		this.user2 = user2;
 	}
 
 	public static List<UserTag> fromDTOList(List<UserTagsDTO> userTagDTOList, Map<String, UserDTO> userMap, Map<String, ImageDTO> imageMap) {
@@ -41,7 +41,7 @@ public class UserTag implements Serializable {
 			userDto = userMap.get(userTagDto.tagUserId);
 			image = Image.fromDTO(imageMap.get(userDto.avatarImageId));
 			userTagList.add(new UserTag(userTagDto.tagAnchorX, userTagDto.tagAnchorY,//
-			userTagDto.tagCenterX, userTagDto.tagCenterY, User.fromDTO(userDto, image)));
+			userTagDto.tagCenterX, userTagDto.tagCenterY, User2.fromDTO(userDto, image)));
 		}
 		return userTagList;
 	}
@@ -62,8 +62,8 @@ public class UserTag implements Serializable {
 		return tagCenterY;
 	}
 
-	public User getUser() {
-		return user;
+	public User2 getUser2() {
+		return user2;
 	}
 
 }

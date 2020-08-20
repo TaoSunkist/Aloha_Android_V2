@@ -1207,10 +1207,10 @@ public class StringUtil {
         }
     }
 
-    public static String shareDescription(com.wealoha.social.api.user.bean.User user, Context context, RegionNodeUtil mRegionNodeUtil) {
-        if (user != null) {
+    public static String shareDescription(com.wealoha.social.api.user.bean.User2 user2, Context context, RegionNodeUtil mRegionNodeUtil) {
+        if (user2 != null) {
             StringBuilder sBuilder = new StringBuilder();
-            List<String> regionNames = mRegionNodeUtil.getRegionNames(user.getRegionCode(), 10);
+            List<String> regionNames = mRegionNodeUtil.getRegionNames(user2.getRegionCode(), 10);
             if (regionNames == null) {
                 return "";
             }
@@ -1227,16 +1227,16 @@ public class StringUtil {
                 ToastUtil.shortToast(context, R.string.Unkown_Error);
             }
             sBuilder.append("\n");
-            sBuilder.append(user.getAge());
+            sBuilder.append(user2.getAge());
             sBuilder.append("·");
-            sBuilder.append(user.getHeight());
+            sBuilder.append(user2.getHeight());
             sBuilder.append("·");
-            sBuilder.append(user.getWeight());
-            if (TextUtils.isEmpty(user.getZodiac())) {
+            sBuilder.append(user2.getWeight());
+            if (TextUtils.isEmpty(user2.getZodiac())) {
                 return sBuilder.toString();
             } else {
                 sBuilder.append("·");
-                sBuilder.append(getUserZodiac(user.getZodiac(), context));
+                sBuilder.append(getUserZodiac(user2.getZodiac(), context));
                 return sBuilder.toString();
             }
         } else {

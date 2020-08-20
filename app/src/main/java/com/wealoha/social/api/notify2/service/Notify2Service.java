@@ -35,7 +35,7 @@ import com.wealoha.social.beans.PostCommentReplyOnOthersPost2DTO;
 import com.wealoha.social.beans.PostLikeNotify2DTO;
 import com.wealoha.social.beans.PostTagNotify2DTO;
 import com.wealoha.social.beans.Post;
-import com.wealoha.social.api.user.bean.User;
+import com.wealoha.social.api.user.bean.User2;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.inject.Injector;
@@ -76,37 +76,37 @@ public class Notify2Service extends AbsBaseService<Notify2, Boolean> {
 			if (type == Notify2Type.PostLike) {
 				PostLikeNotify2DTO d = (PostLikeNotify2DTO) dto;
 				Post post = getPost(data.postMap.get(d.postId), data.userMap, data.imageMap, null, data.commentCountMap, data.likeCountMap);
-				List<User> users = getUsers(d.userIds, data.userMap, data.imageMap);
-				result.add(new PostLikeNotify2(type, dto.unread, dto.notifyId, dto.updateTimeMillis, post, users,dto.count));
+				List<User2> user2s = getUsers(d.userIds, data.userMap, data.imageMap);
+				result.add(new PostLikeNotify2(type, dto.unread, dto.notifyId, dto.updateTimeMillis, post, user2s,dto.count));
 			} else if (type == Notify2Type.NewAloha) {
 				NewAlohaNotify2DTO d = (NewAlohaNotify2DTO) dto;
-				List<User> users = getUsers(d.userIds, data.userMap, data.imageMap);
-				result.add(new NewAlohaNotify2(type, dto.unread, dto.notifyId, dto.updateTimeMillis, dto.count, users));
+				List<User2> user2s = getUsers(d.userIds, data.userMap, data.imageMap);
+				result.add(new NewAlohaNotify2(type, dto.unread, dto.notifyId, dto.updateTimeMillis, dto.count, user2s));
 			} else if (type == Notify2Type.PostComment) {
 				PostCommentNotify2DTO d = (PostCommentNotify2DTO) dto;
-				User fromUser = getUser(d.fromUser, data.userMap, data.imageMap);
+				User2 fromUser2 = getUser(d.fromUser, data.userMap, data.imageMap);
 				Post post = getPost(data.postMap.get(d.postId), data.userMap, data.imageMap, null, data.commentCountMap, data.likeCountMap);
-				result.add(new PostCommentNotify2(type, d.unread, dto.notifyId, d.updateTimeMillis, d.replyMe, d.comment, d.commentId, fromUser, post,d.count));
+				result.add(new PostCommentNotify2(type, d.unread, dto.notifyId, d.updateTimeMillis, d.replyMe, d.comment, d.commentId, fromUser2, post,d.count));
 			} else if (type == Notify2Type.PostTag) {
 				PostTagNotify2DTO d = (PostTagNotify2DTO) dto;
-				User fromUser = getUser(d.fromUser, data.userMap, data.imageMap);
+				User2 fromUser2 = getUser(d.fromUser, data.userMap, data.imageMap);
 				Post post = getPost(data.postMap.get(d.postId), data.userMap, data.imageMap, null, data.commentCountMap, data.likeCountMap);
-				result.add(new PostTagNotify2(type, d.unread, dto.notifyId, d.updateTimeMillis, fromUser, post));
+				result.add(new PostTagNotify2(type, d.unread, dto.notifyId, d.updateTimeMillis, fromUser2, post));
 			}else if(type == Notify2Type.PostCommentReplyOnMyPost){
 				PostCommentReplyOnMyPost2DTO d = (PostCommentReplyOnMyPost2DTO) dto;
-				User fromUser = getUser(d.fromUser, data.userMap, data.imageMap);
-				User replyUser = getUser(d.replyUser, data.userMap, data.imageMap);
+				User2 fromUser2 = getUser(d.fromUser, data.userMap, data.imageMap);
+				User2 replyUser2 = getUser(d.replyUser, data.userMap, data.imageMap);
 				Post post = getPost(data.postMap.get(d.postId), data.userMap, data.imageMap, null, data.commentCountMap, data.likeCountMap);
-				String comment = mContext.getString(R.string.aloha_post_comment_reply_on_my_post, replyUser.getName(),d.comment);
+				String comment = mContext.getString(R.string.aloha_post_comment_reply_on_my_post, replyUser2.getName(),d.comment);
 				result.add(new PostCommentReplyOnMyPost(type, d.unread, d.notifyId, d.updateTimeMillis, //
-				                                        replyUser, fromUser, d.commentId, comment, post));
+						replyUser2, fromUser2, d.commentId, comment, post));
 			}else if(type == Notify2Type.PostCommentReplyOnOthersPost){
 				PostCommentReplyOnOthersPost2DTO d = (PostCommentReplyOnOthersPost2DTO)dto;
-				User postAuthor = getUser(d.fromUser, data.userMap, data.imageMap);
-				User replyUser = getUser(d.postAuthor, data.userMap, data.imageMap);
+				User2 postAuthor = getUser(d.fromUser, data.userMap, data.imageMap);
+				User2 replyUser2 = getUser(d.postAuthor, data.userMap, data.imageMap);
 				Post post = getPost(data.postMap.get(d.postId), data.userMap, data.imageMap, null, data.commentCountMap, data.likeCountMap);
 				result.add(new PostCommentReplyOnOthersPost(type, d.unread, d.notifyId, d.updateTimeMillis, //
-				                                        replyUser, postAuthor, d.commentId, d.comment, post));
+						replyUser2, postAuthor, d.commentId, d.comment, post));
 			}
 			// 在这里添加其它类型
 		}

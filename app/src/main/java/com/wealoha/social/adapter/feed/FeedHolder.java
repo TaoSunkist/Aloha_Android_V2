@@ -49,7 +49,7 @@ import com.wealoha.social.api.common.BaseListApiService.NoResultCallback;
 import com.wealoha.social.beans.UserTag;
 import com.wealoha.social.api.Feed2Service;
 import com.wealoha.social.beans.Post;
-import com.wealoha.social.api.user.bean.User;
+import com.wealoha.social.api.user.bean.User2;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
 import com.wealoha.social.fragment.BaseFragment;
@@ -215,28 +215,28 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 			int foregroundColor = mContext.getResources().getColor(R.color.hashtag_in_feed_bg);
 			for (int i = 0; i < recentComments.size(); i++) {
 				final PostComment pc = recentComments.get(i);
-				final String replyUserName = pc.getReplyUser() == null ? null : pc.getReplyUser().getName();
-				final String userName = pc.getUser() == null ? null : pc.getUser().getName();
+				final String replyUserName = pc.getReplyUser2() == null ? null : pc.getReplyUser2().getName();
+				final String userName = pc.getUser2() == null ? null : pc.getUser2().getName();
 
 				// final String replyUserName = "徐八怪";
 				// final String userName = "杨帅气";
 				SpannableStringBuilder ssb = null;
 				String content = null;
-				if (pc.getReplyUser() != null) {
+				if (pc.getReplyUser2() != null) {
 
 					content = mContext.getString(R.string.open_comment_user, replyUserName, userName, pc.getComment());
 					ssb = SpannableUtil.buidlerClickableStr(content, new String[] { replyUserName, userName }, foregroundColor, new NoUnderlineClickableSpan() {
 
 						@Override
 						public void onClick(View widget) {
-							startUserProfile(pc.getReplyUser());
+							startUserProfile(pc.getReplyUser2());
 						}
 
 					}, new NoUnderlineClickableSpan() {
 
 						@Override
 						public void onClick(View widget) {
-							startUserProfile(pc.getUser());
+							startUserProfile(pc.getUser2());
 						}
 
 					});
@@ -246,7 +246,7 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 
 						@Override
 						public void onClick(View widget) {
-							startUserProfile(pc.getUser());
+							startUserProfile(pc.getUser2());
 						}
 
 					});
@@ -282,12 +282,12 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 	/**
 	 * 开启某人的profile
 	 * 
-	 * @param user
+	 * @param user2
 	 * @return void
 	 */
-	public void startUserProfile(User user) {
+	public void startUserProfile(User2 user2) {
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(User.TAG, user);
+		bundle.putSerializable(User2.TAG, user2);
 		((BaseFragAct) mFrag.getActivity()).startFragment(Profile2Fragment.class, bundle, false);
 
 	}
@@ -392,7 +392,7 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 			FontUtil.setRegulartypeFace(mFrag.getActivity(), shareText);
 		}
 		// 名字转成风骚的大写~~
-		String upper = post.getUser().getName();
+		String upper = post.getUser2().getName();
 		if (!TextUtils.isEmpty(upper)) {
 			upper = upper.toUpperCase(Locale.getDefault());
 		}
@@ -409,7 +409,7 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 		} else {
 			userLocation.setVisibility(View.GONE);
 		}
-		picasso.load(post.getUser().getAvatarImage().getUrlSquare(ImageSize.AVATAR_ROUND_SMALL))//
+		picasso.load(post.getUser2().getAvatarImage().getUrlSquare(ImageSize.AVATAR_ROUND_SMALL))//
 		.placeholder(R.drawable.default_photo).into(userPhoto);
 		changeColor(mPost.isLiked());
 
@@ -549,7 +549,7 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 			break;
 		case R.id.share_tv:
 			new PopupStore(regionNodeUtil).showShareProfileUrl02(mFrag.getActivity().getString(R.string.share_post),//
-																	(BaseFragAct) mFrag.getActivity(), mPost.getUser().getName(), StringUtil.sharePostWebUrl(contextUtil.getCurrentUser().getId(), "", mPost, StringUtil.ME_PROFILE_COPY_LINK), mPost.getImage().getUrl(100, 100));
+																	(BaseFragAct) mFrag.getActivity(), mPost.getUser2().getName(), StringUtil.sharePostWebUrl(contextUtil.getCurrentUser().getId(), "", mPost, StringUtil.ME_PROFILE_COPY_LINK), mPost.getImage().getUrl(100, 100));
 			break;
 		case R.id.praise_count:
 			openUserList();
@@ -628,7 +628,7 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 	 */
 	public void openProfile() {
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(com.wealoha.social.api.user.bean.User.TAG, mPost.getUser());
+		bundle.putSerializable(com.wealoha.social.api.user.bean.User2.TAG, mPost.getUser2());
 		((BaseFragAct) mFrag.getActivity()).startFragment(Profile2Fragment.class, bundle, true);
 	}
 
@@ -636,7 +636,7 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 		Intent intent = new Intent(mFrag.getActivity(), GDMapAct.class);
 		intent.putExtra("latitude", mPost.getLatitude());
 		intent.putExtra("longitude", mPost.getLongitude());
-		intent.putExtra("userphoto", mPost.getUser().getAvatarImage());
+		intent.putExtra("userphoto", mPost.getUser2().getAvatarImage());
 		intent.putExtra("venueAbroad", mPost.getVenueAbroad());
 		mFrag.getActivity().startActivity(intent);
 	}
@@ -736,9 +736,9 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 		if (mPost.isTagMe()) {
 			itemType[index++] = ListItemType.DELETE_TAG_ITEM;
 		}
-		if (mPost.getUser().isMe()) {
+		if (mPost.getUser2().isMe()) {
 			itemType[index++] = ListItemType.DELETE_FEED_ITEM;
-			title = mPost.getUser().getName();
+			title = mPost.getUser2().getName();
 		} else {
 			itemType[index++] = ListItemType.REPORT_FEED_ITEM;
 			title = mFrag.getString(R.string.report_inappropriate_content);
@@ -843,7 +843,7 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 		// 父视图移除数据中的tag
 		for (int i = 0; i < mPost.getUserTags().size(); i++) {
 			UserTag userTag = mPost.getUserTags().get(i);
-			if (userid.equals(userTag.getUser().getId())) {
+			if (userid.equals(userTag.getUser2().getId())) {
 				mPost.getUserTags().remove(i);
 				mPost.removeTagMe();
 				break;

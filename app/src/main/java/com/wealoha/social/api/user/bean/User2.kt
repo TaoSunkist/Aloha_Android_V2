@@ -14,7 +14,7 @@ import java.io.Serializable
  * @createTime 2015年2月25日 上午10:57:45
  */
 @Parcelize
-class User(
+class User2(
     val id: String?,
     val name: String?,
     val birthday: String?,
@@ -86,7 +86,7 @@ class User(
 
     companion object {
         @JvmField
-        val TAG = User::class.java.name
+        val TAG = User2::class.java.name
 
         /**
          *
@@ -97,10 +97,10 @@ class User(
         fun fromDTO(
             dto: UserDTO?,
             avatarImage: Image?
-        ): User? {
-            var user: User? = null
+        ): User2? {
+            var user2: User2? = null
             if (dto != null) {
-                user = User(
+                user2 = User2(
                     dto.id, dto.name, dto.birthday, dto.age, dto.height,  //
                     dto.weight, dto.me, dto.regionCode, dto.region, dto.zodiac,  //
                     dto.summary, dto.selfPurposes, dto.selfTag, avatarImage,  //
@@ -108,11 +108,11 @@ class User(
                     dto.aloha, dto.match, dto.postCount, dto.block, dto.hasPrivacy
                 )
             }
-            return user
+            return user2
         }
 
         @JvmStatic
-        fun fromDTO(dto: UserDTO): User {
+        fun fromDTO(dto: UserDTO): User2 {
             //com.wealoha.social.beans.User()
 //        user.age = userDto.age.toString()
 //        user.aloha = userDto.aloha
@@ -144,7 +144,7 @@ class User(
 //        image.urlPatternWidthHeight = userDto.avatarImage!!.urlPatternWidthHeight
 //        image.type = userDto.avatarImage!!.type
 //        user.avatarImage = image
-            return User(
+            return User2(
                 dto.id,
                 dto.name,
                 dto.birthday,
@@ -171,8 +171,8 @@ class User(
         }
 
         @JvmStatic
-        fun formOldUser(oldUser: com.wealoha.social.beans.User): User {
-            return User(
+        fun formOldUser(oldUser: com.wealoha.social.beans.User): User2 {
+            return User2(
                 oldUser.id,
                 oldUser.name,
                 oldUser.birthday,

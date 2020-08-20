@@ -85,7 +85,7 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 	private View headView;
 	private int removePosition;
 	private String removeCommentId;
-	private com.wealoha.social.api.user.bean.User mUser;
+	private com.wealoha.social.api.user.bean.User2 mUser2;
 	private Handler mHandler;
 	private static final String TAG = FeedCommentActivity.class.getSimpleName();
 
@@ -112,8 +112,8 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 		mContentListView.setOnItemLongClickListener(this);
 		loadFirstPage(getIntent().getStringExtra(GlobalConstants.TAGS.COMMENT_ID));
 
-		if (mUser != null) {
-			mContentEdit.setHint(getResources().getString(R.string.comment_in_reply_hint, mUser.getName()));
+		if (mUser2 != null) {
+			mContentEdit.setHint(getResources().getString(R.string.comment_in_reply_hint, mUser2.getName()));
 		}
 	}
 
@@ -126,7 +126,7 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 		Bundle bundle = getIntent().getExtras();
 		if (bundle != null) {
 			mPost = (Post) bundle.getSerializable(GlobalConstants.TAGS.POST_TAG);
-			mUser = (com.wealoha.social.api.user.bean.User) bundle.getSerializable(com.wealoha.social.api.user.bean.User.TAG);
+			mUser2 = (com.wealoha.social.api.user.bean.User2) bundle.getSerializable(com.wealoha.social.api.user.bean.User2.TAG);
 			return true;
 		}
 		return false;
@@ -199,7 +199,7 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 			PostComment postComment = (PostComment) mFeedCommentAdapter.getItem(i);
 			if (commentid.equals(postComment.getId())) {
 				mContentListView.smoothScrollToPosition(i);
-				mContentEdit.setHint(getString(R.string.comment_in_reply_hint, postComment.getUser().getName()));
+				mContentEdit.setHint(getString(R.string.comment_in_reply_hint, postComment.getUser2().getName()));
 				mContentEdit.setTag(postComment);
 				break;
 			}
@@ -345,16 +345,16 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 		if (postComment == null) {
 			return;
 		}
-		XL.i(TAG, "user:" + postComment.getUser());
-		XL.i(TAG, "reply user:" + postComment.getReplyUser());
+		XL.i(TAG, "user:" + postComment.getUser2());
+		XL.i(TAG, "reply user:" + postComment.getReplyUser2());
 		// 保存当前选中的评论信息，在发送评论的时候取出，省一个全局的变量
 		mContentEdit.setTag(postComment);
-		if (!postComment.getUser().isMe()) {
+		if (!postComment.getUser2().isMe()) {
 			mContentEdit.setFocusable(true);
 			mContentEdit.requestFocus();
 			UiUtils.showKeyBoard(this, mContentEdit, 0);
 			mContentEdit.setText("");
-			mContentEdit.setHint(mResources.getString(R.string.report_hint) + postComment.getUser().getName() + ":");
+			mContentEdit.setHint(mResources.getString(R.string.report_hint) + postComment.getUser2().getName() + ":");
 
 			final int fp = position;
 			final View v = view;
@@ -387,8 +387,8 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 
 		String replyUserId = null;
 		if (postComment != null) {
-			if (!postComment.getUser().isMe()) {
-				replyUserId = postComment.getUser().getId();
+			if (!postComment.getUser2().isMe()) {
+				replyUserId = postComment.getUser2().getId();
 			}
 		}
 		changeViewInSendTime(true);
@@ -492,13 +492,13 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 	/**
 	 * 进入这个人的主页
 	 * 
-	 * @param user
+	 * @param user2
 	 *            被开启主页的用户
 	 */
 	@Override
-	public void openSomeoneProfile(com.wealoha.social.api.user.bean.User user) {
+	public void openSomeoneProfile(com.wealoha.social.api.user.bean.User2 user2) {
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(user));
+		bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(user2));
 		startFragment(Profile2Fragment.class, bundle, true);
 	}
 

@@ -564,7 +564,7 @@ public class PopupStore {
      * @author: sunkist
      * @date:2015-1-21
      */
-    public void showShareProfilePopup(final BaseFragAct baseFragAct, final com.wealoha.social.api.user.bean.User meUser, final com.wealoha.social.api.user.bean.User toUser) {
+    public void showShareProfilePopup(final BaseFragAct baseFragAct, final com.wealoha.social.api.user.bean.User2 meUser2, final com.wealoha.social.api.user.bean.User2 toUser2) {
 
         int viewId = 0;
         LayoutInflater lInflater;
@@ -605,20 +605,20 @@ public class PopupStore {
                     case R.id.popu_outside_ll:
                         break;
                     case 0:
-                        title = baseFragAct.getString(toUser == null ? R.string.share_to_wx_title : R.string.share_to_other_wx_title, toUser == null ? meUser.getName() : toUser.getName());
-                        body = StringUtil.shareDescription(toUser == null ? meUser : toUser, baseFragAct, mRegionNodeUtil);
-                        url = StringUtil.shareUserWebUrl(meUser.getId(), toUser.getId(), toUser == null ? StringUtil.ME_PROFILE_TO_SHARE_WX : StringUtil.OTHER_PROFILE_TO_SHARE_WX);
-                        ShareStore.shareToWXHasUrl(baseFragAct, url, title, body, toUser == null ? meUser.getAvatarImage().getUrlSquare(ImageSize.AVATAR) : toUser.getAvatarImage().getUrlSquare(ImageSize.AVATAR));
+                        title = baseFragAct.getString(toUser2 == null ? R.string.share_to_wx_title : R.string.share_to_other_wx_title, toUser2 == null ? meUser2.getName() : toUser2.getName());
+                        body = StringUtil.shareDescription(toUser2 == null ? meUser2 : toUser2, baseFragAct, mRegionNodeUtil);
+                        url = StringUtil.shareUserWebUrl(meUser2.getId(), toUser2.getId(), toUser2 == null ? StringUtil.ME_PROFILE_TO_SHARE_WX : StringUtil.OTHER_PROFILE_TO_SHARE_WX);
+                        ShareStore.shareToWXHasUrl(baseFragAct, url, title, body, toUser2 == null ? meUser2.getAvatarImage().getUrlSquare(ImageSize.AVATAR) : toUser2.getAvatarImage().getUrlSquare(ImageSize.AVATAR));
                         break;
                     case 1:
-                        title = baseFragAct.getString(toUser == null ? R.string.share_to_wx_title : R.string.share_to_other_wx_title, toUser == null ? meUser.getName() : toUser.getName());
-                        body = StringUtil.shareDescription(toUser == null ? meUser : toUser, baseFragAct, mRegionNodeUtil);
-                        url = StringUtil.shareUserWebUrl(meUser.getId(), toUser.getId(), toUser == null ? StringUtil.ME_PROFILE_TO_SHARE_WXF : StringUtil.OTHER_PROFILE_TO_SHARE_WXF);
-                        ShareStore.shareToFriendHasUrl(baseFragAct, url, title, body, toUser == null ? meUser.getAvatarImage().getUrlSquare(ImageSize.AVATAR) : toUser.getAvatarImage().getUrlSquare(ImageSize.AVATAR));
+                        title = baseFragAct.getString(toUser2 == null ? R.string.share_to_wx_title : R.string.share_to_other_wx_title, toUser2 == null ? meUser2.getName() : toUser2.getName());
+                        body = StringUtil.shareDescription(toUser2 == null ? meUser2 : toUser2, baseFragAct, mRegionNodeUtil);
+                        url = StringUtil.shareUserWebUrl(meUser2.getId(), toUser2.getId(), toUser2 == null ? StringUtil.ME_PROFILE_TO_SHARE_WXF : StringUtil.OTHER_PROFILE_TO_SHARE_WXF);
+                        ShareStore.shareToFriendHasUrl(baseFragAct, url, title, body, toUser2 == null ? meUser2.getAvatarImage().getUrlSquare(ImageSize.AVATAR) : toUser2.getAvatarImage().getUrlSquare(ImageSize.AVATAR));
                         break;
                     case 2:
-                        title = baseFragAct.getString(R.string.share_to_other_wx_title, toUser == null ? meUser.getName() : toUser.getName());
-                        url = StringUtil.shareUserWebUrl(meUser.getId(), toUser.getId(), toUser == null ? StringUtil.ME_PROFILE_COPY_LINK : StringUtil.OTHER_PROFILE_COPY_LINK);
+                        title = baseFragAct.getString(R.string.share_to_other_wx_title, toUser2 == null ? meUser2.getName() : toUser2.getName());
+                        url = StringUtil.shareUserWebUrl(meUser2.getId(), toUser2.getId(), toUser2 == null ? StringUtil.ME_PROFILE_COPY_LINK : StringUtil.OTHER_PROFILE_COPY_LINK);
                         StringUtil.copyStringToClipboard(baseFragAct, url);
                         break;
                     case 3:
@@ -628,17 +628,17 @@ public class PopupStore {
                         int titleid = 0;
                         int urlid = 0;
 
-                        if (toUser == null) {
-                            username = meUser.getName();
+                        if (toUser2 == null) {
+                            username = meUser2.getName();
                             titleid = R.string.share_to_wx_title;
                             urlid = StringUtil.ME_PROFILE_TO_SHARE_WX;
                         } else {
-                            username = toUser.getName();
+                            username = toUser2.getName();
                             titleid = R.string.share_to_other_wx_title;
                             urlid = StringUtil.OTHER_PROFILE_TO_SHARE_WX;
                         }
-                        url = StringUtil.shareUserWebUrl(meUser.getId(), toUser.getId(), urlid);
-                        body = StringUtil.shareDescription(toUser == null ? meUser : toUser, baseFragAct, mRegionNodeUtil);
+                        url = StringUtil.shareUserWebUrl(meUser2.getId(), toUser2.getId(), urlid);
+                        body = StringUtil.shareDescription(toUser2 == null ? meUser2 : toUser2, baseFragAct, mRegionNodeUtil);
                         title = baseFragAct.getString(titleid, username);
                         String imgUrl = ImageUtil.getImageUrl(imgid, ImageSize.CHAT_THUMB, CropMode.ScaleCenterCrop);
                         ShareStore.shareToQQ(baseFragAct, url, title, body, imgUrl);
@@ -651,16 +651,16 @@ public class PopupStore {
                         int titleid2 = 0;
                         int urlid2 = 0;
 
-                        if (toUser == null) {
-                            username2 = meUser.getName();
+                        if (toUser2 == null) {
+                            username2 = meUser2.getName();
                             titleid2 = R.string.share_to_wx_title;
                             urlid2 = StringUtil.ME_PROFILE_TO_SHARE_WXF;
                         } else {
-                            username2 = toUser.getName();
+                            username2 = toUser2.getName();
                             titleid2 = R.string.share_to_other_wx_title;
                             urlid2 = StringUtil.OTHER_PROFILE_TO_SHARE_WXF;
                         }
-                        url = StringUtil.shareUserWebUrl(meUser.getId(), toUser.getId(), urlid2);
+                        url = StringUtil.shareUserWebUrl(meUser2.getId(), toUser2.getId(), urlid2);
                         body = StringUtil.shareDescription(user2, baseFragAct, mRegionNodeUtil);
                         title = baseFragAct.getString(titleid2, username2);
                         String imgUrl2 = ImageUtil.getImageUrl(imgid2, ImageSize.CHAT_THUMB, CropMode.ScaleCenterCrop);
@@ -669,13 +669,13 @@ public class PopupStore {
                         ShareStore.shareToQzone(baseFragAct, url, title, body, imgurls);
                         break;
                     case R.drawable.report:
-                        report(toUser);
+                        report(toUser2);
                         break;
                     case R.drawable.blacklist:
-                        if (toUser.isBlock()) {
-                            removeFromBlack(toUser);
+                        if (toUser2.isBlock()) {
+                            removeFromBlack(toUser2);
                         } else {
-                            openGuideDialog(baseFragAct, toUser, sharePopup);
+                            openGuideDialog(baseFragAct, toUser2, sharePopup);
                         }
                         break;
                 }
@@ -702,7 +702,7 @@ public class PopupStore {
         titleTv.setText(baseFragAct.getString(R.string.share_my_profile));
 
         boolean isHaveLine = true;
-        if (toUser == null || !toUser.hasPrivacy()) {
+        if (toUser2 == null || !toUser2.hasPrivacy()) {
             for (int i = 0; i < shareIconsTwo.length; i++) {
                 Drawable drawable = resources.getDrawable(shareIconsTwo[i]);
                 String shareTvStr = resources.getString(shareTextsTwo[i]);
@@ -731,7 +731,7 @@ public class PopupStore {
 
         HorizontalScrollView hsvLineOne = (HorizontalScrollView) newsMoreView.findViewById(R.id.hsv_line_one);
         hsvLineOne.setVisibility(View.VISIBLE);
-        if (toUser != null) {// 显示举报、、
+        if (toUser2 != null) {// 显示举报、、
             titleTv.setText(R.string.share_my_profile);
             line.setVisibility(View.VISIBLE);
             for (int i = 0; i < shareIconsOne.length; i++) {
@@ -745,7 +745,7 @@ public class PopupStore {
                 shareTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
 
                 // 如果是加入黑名单（这的逻辑太乱）
-                if (i == 1 && toUser.isBlock()) {
+                if (i == 1 && toUser2.isBlock()) {
                     shareTv.setText(resources.getString(R.string.remove_from_black_list));
                 } else {
                     shareTv.setText(shareTvStr);
@@ -881,7 +881,7 @@ public class PopupStore {
                     case 3:
                         // 分享到qq
 
-                        url = StringUtil.sharePostWebUrl(post.getUser().getId(), toUser.getId(), post, StringUtil.OTHER_PROFILE_TO_SHARE_WXF);
+                        url = StringUtil.sharePostWebUrl(post.getUser2().getId(), toUser.getId(), post, StringUtil.OTHER_PROFILE_TO_SHARE_WXF);
                         String imgUrl = ImageUtil.getImageUrl(post.getImage().getImageId(), ImageSize.CHAT_THUMB, CropMode.ScaleCenterCrop);
                         ShareStore.shareToQQ(baseFragAct, url, "1", "2", imgUrl);
                         // ShareStore.shareToWX(baseFragAct, null, imgUrl);
@@ -1288,14 +1288,14 @@ public class PopupStore {
      * @Title: black
      * @Description: 加入黑名单
      */
-    private void black(final com.wealoha.social.api.user.bean.User user) {
-        mUserService.blackUser(user.getId(), new Callback<Result<ResultData>>() {
+    private void black(final com.wealoha.social.api.user.bean.User2 user2) {
+        mUserService.blackUser(user2.getId(), new Callback<Result<ResultData>>() {
 
             @Override
             public void success(Result<ResultData> arg0, Response arg1) {
                 // ToastUtil.shortToast(context, "成功加入");
                 XL.i("PopupStore", "black success");
-                user.block();
+                user2.block();
                 ToastUtil.longToast(mContext, R.string.add_to_black_list_success);
             }
 
@@ -1401,7 +1401,7 @@ public class PopupStore {
 
     }
 
-    public void openGuideDialog(BaseFragAct baseAct, final com.wealoha.social.api.user.bean.User user, PopupWindow sharePopup) {
+    public void openGuideDialog(BaseFragAct baseAct, final com.wealoha.social.api.user.bean.User2 user2, PopupWindow sharePopup) {
         if (sharePopup != null && sharePopup.isShowing()) {
             sharePopup.dismiss();
         }
@@ -1439,7 +1439,7 @@ public class PopupStore {
                 if (alertDialog != null && alertDialog.isShowing()) {
                     alertDialog.dismiss();
                 }
-                black(user);
+                black(user2);
             }
         });
 
@@ -1485,8 +1485,8 @@ public class PopupStore {
      * @Title: black
      * @Description: 移除黑名单
      */
-    private void removeFromBlack(final com.wealoha.social.api.user.bean.User user) {
-        mUserService.unblock(user.getId(), new Callback<Result<ResultData>>() {
+    private void removeFromBlack(final com.wealoha.social.api.user.bean.User2 user2) {
+        mUserService.unblock(user2.getId(), new Callback<Result<ResultData>>() {
 
             @Override
             public void failure(RetrofitError arg0) {
@@ -1496,7 +1496,7 @@ public class PopupStore {
 
             @Override
             public void success(Result<ResultData> result, Response arg1) {
-                user.removeBlock();
+                user2.removeBlock();
                 ;
                 ToastUtil.longToast(mContext, R.string.remove_from_black_list_success);
                 XL.i(TAG, "移除黑名單成功");
@@ -1535,8 +1535,8 @@ public class PopupStore {
      * @Title: report
      * @Description: 举报用户或FEED
      */
-    private void report(com.wealoha.social.api.user.bean.User user) {
-        mUserService.reportUser(user.getId(), null, new Callback<Result<ResultData>>() {
+    private void report(com.wealoha.social.api.user.bean.User2 user2) {
+        mUserService.reportUser(user2.getId(), null, new Callback<Result<ResultData>>() {
 
             @Override
             public void success(Result<ResultData> arg0, Response arg1) {
@@ -1769,19 +1769,19 @@ public class PopupStore {
                     case 0:
                         if (mPost.getType() == FeedType.ImagePost) {
                             if (mPost.isMine()) {// 分享自己的
-                                ShareStore.shareImgToWXHasUrl(baseFragAct, StringUtil.sharePostWebUrl(mPost.getUser().getId(), //
-                                        mPost.getUser().getId(), mPost, StringUtil.ME_PROFILE_TO_SHARE_WX), "Aloha", "", imgUrl);
+                                ShareStore.shareImgToWXHasUrl(baseFragAct, StringUtil.sharePostWebUrl(mPost.getUser2().getId(), //
+                                        mPost.getUser2().getId(), mPost, StringUtil.ME_PROFILE_TO_SHARE_WX), "Aloha", "", imgUrl);
                             } else {// 分享別人的
                                 ShareStore.shareImgToWXHasUrl(baseFragAct, StringUtil.sharePostWebUrl(contextUtil.getCurrentUser().getId(),//
-                                        mPost.getUser().getId(), mPost, StringUtil.OTHER_PROFILE_TO_SHARE_WX), "Aloha", "", imgUrl);
+                                        mPost.getUser2().getId(), mPost, StringUtil.OTHER_PROFILE_TO_SHARE_WX), "Aloha", "", imgUrl);
                             }
                         } else if (mPost.getType() == FeedType.VideoPost) {// 分享視頻
                             if (mPost.isMine()) {// 分享自己的
-                                ShareStore.shareVideoToWXHasUrl(baseFragAct, StringUtil.sharePostWebUrl(mPost.getUser().getId(), //
-                                        mPost.getUser().getId(), mPost, StringUtil.ME_PROFILE_TO_SHARE_WX), "Aloha", "", imgUrl);
+                                ShareStore.shareVideoToWXHasUrl(baseFragAct, StringUtil.sharePostWebUrl(mPost.getUser2().getId(), //
+                                        mPost.getUser2().getId(), mPost, StringUtil.ME_PROFILE_TO_SHARE_WX), "Aloha", "", imgUrl);
                             } else {// 分享別人的
                                 ShareStore.shareVideoToWXHasUrl(baseFragAct, StringUtil.sharePostWebUrl(contextUtil.getCurrentUser().getId(),//
-                                        mPost.getUser().getId(), mPost, StringUtil.OTHER_PROFILE_TO_SHARE_WX), "Aloha", "", imgUrl);
+                                        mPost.getUser2().getId(), mPost, StringUtil.OTHER_PROFILE_TO_SHARE_WX), "Aloha", "", imgUrl);
                             }
                         }
                         feedShare(mPost);
@@ -1790,23 +1790,23 @@ public class PopupStore {
                         String urlwx = null;
                         if (mPost.getType() == FeedType.ImagePost) {
                             if (mPost.isMine()) {// 分享自己的
-                                urlwx = StringUtil.sharePostWebUrl(mPost.getUser().getId(), //
-                                        mPost.getUser().getId(), mPost, StringUtil.ME_PROFILE_TO_SHARE_WX);
+                                urlwx = StringUtil.sharePostWebUrl(mPost.getUser2().getId(), //
+                                        mPost.getUser2().getId(), mPost, StringUtil.ME_PROFILE_TO_SHARE_WX);
                                 ShareStore.shareImgToFriendHasUrl(baseFragAct, urlwx, "Aloha", "", imgUrl);
                             } else {// 分享別人的
                                 urlwx = StringUtil.sharePostWebUrl(contextUtil.getCurrentUser().getId(), //
-                                        mPost.getUser().getId(), mPost, StringUtil.OTHER_PROFILE_TO_SHARE_WX);
+                                        mPost.getUser2().getId(), mPost, StringUtil.OTHER_PROFILE_TO_SHARE_WX);
                                 ShareStore.shareImgToFriendHasUrl(baseFragAct, urlwx, "Aloha", "", imgUrl);
                             }
                         } else if (mPost.getType() == FeedType.VideoPost) {// 分享視頻
                             if (mPost.isMine()) {// 分享自己的
-                                urlwx = StringUtil.sharePostWebUrl(mPost.getUser().getId(), //
-                                        mPost.getUser().getId(), mPost, StringUtil.ME_PROFILE_TO_SHARE_WXF);
+                                urlwx = StringUtil.sharePostWebUrl(mPost.getUser2().getId(), //
+                                        mPost.getUser2().getId(), mPost, StringUtil.ME_PROFILE_TO_SHARE_WXF);
 
                                 ShareStore.shareVideoToFriendHasUrl(baseFragAct, urlwx, "Aloha", "", imgUrl);
                             } else {// 分享別人的
                                 urlwx = StringUtil.sharePostWebUrl(contextUtil.getCurrentUser().getId(), //
-                                        mPost.getUser().getId(), mPost, StringUtil.OTHER_PROFILE_TO_SHARE_WXF);
+                                        mPost.getUser2().getId(), mPost, StringUtil.OTHER_PROFILE_TO_SHARE_WXF);
                                 ShareStore.shareVideoToFriendHasUrl(baseFragAct, urlwx, "Aloha", "", imgUrl);
                             }
                         }
@@ -1819,15 +1819,15 @@ public class PopupStore {
                         String url = null;
                         // 分享到qq
                         if (mPost.isMine()) {
-                            url = StringUtil.sharePostWebUrl(mPost.getUser().getId(), "", mPost, StringUtil.ME_PROFILE_TO_SHARE_WX);
+                            url = StringUtil.sharePostWebUrl(mPost.getUser2().getId(), "", mPost, StringUtil.ME_PROFILE_TO_SHARE_WX);
                         } else {
-                            url = StringUtil.sharePostWebUrl("", mPost.getUser().getId(), mPost, StringUtil.OTHER_PROFILE_TO_SHARE_WX);
+                            url = StringUtil.sharePostWebUrl("", mPost.getUser2().getId(), mPost, StringUtil.OTHER_PROFILE_TO_SHARE_WX);
                         }
                         XL.d("ParamsShareToQQ", "baseFragAct:" + baseFragAct + "-"//
                                 + "url:" + url + "-mPost.getUser().getName()" + //
-                                mPost.getUser().getName() + "-mPost.getDescription()" + mPost.getDescription()//
+                                mPost.getUser2().getName() + "-mPost.getDescription()" + mPost.getDescription()//
                                 + "-imgUrl" + imgUrl);
-                        ShareStore.shareToQQ(baseFragAct, url, mPost.getUser().getName(), mPost.getDescription(), imgUrl);
+                        ShareStore.shareToQQ(baseFragAct, url, mPost.getUser2().getName(), mPost.getDescription(), imgUrl);
                         feedShare(mPost);
                         break;
                     case 4:
@@ -1836,11 +1836,11 @@ public class PopupStore {
 
                         String urlZone = null;
                         if (mPost.isMine()) {
-                            urlZone = StringUtil.sharePostWebUrl(mPost.getUser().getId(), null, mPost, StringUtil.ME_PROFILE_TO_SHARE_WX);
+                            urlZone = StringUtil.sharePostWebUrl(mPost.getUser2().getId(), null, mPost, StringUtil.ME_PROFILE_TO_SHARE_WX);
                         } else {
-                            urlZone = StringUtil.sharePostWebUrl(null, mPost.getUser().getId(), mPost, StringUtil.OTHER_PROFILE_TO_SHARE_WX);
+                            urlZone = StringUtil.sharePostWebUrl(null, mPost.getUser2().getId(), mPost, StringUtil.OTHER_PROFILE_TO_SHARE_WX);
                         }
-                        ShareStore.shareToQzone(baseFragAct, urlZone, mPost.getUser().getName(), mPost.getDescription(), imgurls);
+                        ShareStore.shareToQzone(baseFragAct, urlZone, mPost.getUser2().getName(), mPost.getDescription(), imgurls);
                         XL.i("QQ_ZONE_SHARE", "qq_zone:" + urlZone);
                         feedShare(mPost);
                         break;

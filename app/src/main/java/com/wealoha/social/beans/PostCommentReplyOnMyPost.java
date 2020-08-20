@@ -1,6 +1,6 @@
 package com.wealoha.social.beans;
 
-import com.wealoha.social.api.user.bean.User;
+import com.wealoha.social.api.user.bean.User2;
 
 
 public class PostCommentReplyOnMyPost extends AbsNotify2{
@@ -9,36 +9,36 @@ public class PostCommentReplyOnMyPost extends AbsNotify2{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private User replyUser;
-	private User fromUser;
+	private User2 replyUser2;
+	private User2 fromUser2;
 	private String comment;
 	private String commentId;
 	private Post post;
 	public PostCommentReplyOnMyPost(Notify2Type type, boolean unread, String notifyid,//
-			long updateTimeMillis,User replyUser, User fromUser, String commentId, //
-			String comment, Post post) {
+									long updateTimeMillis, User2 replyUser2, User2 fromUser2, String commentId, //
+									String comment, Post post) {
 		super(type, unread, notifyid, updateTimeMillis);
-		this.replyUser = replyUser;
-		this.fromUser = fromUser;
+		this.replyUser2 = replyUser2;
+		this.fromUser2 = fromUser2;
 		this.comment = comment;
 		this.commentId = commentId;
 		this.post = post;
 	}
 	
-	public User getReplyUser() {
-		return replyUser;
+	public User2 getReplyUser2() {
+		return replyUser2;
 	}
 	
-	public void setReplyUser(User replyUser) {
-		this.replyUser = replyUser;
+	public void setReplyUser2(User2 replyUser2) {
+		this.replyUser2 = replyUser2;
 	}
 	
-	public User getFromUser() {
-		return fromUser;
+	public User2 getFromUser2() {
+		return fromUser2;
 	}
 	
-	public void setFromUser(User fromUser) {
-		this.fromUser = fromUser;
+	public void setFromUser2(User2 fromUser2) {
+		this.fromUser2 = fromUser2;
 	}
 	
 	public String getComment() {

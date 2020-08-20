@@ -7,7 +7,7 @@ import java.util.List;
 import com.wealoha.social.api.comment.dto.Comment2DTO;
 import com.wealoha.social.api.comment.dto.CommentDTO;
 import com.wealoha.social.api.common.bean.Image;
-import com.wealoha.social.api.user.bean.User;
+import com.wealoha.social.api.user.bean.User2;
 
 public class PostComment implements Serializable {
 
@@ -16,39 +16,39 @@ public class PostComment implements Serializable {
 	private final long createTimeMillis;
 	private final String id;
 	private final String comment;
-	private final User replyUser;
-	private final User user;
+	private final User2 replyUser2;
+	private final User2 user2;
 	private final boolean whisper;
 
-	public PostComment(long createTimeMillis, String id, String comment, User replyUser, User user, boolean whisper) {
+	public PostComment(long createTimeMillis, String id, String comment, User2 replyUser2, User2 user2, boolean whisper) {
 		this.createTimeMillis = createTimeMillis;
 		this.id = id;
 		this.comment = comment;
-		this.replyUser = replyUser;
-		this.user = user;
+		this.replyUser2 = replyUser2;
+		this.user2 = user2;
 		this.whisper = whisper;
 	}
 
-	public static PostComment fromCommentDTO(CommentDTO commentDTO, User replyUser, User user) {
+	public static PostComment fromCommentDTO(CommentDTO commentDTO, User2 replyUser2, User2 user2) {
 		return new PostComment(//
 		commentDTO.createTimeMillis,//
 		commentDTO.id,//
 		commentDTO.comment,//
-		replyUser,//
-		user,//
+				replyUser2,//
+				user2,//
 		commentDTO.whisper);
 	}
 
-	public static PostComment fromComment2DTO(Comment2DTO comment2DTO, User replyUser, User user) {
-		return new PostComment(comment2DTO.createTimeMillis, comment2DTO.id, comment2DTO.comment, replyUser, user, comment2DTO.whisper);
+	public static PostComment fromComment2DTO(Comment2DTO comment2DTO, User2 replyUser2, User2 user2) {
+		return new PostComment(comment2DTO.createTimeMillis, comment2DTO.id, comment2DTO.comment, replyUser2, user2, comment2DTO.whisper);
 	}
 
 	public static PostComment fromCommentDTO(CommentDTO commentDTO) {
 		return new PostComment(commentDTO.createTimeMillis,//
 		commentDTO.id, //
 		commentDTO.comment,//
-		User.fromDTO(commentDTO.replyUser),//
-		User.fromDTO(commentDTO.user),//
+		User2.fromDTO(commentDTO.replyUser),//
+		User2.fromDTO(commentDTO.user),//
 		commentDTO.whisper);
 	};
 
@@ -69,16 +69,16 @@ public class PostComment implements Serializable {
 		}
 		List<PostComment> postCommentList = new ArrayList<>();
 		for (Comment2DTO dto : commentList) {
-			User user = null;
-			User replyUser = null;
+			User2 user2 = null;
+			User2 replyUser2 = null;
 			if (dto.user != null) {
-				user = User.fromDTO(dto.user, Image.fromDTO(dto.user.avatarImage));
+				user2 = User2.fromDTO(dto.user, Image.fromDTO(dto.user.avatarImage));
 			}
 			if (dto.replyUser != null) {
-				replyUser = User.fromDTO(dto.replyUser, Image.fromDTO(dto.replyUser.avatarImage));
+				replyUser2 = User2.fromDTO(dto.replyUser, Image.fromDTO(dto.replyUser.avatarImage));
 			}
 
-			PostComment postComment = PostComment.fromComment2DTO(dto, replyUser, user);
+			PostComment postComment = PostComment.fromComment2DTO(dto, replyUser2, user2);
 			postCommentList.add(postComment);
 		}
 		return postCommentList;
@@ -96,12 +96,12 @@ public class PostComment implements Serializable {
 		return comment;
 	}
 
-	public User getReplyUser() {
-		return replyUser;
+	public User2 getReplyUser2() {
+		return replyUser2;
 	}
 
-	public User getUser() {
-		return user;
+	public User2 getUser2() {
+		return user2;
 	}
 
 	public boolean isWhisper() {

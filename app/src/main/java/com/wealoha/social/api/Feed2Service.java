@@ -25,7 +25,7 @@ import com.wealoha.social.beans.UserTag;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.PostDTO;
 import com.wealoha.social.api.topic.bean.HashTag;
-import com.wealoha.social.api.user.bean.User;
+import com.wealoha.social.api.user.bean.User2;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
@@ -79,7 +79,7 @@ public class Feed2Service extends AbsBaseService<Post, String> {
 	 * @param callback
 	 * @return void
 	 */
-	public void getPraiseList(String cursor, int count, String postid, final ApiCallback<List<User>> callback) {
+	public void getPraiseList(String cursor, int count, String postid, final ApiCallback<List<User2>> callback) {
 		feed2Api.getPraiseList(postid, cursor, count, new Callback<Result<UserListGetData>>() {
 
 			@Override
@@ -98,13 +98,13 @@ public class Feed2Service extends AbsBaseService<Post, String> {
 		});
 	}
 
-	private List<User> transUserListGetData2List(UserListGetData userListGetData) {
+	private List<User2> transUserListGetData2List(UserListGetData userListGetData) {
 		if (userListGetData == null || userListGetData.list == null) {
 			return null;
 		}
-		List<User> userList = new ArrayList<User>(userListGetData.list.size());
-		userList = getUsers(userListGetData.list, userListGetData.imageMap);
-		return userList;
+		List<User2> user2List = new ArrayList<User2>(userListGetData.list.size());
+		user2List = getUsers(userListGetData.list, userListGetData.imageMap);
+		return user2List;
 	}
 
 	protected List<Post> transResult2List(FeedGetData result, String currentUserid) {
@@ -121,7 +121,7 @@ public class Feed2Service extends AbsBaseService<Post, String> {
 				continue;
 			}
 
-			User user = getUser(postDto.userId, result.userMap, result.imageMap);
+			User2 user2 = getUser(postDto.userId, result.userMap, result.imageMap);
 			List<UserTag> userTagList = gerUserTagList(postDto.userTags, result.userMap, result.imageMap);
 			Image image = Image.fromDTO(result.imageMap.get(postDto.imageId));
 			Video video = null;
@@ -143,7 +143,7 @@ public class Feed2Service extends AbsBaseService<Post, String> {
 			postDto.latitude, //
 			postDto.longitude,//
 			postDto.venueAbroad, //
-			user, //
+                    user2, //
 			userTagList,//
 			image, //
 			video, //
@@ -193,7 +193,7 @@ public class Feed2Service extends AbsBaseService<Post, String> {
 			Log.i("LOAD_MEMORY", "++++++" + i);
 			Post post = postList.get(i);
 			picasso.load(post.getImage().getUrlSquare(mScreenWidth)).fetch();
-			picasso.load(post.getUser().getAvatarImage().getUrlSquare(ImageSize.AVATAR_ROUND_SMALL)).fetch();
+			picasso.load(post.getUser2().getAvatarImage().getUrlSquare(ImageSize.AVATAR_ROUND_SMALL)).fetch();
 		}
 	}
 
@@ -309,15 +309,11 @@ public class Feed2Service extends AbsBaseService<Post, String> {
 	 * @return void
 	 */
 	public void removeTag(String postId, String tagUserId, final com.wealoha.social.api.common.BaseListApiService.NoResultCallback callback) {
-		feed2Api.removeTag(postId, tagUserId, new Callback<Result<ResultData>>() {
+		feed2Api.removeTag(postId, tagUserId, new Callback<ResultData>() {
 
 			@Override
-			public void success(Result<ResultData> result, Response arg1) {
-				if (result == null || !result.isOk()) {
-					callback.fail(ApiErrorCode.fromResult(result), null);
-				} else {
+			public void success(ResultData result, Response arg1) {
 					callback.success();
-				}
 			}
 
 			@Override

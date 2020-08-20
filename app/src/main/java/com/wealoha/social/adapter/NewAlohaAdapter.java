@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
-import com.wealoha.social.api.user.bean.User;
+import com.wealoha.social.api.user.bean.User2;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
 import com.wealoha.social.inject.Injector;
 import com.wealoha.social.utils.FontUtil;
@@ -24,7 +24,7 @@ import com.wealoha.social.view.custom.CircleImageView;
 
 public class NewAlohaAdapter extends BaseAdapter {
 
-	private List<User> mUsers;
+	private List<User2> mUser2s;
 	private BaseFragAct mParent;
 	private LayoutInflater mLayoutInflater;
 	@Inject
@@ -34,17 +34,17 @@ public class NewAlohaAdapter extends BaseAdapter {
 	private final boolean mIsMatcher;
 	private int mCount;
 
-	public NewAlohaAdapter(List<User> users, BaseFragAct baseFragAct, boolean b) {
+	public NewAlohaAdapter(List<User2> user2s, BaseFragAct baseFragAct, boolean b) {
 		Injector.inject(this);
-		this.mUsers = users;
+		this.mUser2s = user2s;
 		this.mParent = baseFragAct;
 		mIsMatcher = b;
 		mLayoutInflater = (LayoutInflater) baseFragAct.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
-	public NewAlohaAdapter(List<User> users, int count, BaseFragAct baseFragAct, boolean b) {
+	public NewAlohaAdapter(List<User2> user2s, int count, BaseFragAct baseFragAct, boolean b) {
 		Injector.inject(this);
-		this.mUsers = users;
+		this.mUser2s = user2s;
 		this.mParent = baseFragAct;
 		mIsMatcher = b;
 		this.mCount = count;
@@ -53,15 +53,15 @@ public class NewAlohaAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		if (mUsers != null) {
-			return mUsers.size();
+		if (mUser2s != null) {
+			return mUser2s.size();
 		}
 		return 0;
 	}
 
 	@Override
-	public User getItem(int position) {
-		return mUsers.get(position);
+	public User2 getItem(int position) {
+		return mUser2s.get(position);
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class NewAlohaAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder viewHolder = null;
-		User user = mUsers.get(position);
+		User2 user2 = mUser2s.get(position);
 		if (convertView == null) {
 			convertView = mLayoutInflater.inflate(R.layout.item_new_aloha, parent, false);
 			viewHolder = new ViewHolder(convertView, mParent);
@@ -84,16 +84,16 @@ public class NewAlohaAdapter extends BaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		// XL.d("getUrlSquare", user.getAvatarImage().getUrl(100, 100));
-		picasso.load(user.getAvatarImage().getUrl(ImageSize.CHAT_THUMB, ImageSize.CHAT_THUMB)).placeholder(R.drawable.default_photo).resize(100, 100).into(viewHolder.mUserPhoto);
-		viewHolder.mUserName.setText(user.getName());
-		if (mIsMatcher && user.isMatch()) {
+		picasso.load(user2.getAvatarImage().getUrl(ImageSize.CHAT_THUMB, ImageSize.CHAT_THUMB)).placeholder(R.drawable.default_photo).resize(100, 100).into(viewHolder.mUserPhoto);
+		viewHolder.mUserName.setText(user2.getName());
+		if (mIsMatcher && user2.isMatch()) {
 			viewHolder.mMatchOrNot.setVisibility(View.VISIBLE);
 		} else {
 			viewHolder.mMatchOrNot.setVisibility(View.GONE);
 		}
-		viewHolder.mUserPhotoCount.setText(mParent.getString(R.string.aloha_time_photo_count, user.getPostCount()));
-		viewHolder.mUserInfos.setText(user.getAge() + "·" + user.getHeight() + "·" + user.getWeight() + "·" + StringUtil.getUserZodiac(user.getZodiac(), mParent));
-		viewHolder.mUserName.setText(user.getName());
+		viewHolder.mUserPhotoCount.setText(mParent.getString(R.string.aloha_time_photo_count, user2.getPostCount()));
+		viewHolder.mUserInfos.setText(user2.getAge() + "·" + user2.getHeight() + "·" + user2.getWeight() + "·" + StringUtil.getUserZodiac(user2.getZodiac(), mParent));
+		viewHolder.mUserName.setText(user2.getName());
 		return convertView;
 	}
 

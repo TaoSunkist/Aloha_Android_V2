@@ -81,7 +81,7 @@ public class PostLayout extends BaseLayout {
 
 	public void initViewData(Post post) {
 		picasso.load(post.getImage().getUrlSquare(screenWidth)).into(postImageView);
-		picasso.load(post.getUser().getAvatarImage().getUrlSquare(screenWidth)).into(userPhotoView);
+		picasso.load(post.getUser2().getAvatarImage().getUrlSquare(screenWidth)).into(userPhotoView);
 
 		// userNameView.setText(post.getUser().getName());
 		// timeStampView.setText(TimeUtil.howLong(mContext, post.getCreateTimeMillis()));

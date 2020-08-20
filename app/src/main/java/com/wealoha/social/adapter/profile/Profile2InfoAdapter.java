@@ -4,14 +4,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.wealoha.social.api.user.bean.User;
+import com.wealoha.social.api.user.bean.User2;
 
 public class Profile2InfoAdapter extends BaseAdapter {
 
-	private User mUser;
+	private User2 mUser2;
 
-	public Profile2InfoAdapter(User user) {
-		mUser = user;
+	public Profile2InfoAdapter(User2 user2) {
+		mUser2 = user2;
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class Profile2InfoAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Profile2InfoHolder holder = new Profile2InfoHolder(mUser, parent);
+		Profile2InfoHolder holder = new Profile2InfoHolder(mUser2, parent);
 		convertView = holder.getView();
 		return convertView;
 	}

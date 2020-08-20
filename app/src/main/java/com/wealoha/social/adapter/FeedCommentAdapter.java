@@ -39,7 +39,7 @@ public class FeedCommentAdapter extends BaseListApiAdapter<PostComment, String> 
 
 	public interface FeedCommentAdapterCallback {
 
-		public void openSomeoneProfile(com.wealoha.social.api.user.bean.User user);
+		public void openSomeoneProfile(com.wealoha.social.api.user.bean.User2 user2);
 
 		public void showmPrivacyCommentSign();
 	}
@@ -72,7 +72,7 @@ public class FeedCommentAdapter extends BaseListApiAdapter<PostComment, String> 
 		// Font.ENCODESANSCOMPRESSED_600_SEMIBOLD);
 		// fontUtil.changeViewFont(feedCommentViewHolder.mCommentBody,
 		// Font.ENCODESANSCOMPRESSED_500_MEDIUM);
-		picasso.load(item.getUser().getAvatarImage().getUrl(ImageSize.AVATAR_ROUND_SMALL, ImageSize.AVATAR_ROUND_SMALL)).placeholder(R.drawable.default_photo).into(feedCommentViewHolder.mUserHead);
+		picasso.load(item.getUser2().getAvatarImage().getUrl(ImageSize.AVATAR_ROUND_SMALL, ImageSize.AVATAR_ROUND_SMALL)).placeholder(R.drawable.default_photo).into(feedCommentViewHolder.mUserHead);
 
 		TextView timeStampTv = feedCommentViewHolder.mTimeStamp;
 		if (item.isWhisper()) {
@@ -87,11 +87,11 @@ public class FeedCommentAdapter extends BaseListApiAdapter<PostComment, String> 
 		timeStampTv.setText(TimeUtil.getDistanceTimeForApp(mCtx, //
 															new Date().getTime(), item.getCreateTimeMillis()));
 
-		feedCommentViewHolder.mUserName.setText(item.getUser().getName());
+		feedCommentViewHolder.mUserName.setText(item.getUser2().getName());
 
 		String commentHint = null;
-		if (item.getReplyUser() != null) {
-			commentHint = mCtx.getString(R.string.comment_in_reply, item.getReplyUser().getName(), item.getComment());
+		if (item.getReplyUser2() != null) {
+			commentHint = mCtx.getString(R.string.comment_in_reply, item.getReplyUser2().getName(), item.getComment());
 		} else {
 			commentHint = item.getComment();
 		}
@@ -102,7 +102,7 @@ public class FeedCommentAdapter extends BaseListApiAdapter<PostComment, String> 
 
 			@Override
 			public void onClick(View v) {
-				callback.openSomeoneProfile(finalItem.getUser());
+				callback.openSomeoneProfile(finalItem.getUser2());
 			}
 		});
 	}

@@ -148,7 +148,7 @@ public class AtOnePopup2 implements OnTouchListener, OnClickListener, OnGestureL
 		mCallback = callback;
 		mCanMove = canMove;
 		findViews(mParentContainer);
-		mContent.setText(mUserTag.getUser().getName());
+		mContent.setText(mUserTag.getUser2().getName());
 		// 先设置为隐藏，防止初始化位置的时候视图闪动
 		mPopupView.setVisibility(View.INVISIBLE);
 		mPopupView.post(new Runnable() {
@@ -402,8 +402,8 @@ public class AtOnePopup2 implements OnTouchListener, OnClickListener, OnGestureL
 
 	private void openProFile() {
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(com.wealoha.social.api.user.bean.User.TAG, mUserTag.getUser());
-		XL.i("Profile2HeaderHolder", "is null ====" + mUserTag.getUser().getAvatarImage());
+		bundle.putSerializable(com.wealoha.social.api.user.bean.User2.TAG, mUserTag.getUser2());
+		XL.i("Profile2HeaderHolder", "is null ====" + mUserTag.getUser2().getAvatarImage());
 		if (contextUtil.getForegroundAct() != null) {
 			((BaseFragAct) contextUtil.getForegroundAct()).startFragmentHasAnim(Profile2Fragment.class, bundle, true, R.anim.left_in, R.anim.stop);
 		}
@@ -487,7 +487,7 @@ public class AtOnePopup2 implements OnTouchListener, OnClickListener, OnGestureL
 		if (mUserTag == null) {
 			return null;
 		}
-		return mUserTag.getUser().getId();
+		return mUserTag.getUser2().getId();
 	}
 
 	@Override

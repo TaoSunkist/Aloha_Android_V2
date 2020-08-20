@@ -172,22 +172,22 @@ public class FeedNoticeAdapter extends BaseAdapter {
 			picasso.load(postLikeNotify2.getPost().getImage().getUrl(80, 80))//
 			.into(postLikeViewHolder.mFeedImg);
 
-			if (postLikeNotify2.getUsers().size() == 1) {
+			if (postLikeNotify2.getUser2s().size() == 1) {
 				// * 說你的相片讃
 				String format = String.format(mParent.getResources().getString(R.string.title_activity_post_like_title),//
-												postLikeNotify2.getUsers().get(0).getName());
+												postLikeNotify2.getUser2s().get(0).getName());
 				SpannableString ss = new SpannableString(format);
-				ss.setSpan(new StyleSpan(Typeface.BOLD), 0, postLikeNotify2.getUsers().get(0).getName().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				ss.setSpan(new StyleSpan(Typeface.BOLD), 0, postLikeNotify2.getUser2s().get(0).getName().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				postLikeViewHolder.mTitle.setText(ss);
-			} else if (postLikeNotify2.getUsers().size() == 2) {
+			} else if (postLikeNotify2.getUser2s().size() == 2) {
 				// * 以及 * 說你的相片讃
 				String format = String.format(mParent.getResources().getString(R.string.title_activity_post_like_title_two),//
-												postLikeNotify2.getUsers().get(0).getName());
+												postLikeNotify2.getUser2s().get(0).getName());
 				// , postLikeNotify2.getUsers().get(1).getName()
 				String format2 = mParent.getString(R.string.title_activity_post_like_title_middle);
 				String format3 = String.format(mParent.getResources().getString(R.string.title_activity_post_like_title_end),//
-												postLikeNotify2.getUsers().get(1).getName());
-				int oneNameLength = postLikeNotify2.getUsers().get(0).getName().length();
+												postLikeNotify2.getUser2s().get(1).getName());
+				int oneNameLength = postLikeNotify2.getUser2s().get(0).getName().length();
 
 				StringBuilder stringBuilder = new StringBuilder(format);
 				stringBuilder.append(format2);
@@ -197,22 +197,22 @@ public class FeedNoticeAdapter extends BaseAdapter {
 				// 加粗第一个人的名字
 				ss.setSpan(new StyleSpan(Typeface.BOLD), 0, oneNameLength, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				ss.setSpan(new StyleSpan(Typeface.BOLD), oneNameLength + format2.length(), oneNameLength + format2.length() + //
-				postLikeNotify2.getUsers().get(1).getName().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				postLikeNotify2.getUser2s().get(1).getName().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 				postLikeViewHolder.mTitle.setText(ss);
 			} else {
 				String format = String.format(mParent.getResources().getString(R.string.title_activity_post_like_title_more),//
-												postLikeNotify2.getUsers().get(0).getName());
+												postLikeNotify2.getUser2s().get(0).getName());
 
 				String format2 = String.format(mParent.getResources().getString(R.string.title_activity_post_like_title_more_end),//
-												String.valueOf(postLikeNotify2.getUsers().size() - 1));
+												String.valueOf(postLikeNotify2.getUser2s().size() - 1));
 				int oneNameLength = format.length();
 				StringBuilder stringBuilder = new StringBuilder(format);
 				stringBuilder.append(format2);
 
 				SpannableString ss = new SpannableString(stringBuilder.toString());
-				ss.setSpan(new StyleSpan(Typeface.BOLD), 0, postLikeNotify2.getUsers().get(0).getName().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-				ss.setSpan(new StyleSpan(Typeface.BOLD), oneNameLength, oneNameLength + String.valueOf(String.valueOf(postLikeNotify2.getUsers().size() - 1)).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				ss.setSpan(new StyleSpan(Typeface.BOLD), 0, postLikeNotify2.getUser2s().get(0).getName().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				ss.setSpan(new StyleSpan(Typeface.BOLD), oneNameLength, oneNameLength + String.valueOf(String.valueOf(postLikeNotify2.getUser2s().size() - 1)).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 				postLikeViewHolder.mTitle.setText(ss);
 			}
@@ -223,10 +223,10 @@ public class FeedNoticeAdapter extends BaseAdapter {
 		case Notify2.POST_COMMENT_TAG_TYPE:// feed被 评论
 			final PostCommentNotify2 postCommentNotify2 = (PostCommentNotify2) notify2;
 			postCommentViewHolder.mCommentBody.setText(postCommentNotify2.getComment());
-			postCommentViewHolder.mUserName.setText(postCommentNotify2.getFromUser().getName());
+			postCommentViewHolder.mUserName.setText(postCommentNotify2.getFromUser2().getName());
 			postCommentViewHolder.mStamp.setText(TimeUtil.getDistanceTimeForApp(mParent, //
 																				new Date().getTime(), postCommentNotify2.getPost().getCreateTimeMillis()));
-			picasso.load(postCommentNotify2.getFromUser().getAvatarImage().getUrlSquare(120)).//
+			picasso.load(postCommentNotify2.getFromUser2().getAvatarImage().getUrlSquare(120)).//
 			placeholder(R.drawable.default_photo).into(postCommentViewHolder.mUserHead);
 			picasso.load(postCommentNotify2.getPost().getImage().getUrl(80, 80)).//
 			into(postCommentViewHolder.mFeedImg);
@@ -239,15 +239,15 @@ public class FeedNoticeAdapter extends BaseAdapter {
 			break;
 		case Notify2.POST_TAG_VIEW_TYPE:// 圈人的通知
 			PostTagNotify2 postTagNotify2 = (PostTagNotify2) notify2;
-			picasso.load(postTagNotify2.getFromUser().getAvatarImage().getUrl(100, 100)).//
+			picasso.load(postTagNotify2.getFromUser2().getAvatarImage().getUrl(100, 100)).//
 			placeholder(R.drawable.default_photo).into(postTagViewHolder.mUserHead);
 			picasso.load(postTagNotify2.getPost().getImage().getUrl(100, 100)).//
 			into(postTagViewHolder.mFeedImg);
 			String format = String.format(mParent.getResources().getString(R.string.item_feed_notice_post_tag_body),//
-											postTagNotify2.getFromUser().getName());
+											postTagNotify2.getFromUser2().getName());
 
 			SpannableString ss = new SpannableString(format);
-			ss.setSpan(new StyleSpan(Typeface.BOLD), 0, postTagNotify2.getFromUser().getName().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			ss.setSpan(new StyleSpan(Typeface.BOLD), 0, postTagNotify2.getFromUser2().getName().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 			postTagViewHolder.mUserName.setText(ss);
 			postTagViewHolder.mStamp.setText(TimeUtil.getDistanceTimeForApp(mParent, //
@@ -258,9 +258,9 @@ public class FeedNoticeAdapter extends BaseAdapter {
 		case Notify2.NEW_ALOHA_VIEW_TYPE:// 人气的通知
 			NewAlohaNotify2 newAlohaNotify2 = (NewAlohaNotify2) notify2;
 			String string = String.format(mParent.getResources().getString(R.string.item_feed_notice_new_aloha_body),//
-											newAlohaNotify2.getUsers().size());
+											newAlohaNotify2.getUser2s().size());
 			SpannableString newAlohaSS = new SpannableString(string);
-			newAlohaSS.setSpan(new StyleSpan(Typeface.BOLD), 0, String.valueOf(newAlohaNotify2.getUsers().size()).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			newAlohaSS.setSpan(new StyleSpan(Typeface.BOLD), 0, String.valueOf(newAlohaNotify2.getUser2s().size()).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			newAlohaViewHolder.mTitle.setText(newAlohaSS);
 			newAlohaViewHolder.mStamp.setText(TimeUtil.getDistanceTimeForApp(mParent, //
 																				new Date().getTime(), newAlohaNotify2.getUpdateTimeMillis()));
@@ -299,27 +299,27 @@ public class FeedNoticeAdapter extends BaseAdapter {
 	 */
 	private void wrapUsers(final Notify2 notify2, NewAlohaViewHolder newAlohaViewHolder, PostLikeViewHolder postLikeViewHolder) {
 
-		List<com.wealoha.social.api.user.bean.User> users = null;
+		List<com.wealoha.social.api.user.bean.User2> user2s = null;
 		int size = 0;
 		if (notify2 instanceof PostLikeNotify2) {
 			postLikeViewHolder.mWrapUsers.removeAllViews();
-			users = ((PostLikeNotify2) notify2).getUsers();
-			size = users.size();
+			user2s = ((PostLikeNotify2) notify2).getUser2s();
+			size = user2s.size();
 			for (int i = 0; i < size; i++) {
 				if (i < count) {
 					CircleImageView circleImageView = new CircleImageView(mParent);
 					circleImageView.setLayoutParams(layoutParams2);
-					picasso.load(users.get(i).getAvatarImage().getUrlSquare(80)).placeholder(R.drawable.default_photo)//
+					picasso.load(user2s.get(i).getAvatarImage().getUrlSquare(80)).placeholder(R.drawable.default_photo)//
 					.into(circleImageView);
 					postLikeViewHolder.mWrapUsers.addView(circleImageView);
 					circleImageView.setClickable(true);
-					final com.wealoha.social.api.user.bean.User user = users.get(i);
+					final com.wealoha.social.api.user.bean.User2 user2 = user2s.get(i);
 					circleImageView.setOnClickListener(new View.OnClickListener() {
 
 						@Override
 						public void onClick(View v) {
 							Bundle bundle = new Bundle();
-							bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(user));
+							bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(user2));
 							mParent.startFragment(Profile2Fragment.class, bundle, true);
 						}
 					});
@@ -329,13 +329,13 @@ public class FeedNoticeAdapter extends BaseAdapter {
 			}
 		} else if (notify2 instanceof NewAlohaNotify2) {
 			newAlohaViewHolder.mWrapUsers.removeAllViews();
-			users = ((NewAlohaNotify2) notify2).getUsers();
-			size = users.size();
+			user2s = ((NewAlohaNotify2) notify2).getUser2s();
+			size = user2s.size();
 			for (int i = 0; i < size; i++) {
 				if (i < count) {
 					CircleImageView circleImageView = new CircleImageView(mParent);
 					circleImageView.setLayoutParams(layoutParams2);
-					picasso.load(users.get(i).getAvatarImage().getUrlSquare(80)).//
+					picasso.load(user2s.get(i).getAvatarImage().getUrlSquare(80)).//
 					placeholder(R.drawable.default_photo).into(circleImageView);
 					newAlohaViewHolder.mWrapUsers.addView(circleImageView);
 				} else {
@@ -481,7 +481,7 @@ public class FeedNoticeAdapter extends BaseAdapter {
 				break;
 			case R.id.item_feed_notice_comment_userhead_cv:// 评论Feed的User头像
 				bundle = new Bundle();
-				bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(((PostCommentNotify2) mNotify2).getFromUser()));
+				bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(((PostCommentNotify2) mNotify2).getFromUser2()));
 				mParent.startFragment(Profile2Fragment.class, bundle, true);
 				return;
 			case R.id.item_feed_notice_post_tag_userhead_cv:// 圈人的用户头像

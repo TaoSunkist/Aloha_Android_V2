@@ -40,7 +40,7 @@ import com.wealoha.social.api.common.ApiErrorCode;
 import com.wealoha.social.api.common.BaseListApiService.ApiCallback;
 import com.wealoha.social.api.common.BaseListApiService.NoResultCallback;
 import com.wealoha.social.api.user.User2Service;
-import com.wealoha.social.api.user.bean.User;
+import com.wealoha.social.api.user.bean.User2;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.message.InboxSession;
 import com.wealoha.social.beans.message.InboxSessionResult;
@@ -145,7 +145,7 @@ public class Profile2HeaderHolder implements OnTouchListener {
 	@InjectView(R.id.profile_other_pop_count)
 	TextView mOtherPopCount;
 	protected Fragment mFrag;
-	protected User mUser;
+	protected User2 mUser2;
 	protected View rootView;
 	protected ProfileHeader2FragCallback mCallback;
 
@@ -180,9 +180,9 @@ public class Profile2HeaderHolder implements OnTouchListener {
 		/***
 		 * header 更新了aloha 的状态
 		 */
-		public void alohaCallback(User user);
+		public void alohaCallback(User2 user2);
 
-		public void refreshUserData(User user);
+		public void refreshUserData(User2 user2);
 
 		public int getProfileType();
 	}
@@ -202,22 +202,22 @@ public class Profile2HeaderHolder implements OnTouchListener {
 
 	}
 
-	public View resetViewData(User user) {
-		mUser = user;
+	public View resetViewData(User2 user2) {
+		mUser2 = user2;
 		initView();
 		loadUserHeader();
 		return rootView;
 	}
 
 	private void loadUserHeader() {
-		if (picasso == null || mUser == null || mUserPhoto == null || mLayout == null) {
+		if (picasso == null || mUser2 == null || mUserPhoto == null || mLayout == null) {
 			// ToastUtil.longToast(mFrag.getActivity(), "null----:" + mUser);
 			return;
 		}
 
 		loadHeadCache(0);
 
-		if (mUser.isMe()) {
+		if (mUser2.isMe()) {
 			layoutH = UiUtils.dip2px(mFrag.getActivity(), 226);
 			layoutW = UiUtils.getScreenWidth(mFrag.getActivity().getApplicationContext());
 		} else {
@@ -231,13 +231,13 @@ public class Profile2HeaderHolder implements OnTouchListener {
 		RequestCreator requestCreator = null;
 		switch (tag) {
 		case 0:
-			XL.i(TAG, "isnull----------------" + mUser.getAvatarImage());
+			XL.i(TAG, "isnull----------------" + mUser2.getAvatarImage());
 			requestCreator = picasso//
-			.load(mUser.getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB));
+			.load(mUser2.getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB));
 			break;
 		case 1:
 			requestCreator = picasso//
-			.load(mUser.getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB)).skipMemoryCache();
+			.load(mUser2.getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB)).skipMemoryCache();
 			break;
 		}
 		//
@@ -264,7 +264,7 @@ public class Profile2HeaderHolder implements OnTouchListener {
 			return;
 		}
 		// FIXME 数值提取
-		final String url = mUser.getAvatarImage().getUrlSquare(ImageSize.AVATAR_ROUND_SMALL);
+		final String url = mUser2.getAvatarImage().getUrlSquare(ImageSize.AVATAR_ROUND_SMALL);
 		blurTarget = new Target() {
 
 
@@ -330,20 +330,20 @@ public class Profile2HeaderHolder implements OnTouchListener {
 	 */
 	private void initView() {
 		initTabState();
-		if (mUser.isMe()) {
+		if (mUser2.isMe()) {
 			XL.i(TAG, "me");
 			mOther.setVisibility(View.GONE);
 			mPopularity.setVisibility(View.VISIBLE);
 			mAloha.setVisibility(View.VISIBLE);
 			mOtherPopCount.setVisibility(View.GONE);
 
-			mAlohaCountTv.setText(String.valueOf(mUser.getAlohaCount()));
-			mPopCountTv.setText(String.valueOf(mUser.getAlohaGetCount()));
+			mAlohaCountTv.setText(String.valueOf(mUser2.getAlohaCount()));
+			mPopCountTv.setText(String.valueOf(mUser2.getAlohaGetCount()));
 
 			// 为透明渐变效果做准备
 			mBorderHeight = UiUtils.dip2px(mFrag.getActivity(), 160);
 
-		} else if (mUser.hasPrivacy()) {
+		} else if (mUser2.hasPrivacy()) {
 			// 被对方拉黑
 			// 为透明渐变效果做准备
 			mBorderHeight = UiUtils.dip2px(mFrag.getActivity(), 160);
@@ -360,9 +360,9 @@ public class Profile2HeaderHolder implements OnTouchListener {
 			mAloha.setVisibility(View.GONE);
 			mOther.setVisibility(View.VISIBLE);
 			mOtherPopCount.setVisibility(View.VISIBLE);
-			mOtherPopCount.setText(mUser.getAlohaGetCount() + mFrag.getString(R.string.profile_aloha_get));
+			mOtherPopCount.setText(mUser2.getAlohaGetCount() + mFrag.getString(R.string.profile_aloha_get));
 			// 已匹配
-			if (mUser.isMatch()) {
+			if (mUser2.isMatch()) {
 				mOtherMatch.setVisibility(View.VISIBLE);
 				mOtherChat.setVisibility(View.VISIBLE);
 
@@ -375,7 +375,7 @@ public class Profile2HeaderHolder implements OnTouchListener {
 				mOtherChatText.setTextSize(13);
 				mOtherChatImg.setImageResource(R.drawable.profile_chat);
 				// 已经喜欢
-			} else if (mUser.isAloha()) {
+			} else if (mUser2.isAloha()) {
 				mOtherChat.setVisibility(View.VISIBLE);
 				mOtherMatch.setVisibility(View.GONE);
 
@@ -393,7 +393,7 @@ public class Profile2HeaderHolder implements OnTouchListener {
 				mOtherMatchImg.setImageResource(R.drawable.profile_heart);
 			}
 		}
-		mPopCountTv.setText(String.valueOf(mUser.getAlohaGetCount()));
+		mPopCountTv.setText(String.valueOf(mUser2.getAlohaGetCount()));
 		initOnTouchEvent();
 	}
 
@@ -457,7 +457,7 @@ public class Profile2HeaderHolder implements OnTouchListener {
 
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
-		if (mCallback == null || event.getAction() != MotionEvent.ACTION_UP || mUser.hasPrivacy()) {
+		if (mCallback == null || event.getAction() != MotionEvent.ACTION_UP || mUser2.hasPrivacy()) {
 			return true;
 		}
 		switch (v.getId()) {
@@ -486,7 +486,7 @@ public class Profile2HeaderHolder implements OnTouchListener {
 			openUserList(SwipeMenuListFragment.LISTTYPE_LIKE);
 			break;
 		case R.id.profile_other_match:
-			if (mUser.isMatch()) {
+			if (mUser2.isMatch()) {
 				// match過，那麼就是取消aloha
 				openAreYouSureDialog();
 			} else {
@@ -495,8 +495,8 @@ public class Profile2HeaderHolder implements OnTouchListener {
 			}
 			break;
 		case R.id.profile_other_chat:// liked or chat
-			if (mUser.isMatch()) {
-				getUserSessionId(mUser.getId());
+			if (mUser2.isMatch()) {
+				getUserSessionId(mUser2.getId());
 			} else {
 				openAreYouSureDialog();
 			}
@@ -610,12 +610,12 @@ public class Profile2HeaderHolder implements OnTouchListener {
 	 * @return void
 	 */
 	private void dislike() {
-		userService.dislike(mUser.getId(), new NoResultCallback() {
+		userService.dislike(mUser2.getId(), new NoResultCallback() {
 
 			@Override
 			public void success() {
 				XL.i(TAG, "dislike success");
-				refreshHeader(mUser.getId());
+				refreshHeader(mUser2.getId());
 				holderCallback();
 			}
 
@@ -637,12 +637,12 @@ public class Profile2HeaderHolder implements OnTouchListener {
 		if (referBundle != null) {
 			refer = referBundle.getString(WhereIsComeFrom.REFER_KEY);
 		}
-		userService.aloha(mUser.getId(), refer, new NoResultCallback() {
+		userService.aloha(mUser2.getId(), refer, new NoResultCallback() {
 
 			@Override
 			public void success() {
 				XL.i(TAG, "dislike success");
-				refreshHeader(mUser.getId());
+				refreshHeader(mUser2.getId());
 				holderCallback();
 			}
 
@@ -654,9 +654,9 @@ public class Profile2HeaderHolder implements OnTouchListener {
 		// 移除翻牌子列表中的人
 		if (AppApplication.mUserList != null && AppApplication.mUserList.size() > 0) {
 			for (com.wealoha.social.beans.User user : AppApplication.mUserList) {
-				if (user.getId().equals(mUser.getId())) {
+				if (user.getId().equals(mUser2.getId())) {
 					AppApplication.mUserList.remove(user);
-					XL.i(TAG, "AppApplication success:" + AppApplication.mUserList.contains(mUser));
+					XL.i(TAG, "AppApplication success:" + AppApplication.mUserList.contains(mUser2));
 					break;
 				}
 			}
@@ -733,21 +733,21 @@ public class Profile2HeaderHolder implements OnTouchListener {
 	 */
 	public void refreshHeader(String userid) {
 		XL.i(TAG, "refreshHeader==========");
-		userService.userProfile(userid, new ApiCallback<User>() {
+		userService.userProfile(userid, new ApiCallback<User2>() {
 
 			@Override
-			public void success(User data) {
+			public void success(User2 data) {
 				// initView();
 				XL.i(TAG, "success==========");
 				if (!mFrag.isVisible()) {
 					return;
 				}
 				refreshIco(data);
-				mUser = data;
+				mUser2 = data;
 				initView();
 
 				if (mCallback != null) {
-					mCallback.refreshUserData(mUser);
+					mCallback.refreshUserData(mUser2);
 				}
 			}
 
@@ -763,9 +763,9 @@ public class Profile2HeaderHolder implements OnTouchListener {
 	 * 
 	 * @return void
 	 */
-	private void refreshIco(User refreshUser) {
-		if (!mUser.getAvatarImage().getImageId().equals(refreshUser.getAvatarImage().getImageId())) {
-			mUser = refreshUser;
+	private void refreshIco(User2 refreshUser2) {
+		if (!mUser2.getAvatarImage().getImageId().equals(refreshUser2.getAvatarImage().getImageId())) {
+			mUser2 = refreshUser2;
 			loadUserHeader();
 		}
 	}
@@ -777,7 +777,7 @@ public class Profile2HeaderHolder implements OnTouchListener {
 	 */
 	private void holderCallback() {
 		if (mCallback != null) {
-			mCallback.alohaCallback(mUser);
+			mCallback.alohaCallback(mUser2);
 		}
 	}
 
@@ -797,7 +797,7 @@ public class Profile2HeaderHolder implements OnTouchListener {
 		popUpWindow.setTouchable(true);
 		popUpWindow.setWidth(LayoutParams.MATCH_PARENT);
 		popUpWindow.setHeight(LayoutParams.MATCH_PARENT);
-		String url = mUser.getAvatarImage().getUrlSquare(ImageSize.FEED_MAX);
+		String url = mUser2.getAvatarImage().getUrlSquare(ImageSize.FEED_MAX);
 		// FIXME 应该先显示小图,大图家在完毕显示大图
 
 		picasso.load(url).into(avactor);

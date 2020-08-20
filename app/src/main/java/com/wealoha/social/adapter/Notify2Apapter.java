@@ -154,14 +154,14 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 			picasso.load(postLikeNotify2.getPost().getImage().getUrl(80, 80))//
 			.into(postLikeViewHolder.mFeedImg);
 
-			if (postLikeNotify2.getUsers().size() == 1) {
+			if (postLikeNotify2.getUser2s().size() == 1) {
 				// * 說你的相片讃
 				String format = String.format(mParent.getResources().getString(R.string.title_activity_post_like_title),//
-												postLikeNotify2.getUsers().get(0).getName());
+												postLikeNotify2.getUser2s().get(0).getName());
 				postLikeViewHolder.mTitle.setText(format);
 			} else {
 				String format = mParent.getResources().getString(R.string.title_activity_post_like_title_more_end,//
-				postLikeNotify2.getUsers().size());
+				postLikeNotify2.getUser2s().size());
 
 				postLikeViewHolder.mTitle.setText(format);
 			}
@@ -191,12 +191,12 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 			}
 			postCommentViewHolder.mStamp.setText(TimeUtil.getDistanceTimeForApp(mParent, //
 																				new Date().getTime(), postCommentNotify2.getUpdateTimeMillis()));
-			picasso.load(postCommentNotify2.getFromUser().getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB)).//
+			picasso.load(postCommentNotify2.getFromUser2().getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB)).//
 			placeholder(R.drawable.default_photo).into(postCommentViewHolder.mUserHead);
 			picasso.load(postCommentNotify2.getPost().getImage().getUrl(80, 80)).//
 			into(postCommentViewHolder.mFeedImg);
 
-			postCommentViewHolder.mUserName.setText(postCommentNotify2.getFromUser().getName());
+			postCommentViewHolder.mUserName.setText(postCommentNotify2.getFromUser2().getName());
 			postCommentViewHolder.mUserHead.setOnClickListener(new OnClickListener(postCommentNotify2));
 			postCommentViewHolder.mFeedImg.setOnClickListener(new OnClickListener(postCommentNotify2));
 			break;
@@ -214,12 +214,12 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 			} else {
 				postTagViewHolder.mRootView.setBackgroundResource(R.drawable.layout_silde_01);
 			}
-			picasso.load(postTagNotify2.getFromUser().getAvatarImage().getUrl(ImageSize.AVATAR_ROUND_SMALL, ImageSize.AVATAR_ROUND_SMALL)).//
+			picasso.load(postTagNotify2.getFromUser2().getAvatarImage().getUrl(ImageSize.AVATAR_ROUND_SMALL, ImageSize.AVATAR_ROUND_SMALL)).//
 			placeholder(R.drawable.default_photo).into(postTagViewHolder.mUserHead);
 			picasso.load(postTagNotify2.getPost().getImage().getUrl(100, 100)).//
 			into(postTagViewHolder.mFeedImg);
 			String format = String.format(mParent.getResources().getString(R.string.item_feed_notice_post_tag_body),//
-											postTagNotify2.getFromUser().getName());
+											postTagNotify2.getFromUser2().getName());
 			postTagViewHolder.mUserName.setText(format);
 			postTagViewHolder.mStamp.setText(TimeUtil.getDistanceTimeForApp(mParent, //
 																			new Date().getTime(), postTagNotify2.getPost().getCreateTimeMillis()));
@@ -243,12 +243,12 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 			} else {
 				newAlohaViewHolder.mRootView.setBackgroundResource(R.drawable.layout_silde_01);
 			}
-			int userNum = newAlohaNotify2.getUsers().size();
+			int userNum = newAlohaNotify2.getUser2s().size();
 			String string = null;
 			// SpannableString newAlohaSS = null;
 			if (userNum == 1) {
 				string = String.format(mParent.getResources().getString(R.string.item_feed_notice_new_aloha_body),//
-										newAlohaNotify2.getUsers().get(0).getName());
+										newAlohaNotify2.getUser2s().get(0).getName());
 				newAlohaViewHolder.mTitle.setText(string);
 			} else {
 				string = mParent.getResources().getString(R.string.item_feed_notice_new_aloha_body_more_one, userNum);
@@ -275,12 +275,12 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 			postCommentReplyOnMyPostViewHolder.mCommentBody.setText(postCommentReplyOnMyPost.getComment());
 			postCommentReplyOnMyPostViewHolder.mStamp.setText(TimeUtil.getDistanceTimeForApp(mParent, //
 																				new Date().getTime(), postCommentReplyOnMyPost.getUpdateTimeMillis()));
-			picasso.load(postCommentReplyOnMyPost.getFromUser().getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB)).//
+			picasso.load(postCommentReplyOnMyPost.getFromUser2().getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB)).//
 			placeholder(R.drawable.default_photo).into(postCommentReplyOnMyPostViewHolder.mUserHead);
 			picasso.load(postCommentReplyOnMyPost.getPost().getImage().getUrl(80, 80)).//
 			into(postCommentReplyOnMyPostViewHolder.mFeedImg);
 
-			postCommentReplyOnMyPostViewHolder.mUserName.setText(postCommentReplyOnMyPost.getFromUser().getName());
+			postCommentReplyOnMyPostViewHolder.mUserName.setText(postCommentReplyOnMyPost.getFromUser2().getName());
 			postCommentReplyOnMyPostViewHolder.mUserHead.setOnClickListener(new OnClickListener(postCommentReplyOnMyPost));
 			postCommentReplyOnMyPostViewHolder.mFeedImg.setOnClickListener(new OnClickListener(postCommentReplyOnMyPost));
 			break;
@@ -301,12 +301,12 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 			postCommentReplyOnOthersPostViewHolder.mCommentBody.setText(postCommentReplyOnOthersPost.getComment());
 			postCommentReplyOnOthersPostViewHolder.mStamp.setText(TimeUtil.getDistanceTimeForApp(mParent, //
 																				new Date().getTime(), postCommentReplyOnOthersPost.getUpdateTimeMillis()));
-			picasso.load(postCommentReplyOnOthersPost.getFromUser().getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB)).//
+			picasso.load(postCommentReplyOnOthersPost.getFromUser2().getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB)).//
 			placeholder(R.drawable.default_photo).into(postCommentReplyOnOthersPostViewHolder.mUserHead);
 			picasso.load(postCommentReplyOnOthersPost.getPost().getImage().getUrl(80, 80)).//
 			into(postCommentReplyOnOthersPostViewHolder.mFeedImg);
 
-			postCommentReplyOnOthersPostViewHolder.mUserName.setText(postCommentReplyOnOthersPost.getFromUser().getName());
+			postCommentReplyOnOthersPostViewHolder.mUserName.setText(postCommentReplyOnOthersPost.getFromUser2().getName());
 			postCommentReplyOnOthersPostViewHolder.mUserHead.setOnClickListener(new OnClickListener(postCommentReplyOnOthersPost));
 			postCommentReplyOnOthersPostViewHolder.mFeedImg.setOnClickListener(new OnClickListener(postCommentReplyOnOthersPost));
 			break;
@@ -351,8 +351,8 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 				return;
 			case R.id.item_feed_notice_new_aloha_icon_iv:
 				NewAlohaNotify2 newAlohaNotify = (NewAlohaNotify2) mNotify2;
-				if (newAlohaNotify.getUsers() != null && newAlohaNotify.getUsers().size() == 1) {
-					openSomeoneProfile(newAlohaNotify.getUsers().get(0));
+				if (newAlohaNotify.getUser2s() != null && newAlohaNotify.getUser2s().size() == 1) {
+					openSomeoneProfile(newAlohaNotify.getUser2s().get(0));
 				}
 				return;
 			case R.id.item_feed_notice_post_tag_img_iv:// 圈人被圈的Feed图片点击后跳转到圈人Feed
@@ -361,16 +361,16 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 				return;
 			case R.id.item_feed_notice_comment_userhead_cv:// 评论Feed的User头像
 				if(mNotify2 instanceof PostCommentNotify2){
-					openSomeoneProfile(((PostCommentNotify2) mNotify2).getFromUser());
+					openSomeoneProfile(((PostCommentNotify2) mNotify2).getFromUser2());
 				}else if(mNotify2 instanceof PostCommentReplyOnMyPost){
-					openSomeoneProfile(((PostCommentReplyOnMyPost) mNotify2).getFromUser());
+					openSomeoneProfile(((PostCommentReplyOnMyPost) mNotify2).getFromUser2());
 				}else if(mNotify2 instanceof PostCommentReplyOnOthersPost){
-					openSomeoneProfile(((PostCommentReplyOnOthersPost) mNotify2).getFromUser());
+					openSomeoneProfile(((PostCommentReplyOnOthersPost) mNotify2).getFromUser2());
 				}
 //				openSomeoneProfile(((PostCommentNotify2) mNotify2).getFromUser());
 				return;
 			case R.id.item_feed_notice_post_tag_userhead_cv:// 评论Feed的User头像
-				openSomeoneProfile(((PostTagNotify2) mNotify2).getFromUser());
+				openSomeoneProfile(((PostTagNotify2) mNotify2).getFromUser2());
 				return;
 			}
 //			startSingleTagsFeed(post, feedtyep);
@@ -388,13 +388,13 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 	/**
 	 * 进入这个人的主页
 	 * 
-	 * @param user
+	 * @param user2
 	 *            被开启主页的用户
 	 */
-	private void openSomeoneProfile(com.wealoha.social.api.user.bean.User user) {
+	private void openSomeoneProfile(com.wealoha.social.api.user.bean.User2 user2) {
 
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(user));
+		bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(user2));
 		mParent.startFragment(Profile2Fragment.class, bundle, true);
 	}
 
@@ -421,25 +421,25 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 	 */
 	private void wrapUsers(final Notify2 notify2, NewAlohaViewHolder newAlohaViewHolder, PostLikeViewHolder postLikeViewHolder) {
 
-		List<com.wealoha.social.api.user.bean.User> users = null;
+		List<com.wealoha.social.api.user.bean.User2> user2s = null;
 		int size = 0;
 		long t = System.currentTimeMillis();
 		if (notify2 instanceof PostLikeNotify2) {
 			postLikeViewHolder.mWrapUsers.removeAllViews();
-			users = ((PostLikeNotify2) notify2).getUsers();
-			size = users.size();
+			user2s = ((PostLikeNotify2) notify2).getUser2s();
+			size = user2s.size();
 			for (int i = 0; i < Math.min(size, oneRowMaxUserCount); i++) {
 				CircleImageView circleImageView = new CircleImageView(mParent);
 
 				circleImageView.setLayoutParams(userIconLayoutParams);
-				picasso.load(users.get(i).getAvatarImage().getUrlSquare(80)).placeholder(R.drawable.default_photo)//
+				picasso.load(user2s.get(i).getAvatarImage().getUrlSquare(80)).placeholder(R.drawable.default_photo)//
 				.into(circleImageView);
 				postLikeViewHolder.mWrapUsers.addView(circleImageView);
 			}
 		} else if (notify2 instanceof NewAlohaNotify2) {
 			newAlohaViewHolder.mWrapUsers.removeAllViews();
-			users = ((NewAlohaNotify2) notify2).getUsers();
-			size = users.size();
+			user2s = ((NewAlohaNotify2) notify2).getUser2s();
+			size = user2s.size();
 
 			for (int i = 0; i < Math.min(size, oneRowMaxUserCount); i++) {
 				CircleImageView circleImageView = new CircleImageView(mParent);
@@ -448,7 +448,7 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 				} else {
 					circleImageView.setLayoutParams(userIconLayoutParams);
 				}
-				picasso.load(users.get(i).getAvatarImage().getUrlSquare(80)).//
+				picasso.load(user2s.get(i).getAvatarImage().getUrlSquare(80)).//
 				placeholder(R.drawable.default_photo).into(circleImageView);
 				newAlohaViewHolder.mWrapUsers.addView(circleImageView);
 			}

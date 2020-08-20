@@ -21,7 +21,7 @@ import com.wealoha.social.beans.UserTag;
 import com.wealoha.social.beans.UserTagsDTO;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.PostDTO;
-import com.wealoha.social.api.user.bean.User;
+import com.wealoha.social.api.user.bean.User2;
 import com.wealoha.social.beans.UserDTO;
 
 /**
@@ -84,7 +84,7 @@ public abstract class AbsBaseService<E, P> implements BaseListApiService<E, P> {
             // XL.d(TAG, "不支持的通知类型: " + postDto.type);
             return null;
         }
-        User user = getUser(postDto.userId, userMap, imageMap);
+        User2 user2 = getUser(postDto.userId, userMap, imageMap);
         List<UserTag> userTagList = gerUserTagList(postDto.userTags, userMap, imageMap);
         Image image = Image.fromDTO(imageMap.get(postDto.imageId));
         Video video = null;
@@ -103,7 +103,7 @@ public abstract class AbsBaseService<E, P> implements BaseListApiService<E, P> {
             praiseCount = praiseCountMap.get(postDto.userId);
         }
 
-        return Post.fromDTO(postDto, image, video, user, userTagList,//
+        return Post.fromDTO(postDto, image, video, user2, userTagList,//
                 commentCount == null ? 0 : commentCount,//
                 praiseCount == null ? 0 : praiseCount, Post.hasTagForMe(userTagList, currentUserid),//
                 recentCommentList, null);
@@ -123,50 +123,50 @@ public abstract class AbsBaseService<E, P> implements BaseListApiService<E, P> {
         }
         List<PostComment> postCommentList = new ArrayList<>();
         for (Comment2DTO dto : dtoList) {
-            User user = null;
-            User replyUser = null;
+            User2 user2 = null;
+            User2 replyUser2 = null;
             if (dto.user != null) {
-                user = User.fromDTO(dto.user, Image.fromDTO(dto.user.avatarImage));
+                user2 = User2.fromDTO(dto.user, Image.fromDTO(dto.user.avatarImage));
             }
             if (dto.replyUser != null) {
-                replyUser = User.fromDTO(dto.replyUser, Image.fromDTO(dto.replyUser.avatarImage));
+                replyUser2 = User2.fromDTO(dto.replyUser, Image.fromDTO(dto.replyUser.avatarImage));
             }
 
-            PostComment postComment = PostComment.fromComment2DTO(dto, replyUser, user);
+            PostComment postComment = PostComment.fromComment2DTO(dto, replyUser2, user2);
             postCommentList.add(postComment);
         }
         return postCommentList;
     }
 
-    protected List<User> getUsers(List<String> userIds, Map<String, UserDTO> userMap, Map<String, ImageDTO> imageMap) {
+    protected List<User2> getUsers(List<String> userIds, Map<String, UserDTO> userMap, Map<String, ImageDTO> imageMap) {
         if (CollectionUtils.isEmpty(userIds)) {
             return Collections.emptyList();
         }
-        List<User> result = new ArrayList<User>();
+        List<User2> result = new ArrayList<User2>();
         for (String userId : userIds) {
             result.add(getUser(userId, userMap, imageMap));
         }
         return result;
     }
 
-    protected List<User> getUsers(List<UserDTO> userList, Map<String, ImageDTO> imageMap) {
+    protected List<User2> getUsers(List<UserDTO> userList, Map<String, ImageDTO> imageMap) {
         if (CollectionUtils.isEmpty(userList) || imageMap == null) {
             return Collections.emptyList();
         }
-        ArrayList<User> users = new ArrayList<User>(userList.size());
+        ArrayList<User2> user2s = new ArrayList<User2>(userList.size());
         for (UserDTO userDTO : userList) {
-            users.add(User.fromDTO(userDTO, getImage(userDTO.avatarImageId, imageMap)));
+            user2s.add(User2.fromDTO(userDTO, getImage(userDTO.avatarImageId, imageMap)));
         }
-        return users;
+        return user2s;
     }
 
-    protected User getUser(String userId, Map<String, UserDTO> userMap, Map<String, ImageDTO> imageMap) {
+    protected User2 getUser(String userId, Map<String, UserDTO> userMap, Map<String, ImageDTO> imageMap) {
         UserDTO userDTO = userMap.get(userId);
         if (userDTO == null) {
             return null;
         }
 
-        return User.fromDTO(userDTO, getImage(userDTO.avatarImageId, imageMap));
+        return User2.fromDTO(userDTO, getImage(userDTO.avatarImageId, imageMap));
     }
 
     protected Image getImage(String imageId, Map<String, ImageDTO> imageMap) {
@@ -212,7 +212,7 @@ public abstract class AbsBaseService<E, P> implements BaseListApiService<E, P> {
             userDto = userMap.get(userTagDto.tagUserId);
             image = Image.fromDTO(imageMap.get(userDto.avatarImageId));
             userTagList.add(new UserTag(userTagDto.tagAnchorX, userTagDto.tagAnchorY,//
-                    userTagDto.tagCenterX, userTagDto.tagCenterY, User.fromDTO(userDto, image)));
+                    userTagDto.tagCenterX, userTagDto.tagCenterY, User2.fromDTO(userDto, image)));
         }
         return userTagList;
     }

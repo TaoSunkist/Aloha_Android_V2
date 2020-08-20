@@ -11,7 +11,6 @@ import retrofit.client.Response;
 import android.text.TextUtils;
 
 import com.wealoha.social.R;
-import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.api.comment.bean.PostComment;
 import com.wealoha.social.api.comment.dto.Comment2DTO;
 import com.wealoha.social.api.comment.dto.CommentDTO;
@@ -28,7 +27,7 @@ import com.wealoha.social.beans.TopicPostDTO;
 import com.wealoha.social.api.topic.bean.HashTag;
 import com.wealoha.social.api.topic.dto.HashTagDTO;
 import com.wealoha.social.api.topic.dto.TopicPostTagDTO;
-import com.wealoha.social.api.user.bean.User;
+import com.wealoha.social.api.user.bean.User2;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.utils.XL;
 
@@ -182,7 +181,7 @@ public class TopicPostService extends AbsBaseService<TopicPost> {
 		if (postsDTO != null) {
 			postlist = new ArrayList<>(postsDTO.size());
 			for (TopicPostDTO tpd : postsDTO) {
-				User user = User.fromDTO(tpd.user, Image.fromDTO(tpd.user.avatarImage));
+				User2 user2 = User2.fromDTO(tpd.user, Image.fromDTO(tpd.user.avatarImage));
 				List<UserTag> userTags = transPostTagDTO2PostTag(tpd.userTags);
 				List<PostComment> recentCommentList = transComment2DTOListToPostCommentList(tpd.recentComment);
 
@@ -197,7 +196,7 @@ public class TopicPostService extends AbsBaseService<TopicPost> {
 				tpd.latitude,//
 				tpd.longitude,//
 				tpd.venueAbroad,//
-				user, //
+						user2, //
 				userTags,//
 				Image.fromDTO(tpd.image),//
 				Video.fromDTO(tpd.video),//
@@ -226,9 +225,9 @@ public class TopicPostService extends AbsBaseService<TopicPost> {
 		}
 		List<PostComment> postCommentList = new ArrayList<>();
 		for (Comment2DTO dto : dtoList) {
-			User user = User.fromDTO(dto.user, Image.fromDTO(dto.user.avatarImage));
-			User replyUser = User.fromDTO(dto.replyUser, Image.fromDTO(dto.replyUser.avatarImage));
-			PostComment postComment = PostComment.fromComment2DTO(dto, replyUser, user);
+			User2 user2 = User2.fromDTO(dto.user, Image.fromDTO(dto.user.avatarImage));
+			User2 replyUser2 = User2.fromDTO(dto.replyUser, Image.fromDTO(dto.replyUser.avatarImage));
+			PostComment postComment = PostComment.fromComment2DTO(dto, replyUser2, user2);
 			postCommentList.add(postComment);
 		}
 		return postCommentList;
@@ -244,7 +243,7 @@ public class TopicPostService extends AbsBaseService<TopicPost> {
 				tpt.tagAnchorY,//
 				tpt.tagCenterX,//
 				tpt.tagCenterY,//
-				User.fromDTO(tpt.tagUser, Image.fromDTO(tpt.tagUser.avatarImage)));
+				User2.fromDTO(tpt.tagUser, Image.fromDTO(tpt.tagUser.avatarImage)));
 				tags.add(tag);
 			}
 		}

@@ -20,7 +20,7 @@ import com.wealoha.social.R;
 import com.wealoha.social.adapter.UserListAdapter;
 import com.wealoha.social.api.common.ApiErrorCode;
 import com.wealoha.social.api.notify2.service.UserListService;
-import com.wealoha.social.api.user.bean.User;
+import com.wealoha.social.api.user.bean.User2;
 import com.wealoha.social.inject.Injector;
 import com.wealoha.social.utils.DockingBeanUtils;
 import com.wealoha.social.utils.XL;
@@ -96,9 +96,9 @@ public class UserListFragment extends BaseFragment implements OnItemClickListene
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		User user = (User) mListView.getItemAtPosition(position);
+		User2 user2 = (User2) mListView.getItemAtPosition(position);
 		Bundle bundle = new Bundle();
-		bundle.putParcelable(User.TAG, DockingBeanUtils.transUser(user));
+		bundle.putParcelable(User2.TAG, DockingBeanUtils.transUser(user2));
 		((BaseFragAct) getActivity()).startFragment(Profile2Fragment.class, bundle, true);
 	}
 
