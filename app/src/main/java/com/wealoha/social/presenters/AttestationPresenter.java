@@ -4,11 +4,9 @@ import javax.inject.Inject;
 
 import android.content.Context;
 
-import com.wealoha.social.R;
-import com.wealoha.social.api.user.User2Service;
+import com.wealoha.social.api.User2Service;
 import com.wealoha.social.callback.CallbackImpl;
 import com.wealoha.social.ui.attestation.IAttestationView;
-import com.wealoha.social.utils.ToastUtil;
 
 public class AttestationPresenter extends AbsPresenter {
 

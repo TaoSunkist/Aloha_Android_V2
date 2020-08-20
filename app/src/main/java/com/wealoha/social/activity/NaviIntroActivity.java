@@ -26,7 +26,7 @@ import com.wealoha.social.ContextConfig;
 import com.wealoha.social.R;
 import com.wealoha.social.adapter.ViewPagerAdapter;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.api.user.User2Service;
+import com.wealoha.social.api.User2Service;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;

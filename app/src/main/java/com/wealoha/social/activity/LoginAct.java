@@ -30,7 +30,7 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.MatchSettingData;
-import com.wealoha.social.api.user.User2Service;
+import com.wealoha.social.api.User2Service;
 import com.wealoha.social.beans.AuthData;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;

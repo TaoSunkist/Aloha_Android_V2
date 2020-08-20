@@ -1,4 +1,4 @@
-package com.wealoha.social.api.topic;
+package com.wealoha.social.api;
 
 import java.util.List;
 

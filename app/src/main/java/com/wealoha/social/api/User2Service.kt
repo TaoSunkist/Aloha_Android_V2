@@ -1,4 +1,4 @@
-package com.wealoha.social.api.user
+package com.wealoha.social.api
 
 import com.squareup.otto.Bus
 import com.wealoha.social.api.ServerApi
