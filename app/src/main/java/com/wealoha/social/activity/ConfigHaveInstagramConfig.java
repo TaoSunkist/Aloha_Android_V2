@@ -22,9 +22,9 @@ import butterknife.OnClick;
 
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.AuthData;
 import com.wealoha.social.beans.Result;
-import com.wealoha.social.api.InstagramService;
 import com.wealoha.social.utils.FontUtil;
 import com.wealoha.social.utils.FontUtil.Font;
 import com.wealoha.social.utils.NetworkUtil;
@@ -36,7 +36,7 @@ import com.wealoha.social.view.custom.SlideSwitch.OnSwitchChangedListener;
 public class ConfigHaveInstagramConfig extends BaseFragAct implements OnClickListener, OnTouchListener {
 
 	@Inject
-	InstagramService instagramService;
+	ServerApi instagramService;
 	@Inject
 	FontUtil mFont;
 

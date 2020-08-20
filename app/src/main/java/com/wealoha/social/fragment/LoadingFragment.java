@@ -58,13 +58,13 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.activity.MainAct;
 import com.wealoha.social.activity.ProFeatureAct;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.MatchData;
 import com.wealoha.social.api.MatchService;
 import com.wealoha.social.beans.PromotionGetData;
-import com.wealoha.social.api.UserPromotionService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.impl.Listeners;
 import com.wealoha.social.push.NoticeBarController;
@@ -99,7 +99,7 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
     @Inject
     Picasso picasso;
     @Inject
-    UserPromotionService userPromotionService;
+    ServerApi userPromotionService;
     // @InjectView(R.id.match_no_more_ll)
     // LinearLayout linearLayout;
     /* 及时界面显示 */

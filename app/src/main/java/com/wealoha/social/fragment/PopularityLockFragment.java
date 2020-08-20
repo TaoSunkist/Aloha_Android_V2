@@ -16,16 +16,16 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.wealoha.social.R;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.PromotionGetData;
-import com.wealoha.social.api.UserPromotionService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.utils.ToastUtil;
 
 public class PopularityLockFragment extends BaseFragment implements OnClickListener {
 
 	@Inject
-	UserPromotionService userPromotionService;
+	ServerApi userPromotionService;
 
 	@InjectView(R.id.unlock)
 	TextView unlock;

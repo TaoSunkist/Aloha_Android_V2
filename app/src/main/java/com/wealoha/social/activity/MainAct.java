@@ -74,7 +74,6 @@ import com.wealoha.social.api.CountService;
 import com.wealoha.social.api.MessageService;
 import com.wealoha.social.beans.message.UnreadData;
 import com.wealoha.social.beans.PushSettingResult;
-import com.wealoha.social.api.SettingService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.event.ClearFeedNotifyEvent;
 import com.wealoha.social.event.NewCommentPushEvent;
@@ -134,7 +133,7 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 	@InjectView(R.id.profile_frag_rb)
 	CheckBox mProfileFragRb;
 	@Inject
-	SettingService settingService;
+	ServerApi settingService;
 	/** 角标 */
 	@InjectView(R.id.profile_frag_rb_subscript)
 	TextView profileSub;

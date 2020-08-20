@@ -21,7 +21,7 @@ import com.wealoha.social.utils.AMapUtil.LocationCallback;
 public class TopicService implements BaseService<HashTagDTO> {
 
 	@Inject
-	TopicAPI topicAPI;
+	ServerApi topicAPI;
 	@Inject
 	Context context;
 

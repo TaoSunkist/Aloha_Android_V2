@@ -111,14 +111,11 @@ import com.wealoha.social.api.Notify2Service;
 import com.wealoha.social.api.UserListService;
 import com.wealoha.social.api.PostService;
 import com.wealoha.social.api.TopicPostService;
-import com.wealoha.social.api.UserSettingPrivacyAPI;
 import com.wealoha.social.api.Profile2Service;
-import com.wealoha.social.api.TopicAPI;
 import com.wealoha.social.api.TopicService;
 import com.wealoha.social.api.User2Service;
 import com.wealoha.social.api.ConstantsService;
 import com.wealoha.social.api.CountService;
-import com.wealoha.social.api.InstagramService;
 import com.wealoha.social.api.OauthService;
 import com.wealoha.social.api.LocationService;
 import com.wealoha.social.api.MatchService;
@@ -128,10 +125,7 @@ import com.wealoha.social.beans.message.MessageSerializer;
 import com.wealoha.social.api.MessageService;
 import com.wealoha.social.beans.message.TextMessage;
 import com.wealoha.social.api.FindYouService;
-import com.wealoha.social.api.SettingService;
 import com.wealoha.social.api.ProfileService;
-import com.wealoha.social.api.UserPromotionService;
-import com.wealoha.social.api.UserRegisterService;
 import com.wealoha.social.api.UserService;
 import com.wealoha.social.cache.ImageRender;
 import com.wealoha.social.commons.CacheManager;
@@ -739,26 +733,8 @@ public class AlohaModule {
 
     @Provides
     @Singleton
-    UserPromotionService userPromotionService(RestAdapter restAdapter) {
-        return restAdapter.create(UserPromotionService.class);
-    }
-
-    @Provides
-    @Singleton
-    SettingService settingService(RestAdapter restAdapter) {
-        return restAdapter.create(SettingService.class);
-    }
-
-    @Provides
-    @Singleton
     MatchService provideMatchService(RestAdapter restAdapter) {
         return restAdapter.create(MatchService.class);
-    }
-
-    @Provides
-    @Singleton
-    UserRegisterService provideUserRegisterService(RestAdapter restAdapter) {
-        return restAdapter.create(UserRegisterService.class);
     }
 
     @Provides
@@ -841,12 +817,6 @@ public class AlohaModule {
 
     @Provides
     @Singleton
-    InstagramService provideInstagramService(RestAdapter restAdapter) {
-        return restAdapter.create(InstagramService.class);
-    }
-
-    @Provides
-    @Singleton
     LocationService provideLocationService(RestAdapter restAdapter) {
         return restAdapter.create(LocationService.class);
     }
@@ -878,18 +848,6 @@ public class AlohaModule {
     @Singleton
     LocationServiceAPI provideLocationServiceAPI(RestAdapter restAdapter) {
         return restAdapter.create(LocationServiceAPI.class);
-    }
-
-    @Provides
-    @Singleton
-    UserSettingPrivacyAPI provideUserSettingPrivacyAPI(RestAdapter restAdapter) {
-        return restAdapter.create(UserSettingPrivacyAPI.class);
-    }
-
-    @Provides
-    @Singleton
-    TopicAPI provideTopicAPI(RestAdapter restAdapter) {
-        return restAdapter.create(TopicAPI.class);
     }
 
 }

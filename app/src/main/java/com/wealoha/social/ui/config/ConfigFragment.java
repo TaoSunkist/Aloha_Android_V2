@@ -33,11 +33,11 @@ import com.wealoha.social.ContextConfig;
 import com.wealoha.social.R;
 import com.wealoha.social.activity.FaqStatmentAct;
 import com.wealoha.social.activity.ProFeatureAct;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.instagram.InstagramResult;
 import com.wealoha.social.beans.PromotionGetData;
-import com.wealoha.social.api.UserPromotionService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
 import com.wealoha.social.fragment.BaseFragment;
@@ -78,7 +78,7 @@ public class ConfigFragment extends BaseFragment implements IConfigView {
 	@Inject
 	FontUtil fontUtil;
 	@Inject
-	UserPromotionService userPromotionService;
+	ServerApi userPromotionService;
 	// 资料详细
 	@InjectView(R.id.config_detals_rl)
 	RelativeLayout mDetals;

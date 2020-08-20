@@ -703,4 +703,191 @@ interface ServerApi{
         @Field("accessToken") accessToken: String?,
         callback: Callback<Result<AuthData?>?>?
     )
+
+    /**
+     * 读取当前设置
+     *
+     * @return
+     */
+    // TODO
+    @get:GET(ServerUrlImpl.URL_USER_SETTING_PUSH)
+    val pushSetting: Result<PushSettingResult?>?
+
+    @GET(ServerUrlImpl.URL_USER_SETTING_PUSH)
+    fun getPushSetting(callback: Callback<Result<PushSettingResult?>?>?)
+
+    /**
+     * 保存设置
+     *
+     * @param pushSound
+     * @param pushVibration
+     * @param pushShowDetail
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(ServerUrlImpl.URL_USER_SETTING_PUSH)
+    fun savePushSetting(
+        @Field("pushSound") pushSound: Boolean?,  //
+        @Field("pushVibration") pushVibration: Boolean?,  //
+        @Field("pushShowDetail") pushShowDetail: Boolean?,  //
+        @Field("pushPostLike") pushPostLike: String?,  //
+        @Field("pushPostComment") pushPostComment: String?
+    ): Result<ResultData?>?
+
+    @FormUrlEncoded
+    @POST(ServerUrlImpl.URL_USER_SETTING_PUSH)
+    fun savePushSetting(
+        @Field("pushSound") pushSound: Boolean?,  //
+        @Field("pushVibration") pushVibration: Boolean?,  //
+        @Field("pushShowDetail") pushShowDetail: Boolean?,  //
+        @Field("pushPostLike") pushPostLike: String?,  //
+        @Field("pushPostComment") pushPostComment: String?,  //
+        @Field("pushPostTag") pushPostTag: String?,  //
+        callback: Callback<Result<ResultData?>?>?
+    )
+
+    @FormUrlEncoded
+    @POST(ServerUrlImpl.URL_USER_SETTING_PUSH)
+    fun savePushSetting(
+        @Field("pushAloha") pushAloha: String?,  //
+        callback: Callback<Result<ResultData?>?>?
+    )
+
+    @FormUrlEncoded
+    @POST(ServerUrlImpl.URL_USER_SETTING_PUSH)
+    fun savePushSetting(
+        @Field("pushSound") pushSound: Boolean?,  //
+        @Field("pushVibration") pushVibration: Boolean?,  //
+        @Field("pushShowDetail") pushShowDetail: Boolean?
+    ): Result<PushSettingResult?>?
+
+    /**
+     * 获取活动的列表
+     *
+     *
+     * userId
+     *
+     * @return
+     */
+    @GET("/tag/list")
+    fun getTopic(
+        @Query("latitude") latitude: Double?,  //
+        @Query("longitude") longitude: Double?,  //
+        callback: Callback<Result<TopicData?>?>?
+    )
+
+    /**
+     * 获取邀请状态
+     *
+     * @return
+     */
+    @GET(ServerUrlImpl.GET_USER_PROMOTION)
+    fun get(): Result<PromotionGetData?>?
+
+    /**
+     * 获取邀请状态
+     *
+     * @return
+     */
+    @GET(ServerUrlImpl.GET_USER_PROMOTION)
+    operator fun get(callback: Callback<Result<PromotionGetData?>?>?) // /**
+    // * 新注册用户，提交邀请码使用
+    // *
+    // * @param code
+    // * @return
+    // */
+    // @FormUrlEncoded
+    // @POST(GlobalConstants.ServerUrl.LOAD_USER_FEED)
+    // public Result<PromotionSetData> submit(@Field("code") String code);
+
+    /**
+     * 获得短信验证码
+     *
+     * @param number
+     * @param callback
+     */
+    @POST("/v1/user/register/mobile/verify")
+    @FormUrlEncoded
+    fun getCode(
+        @Field("number") number: String?,
+        callback: Callback<Result<ResultData?>?>?
+    )
+
+    /**
+     * 活得重设密码的短信验证码
+     *
+     * @param number
+     * @param callback
+     */
+    @POST("/v1/user/password/mobile/reset/verify")
+    @FormUrlEncoded
+    fun getResetPasswordCode(
+        @Field("number") number: String?,
+        callback: Callback<Result<ResultData?>?>?
+    )
+
+    /**
+     * 提交注册
+     *
+     * @param number
+     * @param code
+     * @param passwordMd5
+     * @param callback
+     */
+    @POST("/v1/user/register/mobile")
+    @FormUrlEncoded
+    fun register(
+        @Field("number") number: String?,
+        @Field("code") code: String?,  //
+        @Field("passwordMd5") passwordMd5: String?,
+        callback: Callback<Result<AuthData?>?>?
+    )
+
+    //
+    // /v1/user/setting/privacy
+
+    //
+    // /v1/user/setting/privacy
+    /**
+     * @param callback
+     * @author: sunkist
+     * @description: matchExcludeDistanceKm
+     * 不要在多近的范围内推荐我。空: 没有设置；大于200，不推荐
+     * @date:2015年8月4日
+     */
+    @GET("/v1/user/setting/privacy")
+    fun getPrivacy(callback: Callback<Result<PrivacyData?>?>?)
+
+    /**
+     * @param matchExcludeDistanceKm 1-1000有效，不传抹掉；大于200隐身
+     * @param callback
+     * @author: sunkist
+     * @description:
+     * @date:2015年8月4日
+     */
+    @POST("/v1/user/setting/privacy")
+    @FormUrlEncoded
+    fun setPrivacy(
+        @Field("matchExcludeDistanceKm") matchExcludeDistanceKm: Int?,
+        callback: Callback<Result<PrivacyData?>?>?
+    )
+
+    @FormUrlEncoded
+    @POST(ServerUrlImpl.POST_INSTAGRAM_TOKEN)
+    fun postToken(
+        @Field("uid") uid: String?,  //
+        @Field("accessToken") accessToken: String?,  //
+        @Field("month") month: Int?,  //
+        callback: Callback<Result<AuthData?>?>?
+    )
+
+    @POST(ServerUrlImpl.UNBIND_INSTAGRAM)
+    fun unbind(callback: Callback<Result<AuthData?>?>?)
+
+    @FormUrlEncoded
+    @POST(ServerUrlImpl.SET_AUTO)
+    fun setAuto(
+        @Field("autoSync") autoSync: Boolean,  //
+        callback: Callback<Result<AuthData?>?>?
+    )
 }

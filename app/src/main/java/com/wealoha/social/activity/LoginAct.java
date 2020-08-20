@@ -34,7 +34,6 @@ import com.wealoha.social.api.User2Service;
 import com.wealoha.social.beans.AuthData;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
-import com.wealoha.social.api.UserRegisterService;
 import com.wealoha.social.api.UserService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.fragment.PhoneAreaFragment;
@@ -88,7 +87,7 @@ public class LoginAct extends BaseFragAct implements OnClickListener {
 	@Inject
 	Context context;
 	@Inject
-	UserRegisterService userRegisterService;
+	ServerApi userRegisterService;
 
 	private Context mContext;
 	private Dialog forgotDialog;

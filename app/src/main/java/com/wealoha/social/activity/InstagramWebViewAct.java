@@ -26,10 +26,10 @@ import butterknife.OnClick;
 
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.AuthData;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.instagram.AccessToken;
-import com.wealoha.social.api.InstagramService;
 import com.wealoha.social.api.OauthService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.utils.ContextUtil;
@@ -42,7 +42,7 @@ public class InstagramWebViewAct extends BaseFragAct implements OnClickListener 
 	@Inject
 	OauthService mOauthService;
 	@Inject
-	InstagramService mInstagramService;
+	ServerApi mInstagramService;
 	@Inject
 	ContextUtil contextUtil;
 
