@@ -39,6 +39,7 @@ import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.api.UserService;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
 import com.wealoha.social.inject.Injector;
@@ -564,7 +565,7 @@ public class PopupStore {
      * @author: sunkist
      * @date:2015-1-21
      */
-    public void showShareProfilePopup(final BaseFragAct baseFragAct, final com.wealoha.social.api.user.bean.User2 meUser2, final com.wealoha.social.api.user.bean.User2 toUser2) {
+    public void showShareProfilePopup(final BaseFragAct baseFragAct, final User2 meUser2, final User2 toUser2) {
 
         int viewId = 0;
         LayoutInflater lInflater;
@@ -1288,7 +1289,7 @@ public class PopupStore {
      * @Title: black
      * @Description: 加入黑名单
      */
-    private void black(final com.wealoha.social.api.user.bean.User2 user2) {
+    private void black(final User2 user2) {
         mUserService.blackUser(user2.getId(), new Callback<Result<ResultData>>() {
 
             @Override
@@ -1401,7 +1402,7 @@ public class PopupStore {
 
     }
 
-    public void openGuideDialog(BaseFragAct baseAct, final com.wealoha.social.api.user.bean.User2 user2, PopupWindow sharePopup) {
+    public void openGuideDialog(BaseFragAct baseAct, final User2 user2, PopupWindow sharePopup) {
         if (sharePopup != null && sharePopup.isShowing()) {
             sharePopup.dismiss();
         }
@@ -1485,7 +1486,7 @@ public class PopupStore {
      * @Title: black
      * @Description: 移除黑名单
      */
-    private void removeFromBlack(final com.wealoha.social.api.user.bean.User2 user2) {
+    private void removeFromBlack(final User2 user2) {
         mUserService.unblock(user2.getId(), new Callback<Result<ResultData>>() {
 
             @Override
@@ -1535,7 +1536,7 @@ public class PopupStore {
      * @Title: report
      * @Description: 举报用户或FEED
      */
-    private void report(com.wealoha.social.api.user.bean.User2 user2) {
+    private void report(User2 user2) {
         mUserService.reportUser(user2.getId(), null, new Callback<Result<ResultData>>() {
 
             @Override

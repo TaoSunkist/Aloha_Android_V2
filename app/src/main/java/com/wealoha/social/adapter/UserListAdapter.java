@@ -13,7 +13,7 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.adapter.feed.AbsViewHolder;
 import com.wealoha.social.api.common.BaseListApiService;
-import com.wealoha.social.api.user.bean.User2;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.view.custom.CircleImageView;
 import com.wealoha.social.widget.BaseAdapterHolder;
 import com.wealoha.social.widget.BaseListApiAdapter;

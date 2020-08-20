@@ -3,8 +3,6 @@ package com.wealoha.social.beans;
 import java.io.Serializable;
 import java.util.List;
 
-import com.wealoha.social.api.user.bean.User2;
-
 /**
  * 
  * 

@@ -2,6 +2,7 @@ package com.wealoha.social.utils;
 
 import com.wealoha.social.beans.Image;
 import com.wealoha.social.beans.User;
+import com.wealoha.social.beans.User2;
 
 /**
  * @author:sunkist
@@ -13,7 +14,7 @@ import com.wealoha.social.beans.User;
  */
 public class DockingBeanUtils {
 
-    public static User transUser(com.wealoha.social.api.user.bean.User2 apiUser2) {
+    public static User transUser(User2 apiUser2) {
         User user = User.Companion.fake();
         user.setAge(String.valueOf(apiUser2.getAge()));
         user.setAlohaCount(apiUser2.getAlohaCount());

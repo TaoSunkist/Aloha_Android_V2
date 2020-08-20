@@ -18,7 +18,7 @@ import com.wealoha.social.adapter.NewAlohaAdapter;
 import com.wealoha.social.beans.NewAlohaNotify2;
 import com.wealoha.social.beans.Notify2;
 import com.wealoha.social.beans.PostLikeNotify2;
-import com.wealoha.social.api.user.bean.User2;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.utils.ContextUtil;
 import com.wealoha.social.utils.FontUtil.Font;
 import com.wealoha.social.utils.ToastUtil;

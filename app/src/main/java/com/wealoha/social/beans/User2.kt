@@ -1,9 +1,8 @@
-package com.wealoha.social.api.user.bean
+package com.wealoha.social.beans
 
 import android.os.Parcelable
 import android.text.TextUtils
 import com.wealoha.social.api.common.bean.Image
-import com.wealoha.social.beans.UserDTO
 import kotlinx.android.parcel.Parcelize
 import org.apache.commons.lang3.builder.ToStringBuilder
 import org.apache.commons.lang3.builder.ToStringStyle
@@ -171,7 +170,7 @@ class User2(
         }
 
         @JvmStatic
-        fun formOldUser(oldUser: com.wealoha.social.beans.User): User2 {
+        fun formOldUser(oldUser: User): User2 {
             return User2(
                 oldUser.id,
                 oldUser.name,

@@ -46,6 +46,7 @@ import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.api.CommentService;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.fragment.Profile2Fragment;
 import com.wealoha.social.utils.DockingBeanUtils;
@@ -85,7 +86,7 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 	private View headView;
 	private int removePosition;
 	private String removeCommentId;
-	private com.wealoha.social.api.user.bean.User2 mUser2;
+	private User2 mUser2;
 	private Handler mHandler;
 	private static final String TAG = FeedCommentActivity.class.getSimpleName();
 
@@ -126,7 +127,7 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 		Bundle bundle = getIntent().getExtras();
 		if (bundle != null) {
 			mPost = (Post) bundle.getSerializable(GlobalConstants.TAGS.POST_TAG);
-			mUser2 = (com.wealoha.social.api.user.bean.User2) bundle.getSerializable(com.wealoha.social.api.user.bean.User2.TAG);
+			mUser2 = (User2) bundle.getSerializable(User2.TAG);
 			return true;
 		}
 		return false;
@@ -496,7 +497,7 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 	 *            被开启主页的用户
 	 */
 	@Override
-	public void openSomeoneProfile(com.wealoha.social.api.user.bean.User2 user2) {
+	public void openSomeoneProfile(User2 user2) {
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(user2));
 		startFragment(Profile2Fragment.class, bundle, true);

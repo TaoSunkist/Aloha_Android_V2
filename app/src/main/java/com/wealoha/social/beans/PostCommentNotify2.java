@@ -1,7 +1,5 @@
 package com.wealoha.social.beans;
 
-import com.wealoha.social.api.user.bean.User2;
-
 /**
  * 
  * 

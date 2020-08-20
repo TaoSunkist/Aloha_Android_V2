@@ -45,6 +45,7 @@ import android.view.WindowManager;
 import com.wealoha.social.R;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.User;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.push.notification.InboxMessageNewNotification;
 
 /**
@@ -1207,7 +1208,7 @@ public class StringUtil {
         }
     }
 
-    public static String shareDescription(com.wealoha.social.api.user.bean.User2 user2, Context context, RegionNodeUtil mRegionNodeUtil) {
+    public static String shareDescription(User2 user2, Context context, RegionNodeUtil mRegionNodeUtil) {
         if (user2 != null) {
             StringBuilder sBuilder = new StringBuilder();
             List<String> regionNames = mRegionNodeUtil.getRegionNames(user2.getRegionCode(), 10);

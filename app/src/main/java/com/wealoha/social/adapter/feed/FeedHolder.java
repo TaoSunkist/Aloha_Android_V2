@@ -49,7 +49,7 @@ import com.wealoha.social.api.common.BaseListApiService.NoResultCallback;
 import com.wealoha.social.beans.UserTag;
 import com.wealoha.social.api.Feed2Service;
 import com.wealoha.social.beans.Post;
-import com.wealoha.social.api.user.bean.User2;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
 import com.wealoha.social.fragment.BaseFragment;
@@ -628,7 +628,7 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 	 */
 	public void openProfile() {
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(com.wealoha.social.api.user.bean.User2.TAG, mPost.getUser2());
+		bundle.putSerializable(User2.TAG, mPost.getUser2());
 		((BaseFragAct) mFrag.getActivity()).startFragment(Profile2Fragment.class, bundle, true);
 	}
 

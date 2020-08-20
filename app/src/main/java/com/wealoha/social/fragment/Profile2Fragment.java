@@ -45,7 +45,7 @@ import com.wealoha.social.adapter.profile.Profile2ImagesAdapter;
 import com.wealoha.social.adapter.profile.Profile2InfoAdapter;
 import com.wealoha.social.api.common.ApiErrorCode;
 import com.wealoha.social.api.profile.service.Profile2Service;
-import com.wealoha.social.api.user.bean.User2;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.store.PopupStore;
 import com.wealoha.social.ui.config.ConfigFragment;

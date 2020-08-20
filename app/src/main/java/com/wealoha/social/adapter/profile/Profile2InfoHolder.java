@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.activity.ConfigDetailsAct;
-import com.wealoha.social.api.user.bean.User2;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.fragment.Profile2Fragment;
 import com.wealoha.social.inject.Injector;
 import com.wealoha.social.utils.ContextUtil;

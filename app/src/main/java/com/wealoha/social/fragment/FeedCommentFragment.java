@@ -73,6 +73,7 @@ import com.wealoha.social.beans.IResultDataErrorCode;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.api.CommentService;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.utils.FontUtil;
 import com.wealoha.social.utils.ToastUtil;
@@ -132,7 +133,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	private Post mPost;
 	private int removePosition;
 	private String removeCommentId;
-	private com.wealoha.social.api.user.bean.User2 mUser2;
+	private User2 mUser2;
 
 	private FeedHolder feedHolder;
 	private VideoFeedHolder videoHolder;
@@ -203,7 +204,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	}
 
 	private void initView(final Bundle bundle) {
-		mUser2 = (com.wealoha.social.api.user.bean.User2) bundle.getSerializable(com.wealoha.social.api.user.bean.User2.TAG);
+		mUser2 = (User2) bundle.getSerializable(User2.TAG);
 		initHeadView();
 		mFeedCommentAdapter = new FeedCommentAdapter(getActivity(), mComment2Service, this);
 		if (isPopSoftInputKey) {
@@ -264,7 +265,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 					if (userListLayout.getChildCount() > 2) {
 						openUserList();
 					} else {
-						openSomeoneProfile((com.wealoha.social.api.user.bean.User2) userListLayout.getChildAt(1).getTag());
+						openSomeoneProfile((User2) userListLayout.getChildAt(1).getTag());
 					}
 					return true;
 				}
@@ -333,10 +334,10 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 		int rootPadding = UiUtils.dip2px(mcontext, 9);
 		// 屏幕宽度减去一个头像所占的大小（为了给布局末尾的箭头视图留出位置）,除以每个头像的大小得出头像的最大个数
 		final int count = (UiUtils.getScreenWidth(getActivity().getApplicationContext()) - arrowWidth - rootPadding * 2) / (radiu + margin * 2);
-		feedService.getPraiseList(null, count, mPost.getPostId(), new ApiCallback<List<com.wealoha.social.api.user.bean.User2>>() {
+		feedService.getPraiseList(null, count, mPost.getPostId(), new ApiCallback<List<User2>>() {
 
 			@Override
-			public void success(List<com.wealoha.social.api.user.bean.User2> data) {
+			public void success(List<User2> data) {
 				XL.i(TAG, "init user list success");
 				if (isVisible()) {
 					initUserList(userListLayout, data, radiu, margin);
@@ -363,7 +364,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	 *            圆形头像的margin值
 	 * @return void
 	 */
-	private void initUserList(ViewGroup parent, List<com.wealoha.social.api.user.bean.User2> user2s, int radiu, int margin) {
+	private void initUserList(ViewGroup parent, List<User2> user2s, int radiu, int margin) {
 		if (user2s == null || user2s.size() == 0 || parent == null) {
 			parent.setVisibility(View.GONE);
 			return;
@@ -768,9 +769,9 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	 *            被开启主页的用户
 	 */
 	@Override
-	public void openSomeoneProfile(com.wealoha.social.api.user.bean.User2 user2) {
+	public void openSomeoneProfile(User2 user2) {
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(com.wealoha.social.api.user.bean.User2.TAG, user2);
+		bundle.putSerializable(User2.TAG, user2);
 		// bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(user));
 		((BaseFragAct) getActivity()).startFragment(Profile2Fragment.class, bundle, true);
 	}

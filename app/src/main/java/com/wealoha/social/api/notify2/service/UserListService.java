@@ -10,7 +10,7 @@ import com.wealoha.social.api.common.ApiErrorCode;
 import com.wealoha.social.api.common.Direct;
 import com.wealoha.social.beans.MergeUsersGetData;
 import com.wealoha.social.api.notify2.Notify2API;
-import com.wealoha.social.api.user.bean.User2;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.inject.Injector;
 import com.wealoha.social.utils.XL;

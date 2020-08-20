@@ -4,7 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.wealoha.social.api.user.bean.User2;
+import com.wealoha.social.beans.User2;
 
 public class Profile2InfoAdapter extends BaseAdapter {
 

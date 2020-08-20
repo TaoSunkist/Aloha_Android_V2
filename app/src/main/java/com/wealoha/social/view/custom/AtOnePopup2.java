@@ -29,6 +29,7 @@ import android.widget.TextView;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.activity.TagFeedAct;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.beans.UserTag;
 import com.wealoha.social.beans.feed.UserTags;
 import com.wealoha.social.fragment.Profile2Fragment;
@@ -402,7 +403,7 @@ public class AtOnePopup2 implements OnTouchListener, OnClickListener, OnGestureL
 
 	private void openProFile() {
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(com.wealoha.social.api.user.bean.User2.TAG, mUserTag.getUser2());
+		bundle.putSerializable(User2.TAG, mUserTag.getUser2());
 		XL.i("Profile2HeaderHolder", "is null ====" + mUserTag.getUser2().getAvatarImage());
 		if (contextUtil.getForegroundAct() != null) {
 			((BaseFragAct) contextUtil.getForegroundAct()).startFragmentHasAnim(Profile2Fragment.class, bundle, true, R.anim.left_in, R.anim.stop);

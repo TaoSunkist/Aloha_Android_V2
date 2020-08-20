@@ -2,8 +2,6 @@ package com.wealoha.social.beans;
 
 import java.util.List;
 
-import com.wealoha.social.api.user.bean.User2;
-
 /**
  * 
  * 

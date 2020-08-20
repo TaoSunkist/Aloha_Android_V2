@@ -17,7 +17,7 @@ import com.wealoha.social.api.comment.bean.PostComment;
 import com.wealoha.social.api.comment.dto.CommentDTO;
 import com.wealoha.social.api.common.AbsBaseService;
 import com.wealoha.social.api.common.Direct;
-import com.wealoha.social.api.user.bean.User2;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.inject.Injector;
 

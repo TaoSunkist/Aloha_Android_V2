@@ -5,7 +5,7 @@ import com.wealoha.social.api.common.ApiErrorCode
 import com.wealoha.social.api.common.BaseListApiService.ApiCallback
 import com.wealoha.social.api.common.BaseListApiService.NoResultCallback
 import com.wealoha.social.api.common.bean.Image
-import com.wealoha.social.api.user.bean.User2
+import com.wealoha.social.beans.User2
 import com.wealoha.social.beans.UserDTO
 import com.wealoha.social.beans.*
 import com.wealoha.social.callback.CallbackImpl

@@ -40,6 +40,7 @@ import com.wealoha.social.api.notify2.service.Notify2Service;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.api.CommentService;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.event.push.NewNotifyEvent;
 import com.wealoha.social.fragment.FeedCommentFragment;
@@ -431,7 +432,7 @@ public class FeedNoticeAct extends BaseFragAct implements OnClickListener, OnIte
 	 * @param user2
 	 *            被开启主页的用户
 	 */
-	private void openSomeoneProfile(com.wealoha.social.api.user.bean.User2 user2) {
+	private void openSomeoneProfile(User2 user2) {
 
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(user2));

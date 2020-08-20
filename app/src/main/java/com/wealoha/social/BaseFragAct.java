@@ -66,6 +66,7 @@ import com.wealoha.social.beans.User;
 import com.wealoha.social.api.ClientLogService;
 import com.wealoha.social.beans.AccessTokenKeeper;
 import com.wealoha.social.api.AuthService;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.callback.IBackKeyCallback;
 import com.wealoha.social.commons.AlohaThreadPool;
 import com.wealoha.social.commons.AlohaThreadPool.ENUM_Thread_Level;
@@ -934,7 +935,7 @@ public abstract class BaseFragAct extends FragmentActivity implements HasCache, 
      * @author: sunkist
      * @date:2014-12-5
      */
-    public void toProfileLogin(com.wealoha.social.api.user.bean.User2 user) {
+    public void toProfileLogin(User2 user) {
         com.wealoha.social.beans.User user2 = DockingBeanUtils.transUser(user);
         Bundle bundle = new Bundle();
         bundle.putSerializable(User.TAG, user2);

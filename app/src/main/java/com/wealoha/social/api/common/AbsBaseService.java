@@ -21,7 +21,7 @@ import com.wealoha.social.beans.UserTag;
 import com.wealoha.social.beans.UserTagsDTO;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.PostDTO;
-import com.wealoha.social.api.user.bean.User2;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.beans.UserDTO;
 
 /**

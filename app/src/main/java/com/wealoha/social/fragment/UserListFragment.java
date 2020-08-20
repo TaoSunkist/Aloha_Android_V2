@@ -20,7 +20,7 @@ import com.wealoha.social.R;
 import com.wealoha.social.adapter.UserListAdapter;
 import com.wealoha.social.api.common.ApiErrorCode;
 import com.wealoha.social.api.notify2.service.UserListService;
-import com.wealoha.social.api.user.bean.User2;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.inject.Injector;
 import com.wealoha.social.utils.DockingBeanUtils;
 import com.wealoha.social.utils.XL;

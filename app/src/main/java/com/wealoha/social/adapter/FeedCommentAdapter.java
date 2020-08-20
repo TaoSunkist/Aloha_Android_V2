@@ -18,6 +18,7 @@ import com.wealoha.social.R;
 import com.wealoha.social.adapter.feed.AbsViewHolder;
 import com.wealoha.social.api.comment.bean.PostComment;
 import com.wealoha.social.api.comment.service.Comment2Service;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
 import com.wealoha.social.utils.FontUtil;
 import com.wealoha.social.utils.TimeUtil;
@@ -39,7 +40,7 @@ public class FeedCommentAdapter extends BaseListApiAdapter<PostComment, String> 
 
 	public interface FeedCommentAdapterCallback {
 
-		public void openSomeoneProfile(com.wealoha.social.api.user.bean.User2 user2);
+		public void openSomeoneProfile(User2 user2);
 
 		public void showmPrivacyCommentSign();
 	}

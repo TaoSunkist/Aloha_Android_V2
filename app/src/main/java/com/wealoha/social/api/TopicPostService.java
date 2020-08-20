@@ -27,7 +27,7 @@ import com.wealoha.social.beans.TopicPostDTO;
 import com.wealoha.social.api.topic.bean.HashTag;
 import com.wealoha.social.api.topic.dto.HashTagDTO;
 import com.wealoha.social.api.topic.dto.TopicPostTagDTO;
-import com.wealoha.social.api.user.bean.User2;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.utils.XL;
 

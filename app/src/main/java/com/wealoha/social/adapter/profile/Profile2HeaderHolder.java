@@ -40,7 +40,7 @@ import com.wealoha.social.api.common.ApiErrorCode;
 import com.wealoha.social.api.common.BaseListApiService.ApiCallback;
 import com.wealoha.social.api.common.BaseListApiService.NoResultCallback;
 import com.wealoha.social.api.user.User2Service;
-import com.wealoha.social.api.user.bean.User2;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.message.InboxSession;
 import com.wealoha.social.beans.message.InboxSessionResult;

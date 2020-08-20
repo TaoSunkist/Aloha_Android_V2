@@ -31,6 +31,7 @@ import com.wealoha.social.beans.PostLikeNotify2;
 import com.wealoha.social.beans.PostTagNotify2;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.User;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
 import com.wealoha.social.fragment.FeedCommentFragment;
@@ -391,7 +392,7 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 	 * @param user2
 	 *            被开启主页的用户
 	 */
-	private void openSomeoneProfile(com.wealoha.social.api.user.bean.User2 user2) {
+	private void openSomeoneProfile(User2 user2) {
 
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(user2));
@@ -421,7 +422,7 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 	 */
 	private void wrapUsers(final Notify2 notify2, NewAlohaViewHolder newAlohaViewHolder, PostLikeViewHolder postLikeViewHolder) {
 
-		List<com.wealoha.social.api.user.bean.User2> user2s = null;
+		List<User2> user2s = null;
 		int size = 0;
 		long t = System.currentTimeMillis();
 		if (notify2 instanceof PostLikeNotify2) {

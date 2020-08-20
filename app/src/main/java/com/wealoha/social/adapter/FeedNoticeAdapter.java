@@ -33,6 +33,7 @@ import com.wealoha.social.beans.PostCommentNotify2;
 import com.wealoha.social.beans.PostLikeNotify2;
 import com.wealoha.social.beans.PostTagNotify2;
 import com.wealoha.social.beans.User;
+import com.wealoha.social.beans.User2;
 import com.wealoha.social.fragment.FeedFragment;
 import com.wealoha.social.fragment.Profile2Fragment;
 import com.wealoha.social.inject.Injector;
@@ -299,7 +300,7 @@ public class FeedNoticeAdapter extends BaseAdapter {
 	 */
 	private void wrapUsers(final Notify2 notify2, NewAlohaViewHolder newAlohaViewHolder, PostLikeViewHolder postLikeViewHolder) {
 
-		List<com.wealoha.social.api.user.bean.User2> user2s = null;
+		List<User2> user2s = null;
 		int size = 0;
 		if (notify2 instanceof PostLikeNotify2) {
 			postLikeViewHolder.mWrapUsers.removeAllViews();
@@ -313,7 +314,7 @@ public class FeedNoticeAdapter extends BaseAdapter {
 					.into(circleImageView);
 					postLikeViewHolder.mWrapUsers.addView(circleImageView);
 					circleImageView.setClickable(true);
-					final com.wealoha.social.api.user.bean.User2 user2 = user2s.get(i);
+					final User2 user2 = user2s.get(i);
 					circleImageView.setOnClickListener(new View.OnClickListener() {
 
 						@Override
