@@ -584,5 +584,123 @@ interface ServerApi{
         @Field("comment") comment: String?,  //
         callback: Callback<Result<Comment2GetData?>?>?
     )
+    /**
+     * æŸ¥çœ‹ç”¨æˆ·feed
+     *
+     * @param userId
+     * ä¼ nullçœ‹ç”¨æˆ·è‡ªå·±çš„
+     * @param cursor
+     * @param count
+     * @return
+     */
+    @GET(ServerUrlImpl.GET_COMMENT)
+    fun comments(
+        @Query("postId") postId: String?,
+        @Query("cursor") cursor: String?,
+        @Query("count") count: String?,
+        callback: Callback<Result<CommentResult?>?>?
+    )
 
+    /**
+     * 发表评论(旧)
+     *
+     * @param userId
+     * @param cursor
+     * @param count
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(ServerUrlImpl.POST_COMMENT)
+    fun postComment(
+        @Field("postId") postId: String?,
+        @Field("replyUserId") userid: String?,
+        @Field("comment") comment: String?,
+        callback: Callback<Result<Comment2GetData?>?>?
+    )
+
+    /**
+     * 发表评论(新)
+     *
+     * @param userId
+     * @param cursor
+     * @param count
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(ServerUrlImpl.POST_COMMENT_V2)
+    fun postCommentV2(
+        @Field("postId") postId: String?,
+        @Field("replyCommentId") replyCommentId: String?,
+        @Field("comment") comment: String?,
+        callback: Callback<Result<Comment2GetData?>?>?
+    )
+
+    /**
+     * 旧版本的发表评论接口
+     *
+     * @param userId
+     * @param cursor
+     * @param count
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(ServerUrlImpl.POST_COMMENT)
+    fun postCommentForOld(
+        @Field("postId") postId: String?,
+        @Field("replyUserId") userid: String?,
+        @Field("comment") comment: String?,
+        callback: Callback<Result<CommentResult?>?>?
+    )
+
+    @FormUrlEncoded
+    @POST(ServerUrlImpl.DELETE_COMMENT)
+    fun deleteComment(
+        @Field("postId") postId: String?,
+        @Field("commentId") comment: String?,
+        callback: Callback<Result<ResultData?>?>?
+    )
+
+    /**
+     * 连接微博
+     *
+     * @param uid
+     * @param accessToken
+     * @return
+     */
+    @POST(ServerUrlImpl.CONNECT_WEIBO)
+    @FormUrlEncoded
+    fun connectWeibo(
+        @Field("uid") uid: String?,
+        @Field("accessToken") accessToken: String?
+    ): Result<AuthData?>?
+
+    /**
+     * 连接微博
+     *
+     * @param uid
+     * @param accessToken
+     * @param callback
+     */
+    @POST(ServerUrlImpl.CONNECT_WEIBO)
+    @FormUrlEncoded
+    fun connectWeibo(
+        @Field("uid") uid: String?,
+        @Field("accessToken") accessToken: String?,
+        callback: Callback<Result<AuthData?>?>?
+    )
+
+    /**
+     * 连接微博
+     *
+     * @param uid
+     * @param accessToken
+     * @param callback
+     */
+    @POST("/v1/connect/facebook")
+    @FormUrlEncoded
+    fun connectFacebook(
+        @Field("uid") uid: String?,
+        @Field("accessToken") accessToken: String?,
+        callback: Callback<Result<AuthData?>?>?
+    )
 }

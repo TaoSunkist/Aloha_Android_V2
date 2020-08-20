@@ -116,7 +116,6 @@ import com.wealoha.social.api.Profile2Service;
 import com.wealoha.social.api.TopicAPI;
 import com.wealoha.social.api.TopicService;
 import com.wealoha.social.api.User2Service;
-import com.wealoha.social.api.CommentService;
 import com.wealoha.social.api.ConstantsService;
 import com.wealoha.social.api.CountService;
 import com.wealoha.social.api.InstagramService;
@@ -130,7 +129,6 @@ import com.wealoha.social.api.MessageService;
 import com.wealoha.social.beans.message.TextMessage;
 import com.wealoha.social.api.FindYouService;
 import com.wealoha.social.api.SettingService;
-import com.wealoha.social.api.ConnectService;
 import com.wealoha.social.api.ProfileService;
 import com.wealoha.social.api.UserPromotionService;
 import com.wealoha.social.api.UserRegisterService;
@@ -765,12 +763,6 @@ public class AlohaModule {
 
     @Provides
     @Singleton
-    ConnectService provideConnectService(RestAdapter restAdapter) {
-        return restAdapter.create(ConnectService.class);
-    }
-
-    @Provides
-    @Singleton
     MessageService provideMessageService(RestAdapter restAdapter) {
         return restAdapter.create(MessageService.class);
     }
@@ -791,12 +783,6 @@ public class AlohaModule {
     @Singleton
     ImageRender provideImageRender(Picasso picasso) {
         return new ImageRender();
-    }
-
-    @Provides
-    @Singleton
-    CommentService provideImageRender(RestAdapter restAdapter) {
-        return restAdapter.create(CommentService.class);
     }
 
     @Provides

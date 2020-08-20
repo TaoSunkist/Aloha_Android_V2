@@ -39,7 +39,6 @@ import com.wealoha.social.beans.PostTagNotify2;
 import com.wealoha.social.api.Notify2Service;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.api.CommentService;
 import com.wealoha.social.beans.User2;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.event.push.NewNotifyEvent;
@@ -78,7 +77,7 @@ public class FeedNoticeAct extends BaseFragAct implements OnClickListener, OnIte
 	@Inject
 	ServerApi mFeedService;
 	@Inject
-	CommentService mCommentService;
+	ServerApi mCommentService;
 	@InjectView(R.id.feed_notice_tv)
 	TextView feed_notice_tv;
 	@InjectView(R.id.frag_feed_msg_tv)

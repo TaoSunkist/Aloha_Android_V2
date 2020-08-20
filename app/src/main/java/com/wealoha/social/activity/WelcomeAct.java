@@ -36,11 +36,11 @@ import com.wealoha.social.ActivityManager;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.ContextConfig;
 import com.wealoha.social.R;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.AuthData;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.AccessTokenKeeper;
-import com.wealoha.social.api.ConnectService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.utils.ContextUtil;
 import com.wealoha.social.utils.FontUtil;
@@ -82,7 +82,7 @@ public class WelcomeAct extends BaseFragAct implements OnClickListener {
     @Inject
     Picasso picasso;
     @Inject
-    ConnectService connectService;
+    ServerApi connectService;
     @Inject
     FontUtil fontUtil;
     private Context mContext;

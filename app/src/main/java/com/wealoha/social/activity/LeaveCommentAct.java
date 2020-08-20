@@ -48,6 +48,7 @@ import com.squareup.picasso.Picasso;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.adapter.CommentAdapter;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Comment;
 import com.wealoha.social.beans.CommentResult;
 import com.wealoha.social.beans.Feed;
@@ -55,7 +56,6 @@ import com.wealoha.social.beans.IResultDataErrorCode;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.api.CommentService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.utils.ContextUtil;
 import com.wealoha.social.utils.FontUtil.Font;
@@ -81,7 +81,7 @@ public class LeaveCommentAct extends BaseFragAct implements OnItemClickListener,
     @Inject
     Picasso picasso;
     @Inject
-    CommentService mCommentService;
+    ServerApi mCommentService;
     public static final String TAG = LeaveCommentAct.class.getSimpleName();
     @InjectView(R.id.comments_send_tv)
     TextView mSend;

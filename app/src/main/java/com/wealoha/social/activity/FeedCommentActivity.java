@@ -35,6 +35,7 @@ import com.wealoha.social.adapter.FeedCommentAdapter;
 import com.wealoha.social.adapter.FeedCommentAdapter.FeedCommentAdapterCallback;
 import com.wealoha.social.adapter.feed.BaseFeedHolder.Holder2FragCallback;
 import com.wealoha.social.adapter.feed.FeedHolder;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Comment2GetData;
 import com.wealoha.social.beans.PostComment;
 import com.wealoha.social.api.Comment2Service;
@@ -45,7 +46,6 @@ import com.wealoha.social.beans.IResultDataErrorCode;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.api.CommentService;
 import com.wealoha.social.beans.User2;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.fragment.Profile2Fragment;
@@ -64,7 +64,7 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 		OnItemLongClickListener, ListItemCallback, FeedCommentAdapterCallback, Holder2FragCallback {
 
 	@Inject
-	CommentService mCommentService;
+	ServerApi mCommentService;
 	@Inject
 	Comment2Service mComment2Service;
 	@InjectView(R.id.feed_comment_back_iv)
@@ -141,7 +141,7 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 	/**
 	 * 加载 “加载之前的留言” 视图
 	 * 
-	 * @param listview
+	 * @ listview
 	 * @return void
 	 */
 	private void initHeadView() {

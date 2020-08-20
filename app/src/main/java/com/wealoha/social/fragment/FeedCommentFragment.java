@@ -72,7 +72,6 @@ import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.IResultDataErrorCode;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
-import com.wealoha.social.api.CommentService;
 import com.wealoha.social.beans.User2;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.utils.FontUtil;
@@ -95,7 +94,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	@Inject
 	Feed2Service feedService;
 	@Inject
-	CommentService mCommentService;
+	ServerApi mCommentService;
 	@Inject
 	Comment2Service mComment2Service;
 	@Inject

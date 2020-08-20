@@ -38,13 +38,13 @@ import com.sina.weibo.sdk.net.RequestListener;
 import com.wealoha.social.ActivityManager;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.AuthData;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.SinaTokenBean;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.UsersAPI;
 import com.wealoha.social.beans.AccessTokenKeeper;
-import com.wealoha.social.api.ConnectService;
 import com.wealoha.social.commons.AlohaThreadPool;
 import com.wealoha.social.commons.AlohaThreadPool.ENUM_Thread_Level;
 import com.wealoha.social.commons.GlobalConstants;
@@ -69,7 +69,7 @@ public class OAuthSinaAct extends BaseFragAct {
 	@Inject
 	ContextUtil contextUtil;
 	@Inject
-	ConnectService connectService;
+	ServerApi connectService;
 
 	private Context mContext;
 	private FlippingLoadingDialog mFlippingLoadingDialog;
