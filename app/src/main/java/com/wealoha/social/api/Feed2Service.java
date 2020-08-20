@@ -35,7 +35,7 @@ import com.wealoha.social.utils.XL;
 public class Feed2Service extends AbsBaseService<Post, String> {
 
 	@Inject
-	Feed2API feed2Api;
+	ServerApi feed2Api;
 	@Inject
 	Context context;
 	@Inject

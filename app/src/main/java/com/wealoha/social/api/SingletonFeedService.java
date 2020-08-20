@@ -16,7 +16,7 @@ import com.wealoha.social.utils.XL;
 public class SingletonFeedService extends Feed2Service {
 
 	@Inject
-	Feed2API feed2Api;
+	ServerApi feed2Api;
 	public final static String TAG = SingletonFeedService.class.getSimpleName();
 
 	@Override

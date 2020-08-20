@@ -16,7 +16,7 @@ import com.wealoha.social.utils.XL;
 public class PraisedPostService extends Feed2Service {
 
 	@Inject
-	Feed2API feed2API;
+	ServerApi feed2API;
 
 	@Override
 	public void getList(String cursor, int count, Direct direct, final String userid, final com.wealoha.social.api.common.BaseListApiService.ApiListCallback<Post> callback) {

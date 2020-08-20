@@ -7,8 +7,8 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import android.text.TextUtils;
 
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.api.common.service.AbsBaseService;
-import com.wealoha.social.api.Feed2API;
 import com.wealoha.social.beans.FeedGetData;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.Result;
@@ -16,7 +16,7 @@ import com.wealoha.social.beans.Result;
 public class PostService extends AbsBaseService<Post> {
 
 	@Inject
-	Feed2API feed2API;
+	ServerApi feed2API;
 
 	@Override
 	public void getList(final ServiceResultCallback<Post> callback, final String cursor, Object... args) {

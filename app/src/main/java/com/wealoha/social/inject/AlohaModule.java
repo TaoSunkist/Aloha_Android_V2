@@ -90,9 +90,9 @@ import com.wealoha.social.adapter.profile.Profile2HeaderHolder;
 import com.wealoha.social.adapter.profile.Profile2ImageHolder;
 import com.wealoha.social.adapter.profile.Profile2ImagesAdapter;
 import com.wealoha.social.adapter.profile.Profile2InfoHolder;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.api.comment.Comment2API;
 import com.wealoha.social.api.comment.service.Comment2Service;
-import com.wealoha.social.api.Feed2API;
 import com.wealoha.social.api.Feed2Service;
 import com.wealoha.social.api.PraisedPostService;
 import com.wealoha.social.api.SingletonFeedService;
@@ -914,8 +914,8 @@ public class AlohaModule {
 
     @Provides
     @Singleton
-    Feed2API provideFeed2API(RestAdapter restAdapter) {
-        return restAdapter.create(Feed2API.class);
+    ServerApi provideFeed2API(RestAdapter restAdapter) {
+        return restAdapter.create(ServerApi.class);
     }
 
     @Provides

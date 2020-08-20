@@ -58,13 +58,13 @@ import com.wealoha.social.adapter.feed.BaseFeedHolder.Holder2FragCallback;
 import com.wealoha.social.adapter.feed.FeedHolder;
 import com.wealoha.social.adapter.feed.ImageFeedHolder;
 import com.wealoha.social.adapter.feed.VideoFeedHolder;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.api.comment.Comment2GetData;
 import com.wealoha.social.api.comment.bean.PostComment;
 import com.wealoha.social.api.comment.service.Comment2Service;
 import com.wealoha.social.api.common.ApiErrorCode;
 import com.wealoha.social.api.common.BaseListApiService.ApiCallback;
 import com.wealoha.social.api.common.Direct;
-import com.wealoha.social.api.Feed2API;
 import com.wealoha.social.beans.FeedGetData;
 import com.wealoha.social.beans.FeedType;
 import com.wealoha.social.api.Feed2Service;
@@ -100,7 +100,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	@Inject
 	Context mcontext;
 	@Inject
-	Feed2API mFeed2API;
+	ServerApi mFeed2API;
 
 	@InjectView(R.id.feed_comment_back_iv)
 	ImageView mBack;
@@ -237,7 +237,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	/**
 	 * 初始化listview 头部布局中的post视图
 	 * 
-	 * @param listview
+	 *  listview
 	 * @return void
 	 */
 	private void initHeadView() {
@@ -249,7 +249,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	/***
 	 * 实例化 listview 头布局中的控件
 	 * 
-	 * @param header
+	 *  header
 	 * @return void
 	 */
 	private void findHeaderViewById(View header) {
@@ -301,7 +301,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	/***
 	 * 加载赞过这个post 的用户的信息并根据屏幕和将要显示的视图大小计算应该显示的用户数量和视图参数
 	 * 
-	 * @param userListLayout
+	 *  userListLayout
 	 *            装载这些用户信息视图的父容器
 	 * @return void
 	 */
@@ -353,13 +353,13 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	/***
 	 * 加载赞过这个post 的用户的信息并渲染视图，循环添加到父容器中
 	 * 
-	 * @param parent
+	 *  parent
 	 *            装载这些用户信息视图的父容器
-	 * @param users
+	 *  users
 	 *            用户的数据
-	 * @param radiu
+	 *  radiu
 	 *            圆形头像的半径
-	 * @param margin
+	 *  margin
 	 *            圆形头像的margin值
 	 * @return void
 	 */
@@ -392,7 +392,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	/***
 	 * listview 头部布局中要显示当前的post视图，这个方法用来初始化这个post视图的holder
 	 * 
-	 * @param parent
+	 *  parent
 	 *            post 视图的父容器
 	 * @return void
 	 */
@@ -418,7 +418,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	/**
 	 * 判断是否显示“加载更在数据”视图
 	 * 
-	 * @param isLoading
+	 *  isLoading
 	 * @return void
 	 */
 	private void loadingHeader(boolean hasNext) {
@@ -437,7 +437,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	/**
 	 * 滚到选中的评论，只在第一次加载数据的时候执行
 	 * 
-	 * @param commentid
+	 *  commentid
 	 * @return void
 	 */
 	private void smoothToTheComment(String commentid) {
@@ -684,7 +684,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	/**
 	 * @Title: sendComment
 	 * @Description: 发送评论
-	 * @param @param comment 评论内容
+	 *   comment 评论内容
 	 * @return void 返回类型
 	 * @throws
 	 */
@@ -764,7 +764,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	/**
 	 * 进入这个人的主页
 	 * 
-	 * @param user
+	 *  user
 	 *            被开启主页的用户
 	 */
 	@Override
