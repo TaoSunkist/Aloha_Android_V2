@@ -65,7 +65,7 @@ public class ImageFeedHolder extends BaseFeedHolder implements OnClickListener {
 	public View resetViewData(final Post post) {
 		mPost = post;
 		feedPhoto.getLayoutParams().height = imgWidth;
-		picasso.load(post.getImage().getUrlSquare(imgWidth)).into(feedPhoto);
+		picasso.load(post.getCommonImage().getUrlSquare(imgWidth)).into(feedPhoto);
 		if (getFeedType() == FeedHolder.TAGS_HOLDER) {
 			initAtOnePopup(post);// 直接显示tag
 		} else {
@@ -249,8 +249,8 @@ public class ImageFeedHolder extends BaseFeedHolder implements OnClickListener {
 	 *            设定文件
 	 */
 	private void createAtOnePopup(UserTag userTag) {
-		XL.i("Profile2HeaderHolder", "null---" + userTag.getUser2().getAvatarImage());
-		XL.i("Profile2HeaderHolder", "post null---" + mPost.getUserTags().get(0).getUser2().getAvatarImage());
+		XL.i("Profile2HeaderHolder", "null---" + userTag.getUser2().getAvatarCommonImage());
+		XL.i("Profile2HeaderHolder", "post null---" + mPost.getUserTags().get(0).getUser2().getAvatarCommonImage());
 		AtOnePopup2 atOne = new AtOnePopup2(mFrag.getActivity(), rootView, userTag);
 		atOnesList.add(atOne);
 		atOne.initAtPopup(false, null);

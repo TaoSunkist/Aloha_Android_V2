@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.wealoha.social.api.comment.dto.Comment2DTO;
 import com.wealoha.social.api.comment.dto.CommentDTO;
-import com.wealoha.social.api.common.bean.Image;
+import com.wealoha.social.api.common.bean.CommonImage;
 import com.wealoha.social.beans.User2;
 
 public class PostComment implements Serializable {
@@ -72,10 +72,10 @@ public class PostComment implements Serializable {
 			User2 user2 = null;
 			User2 replyUser2 = null;
 			if (dto.user != null) {
-				user2 = User2.fromDTO(dto.user, Image.fromDTO(dto.user.avatarImage));
+				user2 = User2.fromDTO(dto.user, CommonImage.fromDTO(dto.user.avatarImage));
 			}
 			if (dto.replyUser != null) {
-				replyUser2 = User2.fromDTO(dto.replyUser, Image.fromDTO(dto.replyUser.avatarImage));
+				replyUser2 = User2.fromDTO(dto.replyUser, CommonImage.fromDTO(dto.replyUser.avatarImage));
 			}
 
 			PostComment postComment = PostComment.fromComment2DTO(dto, replyUser2, user2);

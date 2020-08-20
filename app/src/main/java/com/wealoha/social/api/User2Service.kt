@@ -1,11 +1,10 @@
 package com.wealoha.social.api
 
 import com.squareup.otto.Bus
-import com.wealoha.social.api.ServerApi
-import com.wealoha.social.api.common.ApiErrorCode
-import com.wealoha.social.api.common.BaseListApiService.ApiCallback
-import com.wealoha.social.api.common.BaseListApiService.NoResultCallback
-import com.wealoha.social.api.common.bean.Image
+import com.wealoha.social.beans.ApiErrorCode
+import com.wealoha.social.api.BaseListApiService.ApiCallback
+import com.wealoha.social.api.BaseListApiService.NoResultCallback
+import com.wealoha.social.api.common.bean.CommonImage
 import com.wealoha.social.beans.User2
 import com.wealoha.social.beans.UserDTO
 import com.wealoha.social.beans.*
@@ -123,7 +122,7 @@ class User2Service {
         // userDto.aloha = proData.liked;
         // userDto.match = proData.friend;
         val img =
-            Image.fromDTO(proData?.imageMap!![userDto!!.avatarImageId])
+            CommonImage.fromDTO(proData?.imageMap!![userDto!!.avatarImageId])
         return User2.Companion.fromDTO(userDto, img)
     }
 

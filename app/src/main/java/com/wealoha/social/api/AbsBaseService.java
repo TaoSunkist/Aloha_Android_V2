@@ -1,4 +1,4 @@
-package com.wealoha.social.api.common;
+package com.wealoha.social.api;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,8 +12,8 @@ import android.text.TextUtils;
 import com.wealoha.social.api.comment.bean.PostComment;
 import com.wealoha.social.api.comment.dto.Comment2DTO;
 import com.wealoha.social.api.comment.dto.CommentDTO;
-import com.wealoha.social.api.common.bean.Image;
-import com.wealoha.social.api.common.bean.Video;
+import com.wealoha.social.api.common.bean.CommonImage;
+import com.wealoha.social.api.common.bean.CommonVideo;
 import com.wealoha.social.api.common.dto.ImageDTO;
 import com.wealoha.social.api.common.dto.VideoDTO;
 import com.wealoha.social.beans.FeedType;
@@ -86,10 +86,10 @@ public abstract class AbsBaseService<E, P> implements BaseListApiService<E, P> {
         }
         User2 user2 = getUser(postDto.userId, userMap, imageMap);
         List<UserTag> userTagList = gerUserTagList(postDto.userTags, userMap, imageMap);
-        Image image = Image.fromDTO(imageMap.get(postDto.imageId));
-        Video video = null;
+        CommonImage commonImage = CommonImage.fromDTO(imageMap.get(postDto.imageId));
+        CommonVideo commonVideo = null;
         if (videoMap != null) {
-            video = Video.fromDTO(videoMap.get(postDto.videoId));
+            commonVideo = CommonVideo.fromDTO(videoMap.get(postDto.videoId));
         }
 
         List<PostComment> recentCommentList = transCommentDTOList2PostCommentList(postDto.recentComments, userMap, imageMap);
@@ -103,7 +103,7 @@ public abstract class AbsBaseService<E, P> implements BaseListApiService<E, P> {
             praiseCount = praiseCountMap.get(postDto.userId);
         }
 
-        return Post.fromDTO(postDto, image, video, user2, userTagList,//
+        return Post.fromDTO(postDto, commonImage, commonVideo, user2, userTagList,//
                 commentCount == null ? 0 : commentCount,//
                 praiseCount == null ? 0 : praiseCount, Post.hasTagForMe(userTagList, currentUserid),//
                 recentCommentList, null);
@@ -126,10 +126,10 @@ public abstract class AbsBaseService<E, P> implements BaseListApiService<E, P> {
             User2 user2 = null;
             User2 replyUser2 = null;
             if (dto.user != null) {
-                user2 = User2.fromDTO(dto.user, Image.fromDTO(dto.user.avatarImage));
+                user2 = User2.fromDTO(dto.user, CommonImage.fromDTO(dto.user.avatarImage));
             }
             if (dto.replyUser != null) {
-                replyUser2 = User2.fromDTO(dto.replyUser, Image.fromDTO(dto.replyUser.avatarImage));
+                replyUser2 = User2.fromDTO(dto.replyUser, CommonImage.fromDTO(dto.replyUser.avatarImage));
             }
 
             PostComment postComment = PostComment.fromComment2DTO(dto, replyUser2, user2);
@@ -169,24 +169,24 @@ public abstract class AbsBaseService<E, P> implements BaseListApiService<E, P> {
         return User2.fromDTO(userDTO, getImage(userDTO.avatarImageId, imageMap));
     }
 
-    protected Image getImage(String imageId, Map<String, ImageDTO> imageMap) {
+    protected CommonImage getImage(String imageId, Map<String, ImageDTO> imageMap) {
         ImageDTO imageDTO = imageMap.get(imageId);
         if (imageDTO == null) {
             return null;
         }
-        return Image.fromDTO(imageDTO);
+        return CommonImage.fromDTO(imageDTO);
     }
 
-    protected Video getVideo(String Videoid, Map<String, VideoDTO> videoMap) {
+    protected CommonVideo getVideo(String Videoid, Map<String, VideoDTO> videoMap) {
         VideoDTO videoDTO = videoMap.get(Videoid);
         if (videoDTO == null) {
             return null;
         }
-        return Video.fromDTO(videoDTO);
+        return CommonVideo.fromDTO(videoDTO);
     }
 
     @Override
-    public void getListWithContext(String cursor, int count, P param, com.wealoha.social.api.common.BaseListApiService.ListContextCallback<E> callback) {
+    public void getListWithContext(String cursor, int count, P param, BaseListApiService.ListContextCallback<E> callback) {
         throw new UnsupportedOperationException("不支持从中间取数据");
     }
 
@@ -207,18 +207,18 @@ public abstract class AbsBaseService<E, P> implements BaseListApiService<E, P> {
         }
         List<UserTag> userTagList = new ArrayList<UserTag>(userTagDTOList.size());
         UserDTO userDto;
-        Image image;
+        CommonImage commonImage;
         for (UserTagsDTO userTagDto : userTagDTOList) {
             userDto = userMap.get(userTagDto.tagUserId);
-            image = Image.fromDTO(imageMap.get(userDto.avatarImageId));
+            commonImage = CommonImage.fromDTO(imageMap.get(userDto.avatarImageId));
             userTagList.add(new UserTag(userTagDto.tagAnchorX, userTagDto.tagAnchorY,//
-                    userTagDto.tagCenterX, userTagDto.tagCenterY, User2.fromDTO(userDto, image)));
+                    userTagDto.tagCenterX, userTagDto.tagCenterY, User2.fromDTO(userDto, commonImage)));
         }
         return userTagList;
     }
 
     @Override
-    public void setAdapterListCallback(com.wealoha.social.api.common.BaseListApiService.AdapterListDataCallback<E> callback) {
+    public void setAdapterListCallback(BaseListApiService.AdapterListDataCallback<E> callback) {
         // 子类实现具体方法
     }
 

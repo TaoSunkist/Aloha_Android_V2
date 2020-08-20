@@ -1,4 +1,4 @@
-package com.wealoha.social.api.notify2;
+package com.wealoha.social.beans;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -16,7 +16,7 @@ import com.wealoha.social.inject.AlohaModule;
 /**
  * 使用api返回json的type属性做继承类型对象的序列化和反序列化
  * 
- * 参考 {@link AlohaModule#provideGson()}
+ * 参考 { AlohaModule#provideGson()}
  * 
  * @author javamonk
  * @createTime 2015年2月25日 上午11:35:38

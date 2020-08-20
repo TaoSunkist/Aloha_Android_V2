@@ -146,7 +146,7 @@ public class VideoFeedHolder extends BaseFeedHolder implements OnCompletionListe
 
 	private void setSourceData() {
 		coverRoot.setVisibility(View.VISIBLE);
-		picasso.load(mPost.getImage().getUrlSquare(ImageSize.FEED_MAX)).into(videoImgView);
+		picasso.load(mPost.getCommonImage().getUrlSquare(ImageSize.FEED_MAX)).into(videoImgView);
 	}
 
 	@Override
@@ -270,7 +270,7 @@ public class VideoFeedHolder extends BaseFeedHolder implements OnCompletionListe
 		mMediaPlayer.reset();
 		mMediaPlayer.setVolume(0f, 0f);
 		try {
-			mMediaPlayer.setDataSource(mPost.getVideo().getUrl());
+			mMediaPlayer.setDataSource(mPost.getCommonVideo().getUrl());
 			mMediaPlayer.setLooping(true);
 			mMediaPlayer.prepareAsync();
 		} catch (Exception e) {

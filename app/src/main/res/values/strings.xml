@@ -461,7 +461,7 @@
     <string name="aloha_body_more_one">&#160;%1$s&#160;people&#160;&#160;started&#160;following you</string>
     <string name="first_chat_guide">&#160;&#160;It\'s a Match! You can start a conversation now.</string>
     <string name="unbind_ins_title">Disable</string>
-    <string name="touch_video_prompt">Tap video for sound</string>
+    <string name="touch_video_prompt">Tap commonVideo for sound</string>
     <string name="uninstall_wxapp">Wechat not found on this device</string>
     <string name="restart_post">Repost</string>
     <string name="only_alohaed_person">Following</string>
@@ -601,7 +601,7 @@
     <string name="prompt_need_logoff_current_account">Continue to sign out current account.</string>
     <string name="what_is_new">What\'s new?</string>
     <string name="video_post">Video Post</string>
-    <string name="make_or_upload_your_own_video">Make or upload your own video</string>
+    <string name="make_or_upload_your_own_video">Make or upload your own commonVideo</string>
     <string name="public_comment">Public comment</string>
     <string name="join_the_discussions">Join the discussions</string>
     <string name="privacy">Privacy</string>

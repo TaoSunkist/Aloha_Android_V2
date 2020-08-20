@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.wealoha.social.api.common.bean.Image;
+import com.wealoha.social.api.common.bean.CommonImage;
 import com.wealoha.social.api.common.dto.ImageDTO;
 
 public class UserTag implements Serializable {
@@ -35,12 +35,12 @@ public class UserTag implements Serializable {
 		}
 		List<UserTag> userTagList = new ArrayList<UserTag>(userTagDTOList.size());
 		UserDTO userDto;
-		Image image;
+		CommonImage commonImage;
 		for (UserTagsDTO userTagDto : userTagDTOList) {
 			userDto = userMap.get(userTagDto.tagUserId);
-			image = Image.fromDTO(imageMap.get(userDto.avatarImageId));
+			commonImage = CommonImage.fromDTO(imageMap.get(userDto.avatarImageId));
 			userTagList.add(new UserTag(userTagDto.tagAnchorX, userTagDto.tagAnchorY,//
-			userTagDto.tagCenterX, userTagDto.tagCenterY, User2.fromDTO(userDto, image)));
+			userTagDto.tagCenterX, userTagDto.tagCenterY, User2.fromDTO(userDto, commonImage)));
 		}
 		return userTagList;
 	}

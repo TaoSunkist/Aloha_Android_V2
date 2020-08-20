@@ -62,9 +62,9 @@ import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.api.comment.Comment2GetData;
 import com.wealoha.social.api.comment.bean.PostComment;
 import com.wealoha.social.api.comment.service.Comment2Service;
-import com.wealoha.social.api.common.ApiErrorCode;
-import com.wealoha.social.api.common.BaseListApiService.ApiCallback;
-import com.wealoha.social.api.common.Direct;
+import com.wealoha.social.beans.ApiErrorCode;
+import com.wealoha.social.api.BaseListApiService.ApiCallback;
+import com.wealoha.social.beans.Direct;
 import com.wealoha.social.beans.FeedGetData;
 import com.wealoha.social.beans.FeedType;
 import com.wealoha.social.api.Feed2Service;
@@ -380,7 +380,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 				params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 			}
 			CircleImageView circleImage = new CircleImageView(mcontext);
-			String url = user2s.get(i).getAvatarImage().getUrlSquare(radiu);
+			String url = user2s.get(i).getAvatarCommonImage().getUrlSquare(radiu);
 			picasso.load(url).into(circleImage);
 			circleImage.setTag(user2s.get(i));// 保存这个头像的用户信息
 			XL.i("user_type", "user--:" + user2s.get(i).getClass().getName());

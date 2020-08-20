@@ -11,12 +11,14 @@ import org.apache.commons.collections4.CollectionUtils;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
+import com.wealoha.social.api.BaseListApiService;
 import com.wealoha.social.api.comment.Comment2API;
 import com.wealoha.social.api.comment.Comment2GetData;
 import com.wealoha.social.api.comment.bean.PostComment;
 import com.wealoha.social.api.comment.dto.CommentDTO;
-import com.wealoha.social.api.common.AbsBaseService;
-import com.wealoha.social.api.common.Direct;
+import com.wealoha.social.api.AbsBaseService;
+import com.wealoha.social.beans.Direct;
+import com.wealoha.social.beans.ApiErrorCode;
 import com.wealoha.social.beans.User2;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.inject.Injector;
@@ -49,7 +51,7 @@ public class Comment2Service extends AbsBaseService<PostComment, String> {
 	 * 第一次定位的时候获取的数据.
 	 */
 	@Override
-	public void getList(String cursor, int count, final Direct direct, String postId, final com.wealoha.social.api.common.BaseListApiService.ApiListCallback<PostComment> callback) {
+	public void getList(String cursor, int count, final Direct direct, String postId, final BaseListApiService.ApiListCallback<PostComment> callback) {
 		comment2api.byDirectGetComment2s(postId, cursor, count, direct.getValue(), new retrofit.Callback<Result<Comment2GetData>>() {
 
 			@Override
@@ -70,18 +72,18 @@ public class Comment2Service extends AbsBaseService<PostComment, String> {
 						}
 						callback.success(trans(result.data), cursorid);
 					} else {
-						callback.fail(com.wealoha.social.api.common.ApiErrorCode.fromResult(result), null);
+						callback.fail(ApiErrorCode.fromResult(result), null);
 					}
 
 				} else {
-					callback.fail(com.wealoha.social.api.common.ApiErrorCode.fromResult(result), null);
+					callback.fail(ApiErrorCode.fromResult(result), null);
 				}
 			}
 		});
 	}
 
 	@Override
-	public void getListWithContext(String cursor, int count, String postId, final com.wealoha.social.api.common.BaseListApiService.ListContextCallback<PostComment> callback) {
+	public void getListWithContext(String cursor, int count, String postId, final BaseListApiService.ListContextCallback<PostComment> callback) {
 		comment2api.getFirstComment2s(postId, cursor, count, true, new retrofit.Callback<Result<Comment2GetData>>() {
 
 			@Override
@@ -95,7 +97,7 @@ public class Comment2Service extends AbsBaseService<PostComment, String> {
 					// 拼装数据
 					callback.success(trans(result.data), result.data.lateCursorId, result.data.nextCursorId);
 				} else {
-					callback.fail(com.wealoha.social.api.common.ApiErrorCode.fromResult(result), null);
+					callback.fail(ApiErrorCode.fromResult(result), null);
 				}
 			}
 

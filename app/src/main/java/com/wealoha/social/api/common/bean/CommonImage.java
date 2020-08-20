@@ -14,7 +14,7 @@ import com.wealoha.social.utils.ImageUtil.CropMode;
  * @author javamonk
  * @createTime 2015年2月25日 上午11:31:55
  */
-public class Image implements Serializable {
+public class CommonImage implements Serializable {
 
     /**
      *
@@ -26,7 +26,7 @@ public class Image implements Serializable {
     private final String urlPatternWidth;
     private final String urlPatternWidthHeight;
 
-    public Image(String imageId, int width, int height, String urlPatternWidth, String urlPatternWidthHeight) {
+    public CommonImage(String imageId, int width, int height, String urlPatternWidth, String urlPatternWidthHeight) {
         super();
         this.id = imageId;
         this.width = width;
@@ -35,20 +35,20 @@ public class Image implements Serializable {
         this.urlPatternWidthHeight = urlPatternWidthHeight;
     }
 
-    public static Image fromDTO(ImageDTO imageDTO) {
+    public static CommonImage fromDTO(ImageDTO imageDTO) {
         if (imageDTO == null) {
             return null;
         } else {
-            return new Image(imageDTO.imageId, imageDTO.width, imageDTO.height, //
+            return new CommonImage(imageDTO.imageId, imageDTO.width, imageDTO.height, //
                     imageDTO.urlPatternWidth, imageDTO.urlPatternWidthHeight);
         }
     }
 
-    public static Image fromOld(com.wealoha.social.beans.Image oldImg) {
+    public static CommonImage fromOld(com.wealoha.social.beans.Image oldImg) {
         if (oldImg == null) {
             return null;
         } else {
-            return new Image(oldImg.getId(), oldImg.getWidth(), oldImg.getHeight(), //
+            return new CommonImage(oldImg.getId(), oldImg.getWidth(), oldImg.getHeight(), //
                     oldImg.getUrlPatternWidth(), oldImg.getUrlPatternWidthHeight());
         }
     }

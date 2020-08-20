@@ -1,4 +1,4 @@
-package com.wealoha.social.api.common;
+package com.wealoha.social.beans;
 
 /**
  * 取数据的方向

@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.text.TextUtils;
 
+import com.wealoha.social.api.BaseService;
 import com.wealoha.social.inject.Injector;
 
 public abstract class AbsBaseService<T> implements BaseService<T> {

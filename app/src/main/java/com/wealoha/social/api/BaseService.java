@@ -1,4 +1,4 @@
-package com.wealoha.social.api.common.service;
+package com.wealoha.social.api;
 
 import java.util.List;
 

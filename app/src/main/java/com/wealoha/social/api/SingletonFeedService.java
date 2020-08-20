@@ -6,8 +6,8 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-import com.wealoha.social.api.common.ApiErrorCode;
-import com.wealoha.social.api.common.Direct;
+import com.wealoha.social.beans.ApiErrorCode;
+import com.wealoha.social.beans.Direct;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.FeedGetData;
 import com.wealoha.social.beans.Result;
@@ -20,7 +20,7 @@ public class SingletonFeedService extends Feed2Service {
 	public final static String TAG = SingletonFeedService.class.getSimpleName();
 
 	@Override
-	public void getList(String cursor, int count, Direct direct, String postId, final com.wealoha.social.api.common.BaseListApiService.ApiListCallback<Post> callback) {
+	public void getList(String cursor, int count, Direct direct, String postId, final BaseListApiService.ApiListCallback<Post> callback) {
 		feed2Api.singleFeed(postId, new Callback<Result<FeedGetData>>() {
 
 			@Override

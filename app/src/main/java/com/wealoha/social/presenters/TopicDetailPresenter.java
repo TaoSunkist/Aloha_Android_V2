@@ -2,7 +2,7 @@ package com.wealoha.social.presenters;
 
 import javax.inject.Inject;
 
-import com.wealoha.social.api.common.service.BaseService.ServiceObjResultCallback;
+import com.wealoha.social.api.BaseService.ServiceObjResultCallback;
 import com.wealoha.social.api.TopicPostService;
 import com.wealoha.social.beans.TopicPosts;
 import com.wealoha.social.beans.HashTag;

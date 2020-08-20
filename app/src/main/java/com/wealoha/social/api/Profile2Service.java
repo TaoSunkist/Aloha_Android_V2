@@ -1,4 +1,4 @@
-package com.wealoha.social.api.profile.service;
+package com.wealoha.social.api;
 
 import javax.inject.Inject;
 
@@ -6,11 +6,9 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.api.common.ApiErrorCode;
-import com.wealoha.social.api.common.Direct;
+import com.wealoha.social.beans.ApiErrorCode;
+import com.wealoha.social.beans.Direct;
 import com.wealoha.social.beans.FeedGetData;
-import com.wealoha.social.api.Feed2Service;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.Result;
 
@@ -24,7 +22,7 @@ public class Profile2Service extends Feed2Service {
 	}
 
 	@Override
-	public void getList(String cursor, int count, Direct direct, final String userid, final com.wealoha.social.api.common.BaseListApiService.ApiListCallback<Post> callback) {
+	public void getList(String cursor, int count, Direct direct, final String userid, final BaseListApiService.ApiListCallback<Post> callback) {
 		feed2Api.getUserPosts(userid, cursor, count, new Callback<Result<FeedGetData>>() {
 
 			@Override

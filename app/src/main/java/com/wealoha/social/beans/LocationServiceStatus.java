@@ -1,4 +1,4 @@
-package com.wealoha.social.api.locationservice.bean;
+package com.wealoha.social.beans;
 
 
 public class LocationServiceStatus {

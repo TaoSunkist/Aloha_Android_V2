@@ -1,4 +1,4 @@
-package com.wealoha.social.api.notify2.service;
+package com.wealoha.social.api;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,10 +14,8 @@ import retrofit.client.Response;
 import android.content.Context;
 
 import com.wealoha.social.R;
-import com.wealoha.social.api.common.AbsBaseService;
-import com.wealoha.social.api.common.ApiErrorCode;
-import com.wealoha.social.api.common.Direct;
-import com.wealoha.social.api.notify2.Notify2API;
+import com.wealoha.social.beans.ApiErrorCode;
+import com.wealoha.social.beans.Direct;
 import com.wealoha.social.beans.NotifyGetData;
 import com.wealoha.social.beans.NewAlohaNotify2;
 import com.wealoha.social.beans.Notify2;
@@ -114,7 +112,7 @@ public class Notify2Service extends AbsBaseService<Notify2, Boolean> {
 	}
 
 	@Override
-	public void getList(String cursor, int count, Direct direct, Boolean param, final com.wealoha.social.api.common.BaseListApiService.ApiListCallback<Notify2> callback) {
+	public void getList(String cursor, int count, Direct direct, Boolean param, final BaseListApiService.ApiListCallback<Notify2> callback) {
 		notify2api.getNotifies(cursor, count, param, new retrofit.Callback<Result<NotifyGetData>>() {
 
 			@Override

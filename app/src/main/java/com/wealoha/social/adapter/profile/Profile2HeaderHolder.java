@@ -36,9 +36,9 @@ import com.squareup.picasso.Target;
 import com.wealoha.social.AppApplication;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
-import com.wealoha.social.api.common.ApiErrorCode;
-import com.wealoha.social.api.common.BaseListApiService.ApiCallback;
-import com.wealoha.social.api.common.BaseListApiService.NoResultCallback;
+import com.wealoha.social.beans.ApiErrorCode;
+import com.wealoha.social.api.BaseListApiService.ApiCallback;
+import com.wealoha.social.api.BaseListApiService.NoResultCallback;
 import com.wealoha.social.api.User2Service;
 import com.wealoha.social.beans.User2;
 import com.wealoha.social.beans.Result;
@@ -231,13 +231,13 @@ public class Profile2HeaderHolder implements OnTouchListener {
 		RequestCreator requestCreator = null;
 		switch (tag) {
 		case 0:
-			XL.i(TAG, "isnull----------------" + mUser2.getAvatarImage());
+			XL.i(TAG, "isnull----------------" + mUser2.getAvatarCommonImage());
 			requestCreator = picasso//
-			.load(mUser2.getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB));
+			.load(mUser2.getAvatarCommonImage().getUrlSquare(ImageSize.CHAT_THUMB));
 			break;
 		case 1:
 			requestCreator = picasso//
-			.load(mUser2.getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB)).skipMemoryCache();
+			.load(mUser2.getAvatarCommonImage().getUrlSquare(ImageSize.CHAT_THUMB)).skipMemoryCache();
 			break;
 		}
 		//
@@ -264,7 +264,7 @@ public class Profile2HeaderHolder implements OnTouchListener {
 			return;
 		}
 		// FIXME 数值提取
-		final String url = mUser2.getAvatarImage().getUrlSquare(ImageSize.AVATAR_ROUND_SMALL);
+		final String url = mUser2.getAvatarCommonImage().getUrlSquare(ImageSize.AVATAR_ROUND_SMALL);
 		blurTarget = new Target() {
 
 
@@ -764,7 +764,7 @@ public class Profile2HeaderHolder implements OnTouchListener {
 	 * @return void
 	 */
 	private void refreshIco(User2 refreshUser2) {
-		if (!mUser2.getAvatarImage().getImageId().equals(refreshUser2.getAvatarImage().getImageId())) {
+		if (!mUser2.getAvatarCommonImage().getImageId().equals(refreshUser2.getAvatarCommonImage().getImageId())) {
 			mUser2 = refreshUser2;
 			loadUserHeader();
 		}
@@ -797,7 +797,7 @@ public class Profile2HeaderHolder implements OnTouchListener {
 		popUpWindow.setTouchable(true);
 		popUpWindow.setWidth(LayoutParams.MATCH_PARENT);
 		popUpWindow.setHeight(LayoutParams.MATCH_PARENT);
-		String url = mUser2.getAvatarImage().getUrlSquare(ImageSize.FEED_MAX);
+		String url = mUser2.getAvatarCommonImage().getUrlSquare(ImageSize.FEED_MAX);
 		// FIXME 应该先显示小图,大图家在完毕显示大图
 
 		picasso.load(url).into(avactor);

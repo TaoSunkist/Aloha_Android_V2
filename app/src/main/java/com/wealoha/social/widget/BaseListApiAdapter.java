@@ -17,11 +17,11 @@ import android.widget.BaseAdapter;
 
 import com.squareup.picasso.Picasso;
 import com.wealoha.social.adapter.feed.AbsViewHolder;
-import com.wealoha.social.api.common.ApiErrorCode;
-import com.wealoha.social.api.common.BaseListApiService;
-import com.wealoha.social.api.common.BaseListApiService.AdapterListDataCallback;
-import com.wealoha.social.api.common.BaseListApiService.ListContextCallback;
-import com.wealoha.social.api.common.Direct;
+import com.wealoha.social.beans.ApiErrorCode;
+import com.wealoha.social.api.BaseListApiService;
+import com.wealoha.social.api.BaseListApiService.AdapterListDataCallback;
+import com.wealoha.social.api.BaseListApiService.ListContextCallback;
+import com.wealoha.social.beans.Direct;
 import com.wealoha.social.beans.AbsNotify2;
 import com.wealoha.social.beans.Notify2;
 import com.wealoha.social.inject.Injector;

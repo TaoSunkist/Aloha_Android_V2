@@ -6,8 +6,8 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-import com.wealoha.social.api.common.ApiErrorCode;
-import com.wealoha.social.api.common.Direct;
+import com.wealoha.social.beans.ApiErrorCode;
+import com.wealoha.social.beans.Direct;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.FeedGetData;
 import com.wealoha.social.beans.Result;
@@ -19,7 +19,7 @@ public class PraisedPostService extends Feed2Service {
 	ServerApi feed2API;
 
 	@Override
-	public void getList(String cursor, int count, Direct direct, final String userid, final com.wealoha.social.api.common.BaseListApiService.ApiListCallback<Post> callback) {
+	public void getList(String cursor, int count, Direct direct, final String userid, final BaseListApiService.ApiListCallback<Post> callback) {
 		feed2API.getPraisedList(cursor, count, new Callback<Result<FeedGetData>>() {
 
 			@Override

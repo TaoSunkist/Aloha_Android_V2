@@ -39,7 +39,7 @@ import com.wealoha.social.adapter.feed.BaseFeedHolder;
 import com.wealoha.social.adapter.feed.Feed2Adapter;
 import com.wealoha.social.adapter.feed.FeedHolder;
 import com.wealoha.social.adapter.feed.VideoFeedHolder;
-import com.wealoha.social.api.common.ApiErrorCode;
+import com.wealoha.social.beans.ApiErrorCode;
 import com.wealoha.social.api.Feed2Service;
 import com.wealoha.social.beans.HashTag;
 import com.wealoha.social.commons.GlobalConstants;

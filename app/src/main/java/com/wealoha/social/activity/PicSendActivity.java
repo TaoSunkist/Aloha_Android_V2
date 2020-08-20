@@ -458,7 +458,7 @@ public class PicSendActivity extends BaseFragAct implements OnClickListener, Lis
 				}
 				
 				tagPositionListToArray(mUserTagsList);// 初始化tag 坐标
-				initPhotoByShared(mSharePost.getImage().getImageId());
+				initPhotoByShared(mSharePost.getCommonImage().getImageId());
 				changeTagView(mUserTagsList == null ? 0 : mUserTagsList.size());
 				changeLocationView(mSharePost.getVenue());
 			}

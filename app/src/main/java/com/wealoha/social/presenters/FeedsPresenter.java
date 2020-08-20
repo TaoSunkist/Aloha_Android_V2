@@ -6,8 +6,8 @@ import javax.inject.Inject;
 
 import android.content.Context;
 
-import com.wealoha.social.api.common.service.BaseService.ServiceListResultCallback;
-import com.wealoha.social.api.common.service.BaseService.ServiceResultCallback;
+import com.wealoha.social.api.BaseService.ServiceListResultCallback;
+import com.wealoha.social.api.BaseService.ServiceResultCallback;
 import com.wealoha.social.api.PostService;
 import com.wealoha.social.api.TopicPostService;
 import com.wealoha.social.beans.Post;

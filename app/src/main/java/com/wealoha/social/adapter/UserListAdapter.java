@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.adapter.feed.AbsViewHolder;
-import com.wealoha.social.api.common.BaseListApiService;
+import com.wealoha.social.api.BaseListApiService;
 import com.wealoha.social.beans.User2;
 import com.wealoha.social.view.custom.CircleImageView;
 import com.wealoha.social.widget.BaseAdapterHolder;
@@ -57,7 +57,7 @@ public class UserListAdapter extends BaseListApiAdapter<User2, String> {
 	@Override
 	protected void fillView(AbsViewHolder holder, User2 item, int position, View convertView) {
 		UserListHodler userlistHolder = (UserListHodler) holder;
-		picasso.load(item.getAvatarImage().getUrl(80, 80))//
+		picasso.load(item.getAvatarCommonImage().getUrl(80, 80))//
 		.into(userlistHolder.userPhoto);
 		userlistHolder.userName.setText(item.getName());
 		userlistHolder.userPhotoCount.setText(String.valueOf(item.getPostCount()) + mParent.getString(R.string.photo));

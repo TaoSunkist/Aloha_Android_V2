@@ -2,7 +2,7 @@ package com.wealoha.social.beans
 
 import android.os.Parcelable
 import android.text.TextUtils
-import com.wealoha.social.api.common.bean.Image
+import com.wealoha.social.api.common.bean.CommonImage
 import kotlinx.android.parcel.Parcelize
 import org.apache.commons.lang3.builder.ToStringBuilder
 import org.apache.commons.lang3.builder.ToStringStyle
@@ -27,7 +27,7 @@ class User2(
     val summary: String?,
     val selfPurposes: List<String?>?,
     val selfTag: String?,  //
-    val avatarImage: Image?,
+    val avatarCommonImage: CommonImage?,
     val isProfileIncomplete: Boolean,
     val alohaCount: Int,
     var alohaGetCount: Int,
@@ -95,14 +95,14 @@ class User2(
         @JvmStatic
         fun fromDTO(
             dto: UserDTO?,
-            avatarImage: Image?
+            avatarCommonImage: CommonImage?
         ): User2? {
             var user2: User2? = null
             if (dto != null) {
                 user2 = User2(
                     dto.id, dto.name, dto.birthday, dto.age, dto.height,  //
                     dto.weight, dto.me, dto.regionCode, dto.region, dto.zodiac,  //
-                    dto.summary, dto.selfPurposes, dto.selfTag, avatarImage,  //
+                    dto.summary, dto.selfPurposes, dto.selfTag, avatarCommonImage,  //
                     dto.profileIncomplete, dto.alohaCount, dto.alohaGetCount,  //
                     dto.aloha, dto.match, dto.postCount, dto.block, dto.hasPrivacy
                 )
@@ -157,7 +157,7 @@ class User2(
                 dto.summary,
                 dto.selfPurposes,
                 dto.selfTag,
-                Image.fromDTO(dto.avatarImage),  //
+                CommonImage.fromDTO(dto.avatarImage),  //
                 dto.profileIncomplete,
                 dto.alohaCount,
                 dto.alohaGetCount,  //
@@ -185,7 +185,7 @@ class User2(
                 oldUser.summary,
                 oldUser.selfPurposes,
                 oldUser.selfTag,
-                Image.fromOld(oldUser.avatarImage),  //
+                CommonImage.fromOld(oldUser.avatarImage),  //
                 oldUser.profileIncomplete,
                 oldUser.alohaCount,
                 oldUser.alohaGetCount,  //

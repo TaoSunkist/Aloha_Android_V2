@@ -163,7 +163,7 @@ public class TopicDetailAdapter extends BaseAdapter implements OnClickListener {
 				viewHolder.mTopicPlayAfter.setVisibility(FeedType.VideoPost == (post == null ? null : post.getType()) ? View.VISIBLE : View.GONE);
 			}
 			if (post != null) {
-				mPicasso.load(post.getImage().getUrlSquare(IMG_WIDTH)).resize(IMG_WIDTH, IMG_WIDTH).placeholder(R.color.gray_text).into(iv);
+				mPicasso.load(post.getCommonImage().getUrlSquare(IMG_WIDTH)).resize(IMG_WIDTH, IMG_WIDTH).placeholder(R.color.gray_text).into(iv);
 				iv.setOnClickListener(this);
 			} else {
 				iv.setVisibility(View.INVISIBLE);
@@ -172,7 +172,7 @@ public class TopicDetailAdapter extends BaseAdapter implements OnClickListener {
 	}
 
 	public void fillSingleImg(ImageView topicContentImg, ImageView topicPlayIcon, Post post) {
-		mPicasso.load(post.getImage().getUrlSquare(IMG_WIDTH)).resize(IMG_WIDTH, IMG_WIDTH).placeholder(R.color.gray_text).into(topicContentImg);
+		mPicasso.load(post.getCommonImage().getUrlSquare(IMG_WIDTH)).resize(IMG_WIDTH, IMG_WIDTH).placeholder(R.color.gray_text).into(topicContentImg);
 		topicContentImg.setOnClickListener(this);
 	}
 

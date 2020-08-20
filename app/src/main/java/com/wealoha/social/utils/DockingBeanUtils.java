@@ -31,9 +31,9 @@ public class DockingBeanUtils {
         user.setWeight(String.valueOf(apiUser2.getWeight()));
         user.setZodiac(apiUser2.getZodiac());
         user.setAvatarImage(Image.Companion.fake());
-        user.getAvatarImage().setHeight(apiUser2.getAvatarImage().getHeight());
-        user.getAvatarImage().setId(apiUser2.getAvatarImage().getImageId());
-        user.getAvatarImage().setWidth(apiUser2.getAvatarImage().getWidth());
+        user.getAvatarImage().setHeight(apiUser2.getAvatarCommonImage().getHeight());
+        user.getAvatarImage().setId(apiUser2.getAvatarCommonImage().getImageId());
+        user.getAvatarImage().setWidth(apiUser2.getAvatarCommonImage().getWidth());
         user.setHasPrivacy(apiUser2.hasPrivacy());
         user.setAloha(apiUser2.isAloha());
         user.setMatch(apiUser2.isMatch());

@@ -1,4 +1,4 @@
-package com.wealoha.social.api.locationservice;
+package com.wealoha.social.api;
 
 import retrofit.Callback;
 import retrofit.http.Field;

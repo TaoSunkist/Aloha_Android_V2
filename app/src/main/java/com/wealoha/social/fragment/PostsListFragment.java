@@ -17,7 +17,7 @@ import butterknife.OnClick;
 import com.wealoha.social.R;
 import com.wealoha.social.adapter.profile.Profile2Adapter;
 import com.wealoha.social.adapter.profile.Profile2ImagesAdapter;
-import com.wealoha.social.api.common.ApiErrorCode;
+import com.wealoha.social.beans.ApiErrorCode;
 import com.wealoha.social.api.PraisedPostService;
 import com.wealoha.social.api.TagedPostService;
 import com.wealoha.social.utils.ContextUtil;
@@ -109,7 +109,7 @@ public class PostsListFragment extends BaseFragment implements OnClickListener, 
 				}
 
 				for (int i = 0; i < pro2Adt.getListData().size(); i++) {
-					XL.i("post_info", "video:" + pro2Adt.getListData().get(i).getVideo());
+					XL.i("post_info", "video:" + pro2Adt.getListData().get(i).getCommonVideo());
 				}
 			}
 

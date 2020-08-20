@@ -1,9 +1,6 @@
-package com.wealoha.social.api.common;
+package com.wealoha.social.beans;
 
 import android.util.SparseArray;
-
-import com.wealoha.social.beans.Result;
-import com.wealoha.social.beans.ResultData;
 
 /**
  * Api错误<br/>

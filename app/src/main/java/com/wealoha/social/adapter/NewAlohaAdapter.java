@@ -84,7 +84,7 @@ public class NewAlohaAdapter extends BaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		// XL.d("getUrlSquare", user.getAvatarImage().getUrl(100, 100));
-		picasso.load(user2.getAvatarImage().getUrl(ImageSize.CHAT_THUMB, ImageSize.CHAT_THUMB)).placeholder(R.drawable.default_photo).resize(100, 100).into(viewHolder.mUserPhoto);
+		picasso.load(user2.getAvatarCommonImage().getUrl(ImageSize.CHAT_THUMB, ImageSize.CHAT_THUMB)).placeholder(R.drawable.default_photo).resize(100, 100).into(viewHolder.mUserPhoto);
 		viewHolder.mUserName.setText(user2.getName());
 		if (mIsMatcher && user2.isMatch()) {
 			viewHolder.mMatchOrNot.setVisibility(View.VISIBLE);

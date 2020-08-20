@@ -10,7 +10,6 @@ import retrofit.client.Response;
 import android.content.Context;
 
 import com.wealoha.social.AppApplication;
-import com.wealoha.social.api.common.service.BaseService;
 import com.wealoha.social.beans.HashTag;
 import com.wealoha.social.beans.HashTagDTO;
 import com.wealoha.social.beans.Result;

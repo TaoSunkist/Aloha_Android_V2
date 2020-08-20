@@ -13,11 +13,10 @@ import android.util.Log;
 
 import com.squareup.picasso.Picasso;
 import com.wealoha.social.api.comment.bean.PostComment;
-import com.wealoha.social.api.common.AbsBaseService;
-import com.wealoha.social.api.common.ApiErrorCode;
-import com.wealoha.social.api.common.Direct;
-import com.wealoha.social.api.common.bean.Image;
-import com.wealoha.social.api.common.bean.Video;
+import com.wealoha.social.api.common.bean.CommonImage;
+import com.wealoha.social.beans.ApiErrorCode;
+import com.wealoha.social.beans.Direct;
+import com.wealoha.social.api.common.bean.CommonVideo;
 import com.wealoha.social.beans.FeedGetData;
 import com.wealoha.social.beans.FeedType;
 import com.wealoha.social.beans.UserListGetData;
@@ -49,7 +48,7 @@ public class Feed2Service extends AbsBaseService<Post, String> {
 	}
 
 	@Override
-	public void getList(String cursor, int count, Direct direct, final String userid, final com.wealoha.social.api.common.BaseListApiService.ApiListCallback<Post> callback) {
+	public void getList(String cursor, int count, Direct direct, final String userid, final BaseListApiService.ApiListCallback<Post> callback) {
 		feed2Api.getPosts(cursor, count, new Callback<Result<FeedGetData>>() {
 
 			@Override
@@ -123,10 +122,10 @@ public class Feed2Service extends AbsBaseService<Post, String> {
 
 			User2 user2 = getUser(postDto.userId, result.userMap, result.imageMap);
 			List<UserTag> userTagList = gerUserTagList(postDto.userTags, result.userMap, result.imageMap);
-			Image image = Image.fromDTO(result.imageMap.get(postDto.imageId));
-			Video video = null;
+			CommonImage commonImage = CommonImage.fromDTO(result.imageMap.get(postDto.imageId));
+			CommonVideo commonVideo = null;
 			if (result.videoMap != null) {
-				video = Video.fromDTO(result.videoMap.get(postDto.videoId));
+				commonVideo = CommonVideo.fromDTO(result.videoMap.get(postDto.videoId));
 			}
 
 			List<PostComment> recentCommentList = transCommentDTOList2PostCommentList(postDto.recentComments, result.userMap, result.imageMap);
@@ -145,8 +144,8 @@ public class Feed2Service extends AbsBaseService<Post, String> {
 			postDto.venueAbroad, //
                     user2, //
 			userTagList,//
-			image, //
-			video, //
+					commonImage, //
+					commonVideo, //
 			result.commentCountMap.get(postDto.postId),//
 			result.likeCountMap.get(postDto.postId),//
 			recentCommentList,//
@@ -159,7 +158,7 @@ public class Feed2Service extends AbsBaseService<Post, String> {
 	}
 
 	@Override
-	public void setAdapterListCallback(com.wealoha.social.api.common.BaseListApiService.AdapterListDataCallback<Post> callback) {
+	public void setAdapterListCallback(BaseListApiService.AdapterListDataCallback<Post> callback) {
 		super.setAdapterListCallback(callback);
 		postList = callback.getListData();
 	}
@@ -192,8 +191,8 @@ public class Feed2Service extends AbsBaseService<Post, String> {
 		for (int i = first; i < end - 2; i++) {
 			Log.i("LOAD_MEMORY", "++++++" + i);
 			Post post = postList.get(i);
-			picasso.load(post.getImage().getUrlSquare(mScreenWidth)).fetch();
-			picasso.load(post.getUser2().getAvatarImage().getUrlSquare(ImageSize.AVATAR_ROUND_SMALL)).fetch();
+			picasso.load(post.getCommonImage().getUrlSquare(mScreenWidth)).fetch();
+			picasso.load(post.getUser2().getAvatarCommonImage().getUrlSquare(ImageSize.AVATAR_ROUND_SMALL)).fetch();
 		}
 	}
 
@@ -204,7 +203,7 @@ public class Feed2Service extends AbsBaseService<Post, String> {
 	 * @param callback
 	 * @return void
 	 */
-	public void praiseFeed(String postId, final com.wealoha.social.api.common.BaseListApiService.NoResultCallback callback) {
+	public void praiseFeed(String postId, final BaseListApiService.NoResultCallback callback) {
 		feed2Api.praisePost(postId, new Callback<Result<ResultData>>() {
 
 			@Override
@@ -230,7 +229,7 @@ public class Feed2Service extends AbsBaseService<Post, String> {
 	 * @param callback
 	 * @return void
 	 */
-	public void canclePraiseFeed(String postid, final com.wealoha.social.api.common.BaseListApiService.NoResultCallback callback) {
+	public void canclePraiseFeed(String postid, final BaseListApiService.NoResultCallback callback) {
 		feed2Api.dislikePost(postid, new Callback<Result<ResultData>>() {
 
 			@Override
@@ -256,7 +255,7 @@ public class Feed2Service extends AbsBaseService<Post, String> {
 	 * @param callback
 	 * @return void
 	 */
-	public void deletePost(String postId, final com.wealoha.social.api.common.BaseListApiService.NoResultCallback callback) {
+	public void deletePost(String postId, final BaseListApiService.NoResultCallback callback) {
 		feed2Api.deletePost(postId, new Callback<Result<ResultData>>() {
 
 			@Override
@@ -282,7 +281,7 @@ public class Feed2Service extends AbsBaseService<Post, String> {
 	 * @param callback
 	 * @return void
 	 */
-	public void reportPost(String postId, final com.wealoha.social.api.common.BaseListApiService.NoResultCallback callback) {
+	public void reportPost(String postId, final BaseListApiService.NoResultCallback callback) {
 		feed2Api.reportFeed(postId, null, null, new Callback<Result<ResultData>>() {
 
 			@Override
@@ -308,7 +307,7 @@ public class Feed2Service extends AbsBaseService<Post, String> {
 	 * @param callback
 	 * @return void
 	 */
-	public void removeTag(String postId, String tagUserId, final com.wealoha.social.api.common.BaseListApiService.NoResultCallback callback) {
+	public void removeTag(String postId, String tagUserId, final BaseListApiService.NoResultCallback callback) {
 		feed2Api.removeTag(postId, tagUserId, new Callback<ResultData>() {
 
 			@Override

@@ -1,7 +1,9 @@
-package com.wealoha.social.api.common;
+package com.wealoha.social.api;
 
 import java.util.List;
 
+import com.wealoha.social.beans.ApiErrorCode;
+import com.wealoha.social.beans.Direct;
 import com.wealoha.social.widget.BaseListApiAdapter;
 
 /**

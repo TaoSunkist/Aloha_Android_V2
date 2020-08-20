@@ -44,8 +44,8 @@ import com.wealoha.social.R;
 import com.wealoha.social.activity.GDMapAct;
 import com.wealoha.social.activity.WebActivity;
 import com.wealoha.social.api.comment.bean.PostComment;
-import com.wealoha.social.api.common.ApiErrorCode;
-import com.wealoha.social.api.common.BaseListApiService.NoResultCallback;
+import com.wealoha.social.beans.ApiErrorCode;
+import com.wealoha.social.api.BaseListApiService.NoResultCallback;
 import com.wealoha.social.beans.UserTag;
 import com.wealoha.social.api.Feed2Service;
 import com.wealoha.social.beans.Post;
@@ -409,7 +409,7 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 		} else {
 			userLocation.setVisibility(View.GONE);
 		}
-		picasso.load(post.getUser2().getAvatarImage().getUrlSquare(ImageSize.AVATAR_ROUND_SMALL))//
+		picasso.load(post.getUser2().getAvatarCommonImage().getUrlSquare(ImageSize.AVATAR_ROUND_SMALL))//
 		.placeholder(R.drawable.default_photo).into(userPhoto);
 		changeColor(mPost.isLiked());
 
@@ -549,7 +549,7 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 			break;
 		case R.id.share_tv:
 			new PopupStore(regionNodeUtil).showShareProfileUrl02(mFrag.getActivity().getString(R.string.share_post),//
-																	(BaseFragAct) mFrag.getActivity(), mPost.getUser2().getName(), StringUtil.sharePostWebUrl(contextUtil.getCurrentUser().getId(), "", mPost, StringUtil.ME_PROFILE_COPY_LINK), mPost.getImage().getUrl(100, 100));
+																	(BaseFragAct) mFrag.getActivity(), mPost.getUser2().getName(), StringUtil.sharePostWebUrl(contextUtil.getCurrentUser().getId(), "", mPost, StringUtil.ME_PROFILE_COPY_LINK), mPost.getCommonImage().getUrl(100, 100));
 			break;
 		case R.id.praise_count:
 			openUserList();
@@ -636,7 +636,7 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 		Intent intent = new Intent(mFrag.getActivity(), GDMapAct.class);
 		intent.putExtra("latitude", mPost.getLatitude());
 		intent.putExtra("longitude", mPost.getLongitude());
-		intent.putExtra("userphoto", mPost.getUser2().getAvatarImage());
+		intent.putExtra("userphoto", mPost.getUser2().getAvatarCommonImage());
 		intent.putExtra("venueAbroad", mPost.getVenueAbroad());
 		mFrag.getActivity().startActivity(intent);
 	}

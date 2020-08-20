@@ -609,13 +609,13 @@ public class PopupStore {
                         title = baseFragAct.getString(toUser2 == null ? R.string.share_to_wx_title : R.string.share_to_other_wx_title, toUser2 == null ? meUser2.getName() : toUser2.getName());
                         body = StringUtil.shareDescription(toUser2 == null ? meUser2 : toUser2, baseFragAct, mRegionNodeUtil);
                         url = StringUtil.shareUserWebUrl(meUser2.getId(), toUser2.getId(), toUser2 == null ? StringUtil.ME_PROFILE_TO_SHARE_WX : StringUtil.OTHER_PROFILE_TO_SHARE_WX);
-                        ShareStore.shareToWXHasUrl(baseFragAct, url, title, body, toUser2 == null ? meUser2.getAvatarImage().getUrlSquare(ImageSize.AVATAR) : toUser2.getAvatarImage().getUrlSquare(ImageSize.AVATAR));
+                        ShareStore.shareToWXHasUrl(baseFragAct, url, title, body, toUser2 == null ? meUser2.getAvatarCommonImage().getUrlSquare(ImageSize.AVATAR) : toUser2.getAvatarCommonImage().getUrlSquare(ImageSize.AVATAR));
                         break;
                     case 1:
                         title = baseFragAct.getString(toUser2 == null ? R.string.share_to_wx_title : R.string.share_to_other_wx_title, toUser2 == null ? meUser2.getName() : toUser2.getName());
                         body = StringUtil.shareDescription(toUser2 == null ? meUser2 : toUser2, baseFragAct, mRegionNodeUtil);
                         url = StringUtil.shareUserWebUrl(meUser2.getId(), toUser2.getId(), toUser2 == null ? StringUtil.ME_PROFILE_TO_SHARE_WXF : StringUtil.OTHER_PROFILE_TO_SHARE_WXF);
-                        ShareStore.shareToFriendHasUrl(baseFragAct, url, title, body, toUser2 == null ? meUser2.getAvatarImage().getUrlSquare(ImageSize.AVATAR) : toUser2.getAvatarImage().getUrlSquare(ImageSize.AVATAR));
+                        ShareStore.shareToFriendHasUrl(baseFragAct, url, title, body, toUser2 == null ? meUser2.getAvatarCommonImage().getUrlSquare(ImageSize.AVATAR) : toUser2.getAvatarCommonImage().getUrlSquare(ImageSize.AVATAR));
                         break;
                     case 2:
                         title = baseFragAct.getString(R.string.share_to_other_wx_title, toUser2 == null ? meUser2.getName() : toUser2.getName());
@@ -883,7 +883,7 @@ public class PopupStore {
                         // 分享到qq
 
                         url = StringUtil.sharePostWebUrl(post.getUser2().getId(), toUser.getId(), post, StringUtil.OTHER_PROFILE_TO_SHARE_WXF);
-                        String imgUrl = ImageUtil.getImageUrl(post.getImage().getImageId(), ImageSize.CHAT_THUMB, CropMode.ScaleCenterCrop);
+                        String imgUrl = ImageUtil.getImageUrl(post.getCommonImage().getImageId(), ImageSize.CHAT_THUMB, CropMode.ScaleCenterCrop);
                         ShareStore.shareToQQ(baseFragAct, url, "1", "2", imgUrl);
                         // ShareStore.shareToWX(baseFragAct, null, imgUrl);
                         break;
@@ -1763,7 +1763,7 @@ public class PopupStore {
 
             @Override
             public void onClick(View v) {
-                String imgUrl = mPost.getImage().getUrlSquare(ImageSize.CHAT_THUMB);
+                String imgUrl = mPost.getCommonImage().getUrlSquare(ImageSize.CHAT_THUMB);
                 switch (v.getId()) {
                     case R.id.popu_outside_ll:
                         break;

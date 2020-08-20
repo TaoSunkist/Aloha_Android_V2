@@ -48,7 +48,7 @@ import com.wealoha.social.activity.PicSendActivity.PicSendActivityBundleKey;
 import com.wealoha.social.adapter.ProfileListAdapter;
 import com.wealoha.social.adapter.ProfileListAdapter.ViewType;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.api.notify2.service.Notify2Service;
+import com.wealoha.social.api.Notify2Service;
 import com.wealoha.social.beans.Feed;
 import com.wealoha.social.beans.FeedResult;
 import com.wealoha.social.beans.Result;
