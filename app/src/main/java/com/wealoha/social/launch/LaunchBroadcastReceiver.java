@@ -24,6 +24,7 @@ import com.wealoha.social.activity.FragmentWrapperActivity;
 import com.wealoha.social.activity.MainAct;
 import com.wealoha.social.activity.NaviIntroActivity;
 import com.wealoha.social.activity.WelcomeAct;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.api.common.ApiErrorCode;
 import com.wealoha.social.api.common.BaseListApiService.ApiListCallback;
 import com.wealoha.social.api.common.Direct;
@@ -32,7 +33,6 @@ import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.api.FeedService;
 import com.wealoha.social.beans.ProfileData;
 import com.wealoha.social.api.ProfileService;
 import com.wealoha.social.commons.GlobalConstants;
@@ -60,7 +60,7 @@ public class LaunchBroadcastReceiver extends BroadcastReceiver {
 	@Inject
 	SingletonFeedService feedService;
 	@Inject
-	FeedService feedService2;
+	ServerApi feedService2;
 	private Context mContext;
 
 	private final String TAG = getClass().getSimpleName();

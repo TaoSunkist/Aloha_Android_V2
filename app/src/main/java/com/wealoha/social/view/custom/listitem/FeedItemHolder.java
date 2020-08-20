@@ -47,11 +47,11 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.activity.GDMapAct;
 import com.wealoha.social.adapter.ProfileListAdapter;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Feed;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.api.FeedService;
 import com.wealoha.social.beans.feed.UserTags;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
@@ -94,7 +94,7 @@ public class FeedItemHolder implements OnClickListener, ListItemCallback {
     @Inject
     FontUtil fontUtil;
     @Inject
-    FeedService mFeedService;
+    ServerApi mFeedService;
 
     @InjectView(R.id.item_feed_load_error_rl)
     RelativeLayout mFeedLoadErrorRl;

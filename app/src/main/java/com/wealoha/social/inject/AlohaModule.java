@@ -121,7 +121,6 @@ import com.wealoha.social.api.user.User2Service;
 import com.wealoha.social.api.CommentService;
 import com.wealoha.social.api.ConstantsService;
 import com.wealoha.social.api.CountService;
-import com.wealoha.social.api.FeedService;
 import com.wealoha.social.api.InstagramService;
 import com.wealoha.social.api.OauthService;
 import com.wealoha.social.api.LocationService;
@@ -903,12 +902,6 @@ public class AlohaModule {
     @Provides
     Bus provideOttoBus() {
         return new MainThreadBus();
-    }
-
-    @Provides
-    @Singleton
-    FeedService provideFeedService(RestAdapter restAdapter) {
-        return restAdapter.create(FeedService.class);
     }
 
     @Provides

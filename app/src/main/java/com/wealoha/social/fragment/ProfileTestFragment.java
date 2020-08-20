@@ -51,11 +51,11 @@ import com.wealoha.social.activity.FragmentWrapperActivity;
 import com.wealoha.social.activity.MainAct;
 import com.wealoha.social.adapter.ProfileListAdapter;
 import com.wealoha.social.adapter.ProfileListAdapter.ViewType;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Feed;
 import com.wealoha.social.beans.FeedResult;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.api.FeedService;
 import com.wealoha.social.api.MatchService;
 import com.wealoha.social.beans.ProfileData;
 import com.wealoha.social.api.ProfileService;
@@ -85,7 +85,7 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
     @Inject
     Context context;
     @Inject
-    FeedService mFeedService;
+    ServerApi mFeedService;
     @Inject
     Picasso picasso;
     @Inject

@@ -47,13 +47,13 @@ import com.wealoha.social.activity.PicSendActivity;
 import com.wealoha.social.activity.PicSendActivity.PicSendActivityBundleKey;
 import com.wealoha.social.adapter.ProfileListAdapter;
 import com.wealoha.social.adapter.ProfileListAdapter.ViewType;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.api.notify2.service.Notify2Service;
 import com.wealoha.social.beans.Feed;
 import com.wealoha.social.beans.FeedResult;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.api.FeedService;
 import com.wealoha.social.beans.feed.UserTags;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.CacheKey;
@@ -95,7 +95,7 @@ public class FeedFragment extends BaseFragment implements OnClickListener,
 	@Inject
 	ContextUtil contextUtil;
 	@Inject
-	FeedService feedService;
+	ServerApi feedService;
 	@Inject
 	RemoteLogUtil logUtil;
 	@Inject

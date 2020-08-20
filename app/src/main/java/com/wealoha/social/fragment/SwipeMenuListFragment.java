@@ -38,10 +38,10 @@ import com.squareup.otto.Subscribe;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.adapter.SwipeMenuAdapter;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.api.FeedService;
 import com.wealoha.social.beans.ProfileData;
 import com.wealoha.social.api.ProfileService;
 import com.wealoha.social.beans.UserListResult;
@@ -62,7 +62,7 @@ public class SwipeMenuListFragment extends BaseFragment implements ListItemCallb
     @Inject
     UserService mUserService;
     @Inject
-    FeedService mFeedService;
+    ServerApi mFeedService;
     @Inject
     ProfileService mProfileService;
     @Inject

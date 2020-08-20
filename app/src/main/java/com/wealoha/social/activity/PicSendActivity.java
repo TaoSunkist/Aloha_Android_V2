@@ -40,11 +40,11 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.ContextConfig;
 import com.wealoha.social.R;
 import com.wealoha.social.activity.TagFeedAct.TagFeedActBundleKey;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.ImageUploadResult;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
-import com.wealoha.social.api.FeedService;
 import com.wealoha.social.beans.feed.UserTags;
 import com.wealoha.social.beans.Location;
 import com.wealoha.social.commons.GlobalConstants;
@@ -75,7 +75,7 @@ public class PicSendActivity extends BaseFragAct implements OnClickListener, Lis
 	@Inject
 	ContextUtil contextUtil;
 	@Inject
-	FeedService feedService;
+	ServerApi feedService;
 	@Inject
 	Picasso picasso;
 	@Inject
@@ -542,7 +542,7 @@ public class PicSendActivity extends BaseFragAct implements OnClickListener, Lis
 		int imgid = R.drawable.start_tag;
 		int colorid = R.color.gray_text;
 		if (mTagTv != null && count > 0) {
-			title = getString(R.string.tag_x_friends, mUserTagsList.size());
+			title = getString(R.string.tag_x_friends, String.valueOf(mUserTagsList.size()));
 			imgid = R.drawable.start_tag_black;
 			colorid = R.color.black_text;
 		}

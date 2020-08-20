@@ -32,12 +32,12 @@ import android.widget.TextView;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.ContextConfig;
 import com.wealoha.social.R;
+import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.FeedType;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.api.FeedService;
 import com.wealoha.social.api.UserService;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
@@ -70,7 +70,7 @@ public class PopupStore {
     @Inject
     Context mContext;
     @Inject
-    FeedService feedShare;
+    ServerApi feedShare;
 
     public PopupStore(RegionNodeUtil regionNodeUtil) {
         super();
