@@ -12,7 +12,7 @@ class PostLikeNotify2(
     notifyid: String?,
     updateTimeMillis: Long,
     private val post: Post,
-    private val user2s: List<User2>,
+    private val user2s: List<User>,
     private var count: Int
 ) : AbsNotify2(type, unread, notifyid, updateTimeMillis) {
     fun getCount(): Int {
@@ -27,7 +27,7 @@ class PostLikeNotify2(
         return post
     }
 
-    fun getUser2s(): List<User2> {
+    fun getUsers(): List<User> {
         return user2s
     }
 

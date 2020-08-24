@@ -18,7 +18,7 @@ import com.wealoha.social.ActivityManager
 import com.wealoha.social.BaseFragAct
 import com.wealoha.social.R
 import com.wealoha.social.api.ServerApi
-import com.wealoha.social.api.User2Service
+import com.wealoha.social.api.UserService
 import com.wealoha.social.api.RxUserService
 import com.wealoha.social.beans.*
 import com.wealoha.social.commons.GlobalConstants
@@ -47,7 +47,7 @@ class LoginAct : BaseFragAct(), View.OnClickListener {
 
     @JvmField
     @Inject
-    var mUser2Service: User2Service? = null
+    var mUserService: UserService? = null
 
     @JvmField
     @Inject
@@ -193,7 +193,7 @@ class LoginAct : BaseFragAct(), View.OnClickListener {
             if (result != null) {
                 if (result.isOk) {
                     afterMobileLoginSuccess(mUserName, result.data!!.user, result.data!!.t)
-                    mUser2Service!!.profeatureSetting
+                    mUserService!!.profeatureSetting
                 } else if (result.data!!.error == 451) { // "用戶被封禁"
                     ToastUtil.shortToast(this@LoginAct, R.string.failed)
                 } else if (result.data!!.error == 401) {

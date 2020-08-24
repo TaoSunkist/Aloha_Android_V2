@@ -39,7 +39,7 @@ import com.wealoha.social.beans.PostTagNotify2;
 import com.wealoha.social.api.Notify2Service;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.beans.User2;
+import com.wealoha.social.beans.User;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.event.push.NewNotifyEvent;
 import com.wealoha.social.fragment.FeedCommentFragment;
@@ -349,8 +349,8 @@ public class FeedNoticeAct extends BaseFragAct implements OnClickListener, OnIte
 		}else if (mNotify2 instanceof PostLikeNotify2) {
 			PostLikeNotify2 postLikeNotify2 = (PostLikeNotify2) mNotify2;
 			// 只有一个人的时候开启他的profile
-			if (postLikeNotify2.getUser2s() != null && postLikeNotify2.getUser2s().size() == 1) {
-				openSomeoneProfile(postLikeNotify2.getUser2s().get(0));
+			if (postLikeNotify2.getUsers() != null && postLikeNotify2.getUsers().size() == 1) {
+				openSomeoneProfile(postLikeNotify2.getUsers().get(0));
 			} else {
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("Users", postLikeNotify2);
@@ -361,8 +361,8 @@ public class FeedNoticeAct extends BaseFragAct implements OnClickListener, OnIte
 		} else if (mNotify2 instanceof NewAlohaNotify2) {
 			NewAlohaNotify2 newAlohaNotify2 = (NewAlohaNotify2) mNotify2;
 			// 只有一个人的时候开启他的profile
-			if (newAlohaNotify2.getUser2s() != null && newAlohaNotify2.getUser2s().size() == 1) {
-				openSomeoneProfile(newAlohaNotify2.getUser2s().get(0));
+			if (newAlohaNotify2.getUsers() != null && newAlohaNotify2.getUsers().size() == 1) {
+				openSomeoneProfile(newAlohaNotify2.getUsers().get(0));
 			} else {
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("Users", newAlohaNotify2);
@@ -431,7 +431,7 @@ public class FeedNoticeAct extends BaseFragAct implements OnClickListener, OnIte
 	 * @param user2
 	 *            被开启主页的用户
 	 */
-	private void openSomeoneProfile(User2 user2) {
+	private void openSomeoneProfile(User user2) {
 
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(user2));

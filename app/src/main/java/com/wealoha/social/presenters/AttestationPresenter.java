@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import android.content.Context;
 
-import com.wealoha.social.api.User2Service;
+import com.wealoha.social.api.UserService;
 import com.wealoha.social.callback.CallbackImpl;
 import com.wealoha.social.ui.attestation.IAttestationView;
 
@@ -14,14 +14,14 @@ public class AttestationPresenter extends AbsPresenter {
 	@Inject
 	Context mContext;
 	@Inject
-	User2Service mUser2Service;
+	UserService mUserService;
 
 	public AttestationPresenter(IAttestationView iAttestationView) {
 		mIAttestationView = iAttestationView;
 	}
 
 	public void verifyPassword(String pw) {
-		mUser2Service.verifyPassword(pw, new CallbackImpl() {
+		mUserService.verifyPassword(pw, new CallbackImpl() {
 
 			@Override
 			public void success() {

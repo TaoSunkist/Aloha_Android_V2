@@ -14,7 +14,7 @@ class PostCommentNotify2(
     private val replyMe: Boolean,
     private val comment: String,
     private val commentId: String,
-    private val fromUser2: User2,
+    private val fromUser: User,
     private val post: Post,
     private var count: Int
 ) : AbsNotify2(type, unread, notifyid, updateTimeMillis) {
@@ -38,8 +38,8 @@ class PostCommentNotify2(
         return comment
     }
 
-    fun getFromUser2(): User2 {
-        return fromUser2
+    fun getFromUser(): User {
+        return fromUser
     }
 
     fun getPost(): Post {

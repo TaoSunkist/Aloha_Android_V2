@@ -1,6 +1,6 @@
 package com.wealoha.social.beans
 
-import com.wealoha.social.beans.User2.Companion.fromDTO
+import com.wealoha.social.beans.User.Companion.fromDTO
 import java.io.Serializable
 import java.util.*
 
@@ -8,8 +8,8 @@ data class PostComment(
     val createTimeMillis: Long,
     val id: String?,
     val comment: String?,
-    val replyUser2: User2?,
-    val user2: User2?,
+    val replyUser: User?,
+    val user: User?,
     val whisper: Boolean
 ) : Serializable {
 
@@ -38,28 +38,28 @@ data class PostComment(
 
     companion object {
 
-        fun fromCommentDTO(commentDTO: CommentDTO, replyUser2: User2?, user2: User2?): PostComment {
+        fun fromCommentDTO(commentDTO: CommentDTO, replyUser: User?, user: User?): PostComment {
             return PostComment( //
                 commentDTO.createTimeMillis,  //
                 commentDTO.id,  //
                 commentDTO.comment,  //
-                replyUser2,  //
-                user2,  //
+                replyUser,  //
+                user,  //
                 commentDTO.whisper
             )
         }
 
         fun fromComment2DTO(
             comment2DTO: Comment2DTO?,
-            replyUser2: User2?,
-            user2: User2?
+            replyUser: User?,
+            user: User?
         ): PostComment {
             return PostComment(
                 comment2DTO!!.createTimeMillis,
                 comment2DTO.id,
                 comment2DTO.comment,
-                replyUser2,
-                user2,
+                replyUser,
+                user,
                 comment2DTO.whisper
             )
         }
@@ -94,20 +94,20 @@ data class PostComment(
             val postCommentList: MutableList<PostComment> =
                 ArrayList()
             for (dto in commentList) {
-                var user2: User2? = null
-                var replyUser2: User2? = null
+                var user2: User? = null
+                var replyUser: User? = null
                 if (dto!!.user != null) {
                     user2 =
                         fromDTO(dto.user, CommonImage.Companion.fromDTO(dto.user!!.avatarImage))
                 }
                 if (dto.replyUser != null) {
-                    replyUser2 = fromDTO(
+                    replyUser = fromDTO(
                         dto.replyUser,
                         CommonImage.Companion.fromDTO(dto.replyUser!!.avatarImage)
                     )
                 }
                 val postComment =
-                    fromComment2DTO(dto, replyUser2, user2)
+                    fromComment2DTO(dto, replyUser, user2)
                 postCommentList.add(postComment)
             }
             return postCommentList

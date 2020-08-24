@@ -2,7 +2,9 @@ package com.wealoha.social.beans
 
 import android.os.Parcelable
 import com.mooveit.library.Fakeit
+import com.wealoha.social.utils.ImageUtil
 import kotlinx.android.parcel.Parcelize
+import org.apache.commons.lang3.StringUtils
 import java.io.Serializable
 
 @Parcelize
@@ -127,5 +129,112 @@ data class User(
             user.avatarImage = image
             return user
         }
+
+        fun fromDTO(
+            dto: UserDTO?,
+            avatarCommonImage: CommonImage?
+        ): User? {
+            var user2: User? = null
+            if (dto != null) {
+                user2 = User(
+                    id = dto.id,
+                    name = dto.name,
+                    birthday = dto.birthday,
+                    age = dto.age,
+                    height = dto.height,  //
+                    weight = dto.weight,
+                    me = dto.me,
+                    regionCode = dto.regionCode,
+                    region = dto.region,
+                    zodiac = dto.zodiac,  //
+                    summary = dto.summary,
+                    selfPurposes = dto.selfPurposes,
+                    selfTag = dto.selfTag,
+                    avatarImage = Image.init(avatarCommonImage!!),  //
+                    profileIncomplete = dto.profileIncomplete,
+                    alohaCount = dto.alohaCount,
+                    alohaGetCount = dto.alohaGetCount,  //
+                    aloha = dto.aloha,
+                    match = dto.match,
+                    postCount = dto.postCount,
+                    block = dto.block,
+                    hasPrivacy = dto.hasPrivacy,
+                    accessToken = "",
+                    avatarImageId = dto.avatarImage?.imageId ?: "",
+                    phoneNum = ""
+                )
+            }
+            return user2
+        }
+
+        fun fromDTO(dto: UserDTO): User {
+            return User(
+                id = dto.id,
+                name = dto.name,
+                birthday = dto.birthday,
+                age = dto.age,
+                height = dto.height,  //
+                weight = dto.weight, me = dto.me,
+                regionCode = dto.regionCode,
+                region = dto.region,
+                zodiac = dto.zodiac,  //
+                summary = dto.summary,
+                selfPurposes = dto.selfPurposes,
+                selfTag = dto.selfTag,
+                avatarImage = Image.init(dto.avatarImage!!),  //
+                profileIncomplete = dto.profileIncomplete,
+                alohaCount = dto.alohaCount,
+                alohaGetCount = dto.alohaGetCount,  //
+                aloha = dto.aloha,
+                match = dto.match,
+                postCount = dto.postCount,
+                block = dto.block,
+                hasPrivacy = dto.hasPrivacy,
+                accessToken = "",
+                avatarImageId = dto.avatarImage?.imageId ?: "",
+                phoneNum = ""
+            )
+        }
+
+    }
+
+    fun hasPrivacy(): Boolean {
+        return hasPrivacy
+    }
+
+    /***
+     * 加入黑名单
+     *
+     * @return void
+     */
+    fun block() {
+        block = true
+    }
+
+    /***
+     * 移出黑名单
+     *
+     * @return void
+     */
+    fun removeBlock() {
+        block = false
+    }
+
+    /**
+     * 获取方图地址
+     *
+     * @param width
+     * @return
+     */
+    fun getUrlSquare(width: Int): String {
+        return if (StringUtils.isNotBlank(avatarImage.urlPatternWidth)) {
+            replacePattern(avatarImage.urlPatternWidth, width.toString() + "")
+        } else ImageUtil.getImageUrl(id, width, ImageUtil.CropMode.ScaleCenterCrop)
+    }
+
+    private fun replacePattern(target: String?, vararg args: Any): String {
+        var target = target
+        target = StringUtils.replace(target, "%@", "%s")
+        return String.format(target, *args)
     }
 }

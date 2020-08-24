@@ -11,11 +11,11 @@ class PostTagNotify2(
     unread: Boolean,
     notifyid: String?,
     updateTimeMillis: Long,
-    private val fromUser2: User2,
+    private val fromUser: User,
     private val post: Post
 ) : AbsNotify2(type, unread, notifyid, updateTimeMillis) {
-    fun getFromUser2(): User2 {
-        return fromUser2
+    fun getFromUser(): User {
+        return fromUser
     }
 
     fun getPost(): Post {

@@ -75,7 +75,7 @@ public class WebActivity extends BaseFragAct implements OnClickListener {
 
 	}
 
-	private void initLayout(String uid, User mToUser2) {
+	private void initLayout(String uid, User mToUser) {
 
 		RelativeLayout.LayoutParams fillParams = new RelativeLayout.LayoutParams(
 				RelativeLayout.LayoutParams.MATCH_PARENT,

@@ -1,6 +1,6 @@
 package com.wealoha.social.beans
 
-import com.wealoha.social.beans.User2.Companion.fromDTO
+import com.wealoha.social.beans.User.Companion.fromDTO
 import com.wealoha.social.beans.feed.UserTags
 import java.io.Serializable
 import java.util.*
@@ -24,7 +24,7 @@ class Post(
     val latitude: Double?,
     val longitude: Double?,
     val venueAbroad: Boolean?,
-    val user2: User2?,
+    val user: User?,
     val userTags: List<UserTag>?,
     val commonImage: CommonImage?,
     val commonVideo: CommonVideo?,
@@ -66,7 +66,7 @@ class Post(
      */
     fun dislike() {
         if (praiseCount != 0) {
-            praiseCount = praiseCount - 1
+            praiseCount -= 1
             isLiked = false
         }
     }
@@ -91,7 +91,7 @@ class Post(
             postdto: PostDTO,
             commonImage: CommonImage?,
             commonVideo: CommonVideo?,
-            user2: User2?,
+            user2: User?,
             userTags: List<UserTag>?,
             commentCount: Int,
             praiseCount: Int,
@@ -164,7 +164,7 @@ class Post(
 
             // if (TextUtils.isEmpty(userId)) {
             for (userTag in userTagList) {
-                if (userTag.user2?.isMe == true) {
+                if (userTag.user2?.me == true) {
                     return true
                 }
             }
@@ -185,7 +185,7 @@ class Post(
                 UserTag.Companion.fromDTOList(postDTO.userTags, userMap, imageMap)
             val userDTO = userMap[postDTO.userId]
             var commonImage: CommonImage? = null
-            var user2: User2? = null
+            var user2: User? = null
             if (userDTO != null) {
                 commonImage = CommonImage.Companion.fromDTO(imageMap[userDTO.avatarImageId])
                 user2 = fromDTO(userDTO, commonImage)

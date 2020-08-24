@@ -72,7 +72,7 @@ import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.IResultDataErrorCode;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
-import com.wealoha.social.beans.User2;
+import com.wealoha.social.beans.User;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.utils.FontUtil;
 import com.wealoha.social.utils.ToastUtil;
@@ -132,7 +132,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	private Post mPost;
 	private int removePosition;
 	private String removeCommentId;
-	private User2 mUser2;
+	private User mUser;
 
 	private FeedHolder feedHolder;
 	private VideoFeedHolder videoHolder;
@@ -203,7 +203,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	}
 
 	private void initView(final Bundle bundle) {
-		mUser2 = (User2) bundle.getSerializable(User2.TAG);
+		mUser = (User) bundle.getSerializable(User.TAG);
 		initHeadView();
 		mFeedCommentAdapter = new FeedCommentAdapter(getActivity(), mComment2Service, this);
 		if (isPopSoftInputKey) {
@@ -224,8 +224,8 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 			}
 		});
 		loadFirstPage(getActivity().getIntent().getStringExtra(GlobalConstants.TAGS.COMMENT_ID));
-		if (mUser2 != null) {// 从通知过来，要在输入框中加上回复人的名字
-			mContentEdit.setHint(getResources().getString(R.string.comment_in_reply_hint, mUser2.getName()));
+		if (mUser != null) {// 从通知过来，要在输入框中加上回复人的名字
+			mContentEdit.setHint(getResources().getString(R.string.comment_in_reply_hint, mUser.getName()));
 		}
 	}
 
@@ -264,7 +264,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 					if (userListLayout.getChildCount() > 2) {
 						openUserList();
 					} else {
-						openSomeoneProfile((User2) userListLayout.getChildAt(1).getTag());
+						openSomeoneProfile((User) userListLayout.getChildAt(1).getTag());
 					}
 					return true;
 				}
@@ -333,10 +333,10 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 		int rootPadding = UiUtils.dip2px(mcontext, 9);
 		// 屏幕宽度减去一个头像所占的大小（为了给布局末尾的箭头视图留出位置）,除以每个头像的大小得出头像的最大个数
 		final int count = (UiUtils.getScreenWidth(getActivity().getApplicationContext()) - arrowWidth - rootPadding * 2) / (radiu + margin * 2);
-		feedService.getPraiseList(null, count, mPost.getPostId(), new ApiCallback<List<User2>>() {
+		feedService.getPraiseList(null, count, mPost.getPostId(), new ApiCallback<List<User>>() {
 
 			@Override
-			public void success(List<User2> data) {
+			public void success(List<User> data) {
 				XL.i(TAG, "init user list success");
 				if (isVisible()) {
 					initUserList(userListLayout, data, radiu, margin);
@@ -363,7 +363,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	 *            圆形头像的margin值
 	 * @return void
 	 */
-	private void initUserList(ViewGroup parent, List<User2> user2s, int radiu, int margin) {
+	private void initUserList(ViewGroup parent, List<User> user2s, int radiu, int margin) {
 		if (user2s == null || user2s.size() == 0 || parent == null) {
 			parent.setVisibility(View.GONE);
 			return;
@@ -450,7 +450,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 			if (commentid.equals(postComment.getId())) {
 				mContentListView.smoothScrollToPosition(i + 1);// listview
 																// 头布局占一个位置
-				mContentEdit.setHint(getString(R.string.comment_in_reply_hint, postComment.getUser2().getName()));
+				mContentEdit.setHint(getString(R.string.comment_in_reply_hint, postComment.getUser().getName()));
 				mContentEdit.setTag(postComment);
 				break;
 			}
@@ -609,7 +609,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 		}
 		// 保存当前选中的评论信息，在发送评论的时候取出，省一个全局的变量
 		mContentEdit.setTag(postComment);
-		if (!postComment.getUser2().isMe()) {
+		if (!postComment.getUser().isMe()) {
 			mContentEdit.setFocusable(true);
 			mContentEdit.requestFocus();
 			UiUtils.showKeyBoard(getActivity(), mContentEdit, 0);
@@ -621,7 +621,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 				mContentEdit.refreshDrawableState();
 			}
 			mContentEdit.setText("");
-			mContentEdit.setHint(getString(R.string.report_hint) + postComment.getUser2().getName() + ":");
+			mContentEdit.setHint(getString(R.string.report_hint) + postComment.getUser().getName() + ":");
 
 			final int fp = position + 1;
 			final View v = view;
@@ -695,7 +695,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 
 		String replyCommentId = null;
 		if (postComment != null) {
-			if (!postComment.getUser2().isMe()) {
+			if (!postComment.getUser().isMe()) {
 				replyCommentId = postComment.getId();
 			}
 		}
@@ -768,9 +768,9 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	 *            被开启主页的用户
 	 */
 	@Override
-	public void openSomeoneProfile(User2 user2) {
+	public void openSomeoneProfile(User user2) {
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(User2.TAG, user2);
+		bundle.putSerializable(User.TAG, user2);
 		// bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(user));
 		((BaseFragAct) getActivity()).startFragment(Profile2Fragment.class, bundle, true);
 	}

@@ -1,6 +1,6 @@
 package com.wealoha.social.beans
 
-import com.wealoha.social.beans.User2.Companion.fromDTO
+import com.wealoha.social.beans.User.Companion.fromDTO
 import java.io.Serializable
 import java.util.*
 
@@ -9,7 +9,7 @@ class UserTag(
     val tagAnchorY: Double?,
     val tagCenterX: Double?,
     val tagCenterY: Double?,
-    val user2: User2?
+    val user: User?
 ) : Serializable {
 
     companion object {

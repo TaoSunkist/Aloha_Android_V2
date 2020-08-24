@@ -25,7 +25,7 @@ import com.wealoha.social.beans.UserTag;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.PostDTO;
 import com.wealoha.social.beans.HashTag;
-import com.wealoha.social.beans.User2;
+import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
@@ -82,7 +82,7 @@ public class Feed2Service extends AbsBaseService<Post, String> {
      * @param callback
      * @return void
      */
-    public void getPraiseList(String cursor, int count, String postid, final ApiCallback<List<User2>> callback) {
+    public void getPraiseList(String cursor, int count, String postid, final ApiCallback<List<User>> callback) {
         feed2Api.getPraiseList(postid, cursor, count, new Callback<Result<UserListGetData>>() {
 
             @Override
@@ -101,11 +101,11 @@ public class Feed2Service extends AbsBaseService<Post, String> {
         });
     }
 
-    private List<User2> transUserListGetData2List(UserListGetData userListGetData) {
+    private List<User> transUserListGetData2List(UserListGetData userListGetData) {
         if (userListGetData == null || userListGetData.list == null) {
             return null;
         }
-        List<User2> user2List = new ArrayList<User2>(userListGetData.list.size());
+        List<User> user2List = new ArrayList<User>(userListGetData.list.size());
         user2List = getUsers(userListGetData.list, userListGetData.imageMap);
         return user2List;
     }
@@ -124,7 +124,7 @@ public class Feed2Service extends AbsBaseService<Post, String> {
                 continue;
             }
 
-            User2 user2 = getUser(postDto.userId, result.userMap, result.imageMap);
+            User user2 = getUser(postDto.userId, result.userMap, result.imageMap);
             List<UserTag> userTagList = gerUserTagList(postDto.userTags, result.userMap, result.imageMap);
             CommonImage commonImage = CommonImage.fromDTO(result.imageMap.get(postDto.imageId));
             CommonVideo commonVideo = null;
@@ -196,7 +196,7 @@ public class Feed2Service extends AbsBaseService<Post, String> {
             Log.i("LOAD_MEMORY", "++++++" + i);
             Post post = postList.get(i);
             picasso.load(post.getCommonImage().getUrlSquare(mScreenWidth)).fetch();
-            picasso.load(post.getUser2().getAvatarCommonImage().getUrlSquare(ImageSize.AVATAR_ROUND_SMALL)).fetch();
+            picasso.load(post.getUser().getAvatarCommonImage().getUrlSquare(ImageSize.AVATAR_ROUND_SMALL)).fetch();
         }
     }
 

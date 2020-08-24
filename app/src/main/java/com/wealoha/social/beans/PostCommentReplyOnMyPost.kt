@@ -5,26 +5,26 @@ class PostCommentReplyOnMyPost(
     unread: Boolean,
     notifyid: String?,  //
     updateTimeMillis: Long,
-    private var replyUser2: User2,
-    private var fromUser2: User2,
+    private var replyUser: User,
+    private var fromUser: User,
     private var commentId: String,  //
     private var comment: String,
     private var post: Post
 ) : AbsNotify2(type, unread, notifyid, updateTimeMillis) {
-    fun getReplyUser2(): User2 {
-        return replyUser2
+    fun getReplyUser(): User {
+        return replyUser
     }
 
-    fun setReplyUser2(replyUser2: User2) {
-        this.replyUser2 = replyUser2
+    fun setReplyUser(replyUser: User) {
+        this.replyUser = replyUser
     }
 
-    fun getFromUser2(): User2 {
-        return fromUser2
+    fun getFromUser(): User {
+        return fromUser
     }
 
-    fun setFromUser2(fromUser2: User2) {
-        this.fromUser2 = fromUser2
+    fun setFromUser(fromUser: User) {
+        this.fromUser = fromUser
     }
 
     fun getComment(): String {

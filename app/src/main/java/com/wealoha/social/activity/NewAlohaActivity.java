@@ -18,7 +18,7 @@ import com.wealoha.social.adapter.NewAlohaAdapter;
 import com.wealoha.social.beans.NewAlohaNotify2;
 import com.wealoha.social.beans.Notify2;
 import com.wealoha.social.beans.PostLikeNotify2;
-import com.wealoha.social.beans.User2;
+import com.wealoha.social.beans.User;
 import com.wealoha.social.utils.ContextUtil;
 import com.wealoha.social.utils.FontUtil.Font;
 import com.wealoha.social.utils.ToastUtil;
@@ -30,7 +30,7 @@ public class NewAlohaActivity extends BaseFragAct {
 
 	private ListView mNewAlohaLv;
 	private NewAlohaAdapter mNewAlohaAdapter;
-	private List<User2> mUser2s;
+	private List<User> mUsers;
 	@InjectView(R.id.aloha_title_tv)
 	TextView mTitle;
 
@@ -70,21 +70,21 @@ public class NewAlohaActivity extends BaseFragAct {
 		fontUtil.changeViewFont(mTitle, Font.ENCODESANSCOMPRESSED_600_SEMIBOLD);
 		if (notify2 instanceof NewAlohaNotify2) {
 			NewAlohaNotify2 mNewAlohaNotify2 = (NewAlohaNotify2) notify2;
-			mUser2s = mNewAlohaNotify2.getUser2s();
-			mTitle.setText(mResources.getString(R.string.new_aloha_title_aloha, mUser2s.size()));
-			mNewAlohaAdapter = new NewAlohaAdapter(mUser2s, mNewAlohaNotify2.getCount(), this, true);
+			mUsers = mNewAlohaNotify2.getUsers();
+			mTitle.setText(mResources.getString(R.string.new_aloha_title_aloha, mUsers.size()));
+			mNewAlohaAdapter = new NewAlohaAdapter(mUsers, mNewAlohaNotify2.getCount(), this, true);
 		} else if (notify2 instanceof PostLikeNotify2) {
 			PostLikeNotify2 mPostLikeNotify2 = (PostLikeNotify2) notify2;
-			mUser2s = mPostLikeNotify2.getUser2s();
-			mTitle.setText(mResources.getString(R.string.feed_like_title, mUser2s.size()));
-			mNewAlohaAdapter = new NewAlohaAdapter(mUser2s, mPostLikeNotify2.getCount(), this, true);
+			mUsers = mPostLikeNotify2.getUsers();
+			mTitle.setText(mResources.getString(R.string.feed_like_title, mUsers.size()));
+			mNewAlohaAdapter = new NewAlohaAdapter(mUsers, mPostLikeNotify2.getCount(), this, true);
 		}
 		mNewAlohaLv.setAdapter(mNewAlohaAdapter);
 		mNewAlohaLv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				User2 user2 = (User2) parent.getItemAtPosition(position);
+				User user2 = (User) parent.getItemAtPosition(position);
 				NewAlohaActivity.this.toProfileLogin(user2);
 			}
 		});

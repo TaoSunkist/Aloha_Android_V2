@@ -5,7 +5,6 @@ import com.wealoha.social.beans.ApiErrorCode
 import com.wealoha.social.api.BaseListApiService.ApiCallback
 import com.wealoha.social.api.BaseListApiService.NoResultCallback
 import com.wealoha.social.beans.CommonImage
-import com.wealoha.social.beans.User2
 import com.wealoha.social.beans.UserDTO
 import com.wealoha.social.beans.*
 import com.wealoha.social.callback.CallbackImpl
@@ -18,7 +17,7 @@ import retrofit.client.Response
 import java.util.*
 import javax.inject.Inject
 
-class User2Service {
+class UserService {
 
     @JvmField
     @Inject
@@ -95,7 +94,7 @@ class User2Service {
      */
     fun userProfile(
         userid: String,
-        callback: ApiCallback<User2>
+        callback: ApiCallback<User>
     ) {
         user2Api!!.userProfile(userid, object : Callback<Result<Profile2Data>?> {
             override fun success(
@@ -116,13 +115,13 @@ class User2Service {
         })
     }
 
-    private fun transPro2DataToUser(proData: Profile2Data?): User2? {
+    private fun transPro2DataToUser(proData: Profile2Data?): User? {
         val userDto = proData?.user
         // userDto.aloha = proData.liked;
         // userDto.match = proData.friend;
         val img =
             CommonImage.fromDTO(proData?.imageMap!![userDto!!.avatarImageId])
-        return User2.Companion.fromDTO(userDto, img)
+        return User.Companion.fromDTO(userDto, img)
     }
 
     /***

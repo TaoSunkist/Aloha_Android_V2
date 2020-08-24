@@ -26,7 +26,7 @@ import com.wealoha.social.ContextConfig;
 import com.wealoha.social.R;
 import com.wealoha.social.adapter.ViewPagerAdapter;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.api.User2Service;
+import com.wealoha.social.api.UserService;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
@@ -58,7 +58,7 @@ public class NaviIntroActivity extends BaseFragAct implements ViewPager.OnPageCh
     @Inject
     ServerApi mUserAPI;
     @Inject
-    User2Service mUser2Service;
+    UserService mUserService;
 
     private ViewPager vp;
     private ViewPagerAdapter vpAdapter;
@@ -121,7 +121,7 @@ public class NaviIntroActivity extends BaseFragAct implements ViewPager.OnPageCh
                         finish();
                     } else {
                         uri = GlobalConstants.IntentAction.INTENT_URI_MAIN;
-                        mUser2Service.getProfeatureSetting();// 获取高级界面设置信息
+                        mUserService.getProfeatureSetting();// 获取高级界面设置信息
                     }
                 }
                 // Bundle bundle = new Bundle();

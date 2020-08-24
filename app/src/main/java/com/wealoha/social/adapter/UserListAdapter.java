@@ -13,19 +13,19 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.adapter.feed.AbsViewHolder;
 import com.wealoha.social.api.BaseListApiService;
-import com.wealoha.social.beans.User2;
+import com.wealoha.social.beans.User;
 import com.wealoha.social.view.custom.CircleImageView;
 import com.wealoha.social.widget.BaseAdapterHolder;
 import com.wealoha.social.widget.BaseListApiAdapter;
 import com.wealoha.social.widget.MultiListViewType;
 
-public class UserListAdapter extends BaseListApiAdapter<User2, String> {
+public class UserListAdapter extends BaseListApiAdapter<User, String> {
 
 	@Inject
 	Picasso picasso;
 	private BaseFragAct mParent;
 
-	public UserListAdapter(BaseFragAct parent, BaseListApiService<User2, String> service) {
+	public UserListAdapter(BaseFragAct parent, BaseListApiService<User, String> service) {
 		super(service);
 		mParent = parent;
 	}
@@ -49,13 +49,13 @@ public class UserListAdapter extends BaseListApiAdapter<User2, String> {
 	}
 
 	@Override
-	protected BaseAdapterHolder newViewHolder(MultiListViewType type, User2 item, LayoutInflater inflater, ViewGroup parent) {
+	protected BaseAdapterHolder newViewHolder(MultiListViewType type, User item, LayoutInflater inflater, ViewGroup parent) {
 		View view = inflater.inflate(R.layout.item_swipe_userlist, parent, false);
 		return new UserListHodler(view);
 	}
 
 	@Override
-	protected void fillView(AbsViewHolder holder, User2 item, int position, View convertView) {
+	protected void fillView(AbsViewHolder holder, User item, int position, View convertView) {
 		UserListHodler userlistHolder = (UserListHodler) holder;
 		picasso.load(item.getAvatarCommonImage().getUrl(80, 80))//
 		.into(userlistHolder.userPhoto);

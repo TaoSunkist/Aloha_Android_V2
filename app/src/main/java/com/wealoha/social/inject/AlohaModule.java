@@ -111,7 +111,7 @@ import com.wealoha.social.api.PostService;
 import com.wealoha.social.api.TopicPostService;
 import com.wealoha.social.api.Profile2Service;
 import com.wealoha.social.api.TopicService;
-import com.wealoha.social.api.User2Service;
+import com.wealoha.social.api.UserService;
 import com.wealoha.social.api.ConstantsService;
 import com.wealoha.social.api.CountService;
 import com.wealoha.social.beans.message.ImageMessage;
@@ -394,7 +394,7 @@ import dagger.Provides;
                 Profile2ImageHolder.class,//
                 Profile2Service.class, //
                 Profile2HeaderHolder.class, //
-                User2Service.class,//
+                UserService.class,//
                 SingletonFeedService.class,//
                 ImageFeedHolder.class, //
                 VideoFeedHolder.class,//

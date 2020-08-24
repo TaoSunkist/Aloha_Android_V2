@@ -2,7 +2,7 @@ package com.wealoha.social.utils;
 
 import com.wealoha.social.beans.Image;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.beans.User2;
+import com.wealoha.social.beans.User;
 
 /**
  * @author:sunkist
@@ -14,32 +14,32 @@ import com.wealoha.social.beans.User2;
  */
 public class DockingBeanUtils {
 
-    public static User transUser(User2 apiUser2) {
+    public static User transUser(User apiUser) {
         User user = User.Companion.fake();
-        user.setAge(apiUser2.getAge());
-        user.setAlohaCount(apiUser2.getAlohaCount());
-        user.setAlohaGetCount(apiUser2.getAlohaGetCount());
-        user.setBirthday(apiUser2.getBirthday());
-        user.setHeight(apiUser2.getHeight());
-        user.setId(apiUser2.getId());
-        user.setName(apiUser2.getName());
-        user.setPostCount(apiUser2.getPostCount());
-        user.setRegionCode(apiUser2.getRegionCode());
-        user.setSelfPurposes(apiUser2.getSelfPurposes());
-        user.setSelfTag(apiUser2.getSelfTag());
-        user.setSummary(apiUser2.getSummary());
-        user.setWeight(apiUser2.getWeight());
-        user.setZodiac(apiUser2.getZodiac());
+        user.setAge(apiUser.getAge());
+        user.setAlohaCount(apiUser.getAlohaCount());
+        user.setAlohaGetCount(apiUser.getAlohaGetCount());
+        user.setBirthday(apiUser.getBirthday());
+        user.setHeight(apiUser.getHeight());
+        user.setId(apiUser.getId());
+        user.setName(apiUser.getName());
+        user.setPostCount(apiUser.getPostCount());
+        user.setRegionCode(apiUser.getRegionCode());
+        user.setSelfPurposes(apiUser.getSelfPurposes());
+        user.setSelfTag(apiUser.getSelfTag());
+        user.setSummary(apiUser.getSummary());
+        user.setWeight(apiUser.getWeight());
+        user.setZodiac(apiUser.getZodiac());
         user.setAvatarImage(Image.Companion.fake());
-        user.getAvatarImage().setHeight(apiUser2.getAvatarCommonImage().getHeight());
-        user.getAvatarImage().setId(apiUser2.getAvatarCommonImage().getId());
-        user.getAvatarImage().setWidth(apiUser2.getAvatarCommonImage().getWidth());
-        user.setHasPrivacy(apiUser2.hasPrivacy());
-        user.setAloha(apiUser2.isAloha());
-        user.setMatch(apiUser2.isMatch());
-        user.setMe(apiUser2.isMe());
-        user.setBlock(apiUser2.isBlock());
-        user.setProfileIncomplete(apiUser2.isProfileIncomplete());
+        user.getAvatarImage().setHeight(apiUser.getAvatarCommonImage().getHeight());
+        user.getAvatarImage().setId(apiUser.getAvatarCommonImage().getId());
+        user.getAvatarImage().setWidth(apiUser.getAvatarCommonImage().getWidth());
+        user.setHasPrivacy(apiUser.hasPrivacy());
+        user.setAloha(apiUser.isAloha());
+        user.setMatch(apiUser.isMatch());
+        user.setMe(apiUser.isMe());
+        user.setBlock(apiUser.isBlock());
+        user.setProfileIncomplete(apiUser.isProfileIncomplete());
         return user;
     }
 }

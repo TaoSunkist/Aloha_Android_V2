@@ -8,7 +8,7 @@ import retrofit.client.Response;
 import com.wealoha.social.beans.ApiErrorCode;
 import com.wealoha.social.beans.Direct;
 import com.wealoha.social.beans.MergeUsersGetData;
-import com.wealoha.social.beans.User2;
+import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.inject.Injector;
 import com.wealoha.social.utils.XL;
@@ -19,7 +19,7 @@ import com.wealoha.social.utils.XL;
  * @author superman
  * @createTime 2015-03-12 11:20:31
  */
-public class UserListService extends AbsBaseService<User2, String> {
+public class UserListService extends AbsBaseService<User, String> {
 
 	@Inject
 	ServerApi notify2api;
@@ -29,7 +29,7 @@ public class UserListService extends AbsBaseService<User2, String> {
 	}
 
 	@Override
-	public void getList(String cursor, int count, Direct direct, String notifyId, final BaseListApiService.ApiListCallback<User2> callback) {
+	public void getList(String cursor, int count, Direct direct, String notifyId, final BaseListApiService.ApiListCallback<User> callback) {
 		notify2api.getMergeUsers(notifyId, count, cursor, new retrofit.Callback<Result<MergeUsersGetData>>() {
 
 			@Override

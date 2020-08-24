@@ -27,7 +27,7 @@ import com.wealoha.social.beans.TopicPostDTO;
 import com.wealoha.social.beans.HashTag;
 import com.wealoha.social.beans.HashTagDTO;
 import com.wealoha.social.beans.TopicPostTagDTO;
-import com.wealoha.social.beans.User2;
+import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.utils.XL;
 
@@ -181,7 +181,7 @@ public class TopicPostService extends AbsBaseService<TopicPost> {
 		if (postsDTO != null) {
 			postlist = new ArrayList<>(postsDTO.size());
 			for (TopicPostDTO tpd : postsDTO) {
-				User2 user2 = User2.fromDTO(tpd.user, CommonImage.fromDTO(tpd.user.avatarImage));
+				User user2 = User.fromDTO(tpd.user, CommonImage.fromDTO(tpd.user.avatarImage));
 				List<UserTag> userTags = transPostTagDTO2PostTag(tpd.userTags);
 				List<PostComment> recentCommentList = transComment2DTOListToPostCommentList(tpd.recentComment);
 
@@ -225,9 +225,9 @@ public class TopicPostService extends AbsBaseService<TopicPost> {
 		}
 		List<PostComment> postCommentList = new ArrayList<>();
 		for (Comment2DTO dto : dtoList) {
-			User2 user2 = User2.fromDTO(dto.user, CommonImage.fromDTO(dto.user.avatarImage));
-			User2 replyUser2 = User2.fromDTO(dto.replyUser, CommonImage.fromDTO(dto.replyUser.avatarImage));
-			PostComment postComment = PostComment.Companion.fromComment2DTO(dto, replyUser2, user2);
+			User user2 = User.fromDTO(dto.user, CommonImage.fromDTO(dto.user.avatarImage));
+			User replyUser = User.fromDTO(dto.replyUser, CommonImage.fromDTO(dto.replyUser.avatarImage));
+			PostComment postComment = PostComment.Companion.fromComment2DTO(dto, replyUser, user2);
 			postCommentList.add(postComment);
 		}
 		return postCommentList;
@@ -243,7 +243,7 @@ public class TopicPostService extends AbsBaseService<TopicPost> {
 				tpt.tagAnchorY,//
 				tpt.tagCenterX,//
 				tpt.tagCenterY,//
-				User2.fromDTO(tpt.tagUser, CommonImage.fromDTO(tpt.tagUser.avatarImage)));
+				User.fromDTO(tpt.tagUser, CommonImage.fromDTO(tpt.tagUser.avatarImage)));
 				tags.add(tag);
 			}
 		}

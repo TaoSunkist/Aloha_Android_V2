@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
-import com.wealoha.social.beans.User2;
+import com.wealoha.social.beans.User;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
 import com.wealoha.social.inject.Injector;
 import com.wealoha.social.utils.FontUtil;
@@ -24,7 +24,7 @@ import com.wealoha.social.view.custom.CircleImageView;
 
 public class NewAlohaAdapter extends BaseAdapter {
 
-	private List<User2> mUser2s;
+	private List<User> mUsers;
 	private BaseFragAct mParent;
 	private LayoutInflater mLayoutInflater;
 	@Inject
@@ -34,17 +34,17 @@ public class NewAlohaAdapter extends BaseAdapter {
 	private final boolean mIsMatcher;
 	private int mCount;
 
-	public NewAlohaAdapter(List<User2> user2s, BaseFragAct baseFragAct, boolean b) {
+	public NewAlohaAdapter(List<User> user2s, BaseFragAct baseFragAct, boolean b) {
 		Injector.inject(this);
-		this.mUser2s = user2s;
+		this.mUsers = user2s;
 		this.mParent = baseFragAct;
 		mIsMatcher = b;
 		mLayoutInflater = (LayoutInflater) baseFragAct.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
-	public NewAlohaAdapter(List<User2> user2s, int count, BaseFragAct baseFragAct, boolean b) {
+	public NewAlohaAdapter(List<User> user2s, int count, BaseFragAct baseFragAct, boolean b) {
 		Injector.inject(this);
-		this.mUser2s = user2s;
+		this.mUsers = user2s;
 		this.mParent = baseFragAct;
 		mIsMatcher = b;
 		this.mCount = count;
@@ -53,15 +53,15 @@ public class NewAlohaAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		if (mUser2s != null) {
-			return mUser2s.size();
+		if (mUsers != null) {
+			return mUsers.size();
 		}
 		return 0;
 	}
 
 	@Override
-	public User2 getItem(int position) {
-		return mUser2s.get(position);
+	public User getItem(int position) {
+		return mUsers.get(position);
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class NewAlohaAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder viewHolder = null;
-		User2 user2 = mUser2s.get(position);
+		User user2 = mUsers.get(position);
 		if (convertView == null) {
 			convertView = mLayoutInflater.inflate(R.layout.item_new_aloha, parent, false);
 			viewHolder = new ViewHolder(convertView, mParent);

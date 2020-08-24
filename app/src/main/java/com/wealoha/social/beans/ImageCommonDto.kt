@@ -1,6 +1,9 @@
 package com.wealoha.social.beans
 
+import com.wealoha.social.utils.Debug
 import com.wealoha.social.utils.Dimens
+import com.wealoha.social.utils.ImageUtil
+import org.apache.commons.lang3.StringUtils
 
 /**
  *
@@ -29,5 +32,23 @@ class ImageCommonDto(
                 height = Dimens.purchaseableItemHeight
             )
         }
+    }
+
+    /**
+     * 获取方图地址
+     *
+     * @param width
+     * @return
+     */
+    fun getUrlSquare(width: Int): String {
+        return if (StringUtils.isNotBlank(urlPatternWidth)) {
+            replacePattern(urlPatternWidth, width.toString() + "")
+        } else ImageUtil.getImageUrl(imageId, width, ImageUtil.CropMode.ScaleCenterCrop)
+    }
+
+    private fun replacePattern(target: String?, vararg args: Any): String {
+        var target = target
+        target = StringUtils.replace(target, "%@", "%s")
+        return String.format(target, *args)
     }
 }

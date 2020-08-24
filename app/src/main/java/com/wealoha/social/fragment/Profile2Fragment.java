@@ -45,7 +45,7 @@ import com.wealoha.social.adapter.profile.Profile2ImagesAdapter;
 import com.wealoha.social.adapter.profile.Profile2InfoAdapter;
 import com.wealoha.social.beans.ApiErrorCode;
 import com.wealoha.social.api.Profile2Service;
-import com.wealoha.social.beans.User2;
+import com.wealoha.social.beans.User;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.store.PopupStore;
 import com.wealoha.social.ui.config.ConfigFragment;
@@ -94,7 +94,7 @@ public class Profile2Fragment extends BaseFragment implements ProfileHeader2Frag
 	private Profile2InfoAdapter pro2InfoAdt;
 	private Profile2BlackAdapter pro2BlackAdt;
 	private Profile2HeaderHolder proHeadHld;
-	private User2 mUser2;
+	private User mUser;
 
 	private static final int PAGE_SIZE = 30;
 
@@ -145,7 +145,7 @@ public class Profile2Fragment extends BaseFragment implements ProfileHeader2Frag
 		initOnTouchEvent();
 		openInstagramSub();
 
-		if (mUser2.hasPrivacy()) {
+		if (mUser.hasPrivacy()) {
 			blackUserCallback();
 		}
 	}
@@ -184,7 +184,7 @@ public class Profile2Fragment extends BaseFragment implements ProfileHeader2Frag
 	private void initTitlebar() {
 		// 字体
 		fontUtil.changeFonts(mTitleRootView, Font.ENCODESANSCOMPRESSED_600_SEMIBOLD);
-		if (mUser2.isMe()) {// 按钮
+		if (mUser.isMe()) {// 按钮
 			if (getActivity() instanceof MainAct) {
 				mConfigLayout.setVisibility(View.VISIBLE);
 				mBack.setVisibility(View.GONE);
@@ -197,7 +197,7 @@ public class Profile2Fragment extends BaseFragment implements ProfileHeader2Frag
 			mBack.setVisibility(View.VISIBLE);
 		}
 		// 名字转成风骚的大写~~
-		String upper = mUser2.getName();
+		String upper = mUser.getName();
 		if (!TextUtils.isEmpty(upper)) {
 			upper = upper.toUpperCase(Locale.getDefault());
 		}
@@ -210,7 +210,7 @@ public class Profile2Fragment extends BaseFragment implements ProfileHeader2Frag
 	 */
 	public void openInstagramSub() {
 
-		if (!mUser2.isMe() || !(getActivity() instanceof MainAct)) {
+		if (!mUser.isMe() || !(getActivity() instanceof MainAct)) {
 			return;
 		}
 		if (ContextConfig.getInstance().getBooleanWithFilename("instagram_sub")) {
@@ -259,19 +259,19 @@ public class Profile2Fragment extends BaseFragment implements ProfileHeader2Frag
 	 * @return void
 	 */
 	private void getUserData() {
-		if (mUser2 == null) {
+		if (mUser == null) {
 			Object userobj = getArguments().get(com.wealoha.social.beans.User.TAG);
 			if (userobj == null) {
-				userobj = getArguments().get(User2.TAG);
+				userobj = getArguments().get(User.TAG);
 			}
 
-			if (userobj instanceof User2) {
-				mUser2 = (User2) userobj;
+			if (userobj instanceof User) {
+				mUser = (User) userobj;
 			} else {
-				mUser2 = User2.formOldUser((com.wealoha.social.beans.User) userobj);
+				mUser = User.formOldUser((com.wealoha.social.beans.User) userobj);
 			}
 
-			if (mUser2.getPostCount() == 0) {
+			if (mUser.getPostCount() == 0) {
 				viewtype = INFO_PROFILE;
 			}
 		}
@@ -282,7 +282,7 @@ public class Profile2Fragment extends BaseFragment implements ProfileHeader2Frag
 		if (reset) {
 			pro2Adt.resetStateDelay();
 		}
-		pro2Adt.loadEarlyPage(PAGE_SIZE, mUser2.getId(), new LoadCallback() {
+		pro2Adt.loadEarlyPage(PAGE_SIZE, mUser.getId(), new LoadCallback() {
 
 			@Override
 			public void success(boolean hasEarly, boolean hasLate) {
@@ -309,7 +309,7 @@ public class Profile2Fragment extends BaseFragment implements ProfileHeader2Frag
 
 	private void loadFirstPage() {
 		pro2Adt.resetStateDelay();
-		pro2Adt.loadEarlyPage(PAGE_SIZE, mUser2.getId(), new LoadCallback() {
+		pro2Adt.loadEarlyPage(PAGE_SIZE, mUser.getId(), new LoadCallback() {
 
 			@Override
 			public void success(boolean hasEarly, boolean hasLate) {
@@ -370,11 +370,11 @@ public class Profile2Fragment extends BaseFragment implements ProfileHeader2Frag
 	private void initHeaderView() {
 		if (proHeadHld == null) {
 			proHeadHld = new Profile2HeaderHolder(this, this, mProList);
-			mProList.addHeaderView(proHeadHld.resetViewData(mUser2));
+			mProList.addHeaderView(proHeadHld.resetViewData(mUser));
 		} else {
-			mProList.addHeaderView(proHeadHld.resetViewData(mUser2));
+			mProList.addHeaderView(proHeadHld.resetViewData(mUser));
 		}
-		proHeadHld.refreshHeader(mUser2.getId());
+		proHeadHld.refreshHeader(mUser.getId());
 	}
 
 	/***
@@ -414,7 +414,7 @@ public class Profile2Fragment extends BaseFragment implements ProfileHeader2Frag
 	public void changeToInfo() {
 		viewtype = INFO_PROFILE;
 		// if (pro2InfoAdt == null) {
-		pro2InfoAdt = new Profile2InfoAdapter(mUser2);
+		pro2InfoAdt = new Profile2InfoAdapter(mUser);
 		// } else {
 		// pro2InfoAdt.notifyDataSetChanged();
 		// }
@@ -515,10 +515,10 @@ public class Profile2Fragment extends BaseFragment implements ProfileHeader2Frag
 	 * 
 	 */
 	private void startMenuPopup() {
-		if (mUser2.isMe()) {
-			new PopupStore(regionNodeUtil).showShareProfilePopup((BaseFragAct) getActivity(), DockingBeanUtils.transUser(mUser2), null);
+		if (mUser.isMe()) {
+			new PopupStore(regionNodeUtil).showShareProfilePopup((BaseFragAct) getActivity(), DockingBeanUtils.transUser(mUser), null);
 		} else {
-			new PopupStore(regionNodeUtil).showShareProfilePopup((BaseFragAct) getActivity(), contextUtil.getCurrentUser(), DockingBeanUtils.transUser(mUser2));
+			new PopupStore(regionNodeUtil).showShareProfilePopup((BaseFragAct) getActivity(), contextUtil.getCurrentUser(), DockingBeanUtils.transUser(mUser));
 		}
 	}
 
@@ -529,9 +529,9 @@ public class Profile2Fragment extends BaseFragment implements ProfileHeader2Frag
 	}
 
 	@Override
-	public void alohaCallback(User2 user2) {
-		XL.i("UNALOHA_SOMEONE", "------userid:" + mUser2.getId());
-		mUser2 = user2;
+	public void alohaCallback(User user2) {
+		XL.i("UNALOHA_SOMEONE", "------userid:" + mUser.getId());
+		mUser = user2;
 		Intent resultIntent = new Intent();
 		resultIntent.putExtra("userid", user2.getId());
 		if (getActivity() != null && !getActivity().isFinishing()) {
@@ -578,7 +578,7 @@ public class Profile2Fragment extends BaseFragment implements ProfileHeader2Frag
 	public void refreshUserIco() {
 		// XL.i("CONFIG_FRAG_RESULT", "refreshUserIco");
 		if (proHeadHld != null) {
-			proHeadHld.refreshHeader(mUser2.getId());
+			proHeadHld.refreshHeader(mUser.getId());
 		}
 	}
 
@@ -690,8 +690,8 @@ public class Profile2Fragment extends BaseFragment implements ProfileHeader2Frag
 	}
 
 	@Override
-	public void refreshUserData(User2 user2) {
-		mUser2 = user2;
+	public void refreshUserData(User user2) {
+		mUser = user2;
 		initTitlebar();
 
 		if (viewtype == INFO_PROFILE) {

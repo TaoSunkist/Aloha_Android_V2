@@ -31,7 +31,7 @@ import com.wealoha.social.beans.PostLikeNotify2;
 import com.wealoha.social.beans.PostTagNotify2;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.beans.User2;
+import com.wealoha.social.beans.User;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
 import com.wealoha.social.fragment.FeedCommentFragment;
@@ -155,14 +155,14 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 			picasso.load(postLikeNotify2.getPost().getCommonImage().getUrl(80, 80))//
 			.into(postLikeViewHolder.mFeedImg);
 
-			if (postLikeNotify2.getUser2s().size() == 1) {
+			if (postLikeNotify2.getUsers().size() == 1) {
 				// * 說你的相片讃
 				String format = String.format(mParent.getResources().getString(R.string.title_activity_post_like_title),//
-												postLikeNotify2.getUser2s().get(0).getName());
+												postLikeNotify2.getUsers().get(0).getName());
 				postLikeViewHolder.mTitle.setText(format);
 			} else {
 				String format = mParent.getResources().getString(R.string.title_activity_post_like_title_more_end,//
-				postLikeNotify2.getUser2s().size());
+				postLikeNotify2.getUsers().size());
 
 				postLikeViewHolder.mTitle.setText(format);
 			}
@@ -192,12 +192,12 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 			}
 			postCommentViewHolder.mStamp.setText(TimeUtil.getDistanceTimeForApp(mParent, //
 																				new Date().getTime(), postCommentNotify2.getUpdateTimeMillis()));
-			picasso.load(postCommentNotify2.getFromUser2().getAvatarCommonImage().getUrlSquare(ImageSize.CHAT_THUMB)).//
+			picasso.load(postCommentNotify2.getFromUser().getAvatarCommonImage().getUrlSquare(ImageSize.CHAT_THUMB)).//
 			placeholder(R.drawable.default_photo).into(postCommentViewHolder.mUserHead);
 			picasso.load(postCommentNotify2.getPost().getCommonImage().getUrl(80, 80)).//
 			into(postCommentViewHolder.mFeedImg);
 
-			postCommentViewHolder.mUserName.setText(postCommentNotify2.getFromUser2().getName());
+			postCommentViewHolder.mUserName.setText(postCommentNotify2.getFromUser().getName());
 			postCommentViewHolder.mUserHead.setOnClickListener(new OnClickListener(postCommentNotify2));
 			postCommentViewHolder.mFeedImg.setOnClickListener(new OnClickListener(postCommentNotify2));
 			break;
@@ -215,12 +215,12 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 			} else {
 				postTagViewHolder.mRootView.setBackgroundResource(R.drawable.layout_silde_01);
 			}
-			picasso.load(postTagNotify2.getFromUser2().getAvatarCommonImage().getUrl(ImageSize.AVATAR_ROUND_SMALL, ImageSize.AVATAR_ROUND_SMALL)).//
+			picasso.load(postTagNotify2.getFromUser().getAvatarCommonImage().getUrl(ImageSize.AVATAR_ROUND_SMALL, ImageSize.AVATAR_ROUND_SMALL)).//
 			placeholder(R.drawable.default_photo).into(postTagViewHolder.mUserHead);
 			picasso.load(postTagNotify2.getPost().getCommonImage().getUrl(100, 100)).//
 			into(postTagViewHolder.mFeedImg);
 			String format = String.format(mParent.getResources().getString(R.string.item_feed_notice_post_tag_body),//
-											postTagNotify2.getFromUser2().getName());
+											postTagNotify2.getFromUser().getName());
 			postTagViewHolder.mUserName.setText(format);
 			postTagViewHolder.mStamp.setText(TimeUtil.getDistanceTimeForApp(mParent, //
 																			new Date().getTime(), postTagNotify2.getPost().getCreateTimeMillis()));
@@ -244,12 +244,12 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 			} else {
 				newAlohaViewHolder.mRootView.setBackgroundResource(R.drawable.layout_silde_01);
 			}
-			int userNum = newAlohaNotify2.getUser2s().size();
+			int userNum = newAlohaNotify2.getUsers().size();
 			String string = null;
 			// SpannableString newAlohaSS = null;
 			if (userNum == 1) {
 				string = String.format(mParent.getResources().getString(R.string.item_feed_notice_new_aloha_body),//
-										newAlohaNotify2.getUser2s().get(0).getName());
+										newAlohaNotify2.getUsers().get(0).getName());
 				newAlohaViewHolder.mTitle.setText(string);
 			} else {
 				string = mParent.getResources().getString(R.string.item_feed_notice_new_aloha_body_more_one, userNum);
@@ -276,12 +276,12 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 			postCommentReplyOnMyPostViewHolder.mCommentBody.setText(postCommentReplyOnMyPost.getComment());
 			postCommentReplyOnMyPostViewHolder.mStamp.setText(TimeUtil.getDistanceTimeForApp(mParent, //
 																				new Date().getTime(), postCommentReplyOnMyPost.getUpdateTimeMillis()));
-			picasso.load(postCommentReplyOnMyPost.getFromUser2().getAvatarCommonImage().getUrlSquare(ImageSize.CHAT_THUMB)).//
+			picasso.load(postCommentReplyOnMyPost.getFromUser().getAvatarCommonImage().getUrlSquare(ImageSize.CHAT_THUMB)).//
 			placeholder(R.drawable.default_photo).into(postCommentReplyOnMyPostViewHolder.mUserHead);
 			picasso.load(postCommentReplyOnMyPost.getPost().getCommonImage().getUrl(80, 80)).//
 			into(postCommentReplyOnMyPostViewHolder.mFeedImg);
 
-			postCommentReplyOnMyPostViewHolder.mUserName.setText(postCommentReplyOnMyPost.getFromUser2().getName());
+			postCommentReplyOnMyPostViewHolder.mUserName.setText(postCommentReplyOnMyPost.getFromUser().getName());
 			postCommentReplyOnMyPostViewHolder.mUserHead.setOnClickListener(new OnClickListener(postCommentReplyOnMyPost));
 			postCommentReplyOnMyPostViewHolder.mFeedImg.setOnClickListener(new OnClickListener(postCommentReplyOnMyPost));
 			break;
@@ -302,12 +302,12 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 			postCommentReplyOnOthersPostViewHolder.mCommentBody.setText(postCommentReplyOnOthersPost.getComment());
 			postCommentReplyOnOthersPostViewHolder.mStamp.setText(TimeUtil.getDistanceTimeForApp(mParent, //
 																				new Date().getTime(), postCommentReplyOnOthersPost.getUpdateTimeMillis()));
-			picasso.load(postCommentReplyOnOthersPost.getFromUser2().getAvatarCommonImage().getUrlSquare(ImageSize.CHAT_THUMB)).//
+			picasso.load(postCommentReplyOnOthersPost.getFromUser().getAvatarCommonImage().getUrlSquare(ImageSize.CHAT_THUMB)).//
 			placeholder(R.drawable.default_photo).into(postCommentReplyOnOthersPostViewHolder.mUserHead);
 			picasso.load(postCommentReplyOnOthersPost.getPost().getCommonImage().getUrl(80, 80)).//
 			into(postCommentReplyOnOthersPostViewHolder.mFeedImg);
 
-			postCommentReplyOnOthersPostViewHolder.mUserName.setText(postCommentReplyOnOthersPost.getFromUser2().getName());
+			postCommentReplyOnOthersPostViewHolder.mUserName.setText(postCommentReplyOnOthersPost.getFromUser().getName());
 			postCommentReplyOnOthersPostViewHolder.mUserHead.setOnClickListener(new OnClickListener(postCommentReplyOnOthersPost));
 			postCommentReplyOnOthersPostViewHolder.mFeedImg.setOnClickListener(new OnClickListener(postCommentReplyOnOthersPost));
 			break;
@@ -352,8 +352,8 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 				return;
 			case R.id.item_feed_notice_new_aloha_icon_iv:
 				NewAlohaNotify2 newAlohaNotify = (NewAlohaNotify2) mNotify2;
-				if (newAlohaNotify.getUser2s() != null && newAlohaNotify.getUser2s().size() == 1) {
-					openSomeoneProfile(newAlohaNotify.getUser2s().get(0));
+				if (newAlohaNotify.getUsers() != null && newAlohaNotify.getUsers().size() == 1) {
+					openSomeoneProfile(newAlohaNotify.getUsers().get(0));
 				}
 				return;
 			case R.id.item_feed_notice_post_tag_img_iv:// 圈人被圈的Feed图片点击后跳转到圈人Feed
@@ -362,16 +362,16 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 				return;
 			case R.id.item_feed_notice_comment_userhead_cv:// 评论Feed的User头像
 				if(mNotify2 instanceof PostCommentNotify2){
-					openSomeoneProfile(((PostCommentNotify2) mNotify2).getFromUser2());
+					openSomeoneProfile(((PostCommentNotify2) mNotify2).getFromUser());
 				}else if(mNotify2 instanceof PostCommentReplyOnMyPost){
-					openSomeoneProfile(((PostCommentReplyOnMyPost) mNotify2).getFromUser2());
+					openSomeoneProfile(((PostCommentReplyOnMyPost) mNotify2).getFromUser());
 				}else if(mNotify2 instanceof PostCommentReplyOnOthersPost){
-					openSomeoneProfile(((PostCommentReplyOnOthersPost) mNotify2).getFromUser2());
+					openSomeoneProfile(((PostCommentReplyOnOthersPost) mNotify2).getFromUser());
 				}
 //				openSomeoneProfile(((PostCommentNotify2) mNotify2).getFromUser());
 				return;
 			case R.id.item_feed_notice_post_tag_userhead_cv:// 评论Feed的User头像
-				openSomeoneProfile(((PostTagNotify2) mNotify2).getFromUser2());
+				openSomeoneProfile(((PostTagNotify2) mNotify2).getFromUser());
 				return;
 			}
 //			startSingleTagsFeed(post, feedtyep);
@@ -392,7 +392,7 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 	 * @param user2
 	 *            被开启主页的用户
 	 */
-	private void openSomeoneProfile(User2 user2) {
+	private void openSomeoneProfile(User user2) {
 
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(user2));
@@ -422,12 +422,12 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 	 */
 	private void wrapUsers(final Notify2 notify2, NewAlohaViewHolder newAlohaViewHolder, PostLikeViewHolder postLikeViewHolder) {
 
-		List<User2> user2s = null;
+		List<User> user2s = null;
 		int size = 0;
 		long t = System.currentTimeMillis();
 		if (notify2 instanceof PostLikeNotify2) {
 			postLikeViewHolder.mWrapUsers.removeAllViews();
-			user2s = ((PostLikeNotify2) notify2).getUser2s();
+			user2s = ((PostLikeNotify2) notify2).getUsers();
 			size = user2s.size();
 			for (int i = 0; i < Math.min(size, oneRowMaxUserCount); i++) {
 				CircleImageView circleImageView = new CircleImageView(mParent);
@@ -439,7 +439,7 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 			}
 		} else if (notify2 instanceof NewAlohaNotify2) {
 			newAlohaViewHolder.mWrapUsers.removeAllViews();
-			user2s = ((NewAlohaNotify2) notify2).getUser2s();
+			user2s = ((NewAlohaNotify2) notify2).getUsers();
 			size = user2s.size();
 
 			for (int i = 0; i < Math.min(size, oneRowMaxUserCount); i++) {

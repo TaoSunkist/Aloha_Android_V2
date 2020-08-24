@@ -14,7 +14,7 @@ class NewAlohaNotify2(
     notifyid: String?,
     updateTimeMillis: Long,
     private var count: Int,
-    private val user2s: List<User2>
+    private val user2s: List<User>
 ) : AbsNotify2(type, unread, notifyid, updateTimeMillis), Serializable {
     fun getCount(): Int {
         return count
@@ -24,7 +24,7 @@ class NewAlohaNotify2(
         this.count = count
     }
 
-    fun getUser2s(): List<User2> {
+    fun getUsers(): List<User> {
         return user2s
     }
 

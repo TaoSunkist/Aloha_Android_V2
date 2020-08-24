@@ -58,7 +58,6 @@ data class UserDTO(
     var block: Boolean = false,
     var hasPrivacy: Boolean = false,
 
-    @JvmField
     var avatarImage: ImageCommonDto? = null
 ) {
     companion object {
