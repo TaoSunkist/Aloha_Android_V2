@@ -43,11 +43,11 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.activity.GDMapAct;
 import com.wealoha.social.activity.WebActivity;
+import com.wealoha.social.api.Feed2ListApiService;
 import com.wealoha.social.beans.PostComment;
 import com.wealoha.social.beans.ApiErrorCode;
 import com.wealoha.social.api.BaseListApiService.NoResultCallback;
 import com.wealoha.social.beans.UserTag;
-import com.wealoha.social.api.Feed2Service;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.commons.GlobalConstants;
@@ -77,7 +77,7 @@ import com.wealoha.social.widget.NoUnderlineClickableSpan;
 public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListItemCallback, OnTouchListener, Frag2HolderCallback {
 
 	@Inject
-	Feed2Service feed2Service;
+    Feed2ListApiService feed2Service;
 	@Inject
 	ContextUtil contextUtil;
 	@Inject

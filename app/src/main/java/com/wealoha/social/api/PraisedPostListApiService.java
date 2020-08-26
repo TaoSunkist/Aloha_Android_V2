@@ -13,7 +13,7 @@ import com.wealoha.social.beans.FeedGetData;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.utils.XL;
 
-public class PraisedPostService extends Feed2Service {
+public class PraisedPostListApiService extends Feed2ListApiService {
 
 	@Inject
 	ServerApi feed2API;

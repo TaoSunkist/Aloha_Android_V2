@@ -34,7 +34,7 @@ import com.wealoha.social.utils.XL;
 
 import static com.wealoha.social.utils.DebugToolsKt.printf;
 
-public class Feed2Service extends AbsBaseService<Post, String> {
+public class Feed2ListApiService extends AbsBaseListApiService<Post, String> {
 
     @Inject
     ServerApi feed2Api;
@@ -43,15 +43,16 @@ public class Feed2Service extends AbsBaseService<Post, String> {
     @Inject
     Picasso picasso;
 
-    public final static String TAG = Feed2Service.class.getSimpleName();
+    public final static String TAG = Feed2ListApiService.class.getSimpleName();
     protected List<Post> postList;
 
-    public Feed2Service() {
+    public Feed2ListApiService() {
         Injector.inject(this);
     }
 
     @Override
     public void getList(String cursor, int count, Direct direct, final String userid, final BaseListApiService.ApiListCallback<Post> callback) {
+        //null 20 Early 1597904996689
         printf("taohui", cursor, count, direct, userid);
         feed2Api.getPosts(cursor, count, new Callback<Result<FeedGetData>>() {
 

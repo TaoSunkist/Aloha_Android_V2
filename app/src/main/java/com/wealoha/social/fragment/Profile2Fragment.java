@@ -46,8 +46,8 @@ import com.wealoha.social.adapter.profile.Profile2HeaderHolder.ProfileHeader2Fra
 import com.wealoha.social.adapter.profile.Profile2ImageHolder;
 import com.wealoha.social.adapter.profile.Profile2ImagesAdapter;
 import com.wealoha.social.adapter.profile.Profile2InfoAdapter;
+import com.wealoha.social.api.Profile2ListApiService;
 import com.wealoha.social.beans.ApiErrorCode;
-import com.wealoha.social.api.Profile2Service;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.store.PopupStore;
@@ -64,7 +64,7 @@ public class Profile2Fragment extends BaseFragment implements ProfileHeader2Frag
         OnTouchListener, OnClickListener, OnScrollListener {
 
     @Inject
-    Profile2Service pro2Service;
+    Profile2ListApiService pro2Service;
     @Inject
     RegionNodeUtil regionNodeUtil;
     @Inject

@@ -28,7 +28,7 @@ import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.ApiErrorCode;
 import com.wealoha.social.api.BaseListApiService.ApiListCallback;
 import com.wealoha.social.beans.Direct;
-import com.wealoha.social.api.SingletonFeedService;
+import com.wealoha.social.api.SingletonFeedListApiService;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
@@ -57,7 +57,7 @@ public class LaunchBroadcastReceiver extends BroadcastReceiver {
 	@Inject
 	ServerApi mProfileService;
 	@Inject
-	SingletonFeedService feedService;
+    SingletonFeedListApiService feedService;
 	@Inject
 	ServerApi feedService2;
 	private Context mContext;

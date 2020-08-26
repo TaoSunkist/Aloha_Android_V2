@@ -31,9 +31,9 @@ import com.wealoha.social.adapter.feed.Feed2Adapter;
 import com.wealoha.social.adapter.feed.Feed2Adapter.Adapter2FragmentCallback;
 import com.wealoha.social.adapter.feed.FeedHolder;
 import com.wealoha.social.adapter.feed.VideoFeedHolder;
+import com.wealoha.social.api.SingletonFeedListApiService;
 import com.wealoha.social.beans.ApiErrorCode;
 import com.wealoha.social.api.BaseListApiService.NoResultCallback;
-import com.wealoha.social.api.SingletonFeedService;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.utils.XL;
 import com.wealoha.social.widget.BaseListApiAdapter.LoadCallback;
@@ -42,7 +42,7 @@ public class SingletonFeedFragment extends BaseFragment implements Holder2FragCa
 		Adapter2FragmentCallback {
 
 	@Inject
-	SingletonFeedService feedService;
+    SingletonFeedListApiService feedService;
 	@InjectView(R.id.list)
 	ListView postList;
 	@InjectView(R.id.tags_method_container)

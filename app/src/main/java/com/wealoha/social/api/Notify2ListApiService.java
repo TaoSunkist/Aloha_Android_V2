@@ -46,16 +46,16 @@ import com.wealoha.social.utils.XL;
  * @author javamonk
  * @createTime 2015年2月25日 上午10:34:56
  */
-public class Notify2Service extends AbsBaseService<Notify2, Boolean> {
+public class Notify2ListApiService extends AbsBaseListApiService<Notify2, Boolean> {
 
-	private static final String TAG = Notify2Service.class.getSimpleName();
+	private static final String TAG = Notify2ListApiService.class.getSimpleName();
 
 	@Inject
 	ServerApi notify2api;
 	@Inject
 	Context mContext;
 
-	public Notify2Service() {
+	public Notify2ListApiService() {
 		Injector.inject(this);
 	}
 

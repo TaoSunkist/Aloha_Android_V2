@@ -38,14 +38,13 @@ import com.wealoha.social.adapter.feed.FeedHolder;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Comment2GetData;
 import com.wealoha.social.beans.PostComment;
-import com.wealoha.social.api.Comment2Service;
+import com.wealoha.social.api.Comment2ListApiService;
 import com.wealoha.social.beans.ApiErrorCode;
 import com.wealoha.social.beans.Direct;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.IResultDataErrorCode;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.beans.ResultData;
-import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.fragment.Profile2Fragment;
@@ -66,7 +65,7 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 	@Inject
 	ServerApi mCommentService;
 	@Inject
-	Comment2Service mComment2Service;
+	Comment2ListApiService mComment2Service;
 	@InjectView(R.id.feed_comment_back_iv)
 	ImageView mBack;
 	@InjectView(R.id.feed_comment_content_lv)

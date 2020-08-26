@@ -11,6 +11,7 @@ package com.wealoha.social.beans
 open class ResultData(var error: Int = 0) : IResultDataErrorCode {
 
     companion object {
+
         const val ERROR_NO_ERROR = 0
     }
 }

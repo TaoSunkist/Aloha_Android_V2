@@ -19,12 +19,12 @@ import com.wealoha.social.utils.XL;
  * @author superman
  * @createTime 2015-03-12 11:20:31
  */
-public class UserListService extends AbsBaseService<User, String> {
+public class UserListListApiService extends AbsBaseListApiService<User, String> {
 
 	@Inject
 	ServerApi notify2api;
 
-	public UserListService() {
+	public UserListListApiService() {
 		Injector.inject(this);
 	}
 

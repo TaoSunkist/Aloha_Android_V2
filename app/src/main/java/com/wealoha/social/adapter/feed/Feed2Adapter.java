@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 
 import com.squareup.picasso.Picasso;
 import com.wealoha.social.adapter.feed.BaseFeedHolder.Holder2FragCallback;
+import com.wealoha.social.api.Feed2ListApiService;
 import com.wealoha.social.beans.FeedType;
-import com.wealoha.social.api.Feed2Service;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.ui.feeds.Feed2Fragment;
 import com.wealoha.social.utils.UiUtils;
@@ -30,7 +30,7 @@ public class Feed2Adapter extends BaseListApiAdapter<Post, String> implements
 	private Holder2FragCallback holder2FragCallback;
 	private Adapter2FragmentCallback adt2FragCallback;
 
-	public Feed2Adapter(Fragment frag, Feed2Service service) {
+	public Feed2Adapter(Fragment frag, Feed2ListApiService service) {
 		super(service);
 		mFrag = frag;
 		mScreenWidth = UiUtils.getScreenWidth(frag.getActivity().getApplicationContext());

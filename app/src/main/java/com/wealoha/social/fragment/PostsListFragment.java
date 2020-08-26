@@ -17,9 +17,9 @@ import butterknife.OnClick;
 import com.wealoha.social.R;
 import com.wealoha.social.adapter.profile.Profile2Adapter;
 import com.wealoha.social.adapter.profile.Profile2ImagesAdapter;
+import com.wealoha.social.api.PraisedPostListApiService;
+import com.wealoha.social.api.TagedPostListApiService;
 import com.wealoha.social.beans.ApiErrorCode;
-import com.wealoha.social.api.PraisedPostService;
-import com.wealoha.social.api.TagedPostService;
 import com.wealoha.social.utils.ContextUtil;
 import com.wealoha.social.utils.FontUtil.Font;
 import com.wealoha.social.utils.UiUtils;
@@ -32,9 +32,9 @@ import com.wealoha.social.widget.ScrollToLoadMoreListener.Callback;
 public class PostsListFragment extends BaseFragment implements OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
 	@Inject
-	TagedPostService tagedService;
+    TagedPostListApiService tagedService;
 	@Inject
-	PraisedPostService praisedService;
+    PraisedPostListApiService praisedService;
 	@Inject
 	ContextUtil contextUtil;
 

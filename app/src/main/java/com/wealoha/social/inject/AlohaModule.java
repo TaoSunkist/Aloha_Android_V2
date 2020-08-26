@@ -10,14 +10,11 @@ import org.apache.commons.lang3.StringUtils;
 
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
-import retrofit.RestAdapter.LogLevel;
 import retrofit.client.OkClient;
-import retrofit.converter.GsonConverter;
 
 import android.content.Context;
 import android.net.Uri;
 
-import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.otto.Bus;
@@ -90,12 +87,15 @@ import com.wealoha.social.adapter.profile.Profile2HeaderHolder;
 import com.wealoha.social.adapter.profile.Profile2ImageHolder;
 import com.wealoha.social.adapter.profile.Profile2ImagesAdapter;
 import com.wealoha.social.adapter.profile.Profile2InfoHolder;
+import com.wealoha.social.api.AbsBaseService;
+import com.wealoha.social.api.Feed2ListApiService;
+import com.wealoha.social.api.PraisedPostListApiService;
+import com.wealoha.social.api.Profile2ListApiService;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.api.Comment2Service;
-import com.wealoha.social.api.Feed2Service;
-import com.wealoha.social.api.PraisedPostService;
-import com.wealoha.social.api.SingletonFeedService;
-import com.wealoha.social.api.TagedPostService;
+import com.wealoha.social.api.Comment2ListApiService;
+import com.wealoha.social.api.SingletonFeedListApiService;
+import com.wealoha.social.api.TagedPostListApiService;
+import com.wealoha.social.api.UserListListApiService;
 import com.wealoha.social.beans.Json2ObjectByTypeSerializer;
 import com.wealoha.social.beans.Notify2Type;
 import com.wealoha.social.beans.AbsNotify2DTO;
@@ -105,11 +105,9 @@ import com.wealoha.social.beans.PostCommentReplyOnMyPost2DTO;
 import com.wealoha.social.beans.PostCommentReplyOnOthersPost2DTO;
 import com.wealoha.social.beans.PostLikeNotify2DTO;
 import com.wealoha.social.beans.PostTagNotify2DTO;
-import com.wealoha.social.api.Notify2Service;
-import com.wealoha.social.api.UserListService;
+import com.wealoha.social.api.Notify2ListApiService;
 import com.wealoha.social.api.PostService;
 import com.wealoha.social.api.TopicPostService;
-import com.wealoha.social.api.Profile2Service;
 import com.wealoha.social.api.TopicService;
 import com.wealoha.social.api.UserService;
 import com.wealoha.social.api.ConstantsService;
@@ -336,17 +334,17 @@ import dagger.Provides;
                 FindYouAdapter.class,//
                 UserListAdapter.class,//
                 Profile2Adapter.class,//
-                Profile2Service.class,//
+                Profile2ListApiService.class,//
                 Profile2ImagesAdapter.class,//
                 Profile2InfoHolder.class, TopicService.class,//
 // ProfileArrayAdaper.class,//
                 TopicPostService.class,//
-                Notify2Service.class, // 通知2
-                Feed2Service.class, // 通知2
-                Comment2Service.class, UserListService.class,//
+                Notify2ListApiService.class, // 通知2
+                Feed2ListApiService.class, // 通知2
+                Comment2ListApiService.class, UserListListApiService.class,//
                 AppLocationService.class,//
-                TagedPostService.class,//
-                PraisedPostService.class,//
+                TagedPostListApiService.class,//
+                PraisedPostListApiService.class,//
 // 其它c
                 RegionNodeUtil.class, //
                 JsonController.class, //
@@ -392,10 +390,10 @@ import dagger.Provides;
                 AtOnePopup2.class,//
                 FeedHolder.class,//
                 Profile2ImageHolder.class,//
-                Profile2Service.class, //
+                Profile2ListApiService.class, //
                 Profile2HeaderHolder.class, //
                 UserService.class,//
-                SingletonFeedService.class,//
+                SingletonFeedListApiService.class,//
                 ImageFeedHolder.class, //
                 VideoFeedHolder.class,//
                 AMapUtil.class,//
@@ -407,7 +405,7 @@ import dagger.Provides;
                 ConfigPresenter.class,//
                 DialoguePresenter.class,//
                 AttestationPresenter.class,//
-                com.wealoha.social.api.common.service.AbsBaseService.class,//
+                AbsBaseService.class,//
                 PostService.class,//
                 PostLayout.class,//
                 Feed3Fragment.class,//

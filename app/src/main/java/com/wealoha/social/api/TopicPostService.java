@@ -16,7 +16,6 @@ import com.wealoha.social.beans.Comment2DTO;
 import com.wealoha.social.beans.CommentDTO;
 import com.wealoha.social.beans.CommonImage;
 import com.wealoha.social.beans.CommonVideo;
-import com.wealoha.social.api.common.service.AbsBaseService;
 import com.wealoha.social.beans.HashTagResultData;
 import com.wealoha.social.beans.TopicPostResultData;
 import com.wealoha.social.beans.UserTag;

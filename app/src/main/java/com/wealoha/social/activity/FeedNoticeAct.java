@@ -27,6 +27,7 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.adapter.Notify2Apapter;
 import com.wealoha.social.adapter.feed.FeedHolder;
+import com.wealoha.social.api.Notify2ListApiService;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.ApiErrorCode;
 import com.wealoha.social.beans.NewAlohaNotify2;
@@ -36,9 +37,7 @@ import com.wealoha.social.beans.PostCommentReplyOnMyPost;
 import com.wealoha.social.beans.PostCommentReplyOnOthersPost;
 import com.wealoha.social.beans.PostLikeNotify2;
 import com.wealoha.social.beans.PostTagNotify2;
-import com.wealoha.social.api.Notify2Service;
 import com.wealoha.social.beans.Post;
-import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.event.push.NewNotifyEvent;
@@ -69,7 +68,7 @@ public class FeedNoticeAct extends BaseFragAct implements OnClickListener, OnIte
 		OnTouchListener {
 
 	@Inject
-	Notify2Service mNotify2Service;
+    Notify2ListApiService mNotify2Service;
 	@Inject
 	ContextUtil contextUtil;
 	@Inject

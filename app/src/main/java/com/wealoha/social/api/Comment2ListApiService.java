@@ -20,12 +20,12 @@ import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.Result;
 import com.wealoha.social.inject.Injector;
 
-public class Comment2Service extends AbsBaseService<PostComment, String> {
+public class Comment2ListApiService extends AbsBaseListApiService<PostComment, String> {
 
     @Inject
     ServerApi comment2api;
 
-    public Comment2Service() {
+    public Comment2ListApiService() {
         Injector.inject(this);
     }
 

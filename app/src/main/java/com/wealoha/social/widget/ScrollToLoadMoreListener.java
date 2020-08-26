@@ -3,7 +3,7 @@ package com.wealoha.social.widget;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 
-import com.wealoha.social.api.Feed2Service;
+import com.wealoha.social.api.Feed2ListApiService;
 
 /**
  * 通过滚动加载更多
@@ -15,7 +15,7 @@ public class ScrollToLoadMoreListener implements OnScrollListener {
 
 	private final int loadMoreThreshold;
 	private Callback callback;
-	private final Feed2Service feedService;
+	private final Feed2ListApiService feedService;
 	private final int mFeedWidth;
 
 	public interface Callback {
@@ -53,7 +53,7 @@ public class ScrollToLoadMoreListener implements OnScrollListener {
 		feedService = null;
 	}
 
-	public ScrollToLoadMoreListener(int loadMoreThreshold, Callback callback, Feed2Service service, int feedWidth) {
+	public ScrollToLoadMoreListener(int loadMoreThreshold, Callback callback, Feed2ListApiService service, int feedWidth) {
 		this.loadMoreThreshold = loadMoreThreshold;
 		this.callback = callback;
 		this.feedService = service;

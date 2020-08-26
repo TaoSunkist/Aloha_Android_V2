@@ -7,8 +7,6 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import android.text.TextUtils;
 
-import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.api.common.service.AbsBaseService;
 import com.wealoha.social.beans.FeedGetData;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.Result;

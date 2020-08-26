@@ -19,7 +19,7 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.adapter.UserListAdapter;
 import com.wealoha.social.beans.ApiErrorCode;
-import com.wealoha.social.api.UserListService;
+import com.wealoha.social.api.UserListListApiService;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.inject.Injector;
 import com.wealoha.social.utils.DockingBeanUtils;
@@ -30,7 +30,7 @@ import com.wealoha.social.widget.ScrollToLoadMoreListener;
 public class UserListFragment extends BaseFragment implements OnItemClickListener, OnClickListener {
 
 	@Inject
-	UserListService mUserListService;
+    UserListListApiService mUserListService;
 	@InjectView(R.id.swipe_list)
 	ListView mListView;
 	@InjectView(R.id.back)

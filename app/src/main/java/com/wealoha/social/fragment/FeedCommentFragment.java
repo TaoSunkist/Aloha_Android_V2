@@ -61,13 +61,13 @@ import com.wealoha.social.adapter.feed.VideoFeedHolder;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Comment2GetData;
 import com.wealoha.social.beans.PostComment;
-import com.wealoha.social.api.Comment2Service;
+import com.wealoha.social.api.Comment2ListApiService;
 import com.wealoha.social.beans.ApiErrorCode;
 import com.wealoha.social.api.BaseListApiService.ApiCallback;
 import com.wealoha.social.beans.Direct;
 import com.wealoha.social.beans.FeedGetData;
 import com.wealoha.social.beans.FeedType;
-import com.wealoha.social.api.Feed2Service;
+import com.wealoha.social.api.Feed2ListApiService;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.IResultDataErrorCode;
 import com.wealoha.social.beans.Result;
@@ -92,11 +92,11 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	@Inject
 	Picasso picasso;
 	@Inject
-	Feed2Service feedService;
+	Feed2ListApiService feedService;
 	@Inject
 	ServerApi mCommentService;
 	@Inject
-	Comment2Service mComment2Service;
+	Comment2ListApiService mComment2Service;
 	@Inject
 	Context mcontext;
 	@Inject

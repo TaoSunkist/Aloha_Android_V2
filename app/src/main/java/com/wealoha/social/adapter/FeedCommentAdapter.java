@@ -16,10 +16,9 @@ import butterknife.InjectView;
 import com.squareup.picasso.Picasso;
 import com.wealoha.social.R;
 import com.wealoha.social.adapter.feed.AbsViewHolder;
+import com.wealoha.social.api.Comment2ListApiService;
 import com.wealoha.social.beans.PostComment;
-import com.wealoha.social.api.Comment2Service;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.commons.GlobalConstants.ImageSize;
 import com.wealoha.social.utils.FontUtil;
 import com.wealoha.social.utils.TimeUtil;
 import com.wealoha.social.view.custom.CircleImageView;
@@ -45,7 +44,7 @@ public class FeedCommentAdapter extends BaseListApiAdapter<PostComment, String> 
 		public void showmPrivacyCommentSign();
 	}
 
-	public FeedCommentAdapter(Context ctx, Comment2Service mComment2Service, FeedCommentAdapterCallback callback) {
+	public FeedCommentAdapter(Context ctx, Comment2ListApiService mComment2Service, FeedCommentAdapterCallback callback) {
 		super(mComment2Service);
 		mCtx = ctx;
 		this.callback = callback;

@@ -40,7 +40,7 @@ import com.wealoha.social.adapter.feed.Feed2Adapter;
 import com.wealoha.social.adapter.feed.FeedHolder;
 import com.wealoha.social.adapter.feed.VideoFeedHolder;
 import com.wealoha.social.beans.ApiErrorCode;
-import com.wealoha.social.api.Feed2Service;
+import com.wealoha.social.api.Feed2ListApiService;
 import com.wealoha.social.beans.HashTag;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.event.feed.MediaPlayEvent;
@@ -59,7 +59,7 @@ import com.wealoha.social.widget.BaseListApiAdapter.LoadCallback;
 public class Feed2Fragment extends BaseFragment implements IFeedsView {
 
     @Inject
-    Feed2Service feedService;
+    Feed2ListApiService feedService;
     @Inject
     ContextUtil contextUtil;
     private View mRootView;
