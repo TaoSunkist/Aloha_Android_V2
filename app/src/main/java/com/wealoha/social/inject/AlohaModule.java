@@ -482,16 +482,12 @@ public class AlohaModule {
         }
 
         return new Picasso.Builder(context)//
-                .listener(new Picasso.Listener() {
-
-                    @Override
-                    public void onImageLoadFailed(Picasso picasso, Uri uri, Exception e) {
-                        // 通用的错误处理
-                        XL.d(TAG, "fail to load: " + uri.toString(), e);
-                        // Crashlytics.log(Log.ERROR, TAG, e.getMessage());
-                        if (!(e instanceof IOException)) {
-                            remoteLogUtil.log("PICASSO_LISTENER--URL:" + uri.toString(), e);
-                        }
+                .listener((picasso, uri, e) -> {
+                    // 通用的错误处理
+                    XL.d(TAG, "fail to load: " + uri.toString(), e);
+                    // Crashlytics.log(Log.ERROR, TAG, e.getMessage());
+                    if (!(e instanceof IOException)) {
+                        remoteLogUtil.log("PICASSO_LISTENER--URL:" + uri.toString(), e);
                     }
                 }) //
                 .memoryCache(lrucache) //

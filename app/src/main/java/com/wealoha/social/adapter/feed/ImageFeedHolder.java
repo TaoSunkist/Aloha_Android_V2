@@ -65,7 +65,7 @@ public class ImageFeedHolder extends BaseFeedHolder implements OnClickListener {
 	public View resetViewData(final Post post) {
 		mPost = post;
 		feedPhoto.getLayoutParams().height = imgWidth;
-		picasso.load(post.getCommonImage().getUrlSquare(imgWidth)).into(feedPhoto);
+		picasso.load(post.getUser().getAvatarImage().getUrl()).into(feedPhoto);
 		if (getFeedType() == FeedHolder.TAGS_HOLDER) {
 			initAtOnePopup(post);// 直接显示tag
 		} else {

@@ -128,7 +128,7 @@ public class Profile2ImageHolder extends AbsViewHolder implements OnClickListene
 		Post post = mPostList.get(position);
 		profile_play_image.setVisibility(FeedType.VideoPost==post.getType()?View.VISIBLE:View.GONE);
 		profile_pics_image_rl.setVisibility(ViewStub.VISIBLE);
-		picasso.load(post.getCommonImage().getUrlSquare(imgWidth)).resize(imgWidth, imgWidth).placeholder(R.color.gray_text).into(image);
+		picasso.load(post.getUser().getAvatarImage().getUrl()).resize(imgWidth, imgWidth).placeholder(R.color.gray_text).into(image);
 		profile_pics_image_rl.setTag(post);
 		profile_pics_image_rl.setOnClickListener(this);
 	}
