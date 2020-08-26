@@ -1,0 +1,318 @@
+package com.wealoha.social.api
+
+import android.content.Context
+import android.util.Log
+import com.squareup.picasso.Picasso
+import com.wealoha.social.api.BaseListApiService.*
+import com.wealoha.social.beans.*
+import com.wealoha.social.beans.ApiErrorCode.Companion.fromResult
+import com.wealoha.social.beans.CommonImage.Companion.fromDTO
+import com.wealoha.social.beans.CommonVideo.Companion.fromDTO
+import com.wealoha.social.beans.HashTag.Companion.fromDTO
+import com.wealoha.social.beans.Post.Companion.hasTagForMe
+import com.wealoha.social.commons.GlobalConstants.ImageSize
+import com.wealoha.social.inject.Injector
+import com.wealoha.social.utils.XL
+import com.wealoha.social.utils.printf
+import retrofit.Callback
+import retrofit.RetrofitError
+import retrofit.client.Response
+import javax.inject.Inject
+import kotlin.collections.ArrayList
+
+open class Feed2ListApiService : AbsBaseListApiService<Post, String>() {
+
+    @JvmField
+    @Inject
+    var feed2Api: ServerApi? = null
+
+    @JvmField
+    @Inject
+    var context: Context? = null
+
+    @Inject
+    lateinit var picasso: Picasso
+
+    private var postList: List<Post> = arrayListOf()
+
+
+    override fun getList(
+        cursor: String,
+        count: Int,
+        direct: Direct,
+        userid: String,
+        callback: ApiListCallback<Post?>
+    ) {
+        //null 20 Early 1597904996689
+        printf("taohui", cursor, count, direct, userid)
+        feed2Api!!.getPosts(cursor, count, object : Callback<Result<FeedGetData>> {
+            override fun failure(error: RetrofitError) {
+                XL.i("Feed2Fragment", "service: faile--" + error.message)
+                callback.fail(null, error)
+            }
+
+            override fun success(result: Result<FeedGetData>, arg1: Response) {
+                XL.i("Feed2Fragment", "service: success--")
+                callback.success(
+                    transResult2List(result.data!!, userid),
+                    result.data!!.nextCursorId
+                )
+            }
+        })
+    }
+
+    /***
+     * 赞post 的用户列表
+     *
+     * @param cursor
+     * @param count
+     * @param postid
+     * @param callback
+     * @return void
+     */
+    fun getPraiseList(
+        cursor: String?,
+        count: Int,
+        postid: String?,
+        callback: ApiCallback<List<User?>?>
+    ) {
+        feed2Api!!.getPraiseList(
+            postid!!,
+            cursor!!,
+            count,
+            object : Callback<Result<UserListGetData>> {
+                override fun failure(error: RetrofitError) {
+                    callback.fail(null, error)
+                }
+
+                override fun success(result: Result<UserListGetData>, arg1: Response) {
+                    if (result == null || !result.isOk) {
+                        callback.fail(fromResult(result), null)
+                    } else {
+                        callback.success(transUserListGetData2List(result.data!!))
+                    }
+                }
+            })
+    }
+
+    private fun transUserListGetData2List(userListGetData: UserListGetData): List<User> {
+        return getUsers(userListGetData.list, userListGetData.imageMap)
+    }
+
+    protected fun transResult2List(result: FeedGetData, currentUserid: String): List<Post> {
+        val postList: ArrayList<Post> = ArrayList(result.list.size)
+        for (postDto in result.list) {
+            val type = FeedType.fromValue(postDto.type)
+            if (type == null) {
+                XL.d(TAG, "不支持的通知类型: " + postDto.type)
+                continue
+            }
+            val user2 = getUser(postDto.userId, result.userMap, result.imageMap)
+            val userTagList = gerUserTagList(postDto.userTags, result.userMap, result.imageMap)
+            val commonImage = fromDTO(result.imageMap[postDto.imageId]!!)
+            val commonVideo: CommonVideo = fromDTO(result.videoMap[postDto.videoId]!!)
+            val recentCommentList = transCommentDTOList2PostCommentList(
+                postDto.recentComments,
+                result.userMap,
+                result.imageMap
+            )
+            val post = Post( //
+                postDto.postId,  //
+                type,  //
+                postDto.description,  //
+                postDto.createTimeMillis,  //
+                postDto.mine,  //
+                postDto.liked,  //
+                hasTagForMe(userTagList, currentUserid),  //
+                postDto.venue,  //
+                postDto.venueId,  //
+                postDto.latitude,  //
+                postDto.longitude,  //
+                postDto.venueAbroad,  //
+                user2,  //
+                userTagList,  //
+                commonImage,  //
+                commonVideo,  //
+                result.commentCountMap.get(postDto.postId)!!,  //
+                result.likeCountMap.get(postDto.postId)!!,  //
+                recentCommentList,  //
+                fromDTO(postDto.hashtag),  //
+                postDto.hasMoreComment
+            )
+            postList.add(post)
+        }
+        return postList
+    }
+
+    override fun setAdapterListCallback(callback: AdapterListDataCallback<Post>) {
+        super.setAdapterListCallback(callback)
+        postList = callback.listData
+    }
+
+    override fun fetchPhoto(
+        firstVisibleItem: Int,
+        totalItemCount: Int,
+        direction: Boolean,
+        mScreenWidth: Int
+    ) {
+        if (postList == null || postList!!.size == 0) {
+            return
+        }
+        var first = 0
+        var end = 0
+        // 正向
+        if (direction) {
+            first = firstVisibleItem
+            end = if (firstVisibleItem + 10 > totalItemCount) {
+                totalItemCount
+            } else {
+                firstVisibleItem + 10
+            }
+        } else {
+            end = firstVisibleItem
+            first = if (firstVisibleItem - 10 < 0) {
+                0
+            } else {
+                firstVisibleItem - 10
+            }
+        }
+        Log.i("LOAD_MEMORY", "$first=====$end=====$firstVisibleItem")
+        end = if (end > postList!!.size - 1) postList!!.size - 1 else end
+        for (i in first until end - 2) {
+            Log.i("LOAD_MEMORY", "++++++$i")
+            val post = postList!![i]
+            picasso!!.load(post!!.commonImage!!.getUrlSquare(mScreenWidth)).fetch()
+            picasso!!.load(post.user!!.avatarImage.getUrlSquare(ImageSize.AVATAR_ROUND_SMALL))
+                .fetch()
+        }
+    }
+
+    /***
+     * 赞
+     *
+     * @param postId
+     * @param callback
+     * @return void
+     */
+    fun praiseFeed(postId: String?, callback: NoResultCallback) {
+        feed2Api!!.praisePost(postId!!, object : Callback<Result<ResultData>> {
+            override fun success(result: Result<ResultData>, arg1: Response) {
+                if (result == null || !result.isOk) {
+                    callback.fail(fromResult(result), null)
+                } else {
+                    callback.success()
+                }
+            }
+
+            override fun failure(error: RetrofitError) {
+                callback.fail(null, error)
+            }
+        })
+    }
+
+    /***
+     * 取消赞
+     *
+     * @param postid
+     * @param callback
+     * @return void
+     */
+    fun canclePraiseFeed(postid: String?, callback: NoResultCallback) {
+        feed2Api!!.dislikePost(postid!!, object : Callback<Result<ResultData>> {
+            override fun success(result: Result<ResultData>, arg1: Response) {
+                if (result == null || !result.isOk) {
+                    callback.fail(fromResult(result), null)
+                } else {
+                    callback.success()
+                }
+            }
+
+            override fun failure(error: RetrofitError) {
+                callback.fail(null, error)
+            }
+        })
+    }
+
+    /***
+     * 删除post
+     *
+     * @param postId
+     * @param callback
+     * @return void
+     */
+    fun deletePost(postId: String?, callback: NoResultCallback) {
+        feed2Api!!.deletePost(postId!!, object : Callback<Result<ResultData>> {
+            override fun success(result: Result<ResultData>, arg1: Response) {
+                if (result == null || !result.isOk) {
+                    callback.fail(fromResult(result), null)
+                } else {
+                    callback.success()
+                }
+            }
+
+            override fun failure(error: RetrofitError) {
+                callback.fail(null, error)
+            }
+        })
+    }
+
+    /***
+     * 删除post
+     *
+     * @param postId
+     * @param callback
+     * @return void
+     */
+    fun reportPost(postId: String?, callback: NoResultCallback) {
+        feed2Api!!.reportFeed(postId!!, "", "", object : Callback<Result<ResultData>> {
+            override fun success(result: Result<ResultData>, arg1: Response) {
+                if (result == null || !result.isOk) {
+                    callback.fail(fromResult(result), null)
+                } else {
+                    callback.success()
+                }
+            }
+
+            override fun failure(error: RetrofitError) {
+                callback.fail(null, error)
+            }
+        })
+    }
+
+    /***
+     * 移除标签
+     *
+     * @param postId
+     * @param callback
+     * @return void
+     */
+    fun removeTag(postId: String, tagUserId: String, callback: NoResultCallback) {
+        feed2Api!!.removeTag(postId, tagUserId, object : Callback<ResultData> {
+            override fun success(result: ResultData, arg1: Response) {
+                callback.success()
+            }
+
+            override fun failure(error: RetrofitError) {
+                callback.fail(null, error)
+            }
+        })
+    }
+
+    /***
+     * 判断数据是否为空
+     *
+     * @return
+     * @return boolean
+     */
+    val isDataEmpty: Boolean
+        get() = postList == null || postList!!.size == 0
+
+    companion object {
+        val TAG = Feed2ListApiService::class.java.simpleName
+    }
+
+    init {
+        Injector.inject(this)
+    }
+
+}

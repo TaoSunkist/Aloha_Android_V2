@@ -105,7 +105,7 @@ class UserService {
                     callback.fail(ApiErrorCode.fromResult(result), null)
                 } else {
                     saveCurrentUser(result.data?.user!!)
-                    callback.success(transPro2DataToUser(result.data))
+                    callback.success(transPro2DataToUser(result.data!!))
                 }
             }
 
@@ -115,13 +115,13 @@ class UserService {
         })
     }
 
-    private fun transPro2DataToUser(proData: Profile2Data?): User? {
-        val userDto = proData?.user
+    private fun transPro2DataToUser(proData: Profile2Data): User {
+        val userDto = proData.user
         // userDto.aloha = proData.liked;
         // userDto.match = proData.friend;
         val img =
-            CommonImage.fromDTO(proData?.imageMap!![userDto!!.avatarImageId])
-        return User.Companion.fromDTO(userDto, img)
+            CommonImage.fromDTO(proData.imageMap[userDto.avatarImageId]!!)
+        return User.fromDTO(userDto, img)
     }
 
     /***

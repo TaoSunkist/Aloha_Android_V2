@@ -1,12 +1,13 @@
 package com.wealoha.social.beans
 
 import java.util.*
+import kotlin.collections.ArrayList
 
 class TopicPost {
     /**
      * 适应gridview 样式实图，三个post一行
      */
-    var postsItem: List<Post>
+    var postsItem: ArrayList<Post> = arrayListOf()
 
     /** List<TopicPost> 是否满足一行三个 </TopicPost> */
     var isItemFull = true
@@ -30,7 +31,4 @@ class TopicPost {
         const val NORMAL_TYPE = 0x0004
     }
 
-    init {
-        postsItem = ArrayList()
-    }
 }

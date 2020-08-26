@@ -4,12 +4,12 @@ import com.wealoha.social.beans.User.Companion.fromDTO
 import java.io.Serializable
 import java.util.*
 
-class UserTag(
+data class UserTag(
     val tagAnchorX: Double?,
     val tagAnchorY: Double?,
     val tagCenterX: Double?,
     val tagCenterY: Double?,
-    val user: User?
+    val user: User
 ) : Serializable {
 
     companion object {
@@ -18,20 +18,17 @@ class UserTag(
          */
         private const val serialVersionUID = 6072731508136652565L
         fun fromDTOList(
-            userTagDTOList: List<UserTagsDTO?>?,
-            userMap: Map<String?, UserDTO?>?,
-            imageMap: Map<String?, ImageCommonDto?>?
-        ): List<UserTag>? {
-            if (userTagDTOList == null || userMap == null || imageMap == null) {
-                return null
-            }
+            userTagDTOList: List<UserTagsDTO>,
+            userMap: Map<String, UserDTO>,
+            imageMap: Map<String, ImageCommonDto>
+        ): List<UserTag> {
             val userTagList: MutableList<UserTag> =
                 ArrayList(userTagDTOList.size)
             var userDto: UserDTO?
             var commonImage: CommonImage
             for (userTagDto in userTagDTOList) {
                 userDto = userMap[userTagDto!!.tagUserId]
-                commonImage = CommonImage.Companion.fromDTO(imageMap[userDto!!.avatarImageId])!!
+                commonImage = CommonImage.fromDTO(imageMap[userDto!!.avatarImageId]!!)
                 userTagList.add(
                     UserTag(
                         userTagDto.tagAnchorX,

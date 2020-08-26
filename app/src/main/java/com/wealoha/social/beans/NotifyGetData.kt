@@ -7,13 +7,14 @@ package com.wealoha.social.beans
  * @createTime 2015年2月25日 上午10:33:05
  */
 data class NotifyGetData(
-    var commentCountMap: Map<String, Int>? = null,
-    var likeCountMap: Map<String, Int>? = null,
-    var userMap: Map<String, UserDTO>? = null,
-    var imageMap: Map<String, ImageCommonDto>? = null,
-    var postMap: Map<String, PostDTO>? = null,
-    var list: List<AbsNotify2DTO>? = null,
-    var nextCursorId: String? = null
+    val commentCountMap: Map<String, Int> = mapOf(),
+    val likeCountMap: Map<String, Int> = mapOf(),
+    val userMap: Map<String, UserDTO> = mapOf(),
+    val imageMap: Map<String, ImageCommonDto> = mapOf(),
+    val videoMap: Map<String, VideoCommonDTO> = mapOf(),
+    val postMap: Map<String, PostDTO> = mapOf(),
+    val list: List<AbsNotify2DTO> = listOf(),
+    val nextCursorId: String = Direct.Late.value
 ) : ResultData() {
 
 }

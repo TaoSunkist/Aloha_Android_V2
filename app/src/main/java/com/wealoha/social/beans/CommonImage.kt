@@ -82,26 +82,18 @@ class CommonImage(
         private const val serialVersionUID = -8304279904338894714L
 
         @kotlin.jvm.JvmStatic
-        fun fromDTO(imageCommonDto: ImageCommonDto?): CommonImage? {
-            return if (imageCommonDto == null) {
-                null
-            } else {
-                CommonImage(
-                    imageCommonDto.imageId, imageCommonDto.width, imageCommonDto.height,  //
-                    imageCommonDto.urlPatternWidth, imageCommonDto.urlPatternWidthHeight
-                )
-            }
+        fun fromDTO(imageCommonDto: ImageCommonDto): CommonImage {
+            return CommonImage(
+                imageCommonDto.imageId, imageCommonDto.width, imageCommonDto.height,  //
+                imageCommonDto.urlPatternWidth, imageCommonDto.urlPatternWidthHeight
+            )
         }
 
-        fun fromOld(oldImg: Image?): CommonImage? {
-            return if (oldImg == null) {
-                null
-            } else {
-                CommonImage(
-                    oldImg.id, oldImg.width, oldImg.height,  //
-                    oldImg.urlPatternWidth, oldImg.urlPatternWidthHeight
-                )
-            }
+        fun fromOld(oldImg: Image): CommonImage {
+            return CommonImage(
+                oldImg.id, oldImg.width, oldImg.height,  //
+                oldImg.urlPatternWidth, oldImg.urlPatternWidthHeight
+            )
         }
     }
 

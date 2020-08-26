@@ -25,7 +25,7 @@ class HashTag(
             } else HashTag(
                 dto.itemId,
                 dto.name,
-                CommonImage.Companion.fromDTO(dto.backgroundImage),
+                CommonImage.fromDTO(dto.backgroundImage!!),
                 dto.summary,
                 dto.postCount,
                 dto.url,

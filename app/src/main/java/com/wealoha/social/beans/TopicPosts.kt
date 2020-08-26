@@ -5,21 +5,15 @@ package com.wealoha.social.beans
  *
  * @author dell-pc
  */
-class TopicPosts {
-    private var posts: MutableList<TopicPost>? = null
-    var cursorId: String? = null
+data class TopicPosts(
+    val posts: MutableList<TopicPost> = arrayListOf(),
+    var cursorId: String? = null,
     var hashTag: HashTag? = null
-    fun getPosts(): List<TopicPost>? {
-        return posts
-    }
 
-    fun setPosts(posts: MutableList<TopicPost>?) {
-        this.posts = posts
-    }
+) {
 
     fun clear() {
-        posts!!.clear()
+        posts.clear()
         cursorId = null
     }
-
 }

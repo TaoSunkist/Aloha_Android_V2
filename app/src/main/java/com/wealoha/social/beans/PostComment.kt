@@ -7,9 +7,9 @@ import java.util.*
 data class PostComment(
     val createTimeMillis: Long,
     val id: String?,
-    val comment: String?,
-    val replyUser: User?,
-    val user: User?,
+    val comment: String,
+    val replyUser: User,
+    val user: User,
     val whisper: Boolean
 ) : Serializable {
 
@@ -38,11 +38,11 @@ data class PostComment(
 
     companion object {
 
-        fun fromCommentDTO(commentDTO: CommentDTO, replyUser: User?, user: User?): PostComment {
+        fun fromCommentDTO(commentDTO: CommentDTO, replyUser: User, user: User): PostComment {
             return PostComment( //
                 commentDTO.createTimeMillis,  //
                 commentDTO.id,  //
-                commentDTO.comment,  //
+                commentDTO.comment?:"",  //
                 replyUser,  //
                 user,  //
                 commentDTO.whisper
@@ -50,12 +50,12 @@ data class PostComment(
         }
 
         fun fromComment2DTO(
-            comment2DTO: Comment2DTO?,
-            replyUser: User?,
-            user: User?
+            comment2DTO: Comment2DTO,
+            replyUser: User,
+            user: User
         ): PostComment {
             return PostComment(
-                comment2DTO!!.createTimeMillis,
+                comment2DTO.createTimeMillis,
                 comment2DTO.id,
                 comment2DTO.comment,
                 replyUser,
@@ -68,7 +68,7 @@ data class PostComment(
             return PostComment(
                 commentDTO.createTimeMillis,  //
                 commentDTO.id,  //
-                commentDTO.comment,  //
+                commentDTO.comment?:"",  //
                 fromDTO(commentDTO.replyUser!!),  //
                 fromDTO(commentDTO.user!!),  //
                 commentDTO.whisper
@@ -87,27 +87,19 @@ data class PostComment(
             return posts
         }
 
-        fun fromDTOV2List(commentList: List<Comment2DTO?>?): List<PostComment>? {
+        fun fromDTOV2List(commentList: List<Comment2DTO>?): List<PostComment>? {
             if (commentList == null) {
                 return null
             }
             val postCommentList: MutableList<PostComment> =
                 ArrayList()
             for (dto in commentList) {
-                var user2: User? = null
-                var replyUser: User? = null
-                if (dto!!.user != null) {
-                    user2 =
-                        fromDTO(dto.user, CommonImage.Companion.fromDTO(dto.user!!.avatarImage))
-                }
-                if (dto.replyUser != null) {
-                    replyUser = fromDTO(
-                        dto.replyUser,
-                        CommonImage.Companion.fromDTO(dto.replyUser!!.avatarImage)
-                    )
-                }
-                val postComment =
-                    fromComment2DTO(dto, replyUser, user2)
+                val user2: User = fromDTO(dto.user, CommonImage.fromDTO(dto.user.avatarImage))
+                val replyUser: User = fromDTO(
+                    dto.replyUser,
+                    CommonImage.fromDTO(dto.replyUser.avatarImage)
+                )
+                val postComment = fromComment2DTO(dto, replyUser, user2)
                 postCommentList.add(postComment)
             }
             return postCommentList

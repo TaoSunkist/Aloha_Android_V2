@@ -445,7 +445,7 @@ public class PicSendActivity extends BaseFragAct implements OnClickListener, Lis
 				initPhotoByPicSend(bundle);
 			} else {// 分享feed
 				mSharePost = (Post) bundle.getSerializable(Post.TAG);
-				mUserTagsList = Post.transTagsToOldVer(mSharePost.getUserTags(), mSharePost.isTagMe());
+				mUserTagsList = Post.Companion.transTagsToOldVer(mSharePost.getUserTags(), mSharePost.isTagMe());
 
 				// 初始化地理信息
 				mLocationResult = new Location();

@@ -186,7 +186,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 							if(!isVisible()){
 								return;
 							}
-							mPost = Post.fromDTO(result.getData().getList().get(0), result.getData().getUserMap(), result.getData().getImageMap(), result.getData().getVideoMap(), result.getData().getCommentCountMap(), result.getData().getLikeCountMap());
+							mPost = Post.Companion.fromDTO(result.getData().getList().get(0), result.getData().getUserMap(), result.getData().getImageMap(), result.getData().getVideoMap(), result.getData().getCommentCountMap(), result.getData().getLikeCountMap());
 							initView(bundle);
 						}
 					}

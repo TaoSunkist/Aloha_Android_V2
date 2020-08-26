@@ -5,9 +5,9 @@ data class FeedGetData(
     var imageMap: Map<String, ImageCommonDto> = hashMapOf(),
     var videoMap: Map<String, VideoCommonDTO> = hashMapOf(),
     var commentCountMap: Map<String, Int> = hashMapOf(),
-    var likeCountMap: Map<String, Int>? = hashMapOf(),
-    var userMap: Map<String, UserDTO>? = hashMapOf(),
-    var nextCursorId: String? = null
+    var likeCountMap: Map<String, Int> = hashMapOf(),
+    var userMap: Map<String, UserDTO> = hashMapOf(),
+    var nextCursorId: String
 ) : ResultData() {
     companion object {
 //        fun fake(

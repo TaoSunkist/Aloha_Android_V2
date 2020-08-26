@@ -1,10 +1,7 @@
-package com.wealoha.social.api;
+package com.wealoha.social.api
 
-import java.util.List;
-
-import com.wealoha.social.beans.ApiErrorCode;
-import com.wealoha.social.beans.Direct;
-import com.wealoha.social.widget.BaseListApiAdapter;
+import com.wealoha.social.beans.ApiErrorCode
+import com.wealoha.social.beans.Direct
 
 /**
  * 所有和api交互的list类型
@@ -12,23 +9,21 @@ import com.wealoha.social.widget.BaseListApiAdapter;
  * @author javamonk
  * @createTime 2015年3月4日 下午11:02:05
  */
-public interface BaseListApiService<E, P> {
-
+interface BaseListApiService<E, P> {
     /**
      * Api列表数据加载异步回调
      *
      * @author javamonk
      * @createTime 2015年3月6日 上午11:28:42
      */
-    public interface ApiListCallback<E> {
-
+    interface ApiListCallback<E> {
         /**
          * 加载数据成功
          *
          * @param list
          * @param nextCursorId
          */
-        public void success(List<E> list, String nextCursorId);
+        fun success(list: List<E>, nextCursorId: String)
 
         /**
          * 加载数据出错
@@ -36,7 +31,7 @@ public interface BaseListApiService<E, P> {
          * @param code      api的错误码
          * @param exception 异常，可能为null
          */
-        public void fail(ApiErrorCode code, Exception exception);
+        fun fail(code: ApiErrorCode?, exception: Exception?)
     }
 
     /***
@@ -44,12 +39,11 @@ public interface BaseListApiService<E, P> {
      *
      * @param
      */
-    public interface ApiCallback<E> {
-
+    interface ApiCallback<E> {
         /**
          * 加载数据成功
          */
-        public void success(E data);
+        fun success(data: E)
 
         /**
          * 加载数据出错
@@ -57,11 +51,10 @@ public interface BaseListApiService<E, P> {
          * @param code      api的错误码
          * @param exception 异常，可能为null
          */
-        public void fail(ApiErrorCode code, Exception exception);
+        fun fail(code: ApiErrorCode?, exception: Exception?)
     }
 
-    public interface ListContextCallback<E> {
-
+    interface ListContextCallback<E> {
         /**
          * 加载数据成功
          *
@@ -69,7 +62,7 @@ public interface BaseListApiService<E, P> {
          * @param preCursorId
          * @param nextCursorId
          */
-        public void success(List<E> list, String preCursorId, String nextCursorId);
+        fun success(list: List<E>, preCursorId: String, nextCursorId: String)
 
         /**
          * 加载数据出错
@@ -77,54 +70,51 @@ public interface BaseListApiService<E, P> {
          * @param code      api的错误码
          * @param exception 异常，可能为null
          */
-        public void fail(ApiErrorCode code, Exception exception);
+        fun fail(code: ApiErrorCode?, exception: Exception?)
     }
 
-    public interface NoResultCallback {
-
-        public void success();
-
-        public void fail(ApiErrorCode code, Exception exception);
+    interface NoResultCallback {
+        fun success()
+        fun fail(code: ApiErrorCode?, exception: Exception?)
     }
 
-    public interface AdapterListDataCallback<E> {
-
+    interface AdapterListDataCallback<E> {
         /***
          * service 通过这个callback 获取adapter中的list数据
          *
          * @return
          * @return List<E>
-         */
-        public List<E> getListData();
+        </E> */
+        val listData: List<E>
     }
 
     /**
-     * 是否需要把api取到的数据反转(不用自己反转 {@link BaseListApiAdapter} 会反转)
+     * 是否需要把api取到的数据反转(不用自己反转 [BaseListApiAdapter] 会反转)
      *
      * @return
      */
-    public boolean needReverse();
+    fun needReverse(): Boolean
 
     /**
      * 是否需要把数据放到开头而不是结尾
      *
      * @return
      */
-    public boolean appendToHeader();
+    fun appendToHeader(): Boolean
 
     /**
      * 是否支持向前取数据
      *
      * @return
      */
-    public boolean supportPrev();
+    fun supportPrev(): Boolean
 
     /**
      * 是否支持根据数据定位
      *
      * @return
      */
-    public boolean supportContextByCursor();
+    fun supportContextByCursor(): Boolean
 
     /**
      * 获取列表数据
@@ -135,7 +125,13 @@ public interface BaseListApiService<E, P> {
      * @param param    参数，每个service自行定义
      * @param callback Notify2Service#getList(String, int, Void, ApiListCallback) 的错误处理
      */
-    public void getList(String cursor, int count, Direct direct, P param, final ApiListCallback<E> callback);
+    fun getList(
+        cursor: String,
+        count: Int,
+        direct: Direct,
+        param: P,
+        callback: ApiListCallback<E?>
+    )
 
     /**
      * 获取列表数据，以cursor为参照，上下各取一部分
@@ -145,7 +141,7 @@ public interface BaseListApiService<E, P> {
      * @param param
      * @param callback
      */
-    public void getListWithContext(String cursor, int count, P param, final ListContextCallback<E> callback);
+    fun getListWithContext(cursor: String, count: Int, param: P, callback: ListContextCallback<E>)
 
     /***
      * 设置能够获取adapter 中的listdata 的callback
@@ -153,7 +149,7 @@ public interface BaseListApiService<E, P> {
      * @param callback
      * @return void
      */
-    public void setAdapterListCallback(AdapterListDataCallback<E> callback);
+    fun setAdapterListCallback(callback: AdapterListDataCallback<E>)
 
     /***
      *
@@ -161,6 +157,10 @@ public interface BaseListApiService<E, P> {
      *
      * @return void
      */
-    public void fetchPhoto(int firstVisibleItem, int totalItemCount, boolean direction, int mScreenWidth);
-
+    fun fetchPhoto(
+        firstVisibleItem: Int,
+        totalItemCount: Int,
+        direction: Boolean,
+        mScreenWidth: Int
+    )
 }

@@ -1,11 +1,11 @@
 package com.wealoha.social.beans
 
-class UserListGetData : ResultData() {
-    @kotlin.jvm.JvmField
-    var list: List<UserDTO>? = null
-    @kotlin.jvm.JvmField
-    var imageMap: Map<String, ImageCommonDto>? = null
-    var nextCursorId: String? = null
-    var alohaGetLocked = false
-    var alohaGetUnlockCount = 0
+data class UserListGetData(
+    var list: List<UserDTO> = listOf(),
+    var imageMap: Map<String, ImageCommonDto> = mapOf(),
+    var nextCursorId: String? = null,
+    var alohaGetLocked: Boolean = false,
+    var alohaGetUnlockCount: Int = 0
+) : ResultData() {
+
 }

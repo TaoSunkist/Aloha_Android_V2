@@ -9,11 +9,11 @@ package com.wealoha.social.beans
  * @Date:2015年3月11日
  */
 data class Comment2GetData(
-    var nextCursorId: String? = null,
-    var userMap: Map<String, UserDTO>? = null,
-    var imageMap: Map<String, ImageCommonDto>? = null,
-    var list: List<CommentDTO>? = null,
-    var lateCursorId: String? = null
+    var nextCursorId: String = Direct.Early.value,
+    var userMap: Map<String, UserDTO> = mapOf(),
+    var imageMap: Map<String, ImageCommonDto> = mapOf(),
+    var list: List<CommentDTO> = listOf(),
+    var lateCursorId: String = Direct.Late.value
 ) : ResultData() {
 
 }

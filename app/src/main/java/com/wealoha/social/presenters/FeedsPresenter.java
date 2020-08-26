@@ -18,6 +18,8 @@ import com.wealoha.social.model.feeds.IAdvertisementModel;
 import com.wealoha.social.ui.feeds.IFeedsView;
 import com.wealoha.social.ui.feeds.IFeedsViewV2;
 
+import org.jetbrains.annotations.Nullable;
+
 /**
  * @author:sunkist
  * @see:
@@ -51,8 +53,8 @@ public class FeedsPresenter extends AbsPresenter {
 		mTopicPostService.getHashTagResult(new ServiceListResultCallback<HashTag>() {
 
 			@Override
-			public void success(List<HashTag> t) {
-				mIFeedsView.showTopic(t);
+			public void success(@Nullable List<? extends HashTag> t) {
+				mIFeedsView.showTopic((List<HashTag>) t);
 			}
 
 			@Override
@@ -71,8 +73,8 @@ public class FeedsPresenter extends AbsPresenter {
 		mPostService.getDataList(new ServiceResultCallback<Post>() {
 
 			@Override
-			public void success(List<Post> list) {
-				feedsViewV2.setData(list);
+			public void success(@Nullable List<? extends Post> list) {
+				feedsViewV2.setData((List<Post>) list);
 			}
 
 			@Override

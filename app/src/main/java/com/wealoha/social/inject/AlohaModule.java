@@ -784,6 +784,24 @@ public class AlohaModule {
         return new MainThreadBus();
     }
 
+//    @Provides
+//    @Singleton
+//    SingletonFeedListApiService provideSingletonFeedListApiService(RestAdapter restAdapter) {
+//        return restAdapter.create(SingletonFeedListApiService.class);
+//    }
+//
+//    @Provides
+//    @Singleton
+//    Profile2ListApiService provideProfile2ListApiService(RestAdapter restAdapter) {
+//        return restAdapter.create(Profile2ListApiService.class);
+//    }
+//
+//    @Provides
+//    @Singleton
+//    TagedPostListApiService provideTagedPostListApiService(RestAdapter restAdapter) {
+//        return restAdapter.create(TagedPostListApiService.class);
+//    }
+
     @Provides
     @Singleton
     ServerApi provideFeed2API(RestAdapter restAdapter) {

@@ -63,8 +63,8 @@ import com.wealoha.social.widget.BaseListApiAdapter.LoadCallback;
 public class Profile2Fragment extends BaseFragment implements ProfileHeader2FragCallback, SwipeRefreshLayout.OnRefreshListener,
         OnTouchListener, OnClickListener, OnScrollListener {
 
-    @Inject
-    Profile2ListApiService pro2Service;
+    Profile2ListApiService pro2Service = new Profile2ListApiService();
+
     @Inject
     RegionNodeUtil regionNodeUtil;
     @Inject

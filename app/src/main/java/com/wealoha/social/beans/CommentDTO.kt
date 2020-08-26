@@ -8,23 +8,23 @@ package com.wealoha.social.beans
  * @copyright wealoha.com
  * @Date:2015年3月11日
  */
-class CommentDTO {
-    var createTimeMillis: Long = 0
-    @kotlin.jvm.JvmField
-    var userId: String? = null
-    var mine = false
-    var id: String? = null
-    var type: String? = null
-    var comment: String? = null
+data class CommentDTO(
+    var createTimeMillis: Long = 0,
+    var userId: String,
+    var mine: Boolean = false,
+    var id: String,
+    var type: String? = null,
+    var comment: String,
 
     /** 回复某人  */
-    @kotlin.jvm.JvmField
-    var replyUserId: String? = null
-    var whisper = false
+    var replyUserId: String,
+    var whisper: Boolean = false,
 
     /** 新版评论  */
-    var user: UserDTO? = null
-    var replyUser: UserDTO? = null
+    var user: UserDTO,
+    var replyUser: UserDTO
+) {
+
     override fun hashCode(): Int {
         val prime = 31
         var result = 1

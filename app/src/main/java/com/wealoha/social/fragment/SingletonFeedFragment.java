@@ -41,8 +41,7 @@ import com.wealoha.social.widget.BaseListApiAdapter.LoadCallback;
 public class SingletonFeedFragment extends BaseFragment implements Holder2FragCallback, OnClickListener,
 		Adapter2FragmentCallback {
 
-	@Inject
-    SingletonFeedListApiService feedService;
+    SingletonFeedListApiService feedService = new SingletonFeedListApiService();
 	@InjectView(R.id.list)
 	ListView postList;
 	@InjectView(R.id.tags_method_container)

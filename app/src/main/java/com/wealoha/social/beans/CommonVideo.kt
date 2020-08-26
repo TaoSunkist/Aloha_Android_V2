@@ -40,10 +40,8 @@ class CommonVideo(
          * @return 参数为空，则返回值为空
          */
         @kotlin.jvm.JvmStatic
-        fun fromDTO(videoCommonDTO: VideoCommonDTO?): CommonVideo? {
-            return if (videoCommonDTO == null) {
-                null
-            } else CommonVideo(
+        fun fromDTO(videoCommonDTO: VideoCommonDTO): CommonVideo {
+            return CommonVideo(
                 videoCommonDTO.videoId,
                 videoCommonDTO.width,
                 videoCommonDTO.heigt,

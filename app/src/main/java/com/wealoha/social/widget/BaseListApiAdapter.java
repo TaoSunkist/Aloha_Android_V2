@@ -7,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.jetbrains.annotations.NotNull;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -50,10 +51,10 @@ public abstract class BaseListApiAdapter<E, P> extends BaseAdapter implements Ad
 
     protected final List<E> listData;
 
-    private String earlyCursorId;
+    private String earlyCursorId="";
 
     // 向上翻的状态
-    private String lateCursorId;
+    private String lateCursorId="";
 
     private Object lock = new Object();
 
@@ -141,10 +142,10 @@ public abstract class BaseListApiAdapter<E, P> extends BaseAdapter implements Ad
             return;
         }
         // 使用desc，从头开始
-        service.getList(null, pageSize, null, param, new BaseListApiService.ApiListCallback<E>() {
+        service.getList("", pageSize, Direct.Early, param, new BaseListApiService.ApiListCallback<E>() {
 
             @Override
-            public void success(List<E> list, String nextCursorId) {
+            public void success(@NotNull List<? extends E> list, @NotNull String nextCursorId) {
                 if (CollectionUtils.isEmpty(list)) {
                     callback.success(false);
                     return;
@@ -232,7 +233,7 @@ public abstract class BaseListApiAdapter<E, P> extends BaseAdapter implements Ad
                 service.getListWithContext(commentid, pageSize, param, new ListContextCallback<E>() {
 
                     @Override
-                    public void success(List<E> list, String lataCursorId, String nextCursorId) {
+                    public void success(@NotNull List<? extends E> list, @NotNull String preCursorId, @NotNull String nextCursorId) {
                         if (version != dataVersion) {
                             // 如果加载过程中数据被更新了，就丢弃(比如reset了，但是下一页还在加载中)
                             XL.w(TAG, "丢弃不一致的数据，期待版本: " + version + ", 当前版本: " + dataVersion);
@@ -240,7 +241,7 @@ public abstract class BaseListApiAdapter<E, P> extends BaseAdapter implements Ad
                         }
                         // 更新下一页游标
                         BaseListApiAdapter.this.earlyCursorId = nextCursorId;
-                        BaseListApiAdapter.this.lateCursorId = lataCursorId;
+                        BaseListApiAdapter.this.lateCursorId = lateCursorId;
                         XL.v(TAG, "取到数据: " + list.size());
                         if (CollectionUtils.isNotEmpty(list)) {
 
@@ -333,11 +334,11 @@ public abstract class BaseListApiAdapter<E, P> extends BaseAdapter implements Ad
             if (!loading) {
                 loading = true;
                 final int version = ++dataVersion;
-                String cursor = direct == Direct.Early ? earlyCursorId : lateCursorId;
+                String cursor = (direct == Direct.Early ? earlyCursorId : lateCursorId);
                 service.getList(cursor, pageSize, direct, param, new BaseListApiService.ApiListCallback<E>() {
 
                     @Override
-                    public void success(List<E> list, String cursorId) {
+                    public void success(@NotNull List<? extends E> list, @NotNull String cursorId) {
                         if (version != dataVersion) {
                             // 如果加载过程中数据被更新了，就丢弃(比如reset了，但是下一页还在加载中)
                             XL.w(TAG, "丢弃不一致的数据，期待版本: " + version + ", 当前版本: " + dataVersion);
@@ -443,8 +444,8 @@ public abstract class BaseListApiAdapter<E, P> extends BaseAdapter implements Ad
     public void resetState() {
         synchronized (lock) {
             listData.clear();
-            earlyCursorId = null;
-            lateCursorId = null;
+            earlyCursorId = "";
+            lateCursorId = "";
             reachEnd = false;
             reachHead = false;
             loading = false;
@@ -460,8 +461,8 @@ public abstract class BaseListApiAdapter<E, P> extends BaseAdapter implements Ad
      */
     public void resetStateDelay() {
         synchronized (lock) {
-            earlyCursorId = null;
-            lateCursorId = null;
+            earlyCursorId = "";
+            lateCursorId = "";
             reachEnd = false;
             reachHead = false;
             loading = false;

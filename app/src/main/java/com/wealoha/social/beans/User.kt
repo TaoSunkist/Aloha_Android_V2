@@ -131,40 +131,36 @@ data class User(
         }
 
         fun fromDTO(
-            dto: UserDTO?,
-            avatarCommonImage: CommonImage?
-        ): User? {
-            var user2: User? = null
-            if (dto != null) {
-                user2 = User(
-                    id = dto.id,
-                    name = dto.name,
-                    birthday = dto.birthday,
-                    age = dto.age,
-                    height = dto.height,  //
-                    weight = dto.weight,
-                    me = dto.me,
-                    regionCode = dto.regionCode,
-                    region = dto.region,
-                    zodiac = dto.zodiac,  //
-                    summary = dto.summary,
-                    selfPurposes = dto.selfPurposes,
-                    selfTag = dto.selfTag,
-                    avatarImage = Image.init(avatarCommonImage!!),  //
-                    profileIncomplete = dto.profileIncomplete,
-                    alohaCount = dto.alohaCount,
-                    alohaGetCount = dto.alohaGetCount,  //
-                    aloha = dto.aloha,
-                    match = dto.match,
-                    postCount = dto.postCount,
-                    block = dto.block,
-                    hasPrivacy = dto.hasPrivacy,
-                    accessToken = "",
-                    avatarImageId = dto.avatarImage?.imageId ?: "",
-                    phoneNum = ""
-                )
-            }
-            return user2
+            dto: UserDTO,
+            avatarCommonImage: CommonImage
+        ): User {
+            return User(
+                id = dto.id,
+                name = dto.name,
+                birthday = dto.birthday,
+                age = dto.age,
+                height = dto.height,  //
+                weight = dto.weight,
+                me = dto.me,
+                regionCode = dto.regionCode,
+                region = dto.region,
+                zodiac = dto.zodiac,  //
+                summary = dto.summary,
+                selfPurposes = dto.selfPurposes,
+                selfTag = dto.selfTag,
+                avatarImage = Image.init(avatarCommonImage),  //
+                profileIncomplete = dto.profileIncomplete,
+                alohaCount = dto.alohaCount,
+                alohaGetCount = dto.alohaGetCount,  //
+                aloha = dto.aloha,
+                match = dto.match,
+                postCount = dto.postCount,
+                block = dto.block,
+                hasPrivacy = dto.hasPrivacy,
+                accessToken = "",
+                avatarImageId = dto.avatarImage?.imageId ?: "",
+                phoneNum = ""
+            )
         }
 
         fun fromDTO(dto: UserDTO): User {

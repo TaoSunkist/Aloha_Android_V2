@@ -11,10 +11,10 @@ import java.util.*
  * @author javamonk
  * @createTime 2015年2月25日 上午10:49:44
  */
-class Post(
-    val postId: String?,
+data class Post(
+    val postId: String,
     val type: FeedType?,
-    val description: String?,
+    val description: String,
     val createTimeMillis: Long,
     val isMine: Boolean,
     var isLiked: Boolean,
@@ -24,7 +24,7 @@ class Post(
     val latitude: Double?,
     val longitude: Double?,
     val venueAbroad: Boolean?,
-    val user: User?,
+    val user: User,
     val userTags: List<UserTag>?,
     val commonImage: CommonImage?,
     val commonVideo: CommonVideo?,
@@ -87,11 +87,59 @@ class Post(
          *
          */
         private const val serialVersionUID = 2689425306398055435L
+
+
+        fun transTagsToOldVer(
+            tags: List<UserTag>,
+            tagme: Boolean
+        ): ArrayList<UserTags> {
+            val userTags = ArrayList<UserTags>(tags.size)
+            for (tag in tags) {
+                val userTag = UserTags()
+                userTag.tagAnchorX = tag.tagAnchorX?.toFloat()
+                userTag.tagAnchorY = tag.tagAnchorY?.toFloat()
+                userTag.tagCenterX = tag.tagCenterX?.toFloat()
+                userTag.tagCenterY = tag.tagCenterY?.toFloat()
+                userTag.tagMe = tagme
+                userTag.tagUserId = tag.user?.id
+                userTag.username = tag.user?.name
+                userTags.add(userTag)
+            }
+            return userTags
+        }
+
+        /***
+         * 这个feed 是否有当前用户的标签
+         *
+         * @param userTagList
+         * 圈人列表
+         * @param userId
+         * 当前用户id
+         * @return 如果任意参数为空，那么返回false
+         */
+        fun hasTagForMe(
+            userTagList: List<UserTag>?,
+            userId: String?
+        ): Boolean {
+            if (userTagList == null) {
+                return false
+            }
+
+            // if (TextUtils.isEmpty(userId)) {
+            for (userTag in userTagList) {
+                if (userTag.user?.me == true) {
+                    return true
+                }
+            }
+            // }
+            return false
+        }
+
         fun fromDTO(
             postdto: PostDTO,
             commonImage: CommonImage?,
             commonVideo: CommonVideo?,
-            user2: User?,
+            user2: User,
             userTags: List<UserTag>?,
             commentCount: Int,
             praiseCount: Int,
@@ -124,75 +172,22 @@ class Post(
             )
         }
 
-        @kotlin.jvm.JvmStatic
-        fun transTagsToOldVer(
-            tags: List<UserTag>,
-            tagme: Boolean
-        ): ArrayList<UserTags> {
-            val userTags = ArrayList<UserTags>(tags.size)
-            for (tag in tags) {
-                val userTag = UserTags()
-                userTag.tagAnchorX = tag.tagAnchorX?.toFloat()
-                userTag.tagAnchorY = tag.tagAnchorY?.toFloat()
-                userTag.tagCenterX = tag.tagCenterX?.toFloat()
-                userTag.tagCenterY = tag.tagCenterY?.toFloat()
-                userTag.tagMe = tagme
-                userTag.tagUserId = tag.user?.id
-                userTag.username = tag.user?.name
-                userTags.add(userTag)
-            }
-            return userTags
-        }
-
-        /***
-         * 这个feed 是否有当前用户的标签
-         *
-         * @param userTagList
-         * 圈人列表
-         * @param userId
-         * 当前用户id
-         * @return 如果任意参数为空，那么返回false
-         */
-        @kotlin.jvm.JvmStatic
-        fun hasTagForMe(
-            userTagList: List<UserTag>?,
-            userId: String?
-        ): Boolean {
-            if (userTagList == null) {
-                return false
-            }
-
-            // if (TextUtils.isEmpty(userId)) {
-            for (userTag in userTagList) {
-                if (userTag.user?.me == true) {
-                    return true
-                }
-            }
-            // }
-            return false
-        }
-
-        @kotlin.jvm.JvmStatic
         fun fromDTO(
             postDTO: PostDTO,
-            userMap: Map<String?, UserDTO?>,
-            imageMap: Map<String?, ImageCommonDto?>,
-            video: Map<String?, VideoCommonDTO?>,
-            commentCountMap: Map<String?, Int?>,
-            praiseCountMap: Map<String?, Int?>
+            userMap: Map<String, UserDTO>,
+            imageMap: Map<String, ImageCommonDto>,
+            video: Map<String, VideoCommonDTO>,
+            commentCountMap: Map<String, Int>,
+            praiseCountMap: Map<String, Int>
         ): Post {
-            val userTagList: List<UserTag>? =
-                UserTag.Companion.fromDTOList(postDTO.userTags, userMap, imageMap)
-            val userDTO = userMap[postDTO.userId]
-            var commonImage: CommonImage? = null
-            var user2: User? = null
-            if (userDTO != null) {
-                commonImage = CommonImage.Companion.fromDTO(imageMap[userDTO.avatarImageId])
-                user2 = fromDTO(userDTO, commonImage)
-            }
+            val userTagList: List<UserTag> =
+                UserTag.fromDTOList(postDTO.userTags, userMap, imageMap)
+            val userDTO = userMap[postDTO.userId]!!
+            val commonImage: CommonImage = CommonImage.fromDTO(imageMap[userDTO.avatarImageId]!!)
+            val user2: User = fromDTO(userDTO, commonImage)
             return Post( //
                 postDTO.postId,  //
-                FeedType.Companion.fromValue(postDTO.type),  //
+                FeedType.fromValue(postDTO.type),  //
                 postDTO.description,  //
                 postDTO.createTimeMillis,  //
                 postDTO.mine,  //
@@ -205,8 +200,8 @@ class Post(
                 postDTO.venueAbroad,  //
                 user2,  //
                 userTagList,  //
-                CommonImage.Companion.fromDTO(imageMap[postDTO.imageId]),  //
-                CommonVideo.Companion.fromDTO(video[postDTO.videoId]),  //
+                CommonImage.fromDTO(imageMap[postDTO.imageId]!!),  //
+                CommonVideo.fromDTO(video[postDTO.videoId]!!),  //
                 commentCountMap[postDTO.postId]!!,  //
                 praiseCountMap[postDTO.postId]!!,  //
                 PostComment.Companion.fromDTOV2List(postDTO.recentComments),  //
@@ -215,14 +210,13 @@ class Post(
             )
         }
 
-        @kotlin.jvm.JvmStatic
         fun fromPostDTOList(
             dtoList: List<PostDTO>,
-            userMap: Map<String?, UserDTO?>,
-            imageMap: Map<String?, ImageCommonDto?>,
-            videoMap: Map<String?, VideoCommonDTO?>,
-            commentCountMap: Map<String?, Int?>,
-            praiseCountMap: Map<String?, Int?>
+            userMap: Map<String, UserDTO>,
+            imageMap: Map<String, ImageCommonDto>,
+            videoMap: Map<String, VideoCommonDTO>,
+            commentCountMap: Map<String, Int>,
+            praiseCountMap: Map<String, Int>
         ): List<Post> {
             val postList: MutableList<Post> = ArrayList()
             for (postDTO in dtoList) {

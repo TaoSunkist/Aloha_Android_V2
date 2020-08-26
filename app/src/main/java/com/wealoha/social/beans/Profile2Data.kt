@@ -1,8 +1,10 @@
 package com.wealoha.social.beans
 
-class Profile2Data : ResultData() {
-    var user: UserDTO? = null
-    var imageMap: Map<String, ImageCommonDto>? = null
-    var friend = false
-    var liked = false
+data class Profile2Data(
+    val user: UserDTO,
+    val imageMap: Map<String, ImageCommonDto> = mapOf(),
+    var friend: Boolean = false,
+    var liked: Boolean = false
+) : ResultData() {
+
 }

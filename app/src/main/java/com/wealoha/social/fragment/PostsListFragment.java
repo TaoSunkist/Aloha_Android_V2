@@ -31,8 +31,7 @@ import com.wealoha.social.widget.ScrollToLoadMoreListener.Callback;
 
 public class PostsListFragment extends BaseFragment implements OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
-	@Inject
-    TagedPostListApiService tagedService;
+    TagedPostListApiService tagedService = new TagedPostListApiService();
 	@Inject
     PraisedPostListApiService praisedService;
 	@Inject

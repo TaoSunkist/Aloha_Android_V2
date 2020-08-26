@@ -58,7 +58,7 @@ data class UserDTO(
     var block: Boolean = false,
     var hasPrivacy: Boolean = false,
 
-    var avatarImage: ImageCommonDto? = null
+    var avatarImage: ImageCommonDto
 ) {
     companion object {
         fun fake(): UserDTO {

@@ -1,46 +1,48 @@
 package com.wealoha.social.beans
 
-class TopicPostDTO {
-    @kotlin.jvm.JvmField
-    var postId: String? = null
-    @kotlin.jvm.JvmField
-    var type: FeedType? = null
-    @kotlin.jvm.JvmField
-    var description: String? = null
-    @kotlin.jvm.JvmField
-    var createTimeMillis: Long = 0
-    @kotlin.jvm.JvmField
-    var mine = false
-    @kotlin.jvm.JvmField
-    var venue: String? = null
-    @kotlin.jvm.JvmField
-    var venueId: String? = null
-    @kotlin.jvm.JvmField
-    var latitude: Double? = null
-    @kotlin.jvm.JvmField
-    var longitude: Double? = null
-    @kotlin.jvm.JvmField
-    var venueAbroad: Boolean? = null
-    @kotlin.jvm.JvmField
-    var user: UserDTO? = null
-    @kotlin.jvm.JvmField
-    var userTags: List<TopicPostTagDTO>? = null
-    @kotlin.jvm.JvmField
-    var image: ImageCommonDto? = null
-    @kotlin.jvm.JvmField
-    var video: VideoCommonDTO? = null
-    @kotlin.jvm.JvmField
-    var tagMe = false
-    @kotlin.jvm.JvmField
-    var liked = false
-    @kotlin.jvm.JvmField
-    var commentCount = 0
-    @kotlin.jvm.JvmField
-    var praiseCount = 0
-    @kotlin.jvm.JvmField
-    var recentComment: List<Comment2DTO>? = null
-    @kotlin.jvm.JvmField
-    var hashtag: HashTagDTO? = null
-    @kotlin.jvm.JvmField
-    var hasMoreComment = false
+data class TopicPostDTO(
+
+    var postId: String,
+
+    var type: FeedType,
+
+    var description: String = "",
+
+    var createTimeMillis: Long = 0,
+
+    var mine: Boolean = false,
+
+    var venue: String? = null,
+
+    var venueId: String? = null,
+
+    var latitude: Double? = null,
+
+    var longitude: Double? = null,
+
+    var venueAbroad: Boolean? = null,
+
+    var user: UserDTO,
+
+    var userTags: List<TopicPostTagDTO>? = null,
+
+    val image: ImageCommonDto,
+
+    val video: VideoCommonDTO,
+
+    var tagMe: Boolean = false,
+
+    var liked: Boolean = false,
+
+    var commentCount: Int = 0,
+
+    var praiseCount: Int = 0,
+
+    var recentComment: List<Comment2DTO>? = null,
+
+    var hashtag: HashTagDTO? = null,
+
+    var hasMoreComment: Boolean = false
+) {
+
 }
