@@ -206,7 +206,7 @@ public class FeedNoticeAct extends BaseFragAct implements OnClickListener, OnIte
 				}
 			});
 		} else {// aloha 用户的notify
-			adapter02.loadEarlyPage(FEED_NUM, null, new LoadCallback() {
+			adapter02.loadEarlyPage(FEED_NUM, false, new LoadCallback() {
 
 				@Override
 				public void success(boolean hasPrev, boolean hasNext) {

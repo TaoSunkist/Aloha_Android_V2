@@ -11,16 +11,11 @@ import org.apache.commons.lang3.StringUtils
  * @author javamonk
  * @createTime 2015年2月25日 上午11:31:07
  */
-class ImageCommonDto(
-    @JvmField
+data class ImageCommonDto(
     var imageId: String,
-    @JvmField
     var width: Int,
-    @JvmField
     var height: Int,
-    @JvmField
     var urlPatternWidth: String? = null,
-    @JvmField
     var urlPatternWidthHeight: String? = null,
     var type: String? = null
 ) {
@@ -31,6 +26,14 @@ class ImageCommonDto(
                 width = Dimens.purchaseableItemWidth,
                 height = Dimens.purchaseableItemHeight
             )
+        }
+
+        fun fakeForMap(): HashMap<String, ImageCommonDto> {
+            val map = hashMapOf<String, ImageCommonDto>()
+            (0..20).forEach { index ->
+                map[index.toString()] = fake()
+            }
+            return map
         }
     }
 

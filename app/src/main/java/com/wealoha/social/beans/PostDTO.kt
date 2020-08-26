@@ -1,5 +1,7 @@
 package com.wealoha.social.beans
 
+import com.mooveit.library.Fakeit
+
 /**
  *
  *
@@ -37,6 +39,7 @@ data class PostDTO(
     var venueAbroad: Boolean? = null,
 
     var venueId: String? = null,
+
     var count: Int = 0,
 
     var recentComments: List<Comment2DTO> = listOf(),
@@ -45,5 +48,33 @@ data class PostDTO(
 
     var hasMoreComment: Boolean = false
 ) {
+    companion object {
 
+        fun fake(): PostDTO {
+
+//        VideoPost("VideoPost", 0),  //
+//        ImagePost("ImagePost", 1);
+
+            return PostDTO(
+                createTimeMillis = System.currentTimeMillis(),
+                description = Fakeit.book().genre(),
+                imageId = System.currentTimeMillis().toString(),
+                videoId = System.currentTimeMillis().toString(),
+                postId = System.currentTimeMillis().toString(),
+                mine = (0..1).random() == 1,
+                liked = (0..1).random() == 1,
+                type = FeedType.values().random().value,
+                userId = System.currentTimeMillis().toString(),
+                latitude = (100..180).random().toDouble(),
+                longitude = (100..180).random().toDouble(),
+                venue = Fakeit.book().author(),
+                userTags = (0..5).map { UserTagsDTO.fake(System.currentTimeMillis().toString()) },
+                venueAbroad = (0..1).random() == 1,
+                count = (0..20).random(),
+                recentComments = (0..10).map { Comment2DTO.fake() },
+                hashtag = HashTagDTO.fake(),
+                hasMoreComment = (0..1).random() == 1
+            )
+        }
+    }
 }

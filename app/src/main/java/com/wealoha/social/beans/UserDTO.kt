@@ -89,5 +89,13 @@ data class UserDTO(
                 hasPrivacy = (0..1).random() == 1
             )
         }
+
+        fun fakeForMap(): HashMap<String, UserDTO> {
+            return hashMapOf<String, UserDTO>().apply {
+                (0..20).forEach {
+                    put(it.toString(), fake())
+                }
+            }
+        }
     }
 }

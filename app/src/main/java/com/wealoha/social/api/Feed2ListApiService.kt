@@ -43,22 +43,18 @@ open class Feed2ListApiService : AbsBaseListApiService<Post, String>() {
         userid: String,
         callback: ApiListCallback<Post?>
     ) {
-        //null 20 Early 1597904996689
-        printf("taohui", cursor, count, direct, userid)
-        feed2Api!!.getPosts(cursor, count, object : Callback<Result<FeedGetData>> {
-            override fun failure(error: RetrofitError) {
-                XL.i("Feed2Fragment", "service: faile--" + error.message)
-                callback.fail(null, error)
-            }
-
-            override fun success(result: Result<FeedGetData>, arg1: Response) {
-                XL.i("Feed2Fragment", "service: success--")
-                callback.success(
-                    transResult2List(result.data!!, userid),
-                    result.data!!.nextCursorId
-                )
-            }
-        })
+        val _result = Result.success(
+            FeedGetData.fake(
+                cursor = cursor,
+                direct = direct,
+                userid = userid,
+                count = count
+            )
+        )
+        callback.success(
+            transResult2List(_result.data!!, ""),
+            _result.data!!.nextCursorId
+        )
     }
 
     /***

@@ -21,21 +21,25 @@ class SingletonFeedListApiService : Feed2ListApiService() {
         postId: String,
         callback: ApiListCallback<Post?>
     ) {
-        feed2Api!!.singleFeed(postId!!, object : Callback<Result<FeedGetData>> {
+        feed2Api!!.singleFeed(postId, object : Callback<Result<FeedGetData>> {
             override fun failure(error: RetrofitError) {
                 XL.i("Feed2Fragment", error.message)
                 callback.fail(null, error)
             }
 
-            override fun success(result: Result<FeedGetData>?, arg1: Response) {
-                if (result == null || !result.isOk) {
-                    callback.fail(fromResult(result), null)
-                } else {
-                    callback.success(
-                        transResult2List(result.data!!, ""),
-                        result.data!!.nextCursorId
+            override fun success(result: Result<FeedGetData>, arg1: Response) {
+                val _result = Result.success(
+                    FeedGetData.fake(
+                        cursor = cursor,
+                        direct = direct,
+                        userid = postId,
+                        count = count
                     )
-                }
+                )
+                callback.success(
+                    transResult2List(_result.data!!, ""),
+                    _result.data!!.nextCursorId
+                )
             }
         })
     }
