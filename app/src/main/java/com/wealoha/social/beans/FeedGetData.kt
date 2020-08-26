@@ -10,34 +10,50 @@ data class FeedGetData(
     var nextCursorId: String
 ) : ResultData() {
     companion object {
+
         fun fake(
             cursor: String,
             count: Int,
             direct: Direct,
             userid: String
         ): FeedGetData {
-            val postDTOs = (0..count).map {
-                PostDTO.fake()
+
+
+            val userDTOs = (0 until count).map {
+                UserDTO.fake().apply {
+                }
             }
 
-            val commentCountMap = hashMapOf<String, Int>().apply {
-                (0..20).map {
-                    put(it.toString(), (0..20).random())
+
+            val postDTOs = arrayListOf<PostDTO>()
+            val commentCountMap = hashMapOf<String, Int>()
+            val imageMap = hashMapOf<String, ImageCommonDto>()
+            val videoMap = hashMapOf<String, VideoCommonDTO>()
+            val likeCountMap = hashMapOf<String, Int>()
+            val userMap = hashMapOf<String, UserDTO>()
+
+            userDTOs.map { userDTO ->
+                val postDTO = PostDTO.fake(userDTO.id).apply {
+                    imageId = userDTO.avatarImageId
                 }
+                postDTOs.add(postDTO)
+                userMap[userDTO.id] = userDTO
+                commentCountMap[postDTO.postId] = (0..100).random()
+                likeCountMap[postDTO.postId] = (0..100).random()
+                imageMap[userDTO.avatarImageId] =
+                    ImageCommonDto.fake(imageID = userDTO.avatarImageId)
+                videoMap[postDTO.videoId] = VideoCommonDTO.fake()
             }
-            val likeCountMap = hashMapOf<String, Int>().apply {
-                (0..20).map {
-                    put(it.toString(), (0..20).random())
-                }
-            }
+
+
 
             return FeedGetData(
                 list = postDTOs,
-                imageMap = ImageCommonDto.fakeForMap(),
-                videoMap = VideoCommonDTO.fakeForMap(),
+                imageMap = imageMap,
+                videoMap = videoMap,
                 commentCountMap = commentCountMap,
                 likeCountMap = likeCountMap,
-                userMap = UserDTO.fakeForMap(),
+                userMap = userMap,
                 nextCursorId = Direct.Late.value
             )
         }

@@ -197,20 +197,12 @@ abstract class AbsBaseListApiService<E, P> : BaseListApiService<E, P> {
         return fromDTO(userDTO, getImage(userDTO.avatarImageId, imageMap))
     }
 
-    protected fun getImage(
-        imageId: String,
+    private fun getImage(
+        avatarImageId: String,
         imageMap: Map<String, ImageCommonDto>
     ): CommonImage {
-        val imageCommonDto = imageMap[imageId]!!
+        val imageCommonDto = imageMap[avatarImageId]!!
         return fromDTO(imageCommonDto)
-    }
-
-    protected fun getVideo(
-        Videoid: String,
-        videoMap: Map<String, VideoCommonDTO>
-    ): CommonVideo {
-        val videoCommonDTO = videoMap[Videoid]!!
-        return fromDTO(videoCommonDTO)
     }
 
     override fun getListWithContext(

@@ -90,12 +90,33 @@ data class UserDTO(
             )
         }
 
-        fun fakeForMap(): HashMap<String, UserDTO> {
-            return hashMapOf<String, UserDTO>().apply {
-                (0..20).forEach {
-                    put(it.toString(), fake())
-                }
-            }
+        fun fake(userID: String): UserDTO {
+            val avatarImage = ImageCommonDto.fake();
+
+            return UserDTO(
+                id = userID,
+                name = System.currentTimeMillis().toString(),
+                birthday = System.currentTimeMillis().toString(),
+                age = System.currentTimeMillis().toInt(),
+                height = System.currentTimeMillis().toInt(),
+                weight = System.currentTimeMillis().toInt(),
+                me = (0..1).random() == 1,
+                regionCode = System.currentTimeMillis().toString(),
+                region = (0..4).map { Fakeit.app().name() },
+                zodiac = System.currentTimeMillis().toString(),
+                summary = System.currentTimeMillis().toString(),
+                selfPurposes = (0..4).map { Fakeit.app().name() },
+                selfTag = System.currentTimeMillis().toString(),
+                avatarImage = avatarImage,
+                avatarImageId = avatarImage.imageId,
+                profileIncomplete = (0..1).random() == 1,
+                alohaCount = (0..1000).random(),
+                alohaGetCount = (0..1000).random(),
+                aloha = (0..1).random() == 1,
+                match = (0..1).random() == 1,
+                postCount = (0..1000).random(),
+                hasPrivacy = (0..1).random() == 1
+            )
         }
     }
 }

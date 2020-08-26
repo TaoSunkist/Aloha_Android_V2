@@ -50,11 +50,10 @@ data class PostDTO(
 ) {
     companion object {
 
-        fun fake(): PostDTO {
+        fun fake(userID: String): PostDTO {
 
 //        VideoPost("VideoPost", 0),  //
 //        ImagePost("ImagePost", 1);
-
             return PostDTO(
                 createTimeMillis = System.currentTimeMillis(),
                 description = Fakeit.book().genre(),
@@ -64,11 +63,11 @@ data class PostDTO(
                 mine = (0..1).random() == 1,
                 liked = (0..1).random() == 1,
                 type = FeedType.values().random().value,
-                userId = System.currentTimeMillis().toString(),
+                userId = userID,
                 latitude = (100..180).random().toDouble(),
                 longitude = (100..180).random().toDouble(),
                 venue = Fakeit.book().author(),
-                userTags = (0..5).map { UserTagsDTO.fake(System.currentTimeMillis().toString()) },
+                userTags = (0..5).map { UserTagsDTO.fake(userID = userID) },
                 venueAbroad = (0..1).random() == 1,
                 count = (0..20).random(),
                 recentComments = (0..10).map { Comment2DTO.fake() },

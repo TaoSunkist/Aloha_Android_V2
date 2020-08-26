@@ -44,7 +44,7 @@ open class Feed2ListApiService : AbsBaseListApiService<Post, String>() {
         callback: ApiListCallback<Post?>
     ) {
         val _result = Result.success(
-            FeedGetData.fake(
+            data = FeedGetData.fake(
                 cursor = cursor,
                 direct = direct,
                 userid = userid,
@@ -98,15 +98,13 @@ open class Feed2ListApiService : AbsBaseListApiService<Post, String>() {
     protected fun transResult2List(result: FeedGetData, currentUserid: String): List<Post> {
         val postList: ArrayList<Post> = ArrayList(result.list.size)
         for (postDto in result.list) {
-            val type = FeedType.fromValue(postDto.type)
-            if (type == null) {
-                XL.d(TAG, "不支持的通知类型: " + postDto.type)
-                continue
-            }
+            val type = FeedType.fromValue(postDto.type)!!
             val user2 = getUser(postDto.userId, result.userMap, result.imageMap)
+
             val userTagList = gerUserTagList(postDto.userTags, result.userMap, result.imageMap)
             val commonImage = fromDTO(result.imageMap[postDto.imageId]!!)
-            val commonVideo: CommonVideo = fromDTO(result.videoMap[postDto.videoId]!!)
+            val commonVideo = fromDTO(result.videoMap[postDto.videoId]!!)
+
             val recentCommentList = transCommentDTOList2PostCommentList(
                 postDto.recentComments,
                 result.userMap,

@@ -28,6 +28,14 @@ data class ImageCommonDto(
             )
         }
 
+        fun fake(imageID: String): ImageCommonDto {
+            return ImageCommonDto(
+                imageId = imageID,
+                width = Dimens.purchaseableItemWidth,
+                height = Dimens.purchaseableItemHeight
+            )
+        }
+
         fun fakeForMap(): HashMap<String, ImageCommonDto> {
             val map = hashMapOf<String, ImageCommonDto>()
             (0..20).forEach { index ->
