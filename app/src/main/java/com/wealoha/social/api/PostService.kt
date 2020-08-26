@@ -5,7 +5,7 @@ import com.wealoha.social.api.BaseService.ServiceResultCallback
 import com.wealoha.social.beans.FeedGetData
 import com.wealoha.social.beans.Post
 import com.wealoha.social.beans.Post.Companion.fromPostDTOList
-import com.wealoha.social.beans.Result
+import com.wealoha.social.beans.ApiResponse
 import retrofit.Callback
 import retrofit.RetrofitError
 import retrofit.client.Response
@@ -23,25 +23,25 @@ class PostService : AbsBaseService<Post?>() {
         feed2API!!.getPosts(
             cursor!!,
             AbsBaseService.COUNT,
-            object : Callback<Result<FeedGetData>> {
+            object : Callback<ApiResponse<FeedGetData>> {
                 override fun failure(arg0: RetrofitError) {
                     callback.failer()
                 }
 
-                override fun success(result: Result<FeedGetData>?, arg1: Response) {
-                    if (result != null && result.isOk) {
+                override fun success(apiResponse: ApiResponse<FeedGetData>?, arg1: Response) {
+                    if (apiResponse != null && apiResponse.isOk) {
                         list.addAll( //
                             fromPostDTOList(
-                                result.data!!.list,  //
-                                result.data!!.userMap,  //
-                                result.data!!.imageMap,  //
-                                result.data!!.videoMap,  //
-                                result.data!!.commentCountMap,  //
-                                result.data!!.likeCountMap
+                                apiResponse.data!!.list,  //
+                                apiResponse.data!!.userMap,  //
+                                apiResponse.data!!.imageMap,  //
+                                apiResponse.data!!.videoMap,  //
+                                apiResponse.data!!.commentCountMap,  //
+                                apiResponse.data!!.likeCountMap
                             )
                         )
                         callback.success(list)
-                        cursorId = result.data!!.nextCursorId
+                        cursorId = apiResponse.data!!.nextCursorId
                         if (TextUtils.isEmpty(cursorId)) {
                             callback.nomore()
                         }

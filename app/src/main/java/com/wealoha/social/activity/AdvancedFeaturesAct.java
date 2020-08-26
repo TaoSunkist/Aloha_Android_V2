@@ -19,13 +19,13 @@ import com.wealoha.social.AsyncLoader;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.PromotionGetData;
 import com.wealoha.social.utils.FontUtil;
 import com.wealoha.social.utils.FontUtil.Font;
 import com.wealoha.social.utils.ToastUtil;
 
-public class AdvancedFeaturesAct extends BaseFragAct implements LoaderManager.LoaderCallbacks<Result<PromotionGetData>> {
+public class AdvancedFeaturesAct extends BaseFragAct implements LoaderManager.LoaderCallbacks<ApiResponse<PromotionGetData>> {
 
 	@Inject
 	ServerApi userPromotionService;
@@ -96,14 +96,14 @@ public class AdvancedFeaturesAct extends BaseFragAct implements LoaderManager.Lo
 	}
 
 	@Override
-	public Loader<Result<PromotionGetData>> onCreateLoader(int i, Bundle bundle) {
+	public Loader<ApiResponse<PromotionGetData>> onCreateLoader(int i, Bundle bundle) {
 
 		Log.d(TAG, "onCreateLoader....");
 		if (i == REQUEST_CODE_CODE_LOAD) {
-			return new AsyncLoader<Result<PromotionGetData>>(this) {
+			return new AsyncLoader<ApiResponse<PromotionGetData>>(this) {
 
 				@Override
-				public Result<PromotionGetData> loadInBackground() {
+				public ApiResponse<PromotionGetData> loadInBackground() {
 					try {
 						return userPromotionService.get();
 					} catch (Exception e) {
@@ -177,15 +177,15 @@ public class AdvancedFeaturesAct extends BaseFragAct implements LoaderManager.Lo
 	}
 
 	@Override
-	public void onLoadFinished(Loader<Result<PromotionGetData>> resultLoader, Result<PromotionGetData> result) {
-		if (result == null) {
+	public void onLoadFinished(Loader<ApiResponse<PromotionGetData>> resultLoader, ApiResponse<PromotionGetData> apiResponse) {
+		if (apiResponse == null) {
 			return;
 		}
 		int loaderId = resultLoader.getId();
 
 		if (loaderId == REQUEST_CODE_CODE_LOAD) {
-			PromotionGetData r = (PromotionGetData) result.getData();
-			if (result.isOk()) {
+			PromotionGetData r = (PromotionGetData) apiResponse.getData();
+			if (apiResponse.isOk()) {
 				updateData(r);
 			} else {
 				ToastUtil.shortToast(this, getString(R.string.network_error));
@@ -194,7 +194,7 @@ public class AdvancedFeaturesAct extends BaseFragAct implements LoaderManager.Lo
 	}
 
 	@Override
-	public void onLoaderReset(Loader<Result<PromotionGetData>> resultLoader) {
+	public void onLoaderReset(Loader<ApiResponse<PromotionGetData>> resultLoader) {
 
 	}
 

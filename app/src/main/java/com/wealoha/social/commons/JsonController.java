@@ -6,7 +6,7 @@ import java.util.HashMap;
 import javax.inject.Inject;
 
 import com.google.gson.Gson;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.message.Message;
 import com.wealoha.social.inject.Injector;
@@ -27,11 +27,11 @@ public class JsonController {
 		return mJsonController;
 	}
 
-	public <T extends ResultData> Result<T> parseJsonEx(String jsonData, Type typeOfT) {
+	public <T extends ResultData> ApiResponse<T> parseJsonEx(String jsonData, Type typeOfT) {
 		return gson.fromJson(jsonData, typeOfT);
 	}
 
-	public static <T extends ResultData> Result<T> parseJson(String jsonData, Type typeOfT) {
+	public static <T extends ResultData> ApiResponse<T> parseJson(String jsonData, Type typeOfT) {
 		Gson gson = new Gson();
 		return gson.fromJson(jsonData, typeOfT);
 	}

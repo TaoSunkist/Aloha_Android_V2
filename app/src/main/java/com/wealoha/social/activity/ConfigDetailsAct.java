@@ -60,7 +60,7 @@ import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.AuthData;
 import com.wealoha.social.beans.ImageUploadResult;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.ProfileData;
@@ -90,7 +90,7 @@ import com.wealoha.social.view.custom.dialog.TimePickerDialog;
  * @see
  * @since
  */
-public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Result<ProfileData>> {
+public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<ApiResponse<ProfileData>> {
 
     public static final String TAG = ConfigDetailsAct.class.getSimpleName();
     /**
@@ -594,28 +594,28 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Res
 
         // 为了和ios兼容，使用『-』拼起来
         String selfPurpose = StringUtil.join("-", user.getSelfPurposes());
-        userService.reqAlertUserInfo(user.getName(), user.getBirthday(), user.getHeight(), user.getWeight(), user.getSelfTag(), user.getRegionCode(), selfPurpose, user.getAvatarImageId(), user.getSummary(), new Callback<Result<AuthData>>() {
+        userService.reqAlertUserInfo(user.getName(), user.getBirthday(), user.getHeight(), user.getWeight(), user.getSelfTag(), user.getRegionCode(), selfPurpose, user.getAvatarImageId(), user.getSummary(), new Callback<ApiResponse<AuthData>>() {
 
             @Override
-            public void success(Result<AuthData> result, Response arg1) {
+            public void success(ApiResponse<AuthData> apiResponse, Response arg1) {
                 mLoadingDialog.dismiss();
-                if (result == null) {
+                if (apiResponse == null) {
                     XL.d(TAG, "连接服务器失败");
                     ToastUtil.longToast(mContext, getString(R.string.network_error));
                     return;
                 }
-                if (result.isOk()) {
+                if (apiResponse.isOk()) {
                     // Log.i("CONFIG_USER", "user:" + result.getData().user);
                     ToastUtil.shortToast(mContext, getString(R.string.successfully_saved));
-                    contextUtil.setCurrentUser(result.getData().getUser());
+                    contextUtil.setCurrentUser(apiResponse.getData().getUser());
                     // Log.i("CONFIG_USER", "user current:" +
                     // contextUtil.getCurrentUser());
                     isRefreshHeadIcon = true;
                     setResult();
                     finish();
-                } else if (result.getData().getError() == ResultData.ERROR_USERNAME_USED) {
+                } else if (apiResponse.getData().getError() == ResultData.ERROR_USERNAME_USED) {
                     ToastUtil.shortToast(mContext, getString(R.string.username_unavailable));
-                } else if (result.getData().getError() == ResultData.ERROR_INVALID_SUMMARY) {
+                } else if (apiResponse.getData().getError() == ResultData.ERROR_INVALID_SUMMARY) {
                     ToastUtil.shortToast(mContext, getString(R.string.username_unavailable));
                 }
             }
@@ -843,7 +843,7 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Res
         }
         mLoadingDialog.show();
         TypedFile usericon = new TypedFile("application/octet-stream", file);
-        userService.sendSingleFeed(usericon, new Callback<Result<ImageUploadResult>>() {
+        userService.sendSingleFeed(usericon, new Callback<ApiResponse<ImageUploadResult>>() {
 
             @Override
             public void failure(RetrofitError arg0) {
@@ -855,10 +855,10 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Res
             }
 
             @Override
-            public void success(Result<ImageUploadResult> result, Response arg1) {
+            public void success(ApiResponse<ImageUploadResult> apiResponse, Response arg1) {
                 mLoadingDialog.dismiss();
-                if (result != null && result.isOk()) {
-                    mImgid = result.getData().imageId;
+                if (apiResponse != null && apiResponse.isOk()) {
+                    mImgid = apiResponse.getData().imageId;
                     mHandler.sendMessage(sendMsgToHandler(GlobalConstants.AppConstact.DISPLAY_HAND_PIC, path));
                     setResult();
                 } else {
@@ -885,14 +885,14 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Res
     }
 
     @Override
-    public Loader<Result<ProfileData>> onCreateLoader(int id, Bundle args) {
+    public Loader<ApiResponse<ProfileData>> onCreateLoader(int id, Bundle args) {
         switch (id) {
             case LOADER_GET_PROFILE:
                 mLoadingDialog.show();
-                return new AsyncLoader<Result<ProfileData>>(this) {
+                return new AsyncLoader<ApiResponse<ProfileData>>(this) {
 
                     @Override
-                    public Result<ProfileData> loadInBackground() {
+                    public ApiResponse<ProfileData> loadInBackground() {
                         try {
                             return profileService.view(contextUtil.getCurrentUser().getId());
                         } catch (Exception e) {
@@ -908,14 +908,14 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Res
     }
 
     @Override
-    public void onLoadFinished(Loader<Result<ProfileData>> loader, Result<ProfileData> result) {
+    public void onLoadFinished(Loader<ApiResponse<ProfileData>> loader, ApiResponse<ProfileData> apiResponse) {
         mLoadingDialog.hide();
-        if (result == null) {
+        if (apiResponse == null) {
             return;
         }
         switch (loader.getId()) {
             case LOADER_GET_PROFILE:
-                mUser = result.getData().user;
+                mUser = apiResponse.getData().user;
                 initData();
                 initHandler();
                 break;
@@ -928,7 +928,7 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Res
      * 当一个已创建的装载器被重置,从而使其数据无效时，此方法被调用．此回调使你能发现什么时候数据将被釋放,那时你可以釋放对它的引用
      */
     @Override
-    public void onLoaderReset(Loader<Result<ProfileData>> arg0) {
+    public void onLoaderReset(Loader<ApiResponse<ProfileData>> arg0) {
 
     }
 

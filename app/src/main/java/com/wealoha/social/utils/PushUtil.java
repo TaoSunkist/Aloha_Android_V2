@@ -9,7 +9,7 @@ import android.text.TextUtils;
 
 import com.wealoha.social.ContextConfig;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.inject.Injector;
@@ -63,11 +63,11 @@ public class PushUtil {
 
 		// TODO 改成使用正确方式去取
 		if (contextUtil.getCurrentUser() != null && pushToken != null) {
-			mMessageService.bindPushToUser(pushToken, new Callback<Result<ResultData>>() {
+			mMessageService.bindPushToUser(pushToken, new Callback<ApiResponse<ResultData>>() {
 
 				@Override
-				public void success(Result<ResultData> result, Response arg1) {
-					if (result != null && result.isOk()) {
+				public void success(ApiResponse<ResultData> apiResponse, Response arg1) {
+					if (apiResponse != null && apiResponse.isOk()) {
 						ContextConfig.getInstance().putStringWithFilename(GlobalConstants.AppConstact.TOKEN_GETUI, pushToken);
 						bindSuccess = true;
 					} else {

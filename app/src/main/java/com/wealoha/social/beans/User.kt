@@ -65,8 +65,8 @@ data class User(
             return User(
                 id = System.currentTimeMillis().toString(),
                 type = System.currentTimeMillis().toString(),
-                name = System.currentTimeMillis().toString(),
-                birthday = System.currentTimeMillis().toString(),
+                name = Fakeit.app().author(),
+                birthday = Fakeit.dateTime().dateFormatter(),
                 age = System.currentTimeMillis().toInt(),
                 height = System.currentTimeMillis().toInt(),
                 weight = System.currentTimeMillis().toInt(),

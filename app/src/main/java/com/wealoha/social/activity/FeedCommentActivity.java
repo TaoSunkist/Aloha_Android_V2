@@ -43,7 +43,7 @@ import com.wealoha.social.beans.ApiErrorCode;
 import com.wealoha.social.beans.Direct;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.IResultDataErrorCode;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.commons.GlobalConstants;
@@ -392,7 +392,7 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 			}
 		}
 		changeViewInSendTime(true);
-		mCommentService.postComment(mPost.getPostId(), replyUserId, comment, new Callback<Result<Comment2GetData>>() {
+		mCommentService.postComment(mPost.getPostId(), replyUserId, comment, new Callback<ApiResponse<Comment2GetData>>() {
 
 			@Override
 			public void failure(RetrofitError arg0) {
@@ -400,25 +400,25 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 			}
 
 			@Override
-			public void success(Result<Comment2GetData> result, Response response) {
+			public void success(ApiResponse<Comment2GetData> apiResponse, Response response) {
 				changeViewInSendTime(false);
 				if (isFinishing()) {
 					return;
 				}
-				if (result != null) {
-					if (result.isOk()) {
+				if (apiResponse != null) {
+					if (apiResponse.isOk()) {
 						mContentEdit.setText("");// 重置
 						mContentEdit.setHint(R.string.leave_hint);
 						mContentEdit.setTag(null);
 						UiUtils.hideKeyBoard(FeedCommentActivity.this);
 
-						List<PostComment> postcommentlist = mComment2Service.trans(result.getData());
+						List<PostComment> postcommentlist = mComment2Service.trans(apiResponse.getData());
 						mFeedCommentAdapter.appendListItem(Direct.Late, postcommentlist);
 
 						mContentListView.smoothScrollToPosition(mFeedCommentAdapter.getCount() - 1);
-					} else if (result.getData().getError() == IResultDataErrorCode.ERROR_INVALID_COMMENT) {
+					} else if (apiResponse.getData().getError() == IResultDataErrorCode.ERROR_INVALID_COMMENT) {
 						ToastUtil.shortToast(FeedCommentActivity.this, getString(R.string.comment_has_illegalword));
-					} else if (result.getData().getError() == IResultDataErrorCode.ERROR_BLOCK_BY_OTHER) {
+					} else if (apiResponse.getData().getError() == IResultDataErrorCode.ERROR_BLOCK_BY_OTHER) {
 						ToastUtil.shortToastCenter(FeedCommentActivity.this, getString(R.string.otherside_black_current_user));
 					} else {
 						ToastUtil.shortToastCenter(FeedCommentActivity.this, getString(R.string.Unkown_Error));
@@ -460,11 +460,11 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 	}
 
 	private void deleteComment(final String commentId) {
-		mCommentService.deleteComment(mPost != null ? mPost.getPostId() : "", commentId, new Callback<Result<ResultData>>() {
+		mCommentService.deleteComment(mPost != null ? mPost.getPostId() : "", commentId, new Callback<ApiResponse<ResultData>>() {
 
 			@Override
-			public void success(Result<ResultData> result, Response arg1) {
-				if (result != null && result.isOk()) {
+			public void success(ApiResponse<ResultData> apiResponse, Response arg1) {
+				if (apiResponse != null && apiResponse.isOk()) {
 					mFeedCommentAdapter.removeItem(removePosition);
 					return;
 				}

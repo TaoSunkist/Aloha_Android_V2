@@ -54,7 +54,7 @@ import com.wealoha.social.adapter.ProfileListAdapter.ViewType;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Feed;
 import com.wealoha.social.beans.FeedResult;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.ProfileData;
 import com.wealoha.social.commons.GlobalConstants;
@@ -69,7 +69,7 @@ import com.wealoha.social.utils.XL;
 import com.wealoha.social.view.custom.dialog.ReportBlackAlohaPopup;
 import com.wealoha.social.view.custom.listitem.ProfileHeaderHolder;
 
-public class ProfileTestFragment extends BaseFragment implements OnClickListener, LoaderCallbacks<Result<ProfileData>>, SwipeRefreshLayout.OnRefreshListener, ReportBlackAlohaPopup.RefreshData, OnScrollListener {
+public class ProfileTestFragment extends BaseFragment implements OnClickListener, LoaderCallbacks<ApiResponse<ProfileData>>, SwipeRefreshLayout.OnRefreshListener, ReportBlackAlohaPopup.RefreshData, OnScrollListener {
 
     @Inject
     RegionNodeUtil regionNodeUtil;
@@ -378,31 +378,31 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
         }
 
         XL.i("CURSOR_TEST", "from:" + from);
-        mFeedService.userFeed(getUser().getId(), mCursor, mCount, new Callback<Result<FeedResult>>() {
+        mFeedService.userFeed(getUser().getId(), mCursor, mCount, new Callback<ApiResponse<FeedResult>>() {
 
             @Override
-            public void success(Result<FeedResult> result, Response arg1) {
+            public void success(ApiResponse<FeedResult> apiResponse, Response arg1) {
 
-                if (result != null && result.isOk()) {
+                if (apiResponse != null && apiResponse.isOk()) {
                     // XL.d("mFeedService", mResult)
-                    result.getData().resetFeed(currentUser);
+                    apiResponse.getData().resetFeed(currentUser);
                     if (firstPage) {
-                        mResult = result.getData();
-                        profileAdapter.notifyTopDataSetChanged(result.getData());
+                        mResult = apiResponse.getData();
+                        profileAdapter.notifyTopDataSetChanged(apiResponse.getData());
                         // 允許下拉刷新
                         // scrollLoadMore = true;
                         firstPage = false;
                     } else {
-                        mResult.getCommentCountMap().putAll(result.getData().getCommentCountMap());
-                        mResult.getImageMap().putAll(result.getData().getImageMap());
-                        mResult.getLikeCountMap().putAll(result.getData().getLikeCountMap());
-                        mResult.getUserMap().putAll(result.getData().getUserMap());
-                        mResult.getList().addAll(result.getData().getList());
+                        mResult.getCommentCountMap().putAll(apiResponse.getData().getCommentCountMap());
+                        mResult.getImageMap().putAll(apiResponse.getData().getImageMap());
+                        mResult.getLikeCountMap().putAll(apiResponse.getData().getLikeCountMap());
+                        mResult.getUserMap().putAll(apiResponse.getData().getUserMap());
+                        mResult.getList().addAll(apiResponse.getData().getList());
                         // mResult.videoMap.putAll(result.getData().getVideoMap());
-                        profileAdapter.notifyDataSetChanged(result.getData());
+                        profileAdapter.notifyDataSetChanged(apiResponse.getData());
                     }
                     XL.i("CURSOR_TEST", "current:" + mCursor);
-                    mCursor = result.getData().getNextCursorId();
+                    mCursor = apiResponse.getData().getNextCursorId();
                     XL.i("CURSOR_TEST", "next:" + mCursor);
                 }
                 feedLoading = false;
@@ -464,11 +464,11 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
         }
     }
 
-    private AsyncLoader<Result<ProfileData>> loaderWapper(final String userId) {
-        return new AsyncLoader<Result<ProfileData>>(context) {
+    private AsyncLoader<ApiResponse<ProfileData>> loaderWapper(final String userId) {
+        return new AsyncLoader<ApiResponse<ProfileData>>(context) {
 
             @Override
-            public Result<ProfileData> loadInBackground() {
+            public ApiResponse<ProfileData> loadInBackground() {
                 try {
                     return profileService.view(userId);
                 } catch (Exception e) {
@@ -480,7 +480,7 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
     }
 
     @Override
-    public Loader<Result<ProfileData>> onCreateLoader(int id, Bundle bundle) {
+    public Loader<ApiResponse<ProfileData>> onCreateLoader(int id, Bundle bundle) {
         final String userId = bundle.getString("userId");
         if (id == LOADER_REFRESH_ONRESUME || id == LOADER_REFRESH) {
             return loaderWapper(userId);
@@ -489,19 +489,19 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
     }
 
     @Override
-    public void onLoadFinished(Loader<Result<ProfileData>> loader, Result<ProfileData> result) {
-        if (result == null) {
+    public void onLoadFinished(Loader<ApiResponse<ProfileData>> loader, ApiResponse<ProfileData> apiResponse) {
+        if (apiResponse == null) {
             refreshLayout.setRefreshing(false);
             Toast.makeText(context, getResources().getString(R.string.network_error), Toast.LENGTH_LONG).show();
             return;
         }
 
         if (loader.getId() == LOADER_REFRESH_ONRESUME) {
-            if (result.getData() != null && result.getData().user != null) {
-                if (result.getData().user.getMe()) {
-                    contextUtil.setCurrentUser(result.getData().user);
+            if (apiResponse.getData() != null && apiResponse.getData().user != null) {
+                if (apiResponse.getData().user.getMe()) {
+                    contextUtil.setCurrentUser(apiResponse.getData().user);
                 }
-                currentUser = result.getData().user;
+                currentUser = apiResponse.getData().user;
                 // 更新profile header
                 if (profileHeader != null) {
                     profileHeader.refresh(getUser());
@@ -511,11 +511,11 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
             // ProfileHeaderHolder().getView(profileAdapter,
             // result.getData().user, mIsMe));
         } else if (loader.getId() == LOADER_REFRESH) {
-            if (result.getData() != null && result.getData().user != null) {
-                if (result.getData().user.getMe()) {
-                    contextUtil.setCurrentUser(result.getData().user);
+            if (apiResponse.getData() != null && apiResponse.getData().user != null) {
+                if (apiResponse.getData().user.getMe()) {
+                    contextUtil.setCurrentUser(apiResponse.getData().user);
                 }
-                currentUser = result.getData().user;
+                currentUser = apiResponse.getData().user;
                 // 更新profile header
                 if (profileHeader != null) {
                     profileHeader.refreshExceptIcon(getUser());
@@ -546,7 +546,7 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
     }
 
     @Override
-    public void onLoaderReset(Loader<Result<ProfileData>> loader) {
+    public void onLoaderReset(Loader<ApiResponse<ProfileData>> loader) {
     }
 
     /**

@@ -14,7 +14,7 @@ import javax.inject.Inject;
 
 import org.apache.commons.collections4.MapUtils;
 
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.common.ApiEndpointData;
 import com.wealoha.social.api.ConstantsService;
 import com.wealoha.social.commons.GlobalConstants;
@@ -85,9 +85,9 @@ public class ApiEndpointSelector {
 					XL.i(TAG, "尝试使用'" + host + "'获取ip..");
 					log("尝试使用'" + host + "'获取ip..", null);
 					try {
-						Result<ApiEndpointData> result = constantsService.apiEndpoing();
-						if (result != null) {
-							if (result.isOk()) {
+						ApiResponse<ApiEndpointData> apiResponse = constantsService.apiEndpoing();
+						if (apiResponse != null) {
+							if (apiResponse.isOk()) {
 								if (i == 0) {
 									// 如果第一个能用，不再修改
 									XL.i(TAG, "使用默认IP: " + host);
@@ -97,7 +97,7 @@ public class ApiEndpointSelector {
 									return;
 								}
 
-								ApiEndpointData data = result.getData();
+								ApiEndpointData data = apiResponse.getData();
 								if (data.ip != null && data.ip.size() > 0) {
 									for (String ip : data.ip) {
 										XL.i(TAG, "测试'" + host + "'返回的ip'" + ip + "'..");
@@ -137,10 +137,10 @@ public class ApiEndpointSelector {
 			public void run() {
 
 				try {
-					Result<ApiEndpointData> result = constantsService.apiEndpoing();
-					if (result != null) {
-						if (result.isOk()) {
-							ApiEndpointData data = result.getData();
+					ApiResponse<ApiEndpointData> apiResponse = constantsService.apiEndpoing();
+					if (apiResponse != null) {
+						if (apiResponse.isOk()) {
+							ApiEndpointData data = apiResponse.getData();
 							testImageEndpoint(data.imageTestUrlMap);
 						}
 					}
@@ -189,8 +189,8 @@ public class ApiEndpointSelector {
 		try {
 			apiEndpoint.setEndpoint("http://" + ip);
 
-			Result<ApiEndpointData> result = constantsService.apiEndpoing();
-			return result != null && result.isOk();
+			ApiResponse<ApiEndpointData> apiResponse = constantsService.apiEndpoing();
+			return apiResponse != null && apiResponse.isOk();
 		} catch (Throwable e) {
 			XL.w(TAG, "测试ip失败: " + ip, e);
 			log("测试ip失败: " + ip, e);

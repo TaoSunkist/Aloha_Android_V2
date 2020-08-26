@@ -43,7 +43,7 @@ import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.ShareApp;
 import com.wealoha.social.beans.ImageUploadResult;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.PromotionGetData;
 import com.wealoha.social.callback.CallbackImpl;
 import com.wealoha.social.commons.GlobalConstants;
@@ -343,7 +343,7 @@ public class ShareDialogFragment extends Fragment implements IWeiboHandler.Respo
 						}
 						// 上传图片到服务器
 						File shareFile = new File(string);
-						mUserService.sendSingleFeed(new TypedFile("application/octet-stream", shareFile), new Callback<Result<ImageUploadResult>>() {
+						mUserService.sendSingleFeed(new TypedFile("application/octet-stream", shareFile), new Callback<ApiResponse<ImageUploadResult>>() {
 
 							@Override
 							public void failure(RetrofitError arg0) {
@@ -351,9 +351,9 @@ public class ShareDialogFragment extends Fragment implements IWeiboHandler.Respo
 							}
 
 							@Override
-							public void success(Result<ImageUploadResult> result, Response arg1) {
+							public void success(ApiResponse<ImageUploadResult> apiResponse, Response arg1) {
 								popup.hide();
-								if (result != null && result.isOk()) {
+								if (apiResponse != null && apiResponse.isOk()) {
 								}
 							}
 						});

@@ -5,7 +5,7 @@ import com.wealoha.social.AppApplication
 import com.wealoha.social.api.BaseService.ServiceResultCallback
 import com.wealoha.social.beans.HashTag
 import com.wealoha.social.beans.HashTagDTO
-import com.wealoha.social.beans.Result
+import com.wealoha.social.beans.ApiResponse
 import com.wealoha.social.beans.TopicData
 import com.wealoha.social.inject.Injector
 import com.wealoha.social.utils.AMapUtil
@@ -41,9 +41,9 @@ class TopicService : BaseService<HashTagDTO?> {
         longitude: Double?,
         callback: ServiceResultCallback<HashTag?>?
     ) {
-        topicAPI!!.getTopic(latitude, longitude, object : Callback<Result<TopicData>> {
-            override fun success(result: Result<TopicData>, arg1: Response) {
-                transHashTagDTO2HashTag(result.data!!.tag)
+        topicAPI!!.getTopic(latitude, longitude, object : Callback<ApiResponse<TopicData>> {
+            override fun success(apiResponse: ApiResponse<TopicData>, arg1: Response) {
+                transHashTagDTO2HashTag(apiResponse.data!!.tag)
                 // callback.
             }
 

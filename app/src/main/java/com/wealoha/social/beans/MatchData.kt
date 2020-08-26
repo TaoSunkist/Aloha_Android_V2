@@ -1,5 +1,6 @@
 package com.wealoha.social.beans
 
+import com.mooveit.library.Fakeit
 import com.wealoha.social.beans.imagemap.HasImageMap
 import java.io.Serializable
 
@@ -22,11 +23,34 @@ class MatchData(
 
     /** 可用的重置配额次数  */
     var quotaReset: Int = 0,
-    override var imageMap: Map<String, Image>? = null,
-    var recommendSourceMap: Map<String, String>? = null
+    override var imageMap: Map<String, Image> = hashMapOf(),
+    var recommendSourceMap: Map<String, String> = hashMapOf()
 ) : ResultData(), Serializable, HasImageMap {
 
     companion object {
+        fun fake(): MatchData {
+
+            val userList = arrayListOf<User>()
+            val imageMap = hashMapOf<String, Image>()
+            val recommendSourceMap = hashMapOf<String, String>()
+
+            (0..20).forEach {
+                val user = User.fake()
+                userList.add(user)
+                imageMap.put(user.avatarImageId, Image.fake())
+                recommendSourceMap.put(user.id, Fakeit.book().title())
+            }
+
+            return MatchData(
+                quotaDurationSeconds = listOf(15, 30, 45, 60).random(),
+                quotaResetSeconds = listOf(5, 10, 15).random(),
+                quotaReset = (0..3).random(),
+                list = userList,
+                imageMap = imageMap,
+                recommendSourceMap = recommendSourceMap
+            )
+        }
+
         private const val serialVersionUID = -7473243341042126058L
 
         @kotlin.jvm.JvmField

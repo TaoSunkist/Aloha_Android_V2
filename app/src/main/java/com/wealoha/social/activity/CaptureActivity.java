@@ -453,18 +453,18 @@ public final class CaptureActivity extends BaseFragAct implements SurfaceHolder.
 					if (mLoadingDialog != null) {
 						mLoadingDialog.show();
 					}
-					mProfileService.getUserProfile(userId, new Callback<com.wealoha.social.beans.Result<ProfileData>>() {
+					mProfileService.getUserProfile(userId, new Callback<com.wealoha.social.beans.ApiResponse<ProfileData>>() {
 
 						@Override
-						public void success(com.wealoha.social.beans.Result<ProfileData> result, Response arg1) {
+						public void success(com.wealoha.social.beans.ApiResponse<ProfileData> apiResponse, Response arg1) {
 							mLoadingDialog.dismiss();
-							if (result == null) {
+							if (apiResponse == null) {
 								return;
 							}
-							if (result.isOk()) {
+							if (apiResponse.isOk()) {
 								Bundle bundle = new Bundle();
-								result.getData().user.setMe(false);
-								bundle.putParcelable(User.TAG, result.getData().user);
+								apiResponse.getData().user.setMe(false);
+								bundle.putParcelable(User.TAG, apiResponse.getData().user);
 								bundle.putString("refer_key", GlobalConstants.WhereIsComeFrom.SCANNER_TO_PROFILE);
 								startFragment(Profile2Fragment.class, bundle, true);
 								finish();

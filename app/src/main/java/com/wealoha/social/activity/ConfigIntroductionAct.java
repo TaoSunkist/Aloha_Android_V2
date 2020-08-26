@@ -26,7 +26,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ProfileData;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.JsonController;
@@ -138,18 +138,18 @@ public class ConfigIntroductionAct extends BaseFragAct implements OnClickListene
 				if (arg0 == null) {
 					return;
 				}
-				Result<ProfileData> result = JsonController.parseJson(arg0.result, new TypeToken<Result<ProfileData>>() {
+				ApiResponse<ProfileData> apiResponse = JsonController.parseJson(arg0.result, new TypeToken<ApiResponse<ProfileData>>() {
 				}.getType());
-				if (result.isOk()) {
+				if (apiResponse.isOk()) {
 					ToastUtil.longToast(ConfigIntroductionAct.this, getString(R.string.successfully_saved));
-					contextUtil.setCurrentUser(result.getData().user);
+					contextUtil.setCurrentUser(apiResponse.getData().user);
 					Intent intent = new Intent();
 					intent.putExtra("introduction", mIntroductionContent);
 					setResult(FLAG, intent);
 					finish();
-				} else if (result.getData().getError() == 200503) {
+				} else if (apiResponse.getData().getError() == 200503) {
 					ToastUtil.longToast(ConfigIntroductionAct.this, getString(R.string.username_unavailable));
-				} else if (result.getData().getError() == 200522) {
+				} else if (apiResponse.getData().getError() == 200522) {
 					ToastUtil.longToast(ConfigIntroductionAct.this, getString(R.string.intro_has_illegalword));
 				} else {
 					ToastUtil.longToast(ConfigIntroductionAct.this, getString(R.string.Unkown_Error));

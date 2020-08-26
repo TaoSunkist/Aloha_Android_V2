@@ -49,7 +49,7 @@ import com.wealoha.social.R;
 import com.wealoha.social.activity.MainAct;
 import com.wealoha.social.adapter.ChatListAdapter;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.message.InboxSession;
 import com.wealoha.social.beans.message.InboxSessionResult;
@@ -82,7 +82,7 @@ import com.wealoha.social.view.custom.dialog.ListItemDialog.ListItemType;
  * @see
  * @since
  */
-public class ChatFragment extends BaseFragment implements ListItemCallback, OnItemClickListener, LoaderCallbacks<Result<InboxSessionResult>>, SmsNoticeCallBack {
+public class ChatFragment extends BaseFragment implements ListItemCallback, OnItemClickListener, LoaderCallbacks<ApiResponse<InboxSessionResult>>, SmsNoticeCallBack {
 
     public static final String TAG = ChatFragment.class.getSimpleName();
     public static final int DELETE_SESSION_SUCCESS = 100;
@@ -151,9 +151,9 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
 
                 @Override
                 public void onSuccess(ResponseInfo<String> arg0) {
-                    Result<ResultData> result = JsonController.parseJson(arg0.result, new TypeToken<Result<ResultData>>() {
+                    ApiResponse<ResultData> apiResponse = JsonController.parseJson(arg0.result, new TypeToken<ApiResponse<ResultData>>() {
                     }.getType());
-                    if (result != null && result.isOk()) {
+                    if (apiResponse != null && apiResponse.isOk()) {
                         mHandler.sendEmptyMessage(DELETE_SESSION_SUCCESS);
                         InboxSession s = new InboxSession();
                         s.id = sessionId;
@@ -313,14 +313,14 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
     }
 
     @Override
-    public Loader<Result<InboxSessionResult>> onCreateLoader(int id, Bundle args) {
+    public Loader<ApiResponse<InboxSessionResult>> onCreateLoader(int id, Bundle args) {
         Log.i("CHAT_LOAD", "CREAT-----");
         switch (id) {
             case LOADER_GET_SESSION_LIST:
-                return new AsyncLoader<Result<InboxSessionResult>>(context) {
+                return new AsyncLoader<ApiResponse<InboxSessionResult>>(context) {
 
                     @Override
-                    public Result<InboxSessionResult> loadInBackground() {
+                    public ApiResponse<InboxSessionResult> loadInBackground() {
                         try {
                             nextPageLoading = true;
                             return messageService.sessions(mNextCursorId, 10);
@@ -336,8 +336,8 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
     }
 
     @Override
-    public void onLoadFinished(Loader<Result<InboxSessionResult>> loader, Result<InboxSessionResult> result) {
-        if (result == null) {
+    public void onLoadFinished(Loader<ApiResponse<InboxSessionResult>> loader, ApiResponse<InboxSessionResult> apiResponse) {
+        if (apiResponse == null) {
             return;
         }
         switch (loader.getId()) {
@@ -345,14 +345,14 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
                 nextPageLoading = false;
                 if (mNextCursorId == null) {
                     // 缓存第一页
-                    save(CacheKey.FirstPageInboxSession, result.getData());
-                    inboxSessions = result.getData().getList();
-                    newMessagMap = (Map<String, Message>) result.getData().getNewMessageMap();
+                    save(CacheKey.FirstPageInboxSession, apiResponse.getData());
+                    inboxSessions = apiResponse.getData().getList();
+                    newMessagMap = (Map<String, Message>) apiResponse.getData().getNewMessageMap();
                 } else {
-                    inboxSessions.addAll(result.getData().getList());
-                    newMessagMap.putAll(result.getData().getNewMessageMap());
+                    inboxSessions.addAll(apiResponse.getData().getList());
+                    newMessagMap.putAll(apiResponse.getData().getNewMessageMap());
                 }
-                mNextCursorId = result.getData().getNextCursorId();
+                mNextCursorId = apiResponse.getData().getNextCursorId();
                 if (mNextCursorId == null) {
                     // 没有下一页了
                     hasNextPage = false;
@@ -382,7 +382,7 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
     }
 
     @Override
-    public void onLoaderReset(Loader<Result<InboxSessionResult>> arg0) {
+    public void onLoaderReset(Loader<ApiResponse<InboxSessionResult>> arg0) {
         nextPageLoading = false;
     }
 
@@ -512,9 +512,9 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
 
             @Override
             public void onSuccess(ResponseInfo<String> arg0) {
-                Result<ResultData> result = JsonController.parseJson(arg0.result, new TypeToken<Result<ResultData>>() {
+                ApiResponse<ResultData> apiResponse = JsonController.parseJson(arg0.result, new TypeToken<ApiResponse<ResultData>>() {
                 }.getType());
-                if (result != null && result.isOk()) {
+                if (apiResponse != null && apiResponse.isOk()) {
                     mHandler.sendEmptyMessage(DELETE_SESSION_SUCCESS);
                     InboxSession s = new InboxSession();
                     s.id = sessionId;
@@ -536,12 +536,12 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
             String action = intent.getAction();
             if (action.equals(Push2Type.InboxMessageNew.getType())) {
                 String sessionId = intent.getStringExtra(InboxMessageNewPush.INBOX_MSG_SESSION_ID);
-                messageService.getInboxSession(sessionId, new Callback<Result<InboxSessionResult>>() {
+                messageService.getInboxSession(sessionId, new Callback<ApiResponse<InboxSessionResult>>() {
 
                     @Override
-                    public void success(Result<InboxSessionResult> result, Response arg1) {
-                        if (result != null && result.isOk() && result.getData().getList() != null && result.getData().getList().size() > 0) {
-                            InboxSession session = result.getData().getList().get(0);
+                    public void success(ApiResponse<InboxSessionResult> apiResponse, Response arg1) {
+                        if (apiResponse != null && apiResponse.isOk() && apiResponse.getData().getList() != null && apiResponse.getData().getList().size() > 0) {
+                            InboxSession session = apiResponse.getData().getList().get(0);
                             if (inboxSessions == null) {
                                 inboxSessions = new ArrayList<InboxSession>();
                                 newMessagMap = new HashMap<>();
@@ -555,7 +555,7 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
                                 }
                             }
                             inboxSessions.add(0, session);
-                            newMessagMap.putAll(result.getData().getNewMessageMap());
+                            newMessagMap.putAll(apiResponse.getData().getNewMessageMap());
 
                             mChatListAdapter.notifyDataChage(inboxSessions, newMessagMap);
 

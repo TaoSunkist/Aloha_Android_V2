@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.wealoha.social.R;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.UserListResult;
 import com.wealoha.social.commons.GlobalConstants;
@@ -59,9 +59,9 @@ public class SwipeMenuAdapter extends BaseAdapter {
 
     }
 
-    public void notifyDataSetChanged(Result<UserListResult> result) {
-        if (result != null && result.getData().getList().size() > 0) {
-            mUsers.addAll(result.getData().getList());
+    public void notifyDataSetChanged(ApiResponse<UserListResult> apiResponse) {
+        if (apiResponse != null && apiResponse.getData().getList().size() > 0) {
+            mUsers.addAll(apiResponse.getData().getList());
             super.notifyDataSetChanged();
         }
     }

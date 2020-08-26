@@ -35,9 +35,8 @@ import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.FeedType;
 import com.wealoha.social.beans.Post;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
-import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
@@ -1027,10 +1026,10 @@ public class PopupStore {
      * @Description: 加入黑名单
      */
     private void black(final User user) {
-        mUserService.blackUser(user.getId(), new Callback<Result<ResultData>>() {
+        mUserService.blackUser(user.getId(), new Callback<ApiResponse<ResultData>>() {
 
             @Override
-            public void success(Result<ResultData> arg0, Response arg1) {
+            public void success(ApiResponse<ResultData> arg0, Response arg1) {
                 // ToastUtil.shortToast(context, "成功加入");
                 XL.i("PopupStore", "black success");
                 user.setBlock(true);
@@ -1148,7 +1147,7 @@ public class PopupStore {
      * @Description: 移除黑名单
      */
     private void removeFromBlack(final User user) {
-        mUserService.unblock(user.getId(), new Callback<Result<ResultData>>() {
+        mUserService.unblock(user.getId(), new Callback<ApiResponse<ResultData>>() {
 
             @Override
             public void failure(RetrofitError arg0) {
@@ -1157,7 +1156,7 @@ public class PopupStore {
             }
 
             @Override
-            public void success(Result<ResultData> result, Response arg1) {
+            public void success(ApiResponse<ResultData> apiResponse, Response arg1) {
                 user.setBlock(false);
                 ToastUtil.longToast(mContext, R.string.remove_from_black_list_success);
                 XL.i(TAG, "移除黑名單成功");
@@ -1174,10 +1173,10 @@ public class PopupStore {
      * @Description: 举报用户或FEED
      */
     private void report(User user) {
-        mUserService.reportUser(user.getId(), null, new Callback<Result<ResultData>>() {
+        mUserService.reportUser(user.getId(), null, new Callback<ApiResponse<ResultData>>() {
 
             @Override
-            public void success(Result<ResultData> arg0, Response arg1) {
+            public void success(ApiResponse<ResultData> arg0, Response arg1) {
                 ToastUtil.longToast(mContext, R.string.report_inappropriate_success);
             }
 

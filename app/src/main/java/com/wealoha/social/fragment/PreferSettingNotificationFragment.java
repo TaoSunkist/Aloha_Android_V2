@@ -27,13 +27,13 @@ import butterknife.OnClick;
 import com.wealoha.social.AsyncLoader;
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.PushSettingResult;
 import com.wealoha.social.utils.FontUtil.Font;
 import com.wealoha.social.utils.ToastUtil;
 
-public class PreferSettingNotificationFragment extends BaseFragment implements LoaderManager.LoaderCallbacks<Result<PushSettingResult>>, OnClickListener, OnTouchListener {
+public class PreferSettingNotificationFragment extends BaseFragment implements LoaderManager.LoaderCallbacks<ApiResponse<PushSettingResult>>, OnClickListener, OnTouchListener {
 
 	@Inject
 	ServerApi settingService;
@@ -152,12 +152,12 @@ public class PreferSettingNotificationFragment extends BaseFragment implements L
 	}
 
 	@Override
-	public Loader<Result<PushSettingResult>> onCreateLoader(int i, Bundle bundle) {
+	public Loader<ApiResponse<PushSettingResult>> onCreateLoader(int i, Bundle bundle) {
 		if (i == REQUEST_CODE_LOAD_SETTING) {
-			return new AsyncLoader<Result<PushSettingResult>>(context) {
+			return new AsyncLoader<ApiResponse<PushSettingResult>>(context) {
 
 				@Override
-				public Result<PushSettingResult> loadInBackground() {
+				public ApiResponse<PushSettingResult> loadInBackground() {
 					return settingService.getPushSetting();
 				}
 			};
@@ -447,10 +447,10 @@ public class PreferSettingNotificationFragment extends BaseFragment implements L
 	}
 
 	private void savePraiseAndCommentSetting(String like, String comment, String tag) {
-		settingService.savePushSetting(null, null, null, like, comment, tag, new Callback<Result<ResultData>>() {
+		settingService.savePushSetting(null, null, null, like, comment, tag, new Callback<ApiResponse<ResultData>>() {
 
 			@Override
-			public void success(Result<ResultData> arg0, Response arg1) {
+			public void success(ApiResponse<ResultData> arg0, Response arg1) {
 				// ToastUtil.longToast(context, R.string.successfully_saved);
 				getLoaderManager().restartLoader(REQUEST_CODE_LOAD_SETTING, null, PreferSettingNotificationFragment.this);
 			}
@@ -463,10 +463,10 @@ public class PreferSettingNotificationFragment extends BaseFragment implements L
 	}
 
 	private void saveAlohaPushSetting(String off) {
-		settingService.savePushSetting(off, new Callback<Result<ResultData>>() {
+		settingService.savePushSetting(off, new Callback<ApiResponse<ResultData>>() {
 
 			@Override
-			public void success(Result<ResultData> arg0, Response arg1) {
+			public void success(ApiResponse<ResultData> arg0, Response arg1) {
 				// ToastUtil.longToast(context, R.string.successfully_saved);
 				getLoaderManager().restartLoader(REQUEST_CODE_LOAD_SETTING, null, PreferSettingNotificationFragment.this);
 			}
@@ -479,21 +479,21 @@ public class PreferSettingNotificationFragment extends BaseFragment implements L
 	}
 
 	@Override
-	public void onLoadFinished(Loader<Result<PushSettingResult>> resultLoader, Result<PushSettingResult> result) {
-		if (result == null || !result.isOk()) {
+	public void onLoadFinished(Loader<ApiResponse<PushSettingResult>> resultLoader, ApiResponse<PushSettingResult> apiResponse) {
+		if (apiResponse == null || !apiResponse.isOk()) {
 			return;
 		}
 		int loader = resultLoader.getId();
 		if (loader == REQUEST_CODE_LOAD_SETTING) {
 			// 加载完，更新按钮状态
-			PushSettingResult r = (PushSettingResult) result.getData();
+			PushSettingResult r = (PushSettingResult) apiResponse.getData();
 			initCheckBox(r);
 		}
 
 	}
 
 	@Override
-	public void onLoaderReset(Loader<Result<PushSettingResult>> loader) {
+	public void onLoaderReset(Loader<ApiResponse<PushSettingResult>> loader) {
 
 	}
 

@@ -54,7 +54,7 @@ import com.wealoha.social.ContextConfig;
 import com.wealoha.social.R;
 import com.wealoha.social.activity.MainAct;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.commons.GlobalConstants;
@@ -87,7 +87,7 @@ import com.wealoha.social.view.custom.dialog.ListItemDialog.ListItemType;
  * @copyright wealoha.com
  * @Date:2014-10-31
  */
-public class AlohaFragment extends BaseFragment implements LoaderCallbacks<Result<ResultData>>, ListItemCallback {
+public class AlohaFragment extends BaseFragment implements LoaderCallbacks<ApiResponse<ResultData>>, ListItemCallback {
 
     public static final String TAG = AlohaFragment.class.getSimpleName();
     static public final int nope = 1111;
@@ -304,12 +304,12 @@ public class AlohaFragment extends BaseFragment implements LoaderCallbacks<Resul
      * @date:2014-10-31
      */
     void reportUser() {
-        mUserService.reportUser(user.getId(), new Callback<Result<ResultData>>() {
+        mUserService.reportUser(user.getId(), new Callback<ApiResponse<ResultData>>() {
 
             @Override
-            public void success(Result<ResultData> result, Response arg1) {
-                if (result != null) {
-                    if (result.isOk()) {
+            public void success(ApiResponse<ResultData> apiResponse, Response arg1) {
+                if (apiResponse != null) {
+                    if (apiResponse.isOk()) {
                         // 举报完同时nope掉
                         nopeOrAloha(Action.Nope);
                         // XL.d(TAG, arg0.data.toString());
@@ -511,13 +511,13 @@ public class AlohaFragment extends BaseFragment implements LoaderCallbacks<Resul
     }
 
     @Override
-    public Loader<Result<ResultData>> onCreateLoader(int loader, Bundle bundle) {
+    public Loader<ApiResponse<ResultData>> onCreateLoader(int loader, Bundle bundle) {
         final String userId = bundle.getString("userId");
         if (loader == LOADER_ALOHA) {
-            return new AsyncLoader<Result<ResultData>>(mContext) {
+            return new AsyncLoader<ApiResponse<ResultData>>(mContext) {
 
                 @Override
-                public Result<ResultData> loadInBackground() {
+                public ApiResponse<ResultData> loadInBackground() {
                     try {
 
                         return matchService.like(userId, GlobalConstants.WhereIsComeFrom.ALOHA);
@@ -528,10 +528,10 @@ public class AlohaFragment extends BaseFragment implements LoaderCallbacks<Resul
                 }
             };
         } else if (loader == LOADER_NOPE) {
-            return new AsyncLoader<Result<ResultData>>(mContext) {
+            return new AsyncLoader<ApiResponse<ResultData>>(mContext) {
 
                 @Override
-                public Result<ResultData> loadInBackground() {
+                public ApiResponse<ResultData> loadInBackground() {
                     try {
                         return matchService.dislike(userId);
                     } catch (Exception e) {
@@ -545,12 +545,12 @@ public class AlohaFragment extends BaseFragment implements LoaderCallbacks<Resul
     }
 
     @Override
-    public void onLoaderReset(Loader<Result<ResultData>> arg0) {
+    public void onLoaderReset(Loader<ApiResponse<ResultData>> arg0) {
 
     }
 
     @Override
-    public void onLoadFinished(Loader<Result<ResultData>> loader, Result<ResultData> result) {
+    public void onLoadFinished(Loader<ApiResponse<ResultData>> loader, ApiResponse<ResultData> apiResponse) {
     }
 
     private static User toUser;
@@ -724,10 +724,10 @@ public class AlohaFragment extends BaseFragment implements LoaderCallbacks<Resul
      * @Description: 举报用户或FEED
      */
     private void report(String userid) {
-        mUserService.reportUser(userid, null, new Callback<Result<ResultData>>() {
+        mUserService.reportUser(userid, null, new Callback<ApiResponse<ResultData>>() {
 
             @Override
-            public void success(Result<ResultData> arg0, Response arg1) {
+            public void success(ApiResponse<ResultData> arg0, Response arg1) {
                 ToastUtil.shortToast(AppApplication.getInstance(), R.string.report_inappropriate_success);
             }
 

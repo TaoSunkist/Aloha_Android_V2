@@ -8,7 +8,7 @@ import retrofit.client.Response;
 import android.text.TextUtils;
 
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.ui.lock.CheckPasswordView;
 import com.wealoha.social.utils.StringUtil;
@@ -32,12 +32,12 @@ public class CheckPasswordPresenter extends AbsPresenter {
 			gestureLockView.checkPasswordFaile();
 			return;
 		}
-		userAPI.verifyPassword(password, new Callback<Result<ResultData>>() {
+		userAPI.verifyPassword(password, new Callback<ApiResponse<ResultData>>() {
 
 			@Override
-			public void success(Result<ResultData> result, Response arg1) {
-				if (result != null) {
-					if (result.isOk()) {
+			public void success(ApiResponse<ResultData> apiResponse, Response arg1) {
+				if (apiResponse != null) {
+					if (apiResponse.isOk()) {
 						gestureLockView.checkPasswordSuccess();
 					} else {
 						gestureLockView.checkPasswordFaile();

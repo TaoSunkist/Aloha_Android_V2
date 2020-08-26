@@ -17,7 +17,7 @@ import butterknife.OnClick;
 
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.PromotionGetData;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.utils.ToastUtil;
@@ -57,15 +57,15 @@ public class PopularityLockFragment extends BaseFragment implements OnClickListe
 
 		switch (v.getId()) {
 		case R.id.unlock:
-			userPromotionService.get(new Callback<Result<PromotionGetData>>() {
+			userPromotionService.get(new Callback<ApiResponse<PromotionGetData>>() {
 
 				@Override
-				public void success(Result<PromotionGetData> result, Response arg1) {
-					if (result == null) {
+				public void success(ApiResponse<PromotionGetData> apiResponse, Response arg1) {
+					if (apiResponse == null) {
 						return;
 					}
-					if (result.isOk()) {
-						PromotionGetData r = (PromotionGetData) result.getData();
+					if (apiResponse.isOk()) {
+						PromotionGetData r = (PromotionGetData) apiResponse.getData();
 						Bundle bundle = new Bundle();
 						bundle.putSerializable(PromotionGetData.TAG, r);
 						startActivity(GlobalConstants.IntentAction.INTENT_URI_ADVANCEDFEATURED, bundle);

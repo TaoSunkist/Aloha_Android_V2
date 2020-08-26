@@ -27,7 +27,7 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.AuthData;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.JsonController;
 import com.wealoha.social.store.SyncEntProtocol;
@@ -147,9 +147,9 @@ public class NewPasswordAct extends BaseFragAct implements OnClickListener {
 
 			@Override
 			public void onSuccess(ResponseInfo<String> arg0) {
-				Result<AuthData> result = JsonController.parseJson(arg0.result, new TypeToken<Result<AuthData>>() {
+				ApiResponse<AuthData> apiResponse = JsonController.parseJson(arg0.result, new TypeToken<ApiResponse<AuthData>>() {
 				}.getType());
-				if (result != null && result.isOk()) {
+				if (apiResponse != null && apiResponse.isOk()) {
 					// ToastUtil.longToast(NewPasswordAct.this,
 					// R.string.signin);
 					login(newPassword);
@@ -178,18 +178,18 @@ public class NewPasswordAct extends BaseFragAct implements OnClickListener {
 			popup.show(container);
 		}
 		// showLoadingDialog(getString(R.string.being_sign_in_please_wait));
-		userService.login(mUserName, password, new Callback<Result<AuthData>>() {
+		userService.login(mUserName, password, new Callback<ApiResponse<AuthData>>() {
 
 			@Override
-			public void success(Result<AuthData> result, Response arg1) {
-				if (result != null) {
-					if (result.isOk()) {
+			public void success(ApiResponse<AuthData> apiResponse, Response arg1) {
+				if (apiResponse != null) {
+					if (apiResponse.isOk()) {
 						// TODO 需要清楚本地的其他用户数据
 						ToastUtil.shortToast(NewPasswordAct.this, getString(R.string.login_success));
-						afterMobileLoginSuccess(mUserName, result.getData().getUser(), result.getData().getT());
-					} else if (result.getData().getError() == 451) {
+						afterMobileLoginSuccess(mUserName, apiResponse.getData().getUser(), apiResponse.getData().getT());
+					} else if (apiResponse.getData().getError() == 451) {
 						ToastUtil.shortToast(NewPasswordAct.this, getString(R.string.login_proscribe));
-					} else if (result.getData().getError() == 401) {
+					} else if (apiResponse.getData().getError() == 401) {
 						ToastUtil.shortToast(NewPasswordAct.this, getString(R.string.login_failed));
 					} else {
 						ToastUtil.shortToast(NewPasswordAct.this, R.string.Unkown_Error);

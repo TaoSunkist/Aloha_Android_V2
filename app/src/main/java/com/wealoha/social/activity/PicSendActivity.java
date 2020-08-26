@@ -43,7 +43,7 @@ import com.wealoha.social.activity.TagFeedAct.TagFeedActBundleKey;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.ImageUploadResult;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.feed.UserTags;
 import com.wealoha.social.beans.Location;
@@ -358,7 +358,7 @@ public class PicSendActivity extends BaseFragAct implements OnClickListener, Lis
 				mCenterX, //
 				mCenterY, //
 				mUserids,//
-				new Callback<Result<ResultData>>() {
+				new Callback<ApiResponse<ResultData>>() {
 
 					@Override
 					public void failure(RetrofitError failureResult) {
@@ -370,17 +370,17 @@ public class PicSendActivity extends BaseFragAct implements OnClickListener, Lis
 					}
 
 					@Override
-					public void success(Result<ResultData> result, Response arg1) {
+					public void success(ApiResponse<ResultData> apiResponse, Response arg1) {
 						if (popup != null) {
 							popup.hide();
 						}
-						if (result != null && result.isOk()) {
+						if (apiResponse != null && apiResponse.isOk()) {
 							// 发布新feed，做一个标记，进入profile时要刷新profile
 							ContextConfig.getInstance().putBooleanWithFilename(GlobalConstants.GlobalCacheKeys.POST_NEW_FEED, true);
 							ToastUtil.longToast(PicSendActivity.this, getString(R.string.published_success));
 							setResult(Activity.RESULT_OK);
 							finish();
-						} else if (result.getData().getError() == 200526) {
+						} else if (apiResponse.getData().getError() == 200526) {
 							ToastUtil.longToast(PicSendActivity.this, getString(R.string.describe_has_illegalword));
 							finish();
 						} else {
@@ -395,7 +395,7 @@ public class PicSendActivity extends BaseFragAct implements OnClickListener, Lis
 			popup.show(container);
 		}
 
-		feedService.sendSingleFeed(new TypedFile("application/octet-stream", new File(mPicPath)), new Callback<Result<ImageUploadResult>>() {
+		feedService.sendSingleFeed(new TypedFile("application/octet-stream", new File(mPicPath)), new Callback<ApiResponse<ImageUploadResult>>() {
 
 			@Override
 			public void failure(RetrofitError arg0) {
@@ -407,9 +407,9 @@ public class PicSendActivity extends BaseFragAct implements OnClickListener, Lis
 			}
 
 			@Override
-			public void success(Result<ImageUploadResult> result, Response arg1) {
-				if (result != null && result.isOk()) {
-					publishFeed(result.getData().imageId);
+			public void success(ApiResponse<ImageUploadResult> apiResponse, Response arg1) {
+				if (apiResponse != null && apiResponse.isOk()) {
+					publishFeed(apiResponse.getData().imageId);
 				} else {
 					ToastUtil.longToast(PicSendActivity.this, getString(R.string.image_upload_failed));
 					setResult(GlobalConstants.AppConstact.OPEN_COMPOSE_FEED);

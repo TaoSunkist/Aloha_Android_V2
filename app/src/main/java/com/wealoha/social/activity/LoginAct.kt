@@ -18,7 +18,6 @@ import com.wealoha.social.ActivityManager
 import com.wealoha.social.BaseFragAct
 import com.wealoha.social.R
 import com.wealoha.social.api.ServerApi
-import com.wealoha.social.api.UserService
 import com.wealoha.social.api.RxUserService
 import com.wealoha.social.beans.*
 import com.wealoha.social.commons.GlobalConstants
@@ -214,15 +213,15 @@ class LoginAct : BaseFragAct(), View.OnClickListener {
     private val profeatureSetting: Unit
         private get() {
             mUserAPI!!.userMatchSetting(object :
-                Callback<Result<MatchSettingData>> {
+                Callback<ApiResponse<MatchSettingData>> {
                 override fun success(
-                    result: Result<MatchSettingData>?,
+                    apiResponse: ApiResponse<MatchSettingData>?,
                     response: Response
                 ) {
-                    if (result != null && result.isOk) {
-                        contextUtil!!.profeatureEnable = result.data!!.filterEnable
+                    if (apiResponse != null && apiResponse.isOk) {
+                        contextUtil!!.profeatureEnable = apiResponse.data!!.filterEnable
                         val regions =
-                            result.data!!.selectedRegion as ArrayList<String>?
+                            apiResponse.data!!.selectedRegion as ArrayList<String>?
                         if (regions != null && regions.size > 0) {
                             contextUtil!!.filterRegion = regions[regions.size - 1]
                         }
@@ -274,9 +273,9 @@ class LoginAct : BaseFragAct(), View.OnClickListener {
         }
         userRegisterService!!.getResetPasswordCode(
             mUserName!!,
-            object : Callback<Result<ResultData>> {
+            object : Callback<ApiResponse<ResultData>> {
                 override fun success(
-                    result: Result<ResultData>,
+                    apiResponse: ApiResponse<ResultData>,
                     response: Response
                 ) {
                     // mLoadingDialog.dismiss();
@@ -284,8 +283,8 @@ class LoginAct : BaseFragAct(), View.OnClickListener {
                     if (popup != null) {
                         popup.hide()
                     }
-                    if (result != null) {
-                        if (result.isOk) {
+                    if (apiResponse != null) {
+                        if (apiResponse.isOk) {
                             val bundle = Bundle()
                             bundle.putInt("from", 1)
                             bundle.putString(
@@ -301,14 +300,14 @@ class LoginAct : BaseFragAct(), View.OnClickListener {
                                 mContext,
                                 getString(R.string.verification_code_has_been_sent)
                             )
-                        } else if (result.status == Result.STATUS_CODE_THRESHOLD_HIT) {
+                        } else if (apiResponse.status == ApiResponse.STATUS_CODE_THRESHOLD_HIT) {
                             ToastUtil.shortToast(
                                 mContext,
                                 getString(R.string.register_frequent_request)
                             )
                             // showSingleAlohaDialog(mContext,
                             // R.string.register_frequent_request, null);
-                        } else if (result.data!!.error == IResultDataErrorCode.ERROR_USER_NOT_FOUND) {
+                        } else if (apiResponse.data!!.error == IResultDataErrorCode.ERROR_USER_NOT_FOUND) {
                             ToastUtil.shortToast(
                                 mContext,
                                 getString(R.string.register_mobile_error_noregister)

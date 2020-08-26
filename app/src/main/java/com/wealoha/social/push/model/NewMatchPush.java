@@ -20,7 +20,7 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.ContextConfig;
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ProfileData;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.interfaces.NotifyPush;
@@ -88,17 +88,17 @@ public class NewMatchPush extends BasePush implements NotifyPush<NewMatchNotific
 			noti.flags = Notification.FLAG_AUTO_CANCEL;
 			mNotificationManager.notify(noticeId++, noti);
 		} else {
-			mProfileService.getUserProfile(notification.userId, new Callback<Result<ProfileData>>() {
+			mProfileService.getUserProfile(notification.userId, new Callback<ApiResponse<ProfileData>>() {
 
 				@Override
-				public void success(Result<ProfileData> result, Response arg1) {
-					if (result == null) {
+				public void success(ApiResponse<ProfileData> apiResponse, Response arg1) {
+					if (apiResponse == null) {
 						return;
 					}
-					if (result.isOk()) {
+					if (apiResponse.isOk()) {
 						BaseFragAct act = (BaseFragAct) contextUtil.getForegroundAct();
 						if (act != null) {
-							act.showMatchPopup(result.getData().user);
+							act.showMatchPopup(apiResponse.getData().user);
 						}
 					}
 

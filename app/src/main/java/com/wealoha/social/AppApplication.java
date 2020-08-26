@@ -1,6 +1,7 @@
 package com.wealoha.social;
 
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class AppApplication extends Application implements UncaughtExceptionHand
      *
      * @deprecated
      */
-    public static List<User> mUserList;
+    public static List<User> mUserList = new ArrayList();
     public static AppApplication mInstance = new AppApplication();
     // 用户维护多个profile界面，需要手动进行维护和操作
     static public HashMap<String, BaseFragment> mFragmentMaps = new HashMap<String, BaseFragment>();
@@ -52,7 +53,7 @@ public class AppApplication extends Application implements UncaughtExceptionHand
     public static final String TAG = AppApplication.class.getSimpleName();
     public static ContextConfig config;
     public static ContextHolder contextHolder;
-    public Double[] locationXY = {null, null};
+    public Double[] locationXY = {0.0, 0.0};
 
     private ApiEndpointSelector apiEndpointSelector;
 

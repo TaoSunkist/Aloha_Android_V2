@@ -34,7 +34,7 @@ import com.wealoha.social.R;
 import com.wealoha.social.activity.FaqStatmentAct;
 import com.wealoha.social.activity.ProFeatureAct;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.instagram.InstagramResult;
 import com.wealoha.social.beans.PromotionGetData;
@@ -362,7 +362,6 @@ public class ConfigFragment extends BaseFragment implements IConfigView {
 	/***
 	 * 修改电话号码dialog
 	 * 
-	 * @param updateDetails
 	 * @return void
 	 */
 	private void changeNumberDialog() {
@@ -447,13 +446,13 @@ public class ConfigFragment extends BaseFragment implements IConfigView {
 	}
 
 	@Override
-	public Loader<Result<PromotionGetData>> onCreateLoader(int i, Bundle bundle) {
+	public Loader<ApiResponse<PromotionGetData>> onCreateLoader(int i, Bundle bundle) {
 
 		if (i == REQUEST_CODE_CODE_LOAD) {
-			return new AsyncLoader<Result<PromotionGetData>>(getActivity()) {
+			return new AsyncLoader<ApiResponse<PromotionGetData>>(getActivity()) {
 
 				@Override
-				public Result<PromotionGetData> loadInBackground() {
+				public ApiResponse<PromotionGetData> loadInBackground() {
 					try {
 						return userPromotionService.get();
 					} catch (Exception e) {
@@ -467,14 +466,14 @@ public class ConfigFragment extends BaseFragment implements IConfigView {
 	}
 
 	@Override
-	public void onLoadFinished(Loader<Result<PromotionGetData>> resultLoader, Result<PromotionGetData> result) {
-		if (result == null) {
+	public void onLoadFinished(Loader<ApiResponse<PromotionGetData>> resultLoader, ApiResponse<PromotionGetData> apiResponse) {
+		if (apiResponse == null) {
 			return;
 		}
 		int loaderId = resultLoader.getId();
 		if (loaderId == REQUEST_CODE_CODE_LOAD) {
-			PromotionGetData r = (PromotionGetData) result.getData();
-			if (result.isOk()) {
+			PromotionGetData r = (PromotionGetData) apiResponse.getData();
+			if (apiResponse.isOk()) {
 				contextUtil.setProfeatureEnable(!r.alohaGetLocked);
 				Intent intent = new Intent(getActivity(), ProFeatureAct.class);
 				intent.putExtra(PromotionGetData.TAG, r);
@@ -487,7 +486,7 @@ public class ConfigFragment extends BaseFragment implements IConfigView {
 	}
 
 	@Override
-	public void onLoaderReset(Loader<Result<PromotionGetData>> loader) {
+	public void onLoaderReset(Loader<ApiResponse<PromotionGetData>> loader) {
 	}
 
 	public void clearCache() {
@@ -570,10 +569,10 @@ public class ConfigFragment extends BaseFragment implements IConfigView {
 	}
 
 	@Override
-	public void refreshInstagramSuccess(Result<InstagramResult> result) {
-		if (result != null) {
-			if (result.isOk() && isAdded()) {
-				Map<String, Object> instagram = (Map<String, Object>) result.getData().instagram;
+	public void refreshInstagramSuccess(ApiResponse<InstagramResult> apiResponse) {
+		if (apiResponse != null) {
+			if (apiResponse.isOk() && isAdded()) {
+				Map<String, Object> instagram = (Map<String, Object>) apiResponse.getData().instagram;
 				// bundle.
 				if (instagram == null && mInstagramTv != null) {
 					instagramBundle = null;

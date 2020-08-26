@@ -46,7 +46,7 @@ import com.wealoha.social.R;
 import com.wealoha.social.adapter.ProfileListAdapter;
 import com.wealoha.social.adapter.ProfileListAdapter.ViewType;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.message.InboxSession;
@@ -536,20 +536,20 @@ public class ProfileHeaderHolder {
     ServerApi mMessageService;
 
     private void getUserSessionId(final String id) {
-        mMessageService.getInboxSession(id, new Callback<Result<InboxSessionResult>>() {
+        mMessageService.getInboxSession(id, new Callback<ApiResponse<InboxSessionResult>>() {
 
             @Override
-            public void success(Result<InboxSessionResult> result, Response arg1) {
-                if (result != null && result.isOk()) {
-                    if (result.getData().getList() != null && result.getData().getList().size() != 0) {
-                        InboxSession inboxSession = result.getData().getList().get(0);
+            public void success(ApiResponse<InboxSessionResult> apiResponse, Response arg1) {
+                if (apiResponse != null && apiResponse.isOk()) {
+                    if (apiResponse.getData().getList() != null && apiResponse.getData().getList().size() != 0) {
+                        InboxSession inboxSession = apiResponse.getData().getList().get(0);
                         Bundle inboxSessionBundle = new Bundle();
                         inboxSessionBundle.putString("sessionId", inboxSession.id);
                         if (contextUtil.getForegroundAct() != null) {
                             ((BaseFragAct) contextUtil.getForegroundAct()).startActivity(GlobalConstants.IntentAction.INTENT_URI_DIALOGUE, inboxSessionBundle);
                         }
                     } else {
-                        mMessageService.post(id, new Callback<Result<InboxSessionResult>>() {
+                        mMessageService.post(id, new Callback<ApiResponse<InboxSessionResult>>() {
 
                             @Override
                             public void failure(RetrofitError arg0) {
@@ -557,15 +557,15 @@ public class ProfileHeaderHolder {
                             }
 
                             @Override
-                            public void success(Result<InboxSessionResult> arg0, Response arg1) {
-                                mMessageService.post(id, new Callback<Result<InboxSessionResult>>() {
+                            public void success(ApiResponse<InboxSessionResult> arg0, Response arg1) {
+                                mMessageService.post(id, new Callback<ApiResponse<InboxSessionResult>>() {
 
                                     @Override
                                     public void failure(RetrofitError arg0) {
                                     }
 
                                     @Override
-                                    public void success(Result<InboxSessionResult> arg0, Response arg1) {
+                                    public void success(ApiResponse<InboxSessionResult> arg0, Response arg1) {
                                         if (arg0 != null && arg0.isOk()) {
                                             if (arg0.getData().getList() != null && arg0.getData().getList().size() != 0) {
                                                 InboxSession inboxSession = arg0.getData().getList().get(0);
@@ -675,10 +675,10 @@ public class ProfileHeaderHolder {
     }
 
     private void dislike() {
-        mUserService.dislikeUser(mUser.getId(), new Callback<Result<ResultData>>() {
+        mUserService.dislikeUser(mUser.getId(), new Callback<ApiResponse<ResultData>>() {
 
             @Override
-            public void success(Result<ResultData> arg0, Response arg1) {
+            public void success(ApiResponse<ResultData> arg0, Response arg1) {
                 XL.i("ALOHA_ALOHA", "dislike user:success");
                 // 刷新数据
                 // ((RefreshData) mFrag).refreshData();
@@ -697,10 +697,10 @@ public class ProfileHeaderHolder {
     }
 
     private void aloho() {
-        mMatchService.like(mUser.getId(), whereIsComeFrom, new Callback<Result<ResultData>>() {
+        mMatchService.like(mUser.getId(), whereIsComeFrom, new Callback<ApiResponse<ResultData>>() {
 
             @Override
-            public void success(Result<ResultData> arg0, Response arg1) {
+            public void success(ApiResponse<ResultData> arg0, Response arg1) {
                 refreshHeader(mUser.getId());
                 if (AppApplication.mUserList != null && AppApplication.mUserList.size() > 0) {
                     for (User user : AppApplication.mUserList) {
@@ -737,12 +737,12 @@ public class ProfileHeaderHolder {
      * @Description: 刷新header
      */
     public void refreshHeader(String userid) {
-        mProfileService.view(userid, new Callback<Result<ProfileData>>() {
+        mProfileService.view(userid, new Callback<ApiResponse<ProfileData>>() {
 
             @Override
-            public void success(Result<ProfileData> result, Response arg1) {
-                if (result != null && result.isOk()) {
-                    mUser = result.getData().user;
+            public void success(ApiResponse<ProfileData> apiResponse, Response arg1) {
+                if (apiResponse != null && apiResponse.isOk()) {
+                    mUser = apiResponse.getData().user;
                     if (mUser.getMe()) {
                         contextUtil.setCurrentUser(mUser);
                     }
@@ -770,16 +770,16 @@ public class ProfileHeaderHolder {
     }
 
     public void refreshIcon(String userid) {
-        mProfileService.view(userid, new Callback<Result<ProfileData>>() {
+        mProfileService.view(userid, new Callback<ApiResponse<ProfileData>>() {
 
             @Override
-            public void success(Result<ProfileData> result, Response arg1) {
-                if (result == null || !result.isOk()) {
+            public void success(ApiResponse<ProfileData> apiResponse, Response arg1) {
+                if (apiResponse == null || !apiResponse.isOk()) {
                     return;
                 }
-                XL.i("PROFILE_HEADER_HOLDER", "NEW:" + (mUser.getAvatarImage().getId().equals(result.getData().user.getAvatarImage().getId())));
-                if (!mUser.getAvatarImage().getId().equals(result.getData().user.getAvatarImage().getId()) || !isUseable) {
-                    mUser = result.getData().user;
+                XL.i("PROFILE_HEADER_HOLDER", "NEW:" + (mUser.getAvatarImage().getId().equals(apiResponse.getData().user.getAvatarImage().getId())));
+                if (!mUser.getAvatarImage().getId().equals(apiResponse.getData().user.getAvatarImage().getId()) || !isUseable) {
+                    mUser = apiResponse.getData().user;
                     isUseable = false;
                     loadUserHeader();
                 }

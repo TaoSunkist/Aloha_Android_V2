@@ -27,7 +27,7 @@ import com.wealoha.social.R;
 import com.wealoha.social.adapter.ViewPagerAdapter;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.api.UserService;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.api.ConstantsService;
@@ -208,10 +208,10 @@ public class NaviIntroActivity extends BaseFragAct implements ViewPager.OnPageCh
      * @date:2014-12-17
      */
     private void goHome() {
-        mUserAPI.startLand(new GuidUtil().getGuid(), new Callback<Result<ResultData>>() {
+        mUserAPI.startLand(new GuidUtil().getGuid(), new Callback<ApiResponse<ResultData>>() {
 
             @Override
-            public void success(Result<ResultData> arg0, Response arg1) {
+            public void success(ApiResponse<ResultData> arg0, Response arg1) {
             }
 
             @Override

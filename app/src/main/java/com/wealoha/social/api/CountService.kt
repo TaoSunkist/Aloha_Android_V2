@@ -1,6 +1,6 @@
 package com.wealoha.social.api
 
-import com.wealoha.social.beans.Result
+import com.wealoha.social.beans.ApiResponse
 import com.wealoha.social.beans.common.CountData
 import com.wealoha.social.impl.ServerUrlImpl
 import retrofit.Callback
@@ -21,5 +21,5 @@ interface CountService {
      * @param callback
      */
     @GET(ServerUrlImpl.COUNT)
-    fun count(callback: Callback<Result<CountData>>)
+    fun count(callback: Callback<ApiResponse<CountData>>)
 }

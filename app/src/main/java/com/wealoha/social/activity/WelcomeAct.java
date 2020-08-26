@@ -38,7 +38,7 @@ import com.wealoha.social.ContextConfig;
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.AuthData;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.AccessTokenKeeper;
 import com.wealoha.social.commons.GlobalConstants;
@@ -254,17 +254,17 @@ public class WelcomeAct extends BaseFragAct implements OnClickListener {
                 bundle.putString("uid", mAccessToken.getUid());
                 bundle.putString("token", mAccessToken.getToken());
                 XL.d("SinaAccess", mAccessToken.getToken());
-                connectService.connectWeibo(mAccessToken.getUid(), mAccessToken.getToken(), new Callback<Result<AuthData>>() {
+                connectService.connectWeibo(mAccessToken.getUid(), mAccessToken.getToken(), new Callback<ApiResponse<AuthData>>() {
 
                     @Override
-                    public void success(Result<AuthData> result, Response response) {
-                        if (result != null) {
-                            if (result.isOk()) {
-                                result.getData().getUser().setAccessToken(mAccessToken.getToken());
-                                contextUtil.setCurrentSinaWbToken(result.getData().getUser().getAccessToken());
-                                afterSinaLoginSuccess(result.getData().getUser(), result.getData().getT());
+                    public void success(ApiResponse<AuthData> apiResponse, Response response) {
+                        if (apiResponse != null) {
+                            if (apiResponse.isOk()) {
+                                apiResponse.getData().getUser().setAccessToken(mAccessToken.getToken());
+                                contextUtil.setCurrentSinaWbToken(apiResponse.getData().getUser().getAccessToken());
+                                afterSinaLoginSuccess(apiResponse.getData().getUser(), apiResponse.getData().getT());
                                 XL.d("SinaAccess", mAccessToken.getToken());
-                                if (result.getData().getUser().getProfileIncomplete()) {
+                                if (apiResponse.getData().getUser().getProfileIncomplete()) {
                                     startActivityAndCleanTask(GlobalConstants.IntentAction.INTENT_URI_USER_DATA, null);
                                 } else {
                                     startActivityAndCleanTask(GlobalConstants.IntentAction.INTENT_URI_MAIN, null);

@@ -44,7 +44,7 @@ import com.wealoha.social.api.BaseListApiService.ApiCallback;
 import com.wealoha.social.api.BaseListApiService.NoResultCallback;
 import com.wealoha.social.api.UserService;
 import com.wealoha.social.beans.User;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.message.InboxSession;
 import com.wealoha.social.beans.message.InboxSessionResult;
 import com.wealoha.social.commons.GlobalConstants;
@@ -713,21 +713,21 @@ public class Profile2HeaderHolder implements OnTouchListener {
      * @return void
      */
     private void getUserSessionId(final String id) {
-        mMessageService.getInboxSession(id, new Callback<Result<InboxSessionResult>>() {
+        mMessageService.getInboxSession(id, new Callback<ApiResponse<InboxSessionResult>>() {
 
             @Override
-            public void success(Result<InboxSessionResult> result, Response arg1) {
+            public void success(ApiResponse<InboxSessionResult> apiResponse, Response arg1) {
                 if (!mFrag.isVisible()) {
                     return;
                 }
-                if (result != null && result.isOk()) {
-                    if (result.getData().getList() != null && result.getData().getList().size() != 0) {
-                        InboxSession inboxSession = result.getData().getList().get(0);
+                if (apiResponse != null && apiResponse.isOk()) {
+                    if (apiResponse.getData().getList() != null && apiResponse.getData().getList().size() != 0) {
+                        InboxSession inboxSession = apiResponse.getData().getList().get(0);
                         Bundle inboxSessionBundle = new Bundle();
                         inboxSessionBundle.putString("sessionId", inboxSession.id);
                         ((BaseFragAct) mFrag.getActivity()).startActivity(GlobalConstants.IntentAction.INTENT_URI_DIALOGUE, inboxSessionBundle);
                     } else {
-                        mMessageService.post(id, new Callback<Result<InboxSessionResult>>() {
+                        mMessageService.post(id, new Callback<ApiResponse<InboxSessionResult>>() {
 
                             @Override
                             public void failure(RetrofitError arg0) {
@@ -735,15 +735,15 @@ public class Profile2HeaderHolder implements OnTouchListener {
                             }
 
                             @Override
-                            public void success(Result<InboxSessionResult> arg0, Response arg1) {
-                                mMessageService.post(id, new Callback<Result<InboxSessionResult>>() {
+                            public void success(ApiResponse<InboxSessionResult> arg0, Response arg1) {
+                                mMessageService.post(id, new Callback<ApiResponse<InboxSessionResult>>() {
 
                                     @Override
                                     public void failure(RetrofitError arg0) {
                                     }
 
                                     @Override
-                                    public void success(Result<InboxSessionResult> arg0, Response arg1) {
+                                    public void success(ApiResponse<InboxSessionResult> arg0, Response arg1) {
                                         if (arg0 != null && arg0.isOk()) {
                                             if (arg0.getData().getList() != null && arg0.getData().getList().size() != 0) {
                                                 InboxSession inboxSession = arg0.getData().getList().get(0);

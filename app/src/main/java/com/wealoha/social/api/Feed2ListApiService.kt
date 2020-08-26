@@ -12,8 +12,6 @@ import com.wealoha.social.beans.HashTag.Companion.fromDTO
 import com.wealoha.social.beans.Post.Companion.hasTagForMe
 import com.wealoha.social.commons.GlobalConstants.ImageSize
 import com.wealoha.social.inject.Injector
-import com.wealoha.social.utils.XL
-import com.wealoha.social.utils.printf
 import retrofit.Callback
 import retrofit.RetrofitError
 import retrofit.client.Response
@@ -43,7 +41,7 @@ open class Feed2ListApiService : AbsBaseListApiService<Post, String>() {
         userid: String,
         callback: ApiListCallback<Post?>
     ) {
-        val _result = Result.success(
+        val _result = ApiResponse.success(
             data = FeedGetData.fake(
                 cursor = cursor,
                 direct = direct,
@@ -76,16 +74,16 @@ open class Feed2ListApiService : AbsBaseListApiService<Post, String>() {
             postid!!,
             cursor!!,
             count,
-            object : Callback<Result<UserListGetData>> {
+            object : Callback<ApiResponse<UserListGetData>> {
                 override fun failure(error: RetrofitError) {
                     callback.fail(null, error)
                 }
 
-                override fun success(result: Result<UserListGetData>, arg1: Response) {
-                    if (result == null || !result.isOk) {
-                        callback.fail(fromResult(result), null)
+                override fun success(apiResponse: ApiResponse<UserListGetData>, arg1: Response) {
+                    if (apiResponse == null || !apiResponse.isOk) {
+                        callback.fail(fromResult(apiResponse), null)
                     } else {
-                        callback.success(transUserListGetData2List(result.data!!))
+                        callback.success(transUserListGetData2List(apiResponse.data!!))
                     }
                 }
             })
@@ -127,8 +125,8 @@ open class Feed2ListApiService : AbsBaseListApiService<Post, String>() {
                 userTagList,  //
                 commonImage,  //
                 commonVideo,  //
-                result.commentCountMap.get(postDto.postId)!!,  //
-                result.likeCountMap.get(postDto.postId)!!,  //
+                result.commentCountMap[postDto.postId]!!,  //
+                result.likeCountMap[postDto.postId]!!,  //
                 recentCommentList,  //
                 fromDTO(postDto.hashtag),  //
                 postDto.hasMoreComment
@@ -149,7 +147,7 @@ open class Feed2ListApiService : AbsBaseListApiService<Post, String>() {
         direction: Boolean,
         mScreenWidth: Int
     ) {
-        if (postList == null || postList!!.size == 0) {
+        if (postList.isEmpty()) {
             return
         }
         var first = 0
@@ -189,10 +187,10 @@ open class Feed2ListApiService : AbsBaseListApiService<Post, String>() {
      * @return void
      */
     fun praiseFeed(postId: String?, callback: NoResultCallback) {
-        feed2Api!!.praisePost(postId!!, object : Callback<Result<ResultData>> {
-            override fun success(result: Result<ResultData>, arg1: Response) {
-                if (result == null || !result.isOk) {
-                    callback.fail(fromResult(result), null)
+        feed2Api!!.praisePost(postId!!, object : Callback<ApiResponse<ResultData>> {
+            override fun success(apiResponse: ApiResponse<ResultData>, arg1: Response) {
+                if (apiResponse == null || !apiResponse.isOk) {
+                    callback.fail(fromResult(apiResponse), null)
                 } else {
                     callback.success()
                 }
@@ -212,10 +210,10 @@ open class Feed2ListApiService : AbsBaseListApiService<Post, String>() {
      * @return void
      */
     fun canclePraiseFeed(postid: String?, callback: NoResultCallback) {
-        feed2Api!!.dislikePost(postid!!, object : Callback<Result<ResultData>> {
-            override fun success(result: Result<ResultData>, arg1: Response) {
-                if (result == null || !result.isOk) {
-                    callback.fail(fromResult(result), null)
+        feed2Api!!.dislikePost(postid!!, object : Callback<ApiResponse<ResultData>> {
+            override fun success(apiResponse: ApiResponse<ResultData>, arg1: Response) {
+                if (apiResponse == null || !apiResponse.isOk) {
+                    callback.fail(fromResult(apiResponse), null)
                 } else {
                     callback.success()
                 }
@@ -235,10 +233,10 @@ open class Feed2ListApiService : AbsBaseListApiService<Post, String>() {
      * @return void
      */
     fun deletePost(postId: String?, callback: NoResultCallback) {
-        feed2Api!!.deletePost(postId!!, object : Callback<Result<ResultData>> {
-            override fun success(result: Result<ResultData>, arg1: Response) {
-                if (result == null || !result.isOk) {
-                    callback.fail(fromResult(result), null)
+        feed2Api!!.deletePost(postId!!, object : Callback<ApiResponse<ResultData>> {
+            override fun success(apiResponse: ApiResponse<ResultData>, arg1: Response) {
+                if (apiResponse == null || !apiResponse.isOk) {
+                    callback.fail(fromResult(apiResponse), null)
                 } else {
                     callback.success()
                 }
@@ -258,10 +256,10 @@ open class Feed2ListApiService : AbsBaseListApiService<Post, String>() {
      * @return void
      */
     fun reportPost(postId: String?, callback: NoResultCallback) {
-        feed2Api!!.reportFeed(postId!!, "", "", object : Callback<Result<ResultData>> {
-            override fun success(result: Result<ResultData>, arg1: Response) {
-                if (result == null || !result.isOk) {
-                    callback.fail(fromResult(result), null)
+        feed2Api!!.reportFeed(postId!!, "", "", object : Callback<ApiResponse<ResultData>> {
+            override fun success(apiResponse: ApiResponse<ResultData>, arg1: Response) {
+                if (apiResponse == null || !apiResponse.isOk) {
+                    callback.fail(fromResult(apiResponse), null)
                 } else {
                     callback.success()
                 }

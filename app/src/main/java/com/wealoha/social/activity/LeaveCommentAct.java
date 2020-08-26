@@ -53,7 +53,7 @@ import com.wealoha.social.beans.Comment;
 import com.wealoha.social.beans.CommentResult;
 import com.wealoha.social.beans.Feed;
 import com.wealoha.social.beans.IResultDataErrorCode;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.commons.GlobalConstants;
@@ -178,7 +178,7 @@ public class LeaveCommentAct extends BaseFragAct implements OnItemClickListener,
         if (SURPER_CURSOR.equals(mCursor)) {
             mCursor = null;
         }
-        mCommentService.comments(feed.postId, mCursor, mCount, new Callback<Result<CommentResult>>() {
+        mCommentService.comments(feed.postId, mCursor, mCount, new Callback<ApiResponse<CommentResult>>() {
 
             @Override
             public void failure(RetrofitError arg0) {
@@ -186,10 +186,10 @@ public class LeaveCommentAct extends BaseFragAct implements OnItemClickListener,
             }
 
             @Override
-            public void success(Result<CommentResult> result, Response arg1) {
-                if (result != null && result.isOk()) {
-                    mCursor = result.getData().getNextCursorId();
-                    refreshView(result);
+            public void success(ApiResponse<CommentResult> apiResponse, Response arg1) {
+                if (apiResponse != null && apiResponse.isOk()) {
+                    mCursor = apiResponse.getData().getNextCursorId();
+                    refreshView(apiResponse);
                 }
                 mSwipeRefreshLayout.setRefreshing(false);
             }
@@ -202,19 +202,19 @@ public class LeaveCommentAct extends BaseFragAct implements OnItemClickListener,
      * @Title: refreshView
      * @Description: 创建评论信息的控件
      */
-    public void refreshView(Result<CommentResult> result) {
-        if (result.getData().getUserMap() == null || result.getData().getList() == null) {
+    public void refreshView(ApiResponse<CommentResult> apiResponse) {
+        if (apiResponse.getData().getUserMap() == null || apiResponse.getData().getList() == null) {
             // ToastUtil.longToast(mContext, "這張照片已經被刪除了");
             ToastUtil.shortToast(mContext, R.string.failed);
             return;
         }
         if (mCommentAdapter == null) {
-            mUserMap.putAll(result.getData().getUserMap());
-            mCommentAdapter = new CommentAdapter(this, result.getData().getList(), result.getData().getUserMap(), mFeed);
+            mUserMap.putAll(apiResponse.getData().getUserMap());
+            mCommentAdapter = new CommentAdapter(this, apiResponse.getData().getList(), apiResponse.getData().getUserMap(), mFeed);
             mCommentListView.setAdapter(mCommentAdapter);
-            mComments.addAll(result.getData().getList());
+            mComments.addAll(apiResponse.getData().getList());
 
-            final int endPositino = result.getData().getList().size();
+            final int endPositino = apiResponse.getData().getList().size();
             refreshViewHandler = new Handler();
             refreshViewRunable = new Runnable() {
 
@@ -226,8 +226,8 @@ public class LeaveCommentAct extends BaseFragAct implements OnItemClickListener,
             refreshViewHandler.postDelayed(refreshViewRunable, 200);
             // Log.i("REFRESHVIEW", "null");
         } else {
-            mComments.addAll(result.getData().getList());
-            mUserMap.putAll(result.getData().getUserMap());
+            mComments.addAll(apiResponse.getData().getList());
+            mUserMap.putAll(apiResponse.getData().getUserMap());
             mCommentAdapter.notifyDataSetChanged(mComments, mUserMap);
             if (mCommentAdapter.getCount() > 0) {
                 mCommentListView.setSelection(mCommentAdapter.getCount() - 1);
@@ -269,15 +269,15 @@ public class LeaveCommentAct extends BaseFragAct implements OnItemClickListener,
                 replyUserId = mFeed.userId;
             }
         }
-        mCommentService.postCommentForOld(mFeed != null ? mFeed.postId : "", replyUserId, comment, new Callback<Result<CommentResult>>() {
+        mCommentService.postCommentForOld(mFeed != null ? mFeed.postId : "", replyUserId, comment, new Callback<ApiResponse<CommentResult>>() {
 
             @Override
-            public void success(Result<CommentResult> result, Response response) {
+            public void success(ApiResponse<CommentResult> apiResponse, Response response) {
                 if (isFinishing()) {
                     return;
                 }
-                if (result != null) {
-                    if (result.isOk()) {
+                if (apiResponse != null) {
+                    if (apiResponse.isOk()) {
                         // 评论数 + 1
                         Integer commentCount = 0;
                         if (FeedItemHolder.commentMap != null && FeedItemHolder.commentMap.size() > 0) {
@@ -298,10 +298,10 @@ public class LeaveCommentAct extends BaseFragAct implements OnItemClickListener,
                         // Log.i("SEND_COMMENT", "result:" +
                         // result.getData().getList().get(0).replyUserId);
                         // feed.
-                        refreshView(result);// 更新评论列表
-                    } else if (result.getData().getError() == IResultDataErrorCode.ERROR_INVALID_COMMENT) {
+                        refreshView(apiResponse);// 更新评论列表
+                    } else if (apiResponse.getData().getError() == IResultDataErrorCode.ERROR_INVALID_COMMENT) {
                         ToastUtil.shortToast(LeaveCommentAct.this, getString(R.string.comment_has_illegalword));
-                    } else if (result.getData().getError() == IResultDataErrorCode.ERROR_BLOCK_BY_OTHER) {
+                    } else if (apiResponse.getData().getError() == IResultDataErrorCode.ERROR_BLOCK_BY_OTHER) {
                         ToastUtil.shortToastCenter(mContext, getString(R.string.otherside_black_current_user));
                     } else {
                         ToastUtil.shortToastCenter(mContext, getString(R.string.Unkown_Error));
@@ -461,7 +461,7 @@ public class LeaveCommentAct extends BaseFragAct implements OnItemClickListener,
         if (SURPER_CURSOR.equals(mCursor)) {
             mCursor = null;
         }
-        mCommentService.comments(mFeed.postId, mCursor, mCount, new Callback<Result<CommentResult>>() {
+        mCommentService.comments(mFeed.postId, mCursor, mCount, new Callback<ApiResponse<CommentResult>>() {
 
             @Override
             public void failure(RetrofitError arg0) {
@@ -469,12 +469,12 @@ public class LeaveCommentAct extends BaseFragAct implements OnItemClickListener,
             }
 
             @Override
-            public void success(Result<CommentResult> result, Response arg1) {
-                if (result != null && result.isOk()) {
-                    mCursor = result.getData().getNextCursorId();
+            public void success(ApiResponse<CommentResult> apiResponse, Response arg1) {
+                if (apiResponse != null && apiResponse.isOk()) {
+                    mCursor = apiResponse.getData().getNextCursorId();
                     // refreshView(result);
-                    mComments.addAll(0, result.getData().getList());
-                    mCommentAdapter.notifyDataSetChangedOnTop(result);
+                    mComments.addAll(0, apiResponse.getData().getList());
+                    mCommentAdapter.notifyDataSetChangedOnTop(apiResponse);
                     mCommentListView.setSelection(0);
                     Log.i("REFRESHVIEW", "pullRefresh");
                 }
@@ -557,11 +557,11 @@ public class LeaveCommentAct extends BaseFragAct implements OnItemClickListener,
     }
 
     private void deleteComment(final String commentId) {
-        mCommentService.deleteComment(mFeed != null ? mFeed.postId : "", commentId, new Callback<Result<ResultData>>() {
+        mCommentService.deleteComment(mFeed != null ? mFeed.postId : "", commentId, new Callback<ApiResponse<ResultData>>() {
 
             @Override
-            public void success(Result<ResultData> result, Response arg1) {
-                if (result != null && result.isOk()) {
+            public void success(ApiResponse<ResultData> apiResponse, Response arg1) {
+                if (apiResponse != null && apiResponse.isOk()) {
                     // FIXME 评论数更新，有更好的方法？
                     Comment s = new Comment();
                     s.id = commentId;

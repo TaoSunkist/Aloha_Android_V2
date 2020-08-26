@@ -4,7 +4,7 @@ import com.wealoha.social.api.BaseListApiService.ApiListCallback
 import com.wealoha.social.beans.ApiErrorCode.Companion.fromResult
 import com.wealoha.social.beans.Direct
 import com.wealoha.social.beans.MergeUsersGetData
-import com.wealoha.social.beans.Result
+import com.wealoha.social.beans.ApiResponse
 import com.wealoha.social.beans.User
 import com.wealoha.social.inject.Injector
 import com.wealoha.social.utils.XL
@@ -35,21 +35,21 @@ class UserListListApiService : AbsBaseListApiService<User, String>() {
             notifyId!!,
             count,
             cursor!!,
-            object : Callback<Result<MergeUsersGetData>> {
+            object : Callback<ApiResponse<MergeUsersGetData>> {
                 override fun failure(error: RetrofitError) {
                     callback.fail(null, error)
                     XL.i("USER_LIST_FRAG", "failure:" + error.message)
                 }
 
-                override fun success(result: Result<MergeUsersGetData>?, arg1: Response) {
+                override fun success(apiResponse: ApiResponse<MergeUsersGetData>?, arg1: Response) {
                     XL.i("USER_LIST_FRAG", "success")
-                    if (result != null && result.isOk) {
+                    if (apiResponse != null && apiResponse.isOk) {
                         callback.success(
-                            getUsers(result.data!!.list!!, result.data!!.imageMap),
-                            result.data!!.nextCursorId
+                            getUsers(apiResponse.data!!.list!!, apiResponse.data!!.imageMap),
+                            apiResponse.data!!.nextCursorId
                         )
                     } else {
-                        callback.fail(fromResult(result), null)
+                        callback.fail(fromResult(apiResponse), null)
                     }
                 }
             })

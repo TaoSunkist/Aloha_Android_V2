@@ -28,7 +28,7 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.AuthData;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.instagram.AccessToken;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.utils.ContextUtil;
@@ -198,13 +198,13 @@ public class InstagramWebViewAct extends BaseFragAct implements OnClickListener 
 		if (!isAll) {
 			month = 6;
 		}
-		mInstagramService.postToken(uid, accessToken, month, new Callback<Result<AuthData>>() {
+		mInstagramService.postToken(uid, accessToken, month, new Callback<ApiResponse<AuthData>>() {
 
 			@Override
-			public void success(Result<AuthData> result, Response arg1) {
-				if (result != null) {
-					if (result != null && result.isOk()) {
-						XL.i("POST_TOKEN", "result" + result.getData().getT());
+			public void success(ApiResponse<AuthData> apiResponse, Response arg1) {
+				if (apiResponse != null) {
+					if (apiResponse != null && apiResponse.isOk()) {
+						XL.i("POST_TOKEN", "result" + apiResponse.getData().getT());
 						if (popup != null) {
 							popup.hide();
 						}
@@ -214,11 +214,11 @@ public class InstagramWebViewAct extends BaseFragAct implements OnClickListener 
 						bundle.putString("name", username);
 						// bundle.putBoolean("autoSync", isAll);
 						startActivity(GlobalConstants.IntentAction.INTENT_URI_CONFIG_HAVE_INSTAGRAM, bundle);
-					} else if (200524 == result.getData().getError()) {
+					} else if (200524 == apiResponse.getData().getError()) {
 						ToastUtil.longToast(InstagramWebViewAct.this, R.string.instagram_token_overdue);
-					} else if (200530 == result.getData().getError()) {
+					} else if (200530 == apiResponse.getData().getError()) {
 						ToastUtil.longToast(InstagramWebViewAct.this, R.string.instagram_have_token);
-					} else if (451 == result.getData().getError()) {
+					} else if (451 == apiResponse.getData().getError()) {
 						ToastUtil.longToast(InstagramWebViewAct.this, R.string.user_was_fucked);
 					} else {
 						ToastUtil.longToast(InstagramWebViewAct.this, R.string.Unkown_Error);

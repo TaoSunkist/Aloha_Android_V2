@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.wealoha.social.beans.Feed;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.Notify;
 import com.wealoha.social.beans.NotifyResult;
@@ -23,7 +23,7 @@ public class DynamicNotice {
     public List<NotifyItem> mNotifyItems = new ArrayList<NotifyItem>();
 
     /**
-     * @param result
+     * @param apiResponse
      * @Description:根据不同的视图拼装不同的Item用来填充Item
      * @see:
      * @since:
@@ -31,13 +31,13 @@ public class DynamicNotice {
      * @author: sunkist
      * @date:2015-2-12
      */
-    public void assemblyDynamicItem(Result<NotifyResult> result) {
+    public void assemblyDynamicItem(ApiResponse<NotifyResult> apiResponse) {
 
-        List<Notify> notifies = result.getData().getList();
-        Map<String, Feed> feedMap = result.getData().getPostMap();
-        Map<String, User> userMap = result.getData().getUserMap();
-        Map<String, Integer> likeCountMap = result.getData().getLikeCountMap();
-        Map<String, Integer> commentCountMap = result.getData().getCommentCountMap();
+        List<Notify> notifies = apiResponse.getData().getList();
+        Map<String, Feed> feedMap = apiResponse.getData().getPostMap();
+        Map<String, User> userMap = apiResponse.getData().getUserMap();
+        Map<String, Integer> likeCountMap = apiResponse.getData().getLikeCountMap();
+        Map<String, Integer> commentCountMap = apiResponse.getData().getCommentCountMap();
         // 循环拼装数据
         for (int i = 0; i < notifies.size(); i++) {
             Notify notify = notifies.get(i);

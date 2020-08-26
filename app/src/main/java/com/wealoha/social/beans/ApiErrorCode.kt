@@ -73,20 +73,20 @@ enum class ApiErrorCode(//
         /**
          * 转换api的错误码
          *
-         * @param result
+         * @param apiResponse
          * @return
          */
         @kotlin.jvm.JvmStatic
-        fun fromResult(result: Result<out ResultData>?): ApiErrorCode {
-            if (result == null) {
+        fun fromResult(apiResponse: ApiResponse<out ResultData>?): ApiErrorCode {
+            if (apiResponse == null) {
                 return NullResult
             }
-            if (result.isOk) {
+            if (apiResponse.isOk) {
                 return Ok
             }
-            return if (result.status != Ok.value) {
-                valuesMap[result.status]
-            } else valuesMap[result.data!!.error]
+            return if (apiResponse.status != Ok.value) {
+                valuesMap[apiResponse.status]
+            } else valuesMap[apiResponse.data!!.error]
         }
 
         init {

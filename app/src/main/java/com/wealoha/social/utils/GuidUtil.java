@@ -15,7 +15,7 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.wealoha.social.beans.IResultDataErrorCode;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.JsonController;
@@ -86,11 +86,11 @@ public class GuidUtil {
 
 			@Override
 			public void onSuccess(ResponseInfo<String> resp) {
-				Result<ResultData> result = JsonController.parseJson(resp.result, new TypeToken<Result<ResultData>>() {
+				ApiResponse<ResultData> apiResponse = JsonController.parseJson(resp.result, new TypeToken<ApiResponse<ResultData>>() {
 				}.getType());
-				if (result.isOk()) {
+				if (apiResponse.isOk()) {
 					XL.d(TAG, "注册GUID成功");
-				} else if (result.getData().getError() == IResultDataErrorCode.ERROR_GUID_DUPLICATE) {
+				} else if (apiResponse.getData().getError() == IResultDataErrorCode.ERROR_GUID_DUPLICATE) {
 					XL.w(TAG, "注册GUID失败，重复，清理掉本地的，下次再生成一个");
 					Editor editor = sharedPreferences.edit();
 					editor.remove(KEY_GUID);

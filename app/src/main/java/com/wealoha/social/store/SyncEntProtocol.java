@@ -7,13 +7,9 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
-
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
 
 import android.os.Handler;
 
@@ -25,11 +21,10 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.wealoha.social.beans.ImageUploadResult;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.JsonController;
 import com.wealoha.social.utils.ContextUtil;
-import com.wealoha.social.utils.StringUtil;
 import com.wealoha.social.utils.XL;
 
 public class SyncEntProtocol extends HttpUtils {
@@ -244,10 +239,10 @@ public class SyncEntProtocol extends HttpUtils {
 			@Override
 			public void onSuccess(ResponseInfo<String> responseInfo) {
 				// msgTextview.setText("reply: " + responseInfo.result);
-				Result<ImageUploadResult> result = JsonController.parseJson(responseInfo.result, new TypeToken<Result<ImageUploadResult>>() {
+				ApiResponse<ImageUploadResult> apiResponse = JsonController.parseJson(responseInfo.result, new TypeToken<ApiResponse<ImageUploadResult>>() {
 				}.getType());
 				XL.d("onSuccess", "" + responseInfo.result);
-				if (result != null && result.isOk()) {
+				if (apiResponse != null && apiResponse.isOk()) {
 					XL.d("onSuccess", "" + responseInfo.result);
 					// 接收上传成功的图片的id
 				} else {

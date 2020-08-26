@@ -24,7 +24,7 @@ import butterknife.OnClick;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.utils.FontUtil;
 import com.wealoha.social.utils.FontUtil.Font;
@@ -94,19 +94,19 @@ public class ChangeNumberPart1 extends BaseFragment implements OnClickListener {
 			ToastUtil.shortToast(getActivity(), R.string.you_entered_psd_is_wrong);
 			return;
 		}
-		user2Api.verifyPassword(StringUtil.md5(psd), new Callback<Result<ResultData>>() {
+		user2Api.verifyPassword(StringUtil.md5(psd), new Callback<ApiResponse<ResultData>>() {
 
 			@Override
-			public void success(Result<ResultData> result, Response arg1) {
-				if (result == null) {
+			public void success(ApiResponse<ResultData> apiResponse, Response arg1) {
+				if (apiResponse == null) {
 					ToastUtil.longToast(getActivity(), R.string.network_error);
 					return;
 				}
-				if (result.isOk()) {
+				if (apiResponse.isOk()) {
 					Bundle bundle = new Bundle();
 					bundle.putString("password", psd);
 					((BaseFragAct) getActivity()).startFragmentForResult(ChangeNumberPart2.class, bundle, true, CHANGE_NUM_REQUEST_CODE, 0, 0);
-				} else if (result.getData().getError() == 200509) {
+				} else if (apiResponse.getData().getError() == 200509) {
 					ToastUtil.shortToast(getActivity(), R.string.you_entered_psd_is_wrong);
 				}
 			}

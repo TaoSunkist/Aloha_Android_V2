@@ -65,7 +65,7 @@ import com.wealoha.social.ContextConfig;
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.MatchSettingData;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.common.ConstantsData;
 import com.wealoha.social.api.ConstantsService;
@@ -505,10 +505,10 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 
 	private void getNoticeSetting() {
 		// XL.d(TAG, "取Push设置");
-		settingService.getPushSetting(new Callback<Result<PushSettingResult>>() {
+		settingService.getPushSetting(new Callback<ApiResponse<PushSettingResult>>() {
 
 			@Override
-			public void success(Result<PushSettingResult> arg0, Response arg1) {
+			public void success(ApiResponse<PushSettingResult> arg0, Response arg1) {
 				if (arg0 != null && arg0.isOk()) {
 					ContextConfig.getInstance().putPushSetConfig(arg0.getData());
 				} else {
@@ -740,19 +740,19 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 	 * 开机画面和升级等信息
 	 */
 	private void fetchUpdateAndStartup() {
-		constantsService.get(new Callback<Result<ConstantsData>>() {
+		constantsService.get(new Callback<ApiResponse<ConstantsData>>() {
 
 			@Override
-			public void success(Result<ConstantsData> result, Response response) {
-				if (result == null) {
+			public void success(ApiResponse<ConstantsData> apiResponse, Response response) {
+				if (apiResponse == null) {
 					return;
 				}
-				if (result.isOk()) {
+				if (apiResponse.isOk()) {
 					XL.d(TAG, "有新版本可以更新");
-					contextUtil.setHasNewestVersion(result.getData().hasUpdateVersion);
-					contextUtil.setNewVersionDetails(result.getData().updateDetails);
-					contextUtil.setStartImageIntervalMinutes(result.getData().startupImageShowIntervalMinutes);
-					Map<String, String> startupImageMap = result.getData().startupImageMap;
+					contextUtil.setHasNewestVersion(apiResponse.getData().hasUpdateVersion);
+					contextUtil.setNewVersionDetails(apiResponse.getData().updateDetails);
+					contextUtil.setStartImageIntervalMinutes(apiResponse.getData().startupImageShowIntervalMinutes);
+					Map<String, String> startupImageMap = apiResponse.getData().startupImageMap;
 					// 下面两行测试数据，可以测试开机画面
 					if (startupImageMap != null && startupImageMap.size() > 0) {
 						// 有开机画面了，根据手机尺寸取一张下载，下次显示
@@ -799,15 +799,15 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 
 				@Override
 				public void run() {
-					countService.count(new Callback<Result<CountData>>() {
+					countService.count(new Callback<ApiResponse<CountData>>() {
 
 						@Override
-						public void success(Result<CountData> result, Response response) {
+						public void success(ApiResponse<CountData> apiResponse, Response response) {
 							// 触发tab的红点
-							if (result != null && result.isOk()) {
-								NotificationCount.setCommentCount(result.getData().newNotifyCount);
-								if (result.getData().newFeed) {
-									showOrHideTabFeedNotice(result.getData().newFeed, result.getData().newNotifyCount);
+							if (apiResponse != null && apiResponse.isOk()) {
+								NotificationCount.setCommentCount(apiResponse.getData().newNotifyCount);
+								if (apiResponse.getData().newFeed) {
+									showOrHideTabFeedNotice(apiResponse.getData().newFeed, apiResponse.getData().newNotifyCount);
 								}
 								// 发通知
 								// busSentEvent(new
@@ -1099,7 +1099,7 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 	 * @return void 返回类型
 	 */
 	private void refreshChatSub() {
-		mMessageService.unread(new Callback<Result<UnreadData>>() {
+		mMessageService.unread(new Callback<ApiResponse<UnreadData>>() {
 
 			@Override
 			public void failure(RetrofitError arg0) {
@@ -1107,9 +1107,9 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 			}
 
 			@Override
-			public void success(Result<UnreadData> result, Response arg1) {
-				if (result != null && result.isOk()) {
-					setChatSub(result.getData().count);
+			public void success(ApiResponse<UnreadData> apiResponse, Response arg1) {
+				if (apiResponse != null && apiResponse.isOk()) {
+					setChatSub(apiResponse.getData().count);
 				}
 			}
 		});
@@ -1274,14 +1274,14 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 	 */
 	public void getUserMatchSetting() {
 		mOpenFilter.setEnabled(false);
-		mUserAPI.userMatchSetting(new Callback<Result<MatchSettingData>>() {
+		mUserAPI.userMatchSetting(new Callback<ApiResponse<MatchSettingData>>() {
 
 			@Override
-			public void success(Result<MatchSettingData> result, Response response) {
+			public void success(ApiResponse<MatchSettingData> apiResponse, Response response) {
 				mOpenFilter.setEnabled(true);
-				if (result != null && result.isOk()) {
+				if (apiResponse != null && apiResponse.isOk()) {
 					Intent intent = new Intent(MainAct.this, FilterSettingAct.class);
-					intent.putExtra(MatchSettingData.TAG, result.getData());
+					intent.putExtra(MatchSettingData.TAG, apiResponse.getData());
 					startActivity(intent);
 					overridePendingTransition(R.anim.sliding_in_down2up, R.anim.stop);
 				} else {

@@ -1,7 +1,5 @@
 package com.wealoha.social.beans
 
-import java.io.Serializable
-
 /**
  * @author:sunkist
  * @see:
@@ -10,7 +8,7 @@ import java.io.Serializable
  * @copyright wealoha.com
  * @Date:2014-10-27
  */
-class Result<T : ResultData>(
+class ApiResponse<T : ResultData>(
     /**
      * @see me.cu.app.config.Constants.HttpStatus
      */
@@ -30,8 +28,8 @@ class Result<T : ResultData>(
             status == STATUS_CODE_OK && (data == null || data?.error == ResultData.ERROR_NO_ERROR)
 
     companion object {
-        fun <T : ResultData> success(data: T): Result<T> {
-            return Result(data = data, status = 200)
+        fun <T : ResultData> success(data: T): ApiResponse<T> {
+            return ApiResponse(data = data, status = 200)
         }
 
         private const val serialVersionUID = 6540499880692897496L

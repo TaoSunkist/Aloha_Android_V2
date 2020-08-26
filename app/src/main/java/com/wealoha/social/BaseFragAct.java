@@ -62,11 +62,10 @@ import com.wealoha.social.activity.MainAct;
 import com.wealoha.social.activity.NaviIntroActivity;
 import com.wealoha.social.activity.WelcomeAct;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.AccessTokenKeeper;
-import com.wealoha.social.beans.User;
 import com.wealoha.social.callback.IBackKeyCallback;
 import com.wealoha.social.commons.AlohaThreadPool;
 import com.wealoha.social.commons.AlohaThreadPool.ENUM_Thread_Level;
@@ -200,10 +199,10 @@ public abstract class BaseFragAct extends FragmentActivity implements HasCache, 
     private void doApiLogout(final Context context) {
         MiPushClient.unregisterPush(this);
         // FIXME 添加登出的Loading框;
-        authService.unbind(pushUtil.getPushToken(), new Callback<Result<ResultData>>() {
+        authService.unbind(pushUtil.getPushToken(), new Callback<ApiResponse<ResultData>>() {
 
             @Override
-            public void success(Result<ResultData> result, Response response) {
+            public void success(ApiResponse<ResultData> apiResponse, Response response) {
                 doRealApiLogout(context);
             }
 
@@ -216,10 +215,10 @@ public abstract class BaseFragAct extends FragmentActivity implements HasCache, 
 
     private void doRealApiLogout(final Context context) {
         // FIXME 添加登出的Loading框;
-        authService.unauth(new Callback<Result<ResultData>>() {
+        authService.unauth(new Callback<ApiResponse<ResultData>>() {
 
             @Override
-            public void success(Result<ResultData> arg0, Response arg1) {
+            public void success(ApiResponse<ResultData> arg0, Response arg1) {
                 popup.hide();
                 contextUtil.cleanLoginStatus();
                 Intent intent = new Intent(context, WelcomeAct.class);
@@ -618,7 +617,7 @@ public abstract class BaseFragAct extends FragmentActivity implements HasCache, 
             XL.w(TAG, "清理微博Token失败", t);
         }
         // 清理未完的match
-        AppApplication.mUserList = null;
+        AppApplication.mUserList.clear();
     }
 
     public Message sendMsgToHandler(int tag, Object obj) {

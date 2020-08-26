@@ -18,7 +18,7 @@ import com.lidroid.xutils.http.RequestParams;
 import com.wealoha.social.AppApplication;
 import com.wealoha.social.R;
 import com.wealoha.social.activity.MainAct;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.commons.CacheManager;
@@ -600,7 +600,7 @@ public class ContextUtil {
      * @see
      * @since
      */
-    private class RetrofitCallback implements retrofit.Callback<Result<ResultData>> {
+    private class RetrofitCallback implements retrofit.Callback<ApiResponse<ResultData>> {
 
         private final boolean showToaster;
 
@@ -618,12 +618,12 @@ public class ContextUtil {
             XL.w(TAG, "API请求失败", error);
         }
 
-        public void success(com.wealoha.social.beans.Result<ResultData> result, retrofit.client.Response response) {
-            XL.d(TAG, "API请求成功: " + result);
-            if (result.isOk()) {
+        public void success(com.wealoha.social.beans.ApiResponse<ResultData> apiResponse, retrofit.client.Response response) {
+            XL.d(TAG, "API请求成功: " + apiResponse);
+            if (apiResponse.isOk()) {
                 return;
             }
-            if (result.getStatus() == Result.STATUS_CODE_FORBIDEN) {
+            if (apiResponse.getStatus() == ApiResponse.STATUS_CODE_FORBIDEN) {
                 // 票过期了
                 XL.d(TAG, "票过期啦!!");
                 // setCurrentTicket(null);
@@ -641,7 +641,7 @@ public class ContextUtil {
      * @param showToaster 如果出错了，是否显示对话框
      * @return
      */
-    public retrofit.Callback<Result<ResultData>> getCommonResultCallback(boolean showToaster) {
+    public retrofit.Callback<ApiResponse<ResultData>> getCommonResultCallback(boolean showToaster) {
         init();
 
         return new RetrofitCallback(showToaster);

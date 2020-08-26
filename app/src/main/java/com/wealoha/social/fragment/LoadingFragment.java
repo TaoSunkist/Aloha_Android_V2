@@ -13,6 +13,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.LoaderManager;
@@ -58,13 +59,15 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.activity.MainAct;
 import com.wealoha.social.activity.ProFeatureAct;
+import com.wealoha.social.api.AlohaService;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.MatchData;
 import com.wealoha.social.beans.PromotionGetData;
 import com.wealoha.social.commons.GlobalConstants;
+import com.wealoha.social.extension.RxUtilsKt;
 import com.wealoha.social.impl.Listeners;
 import com.wealoha.social.push.NoticeBarController;
 import com.wealoha.social.utils.AMapUtil;
@@ -85,7 +88,7 @@ import com.wealoha.social.view.custom.WaterView;
  * @copyright wealoha.com
  * @Date:2014-10-30
  */
-public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com.wealoha.social.beans.Result<MatchData>> {
+public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com.wealoha.social.beans.ApiResponse<MatchData>> {
 
     private static final int LOADER_LOAD_MATCH = 0;
 
@@ -253,10 +256,7 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
                     });
                 }
             }
-        } catch (IllegalStateException e) {
-            // 切换tab，Fragment隐藏了又调用会抛出异常，忽略
-            XL.w(TAG, "加载数据时异常", e);
-        } catch (NullPointerException e) {
+        } catch (IllegalStateException | NullPointerException e) {
             // 切换tab，Fragment隐藏了又调用会抛出异常，忽略
             XL.w(TAG, "加载数据时异常", e);
         }
@@ -346,6 +346,7 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
             if (flag)
                 container.setOnTouchListener(new OnTouchListener() {
 
+                    @SuppressLint("ClickableViewAccessibility")
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         float x = event.getX();
@@ -442,15 +443,15 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
         } else {
             // 去高级设置在這裏先加載高級設置要用的數據
             // popup
-            userPromotionService.get(new Callback<Result<PromotionGetData>>() {
+            userPromotionService.get(new Callback<ApiResponse<PromotionGetData>>() {
 
                 @Override
-                public void success(Result<PromotionGetData> result, Response arg1) {
-                    if (result == null) {
+                public void success(ApiResponse<PromotionGetData> apiResponse, Response arg1) {
+                    if (apiResponse == null) {
                         return;
                     }
-                    if (result.isOk()) {
-                        PromotionGetData r = (PromotionGetData) result.getData();
+                    if (apiResponse.isOk()) {
+                        PromotionGetData r = (PromotionGetData) apiResponse.getData();
                         contextUtil.setProfeatureEnable(!r.alohaGetLocked);
                         Intent intent = new Intent(getActivity(), ProFeatureAct.class);
                         intent.putExtra(PromotionGetData.TAG, r);
@@ -493,11 +494,11 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
     }
 
     public void resetQuotaLoadResquest(Double latitude, Double longitude) {
-        matchService.findRandom(latitude, longitude, new Callback<Result<MatchData>>() {
+        matchService.findRandom(latitude, longitude, new Callback<ApiResponse<MatchData>>() {
 
             @Override
-            public void success(Result<MatchData> result, Response arg1) {
-                hasQuoraReset = (result.getData().getQuotaReset() > 0);
+            public void success(ApiResponse<MatchData> apiResponse, Response arg1) {
+                hasQuoraReset = (apiResponse.getData().getQuotaReset() > 0);
                 resetQuota();
             }
 
@@ -624,26 +625,28 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
     }
 
     @Override
-    public Loader<com.wealoha.social.beans.Result<MatchData>> onCreateLoader(int loaderId, final Bundle bundle) {
+    public Loader<com.wealoha.social.beans.ApiResponse<MatchData>> onCreateLoader(int loaderId, final Bundle bundle) {
         if (!fragmentVisible) {
             XL.d(TAG, "视图不在了，忽略请求");
             return null;
         }
 
-        final Double latitude = appApplication != null ? appApplication.locationXY[0] : null;
-        final Double longitude = appApplication != null ? appApplication.locationXY[1] : null;
+        final Double latitude = appApplication != null ? appApplication.locationXY[0] : 0;
+        final Double longitude = appApplication != null ? appApplication.locationXY[1] : 0;
         if (loaderId == LOADER_LOAD_MATCH) {
-            return new AsyncLoader<com.wealoha.social.beans.Result<MatchData>>(context) {
+
+            return new AsyncLoader<com.wealoha.social.beans.ApiResponse<MatchData>>(context) {
 
                 @Override
-                public com.wealoha.social.beans.Result<MatchData> loadInBackground() {
+                public com.wealoha.social.beans.ApiResponse<MatchData> loadInBackground() {
                     // 开始加载下一批数据..
                     try {
                         if (bundle != null && bundle.getBoolean("reset")) {
                             // 重置配额
                             return matchService.findWithResetQuota(latitude, longitude, true);
                         } else {
-                            return matchService.findRandom(latitude, longitude);
+                            ApiResponse<MatchData> apiResponse = AlohaService.Companion.getShared().findRandom(latitude, longitude).blockingGet();
+                            return apiResponse;
                         }
                     } catch (Exception e) {
                         return null;
@@ -655,16 +658,12 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
         return null;
     }
 
-    public void loaderRequest() {
-
-    }
-
     @Override
-    public void onLoaderReset(Loader<Result<MatchData>> arg0) {
+    public void onLoaderReset(Loader<ApiResponse<MatchData>> arg0) {
     }
 
-    public void onLoadFinished(Loader<com.wealoha.social.beans.Result<MatchData>> loader, com.wealoha.social.beans.Result<MatchData> result) {
-        XL.d(TAG, "加载下一批数据完成: " + result);
+    public void onLoadFinished(Loader<com.wealoha.social.beans.ApiResponse<MatchData>> loader, com.wealoha.social.beans.ApiResponse<MatchData> apiResponse) {
+        XL.d(TAG, "加载下一批数据完成: " + apiResponse);
         if (!isVisible()) {
             return;
         }
@@ -672,20 +671,20 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
             XL.d(TAG, "视图不在了，忽略返回结果");
             return;
         }
-        if (result == null) {
+        if (apiResponse == null) {
             // 失败了，继续显示loading
             showNetworkFucked();
             return;
         }
 
         if (loader.getId() == LOADER_LOAD_MATCH) {
-            if (result != null) {
-                if (result.isOk() && result.getData().getList() != null && result.getData().getList().size() > 0) {
+            if (apiResponse != null) {
+                if (apiResponse.isOk() && apiResponse.getData().getList() != null && apiResponse.getData().getList().size() > 0) {
                     // 有下一批用户
-                    AppApplication.mUserList = result.getData().getList();
+                    AppApplication.mUserList = apiResponse.getData().getList();
                     XL.i("HOME_KEY", "list size:" + AppApplication.mUserList.size());
                     // 设置标签的数据
-                    mainAct.setRecommendSourceMap(result.getData().getRecommendSourceMap());
+                    mainAct.setRecommendSourceMap(apiResponse.getData().getRecommendSourceMap());
                     Collections.shuffle(AppApplication.mUserList);
                     exitAnim.setFillAfter(true);
                     fragexitAnim.setFillAfter(true);
@@ -694,16 +693,16 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
                     mUserPhotoRoot.startAnimation(exitAnim);
                     // circle1.stopAnimation();
                     startingAloha();
-                } else if (result.getData().getError() == 200518) {// 当前时段没有更多匹配了，需要重置配额或者等下个时段
-                    startTimingInterface(result.getData());
+                } else if (apiResponse.getData().getError() == 200518) {// 当前时段没有更多匹配了，需要重置配额或者等下个时段
+                    startTimingInterface(apiResponse.getData());
                     // ToastUtil.shortToast(getActivity(), "200518");
-                } else if (result.getData().getError() == 200531) {// 没有搜寻到过滤条件范围内的人
+                } else if (apiResponse.getData().getError() == 200531) {// 没有搜寻到过滤条件范围内的人
                     // ToastUtil.shortToast(getActivity(), "200531");
                     showFilterResult();
-                } else if (result.getData().getError() == 200519) {// 没有更多了
+                } else if (apiResponse.getData().getError() == 200519) {// 没有更多了
                     // ToastUtil.shortToast(getActivity(), "200519");
                     showFilterNoResult();
-                } else if (result.getData().getError() == 200532) {// 服务挂了，稍候再试
+                } else if (apiResponse.getData().getError() == 200532) {// 服务挂了，稍候再试
                     // ToastUtil.shortToast(getActivity(), "200532");
                     showServerFucked();
                 } else {

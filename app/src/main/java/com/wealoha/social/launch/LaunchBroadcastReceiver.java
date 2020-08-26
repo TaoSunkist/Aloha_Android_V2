@@ -32,7 +32,7 @@ import com.wealoha.social.api.BaseListApiService.ApiListCallback;
 import com.wealoha.social.beans.Direct;
 import com.wealoha.social.api.SingletonFeedListApiService;
 import com.wealoha.social.beans.Post;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.ProfileData;
@@ -169,14 +169,14 @@ public class LaunchBroadcastReceiver extends BroadcastReceiver {
         }
         String ticket = contextUtil.getCurrentTicket();
         if (StringUtils.isNotBlank(shareByUserId)) {
-            mProfileService.recordCardClick(userId, shareByUserId, new retrofit.Callback<Result<ResultData>>() {
+            mProfileService.recordCardClick(userId, shareByUserId, new retrofit.Callback<ApiResponse<ResultData>>() {
 
                 @Override
                 public void failure(RetrofitError arg0) {
                 }
 
                 @Override
-                public void success(Result<ResultData> arg0, Response arg1) {
+                public void success(ApiResponse<ResultData> arg0, Response arg1) {
                 }
             });
         }
@@ -250,12 +250,12 @@ public class LaunchBroadcastReceiver extends BroadcastReceiver {
         if (mProfileService == null) {
             return;
         }
-        mProfileService.view(userid, new Callback<Result<ProfileData>>() {
+        mProfileService.view(userid, new Callback<ApiResponse<ProfileData>>() {
 
             @Override
-            public void success(Result<ProfileData> result, Response arg1) {
-                if (result != null && result.isOk()) {
-                    startProfileFragment(Profile2Fragment.class, result.getData().user);
+            public void success(ApiResponse<ProfileData> apiResponse, Response arg1) {
+                if (apiResponse != null && apiResponse.isOk()) {
+                    startProfileFragment(Profile2Fragment.class, apiResponse.getData().user);
                 }
             }
 

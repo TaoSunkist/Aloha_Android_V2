@@ -29,7 +29,7 @@ import butterknife.OnClick;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.fragment.PhoneAreaFragment.ChangePhoneAreaCallback;
 import com.wealoha.social.utils.FontUtil;
@@ -140,25 +140,25 @@ public class ChangeNumberPart2 extends BaseFragment implements OnClickListener, 
 			return;
 		}
 		showDialog(true);
-		user2Api.mobileVerify(phonenum, new Callback<Result<ResultData>>() {
+		user2Api.mobileVerify(phonenum, new Callback<ApiResponse<ResultData>>() {
 
 			@Override
-			public void success(Result<ResultData> result, Response arg1) {
+			public void success(ApiResponse<ResultData> apiResponse, Response arg1) {
 				showDialog(false);
-				if (!isVisible() || result == null) {
+				if (!isVisible() || apiResponse == null) {
 					return;
 				}
 				int resid = -1;
-				if (result.isOk()) {
+				if (apiResponse.isOk()) {
 					Bundle bundle = new Bundle();// 将密码和电话号码发送给下一个页面
 					bundle.putString("password", password);
 					bundle.putString("phonenum", phonenum);
 					((BaseFragAct) getActivity()).startFragmentForResult(ChangeNumberPart3.class, bundle, true, ChangeNumberPart1.CHANGE_NUM_REQUEST_CODE, 0, 0);
-				} else if (result.getData().getError() == 200516) {
+				} else if (apiResponse.getData().getError() == 200516) {
 					resid = R.string.the_phone_had_registed;
-				} else if (result.getData().getError() == 200520) {
+				} else if (apiResponse.getData().getError() == 200520) {
 					resid = R.string.phone_num_incorrect_format;
-				} else if (result.getStatus() == 503) {
+				} else if (apiResponse.getStatus() == 503) {
 					resid = R.string.register_too_multifarious;
 				}
 				if (resid != -1)

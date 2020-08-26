@@ -10,7 +10,7 @@ import android.content.Context;
 import com.wealoha.social.ContextConfig;
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.common.ConstantsData;
 import com.wealoha.social.api.ConstantsService;
 import com.wealoha.social.beans.instagram.InstagramResult;
@@ -65,13 +65,13 @@ public class ConfigPresenter extends AbsPresenter {
 	 * @date:2015年7月30日
 	 */
 	public void checkNewVersion() {
-		constantsService.get(new Callback<Result<ConstantsData>>() {
+		constantsService.get(new Callback<ApiResponse<ConstantsData>>() {
 
 			@Override
-			public void success(Result<ConstantsData> result, Response arg1) {
-				if (result != null && result.isOk()) {
-					if (result.getData().hasUpdateVersion) {
-						mIConfigView.updateDialog(result.getData().updateDetails);
+			public void success(ApiResponse<ConstantsData> apiResponse, Response arg1) {
+				if (apiResponse != null && apiResponse.isOk()) {
+					if (apiResponse.getData().hasUpdateVersion) {
+						mIConfigView.updateDialog(apiResponse.getData().updateDetails);
 					} else {
 						ToastUtil.longToast(mCtx, R.string.no_new_version);
 					}
@@ -116,11 +116,11 @@ public class ConfigPresenter extends AbsPresenter {
 	 */
 	public void refreshInstagram() {
 		try {
-			mUserService.loginType(new Callback<Result<InstagramResult>>() {
+			mUserService.loginType(new Callback<ApiResponse<InstagramResult>>() {
 
 				@Override
-				public void success(Result<InstagramResult> result, Response arg1) {
-					mIConfigView.refreshInstagramSuccess(result);
+				public void success(ApiResponse<InstagramResult> apiResponse, Response arg1) {
+					mIConfigView.refreshInstagramSuccess(apiResponse);
 
 				}
 

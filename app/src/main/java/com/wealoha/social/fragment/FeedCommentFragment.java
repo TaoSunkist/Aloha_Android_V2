@@ -70,7 +70,7 @@ import com.wealoha.social.beans.FeedType;
 import com.wealoha.social.api.Feed2ListApiService;
 import com.wealoha.social.beans.Post;
 import com.wealoha.social.beans.IResultDataErrorCode;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.commons.GlobalConstants;
@@ -173,20 +173,20 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 		if (GlobalConstants.TAGS.TOPIC_DETAIL_TAG.equals(tag)) {
 			mContentEdit.setFocusableInTouchMode(false);
 			mPost = (Post) bundle.getSerializable(GlobalConstants.TAGS.POST_TAG);
-			mFeed2API.singleFeed(mPost.getPostId(), new Callback<Result<FeedGetData>>() {
+			mFeed2API.singleFeed(mPost.getPostId(), new Callback<ApiResponse<FeedGetData>>() {
 
 				@Override
 				public void failure(RetrofitError arg0) {
 				}
 
 				@Override
-				public void success(Result<FeedGetData> result, Response arg1) {
-					if (result != null && result.isOk()) {
-						if (result.getData().getList().get(0) != null) {
+				public void success(ApiResponse<FeedGetData> apiResponse, Response arg1) {
+					if (apiResponse != null && apiResponse.isOk()) {
+						if (apiResponse.getData().getList().get(0) != null) {
 							if(!isVisible()){
 								return;
 							}
-							mPost = Post.Companion.fromDTO(result.getData().getList().get(0), result.getData().getUserMap(), result.getData().getImageMap(), result.getData().getVideoMap(), result.getData().getCommentCountMap(), result.getData().getLikeCountMap());
+							mPost = Post.Companion.fromDTO(apiResponse.getData().getList().get(0), apiResponse.getData().getUserMap(), apiResponse.getData().getImageMap(), apiResponse.getData().getVideoMap(), apiResponse.getData().getCommentCountMap(), apiResponse.getData().getLikeCountMap());
 							initView(bundle);
 						}
 					}
@@ -642,7 +642,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 		}
 	}
 
-	private Callback<Result<Comment2GetData>> sendCommentCallback = new Callback<Result<Comment2GetData>>() {
+	private Callback<ApiResponse<Comment2GetData>> sendCommentCallback = new Callback<ApiResponse<Comment2GetData>>() {
 
 		@Override
 		public void failure(RetrofitError arg0) {
@@ -650,26 +650,26 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 		}
 
 		@Override
-		public void success(Result<Comment2GetData> result, Response response) {
+		public void success(ApiResponse<Comment2GetData> apiResponse, Response response) {
 			changeViewInSendTime(false);
 			if (!isVisible()) {
 				return;
 			}
-			if (result != null) {
-				if (result.isOk()) {
+			if (apiResponse != null) {
+				if (apiResponse.isOk()) {
 					mContentEdit.setText("");// 重置
 					mContentEdit.setHint(R.string.leave_hint);
 					mContentEdit.setTag(null);
 					UiUtils.hideKeyBoard(getActivity());
 					List<PostComment> postcommentlist = null;
-					postcommentlist = PostComment.Companion.fromCommentDTOList(result.getData().getList());
+					postcommentlist = PostComment.Companion.fromCommentDTOList(apiResponse.getData().getList());
 					mFeedCommentAdapter.appendListItem(Direct.Late, postcommentlist);
 					mFeedCommentAdapter.notifyDataSetChanged();
 					mContentListView.smoothScrollToPosition(mFeedCommentAdapter.getCount());// 因为listview
 					// 有头布局，所以这个地方不用-1
-				} else if (result.getData().getError() == IResultDataErrorCode.ERROR_INVALID_COMMENT) {
+				} else if (apiResponse.getData().getError() == IResultDataErrorCode.ERROR_INVALID_COMMENT) {
 					ToastUtil.shortToast(getActivity(), getString(R.string.comment_has_illegalword));
-				} else if (result.getData().getError() == IResultDataErrorCode.ERROR_BLOCK_BY_OTHER) {
+				} else if (apiResponse.getData().getError() == IResultDataErrorCode.ERROR_BLOCK_BY_OTHER) {
 					ToastUtil.shortToastCenter(getActivity(), getString(R.string.otherside_black_current_user));
 				} else {
 					ToastUtil.shortToastCenter(getActivity(), getString(R.string.Unkown_Error));
@@ -732,11 +732,11 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	}
 
 	private void deleteComment(final String commentId) {
-		mCommentService.deleteComment(mPost != null ? mPost.getPostId() : "", commentId, new Callback<Result<ResultData>>() {
+		mCommentService.deleteComment(mPost != null ? mPost.getPostId() : "", commentId, new Callback<ApiResponse<ResultData>>() {
 
 			@Override
-			public void success(Result<ResultData> result, Response arg1) {
-				if (result != null && result.isOk()) {
+			public void success(ApiResponse<ResultData> apiResponse, Response arg1) {
+				if (apiResponse != null && apiResponse.isOk()) {
 					mFeedCommentAdapter.removeItem(removePosition);
 					return;
 				}

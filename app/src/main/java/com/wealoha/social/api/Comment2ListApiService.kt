@@ -44,23 +44,23 @@ class Comment2ListApiService : AbsBaseListApiService<PostComment, String>() {
             cursor,
             count,
             direct.value,
-            object : Callback<Result<Comment2GetData>> {
+            object : Callback<ApiResponse<Comment2GetData>> {
                 override fun failure(arg0: RetrofitError) {}
-                override fun success(result: Result<Comment2GetData>, response: Response) {
-                    if (result.isOk) {
-                        if (result.isOk) {
+                override fun success(apiResponse: ApiResponse<Comment2GetData>, response: Response) {
+                    if (apiResponse.isOk) {
+                        if (apiResponse.isOk) {
                             // 拼装数据
                             val cursorid: String = if (direct === Direct.Early) {
                                 Direct.Early.value
                             } else {
                                 Direct.Late.value
                             }
-                            callback.success(trans(result.data!!), cursorid)
+                            callback.success(trans(apiResponse.data!!), cursorid)
                         } else {
-                            callback.fail(fromResult(result), null)
+                            callback.fail(fromResult(apiResponse), null)
                         }
                     } else {
-                        callback.fail(fromResult(result), null)
+                        callback.fail(fromResult(apiResponse), null)
                     }
                 }
             })
@@ -77,18 +77,18 @@ class Comment2ListApiService : AbsBaseListApiService<PostComment, String>() {
             cursor = cursor,
             count = count,
             needCtx = true,
-            callback = object : Callback<Result<Comment2GetData>> {
+            callback = object : Callback<ApiResponse<Comment2GetData>> {
                 override fun failure(arg0: RetrofitError) {}
-                override fun success(result: Result<Comment2GetData>?, arg1: Response) {
-                    if (result != null && result.isOk) {
+                override fun success(apiResponse: ApiResponse<Comment2GetData>?, arg1: Response) {
+                    if (apiResponse != null && apiResponse.isOk) {
                         // 拼装数据
                         callback.success(
-                            trans(result.data!!),
-                            result.data!!.lateCursorId,
-                            result.data!!.nextCursorId
+                            trans(apiResponse.data!!),
+                            apiResponse.data!!.lateCursorId,
+                            apiResponse.data!!.nextCursorId
                         )
                     } else {
-                        callback.fail(fromResult(result), null)
+                        callback.fail(fromResult(apiResponse), null)
                     }
                 }
             })

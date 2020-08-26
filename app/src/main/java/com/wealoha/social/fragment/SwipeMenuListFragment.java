@@ -39,7 +39,7 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.adapter.SwipeMenuAdapter;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.ProfileData;
@@ -102,7 +102,7 @@ public class SwipeMenuListFragment extends BaseFragment implements ListItemCallb
 
     private final static int CREAT_ADAPTER = 1;
     private final static int ADAPTER_NOTIFY = 2;
-    private Result<UserListResult> mResult;
+    private ApiResponse<UserListResult> mApiResponse;
     private ProgressBar footerProgress;
     private TextView footerImg;
     private int positionTemp;
@@ -139,15 +139,15 @@ public class SwipeMenuListFragment extends BaseFragment implements ListItemCallb
         switch (msg.what) {
             case CREAT_ADAPTER:
                 boolean showMatch = mListType == LISTTYPE_LIKE || mListType == LISTTYPE_POPULARITY;
-                if (mResult != null && mSwipeList != null) {
-                    mSwipeAdapter = new SwipeMenuAdapter(mResult.getData(), showMatch);
+                if (mApiResponse != null && mSwipeList != null) {
+                    mSwipeAdapter = new SwipeMenuAdapter(mApiResponse.getData(), showMatch);
                     mSwipeList.setAdapter(mSwipeAdapter);
                 }
 
                 break;
             case ADAPTER_NOTIFY:
-                if (mResult != null && mSwipeList != null) {
-                    mSwipeAdapter.notifyDataSetChanged(mResult);
+                if (mApiResponse != null && mSwipeList != null) {
+                    mSwipeAdapter.notifyDataSetChanged(mApiResponse);
                     XL.i("LOADER_TEST", "ADAPTER_NOTIFY-----");
                 }
                 break;
@@ -159,7 +159,7 @@ public class SwipeMenuListFragment extends BaseFragment implements ListItemCallb
 
     Handler myHandler = new MenuListHandler(this);
 
-    Callback<Result<UserListResult>> userlistCallback = new Callback<Result<UserListResult>>() {
+    Callback<ApiResponse<UserListResult>> userlistCallback = new Callback<ApiResponse<UserListResult>>() {
 
         @Override
         public void failure(RetrofitError arg0) {
@@ -169,11 +169,11 @@ public class SwipeMenuListFragment extends BaseFragment implements ListItemCallb
         }
 
         @Override
-        public void success(Result<UserListResult> result, Response arg1) {
+        public void success(ApiResponse<UserListResult> apiResponse, Response arg1) {
             if (!isVisible()) {
                 return;
             }
-            if (result != null && result.isOk()) {
+            if (apiResponse != null && apiResponse.isOk()) {
                 addFooterView(true);
                 Message msg = new Message();
                 if (mSwipeAdapter == null) {
@@ -181,22 +181,22 @@ public class SwipeMenuListFragment extends BaseFragment implements ListItemCallb
                 } else {
                     msg.what = ADAPTER_NOTIFY;
                 }
-                mResult = result;
+                mApiResponse = apiResponse;
                 myHandler.sendMessage(msg);
                 if (mUsers == null) {
                     mUsers = new ArrayList<User>();
                 }
-                mUsers.addAll(result.getData().getList());
-                cursor = result.getData().getNextCursorId();
+                mUsers.addAll(apiResponse.getData().getList());
+                cursor = apiResponse.getData().getNextCursorId();
                 if (TextUtils.isEmpty(cursor) || "null".equals(cursor)) {
                     removeFooterView();
                 }
                 // 更新人氣列表表頭
                 if (mListType == LISTTYPE_POPULARITY && unlockCount != null) {
-                    unlockCount.setText(context.getResources().getString(R.string.showing_latest_followers, result.getData().getAlohaGetUnlockCount()));
+                    unlockCount.setText(context.getResources().getString(R.string.showing_latest_followers, apiResponse.getData().getAlohaGetUnlockCount()));
                 }
             } else {
-                XL.i(TAG, result.getData().getError() + "");
+                XL.i(TAG, apiResponse.getData().getError() + "");
                 addFooterView(false);
             }
         }
@@ -364,7 +364,7 @@ public class SwipeMenuListFragment extends BaseFragment implements ListItemCallb
      */
     private void deleteFromBlackList(final int position) {
         User user = mUsers.get(position);
-        mUserService.unblock(user.getId(), new Callback<Result<ResultData>>() {
+        mUserService.unblock(user.getId(), new Callback<ApiResponse<ResultData>>() {
 
             @Override
             public void failure(RetrofitError arg0) {
@@ -373,11 +373,11 @@ public class SwipeMenuListFragment extends BaseFragment implements ListItemCallb
             }
 
             @Override
-            public void success(Result<ResultData> result, Response arg1) {
-                if (result == null) {
+            public void success(ApiResponse<ResultData> apiResponse, Response arg1) {
+                if (apiResponse == null) {
                     return;
                 }
-                if (result.isOk()) {
+                if (apiResponse.isOk()) {
 
                     if (mUsers != null && mUsers.size() > position) {
                         mUsers.remove(position);
@@ -396,7 +396,7 @@ public class SwipeMenuListFragment extends BaseFragment implements ListItemCallb
      */
     private void deleteFromLikeList(final int position) {
         XL.i("UNALOHA_SOMEONE", "deleteFromLikeList" + position);
-        mUserService.dislikeUser(mUsers.get(position).getId(), new Callback<Result<ResultData>>() {
+        mUserService.dislikeUser(mUsers.get(position).getId(), new Callback<ApiResponse<ResultData>>() {
 
             @Override
             public void failure(RetrofitError arg0) {
@@ -404,7 +404,7 @@ public class SwipeMenuListFragment extends BaseFragment implements ListItemCallb
             }
 
             @Override
-            public void success(Result<ResultData> result, Response arg1) {
+            public void success(ApiResponse<ResultData> apiResponse, Response arg1) {
                 try {
                     mUsers.remove(position);
                 } catch (IndexOutOfBoundsException e) {
@@ -553,16 +553,16 @@ public class SwipeMenuListFragment extends BaseFragment implements ListItemCallb
         if (mProfileService == null) {
             return;
         }
-        mProfileService.view(userid, new Callback<Result<ProfileData>>() {
+        mProfileService.view(userid, new Callback<ApiResponse<ProfileData>>() {
 
             @Override
-            public void success(Result<ProfileData> result, Response arg1) {
-                if (result == null || !result.isOk() || mUsers == null || mSwipeAdapter == null) {
+            public void success(ApiResponse<ProfileData> apiResponse, Response arg1) {
+                if (apiResponse == null || !apiResponse.isOk() || mUsers == null || mSwipeAdapter == null) {
                     return;
                 }
                 for (User user : mUsers) {
                     if (user.getId().equals(userid)) {
-                        user.setMatch(result.getData().user.getMatch());
+                        user.setMatch(apiResponse.getData().user.getMatch());
                         mSwipeAdapter.notifyDataSetChangedByList(mUsers);
                         break;
                     }

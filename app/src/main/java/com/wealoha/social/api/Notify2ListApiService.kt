@@ -172,14 +172,14 @@ class Notify2ListApiService : AbsBaseListApiService<Notify2, Boolean>() {
         param: Boolean,
         callback: ApiListCallback<Notify2?>
     ) {
-        notify2api!!.getNotifies(cursor, count, param, object : Callback<Result<NotifyGetData>> {
-            override fun success(result: Result<NotifyGetData>, response: Response) {
+        notify2api!!.getNotifies(cursor, count, param, object : Callback<ApiResponse<NotifyGetData>> {
+            override fun success(apiResponse: ApiResponse<NotifyGetData>, response: Response) {
                 XL.d(TAG, "加载数据成功")
-                if (result.isOk) {
+                if (apiResponse.isOk) {
                     // 成功，拼装数据
-                    callback.success(trans(result.data!!), result.data!!.nextCursorId)
+                    callback.success(trans(apiResponse.data!!), apiResponse.data!!.nextCursorId)
                 } else {
-                    callback.fail(fromResult(result), null)
+                    callback.fail(fromResult(apiResponse), null)
                 }
             }
 
@@ -193,8 +193,8 @@ class Notify2ListApiService : AbsBaseListApiService<Notify2, Boolean>() {
      * 清理未读数
      */
     fun clearUnread() {
-        notify2api?.clearUnread(object : Callback<Result<ResultData>> {
-            override fun success(arg0: Result<ResultData>, arg1: Response) {
+        notify2api?.clearUnread(object : Callback<ApiResponse<ResultData>> {
+            override fun success(arg0: ApiResponse<ResultData>, arg1: Response) {
                 XL.d(TAG, "clear成功")
                 // 清理本地的未读数
                 NotificationCount.setCommentCount(0)

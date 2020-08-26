@@ -19,7 +19,7 @@ import com.amap.api.location.LocationManagerProxy;
 import com.amap.api.location.LocationProviderProxy;
 import com.wealoha.social.AppApplication;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.inject.Injector;
 import com.wealoha.social.utils.XL;
@@ -89,7 +89,7 @@ public class AppLocationService extends Service implements AMapLocationListener 
 			XL.i("LOCATION_SERVICE", "LOCATION_SERVICE y:" + amapLocation.getLongitude());
 			((AppApplication) getApplication()).locationXY[0] = amapLocation.getLatitude();
 			((AppApplication) getApplication()).locationXY[1] = amapLocation.getLongitude();
-			locactionService.locationRecord(amapLocation.getLatitude(), amapLocation.getLongitude(), new Callback<Result<ResultData>>() {
+			locactionService.locationRecord(amapLocation.getLatitude(), amapLocation.getLongitude(), new Callback<ApiResponse<ResultData>>() {
 
 				@Override
 				public void failure(RetrofitError error) {
@@ -97,7 +97,7 @@ public class AppLocationService extends Service implements AMapLocationListener 
 				}
 
 				@Override
-				public void success(Result<ResultData> arg0, Response arg1) {
+				public void success(ApiResponse<ResultData> arg0, Response arg1) {
 					XL.i("LOCATION_SERVICE_TEST", "success service:");
 				}
 			});

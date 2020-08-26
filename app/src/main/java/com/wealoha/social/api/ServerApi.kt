@@ -17,7 +17,7 @@ interface ServerApi {
     fun getPosts(
         @Field("cursor") cursor: String,
         @Field("count") count: Int?,
-        callback: Callback<Result<FeedGetData>>
+        callback: Callback<ApiResponse<FeedGetData>>
     )
 
     @FormUrlEncoded
@@ -26,7 +26,7 @@ interface ServerApi {
         @Field("uid") userId: String,
         @Field("cursor") cursor: String,
         @Field("count") count: Int?,
-        callback: Callback<Result<FeedGetData>>
+        callback: Callback<ApiResponse<FeedGetData>>
     )
 
     /**
@@ -38,7 +38,7 @@ interface ServerApi {
     @GET("/v1/feed/detail")
     fun singleFeed(
         @Query("postId") postId: String,
-        callback: Callback<Result<FeedGetData>>
+        callback: Callback<ApiResponse<FeedGetData>>
     )
 
     /**
@@ -52,7 +52,7 @@ interface ServerApi {
     @POST("/v1/feed/like")
     fun praisePost(
         @Field("postId") postId: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -66,7 +66,7 @@ interface ServerApi {
     @POST("/v1/feed/like/cancel")
     fun dislikePost(
         @Field("postId") postId: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -80,7 +80,7 @@ interface ServerApi {
     @POST("/v1/feed/delete")
     fun deletePost(
         @Field("postId") postId: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -95,7 +95,7 @@ interface ServerApi {
         @Query("postId") postId: String,
         @Query("cursor") cursor: String,
         @Query("count") count: Int,
-        callback: Callback<Result<UserListGetData>>
+        callback: Callback<ApiResponse<UserListGetData>>
     )
 
     /**
@@ -109,7 +109,7 @@ interface ServerApi {
     fun getPraisedList(
         @Query("cursor") cursor: String,
         @Query("count") count: Int,
-        callback: Callback<Result<FeedGetData>>
+        callback: Callback<ApiResponse<FeedGetData>>
     )
 
     /**
@@ -123,14 +123,14 @@ interface ServerApi {
     fun getTagedList(
         @Query("cursor") cursor: String,
         @Query("count") count: Int,
-        callback: Callback<Result<FeedGetData>>
+        callback: Callback<ApiResponse<FeedGetData>>
     )
 
     @GET("/v1/hashtag/activity/list")
     fun getHashTag(
         @Query("latitude") latitude: String,
         @Query("longitude") longitude: String,
-        callback: Callback<Result<FeedGetData>>
+        callback: Callback<ApiResponse<FeedGetData>>
     )
 
     /**
@@ -146,11 +146,11 @@ interface ServerApi {
         @Query("itemId") id: String,
         @Query("cursor") cursor: String,
         @Query("count") count: Int?,
-        callback: Callback<Result<TopicPostResultData>>
+        callback: Callback<ApiResponse<TopicPostResultData>>
     )
 
     @GET("/v1/hashtag/activity/list")
-    fun getHashTag(callback: Callback<Result<HashTagResultData>>)
+    fun getHashTag(callback: Callback<ApiResponse<HashTagResultData>>)
 
     // imageId
     // description 可选，需要限定长度(140)
@@ -174,7 +174,7 @@ interface ServerApi {
         @Field("tagCenterX[]") tagCenterX: Array<Float>,  //
         @Field("tagCenterY[]") tagCenterY: Array<Float>,  //
         @Field("tagUserId[]") tagUserId: Array<String>?,  //
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -192,7 +192,7 @@ interface ServerApi {
         @Field("uid") userId: String,
         @Field("cursor") cursor: String,
         @Field("count") count: Int?
-    ): Result<FeedResult>
+    ): ApiResponse<FeedResult>
 
     @FormUrlEncoded
     @POST(ServerUrlImpl.LOAD_USER_FEED)
@@ -200,7 +200,7 @@ interface ServerApi {
         @Field("uid") userId: String,
         @Field("cursor") cursor: String,
         @Field("count") count: Int?,
-        callback: Callback<Result<FeedResult>>
+        callback: Callback<ApiResponse<FeedResult>>
     )
 
     /**
@@ -215,7 +215,7 @@ interface ServerApi {
     fun feed(
         @Field("cursor") cursor: String,
         @Field("count") count: Int?
-    ): Result<FeedResult>
+    ): ApiResponse<FeedResult>
 
     /**
      * 查看自己收到的feed
@@ -229,7 +229,7 @@ interface ServerApi {
     fun feed(
         @Field("cursor") cursor: String,
         @Field("count") count: Int?,
-        callback: Callback<Result<FeedResult>>
+        callback: Callback<ApiResponse<FeedResult>>
     )
 
     /**
@@ -241,7 +241,7 @@ interface ServerApi {
     @GET(ServerUrlImpl.FEED_DETAIL)
     fun feedDetail(
         @Query("postId") postId: String,
-        callback: Callback<Result<FeedResult>>
+        callback: Callback<ApiResponse<FeedResult>>
     )
 
     @FormUrlEncoded
@@ -250,7 +250,7 @@ interface ServerApi {
         @Field("postId") postId: String,
         @Field("reason") reason: String,
         @Field("type") type: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -264,7 +264,7 @@ interface ServerApi {
     @POST(ServerUrlImpl.PRAISE_USER_FEED)
     fun praiseFeed(
         @Field("postId") postId: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -278,7 +278,7 @@ interface ServerApi {
     @POST(ServerUrlImpl.DISLIKE_USER_FEED)
     fun dislikeFeed(
         @Field("postId") postId: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -292,7 +292,7 @@ interface ServerApi {
     @POST(ServerUrlImpl.DELETE_USER_FEED)
     fun deleteFeed(
         @Field("postId") postId: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -307,7 +307,7 @@ interface ServerApi {
         @Query("postId") postId: String,
         @Query("cursor") cursor: String,
         @Query("count") count: String,
-        callback: Callback<Result<UserListResult>>
+        callback: Callback<ApiResponse<UserListResult>>
     )
     //
     // /**
@@ -364,7 +364,7 @@ interface ServerApi {
     fun aloha(
         @Field("userId") userId: String,
         @Field("refer") refer: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -376,7 +376,7 @@ interface ServerApi {
     @GET("/v1/user/profile/view")
     fun userProfile(
         @Query("id") userId: String,
-        callback: Callback<Result<Profile2Data>?>
+        callback: Callback<ApiResponse<Profile2Data>?>
     )
 
     /***
@@ -390,7 +390,7 @@ interface ServerApi {
     @FormUrlEncoded
     fun verifyPassword(
         @Field("password") password: String,
-        callback: Callback<Result<ResultData>?>
+        callback: Callback<ApiResponse<ResultData>?>
     )
 
     /***
@@ -406,7 +406,7 @@ interface ServerApi {
     @FormUrlEncoded
     fun mobileVerify(
         @Field("number") number: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -422,7 +422,7 @@ interface ServerApi {
         @Field("number") number: String,
         @Field("password") password: String,
         @Field("code") code: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -432,7 +432,7 @@ interface ServerApi {
      * @return
      */
     @GET("/v1/user/setting/match")
-    fun userMatchSetting(callback: Callback<Result<MatchSettingData>>)
+    fun userMatchSetting(callback: Callback<ApiResponse<MatchSettingData>>)
 
     /**
      * 获取一个用户的profile
@@ -441,7 +441,7 @@ interface ServerApi {
      * @return
      */
     @GET("/v1/user/promotion")
-    fun getUserPromotionSetting(callback: Callback<Result<PromotionGetData>>)
+    fun getUserPromotionSetting(callback: Callback<ApiResponse<PromotionGetData>>)
 
     @POST("/v1/user/setting/match")
     @FormUrlEncoded
@@ -451,14 +451,14 @@ interface ServerApi {
         @Field("filterAgeRangeEnd") filterAgeRangeEnd: Int?,  //
         @Field("latitude ") latitude: Double?,  //
         @Field("longitude ") longitude: Double?,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     @POST("/v1/stat/land")
     @FormUrlEncoded
     fun startLand(
         @Field("guid") guid: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -466,7 +466,7 @@ interface ServerApi {
      * @param callback
      */
     @POST(ServerUrlImpl.LOGOUT_URL)
-    fun unauth(callback: Callback<Result<ResultData>>)
+    fun unauth(callback: Callback<ApiResponse<ResultData>>)
 
     // @FormUrlEncoded
     // @POST(GlobalConstants.ServerUrlPath.PUSH_UNBINDING)
@@ -475,7 +475,7 @@ interface ServerApi {
     @POST(ServerUrlImpl.PUSH_UNBINDING)
     fun unbind(
         @Field("token") token: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     @POST(ServerUrlImpl.CLIENT_LOG)
@@ -484,7 +484,7 @@ interface ServerApi {
         @Field("message") message: String,
         @Field("exception") exception: String,  //
         @Field("timestamp") createTime: Long?
-    ): Result<ResultData>
+    ): ApiResponse<ResultData>
 
     /**
      * @Description:从通知列表进入的Comment(第一次请求), 客户端传入参数postId, cursor, count, needCtx=true：
@@ -506,7 +506,7 @@ interface ServerApi {
         @Query("cursor") cursor: String,  //
         @Query("count") count: Int,  //
         @Query("needCtx") needCtx: Boolean,
-        callback: Callback<Result<Comment2GetData>>
+        callback: Callback<ApiResponse<Comment2GetData>>
     )
 
     /**
@@ -529,7 +529,7 @@ interface ServerApi {
         @Query("cursor") cursor: String,  //
         @Query("count") count: Int,  //
         @Query("direct") direct: String,
-        callback: Callback<Result<Comment2GetData>>
+        callback: Callback<ApiResponse<Comment2GetData>>
     )
 
     /**
@@ -548,7 +548,7 @@ interface ServerApi {
         @Field("postId") postId: String,  //
         @Field("replyUserId") userid: String,  //
         @Field("comment") comment: String,  //
-        callback: Callback<Result<Comment2GetData>>
+        callback: Callback<ApiResponse<Comment2GetData>>
     )
 
     /**
@@ -565,7 +565,7 @@ interface ServerApi {
         @Query("postId") postId: String,
         @Query("cursor") cursor: String,
         @Query("count") count: String,
-        callback: Callback<Result<CommentResult>>
+        callback: Callback<ApiResponse<CommentResult>>
     )
 
     /**
@@ -582,7 +582,7 @@ interface ServerApi {
         @Field("postId") postId: String,
         @Field("replyUserId") userid: String,
         @Field("comment") comment: String,
-        callback: Callback<Result<Comment2GetData>>
+        callback: Callback<ApiResponse<Comment2GetData>>
     )
 
     /**
@@ -599,7 +599,7 @@ interface ServerApi {
         @Field("postId") postId: String,
         @Field("replyCommentId") replyCommentId: String,
         @Field("comment") comment: String,
-        callback: Callback<Result<Comment2GetData>>
+        callback: Callback<ApiResponse<Comment2GetData>>
     )
 
     /**
@@ -616,7 +616,7 @@ interface ServerApi {
         @Field("postId") postId: String,
         @Field("replyUserId") userid: String,
         @Field("comment") comment: String,
-        callback: Callback<Result<CommentResult>>
+        callback: Callback<ApiResponse<CommentResult>>
     )
 
     @FormUrlEncoded
@@ -624,7 +624,7 @@ interface ServerApi {
     fun deleteComment(
         @Field("postId") postId: String,
         @Field("commentId") comment: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -639,7 +639,7 @@ interface ServerApi {
     fun connectWeibo(
         @Field("uid") uid: String,
         @Field("accessToken") accessToken: String
-    ): Result<AuthData>
+    ): ApiResponse<AuthData>
 
     /**
      * 连接微博
@@ -653,7 +653,7 @@ interface ServerApi {
     fun connectWeibo(
         @Field("uid") uid: String,
         @Field("accessToken") accessToken: String,
-        callback: Callback<Result<AuthData>>
+        callback: Callback<ApiResponse<AuthData>>
     )
 
     /**
@@ -668,7 +668,7 @@ interface ServerApi {
     fun connectFacebook(
         @Field("uid") uid: String,
         @Field("accessToken") accessToken: String,
-        callback: Callback<Result<AuthData>>
+        callback: Callback<ApiResponse<AuthData>>
     )
 
     /**
@@ -678,10 +678,10 @@ interface ServerApi {
      */
     // TODO
     @get:GET(ServerUrlImpl.URL_USER_SETTING_PUSH)
-    val pushSetting: Result<PushSettingResult>
+    val pushSetting: ApiResponse<PushSettingResult>
 
     @GET(ServerUrlImpl.URL_USER_SETTING_PUSH)
-    fun getPushSetting(callback: Callback<Result<PushSettingResult>>)
+    fun getPushSetting(callback: Callback<ApiResponse<PushSettingResult>>)
 
     /**
      * 保存设置
@@ -699,7 +699,7 @@ interface ServerApi {
         @Field("pushShowDetail") pushShowDetail: Boolean?,  //
         @Field("pushPostLike") pushPostLike: String,  //
         @Field("pushPostComment") pushPostComment: String
-    ): Result<ResultData>
+    ): ApiResponse<ResultData>
 
     @FormUrlEncoded
     @POST(ServerUrlImpl.URL_USER_SETTING_PUSH)
@@ -710,14 +710,14 @@ interface ServerApi {
         @Field("pushPostLike") pushPostLike: String,  //
         @Field("pushPostComment") pushPostComment: String,  //
         @Field("pushPostTag") pushPostTag: String,  //
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     @FormUrlEncoded
     @POST(ServerUrlImpl.URL_USER_SETTING_PUSH)
     fun savePushSetting(
         @Field("pushAloha") pushAloha: String,  //
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     @FormUrlEncoded
@@ -726,7 +726,7 @@ interface ServerApi {
         @Field("pushSound") pushSound: Boolean?,  //
         @Field("pushVibration") pushVibration: Boolean?,  //
         @Field("pushShowDetail") pushShowDetail: Boolean?
-    ): Result<PushSettingResult>
+    ): ApiResponse<PushSettingResult>
 
     /**
      * 获取活动的列表
@@ -740,7 +740,7 @@ interface ServerApi {
     fun getTopic(
         @Query("latitude") latitude: Double?,  //
         @Query("longitude") longitude: Double?,  //
-        callback: Callback<Result<TopicData>>
+        callback: Callback<ApiResponse<TopicData>>
     )
 
     /**
@@ -749,7 +749,7 @@ interface ServerApi {
      * @return
      */
     @GET(ServerUrlImpl.GET_USER_PROMOTION)
-    fun get(): Result<PromotionGetData>
+    fun get(): ApiResponse<PromotionGetData>
 
     /**
      * 获取邀请状态
@@ -757,7 +757,7 @@ interface ServerApi {
      * @return
      */
     @GET(ServerUrlImpl.GET_USER_PROMOTION)
-    operator fun get(callback: Callback<Result<PromotionGetData>>) // /**
+    operator fun get(callback: Callback<ApiResponse<PromotionGetData>>) // /**
     // * 新注册用户，提交邀请码使用
     // *
     // * @param code
@@ -777,7 +777,7 @@ interface ServerApi {
     @FormUrlEncoded
     fun getCode(
         @Field("number") number: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -790,7 +790,7 @@ interface ServerApi {
     @FormUrlEncoded
     fun getResetPasswordCode(
         @Field("number") number: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -807,7 +807,7 @@ interface ServerApi {
         @Field("number") number: String,
         @Field("code") code: String,  //
         @Field("passwordMd5") passwordMd5: String,
-        callback: Callback<Result<AuthData>>
+        callback: Callback<ApiResponse<AuthData>>
     )
 
     //
@@ -823,7 +823,7 @@ interface ServerApi {
      * @date:2015年8月4日
      */
     @GET("/v1/user/setting/privacy")
-    fun getPrivacy(callback: Callback<Result<PrivacyData>>)
+    fun getPrivacy(callback: Callback<ApiResponse<PrivacyData>>)
 
     /**
      * @param matchExcludeDistanceKm 1-1000有效，不传抹掉；大于200隐身
@@ -836,7 +836,7 @@ interface ServerApi {
     @FormUrlEncoded
     fun setPrivacy(
         @Field("matchExcludeDistanceKm") matchExcludeDistanceKm: Int?,
-        callback: Callback<Result<PrivacyData>>
+        callback: Callback<ApiResponse<PrivacyData>>
     )
 
     @FormUrlEncoded
@@ -845,17 +845,17 @@ interface ServerApi {
         @Field("uid") uid: String,  //
         @Field("accessToken") accessToken: String,  //
         @Field("month") month: Int?,  //
-        callback: Callback<Result<AuthData>>
+        callback: Callback<ApiResponse<AuthData>>
     )
 
     @POST(ServerUrlImpl.UNBIND_INSTAGRAM)
-    fun unbind(callback: Callback<Result<AuthData>>)
+    fun unbind(callback: Callback<ApiResponse<AuthData>>)
 
     @FormUrlEncoded
     @POST(ServerUrlImpl.SET_AUTO)
     fun setAuto(
         @Field("autoSync") autoSync: Boolean,  //
-        callback: Callback<Result<AuthData>>
+        callback: Callback<ApiResponse<AuthData>>
     )
 
     @FormUrlEncoded
@@ -867,7 +867,7 @@ interface ServerApi {
         @Field("longitude") longitude: Double?,  //
         @Field("count") count: Int?,  //
         @Field("cursor") cursor: String,  //
-        callback: Callback<Result<LocationResult>>
+        callback: Callback<ApiResponse<LocationResult>>
     )
 
     @FormUrlEncoded
@@ -875,14 +875,14 @@ interface ServerApi {
     fun locationRecord( //
         @Field("latitude") latitude: Double?,  //
         @Field("longitude") longitude: Double?,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     @FormUrlEncoded
     @POST("/v1/stat/logdata")
     fun logData(
         @Field("data") dataStr: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -897,7 +897,7 @@ interface ServerApi {
     fun findYou(
         @Field("keyword") keyword: String,
         @Field("count") count: Int?,
-        callback: Callback<Result<FindYouResult>>
+        callback: Callback<ApiResponse<FindYouResult>>
     )
 
     /**
@@ -908,7 +908,7 @@ interface ServerApi {
      * @return
      */
     @GET(ServerUrlImpl.TAG_SUGGEST)
-    fun defaultTagUsers(callback: Callback<Result<FindYouResult>>)
+    fun defaultTagUsers(callback: Callback<ApiResponse<FindYouResult>>)
 
     /**
      * 返回数据
@@ -917,7 +917,7 @@ interface ServerApi {
     fun findRandom(
         @Query("latitude") latitude: Double?,
         @Query("longitude") longitude: Double?
-    ): Result<MatchData>
+    ): ApiResponse<MatchData>
 
     /**
      * 返回数据
@@ -926,7 +926,7 @@ interface ServerApi {
     fun findRandom(
         @Query("latitude") latitude: Double?,
         @Query("longitude") longitude: Double?,
-        callback: Callback<Result<MatchData>>
+        callback: Callback<ApiResponse<MatchData>>
     )
 
     /**
@@ -939,7 +939,7 @@ interface ServerApi {
         @Query("latitude") latitude: Double?,
         @Query("longitude") longitude: Double?,
         @Query("resetQuota") resetQuota: Boolean
-    ): Result<MatchData>
+    ): ApiResponse<MatchData>
     /**
      * Aloha一个用户
      *
@@ -960,7 +960,7 @@ interface ServerApi {
     fun like(
         @Field("userId") userId: String,
         @Field("refer") refer: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     @POST(ServerUrlImpl.ALOHA_LIKE)
@@ -968,7 +968,7 @@ interface ServerApi {
     fun like(
         @Field("userId") userId: String,
         @Field("refer") refer: String
-    ): Result<ResultData>
+    ): ApiResponse<ResultData>
 
     /**
      * Nope一个用户
@@ -978,7 +978,7 @@ interface ServerApi {
      */
     @POST(ServerUrlImpl.ALOHA_DISLIKE)
     @FormUrlEncoded
-    fun dislike(@Field("userId") userId: String): Result<ResultData>
+    fun dislike(@Field("userId") userId: String): ApiResponse<ResultData>
 
     /**
      * @Description:
@@ -1002,20 +1002,20 @@ interface ServerApi {
         @Field("filterRegion") filterRegion: String,  //
         @Field("filterAgeRangeStart") filterAgeRangeStart: Int,  //
         @Field("filterAgeRangeEnd") filterAgeRangeEnd: Int,  //
-        callback: Callback<Result<RegionResult>>
+        callback: Callback<ApiResponse<RegionResult>>
     )
 
     @GET(ServerUrlImpl.GET_THE_SESSION_LIST)
     fun sessions(
         @Query("cursor") cursor: String,
         @Query("count") count: Int
-    ): Result<InboxSessionResult>
+    ): ApiResponse<InboxSessionResult>
 
     @GET(ServerUrlImpl.GET_THE_SESSION_LIST)
     fun sessions(
         @Query("cursor") cursor: String,
         @Query("count") count: Int,
-        callback: Callback<Result<InboxSessionResult>>
+        callback: Callback<ApiResponse<InboxSessionResult>>
     )
 
     @GET(ServerUrlImpl.GET_SMS_LIST)
@@ -1023,7 +1023,7 @@ interface ServerApi {
         @Query("sessionId") sessionId: String,
         @Query("cursor") cursor: String,
         @Query("count") count: Int
-    ): Result<InboxMessageResult>
+    ): ApiResponse<InboxMessageResult>
 
     /**
      * 获取单个会话
@@ -1035,7 +1035,7 @@ interface ServerApi {
     @GET(ServerUrlImpl.GET_SINGLE_SESSION)
     fun getInboxSession(
         @Query("sessionId") sessionId: String,
-        callback: Callback<Result<InboxSessionResult>>
+        callback: Callback<ApiResponse<InboxSessionResult>>
     )
 
     /**
@@ -1048,7 +1048,7 @@ interface ServerApi {
     @FormUrlEncoded
     fun post(
         @Field("sessionId") sessionId: String,
-        callback: Callback<Result<InboxSessionResult>>
+        callback: Callback<ApiResponse<InboxSessionResult>>
     )
 
     /**
@@ -1061,7 +1061,7 @@ interface ServerApi {
     @FormUrlEncoded
     fun clearUnread(
         @Field("sessionId") sessionId: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -1076,7 +1076,7 @@ interface ServerApi {
      */
     @POST(ServerUrlImpl.INBOX_SESSION_CLEAR_UNREAD)
     @FormUrlEncoded
-    fun clearUnread(@Field("sessionId") sessionId: String): Result<ResultData>
+    fun clearUnread(@Field("sessionId") sessionId: String): ApiResponse<ResultData>
 
     /**
      * 清理会话未读数
@@ -1088,7 +1088,7 @@ interface ServerApi {
     @FormUrlEncoded
     fun bindPushToUser(
         @Field("token") token: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -1097,7 +1097,7 @@ interface ServerApi {
      * @param callback
      */
     @GET(ServerUrlImpl.INBOX_SESSION_UNREAD)
-    fun unread(callback: Callback<Result<UnreadData>>)
+    fun unread(callback: Callback<ApiResponse<UnreadData>>)
 
     /**
      * 获取单个session
@@ -1108,7 +1108,7 @@ interface ServerApi {
     @GET(ServerUrlImpl.INBOX_SESSION_GET)
     fun sessionGet(
         @Query("sessionId") sessionId: String,
-        callback: Callback<Result<InboxSessionResult>>
+        callback: Callback<ApiResponse<InboxSessionResult>>
     )
 
     /**
@@ -1128,7 +1128,7 @@ interface ServerApi {
         @Part("image") file: TypedFile?,
         @Part("toUserId") toUserId: String,
         @Part("state") state: String,
-        callback: Callback<Result<InboxMessageResult>>
+        callback: Callback<ApiResponse<InboxMessageResult>>
     )
 
     /**
@@ -1147,7 +1147,7 @@ interface ServerApi {
         @Field("text") text: String,
         @Field("toUserId") toUserId: String,
         @Field("state") state: String,
-        callback: Callback<Result<InboxMessageResult>>
+        callback: Callback<ApiResponse<InboxMessageResult>>
     )
 
     /**
@@ -1167,7 +1167,7 @@ interface ServerApi {
     fun delSingleSms(
         @Field("sessionId") sessionId: String,
         @Field("messageId") messageId: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     @GET("/v1/feed/notify2")
@@ -1175,18 +1175,18 @@ interface ServerApi {
         @Query("cursor") cursor: String,
         @Query("count") count: Int?,
         @Query("aloha") aloha: Boolean?,
-        callback: Callback<Result<NotifyGetData>>
+        callback: Callback<ApiResponse<NotifyGetData>>
     )
 
     @POST("/v1/feed/notify2/clearUnread")
-    fun clearUnread(callback: Callback<Result<ResultData>>)
+    fun clearUnread(callback: Callback<ApiResponse<ResultData>>)
 
     @GET("/v1/feed/notify2/mergeUsers")
     fun getMergeUsers(
         @Query("notifyId") notifyId: String,
         @Query("count") count: Int?,
         @Query("cursor") cursor: String,
-        callback: Callback<Result<MergeUsersGetData>>
+        callback: Callback<ApiResponse<MergeUsersGetData>>
     )
 
     @POST("/oauth/access_token")
@@ -1217,7 +1217,7 @@ interface ServerApi {
      * @return
      */
     @GET(ServerUrlImpl.USER_PROFILE_VIEW)
-    fun view(@Query("id") userId: String): Result<ProfileData>
+    fun view(@Query("id") userId: String): ApiResponse<ProfileData>
 
     /**
      * 获取一个用户的profile
@@ -1228,7 +1228,7 @@ interface ServerApi {
     @GET(ServerUrlImpl.USER_PROFILE_VIEW)
     fun view(
         @Query("id") userId: String,
-        callback: Callback<Result<ProfileData>>
+        callback: Callback<ApiResponse<ProfileData>>
     )
 
     /**
@@ -1241,7 +1241,7 @@ interface ServerApi {
     @FormUrlEncoded
     fun getUserProfile(
         @Field("id") userId: String,
-        callback: Callback<Result<ProfileData>>
+        callback: Callback<ApiResponse<ProfileData>>
     )
 
     /**
@@ -1260,7 +1260,7 @@ interface ServerApi {
     fun recordCardClick(
         @Field("userId") userId: String,
         @Field("shareByUserId") shareByUserId: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -1275,7 +1275,7 @@ interface ServerApi {
     fun reportUser(
         @Field("userId") userId: String,
         @Field("type") type: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -1289,7 +1289,7 @@ interface ServerApi {
     @POST(ServerUrlImpl.REPORT_USER)
     fun reportUser(
         @Field("userId") userId: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -1302,7 +1302,7 @@ interface ServerApi {
     @POST(ServerUrlImpl.BLACK_USER)
     fun blackUser(
         @Field("userId") userId: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -1315,7 +1315,7 @@ interface ServerApi {
     @POST(ServerUrlImpl.CANCEL_ALOHA_USER)
     fun dislikeUser(
         @Field("userId") userId: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -1331,7 +1331,7 @@ interface ServerApi {
     fun blackList(
         @Query("cursor") cursor: String,
         @Query("count") count: String,
-        callback: Callback<Result<UserListResult>>
+        callback: Callback<ApiResponse<UserListResult>>
     )
 
     /**
@@ -1347,7 +1347,7 @@ interface ServerApi {
     fun likeList(
         @Query("cursor") cursor: String,
         @Query("count") limit: String,
-        callback: Callback<Result<UserListResult>>
+        callback: Callback<ApiResponse<UserListResult>>
     )
 
     /**
@@ -1363,7 +1363,7 @@ interface ServerApi {
     fun popularityList(
         @Query("cursor") cursor: String,
         @Query("count") limit: String,
-        callback: Callback<Result<UserListResult>>
+        callback: Callback<ApiResponse<UserListResult>>
     )
 
     /**
@@ -1376,7 +1376,7 @@ interface ServerApi {
     @POST(ServerUrlImpl.UNBLOCK)
     fun unblock(
         @Field("userId") userId: String,
-        callback: Callback<Result<ResultData>>
+        callback: Callback<ApiResponse<ResultData>>
     )
 
     /**
@@ -1389,7 +1389,7 @@ interface ServerApi {
     @POST(ServerUrlImpl.REGISTER_LOGIN)
     fun login(
         @Field("number") number: String,
-        callback: Callback<Result<AuthData>>
+        callback: Callback<ApiResponse<AuthData>>
     )
 
     /**
@@ -1403,7 +1403,7 @@ interface ServerApi {
     fun login(
         @Field("account") number: String,
         @Field("password") password: String,
-        callback: Callback<Result<AuthData>>
+        callback: Callback<ApiResponse<AuthData>>
     )
 
     /**
@@ -1413,7 +1413,7 @@ interface ServerApi {
      * @return
      */
     @GET(ServerUrlImpl.LOGIN_TYPE)
-    fun loginType(callback: Callback<Result<InstagramResult>>)
+    fun loginType(callback: Callback<ApiResponse<InstagramResult>>)
 
     /**
      * @Description:
@@ -1431,7 +1431,7 @@ interface ServerApi {
     fun reqAlertPassWord(
         @Field("password") number: String,
         @Field("newPassword") newPassword: String,
-        callback: Callback<Result<AuthData>>
+        callback: Callback<ApiResponse<AuthData>>
     )
 
     /**
@@ -1464,7 +1464,7 @@ interface ServerApi {
         @Field("selfPurpose") selfPurpose: String,
         @Field("avatarImageId") mImgid: String,  //
         @Field("summary") summary: String,
-        callback: Callback<Result<AuthData>>
+        callback: Callback<ApiResponse<AuthData>>
     )
 
     /**
@@ -1481,7 +1481,7 @@ interface ServerApi {
     @POST(ServerUrlImpl.UPLOAD_FEED_JPG)
     fun sendSingleFeed(
         @Part("image") file: TypedFile?,
-        callback: Callback<Result<ImageUploadResult>>
+        callback: Callback<ApiResponse<ImageUploadResult>>
     )
 
     @FormUrlEncoded
@@ -1493,7 +1493,7 @@ interface ServerApi {
         @Field("birthday") birthday: String,  //
         @Field("regionCode") regionCode: String,
         @Field("avatarImageId") avatarImageId: String,  //
-        callback: Callback<Result<AuthData>>
+        callback: Callback<ApiResponse<AuthData>>
     )
 
     @FormUrlEncoded
@@ -1505,6 +1505,6 @@ interface ServerApi {
         @Field("birthday") birthday: String,  //
         @Field("regionCode") regionCode: String,
         @Field("avatarImageId") avatarImageId: String,  //
-        callback: Callback<Result<AuthData>>
+        callback: Callback<ApiResponse<AuthData>>
     )
 }

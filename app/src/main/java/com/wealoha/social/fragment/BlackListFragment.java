@@ -28,7 +28,7 @@ import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.squareup.picasso.Picasso;
 import com.wealoha.social.R;
 import com.wealoha.social.beans.BlackListResult;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.commons.GlobalConstants;
@@ -94,14 +94,14 @@ public class BlackListFragment extends BaseFragment implements OnSlideListener, 
             @Override
             public void onSuccess(ResponseInfo<String> arg0) {
 
-                Result<BlackListResult> result = JsonController.parseJson(arg0.result, new TypeToken<Result<BlackListResult>>() {
+                ApiResponse<BlackListResult> apiResponse = JsonController.parseJson(arg0.result, new TypeToken<ApiResponse<BlackListResult>>() {
                 }.getType());
                 Log.i("DELETE_COMMENT", arg0.result);
-                if (result.isOk()) {
+                if (apiResponse.isOk()) {
                     // result中还有nextcursorid,这里先只用comments和userMap
-                    mBTUsers = result.getData().getList();
+                    mBTUsers = apiResponse.getData().getList();
                     // 更新
-                    if (result.getData().getList().size() > 0) {
+                    if (apiResponse.getData().getList().size() > 0) {
                         refreshView();
                     }
 
@@ -248,9 +248,9 @@ public class BlackListFragment extends BaseFragment implements OnSlideListener, 
             @Override
             public void onSuccess(ResponseInfo<String> arg0) {
 
-                Result<ResultData> result = JsonController.parseJson(arg0.result, new TypeToken<Result<ResultData>>() {
+                ApiResponse<ResultData> apiResponse = JsonController.parseJson(arg0.result, new TypeToken<ApiResponse<ResultData>>() {
                 }.getType());
-                if (result.isOk()) {
+                if (apiResponse.isOk()) {
                     // ToastUtil.shortToast(context,
                     // getString(R.string.network_error));
                     Log.i("ALOHA_REMOVE_BTUSER", "SUCCESS");

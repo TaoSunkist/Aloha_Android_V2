@@ -8,7 +8,7 @@ import retrofit.mime.TypedInput;
 
 import com.google.gson.Gson;
 import com.squareup.otto.Bus;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.imagemap.HasImageMap;
 import com.wealoha.social.event.TicketInvalidEvent;
@@ -36,13 +36,13 @@ public class CustomGsonConverter extends GsonConverter {
 	@Override
 	public Object fromBody(TypedInput input, Type type) throws ConversionException {
 		Object result = super.fromBody(input, type);
-		if (result instanceof Result) {
+		if (result instanceof ApiResponse) {
 			@SuppressWarnings("unchecked")
-			Result<ResultData> r = (Result<ResultData>) result;
+			ApiResponse<ResultData> r = (ApiResponse<ResultData>) result;
 			XL.d(TAG, "Result: " + r.getStatus());
 
 			if (!r.isOk()) {
-				if (r.getStatus() == Result.STATUS_CODE_FORBIDEN) {
+				if (r.getStatus() == ApiResponse.STATUS_CODE_FORBIDEN) {
 					// 票被踢了
 					XL.w(TAG, "票无效，发送事件..");
 					bus.post(new TicketInvalidEvent());

@@ -21,7 +21,7 @@ import com.wealoha.social.AppApplication;
 import com.wealoha.social.ContextConfig;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.LocationServiceStatus;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.inject.Injector;
 
@@ -87,10 +87,10 @@ public class AMapUtil implements AMapLocationListener {
 		}
 		String json = new Gson().toJson(new LocationServiceStatus(localEnable, errorCode));
 		XL.i("LOCATION_UTIL", "json:" + json);
-		locactionServiceAPI.logData(json, new Callback<Result<ResultData>>() {
+		locactionServiceAPI.logData(json, new Callback<ApiResponse<ResultData>>() {
 			
 			@Override
-			public void success(Result<ResultData> arg0, Response arg1) {
+			public void success(ApiResponse<ResultData> arg0, Response arg1) {
 			}
 			
 			@Override
@@ -116,7 +116,7 @@ public class AMapUtil implements AMapLocationListener {
 			// 获取地理位置信息的时间
 			ContextConfig.getInstance().putLongWithFilename(CACHE_NAME, System.currentTimeMillis());
 
-			locactionService.locationRecord(amapLocation.getLatitude(), amapLocation.getLongitude(), new Callback<Result<ResultData>>() {
+			locactionService.locationRecord(amapLocation.getLatitude(), amapLocation.getLongitude(), new Callback<ApiResponse<ResultData>>() {
 
 				@Override
 				public void failure(RetrofitError error) {
@@ -124,7 +124,7 @@ public class AMapUtil implements AMapLocationListener {
 				}
 
 				@Override
-				public void success(Result<ResultData> arg0, Response arg1) {
+				public void success(ApiResponse<ResultData> arg0, Response arg1) {
 					XL.i("LOCATION_SERVICE_TEST", "success service:");
 				}
 			});

@@ -61,7 +61,7 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.activity.WebActivity;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.message.ImageMessage;
@@ -966,7 +966,7 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
      * @copyright wealoha.com
      * @Date:2015-1-4
      */
-    class SmsSendDealCallBack implements Callback<Result<InboxMessageResult>> {
+    class SmsSendDealCallBack implements Callback<ApiResponse<InboxMessageResult>> {
 
         private ViewHolder mViewHolder;
         private String mState;
@@ -982,12 +982,12 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
         }
 
         @Override
-        public void success(Result<InboxMessageResult> result, Response arg1) {
-            if (result != null && result.isOk()) {
-                final Message newMessage = result.getData().getList().get(0);
+        public void success(ApiResponse<InboxMessageResult> apiResponse, Response arg1) {
+            if (apiResponse != null && apiResponse.isOk()) {
+                final Message newMessage = apiResponse.getData().getList().get(0);
                 sendingMessageSuccess(newMessage);
                 // changeUI(View.GONE, View.GONE);
-            } else if (result.getData().getError() == ResultData.ERROR_BLOCK_BY_OTHER) {
+            } else if (apiResponse.getData().getError() == ResultData.ERROR_BLOCK_BY_OTHER) {
                 // 發送失敗
                 ToastUtil.shortToast(mContext, mContext.getString(R.string.failed_to_send_message_cause_blocked));
                 sendingMessageFail(mState);
@@ -1054,7 +1054,7 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
             cacheRestore();
             return;
         } else {
-            mMessageService.delSingleSms(mSessionId, viewHolder.getMessage().id, new Callback<Result<ResultData>>() {
+            mMessageService.delSingleSms(mSessionId, viewHolder.getMessage().id, new Callback<ApiResponse<ResultData>>() {
 
                 @Override
                 public void failure(RetrofitError arg0) {
@@ -1062,7 +1062,7 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
                 }
 
                 @Override
-                public void success(Result<ResultData> arg0, Response arg1) {
+                public void success(ApiResponse<ResultData> arg0, Response arg1) {
                     try {
                         mMessageList.remove(mMessageList.indexOf(viewHolder.getMessage()));
                         notifyDataSetChanged();

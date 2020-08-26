@@ -28,7 +28,7 @@ import com.wealoha.social.LocationActivity;
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.MatchSettingData;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.PromotionGetData;
 import com.wealoha.social.utils.AMapUtil;
@@ -207,14 +207,14 @@ public class FilterSettingAct extends BaseFragAct implements OnClickListener, On
 	 * @return void
 	 */
 	private void openProFeatrue() {
-		mUserAPI.getUserPromotionSetting(new Callback<Result<PromotionGetData>>() {
+		mUserAPI.getUserPromotionSetting(new Callback<ApiResponse<PromotionGetData>>() {
 
 			@Override
-			public void success(Result<PromotionGetData> result, Response arg1) {
-				if (result != null) {
-					if (result.isOk()) {
+			public void success(ApiResponse<PromotionGetData> apiResponse, Response arg1) {
+				if (apiResponse != null) {
+					if (apiResponse.isOk()) {
 						Intent intent = new Intent(FilterSettingAct.this, ProFeatureAct.class);
-						intent.putExtra(PromotionGetData.TAG, result.getData());
+						intent.putExtra(PromotionGetData.TAG, apiResponse.getData());
 						startActivity(intent);
 					} else {
 						ToastUtil.shortToast(mContext, R.string.network_error);
@@ -325,7 +325,7 @@ public class FilterSettingAct extends BaseFragAct implements OnClickListener, On
 
 	private void saveToServer() {
 		Double[] locations = AppApplication.getInstance().locationXY;
-		mUserAPI.saveMatchSetting(mRegionKey, mStartAge, mEndAge, locations[0], locations[1], new Callback<Result<ResultData>>() {
+		mUserAPI.saveMatchSetting(mRegionKey, mStartAge, mEndAge, locations[0], locations[1], new Callback<ApiResponse<ResultData>>() {
 
 			@Override
 			public void failure(RetrofitError arg0) {
@@ -334,9 +334,9 @@ public class FilterSettingAct extends BaseFragAct implements OnClickListener, On
 			}
 
 			@Override
-			public void success(Result<ResultData> result, Response arg1) {
+			public void success(ApiResponse<ResultData> apiResponse, Response arg1) {
 				showProgressBar(false);
-				if (result != null && result.isOk()) {
+				if (apiResponse != null && apiResponse.isOk()) {
 					if (AppApplication.mUserList != null) {// 清空原有的翻牌子数据
 						AppApplication.mUserList.clear();
 					}

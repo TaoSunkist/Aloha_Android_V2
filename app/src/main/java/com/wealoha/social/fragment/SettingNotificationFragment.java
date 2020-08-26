@@ -23,14 +23,14 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.ContextConfig;
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.PushSettingResult;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.utils.FontUtil.Font;
 import com.wealoha.social.view.custom.SlideSwitch;
 import com.wealoha.social.view.custom.SlideSwitch.OnSwitchChangedListener;
 
-public class SettingNotificationFragment extends BaseFragment implements LoaderManager.LoaderCallbacks<Result<PushSettingResult>>, OnSwitchChangedListener, OnClickListener {
+public class SettingNotificationFragment extends BaseFragment implements LoaderManager.LoaderCallbacks<ApiResponse<PushSettingResult>>, OnSwitchChangedListener, OnClickListener {
 
     @Inject
     ServerApi settingService;
@@ -102,20 +102,20 @@ public class SettingNotificationFragment extends BaseFragment implements LoaderM
     }
 
     @Override
-    public Loader<Result<PushSettingResult>> onCreateLoader(int i, Bundle bundle) {
+    public Loader<ApiResponse<PushSettingResult>> onCreateLoader(int i, Bundle bundle) {
         if (i == REQUEST_CODE_LOAD_SETTING) {
-            return new AsyncLoader<Result<PushSettingResult>>(context) {
+            return new AsyncLoader<ApiResponse<PushSettingResult>>(context) {
 
                 @Override
-                public Result<PushSettingResult> loadInBackground() {
+                public ApiResponse<PushSettingResult> loadInBackground() {
                     return settingService.getPushSetting();
                 }
             };
         } else if (i == REQUEST_CODE_SAVE_SETTING) {
-            return new AsyncLoader<Result<PushSettingResult>>(context) {
+            return new AsyncLoader<ApiResponse<PushSettingResult>>(context) {
 
                 @Override
-                public Result<PushSettingResult> loadInBackground() {
+                public ApiResponse<PushSettingResult> loadInBackground() {
                     try {
                         return settingService.savePushSetting(pushSound, pushVibration, pushShowDetail);
                     } catch (Exception e) {
@@ -129,14 +129,14 @@ public class SettingNotificationFragment extends BaseFragment implements LoaderM
     }
 
     @Override
-    public void onLoadFinished(Loader<Result<PushSettingResult>> resultLoader, Result<PushSettingResult> result) {
-        if (result == null || !result.isOk()) {
+    public void onLoadFinished(Loader<ApiResponse<PushSettingResult>> resultLoader, ApiResponse<PushSettingResult> apiResponse) {
+        if (apiResponse == null || !apiResponse.isOk()) {
             return;
         }
         int loader = resultLoader.getId();
         if (loader == REQUEST_CODE_LOAD_SETTING) {
             // 加载完，更新按钮状态
-            PushSettingResult r = (PushSettingResult) result.getData();
+            PushSettingResult r = (PushSettingResult) apiResponse.getData();
             if (!r.pushEnable) {
                 switchRing.setChecked(false);
                 switchVibration.setChecked(false);
@@ -159,7 +159,7 @@ public class SettingNotificationFragment extends BaseFragment implements LoaderM
     }
 
     @Override
-    public void onLoaderReset(Loader<Result<PushSettingResult>> resultLoader) {
+    public void onLoaderReset(Loader<ApiResponse<PushSettingResult>> resultLoader) {
 
     }
 

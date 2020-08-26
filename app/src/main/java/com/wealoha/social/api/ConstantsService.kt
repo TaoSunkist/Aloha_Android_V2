@@ -1,6 +1,6 @@
 package com.wealoha.social.api
 
-import com.wealoha.social.beans.Result
+import com.wealoha.social.beans.ApiResponse
 import com.wealoha.social.beans.common.ApiEndpointData
 import com.wealoha.social.beans.common.ConstantsData
 import com.wealoha.social.impl.ServerUrlImpl
@@ -17,7 +17,7 @@ import retrofit.http.GET
  */
 interface ConstantsService {
     @GET(ServerUrlImpl.CONSTANTS)
-    operator fun get(callback: Callback<Result<ConstantsData>>)
+    operator fun get(callback: Callback<ApiResponse<ConstantsData>>)
 
     /**
      * API可用的入口
@@ -25,5 +25,5 @@ interface ConstantsService {
      * @return
      */
     @GET(ServerUrlImpl.CONSTANTS_API_ENDPOINT)
-    fun apiEndpoing(): Result<ApiEndpointData>
+    fun apiEndpoing(): ApiResponse<ApiEndpointData>
 }

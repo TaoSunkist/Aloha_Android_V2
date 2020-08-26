@@ -22,15 +22,15 @@ class TopicPostService : AbsBaseService<TopicPost?>() {
     var postAPI: ServerApi? = null
     private var mTopicPosts: TopicPosts? = null
     fun getHashTagResult(serviceListResultCallback: ServiceListResultCallback<HashTag?>) {
-        postAPI!!.getHashTag(object : Callback<Result<HashTagResultData>> {
+        postAPI!!.getHashTag(object : Callback<ApiResponse<HashTagResultData>> {
             override fun failure(retrofitError: RetrofitError) {
                 serviceListResultCallback.failer()
             }
 
-            override fun success(hashTagResult: Result<HashTagResultData>?, arg1: Response) {
-                if (hashTagResult != null && hashTagResult.isOk) {
+            override fun success(hashTagApiResponse: ApiResponse<HashTagResultData>?, arg1: Response) {
+                if (hashTagApiResponse != null && hashTagApiResponse.isOk) {
                     val hashTags = transHashTagDTO2HashTag(
-                        hashTagResult.data!!.list
+                        hashTagApiResponse.data!!.list
                     )
                     serviceListResultCallback.success(hashTags)
                 } else {
@@ -59,25 +59,25 @@ class TopicPostService : AbsBaseService<TopicPost?>() {
             tagname,
             tempCursor,
             AbsBaseService.Companion.COUNT,
-            object : Callback<Result<TopicPostResultData>> {
+            object : Callback<ApiResponse<TopicPostResultData>> {
                 override fun failure(arg0: RetrofitError) {
                     XL.d("Topic_Refresh", "failure")
                     callback.failer()
                     loading = false
                 }
 
-                override fun success(result: Result<TopicPostResultData>, arg1: Response) {
+                override fun success(apiResponse: ApiResponse<TopicPostResultData>, arg1: Response) {
                     if (mTopicPosts == null) {
                         mTopicPosts = TopicPosts()
                     }
-                    if (result.isOk) {
+                    if (apiResponse.isOk) {
                         // TopicPosts topicPosts = new TopicPosts();
                         callback.beforeSuccess()
                         val newPostsList = transTopicPosts2Posts(
-                            result.data!!.list!!
+                            apiResponse.data!!.list!!
                         )
                         val hotPostsList = transTopicPosts2Posts(
-                            result.data!!.hot!!
+                            apiResponse.data!!.hot!!
                         )
                         if (FIRST_PAGE == cursorId) { // 首次拉取数据
                             if (hotPostsList.isNotEmpty()) {
@@ -88,17 +88,17 @@ class TopicPostService : AbsBaseService<TopicPost?>() {
                                 list.add(topicTitleItem4New)
                                 list.addAll(transPostsList2GridList(newPostsList))
                             }
-                            val hashTag = fromDTO(result.data!!.hashtag)
+                            val hashTag = fromDTO(apiResponse.data!!.hashtag)
                             mTopicPosts!!.hashTag = hashTag
                         } else { // 最新数据翻页
                             list.addAll(transPostsList2GridList(newPostsList))
                         }
                         mTopicPosts!!.posts.addAll(list.filterNotNull().map { it }.toList())
                         callback.success(mTopicPosts)
-                        if (TextUtils.isEmpty(result.data!!.nextCursorId)) {
+                        if (TextUtils.isEmpty(apiResponse.data!!.nextCursorId)) {
                             callback.nomore()
                         }
-                        cursorId = result.data!!.nextCursorId!!
+                        cursorId = apiResponse.data!!.nextCursorId!!
                     } else {
                         callback.failer()
                     }

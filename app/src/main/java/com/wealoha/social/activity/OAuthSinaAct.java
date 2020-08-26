@@ -40,7 +40,7 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.AuthData;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.SinaTokenBean;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.UsersAPI;
@@ -300,24 +300,24 @@ public class OAuthSinaAct extends BaseFragAct {
 	 */
 	private void openUserDataUI(final SinaTokenBean sinaTokenBean) {
 
-		connectService.connectWeibo(sinaTokenBean.uid, sinaTokenBean.accessToken, new Callback<Result<AuthData>>() {
+		connectService.connectWeibo(sinaTokenBean.uid, sinaTokenBean.accessToken, new Callback<ApiResponse<AuthData>>() {
 
 			@Override
-			public void success(Result<AuthData> result, Response response) {
-				if (result != null) {
-					if (result.isOk()) {
+			public void success(ApiResponse<AuthData> apiResponse, Response response) {
+				if (apiResponse != null) {
+					if (apiResponse.isOk()) {
 						Bundle bundle = new Bundle();
-						result.getData().getUser().setAccessToken(sinaTokenBean.accessToken);
-						bundle.putParcelable(User.TAG, result.getData().getUser());
-						contextUtil.setCurrentSinaWbToken(result.getData().getUser().getAccessToken());
-						afterSinaLoginSuccess(result.getData().getUser(), result.getData().getT());
-						if (result.getData().getUser().getProfileIncomplete()) {
+						apiResponse.getData().getUser().setAccessToken(sinaTokenBean.accessToken);
+						bundle.putParcelable(User.TAG, apiResponse.getData().getUser());
+						contextUtil.setCurrentSinaWbToken(apiResponse.getData().getUser().getAccessToken());
+						afterSinaLoginSuccess(apiResponse.getData().getUser(), apiResponse.getData().getT());
+						if (apiResponse.getData().getUser().getProfileIncomplete()) {
 							startActivityAndCleanTask(GlobalConstants.IntentAction.INTENT_URI_USER_DATA, null);
 						} else {
 							startActivityAndCleanTask(GlobalConstants.IntentAction.INTENT_URI_MAIN, null);
 						}
 						finish();
-					} else if (451 == result.getStatus()) {
+					} else if (451 == apiResponse.getStatus()) {
 						// ToastUtil.shortToast(mContext, "該賬號已被封停");
 						ToastUtil.shortToast(mContext, R.string.failed);
 						finish();

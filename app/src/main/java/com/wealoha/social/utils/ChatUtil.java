@@ -12,7 +12,7 @@ import android.util.Log;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.message.ImageMessage;
 import com.wealoha.social.beans.message.InboxSession;
 import com.wealoha.social.beans.message.InboxSessionResult;
@@ -75,17 +75,17 @@ public class ChatUtil {
 	 */
 	public void chatWith(String userId) {
 		// 如果能够加载到会话,直接跳转,否则创建一个会话再跳转,FIXME 硬编码官方ID---YUZzqAXuczM
-		messageService.getInboxSession(userId, new Callback<Result<InboxSessionResult>>() {
+		messageService.getInboxSession(userId, new Callback<ApiResponse<InboxSessionResult>>() {
 
 			@Override
-			public void success(Result<InboxSessionResult> result, Response arg1) {
-				if (result == null) {
+			public void success(ApiResponse<InboxSessionResult> apiResponse, Response arg1) {
+				if (apiResponse == null) {
 					return;
 				}
-				if (result.isOk() && result.getData().getList() != null && result.getData().getList().size() != 0) {
+				if (apiResponse.isOk() && apiResponse.getData().getList() != null && apiResponse.getData().getList().size() != 0) {
 					InboxSession inboxSession;
 					Bundle inboxSessionBundle = new Bundle();
-					for (InboxSession inboxS : result.getData().getList()) {
+					for (InboxSession inboxS : apiResponse.getData().getList()) {
 						if (inboxS != null) {
 							inboxSession = inboxS;
 							inboxSessionBundle.putString("sessionId", inboxSession.id);
@@ -108,7 +108,7 @@ public class ChatUtil {
 
 	public void bySessionIdToDialogue(String sessionId) {
 
-		messageService.post(sessionId, new Callback<Result<InboxSessionResult>>() {
+		messageService.post(sessionId, new Callback<ApiResponse<InboxSessionResult>>() {
 
 			@Override
 			public void failure(RetrofitError arg0) {
@@ -116,13 +116,13 @@ public class ChatUtil {
 			}
 
 			@Override
-			public void success(Result<InboxSessionResult> result, Response arg1) {
-				if (result == null || !result.isOk()) {
+			public void success(ApiResponse<InboxSessionResult> apiResponse, Response arg1) {
+				if (apiResponse == null || !apiResponse.isOk()) {
 					return;
-				} else if (result.getData().getList() != null) {
+				} else if (apiResponse.getData().getList() != null) {
 					InboxSession inboxSession;
 					Bundle inboxSessionBundle = new Bundle();
-					for (InboxSession inboxS : result.getData().getList()) {
+					for (InboxSession inboxS : apiResponse.getData().getList()) {
 						if (inboxS != null) {
 							inboxSession = inboxS;
 							inboxSessionBundle.putString("sessionId", inboxSession.id);

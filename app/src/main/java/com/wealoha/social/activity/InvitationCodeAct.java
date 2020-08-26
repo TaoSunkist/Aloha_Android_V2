@@ -27,7 +27,7 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.ContextConfig;
 import com.wealoha.social.R;
 import com.wealoha.social.beans.CommentResult;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.JsonController;
 import com.wealoha.social.store.SyncEntProtocol;
@@ -104,10 +104,10 @@ public class InvitationCodeAct extends BaseFragAct implements OnClickListener {
 
 			@Override
 			public void onSuccess(ResponseInfo<String> arg0) {
-				Result<CommentResult> result = JsonController.parseJson(arg0.result, new TypeToken<Result<CommentResult>>() {
+				ApiResponse<CommentResult> apiResponse = JsonController.parseJson(arg0.result, new TypeToken<ApiResponse<CommentResult>>() {
 				}.getType());
 				Log.i("invitation", arg0.result);
-				if (result != null && result.isOk()) {
+				if (apiResponse != null && apiResponse.isOk()) {
 					ToastUtil.shortToast(mContext, R.string.is_work);
 					// 不用再显示了
 					dismissInvitationInput();

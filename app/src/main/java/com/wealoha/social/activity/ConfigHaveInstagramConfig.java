@@ -24,7 +24,7 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.AuthData;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.utils.FontUtil;
 import com.wealoha.social.utils.FontUtil.Font;
 import com.wealoha.social.utils.NetworkUtil;
@@ -96,10 +96,10 @@ public class ConfigHaveInstagramConfig extends BaseFragAct implements OnClickLis
 	}
 
 	private void setAuto(boolean autoSync) {
-		instagramService.setAuto(autoSync, new Callback<Result<AuthData>>() {
+		instagramService.setAuto(autoSync, new Callback<ApiResponse<AuthData>>() {
 
 			@Override
-			public void success(Result<AuthData> arg0, Response arg1) {
+			public void success(ApiResponse<AuthData> arg0, Response arg1) {
 				XL.i("AUTO_SET", "SUCCESS");
 			}
 
@@ -195,10 +195,10 @@ public class ConfigHaveInstagramConfig extends BaseFragAct implements OnClickLis
 	}
 
 	private void unbind() {
-		instagramService.unbind(new Callback<Result<AuthData>>() {
+		instagramService.unbind(new Callback<ApiResponse<AuthData>>() {
 
 			@Override
-			public void success(Result<AuthData> arg0, Response arg1) {
+			public void success(ApiResponse<AuthData> arg0, Response arg1) {
 				ToastUtil.longToast(ConfigHaveInstagramConfig.this, "unbind success");
 				finish();
 			}

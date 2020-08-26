@@ -23,7 +23,7 @@ import com.wealoha.social.activity.LeaveCommentAct;
 import com.wealoha.social.beans.Comment;
 import com.wealoha.social.beans.CommentResult;
 import com.wealoha.social.beans.Feed;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.fragment.Profile2Fragment;
@@ -74,11 +74,11 @@ public class CommentAdapter extends BaseAdapter/* implements OnSlideListener */{
 		}
 	}
 
-	public void notifyDataSetChanged(Result<CommentResult> result) {
-		if (result != null) {
-			this.mUsers.putAll(result.getData().getUserMap());
+	public void notifyDataSetChanged(ApiResponse<CommentResult> apiResponse) {
+		if (apiResponse != null) {
+			this.mUsers.putAll(apiResponse.getData().getUserMap());
 			// 放到數據開頭
-			this.mComments.addAll(result.getData().getList());
+			this.mComments.addAll(apiResponse.getData().getList());
 			notifyDataSetChanged();
 		}
 	}
@@ -92,11 +92,11 @@ public class CommentAdapter extends BaseAdapter/* implements OnSlideListener */{
 		}
 	}
 
-	public void notifyDataSetChangedOnTop(Result<CommentResult> result) {
-		if (result != null && result.getData().getList().size() > 0) {
-			this.mUsers.putAll(result.getData().getUserMap());
+	public void notifyDataSetChangedOnTop(ApiResponse<CommentResult> apiResponse) {
+		if (apiResponse != null && apiResponse.getData().getList().size() > 0) {
+			this.mUsers.putAll(apiResponse.getData().getUserMap());
 			// 放到數據開頭
-			this.mComments.addAll(0, result.getData().getList());
+			this.mComments.addAll(0, apiResponse.getData().getList());
 			notifyDataSetChanged();
 		}
 	}
@@ -108,10 +108,10 @@ public class CommentAdapter extends BaseAdapter/* implements OnSlideListener */{
 	 * @return void 返回类型
 	 * @throws
 	 */
-	public void notifyDataSetAllChanged(Result<CommentResult> result) {
-		if (result != null && result.getData().getList().size() > 0) {
-			this.mUsers = result.getData().getUserMap();
-			this.mComments = result.getData().getList();
+	public void notifyDataSetAllChanged(ApiResponse<CommentResult> apiResponse) {
+		if (apiResponse != null && apiResponse.getData().getList().size() > 0) {
+			this.mUsers = apiResponse.getData().getUserMap();
+			this.mComments = apiResponse.getData().getList();
 			notifyDataSetChanged();
 		}
 	}

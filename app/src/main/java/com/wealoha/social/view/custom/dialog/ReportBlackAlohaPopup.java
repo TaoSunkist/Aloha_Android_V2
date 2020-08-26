@@ -30,7 +30,7 @@ import com.wealoha.social.R;
 import com.wealoha.social.adapter.ChatMsgViewAdapter;
 import com.wealoha.social.adapter.ProfileListAdapter;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.message.ImageMessage;
@@ -398,10 +398,10 @@ public class ReportBlackAlohaPopup implements OnClickListener {
 	 */
 	private void report() {
 		if (mPostType == PostType.FEED) {
-			mFeedService.reportFeed(mId, null, null, new Callback<Result<ResultData>>() {
+			mFeedService.reportFeed(mId, null, null, new Callback<ApiResponse<ResultData>>() {
 
 				@Override
-				public void success(Result<ResultData> arg0, Response arg1) {
+				public void success(ApiResponse<ResultData> arg0, Response arg1) {
 					dismissPopup();
 				}
 
@@ -412,10 +412,10 @@ public class ReportBlackAlohaPopup implements OnClickListener {
 			});
 			// FIXME 举报成功后没有提示,
 		} else if (mPostType == PostType.USER) {
-			mUserService.reportUser(mId, null, new Callback<Result<ResultData>>() {
+			mUserService.reportUser(mId, null, new Callback<ApiResponse<ResultData>>() {
 
 				@Override
-				public void success(Result<ResultData> arg0, Response arg1) {
+				public void success(ApiResponse<ResultData> arg0, Response arg1) {
 					ToastUtil.shortToast(AppApplication.getInstance(), R.string.report_inappropriate_success);
 				}
 
@@ -441,10 +441,10 @@ public class ReportBlackAlohaPopup implements OnClickListener {
 	 * @throws
 	 */
 	private void black() {
-		mUserService.blackUser(mId, new Callback<Result<ResultData>>() {
+		mUserService.blackUser(mId, new Callback<ApiResponse<ResultData>>() {
 
 			@Override
-			public void success(Result<ResultData> arg0, Response arg1) {
+			public void success(ApiResponse<ResultData> arg0, Response arg1) {
 				XL.i(TAG, "black user:success");
 				ToastUtil.shortToast(AppApplication.getInstance(), R.string.add_to_black_list_success);
 				mUser.setBlock(true);
@@ -465,7 +465,7 @@ public class ReportBlackAlohaPopup implements OnClickListener {
 	 * @throws
 	 */
 	private void removeFromBlack() {
-		mUserService.unblock(mId, new Callback<Result<ResultData>>() {
+		mUserService.unblock(mId, new Callback<ApiResponse<ResultData>>() {
 
 			@Override
 			public void failure(RetrofitError arg0) {
@@ -474,7 +474,7 @@ public class ReportBlackAlohaPopup implements OnClickListener {
 			}
 
 			@Override
-			public void success(Result<ResultData> result, Response arg1) {
+			public void success(ApiResponse<ResultData> apiResponse, Response arg1) {
 				mUser.setBlock(false);
 				ToastUtil.shortToast(context, R.string.remove_from_black_list_success);
 				XL.i(TAG, "移除黑名單成功");
@@ -483,10 +483,10 @@ public class ReportBlackAlohaPopup implements OnClickListener {
 	}
 
 	private void dislike() {
-		mUserService.dislikeUser(mId, new Callback<Result<ResultData>>() {
+		mUserService.dislikeUser(mId, new Callback<ApiResponse<ResultData>>() {
 
 			@Override
-			public void success(Result<ResultData> arg0, Response arg1) {
+			public void success(ApiResponse<ResultData> arg0, Response arg1) {
 				XL.i("ALOHA_ALOHA", "dislike user:success");
 				// 刷新数据
 				((RefreshData) mFrag).refreshData();
@@ -503,10 +503,10 @@ public class ReportBlackAlohaPopup implements OnClickListener {
 	}
 
 	private void deleteFeed() {
-		mFeedService.deleteFeed(mId, new Callback<Result<ResultData>>() {
+		mFeedService.deleteFeed(mId, new Callback<ApiResponse<ResultData>>() {
 
 			@Override
-			public void success(Result<ResultData> arg0, Response arg1) {
+			public void success(ApiResponse<ResultData> arg0, Response arg1) {
 				XL.i("ALOHA_ALOHA", "delete feed:success");
 				// 更新feed list
 				GlobalConstants.AppConstact.mDelPostId = mId;

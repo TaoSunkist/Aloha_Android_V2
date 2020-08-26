@@ -39,7 +39,7 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.adapter.FindYouAdapter;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.FindYouResult;
 import com.wealoha.social.commons.GlobalConstants;
@@ -137,12 +137,12 @@ public class FindYouAct extends BaseFragAct implements TextWatcher, OnItemClickL
      * @Description: 寻找要圈人目标时的系统推荐圈人列表
      */
     private void getDefaultList() {
-        findyouService.defaultTagUsers(new Callback<Result<FindYouResult>>() {
+        findyouService.defaultTagUsers(new Callback<ApiResponse<FindYouResult>>() {
 
             @Override
-            public void success(Result<FindYouResult> result, Response arg1) {
-                if (result != null && result.isOk()) {
-                    mDefUsersResult = result.getData();
+            public void success(ApiResponse<FindYouResult> apiResponse, Response arg1) {
+                if (apiResponse != null && apiResponse.isOk()) {
+                    mDefUsersResult = apiResponse.getData();
                     initAdapterWithDefUsers();
                 }
             }
@@ -217,7 +217,7 @@ public class FindYouAct extends BaseFragAct implements TextWatcher, OnItemClickL
         findYou(s.toString(), null);
     }
 
-    private Callback<Result<FindYouResult>> findYouCallback = new Callback<Result<FindYouResult>>() {
+    private Callback<ApiResponse<FindYouResult>> findYouCallback = new Callback<ApiResponse<FindYouResult>>() {
 
         @Override
         public void failure(RetrofitError arg0) {
@@ -235,9 +235,9 @@ public class FindYouAct extends BaseFragAct implements TextWatcher, OnItemClickL
         }
 
         @Override
-        public void success(Result<FindYouResult> result, Response arg1) {
+        public void success(ApiResponse<FindYouResult> apiResponse, Response arg1) {
             syncLastPageBool = false;
-            if (result == null || !result.isOk() || mList == null) {
+            if (apiResponse == null || !apiResponse.isOk() || mList == null) {
                 return;
             }
             if (mList == null || headerAlohaListTitle == null || headerUserName == null || headerUserPhoto == null) {
@@ -245,8 +245,8 @@ public class FindYouAct extends BaseFragAct implements TextWatcher, OnItemClickL
             }
 
             // 返回的关键字和当前关键字是否一样，不一样则说明返回的结果已经过期
-            if (!TextUtils.isEmpty(result.getData().getKeyword())) {
-                if (!result.getData().getKeyword().equals(mKeyword)) {
+            if (!TextUtils.isEmpty(apiResponse.getData().getKeyword())) {
+                if (!apiResponse.getData().getKeyword().equals(mKeyword)) {
                     return;
                 }
             } else {
@@ -254,14 +254,14 @@ public class FindYouAct extends BaseFragAct implements TextWatcher, OnItemClickL
             }
 
             // 初始化aloha list 列表
-            if (result.getData().getList().size() > 0) {
+            if (apiResponse.getData().getList().size() > 0) {
                 headerAlohaListTitle.setVisibility(View.VISIBLE);
-                mFindYouResult = result.getData();
+                mFindYouResult = apiResponse.getData();
                 mFindYouAdapter.clearData();
                 mFindYouAdapter.setData(mFindYouResult);
                 mFindYouAdapter.notifyDataSetChanged();
 
-                XL.i("FIND_YOU_TEST", "size:" + result.getData().getList().size());
+                XL.i("FIND_YOU_TEST", "size:" + apiResponse.getData().getList().size());
             } else {
                 // 隐藏aloha list
                 if (mFindYouAdapter != null) {
@@ -272,18 +272,18 @@ public class FindYouAct extends BaseFragAct implements TextWatcher, OnItemClickL
             }
 
             // 初始化搜寻结果
-            User user = result.getData().getUser();
+            User user = apiResponse.getData().getUser();
             if (user != null) {
                 currentUser = user;
-                headerUserName.setText(StringUtil.foregroundHight(user.getName(), result.getData().getKeyword()));
+                headerUserName.setText(StringUtil.foregroundHight(user.getName(), apiResponse.getData().getKeyword()));
                 picasso.load(ImageUtil.getImageUrl(user.getAvatarImage().getId(),//
                         100, CropMode.ScaleCenterCrop))//
                         .placeholder(R.drawable.search_persion)//
                         .into(headerUserPhoto);
             } else {
                 currentUser = null;
-                if (!TextUtils.isEmpty(result.getData().getKeyword())) {
-                    headerUserName.setText(StringUtil.foregroundHight(context.getResources().getString(R.string.not_find_the_person) + result.getData().getKeyword(), result.getData().getKeyword()));
+                if (!TextUtils.isEmpty(apiResponse.getData().getKeyword())) {
+                    headerUserName.setText(StringUtil.foregroundHight(context.getResources().getString(R.string.not_find_the_person) + apiResponse.getData().getKeyword(), apiResponse.getData().getKeyword()));
                 }
             }
 

@@ -41,7 +41,7 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.adapter.LocationForFeedAdapter;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.Location;
 import com.wealoha.social.beans.LocationResult;
 import com.wealoha.social.utils.AMapUtil;
@@ -117,23 +117,23 @@ public class LocationForFeedAct extends BaseFragAct implements OnClickListener, 
 		initLocation();
 	}
 
-	private Callback<Result<LocationResult>> callback = new Callback<Result<LocationResult>>() {
+	private Callback<ApiResponse<LocationResult>> callback = new Callback<ApiResponse<LocationResult>>() {
 
 		@Override
-		public void success(Result<LocationResult> result, Response arg1) {
-			if (result != null) {
-				if (result.isOk()) {
-					mCursor = result.getData().getNextCursorId();
+		public void success(ApiResponse<LocationResult> apiResponse, Response arg1) {
+			if (apiResponse != null) {
+				if (apiResponse.isOk()) {
+					mCursor = apiResponse.getData().getNextCursorId();
 					if (locationAdapter == null) {
-						locationAdapter = new LocationForFeedAdapter(LocationForFeedAct.this, result.getData().getList());
+						locationAdapter = new LocationForFeedAdapter(LocationForFeedAct.this, apiResponse.getData().getList());
 						mList.setAdapter(locationAdapter);
 					} else if (callbackType == scrollType) {
-						locationAdapter.notifyDataSetChangedByResult(result.getData().getList());
+						locationAdapter.notifyDataSetChangedByResult(apiResponse.getData().getList());
 					} else if (callbackType == searchType) {
-						locationAdapter.notifyDataSetChangedBySearch(result.getData().getList());
+						locationAdapter.notifyDataSetChangedBySearch(apiResponse.getData().getList());
 					}
 					if (firstResults == null) {
-						firstResults = result.getData().getList();
+						firstResults = apiResponse.getData().getList();
 					}
 				} else {
 					ToastUtil.longToast(LocationForFeedAct.this, R.string.location_error);

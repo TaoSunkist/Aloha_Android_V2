@@ -55,7 +55,7 @@ import com.wealoha.social.api.Notify2ListApiService;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Feed;
 import com.wealoha.social.beans.FeedResult;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.feed.UserTags;
@@ -387,7 +387,7 @@ public class FeedFragment extends BaseFragment implements OnClickListener,
         addFooterView(false);
     }
 
-    private Callback<Result<FeedResult>> loadCallBack = new Callback<Result<FeedResult>>() {
+    private Callback<ApiResponse<FeedResult>> loadCallBack = new Callback<ApiResponse<FeedResult>>() {
 
         @Override
         public void failure(RetrofitError arg0) {
@@ -398,16 +398,16 @@ public class FeedFragment extends BaseFragment implements OnClickListener,
         }
 
         @Override
-        public void success(Result<FeedResult> result, Response arg1) {
+        public void success(ApiResponse<FeedResult> apiResponse, Response arg1) {
             closeRefresh();
-            if (result == null || !result.isOk()) {
+            if (apiResponse == null || !apiResponse.isOk()) {
                 addFooterView(true);
                 return;
             }
             // 为了渲染视图，重新组装usertags
-            result.getData().resetFeed(mCurrentUser);
-            setNextCursor(result.getData().getNextCursorId());
-            notifyAdapterDataChanged(isRefresh, result.getData());
+            apiResponse.getData().resetFeed(mCurrentUser);
+            setNextCursor(apiResponse.getData().getNextCursorId());
+            notifyAdapterDataChanged(isRefresh, apiResponse.getData());
             syncLastPageBool = true;
             if (isAdded())
                 removeNofeedCover();
@@ -451,10 +451,10 @@ public class FeedFragment extends BaseFragment implements OnClickListener,
      * @Description: 加载单个feed
      */
     private void loadSingleFeed() {
-        feedService.feedDetail(mPostId, new Callback<Result<FeedResult>>() {
+        feedService.feedDetail(mPostId, new Callback<ApiResponse<FeedResult>>() {
 
             @Override
-            public void success(Result<FeedResult> result, Response arg1) {
+            public void success(ApiResponse<FeedResult> apiResponse, Response arg1) {
                 if (getActivity() != null && getActivity().isFinishing()) {
                     return;
                 }
@@ -465,12 +465,12 @@ public class FeedFragment extends BaseFragment implements OnClickListener,
                 } catch (Throwable e) {
                 }
 
-                if (result != null) {
-                    if (result.isOk()) {
+                if (apiResponse != null) {
+                    if (apiResponse.isOk()) {
                         // cacheFlag = false;
                         // syncLastPageBool = false;
-                        result.getData().resetFeed(mCurrentUser);
-                        mResult = result.getData();
+                        apiResponse.getData().resetFeed(mCurrentUser);
+                        mResult = apiResponse.getData();
                         mProfileAdapter.clearData();
                         mProfileAdapter.notifyTopDataSetChanged(mResult);
 
@@ -480,9 +480,9 @@ public class FeedFragment extends BaseFragment implements OnClickListener,
                             changeViewByTags(false);
                         }
 
-                    } else if (result.getData().getError() == 404) {
+                    } else if (apiResponse.getData().getError() == 404) {
                         ToastUtil.longToast(mBaseFragAct, R.string.deleted_or_nohave_user_by_service);
-                    } else if (result.getData().getError() == 451) {
+                    } else if (apiResponse.getData().getError() == 451) {
                         ToastUtil.longToast(mBaseFragAct, R.string.deleted_user_by_service);
                     } else {
                         ToastUtil.longToast(mBaseFragAct, R.string.Unkown_Error);

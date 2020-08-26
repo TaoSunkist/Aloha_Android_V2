@@ -42,7 +42,7 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.AuthData;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.JsonController;
@@ -253,10 +253,10 @@ public class VerifyAct extends BaseFragAct implements OnClickListener {
 
             @Override
             public void onSuccess(ResponseInfo<String> arg0) {
-                Result<AuthData> result = JsonController.parseJson(arg0.result, new TypeToken<Result<AuthData>>() {
+                ApiResponse<AuthData> apiResponse = JsonController.parseJson(arg0.result, new TypeToken<ApiResponse<AuthData>>() {
                 }.getType());
                 ToastUtil.shortToast(VerifyAct.this, getString(R.string.verification_code_has_been_sent));
-                if (result != null && result.isOk()) {
+                if (apiResponse != null && apiResponse.isOk()) {
                     // afterMobileLoginSuccess(phoneNum, result.getData().user,
                     // result.getData().t);
                     Bundle bundle = new Bundle();
@@ -264,9 +264,9 @@ public class VerifyAct extends BaseFragAct implements OnClickListener {
                     bundle.putString("code", code);
                     startActivity(GlobalConstants.IntentAction.INTENT_URI_NEWPASSWORD, bundle);
                     finish();
-                } else if (ResultData.MOBILE_ERROR == result.getData().getError()) {
+                } else if (ResultData.MOBILE_ERROR == apiResponse.getData().getError()) {
                     ToastUtil.longToast(VerifyAct.this, R.string.register_mobile_error);
-                } else if (ResultData.REGISTERED_ERROR == result.getData().getError()) {
+                } else if (ResultData.REGISTERED_ERROR == apiResponse.getData().getError()) {
                     ToastUtil.longToast(VerifyAct.this, R.string.mobile_error);
                 } else {
                     ToastUtil.longToast(VerifyAct.this, R.string.verification_code_has_been_sent_but_faile);
@@ -292,21 +292,21 @@ public class VerifyAct extends BaseFragAct implements OnClickListener {
         }
 
         // 提交注册
-        userRegisterService.register(phoneNum, code, StringUtil.md5(pw), new Callback<Result<AuthData>>() {
+        userRegisterService.register(phoneNum, code, StringUtil.md5(pw), new Callback<ApiResponse<AuthData>>() {
 
             @Override
-            public void success(Result<AuthData> result, Response response) {
-                if (result == null) {
+            public void success(ApiResponse<AuthData> apiResponse, Response response) {
+                if (apiResponse == null) {
                     ToastUtil.longToast(VerifyAct.this, R.string.Unkown_Error);
                     return;
                 }
-                if (result.isOk()) {
+                if (apiResponse.isOk()) {
                     ToastUtil.shortToast(VerifyAct.this, getString(R.string.verification_code_has_been_sent));
-                    afterMobileLoginSuccess(phoneNum, result.getData().getUser(), result.getData().getT());
+                    afterMobileLoginSuccess(phoneNum, apiResponse.getData().getUser(), apiResponse.getData().getT());
                     finish();
-                } else if (ResultData.ERROR_INVALID_MOBILE_VERIFY_CODE == result.getData().getError()) {
+                } else if (ResultData.ERROR_INVALID_MOBILE_VERIFY_CODE == apiResponse.getData().getError()) {
                     ToastUtil.longToast(VerifyAct.this, R.string.verification_code_has_been_sent_but_faile);
-                } else if (ResultData.ERROR_MOBILE_NUMBER_REGISTERED == result.getData().getError()) {
+                } else if (ResultData.ERROR_MOBILE_NUMBER_REGISTERED == apiResponse.getData().getError()) {
                     ToastUtil.longToast(VerifyAct.this, R.string.Invalid_phone_number_str);
                 } else {
                     ToastUtil.longToast(VerifyAct.this, R.string.Unkown_Error);
@@ -368,10 +368,10 @@ public class VerifyAct extends BaseFragAct implements OnClickListener {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // 两个发送验证码的接口返回状态码类似
-                Callback<Result<ResultData>> callback = new Callback<Result<ResultData>>() {
+                Callback<ApiResponse<ResultData>> callback = new Callback<ApiResponse<ResultData>>() {
 
                     @Override
-                    public void success(Result<ResultData> result, Response response) {
+                    public void success(ApiResponse<ResultData> result, Response response) {
 
                         if (result != null) {
                             if (result.isOk()) {
@@ -381,7 +381,7 @@ public class VerifyAct extends BaseFragAct implements OnClickListener {
                                 ToastUtil.longToast(VerifyAct.this, R.string.register_mobile_error);
                             } else if (ResultData.REGISTERED_ERROR == result.getData().getError()) {
                                 ToastUtil.longToast(VerifyAct.this, R.string.mobile_error);
-                            } else if (Result.STATUS_CODE_THRESHOLD_HIT == result.getStatus()) {
+                            } else if (ApiResponse.STATUS_CODE_THRESHOLD_HIT == result.getStatus()) {
                                 ToastUtil.longToast(VerifyAct.this, R.string.get_code_frequent_req);
                             } else {
                                 ToastUtil.longToast(VerifyAct.this, R.string.Unkown_Error);

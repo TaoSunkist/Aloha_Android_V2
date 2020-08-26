@@ -40,13 +40,13 @@ class UserService {
      * @return void
      */
     fun dislike(userid: String, callback: NoResultCallback) {
-        user2Api!!.dislikeUser(userid, object : Callback<Result<ResultData>> {
+        user2Api!!.dislikeUser(userid, object : Callback<ApiResponse<ResultData>> {
             override fun success(
-                result: Result<ResultData>,
+                apiResponse: ApiResponse<ResultData>,
                 arg1: Response
             ) {
-                if (!result.isOk) {
-                    callback.fail(ApiErrorCode.fromResult(result), null)
+                if (!apiResponse.isOk) {
+                    callback.fail(ApiErrorCode.fromResult(apiResponse), null)
                 } else {
                     callback.success()
                 }
@@ -66,13 +66,13 @@ class UserService {
         user2Api!!.aloha(
             userid,
             refer,
-            object : Callback<Result<ResultData>> {
+            object : Callback<ApiResponse<ResultData>> {
                 override fun success(
-                    result: Result<ResultData>,
+                    apiResponse: ApiResponse<ResultData>,
                     arg1: Response
                 ) {
-                    if (result == null || !result.isOk) {
-                        callback.fail(ApiErrorCode.fromResult(result), null)
+                    if (apiResponse == null || !apiResponse.isOk) {
+                        callback.fail(ApiErrorCode.fromResult(apiResponse), null)
                     } else {
                         callback.success()
                     }
@@ -96,16 +96,16 @@ class UserService {
         userid: String,
         callback: ApiCallback<User>
     ) {
-        user2Api!!.userProfile(userid, object : Callback<Result<Profile2Data>?> {
+        user2Api!!.userProfile(userid, object : Callback<ApiResponse<Profile2Data>?> {
             override fun success(
-                result: Result<Profile2Data>?,
+                apiResponse: ApiResponse<Profile2Data>?,
                 arg1: Response
             ) {
-                if (result == null || !result.isOk) {
-                    callback.fail(ApiErrorCode.fromResult(result), null)
+                if (apiResponse == null || !apiResponse.isOk) {
+                    callback.fail(ApiErrorCode.fromResult(apiResponse), null)
                 } else {
-                    saveCurrentUser(result.data?.user!!)
-                    callback.success(transPro2DataToUser(result.data!!))
+                    saveCurrentUser(apiResponse.data?.user!!)
+                    callback.success(transPro2DataToUser(apiResponse.data!!))
                 }
             }
 
@@ -144,15 +144,15 @@ class UserService {
      */
     val profeatureSetting: Unit
         get() {
-            user2Api!!.userMatchSetting(object : Callback<Result<MatchSettingData>> {
+            user2Api!!.userMatchSetting(object : Callback<ApiResponse<MatchSettingData>> {
                 override fun success(
-                    result: Result<MatchSettingData>?,
+                    apiResponse: ApiResponse<MatchSettingData>?,
                     response: Response
                 ) {
-                    if (result != null && result.isOk) {
-                        contextUtil!!.profeatureEnable = result.data?.filterEnable == true
+                    if (apiResponse != null && apiResponse.isOk) {
+                        contextUtil!!.profeatureEnable = apiResponse.data?.filterEnable == true
                         val regions =
-                            result.data?.selectedRegion as ArrayList<String?>
+                            apiResponse.data?.selectedRegion as ArrayList<String?>
                         if (regions != null && regions.size > 0) {
                             contextUtil!!.filterRegion = regions[regions.size - 1]
                         } else {
@@ -176,20 +176,20 @@ class UserService {
     ) {
         user2Api!!.verifyPassword(
             pw,
-            object : Callback<Result<ResultData>?> {
+            object : Callback<ApiResponse<ResultData>?> {
                 override fun failure(retrofitError: RetrofitError) {
                     // ToastUtil.shortToast(AppApplication.getInstance(), R.string.Unkown_Error);
                     callbackImpl.failure()
                 }
 
                 override fun success(
-                    result: Result<ResultData>?,
+                    apiResponse: ApiResponse<ResultData>?,
                     response: Response
                 ) {
-                    if (result != null && result.isOk) {
-                        if (result.isOk) {
+                    if (apiResponse != null && apiResponse.isOk) {
+                        if (apiResponse.isOk) {
                             callbackImpl.success()
-                        } else if (result.data?.error == IResultDataErrorCode.ERROR_INVALID_PASSWORD) {
+                        } else if (apiResponse.data?.error == IResultDataErrorCode.ERROR_INVALID_PASSWORD) {
                             callbackImpl.failure()
                             // ToastUtil.shortToast(AppApplication.getInstance(),
                             // R.string.login_password_is_invalid_title);

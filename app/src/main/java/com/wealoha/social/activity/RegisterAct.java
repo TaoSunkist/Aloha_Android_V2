@@ -31,7 +31,7 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.AuthData;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.fragment.PhoneAreaFragment;
@@ -143,23 +143,23 @@ public class RegisterAct extends BaseFragAct implements OnClickListener {
 							popup.show(container);
 						}
 						username = callingCode + " " + username;
-						userService.login(username, new Callback<Result<AuthData>>() {
+						userService.login(username, new Callback<ApiResponse<AuthData>>() {
 
 							@Override
-							public void success(Result<AuthData> result, Response arg1) {
-								if (result != null) {
-									if (result.isOk()) {
+							public void success(ApiResponse<AuthData> apiResponse, Response arg1) {
+								if (apiResponse != null) {
+									if (apiResponse.isOk()) {
 										Bundle bundle = new Bundle();
 										bundle.putInt("from", 0);
 										bundle.putString(GlobalConstants.AppConstact.USERNAME, username);
 										bundle.putString(GlobalConstants.AppConstact.PASSWORD, pw);
 										startActivity(GlobalConstants.IntentAction.INTENT_URI_VERIFY, bundle);
 										ToastUtil.longToast(RegisterAct.this, getString(R.string.verification_code_has_been_sent));
-									} else if (ResultData.MOBILE_ERROR == result.getData().getError()) {
+									} else if (ResultData.MOBILE_ERROR == apiResponse.getData().getError()) {
 										ToastUtil.shortToast(RegisterAct.this, R.string.mobile_error);
-									} else if (ResultData.REGISTERED_ERROR == result.getData().getError()) {
+									} else if (ResultData.REGISTERED_ERROR == apiResponse.getData().getError()) {
 										ToastUtil.shortToast(RegisterAct.this, R.string.register_mobile_error);
-									} else if ("503".equals(String.valueOf(result.getStatus()))) {
+									} else if ("503".equals(String.valueOf(apiResponse.getStatus()))) {
 										ToastUtil.shortToast(RegisterAct.this, R.string.get_code_frequent_req);
 									} else {
 										ToastUtil.shortToast(RegisterAct.this, R.string.Unkown_Error);

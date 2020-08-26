@@ -1,14 +1,5 @@
 package com.wealoha.social.api
 
-import com.wealoha.social.beans.AuthData
-import com.wealoha.social.beans.Result
-import com.wealoha.social.beans.message.InboxSessionResult
-import com.wealoha.social.impl.ServerUrlImpl
-import io.reactivex.Single
-import retrofit.http.GET
-import retrofit.http.Query
-import kotlin.random.Random
-
 class RxMessageService {
     companion object {
         val shared = RxMessageService()

@@ -50,7 +50,7 @@ import com.wealoha.social.R;
 import com.wealoha.social.adapter.ChatMsgViewAdapter;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Image;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.message.ImageMessage;
@@ -161,11 +161,11 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
                 // 如果當前Push過來的消息和當前聊天的用戶的sessionId是不一樣的，
                 if (mDialogueP.getDialogueHolder().getToUser() != null && //
                         !mDialogueP.getDialogueHolder().getToUser().getId().equals(sessionId)) {
-                    mMessageService.unread(new Callback<Result<UnreadData>>() {
+                    mMessageService.unread(new Callback<ApiResponse<UnreadData>>() {
 
                         @Override
-                        public void success(Result<UnreadData> result, Response arg1) {
-                            changeBackKeyUI(result.getData().count);
+                        public void success(ApiResponse<UnreadData> apiResponse, Response arg1) {
+                            changeBackKeyUI(apiResponse.getData().count);
                         }
 
                         public void failure(RetrofitError e) {
@@ -177,10 +177,10 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
                     mNextCursorId = null;
                     getLoaderManager().restartLoader(LOADER_LOAD_MESSAGES, null, DialogueActivity.this);
                     if (mDialogueP.getDialogueHolder().getToUser() != null) {
-                        mMessageService.clearUnread(mDialogueP.getDialogueHolder().getToUser().getId(), new Callback<Result<ResultData>>() {
+                        mMessageService.clearUnread(mDialogueP.getDialogueHolder().getToUser().getId(), new Callback<ApiResponse<ResultData>>() {
 
                             @Override
-                            public void success(Result<ResultData> arg0, Response arg1) {
+                            public void success(ApiResponse<ResultData> arg0, Response arg1) {
                             }
 
                             @Override
@@ -232,7 +232,7 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
      */
     @Override
     public void clearUnreadCount(String sessionId) {
-        mMessageService.clearUnread(mDialogueP.getDialogueHolder().getSessionId(), new Callback<Result<ResultData>>() {
+        mMessageService.clearUnread(mDialogueP.getDialogueHolder().getSessionId(), new Callback<ApiResponse<ResultData>>() {
 
             @Override
             public void failure(RetrofitError arg0) {
@@ -240,7 +240,7 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
             }
 
             @Override
-            public void success(Result<ResultData> arg0, Response arg1) {
+            public void success(ApiResponse<ResultData> arg0, Response arg1) {
 
             }
         });
@@ -249,10 +249,10 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
     @Override
     public void byNoticeJoinDialog() {
 
-        mProfileService.view(mDialogueP.getDialogueHolder().getSessionId(), new Callback<Result<ProfileData>>() {
+        mProfileService.view(mDialogueP.getDialogueHolder().getSessionId(), new Callback<ApiResponse<ProfileData>>() {
 
             @Override
-            public void success(Result<ProfileData> arg0, Response arg1) {
+            public void success(ApiResponse<ProfileData> arg0, Response arg1) {
                 mDialogueP.getDialogueHolder().setToUser(arg0.getData().user);
                 bus.post(new SessionNewMessageEvent(null, null));
                 designUi();
@@ -276,21 +276,21 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
     ContextUtil contextUtil;
 
     @Override
-    public void onLoaderReset(Loader<Result<InboxMessageResult>> arg0) {
+    public void onLoaderReset(Loader<ApiResponse<InboxMessageResult>> arg0) {
         if (mListView != null) {
             mListView.stopRefresh();
         }
     }
 
     @Override
-    public Loader<Result<InboxMessageResult>> onCreateLoader(int id, Bundle arg1) {
+    public Loader<ApiResponse<InboxMessageResult>> onCreateLoader(int id, Bundle arg1) {
         hideFirstChatView();
         switch (id) {
             case LOADER_LOAD_MESSAGES:
-                return new AsyncLoader<Result<InboxMessageResult>>(mContext) {
+                return new AsyncLoader<ApiResponse<InboxMessageResult>>(mContext) {
 
                     @Override
-                    public Result<InboxMessageResult> loadInBackground() {
+                    public ApiResponse<InboxMessageResult> loadInBackground() {
                         try {
                             return mMessageService.sessionMessages(mDialogueP.getDialogueHolder().getSessionId(), mNextCursorId, PAGE_COUNT);
                         } catch (Exception e) {
@@ -306,9 +306,9 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
     }
 
     @Override
-    public void onLoadFinished(Loader<Result<InboxMessageResult>> loader, Result<InboxMessageResult> result) {
+    public void onLoadFinished(Loader<ApiResponse<InboxMessageResult>> loader, ApiResponse<InboxMessageResult> apiResponse) {
         mListView.stopRefresh();
-        if (result == null) {
+        if (apiResponse == null) {
             return;
         }
         switch (loader.getId()) {
@@ -317,11 +317,11 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
                 if (mNextCursorId == null) {
                     firstPage = true;
                 }
-                mNextCursorId = result.getData().getNextCursorId();
+                mNextCursorId = apiResponse.getData().getNextCursorId();
                 if (mNextCursorId == null) {
                     mHasMore = false;
                 }
-                List<Message> list = (List<Message>) result.getData().getList();
+                List<Message> list = (List<Message>) apiResponse.getData().getList();
                 Collections.reverse(list);
                 // if (list != null && list.size() > 0) {
                 // mMessage = list.get(list.size() - 1);

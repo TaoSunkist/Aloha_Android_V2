@@ -40,7 +40,7 @@ import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.AuthData;
 import com.wealoha.social.beans.Image;
 import com.wealoha.social.beans.ImageUploadResult;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.commons.GlobalConstants;
@@ -288,7 +288,7 @@ public class UserDataAct extends BaseFragAct implements OnClickListener {
         }
         showDialog(true);
         TypedFile usericon = new TypedFile("application/octet-stream", new File(imgPath));
-        userService.sendSingleFeed(usericon, new Callback<Result<ImageUploadResult>>() {
+        userService.sendSingleFeed(usericon, new Callback<ApiResponse<ImageUploadResult>>() {
 
             @Override
             public void failure(RetrofitError arg0) {
@@ -298,11 +298,11 @@ public class UserDataAct extends BaseFragAct implements OnClickListener {
             }
 
             @Override
-            public void success(Result<ImageUploadResult> result, Response arg1) {
-                if (result != null && result.isOk()) {
+            public void success(ApiResponse<ImageUploadResult> apiResponse, Response arg1) {
+                if (apiResponse != null && apiResponse.isOk()) {
                     user.setAvatarImage(Image.Companion.fake());
-                    user.getAvatarImage().setId(result.getData().imageId);
-                    user.getAvatarImage().setUrl(result.getData().imageUrl);
+                    user.getAvatarImage().setId(apiResponse.getData().imageId);
+                    user.getAvatarImage().setUrl(apiResponse.getData().imageUrl);
                 } else {
                     ToastUtil.shortToast(UserDataAct.this, R.string.failed);
                 }
@@ -322,20 +322,20 @@ public class UserDataAct extends BaseFragAct implements OnClickListener {
     private void userDataPerfect() {
         showDialog(true);
 
-        userService.uploadUserData(username, height, weight, user.getBirthday(), user.getRegionCode(), user.getAvatarImage().getId(), new Callback<Result<AuthData>>() {
+        userService.uploadUserData(username, height, weight, user.getBirthday(), user.getRegionCode(), user.getAvatarImage().getId(), new Callback<ApiResponse<AuthData>>() {
 
             @Override
-            public void success(Result<AuthData> result, Response paramResponse) {
+            public void success(ApiResponse<AuthData> apiResponse, Response paramResponse) {
                 showDialog(false);
-                if (result != null) {
-                    if (result.isOk()) {
+                if (apiResponse != null) {
+                    if (apiResponse.isOk()) {
                         // 成功，进入邀请码页面
-                        contextUtil.setCurrentUser(result.getData().getUser());
+                        contextUtil.setCurrentUser(apiResponse.getData().getUser());
                         startActivity(GlobalConstants.IntentAction.INTENT_URI_INVITATION);
                         finish();
-                    } else if (result.getData().getError() == ResultData.ERROR_USERNAME_USED) {
+                    } else if (apiResponse.getData().getError() == ResultData.ERROR_USERNAME_USED) {
                         ToastUtil.longToast(UserDataAct.this, getString(R.string.username_unavailable));
-                    } else if (result.getData().getError() == ResultData.ERROR_INVALID_SUMMARY) {
+                    } else if (apiResponse.getData().getError() == ResultData.ERROR_INVALID_SUMMARY) {
                         ToastUtil.longToast(UserDataAct.this, getString(R.string.intro_has_illegalword));
                     } else {
                         ToastUtil.shortToast(UserDataAct.this, R.string.is_not_work);

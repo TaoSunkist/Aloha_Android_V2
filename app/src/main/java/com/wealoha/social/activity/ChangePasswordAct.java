@@ -25,7 +25,7 @@ import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.AuthData;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.utils.ContextUtil;
 import com.wealoha.social.utils.FontUtil;
 import com.wealoha.social.utils.FontUtil.Font;
@@ -132,15 +132,15 @@ public class ChangePasswordAct extends BaseFragAct implements OnClickListener {
 			return;
 		}
 
-		mUserService.reqAlertPassWord(StringUtil.md5(password), StringUtil.md5(newPassword), new Callback<Result<AuthData>>() {
+		mUserService.reqAlertPassWord(StringUtil.md5(password), StringUtil.md5(newPassword), new Callback<ApiResponse<AuthData>>() {
 
 			@Override
-			public void success(Result<AuthData> result, Response arg1) {
-				if (result != null) {
-					if (result.isOk()) {
+			public void success(ApiResponse<AuthData> apiResponse, Response arg1) {
+				if (apiResponse != null) {
+					if (apiResponse.isOk()) {
 						ToastUtil.shortToast(ChangePasswordAct.this, getString(R.string.modify_success));
 						finish();
-					} else if (result.getData().getError() == 200509) {
+					} else if (apiResponse.getData().getError() == 200509) {
 						// showSingleAlohaDialog(mContext,
 						// R.string.old_password_is_not_correct, null);
 						ToastUtil.shortToast(ChangePasswordAct.this, R.string.old_password_is_not_correct);

@@ -28,7 +28,7 @@ import butterknife.OnClick;
 
 import com.wealoha.social.R;
 import com.wealoha.social.api.ServerApi;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.utils.FontUtil;
 import com.wealoha.social.utils.FontUtil.Font;
@@ -188,18 +188,18 @@ public class ChangeNumberPart3 extends BaseFragment implements OnClickListener {
 		if (TextUtils.isEmpty(phonenum) || TextUtils.isEmpty(password)) {
 			return;
 		}
-		user2Api.changeMobile(phonenum, StringUtil.md5(password), code, new Callback<Result<ResultData>>() {
+		user2Api.changeMobile(phonenum, StringUtil.md5(password), code, new Callback<ApiResponse<ResultData>>() {
 
 			@Override
-			public void success(Result<ResultData> result, Response arg1) {
-				if (!isVisible() || result == null) {
+			public void success(ApiResponse<ResultData> apiResponse, Response arg1) {
+				if (!isVisible() || apiResponse == null) {
 					return;
 				}
-				if (result.isOk()) {
+				if (apiResponse.isOk()) {
 					contextUtil.setAccountPhoneNumber(phonenum);
 					getActivity().setResult(Activity.RESULT_OK);
 					getActivity().finish();
-				} else if (result.getData().getError() == 200528) {
+				} else if (apiResponse.getData().getError() == 200528) {
 					securityCodeError.setVisibility(View.VISIBLE);
 				} else {
 					ToastUtil.longToast(getActivity(), R.string.Unkown_Error);
@@ -311,12 +311,12 @@ public class ChangeNumberPart3 extends BaseFragment implements OnClickListener {
 			return;
 		}
 		showDialog(true);
-		user2Api.mobileVerify(phonenum, new Callback<Result<ResultData>>() {
+		user2Api.mobileVerify(phonenum, new Callback<ApiResponse<ResultData>>() {
 
 			@Override
-			public void success(Result<ResultData> result, Response arg1) {
+			public void success(ApiResponse<ResultData> apiResponse, Response arg1) {
 				showDialog(false);
-				if (!isVisible() || result == null) {
+				if (!isVisible() || apiResponse == null) {
 					return;
 				}
 				isReset = false;

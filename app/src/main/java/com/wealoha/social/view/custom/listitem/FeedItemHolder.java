@@ -49,7 +49,7 @@ import com.wealoha.social.activity.GDMapAct;
 import com.wealoha.social.adapter.ProfileListAdapter;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.Feed;
-import com.wealoha.social.beans.Result;
+import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.feed.UserTags;
@@ -809,10 +809,10 @@ public class FeedItemHolder implements OnClickListener, ListItemCallback {
     }
 
     private void praiseFeed() {
-        mFeedService.praiseFeed(mFeed.postId, new Callback<Result<ResultData>>() {
+        mFeedService.praiseFeed(mFeed.postId, new Callback<ApiResponse<ResultData>>() {
 
             @Override
-            public void success(Result<ResultData> result, Response arg1) {
+            public void success(ApiResponse<ResultData> apiResponse, Response arg1) {
                 // 视图状态
                 // praise();
                 XL.i(TAG, "赞成");
@@ -831,10 +831,10 @@ public class FeedItemHolder implements OnClickListener, ListItemCallback {
     }
 
     private void dislikeFeed() {
-        mFeedService.dislikeFeed(mFeed.postId, new Callback<Result<ResultData>>() {
+        mFeedService.dislikeFeed(mFeed.postId, new Callback<ApiResponse<ResultData>>() {
 
             @Override
-            public void success(Result<ResultData> result, Response arg1) {
+            public void success(ApiResponse<ResultData> apiResponse, Response arg1) {
                 XL.i(TAG, "没赞成");
                 if (mFeed.isLiked()) {
                     mFeed.setLiked(false);
@@ -914,10 +914,10 @@ public class FeedItemHolder implements OnClickListener, ListItemCallback {
      * @Description: 刪除feed
      */
     private void deleteFeed() {
-        mFeedService.deleteFeed(mFeed.postId, new Callback<Result<ResultData>>() {
+        mFeedService.deleteFeed(mFeed.postId, new Callback<ApiResponse<ResultData>>() {
 
             @Override
-            public void success(Result<ResultData> arg0, Response arg1) {
+            public void success(ApiResponse<ResultData> arg0, Response arg1) {
                 // 更新feed list
                 ((ProfileListAdapter) baseAdapter).notifyFeedDataSetChanged(mFeed.postId);
             }
@@ -930,10 +930,10 @@ public class FeedItemHolder implements OnClickListener, ListItemCallback {
     }
 
     private void report() {
-        mFeedService.reportFeed(mFeed.postId, null, null, new Callback<Result<ResultData>>() {
+        mFeedService.reportFeed(mFeed.postId, null, null, new Callback<ApiResponse<ResultData>>() {
 
             @Override
-            public void success(Result<ResultData> arg0, Response arg1) {
+            public void success(ApiResponse<ResultData> arg0, Response arg1) {
                 ToastUtil.longToast(context, R.string.report_inappropriate_success);
             }
 

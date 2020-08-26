@@ -5,12 +5,10 @@ import com.wealoha.social.beans.ApiErrorCode.Companion.fromResult
 import com.wealoha.social.beans.Direct
 import com.wealoha.social.beans.FeedGetData
 import com.wealoha.social.beans.Post
-import com.wealoha.social.beans.Result
-import com.wealoha.social.inject.Injector
+import com.wealoha.social.beans.ApiResponse
 import retrofit.Callback
 import retrofit.RetrofitError
 import retrofit.client.Response
-import javax.inject.Inject
 
 class Profile2ListApiService : Feed2ListApiService() {
 
@@ -22,18 +20,18 @@ class Profile2ListApiService : Feed2ListApiService() {
         userid: String,
         callback: ApiListCallback<Post?>
     ) {
-        feed2Api!!.getUserPosts(userid!!, cursor!!, count, object : Callback<Result<FeedGetData>> {
+        feed2Api!!.getUserPosts(userid!!, cursor!!, count, object : Callback<ApiResponse<FeedGetData>> {
             override fun failure(error: RetrofitError) {
                 callback.fail(null, error)
             }
 
-            override fun success(result: Result<FeedGetData>?, arg1: Response) {
-                if (result == null || !result.isOk) {
-                    callback.fail(fromResult(result), null)
+            override fun success(apiResponse: ApiResponse<FeedGetData>?, arg1: Response) {
+                if (apiResponse == null || !apiResponse.isOk) {
+                    callback.fail(fromResult(apiResponse), null)
                 } else {
                     callback.success(
-                        transResult2List(result.data!!, userid),
-                        result.data!!.nextCursorId
+                        transResult2List(apiResponse.data!!, userid),
+                        apiResponse.data!!.nextCursorId
                     )
                 }
             }
