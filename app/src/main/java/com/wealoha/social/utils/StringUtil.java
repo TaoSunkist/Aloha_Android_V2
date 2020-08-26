@@ -1208,43 +1208,6 @@ public class StringUtil {
         }
     }
 
-    public static String shareDescription(User user2, Context context, RegionNodeUtil mRegionNodeUtil) {
-        if (user2 != null) {
-            StringBuilder sBuilder = new StringBuilder();
-            List<String> regionNames = mRegionNodeUtil.getRegionNames(user2.getRegionCode(), 10);
-            if (regionNames == null) {
-                return "";
-            }
-            Collections.reverse(regionNames);
-            try {
-                for (int i = 1; i < regionNames.size(); i++) {
-                    sBuilder.append(regionNames.get(i));
-                    if (i != regionNames.size() - 1) {
-                        sBuilder.append("，");
-                    }
-                }
-            } catch (Throwable e) {
-                // 提示用户无法获取地区信息
-                ToastUtil.shortToast(context, R.string.Unkown_Error);
-            }
-            sBuilder.append("\n");
-            sBuilder.append(user2.getAge());
-            sBuilder.append("·");
-            sBuilder.append(user2.getHeight());
-            sBuilder.append("·");
-            sBuilder.append(user2.getWeight());
-            if (TextUtils.isEmpty(user2.getZodiac())) {
-                return sBuilder.toString();
-            } else {
-                sBuilder.append("·");
-                sBuilder.append(getUserZodiac(user2.getZodiac(), context));
-                return sBuilder.toString();
-            }
-        } else {
-            return "";
-        }
-    }
-
     public static String getUserZodiac(String zodiac, Context context) {
         if ("Aries".equals(zodiac)) {
             return context.getString(R.string.aries);

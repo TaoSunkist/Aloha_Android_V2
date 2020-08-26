@@ -34,7 +34,7 @@ public class SingletonFeedService extends Feed2Service {
 				if (result == null || !result.isOk()) {
 					callback.fail(ApiErrorCode.fromResult(result), null);
 				} else {
-					callback.success(transResult2List(result.getData(), null), result.getData().nextCursorId);
+					callback.success(transResult2List(result.getData(), null), result.getData().getNextCursorId());
 				}
 			}
 		});

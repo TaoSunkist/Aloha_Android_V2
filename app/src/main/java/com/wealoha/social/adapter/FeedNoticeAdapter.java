@@ -227,7 +227,7 @@ public class FeedNoticeAdapter extends BaseAdapter {
 			postCommentViewHolder.mUserName.setText(postCommentNotify2.getFromUser().getName());
 			postCommentViewHolder.mStamp.setText(TimeUtil.getDistanceTimeForApp(mParent, //
 																				new Date().getTime(), postCommentNotify2.getPost().getCreateTimeMillis()));
-			picasso.load(postCommentNotify2.getFromUser().getAvatarCommonImage().getUrlSquare(120)).//
+			picasso.load(postCommentNotify2.getFromUser().getAvatarImage().getUrlSquare(120)).//
 			placeholder(R.drawable.default_photo).into(postCommentViewHolder.mUserHead);
 			picasso.load(postCommentNotify2.getPost().getCommonImage().getUrl(80, 80)).//
 			into(postCommentViewHolder.mFeedImg);
@@ -240,7 +240,7 @@ public class FeedNoticeAdapter extends BaseAdapter {
 			break;
 		case Notify2.POST_TAG_VIEW_TYPE:// 圈人的通知
 			PostTagNotify2 postTagNotify2 = (PostTagNotify2) notify2;
-			picasso.load(postTagNotify2.getFromUser().getAvatarCommonImage().getUrl(100, 100)).//
+			picasso.load(postTagNotify2.getFromUser().getAvatarImage().getUrl()).//
 			placeholder(R.drawable.default_photo).into(postTagViewHolder.mUserHead);
 			picasso.load(postTagNotify2.getPost().getCommonImage().getUrl(100, 100)).//
 			into(postTagViewHolder.mFeedImg);
@@ -259,7 +259,7 @@ public class FeedNoticeAdapter extends BaseAdapter {
 		case Notify2.NEW_ALOHA_VIEW_TYPE:// 人气的通知
 			NewAlohaNotify2 newAlohaNotify2 = (NewAlohaNotify2) notify2;
 			String string = String.format(mParent.getResources().getString(R.string.item_feed_notice_new_aloha_body),//
-											newAlohaNotify2.getUsers().size());
+											String.valueOf(newAlohaNotify2.getUsers().size()));
 			SpannableString newAlohaSS = new SpannableString(string);
 			newAlohaSS.setSpan(new StyleSpan(Typeface.BOLD), 0, String.valueOf(newAlohaNotify2.getUsers().size()).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			newAlohaViewHolder.mTitle.setText(newAlohaSS);
@@ -310,7 +310,7 @@ public class FeedNoticeAdapter extends BaseAdapter {
 				if (i < count) {
 					CircleImageView circleImageView = new CircleImageView(mParent);
 					circleImageView.setLayoutParams(layoutParams2);
-					picasso.load(user2s.get(i).getAvatarCommonImage().getUrlSquare(80)).placeholder(R.drawable.default_photo)//
+					picasso.load(user2s.get(i).getAvatarImage().getUrlSquare(80)).placeholder(R.drawable.default_photo)//
 					.into(circleImageView);
 					postLikeViewHolder.mWrapUsers.addView(circleImageView);
 					circleImageView.setClickable(true);
@@ -336,7 +336,7 @@ public class FeedNoticeAdapter extends BaseAdapter {
 				if (i < count) {
 					CircleImageView circleImageView = new CircleImageView(mParent);
 					circleImageView.setLayoutParams(layoutParams2);
-					picasso.load(user2s.get(i).getAvatarCommonImage().getUrlSquare(80)).//
+					picasso.load(user2s.get(i).getAvatarImage().getUrlSquare(80)).//
 					placeholder(R.drawable.default_photo).into(circleImageView);
 					newAlohaViewHolder.mWrapUsers.addView(circleImageView);
 				} else {

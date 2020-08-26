@@ -35,7 +35,7 @@ public class Profile2Service extends Feed2Service {
 				if (result == null || !result.isOk()) {
 					callback.fail(ApiErrorCode.fromResult(result), null);
 				} else {
-					callback.success(transResult2List(result.getData(), userid), result.getData().nextCursorId);
+					callback.success(transResult2List(result.getData(), userid), result.getData().getNextCursorId());
 				}
 			}
 		});

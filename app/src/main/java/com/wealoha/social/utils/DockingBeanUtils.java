@@ -31,15 +31,15 @@ public class DockingBeanUtils {
         user.setWeight(apiUser.getWeight());
         user.setZodiac(apiUser.getZodiac());
         user.setAvatarImage(Image.Companion.fake());
-        user.getAvatarImage().setHeight(apiUser.getAvatarCommonImage().getHeight());
-        user.getAvatarImage().setId(apiUser.getAvatarCommonImage().getId());
-        user.getAvatarImage().setWidth(apiUser.getAvatarCommonImage().getWidth());
+        user.getAvatarImage().setHeight(apiUser.getAvatarImage().getHeight());
+        user.getAvatarImage().setId(apiUser.getAvatarImage().getId());
+        user.getAvatarImage().setWidth(apiUser.getAvatarImage().getWidth());
         user.setHasPrivacy(apiUser.hasPrivacy());
-        user.setAloha(apiUser.isAloha());
-        user.setMatch(apiUser.isMatch());
-        user.setMe(apiUser.isMe());
-        user.setBlock(apiUser.isBlock());
-        user.setProfileIncomplete(apiUser.isProfileIncomplete());
+        user.setAloha(apiUser.getAloha());
+        user.setMatch(apiUser.getAloha());
+        user.setMe(apiUser.getMe());
+        user.setBlock(apiUser.getBlock());
+        user.setProfileIncomplete(apiUser.getProfileIncomplete());
         return user;
     }
 }

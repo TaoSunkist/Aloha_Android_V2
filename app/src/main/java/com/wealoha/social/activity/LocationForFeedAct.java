@@ -123,17 +123,17 @@ public class LocationForFeedAct extends BaseFragAct implements OnClickListener, 
 		public void success(Result<LocationResult> result, Response arg1) {
 			if (result != null) {
 				if (result.isOk()) {
-					mCursor = result.getData().nextCursorId;
+					mCursor = result.getData().getNextCursorId();
 					if (locationAdapter == null) {
-						locationAdapter = new LocationForFeedAdapter(LocationForFeedAct.this, result.getData().list);
+						locationAdapter = new LocationForFeedAdapter(LocationForFeedAct.this, result.getData().getList());
 						mList.setAdapter(locationAdapter);
 					} else if (callbackType == scrollType) {
-						locationAdapter.notifyDataSetChangedByResult(result.getData().list);
+						locationAdapter.notifyDataSetChangedByResult(result.getData().getList());
 					} else if (callbackType == searchType) {
-						locationAdapter.notifyDataSetChangedBySearch(result.getData().list);
+						locationAdapter.notifyDataSetChangedBySearch(result.getData().getList());
 					}
 					if (firstResults == null) {
-						firstResults = result.getData().list;
+						firstResults = result.getData().getList();
 					}
 				} else {
 					ToastUtil.longToast(LocationForFeedAct.this, R.string.location_error);

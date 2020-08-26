@@ -11,26 +11,24 @@ import java.io.Serializable
  * @since
  * @date 2014-10-29 下午4:44:17
  */
-class MatchData : ResultData(), Serializable, HasImageMap {
-    @kotlin.jvm.JvmField
-    var list: List<User>? = null
+class MatchData(
+    var list: List<User>? = null,
 
     /** 还需要多少秒才能刷下一批  */
-    @kotlin.jvm.JvmField
-    var quotaResetSeconds = 0
+    var quotaResetSeconds: Int = 0,
 
     /** 每次刷一批的时间段长度  */
-    var quotaDurationSeconds = 0
+    var quotaDurationSeconds: Int = 0,
 
     /** 可用的重置配额次数  */
-    @kotlin.jvm.JvmField
-    var quotaReset = 0
-    override var imageMap: Map<String, Image>? = null
-    @kotlin.jvm.JvmField
+    var quotaReset: Int = 0,
+    override var imageMap: Map<String, Image>? = null,
     var recommendSourceMap: Map<String, String>? = null
+) : ResultData(), Serializable, HasImageMap {
 
     companion object {
         private const val serialVersionUID = -7473243341042126058L
+
         @kotlin.jvm.JvmField
         val TAG = MatchData::class.java.simpleName
     }

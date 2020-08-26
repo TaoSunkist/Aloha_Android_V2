@@ -17,32 +17,28 @@ interface Notify2 {
          * feed被喜欢的通知.
          *
          */
-        @kotlin.jvm.JvmField
         @Deprecated("")
-        val POST_LIKE_VIEW_TYPE = 0
+        const val POST_LIKE_VIEW_TYPE = 0
 
         /**
          * 人气的通知
          *
          */
-        @kotlin.jvm.JvmField
         @Deprecated("")
-        val NEW_ALOHA_VIEW_TYPE = 1
+        const val NEW_ALOHA_VIEW_TYPE = 1
 
         /**
          * Feed评论的通知
          *
          */
-        @kotlin.jvm.JvmField
         @Deprecated("")
-        val POST_COMMENT_TAG_TYPE = 2
+        const val POST_COMMENT_TAG_TYPE = 2
 
         /**
          * 圈人的通知
          *
          */
-        @kotlin.jvm.JvmField
         @Deprecated("")
-        val POST_TAG_VIEW_TYPE = 3
+        const val POST_TAG_VIEW_TYPE = 3
     }
 }

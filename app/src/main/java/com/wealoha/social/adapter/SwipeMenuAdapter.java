@@ -45,8 +45,8 @@ public class SwipeMenuAdapter extends BaseAdapter {
      */
     public SwipeMenuAdapter(UserListResult result, boolean showMatch) {
         Injector.inject(this);
-        if (result.list != null && result.list.size() > 0) {
-            this.mUsers = result.list;
+        if (result.getList() != null && result.getList().size() > 0) {
+            this.mUsers = result.getList();
         } else {
             this.mUsers = new ArrayList<User>();
         }
@@ -60,8 +60,8 @@ public class SwipeMenuAdapter extends BaseAdapter {
     }
 
     public void notifyDataSetChanged(Result<UserListResult> result) {
-        if (result != null && result.getData().list.size() > 0) {
-            mUsers.addAll(result.getData().list);
+        if (result != null && result.getData().getList().size() > 0) {
+            mUsers.addAll(result.getData().getList());
             super.notifyDataSetChanged();
         }
     }

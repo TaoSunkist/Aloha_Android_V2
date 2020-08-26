@@ -613,9 +613,9 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Res
                     isRefreshHeadIcon = true;
                     setResult();
                     finish();
-                } else if (result.getData().error == ResultData.ERROR_USERNAME_USED) {
+                } else if (result.getData().getError() == ResultData.ERROR_USERNAME_USED) {
                     ToastUtil.shortToast(mContext, getString(R.string.username_unavailable));
-                } else if (result.getData().error == ResultData.ERROR_INVALID_SUMMARY) {
+                } else if (result.getData().getError() == ResultData.ERROR_INVALID_SUMMARY) {
                     ToastUtil.shortToast(mContext, getString(R.string.username_unavailable));
                 }
             }

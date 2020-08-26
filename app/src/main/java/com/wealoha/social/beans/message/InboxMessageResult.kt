@@ -13,13 +13,13 @@ import com.wealoha.social.beans.imagemap.HasImageMap
  * @since
  * @date 2014-10-29 下午4:44:17
  */
-class InboxMessageResult : ResultData(), HasImageMap {
-    @kotlin.jvm.JvmField
-    var nextCursorId: String? = null
-    var messageId: String? = null
-    var toUser: User? = null
-    var user: User? = null
-    @kotlin.jvm.JvmField
-    var list: List<Message>? = null
+class InboxMessageResult(
+    var nextCursorId: String? = null,
+    var messageId: String? = null,
+    var toUser: User? = null,
+    var user: User? = null,
+    var list: List<Message>? = null,
     override var imageMap: Map<String, Image>? = null
+) : ResultData(), HasImageMap {
+
 }

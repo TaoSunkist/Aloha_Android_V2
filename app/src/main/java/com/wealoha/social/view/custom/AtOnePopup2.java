@@ -404,7 +404,7 @@ public class AtOnePopup2 implements OnTouchListener, OnClickListener, OnGestureL
 	private void openProFile() {
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(User.TAG, mUserTag.getUser());
-		XL.i("Profile2HeaderHolder", "is null ====" + mUserTag.getUser().getAvatarCommonImage());
+		XL.i("Profile2HeaderHolder", "is null ====" + mUserTag.getUser().getAvatarImage());
 		if (contextUtil.getForegroundAct() != null) {
 			((BaseFragAct) contextUtil.getForegroundAct()).startFragmentHasAnim(Profile2Fragment.class, bundle, true, R.anim.left_in, R.anim.stop);
 		}

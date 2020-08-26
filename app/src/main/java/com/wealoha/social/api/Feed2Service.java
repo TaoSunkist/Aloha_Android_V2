@@ -67,7 +67,7 @@ public class Feed2Service extends AbsBaseService<Post, String> {
                 if (result == null || !result.isOk()) {
                     callback.fail(ApiErrorCode.fromResult(result), null);
                 } else {
-                    callback.success(transResult2List(result.getData(), userid), result.getData().nextCursorId);
+                    callback.success(transResult2List(result.getData(), userid), result.getData().getNextCursorId());
                 }
             }
         });
@@ -111,12 +111,12 @@ public class Feed2Service extends AbsBaseService<Post, String> {
     }
 
     protected List<Post> transResult2List(FeedGetData result, String currentUserid) {
-        if (result == null || result.list == null) {
+        if (result == null || result.getList() == null) {
             XL.i(TAG, "post list is null");
             return null;
         }
-        List<Post> postList = new ArrayList<Post>(result.list.size());
-        for (PostDTO postDto : result.list) {
+        List<Post> postList = new ArrayList<Post>(result.getList().size());
+        for (PostDTO postDto : result.getList()) {
 
             FeedType type = FeedType.fromValue(postDto.type);
             if (type == null) {
@@ -124,15 +124,15 @@ public class Feed2Service extends AbsBaseService<Post, String> {
                 continue;
             }
 
-            User user2 = getUser(postDto.userId, result.userMap, result.imageMap);
-            List<UserTag> userTagList = gerUserTagList(postDto.userTags, result.userMap, result.imageMap);
-            CommonImage commonImage = CommonImage.fromDTO(result.imageMap.get(postDto.imageId));
+            User user2 = getUser(postDto.userId, result.getUserMap(), result.getImageMap());
+            List<UserTag> userTagList = gerUserTagList(postDto.userTags, result.getUserMap(), result.getImageMap());
+            CommonImage commonImage = CommonImage.fromDTO(result.getImageMap().get(postDto.imageId));
             CommonVideo commonVideo = null;
-            if (result.videoMap != null) {
-                commonVideo = CommonVideo.fromDTO(result.videoMap.get(postDto.videoId));
+            if (result.getVideoMap() != null) {
+                commonVideo = CommonVideo.fromDTO(result.getVideoMap().get(postDto.videoId));
             }
 
-            List<PostComment> recentCommentList = transCommentDTOList2PostCommentList(postDto.recentComments, result.userMap, result.imageMap);
+            List<PostComment> recentCommentList = transCommentDTOList2PostCommentList(postDto.recentComments, result.getUserMap(), result.getImageMap());
             Post post = new Post(//
                     postDto.postId,//
                     type,//
@@ -150,8 +150,8 @@ public class Feed2Service extends AbsBaseService<Post, String> {
                     userTagList,//
                     commonImage, //
                     commonVideo, //
-                    result.commentCountMap.get(postDto.postId),//
-                    result.likeCountMap.get(postDto.postId),//
+                    result.getCommentCountMap().get(postDto.postId),//
+                    result.getLikeCountMap().get(postDto.postId),//
                     recentCommentList,//
                     HashTag.fromDTO(postDto.hashtag),//
                     postDto.hasMoreComment);
@@ -196,7 +196,7 @@ public class Feed2Service extends AbsBaseService<Post, String> {
             Log.i("LOAD_MEMORY", "++++++" + i);
             Post post = postList.get(i);
             picasso.load(post.getCommonImage().getUrlSquare(mScreenWidth)).fetch();
-            picasso.load(post.getUser().getAvatarCommonImage().getUrlSquare(ImageSize.AVATAR_ROUND_SMALL)).fetch();
+            picasso.load(post.getUser().getAvatarImage().getUrlSquare(ImageSize.AVATAR_ROUND_SMALL)).fetch();
         }
     }
 

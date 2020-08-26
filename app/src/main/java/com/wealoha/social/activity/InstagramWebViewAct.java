@@ -214,11 +214,11 @@ public class InstagramWebViewAct extends BaseFragAct implements OnClickListener 
 						bundle.putString("name", username);
 						// bundle.putBoolean("autoSync", isAll);
 						startActivity(GlobalConstants.IntentAction.INTENT_URI_CONFIG_HAVE_INSTAGRAM, bundle);
-					} else if (200524 == result.getData().error) {
+					} else if (200524 == result.getData().getError()) {
 						ToastUtil.longToast(InstagramWebViewAct.this, R.string.instagram_token_overdue);
-					} else if (200530 == result.getData().error) {
+					} else if (200530 == result.getData().getError()) {
 						ToastUtil.longToast(InstagramWebViewAct.this, R.string.instagram_have_token);
-					} else if (451 == result.getData().error) {
+					} else if (451 == result.getData().getError()) {
 						ToastUtil.longToast(InstagramWebViewAct.this, R.string.user_was_fucked);
 					} else {
 						ToastUtil.longToast(InstagramWebViewAct.this, R.string.Unkown_Error);

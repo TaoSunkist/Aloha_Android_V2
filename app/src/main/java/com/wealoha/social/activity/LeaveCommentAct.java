@@ -188,7 +188,7 @@ public class LeaveCommentAct extends BaseFragAct implements OnItemClickListener,
             @Override
             public void success(Result<CommentResult> result, Response arg1) {
                 if (result != null && result.isOk()) {
-                    mCursor = result.getData().nextCursorId;
+                    mCursor = result.getData().getNextCursorId();
                     refreshView(result);
                 }
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -203,18 +203,18 @@ public class LeaveCommentAct extends BaseFragAct implements OnItemClickListener,
      * @Description: 创建评论信息的控件
      */
     public void refreshView(Result<CommentResult> result) {
-        if (result.getData().userMap == null || result.getData().list == null) {
+        if (result.getData().getUserMap() == null || result.getData().getList() == null) {
             // ToastUtil.longToast(mContext, "這張照片已經被刪除了");
             ToastUtil.shortToast(mContext, R.string.failed);
             return;
         }
         if (mCommentAdapter == null) {
-            mUserMap.putAll(result.getData().userMap);
-            mCommentAdapter = new CommentAdapter(this, result.getData().list, result.getData().userMap, mFeed);
+            mUserMap.putAll(result.getData().getUserMap());
+            mCommentAdapter = new CommentAdapter(this, result.getData().getList(), result.getData().getUserMap(), mFeed);
             mCommentListView.setAdapter(mCommentAdapter);
-            mComments.addAll(result.getData().list);
+            mComments.addAll(result.getData().getList());
 
-            final int endPositino = result.getData().list.size();
+            final int endPositino = result.getData().getList().size();
             refreshViewHandler = new Handler();
             refreshViewRunable = new Runnable() {
 
@@ -226,8 +226,8 @@ public class LeaveCommentAct extends BaseFragAct implements OnItemClickListener,
             refreshViewHandler.postDelayed(refreshViewRunable, 200);
             // Log.i("REFRESHVIEW", "null");
         } else {
-            mComments.addAll(result.getData().list);
-            mUserMap.putAll(result.getData().userMap);
+            mComments.addAll(result.getData().getList());
+            mUserMap.putAll(result.getData().getUserMap());
             mCommentAdapter.notifyDataSetChanged(mComments, mUserMap);
             if (mCommentAdapter.getCount() > 0) {
                 mCommentListView.setSelection(mCommentAdapter.getCount() - 1);
@@ -296,12 +296,12 @@ public class LeaveCommentAct extends BaseFragAct implements OnItemClickListener,
                         imm.hideSoftInputFromWindow(mCommentEt.getWindowToken(), 0);
 
                         // Log.i("SEND_COMMENT", "result:" +
-                        // result.getData().list.get(0).replyUserId);
+                        // result.getData().getList().get(0).replyUserId);
                         // feed.
                         refreshView(result);// 更新评论列表
-                    } else if (result.getData().error == IResultDataErrorCode.ERROR_INVALID_COMMENT) {
+                    } else if (result.getData().getError() == IResultDataErrorCode.ERROR_INVALID_COMMENT) {
                         ToastUtil.shortToast(LeaveCommentAct.this, getString(R.string.comment_has_illegalword));
-                    } else if (result.getData().error == IResultDataErrorCode.ERROR_BLOCK_BY_OTHER) {
+                    } else if (result.getData().getError() == IResultDataErrorCode.ERROR_BLOCK_BY_OTHER) {
                         ToastUtil.shortToastCenter(mContext, getString(R.string.otherside_black_current_user));
                     } else {
                         ToastUtil.shortToastCenter(mContext, getString(R.string.Unkown_Error));
@@ -471,9 +471,9 @@ public class LeaveCommentAct extends BaseFragAct implements OnItemClickListener,
             @Override
             public void success(Result<CommentResult> result, Response arg1) {
                 if (result != null && result.isOk()) {
-                    mCursor = result.getData().nextCursorId;
+                    mCursor = result.getData().getNextCursorId();
                     // refreshView(result);
-                    mComments.addAll(0, result.getData().list);
+                    mComments.addAll(0, result.getData().getList());
                     mCommentAdapter.notifyDataSetChangedOnTop(result);
                     mCommentListView.setSelection(0);
                     Log.i("REFRESHVIEW", "pullRefresh");

@@ -46,7 +46,7 @@ class CommonVideo(
             } else CommonVideo(
                 videoCommonDTO.videoId,
                 videoCommonDTO.width,
-                videoCommonDTO.height,
+                videoCommonDTO.heigt,
                 videoCommonDTO.url
             )
         }

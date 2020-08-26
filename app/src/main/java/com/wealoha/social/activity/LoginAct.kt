@@ -47,10 +47,6 @@ class LoginAct : BaseFragAct(), View.OnClickListener {
 
     @JvmField
     @Inject
-    var mUserService: UserService? = null
-
-    @JvmField
-    @Inject
     var mUserAPI: ServerApi? = null
 
     /** 區號  */
@@ -193,7 +189,6 @@ class LoginAct : BaseFragAct(), View.OnClickListener {
             if (result != null) {
                 if (result.isOk) {
                     afterMobileLoginSuccess(mUserName, result.data!!.user, result.data!!.t)
-                    mUserService!!.profeatureSetting
                 } else if (result.data!!.error == 451) { // "用戶被封禁"
                     ToastUtil.shortToast(this@LoginAct, R.string.failed)
                 } else if (result.data!!.error == 401) {

@@ -292,9 +292,9 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
             if (mResult != null) {
                 Feed feed = new Feed();
                 feed.postId = GlobalConstants.AppConstact.mDelPostId;
-                int position = mResult.list.indexOf(feed);
+                int position = mResult.getList().indexOf(feed);
                 if (position != -1) {
-                    mResult.list.remove(position);
+                    mResult.getList().remove(position);
                     profileAdapter.clearData();
                     profileAdapter.notifyDataSetChanged(mResult);
                 }
@@ -393,16 +393,16 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
                         // scrollLoadMore = true;
                         firstPage = false;
                     } else {
-                        mResult.commentCountMap.putAll(result.getData().commentCountMap);
+                        mResult.getCommentCountMap().putAll(result.getData().getCommentCountMap());
                         mResult.getImageMap().putAll(result.getData().getImageMap());
-                        mResult.likeCountMap.putAll(result.getData().likeCountMap);
-                        mResult.userMap.putAll(result.getData().userMap);
-                        mResult.list.addAll(result.getData().list);
-                        // mResult.videoMap.putAll(result.getData().videoMap);
+                        mResult.getLikeCountMap().putAll(result.getData().getLikeCountMap());
+                        mResult.getUserMap().putAll(result.getData().getUserMap());
+                        mResult.getList().addAll(result.getData().getList());
+                        // mResult.videoMap.putAll(result.getData().getVideoMap());
                         profileAdapter.notifyDataSetChanged(result.getData());
                     }
                     XL.i("CURSOR_TEST", "current:" + mCursor);
-                    mCursor = result.getData().nextCursorId;
+                    mCursor = result.getData().getNextCursorId();
                     XL.i("CURSOR_TEST", "next:" + mCursor);
                 }
                 feedLoading = false;

@@ -5,21 +5,18 @@ package com.wealoha.social.beans
  *
  * @author dell-pc
  */
-class TopicPostResultData : ResultData() {
-    /** 最新  */
-    @kotlin.jvm.JvmField
-    var list: List<TopicPostDTO>? = null
+class TopicPostResultData(
+    var list: List<TopicPostDTO>? = null,
 
     /** 最热  */
-    @kotlin.jvm.JvmField
-    var hot: List<TopicPostDTO>? = null
-    var imageMap: Map<String, ImageCommonDto>? = null
-    var videoMap: Map<String, VideoCommonDTO>? = null
-    var userMap: Map<String, UserDTO>? = null
+    var hot: List<TopicPostDTO>? = null,
+    var imageMap: Map<String, ImageCommonDto>? = null,
+    var videoMap: Map<String, VideoCommonDTO>? = null,
+    var userMap: Map<String, UserDTO>? = null,
 
     /** 最新的cursor  */
-    @kotlin.jvm.JvmField
-    var nextCursorId: String? = null
-    @kotlin.jvm.JvmField
+    var nextCursorId: String? = null,
     var hashtag: HashTagDTO? = null
+) : ResultData() {
+
 }

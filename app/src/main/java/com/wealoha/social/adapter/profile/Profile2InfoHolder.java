@@ -101,7 +101,7 @@ public class Profile2InfoHolder {
 			mFindWoman.setVisibility(View.GONE);
 		}
 
-		if (mUser.isMe()) {
+		if (mUser.getMe()) {
 			mReport.setVisibility(View.VISIBLE);
 			mSetupTv.setVisibility(View.VISIBLE);
 		} else {

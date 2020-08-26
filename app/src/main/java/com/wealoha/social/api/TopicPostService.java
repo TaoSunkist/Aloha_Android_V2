@@ -90,8 +90,8 @@ public class TopicPostService extends AbsBaseService<TopicPost> {
 				if (result != null && result.isOk()) {
 					// TopicPosts topicPosts = new TopicPosts();
 					callback.beforeSuccess();
-					List<Post> newPostsList = transTopicPosts2Posts(result.getData().list);
-					List<Post> hotPostsList = transTopicPosts2Posts(result.getData().hot);
+					List<Post> newPostsList = transTopicPosts2Posts(result.getData().getList());
+					List<Post> hotPostsList = transTopicPosts2Posts(result.getData().getHot());
 					if (FIRST_PAGE.equals(cursorId)) {// 首次拉取数据
 						if (hotPostsList != null && hotPostsList.size() > 0) {
 							list.add(getTopicTitleItem4Hot());
@@ -102,7 +102,7 @@ public class TopicPostService extends AbsBaseService<TopicPost> {
 							list.add(getTopicTitleItem4New());
 							list.addAll(transPostsList2GridList(newPostsList));
 						}
-						HashTag hashTag = HashTag.fromDTO(result.getData().hashtag);
+						HashTag hashTag = HashTag.fromDTO(result.getData().getHashtag());
 						mTopicPosts.setHashTag(hashTag);
 					} else {// 最新数据翻页
 						list.addAll(transPostsList2GridList(newPostsList));
@@ -110,10 +110,10 @@ public class TopicPostService extends AbsBaseService<TopicPost> {
 					mTopicPosts.setPosts(list);
 					callback.success(mTopicPosts);
 
-					if (TextUtils.isEmpty(result.getData().nextCursorId)) {
+					if (TextUtils.isEmpty(result.getData().getNextCursorId())) {
 						callback.nomore();
 					}
-					cursorId = result.getData().nextCursorId;
+					cursorId = result.getData().getNextCursorId();
 				} else {
 					callback.failer();
 				}
@@ -181,7 +181,7 @@ public class TopicPostService extends AbsBaseService<TopicPost> {
 		if (postsDTO != null) {
 			postlist = new ArrayList<>(postsDTO.size());
 			for (TopicPostDTO tpd : postsDTO) {
-				User user2 = User.fromDTO(tpd.user, CommonImage.fromDTO(tpd.user.avatarImage));
+				User user2 = User.Companion.fromDTO(tpd.user, CommonImage.fromDTO(tpd.user.getAvatarImage()));
 				List<UserTag> userTags = transPostTagDTO2PostTag(tpd.userTags);
 				List<PostComment> recentCommentList = transComment2DTOListToPostCommentList(tpd.recentComment);
 
@@ -225,8 +225,8 @@ public class TopicPostService extends AbsBaseService<TopicPost> {
 		}
 		List<PostComment> postCommentList = new ArrayList<>();
 		for (Comment2DTO dto : dtoList) {
-			User user2 = User.fromDTO(dto.user, CommonImage.fromDTO(dto.user.avatarImage));
-			User replyUser = User.fromDTO(dto.replyUser, CommonImage.fromDTO(dto.replyUser.avatarImage));
+			User user2 = User.Companion.fromDTO(dto.user, CommonImage.fromDTO(dto.user.getAvatarImage()));
+			User replyUser = User.Companion.fromDTO(dto.replyUser, CommonImage.fromDTO(dto.replyUser.getAvatarImage()));
 			PostComment postComment = PostComment.Companion.fromComment2DTO(dto, replyUser, user2);
 			postCommentList.add(postComment);
 		}
@@ -243,7 +243,7 @@ public class TopicPostService extends AbsBaseService<TopicPost> {
 				tpt.tagAnchorY,//
 				tpt.tagCenterX,//
 				tpt.tagCenterY,//
-				User.fromDTO(tpt.tagUser, CommonImage.fromDTO(tpt.tagUser.avatarImage)));
+				User.Companion.fromDTO(tpt.tagUser, CommonImage.fromDTO(tpt.tagUser.getAvatarImage())));
 				tags.add(tag);
 			}
 		}

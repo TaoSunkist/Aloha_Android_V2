@@ -182,11 +182,11 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 				@Override
 				public void success(Result<FeedGetData> result, Response arg1) {
 					if (result != null && result.isOk()) {
-						if (result.getData().list.get(0) != null) {
+						if (result.getData().getList().get(0) != null) {
 							if(!isVisible()){
 								return;
 							}
-							mPost = Post.fromDTO(result.getData().list.get(0), result.getData().userMap, result.getData().imageMap, result.getData().videoMap, result.getData().commentCountMap, result.getData().likeCountMap);
+							mPost = Post.fromDTO(result.getData().getList().get(0), result.getData().getUserMap(), result.getData().getImageMap(), result.getData().getVideoMap(), result.getData().getCommentCountMap(), result.getData().getLikeCountMap());
 							initView(bundle);
 						}
 					}
@@ -379,7 +379,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 				params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 			}
 			CircleImageView circleImage = new CircleImageView(mcontext);
-			String url = user2s.get(i).getAvatarCommonImage().getUrlSquare(radiu);
+			String url = user2s.get(i).getAvatarImage().getUrlSquare(radiu);
 			picasso.load(url).into(circleImage);
 			circleImage.setTag(user2s.get(i));// 保存这个头像的用户信息
 			XL.i("user_type", "user--:" + user2s.get(i).getClass().getName());
@@ -609,7 +609,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 		}
 		// 保存当前选中的评论信息，在发送评论的时候取出，省一个全局的变量
 		mContentEdit.setTag(postComment);
-		if (!postComment.getUser().isMe()) {
+		if (!postComment.getUser().getMe()) {
 			mContentEdit.setFocusable(true);
 			mContentEdit.requestFocus();
 			UiUtils.showKeyBoard(getActivity(), mContentEdit, 0);
@@ -662,14 +662,14 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 					mContentEdit.setTag(null);
 					UiUtils.hideKeyBoard(getActivity());
 					List<PostComment> postcommentlist = null;
-					postcommentlist = PostComment.Companion.fromCommentDTOList(result.getData().list);
+					postcommentlist = PostComment.Companion.fromCommentDTOList(result.getData().getList());
 					mFeedCommentAdapter.appendListItem(Direct.Late, postcommentlist);
 					mFeedCommentAdapter.notifyDataSetChanged();
 					mContentListView.smoothScrollToPosition(mFeedCommentAdapter.getCount());// 因为listview
 					// 有头布局，所以这个地方不用-1
-				} else if (result.getData().error == IResultDataErrorCode.ERROR_INVALID_COMMENT) {
+				} else if (result.getData().getError() == IResultDataErrorCode.ERROR_INVALID_COMMENT) {
 					ToastUtil.shortToast(getActivity(), getString(R.string.comment_has_illegalword));
-				} else if (result.getData().error == IResultDataErrorCode.ERROR_BLOCK_BY_OTHER) {
+				} else if (result.getData().getError() == IResultDataErrorCode.ERROR_BLOCK_BY_OTHER) {
 					ToastUtil.shortToastCenter(getActivity(), getString(R.string.otherside_black_current_user));
 				} else {
 					ToastUtil.shortToastCenter(getActivity(), getString(R.string.Unkown_Error));
@@ -695,7 +695,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 
 		String replyCommentId = null;
 		if (postComment != null) {
-			if (!postComment.getUser().isMe()) {
+			if (!postComment.getUser().getMe()) {
 				replyCommentId = postComment.getId();
 			}
 		}

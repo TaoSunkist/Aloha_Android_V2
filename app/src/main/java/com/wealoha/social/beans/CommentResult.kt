@@ -1,10 +1,9 @@
 package com.wealoha.social.beans
 
-class CommentResult : ResultData() {
-    @kotlin.jvm.JvmField
-    var nextCursorId: String? = null
-    @kotlin.jvm.JvmField
-    var userMap: Map<String, User>? = null
-    @kotlin.jvm.JvmField
+data class CommentResult(
+    var nextCursorId: String? = null,
+    var userMap: Map<String, User>? = null,
     var list: List<Comment>? = null
+) : ResultData() {
+
 }

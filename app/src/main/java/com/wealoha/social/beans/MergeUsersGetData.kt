@@ -1,10 +1,9 @@
 package com.wealoha.social.beans
 
-class MergeUsersGetData : ResultData() {
-    @kotlin.jvm.JvmField
-    var list: List<UserDTO>? = null
-    @kotlin.jvm.JvmField
-    var imageMap: Map<String, ImageCommonDto>? = null
-    @kotlin.jvm.JvmField
+data class MergeUsersGetData(
+    var list: List<UserDTO>? = null,
+    var imageMap: Map<String, ImageCommonDto>? = null,
     var nextCursorId: String? = null
+) : ResultData() {
+
 }

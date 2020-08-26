@@ -350,7 +350,7 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 		XL.i(TAG, "reply user:" + postComment.getReplyUser());
 		// 保存当前选中的评论信息，在发送评论的时候取出，省一个全局的变量
 		mContentEdit.setTag(postComment);
-		if (!postComment.getUser().isMe()) {
+		if (!postComment.getUser().getMe()) {
 			mContentEdit.setFocusable(true);
 			mContentEdit.requestFocus();
 			UiUtils.showKeyBoard(this, mContentEdit, 0);
@@ -388,7 +388,7 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 
 		String replyUserId = null;
 		if (postComment != null) {
-			if (!postComment.getUser().isMe()) {
+			if (!postComment.getUser().getMe()) {
 				replyUserId = postComment.getUser().getId();
 			}
 		}
@@ -417,9 +417,9 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 						mFeedCommentAdapter.appendListItem(Direct.Late, postcommentlist);
 
 						mContentListView.smoothScrollToPosition(mFeedCommentAdapter.getCount() - 1);
-					} else if (result.getData().error == IResultDataErrorCode.ERROR_INVALID_COMMENT) {
+					} else if (result.getData().getError() == IResultDataErrorCode.ERROR_INVALID_COMMENT) {
 						ToastUtil.shortToast(FeedCommentActivity.this, getString(R.string.comment_has_illegalword));
-					} else if (result.getData().error == IResultDataErrorCode.ERROR_BLOCK_BY_OTHER) {
+					} else if (result.getData().getError() == IResultDataErrorCode.ERROR_BLOCK_BY_OTHER) {
 						ToastUtil.shortToastCenter(FeedCommentActivity.this, getString(R.string.otherside_black_current_user));
 					} else {
 						ToastUtil.shortToastCenter(FeedCommentActivity.this, getString(R.string.Unkown_Error));

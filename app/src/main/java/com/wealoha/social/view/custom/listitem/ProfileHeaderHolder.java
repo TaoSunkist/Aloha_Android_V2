@@ -541,8 +541,8 @@ public class ProfileHeaderHolder {
             @Override
             public void success(Result<InboxSessionResult> result, Response arg1) {
                 if (result != null && result.isOk()) {
-                    if (result.getData().list != null && result.getData().list.size() != 0) {
-                        InboxSession inboxSession = result.getData().list.get(0);
+                    if (result.getData().getList() != null && result.getData().getList().size() != 0) {
+                        InboxSession inboxSession = result.getData().getList().get(0);
                         Bundle inboxSessionBundle = new Bundle();
                         inboxSessionBundle.putString("sessionId", inboxSession.id);
                         if (contextUtil.getForegroundAct() != null) {
@@ -567,8 +567,8 @@ public class ProfileHeaderHolder {
                                     @Override
                                     public void success(Result<InboxSessionResult> arg0, Response arg1) {
                                         if (arg0 != null && arg0.isOk()) {
-                                            if (arg0.getData().list != null && arg0.getData().list.size() != 0) {
-                                                InboxSession inboxSession = arg0.getData().list.get(0);
+                                            if (arg0.getData().getList() != null && arg0.getData().getList().size() != 0) {
+                                                InboxSession inboxSession = arg0.getData().getList().get(0);
                                                 Bundle inboxSessionBundle = new Bundle();
                                                 inboxSessionBundle.putString("sessionId", inboxSession.id);
                                                 if (contextUtil.getForegroundAct() != null) {

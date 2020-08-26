@@ -380,7 +380,7 @@ public class PicSendActivity extends BaseFragAct implements OnClickListener, Lis
 							ToastUtil.longToast(PicSendActivity.this, getString(R.string.published_success));
 							setResult(Activity.RESULT_OK);
 							finish();
-						} else if (result.getData().error == 200526) {
+						} else if (result.getData().getError() == 200526) {
 							ToastUtil.longToast(PicSendActivity.this, getString(R.string.describe_has_illegalword));
 							finish();
 						} else {

@@ -186,17 +186,17 @@ public class SwipeMenuListFragment extends BaseFragment implements ListItemCallb
                 if (mUsers == null) {
                     mUsers = new ArrayList<User>();
                 }
-                mUsers.addAll(result.getData().list);
-                cursor = result.getData().nextCursorId;
+                mUsers.addAll(result.getData().getList());
+                cursor = result.getData().getNextCursorId();
                 if (TextUtils.isEmpty(cursor) || "null".equals(cursor)) {
                     removeFooterView();
                 }
                 // 更新人氣列表表頭
                 if (mListType == LISTTYPE_POPULARITY && unlockCount != null) {
-                    unlockCount.setText(context.getResources().getString(R.string.showing_latest_followers, result.getData().alohaGetUnlockCount));
+                    unlockCount.setText(context.getResources().getString(R.string.showing_latest_followers, result.getData().getAlohaGetUnlockCount()));
                 }
             } else {
-                XL.i(TAG, result.getData().error + "");
+                XL.i(TAG, result.getData().getError() + "");
                 addFooterView(false);
             }
         }

@@ -137,8 +137,8 @@ class Post(
                 userTag.tagCenterX = tag.tagCenterX?.toFloat()
                 userTag.tagCenterY = tag.tagCenterY?.toFloat()
                 userTag.tagMe = tagme
-                userTag.tagUserId = tag.user2?.id
-                userTag.username = tag.user2?.name
+                userTag.tagUserId = tag.user?.id
+                userTag.username = tag.user?.name
                 userTags.add(userTag)
             }
             return userTags
@@ -164,7 +164,7 @@ class Post(
 
             // if (TextUtils.isEmpty(userId)) {
             for (userTag in userTagList) {
-                if (userTag.user2?.me == true) {
+                if (userTag.user?.me == true) {
                     return true
                 }
             }

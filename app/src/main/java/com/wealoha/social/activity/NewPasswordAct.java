@@ -187,9 +187,9 @@ public class NewPasswordAct extends BaseFragAct implements OnClickListener {
 						// TODO 需要清楚本地的其他用户数据
 						ToastUtil.shortToast(NewPasswordAct.this, getString(R.string.login_success));
 						afterMobileLoginSuccess(mUserName, result.getData().getUser(), result.getData().getT());
-					} else if (result.getData().error == 451) {
+					} else if (result.getData().getError() == 451) {
 						ToastUtil.shortToast(NewPasswordAct.this, getString(R.string.login_proscribe));
-					} else if (result.getData().error == 401) {
+					} else if (result.getData().getError() == 401) {
 						ToastUtil.shortToast(NewPasswordAct.this, getString(R.string.login_failed));
 					} else {
 						ToastUtil.shortToast(NewPasswordAct.this, R.string.Unkown_Error);

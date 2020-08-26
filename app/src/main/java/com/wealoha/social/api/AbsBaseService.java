@@ -126,10 +126,10 @@ public abstract class AbsBaseService<E, P> implements BaseListApiService<E, P> {
             User user2 = null;
             User replyUser = null;
             if (dto.user != null) {
-                user2 = User.Companion.fromDTO(dto.user, CommonImage.fromDTO(dto.user.avatarImage));
+                user2 = User.Companion.fromDTO(dto.user, CommonImage.fromDTO(dto.user.getAvatarImage()));
             }
             if (dto.replyUser != null) {
-                replyUser = User.Companion.fromDTO(dto.replyUser, CommonImage.fromDTO(dto.replyUser.avatarImage));
+                replyUser = User.Companion.fromDTO(dto.replyUser, CommonImage.fromDTO(dto.replyUser.getAvatarImage()));
             }
 
             PostComment postComment = PostComment.Companion.fromComment2DTO(dto, replyUser, user2);

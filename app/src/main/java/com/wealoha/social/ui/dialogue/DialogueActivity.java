@@ -317,11 +317,11 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
                 if (mNextCursorId == null) {
                     firstPage = true;
                 }
-                mNextCursorId = result.getData().nextCursorId;
+                mNextCursorId = result.getData().getNextCursorId();
                 if (mNextCursorId == null) {
                     mHasMore = false;
                 }
-                List<Message> list = (List<Message>) result.getData().list;
+                List<Message> list = (List<Message>) result.getData().getList();
                 Collections.reverse(list);
                 // if (list != null && list.size() > 0) {
                 // mMessage = list.get(list.size() - 1);

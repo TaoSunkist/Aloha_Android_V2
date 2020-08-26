@@ -1,30 +1,19 @@
 package com.wealoha.social.beans
 
-import com.wealoha.social.beans.feed.Video
 import com.wealoha.social.beans.imagemap.HasImageMap
 
 /**
  * @author javamonk
  * @createTime 14-10-13 AM10:29
  */
-class FeedResult : ResultData(), HasImageMap {
-    @kotlin.jvm.JvmField
-    var list: List<Feed>? = null
-
-    override var imageMap: Map<String, Image>? = null
-
-    @kotlin.jvm.JvmField
-    var commentCountMap: Map<String, Int>? = null
-
-    @kotlin.jvm.JvmField
-    var likeCountMap: Map<String, Int>? = null
-
-    @kotlin.jvm.JvmField
-    var userMap: Map<String, User>? = null
-    var videoMap: Map<String, Video>? = null
-
-    @kotlin.jvm.JvmField
+class FeedResult(
+    var list: List<Feed>? = null,
+    override var imageMap: Map<String, Image>? = null,
+    var commentCountMap: Map<String, Int>? = null,
+    var likeCountMap: Map<String, Int>? = null,
+    var userMap: Map<String, User>? = null,
     var nextCursorId: String? = null
+) : ResultData(), HasImageMap {
 
     /**
      * @Title: buildUserTags
@@ -39,7 +28,7 @@ class FeedResult : ResultData(), HasImageMap {
             return
         }
         for (feed in list!!) {
-            if (feed.userTags == null || feed.userTags!!.size <= 0) {
+            if (feed.userTags == null || feed.userTags!!.isEmpty()) {
                 continue
             }
             for (userTag in feed.userTags!!) {

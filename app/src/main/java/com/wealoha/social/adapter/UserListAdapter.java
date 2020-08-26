@@ -57,11 +57,11 @@ public class UserListAdapter extends BaseListApiAdapter<User, String> {
 	@Override
 	protected void fillView(AbsViewHolder holder, User item, int position, View convertView) {
 		UserListHodler userlistHolder = (UserListHodler) holder;
-		picasso.load(item.getAvatarCommonImage().getUrl(80, 80))//
+		picasso.load(item.getAvatarImage().getUrl())//
 		.into(userlistHolder.userPhoto);
 		userlistHolder.userName.setText(item.getName());
 		userlistHolder.userPhotoCount.setText(String.valueOf(item.getPostCount()) + mParent.getString(R.string.photo));
-		userlistHolder.matchOrNot.setText(item.isMatch() ? mParent.getString(R.string.matched) : "");
+		userlistHolder.matchOrNot.setText(item.getMatch() ? mParent.getString(R.string.matched) : "");
 		userlistHolder.userInfos.setText(item.getAge() + "·" + item.getHeight() + "·" + item.getWeight() + "·" + item.getZodiac());
 	}
 }

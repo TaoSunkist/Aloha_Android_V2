@@ -165,11 +165,11 @@ public class ProfileListAdapter extends BaseAdapter implements OnClickListener {
      * @param result
      */
     public void notifyDataSetChanged(FeedResult result) {
-        if (result != null && result.list != null) {
-            mList.addAll(result.list);
-            mUserMap.putAll(result.userMap);
-            mLikeCountMap.putAll(result.likeCountMap);
-            mCommentCountMap.putAll(result.commentCountMap);
+        if (result != null && result.getList() != null) {
+            mList.addAll(result.getList());
+            mUserMap.putAll(result.getUserMap());
+            mLikeCountMap.putAll(result.getLikeCountMap());
+            mCommentCountMap.putAll(result.getCommentCountMap());
             notifyDataSetChanged();
         }
     }
@@ -189,11 +189,11 @@ public class ProfileListAdapter extends BaseAdapter implements OnClickListener {
      * @param result
      */
     public void notifyTopDataSetChanged(FeedResult result) {
-        if (result.list != null && result.list.size() >= 0) {
-            mList.addAll(result.list);
-            mUserMap.putAll(result.userMap);
-            mLikeCountMap.putAll(result.likeCountMap);
-            mCommentCountMap.putAll(result.commentCountMap);
+        if (result.getList() != null && result.getList().size() >= 0) {
+            mList.addAll(result.getList());
+            mUserMap.putAll(result.getUserMap());
+            mLikeCountMap.putAll(result.getLikeCountMap());
+            mCommentCountMap.putAll(result.getCommentCountMap());
             // 清空赞
             FeedItemHolder.clearPraiseMap();
             notifyDataSetChanged();
@@ -209,10 +209,10 @@ public class ProfileListAdapter extends BaseAdapter implements OnClickListener {
     }
 
     public void notifyTopDataSetChangedByList(FeedResult result) {
-        mList = result.list;
-        mUserMap = result.userMap;
-        mLikeCountMap = result.likeCountMap;
-        mCommentCountMap = result.commentCountMap;
+        mList = result.getList();
+        mUserMap = result.getUserMap();
+        mLikeCountMap = result.getLikeCountMap();
+        mCommentCountMap = result.getCommentCountMap();
         notifyDataSetChanged();
     }
 

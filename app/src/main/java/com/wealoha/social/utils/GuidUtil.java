@@ -90,7 +90,7 @@ public class GuidUtil {
 				}.getType());
 				if (result.isOk()) {
 					XL.d(TAG, "注册GUID成功");
-				} else if (result.getData().error == IResultDataErrorCode.ERROR_GUID_DUPLICATE) {
+				} else if (result.getData().getError() == IResultDataErrorCode.ERROR_GUID_DUPLICATE) {
 					XL.w(TAG, "注册GUID失败，重复，清理掉本地的，下次再生成一个");
 					Editor editor = sharedPreferences.edit();
 					editor.remove(KEY_GUID);

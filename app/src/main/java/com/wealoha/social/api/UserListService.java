@@ -42,7 +42,7 @@ public class UserListService extends AbsBaseService<User, String> {
 			public void success(Result<MergeUsersGetData> result, Response arg1) {
 				XL.i("USER_LIST_FRAG", "success");
 				if (result != null && result.isOk()) {
-					callback.success(getUsers(result.getData().list, result.getData().imageMap), result.getData().nextCursorId);
+					callback.success(getUsers(result.getData().getList(), result.getData().getImageMap()), result.getData().getNextCursorId());
 				} else {
 					callback.fail(ApiErrorCode.fromResult(result), null);
 				}

@@ -60,12 +60,12 @@ public class Notify2Service extends AbsBaseService<Notify2, Boolean> {
 	}
 
 	protected List<Notify2> trans(NotifyGetData data) {
-		if (CollectionUtils.isEmpty(data.list)) {
+		if (CollectionUtils.isEmpty(data.getList())) {
 			return Collections.emptyList();
 		}
 
-		List<Notify2> result = new ArrayList<Notify2>(data.list.size());
-		for (AbsNotify2DTO dto : data.list) {
+		List<Notify2> result = new ArrayList<Notify2>(data.getList().size());
+		for (AbsNotify2DTO dto : data.getList()) {
 			Notify2Type type = Notify2Type.fromValue(dto.type);
 			if (type == null) {
 				continue;
@@ -73,36 +73,36 @@ public class Notify2Service extends AbsBaseService<Notify2, Boolean> {
 
 			if (type == Notify2Type.PostLike) {
 				PostLikeNotify2DTO d = (PostLikeNotify2DTO) dto;
-				Post post = getPost(data.postMap.get(d.postId), data.userMap, data.imageMap, null, data.commentCountMap, data.likeCountMap);
-				List<User> user2s = getUsers(d.userIds, data.userMap, data.imageMap);
+				Post post = getPost(data.getPostMap().get(d.postId), data.getUserMap(), data.getImageMap(), null, data.getCommentCountMap(), data.getLikeCountMap());
+				List<User> user2s = getUsers(d.userIds, data.getUserMap(), data.getImageMap());
 				result.add(new PostLikeNotify2(type, dto.unread, dto.notifyId, dto.updateTimeMillis, post, user2s,dto.count));
 			} else if (type == Notify2Type.NewAloha) {
 				NewAlohaNotify2DTO d = (NewAlohaNotify2DTO) dto;
-				List<User> user2s = getUsers(d.userIds, data.userMap, data.imageMap);
+				List<User> user2s = getUsers(d.userIds, data.getUserMap(), data.getImageMap());
 				result.add(new NewAlohaNotify2(type, dto.unread, dto.notifyId, dto.updateTimeMillis, dto.count, user2s));
 			} else if (type == Notify2Type.PostComment) {
 				PostCommentNotify2DTO d = (PostCommentNotify2DTO) dto;
-				User fromUser = getUser(d.fromUser, data.userMap, data.imageMap);
-				Post post = getPost(data.postMap.get(d.postId), data.userMap, data.imageMap, null, data.commentCountMap, data.likeCountMap);
+				User fromUser = getUser(d.fromUser, data.getUserMap(), data.getImageMap());
+				Post post = getPost(data.getPostMap().get(d.postId), data.getUserMap(), data.getImageMap(), null, data.getCommentCountMap(), data.getLikeCountMap());
 				result.add(new PostCommentNotify2(type, d.unread, dto.notifyId, d.updateTimeMillis, d.replyMe, d.comment, d.commentId, fromUser, post,d.count));
 			} else if (type == Notify2Type.PostTag) {
 				PostTagNotify2DTO d = (PostTagNotify2DTO) dto;
-				User fromUser = getUser(d.fromUser, data.userMap, data.imageMap);
-				Post post = getPost(data.postMap.get(d.postId), data.userMap, data.imageMap, null, data.commentCountMap, data.likeCountMap);
+				User fromUser = getUser(d.fromUser, data.getUserMap(), data.getImageMap());
+				Post post = getPost(data.getPostMap().get(d.postId), data.getUserMap(), data.getImageMap(), null, data.getCommentCountMap(), data.getLikeCountMap());
 				result.add(new PostTagNotify2(type, d.unread, dto.notifyId, d.updateTimeMillis, fromUser, post));
 			}else if(type == Notify2Type.PostCommentReplyOnMyPost){
 				PostCommentReplyOnMyPost2DTO d = (PostCommentReplyOnMyPost2DTO) dto;
-				User fromUser = getUser(d.fromUser, data.userMap, data.imageMap);
-				User replyUser = getUser(d.replyUser, data.userMap, data.imageMap);
-				Post post = getPost(data.postMap.get(d.postId), data.userMap, data.imageMap, null, data.commentCountMap, data.likeCountMap);
+				User fromUser = getUser(d.fromUser, data.getUserMap(), data.getImageMap());
+				User replyUser = getUser(d.replyUser, data.getUserMap(), data.getImageMap());
+				Post post = getPost(data.getPostMap().get(d.postId), data.getUserMap(), data.getImageMap(), null, data.getCommentCountMap(), data.getLikeCountMap());
 				String comment = mContext.getString(R.string.aloha_post_comment_reply_on_my_post, replyUser.getName(),d.comment);
 				result.add(new PostCommentReplyOnMyPost(type, d.unread, d.notifyId, d.updateTimeMillis, //
 						replyUser, fromUser, d.commentId, comment, post));
 			}else if(type == Notify2Type.PostCommentReplyOnOthersPost){
 				PostCommentReplyOnOthersPost2DTO d = (PostCommentReplyOnOthersPost2DTO)dto;
-				User postAuthor = getUser(d.fromUser, data.userMap, data.imageMap);
-				User replyUser = getUser(d.postAuthor, data.userMap, data.imageMap);
-				Post post = getPost(data.postMap.get(d.postId), data.userMap, data.imageMap, null, data.commentCountMap, data.likeCountMap);
+				User postAuthor = getUser(d.fromUser, data.getUserMap(), data.getImageMap());
+				User replyUser = getUser(d.postAuthor, data.getUserMap(), data.getImageMap());
+				Post post = getPost(data.getPostMap().get(d.postId), data.getUserMap(), data.getImageMap(), null, data.getCommentCountMap(), data.getLikeCountMap());
 				result.add(new PostCommentReplyOnOthersPost(type, d.unread, d.notifyId, d.updateTimeMillis, //
 						replyUser, postAuthor, d.commentId, d.comment, post));
 			}
@@ -120,7 +120,7 @@ public class Notify2Service extends AbsBaseService<Notify2, Boolean> {
 				XL.d(TAG, "加载数据成功");
 				if (result != null && result.isOk()) {
 					// 成功，拼装数据
-					callback.success(trans(result.getData()), result.getData().nextCursorId);
+					callback.success(trans(result.getData()), result.getData().getNextCursorId());
 				} else {
 					callback.fail(ApiErrorCode.fromResult(result), null);
 				}

@@ -3,15 +3,14 @@ package com.wealoha.social.beans
 import com.wealoha.social.beans.imagemap.HasImageMap
 import java.io.Serializable
 
-class UserListResult : ResultData(), Serializable, HasImageMap {
-    @kotlin.jvm.JvmField
-    var list: List<User>? = null
-    override var imageMap: Map<String, Image>? = null
-    @kotlin.jvm.JvmField
-    var nextCursorId: String? = null
-    var alohaGetLocked = false
-    @kotlin.jvm.JvmField
-    var alohaGetUnlockCount = 0
+data class UserListResult(
+    var list: List<User>? = null,
+    override var imageMap: Map<String, Image>? = null,
+    var nextCursorId: String? = null,
+    var alohaGetLocked: Boolean = false,
+    var alohaGetUnlockCount: Int = 0
+
+) : ResultData(), Serializable, HasImageMap {
 
     companion object {
         /**

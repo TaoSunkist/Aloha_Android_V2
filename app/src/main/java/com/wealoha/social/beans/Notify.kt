@@ -13,25 +13,20 @@ import com.wealoha.social.impl.DynamicType
  * @Date:2014-11-20
  */
 @Deprecated("切换到Notify2")
-class Notify : DynamicType {
-    @kotlin.jvm.JvmField
-    var postId: String? = null
-    var fromUser: String? = null
-    @kotlin.jvm.JvmField
-    var type: String? = null
-    @kotlin.jvm.JvmField
-    var createTimeMillis: Long = 0
-    @kotlin.jvm.JvmField
-    var comment: String? = null
-    var replyUser: User? = null
-    @kotlin.jvm.JvmField
-    var userIds: List<String>? = null
-    @kotlin.jvm.JvmField
-    var updateTimeMillis: Long = 0
-    var unread = false
-    @kotlin.jvm.JvmField
-    var count = 0
-    var replyMe = false
+class Notify(
+    var postId: String? = null,
+    var fromUser: String? = null,
+    var type: String? = null,
+    var createTimeMillis: Long = 0,
+    var comment: String? = null,
+    var replyUser: User? = null,
+    var userIds: List<String>? = null,
+    var updateTimeMillis: Long = 0,
+    var unread: Boolean = false,
+    var count: Int = 0,
+    var replyMe: Boolean = false
+) : DynamicType {
+
     override fun toString(): String {
         return "Notify [postId=$postId, fromUser=$fromUser, type=$type, createTimeMillis=$createTimeMillis, comment=$comment, replyUser=$replyUser, userIds=$userIds, updateTimeMillis=$updateTimeMillis, unread=$unread, count=$count, replyMe=$replyMe]"
     }
@@ -44,7 +39,7 @@ class Notify : DynamicType {
      * @author: sunkist
      * @date:2015-2-6
      */
-    fun getType(): Int {
+    fun getTypeTag(): Int {
         return if (DynamicType.TYPE_NOTIFY_POST_LIKE == type) { // feed被点赞
             DynamicType.FEED_PRAISE_VIEW_TYPE
         } else if (DynamicType.TYPE_NOTIFY_POST_COMMENT == type) { // Feed被评论的Item显示

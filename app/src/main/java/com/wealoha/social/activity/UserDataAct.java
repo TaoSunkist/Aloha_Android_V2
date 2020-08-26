@@ -333,9 +333,9 @@ public class UserDataAct extends BaseFragAct implements OnClickListener {
                         contextUtil.setCurrentUser(result.getData().getUser());
                         startActivity(GlobalConstants.IntentAction.INTENT_URI_INVITATION);
                         finish();
-                    } else if (result.getData().error == ResultData.ERROR_USERNAME_USED) {
+                    } else if (result.getData().getError() == ResultData.ERROR_USERNAME_USED) {
                         ToastUtil.longToast(UserDataAct.this, getString(R.string.username_unavailable));
-                    } else if (result.getData().error == ResultData.ERROR_INVALID_SUMMARY) {
+                    } else if (result.getData().getError() == ResultData.ERROR_INVALID_SUMMARY) {
                         ToastUtil.longToast(UserDataAct.this, getString(R.string.intro_has_illegalword));
                     } else {
                         ToastUtil.shortToast(UserDataAct.this, R.string.is_not_work);

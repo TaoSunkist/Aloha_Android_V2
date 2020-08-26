@@ -318,20 +318,20 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
         mRestAloha.setText(R.string.speed_up);
         mRestAloha.setTag(TIME_DOWN);
 
-        this.hasQuoraReset = matchData == null ? false : matchData.quotaReset > 0;
+        this.hasQuoraReset = matchData == null ? false : matchData.getQuotaReset() > 0;
 
-        if (matchData.error == ResultData.ERROR_MATCH_NO_MORE_TODAY) {
+        if (matchData.getError() == ResultData.ERROR_MATCH_NO_MORE_TODAY) {
             // 有倒计时和加速
             sendTimingNotice(matchData);
             mCountdown.setVisibility(View.VISIBLE);
             returnLastUser();
-            mCountdown.setText(formatTime(matchData.quotaResetSeconds));
+            mCountdown.setText(formatTime(matchData.getQuotaResetSeconds()));
             if (mCountDownTimer != null) {
                 mCountDownTimer.cancel();
                 mCountDownTimer = null;
             }
             mCountDownTimer = new Timer();
-            mMyCounter = new MyCounter(matchData.quotaResetSeconds, false);
+            mMyCounter = new MyCounter(matchData.getQuotaResetSeconds(), false);
             mCountDownTimer.scheduleAtFixedRate(mMyCounter, 0, 1000);
         }
         // this.hasQuoraReset = matchData.quotaReset > 0;
@@ -415,7 +415,7 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
         Bundle bundle = new Bundle();
         bundle.putSerializable(MatchData.TAG, matchData);
         bundle.putInt(GlobalConstants.AppConstact.ALARM_REQUEST_CODE, GlobalConstants.AppConstact.LOADING_SEND_TIMING_NOTICE);
-        NoticeBarController.getInstance(mainAct).timmingSendNotice(matchData.quotaResetSeconds, bundle);
+        NoticeBarController.getInstance(mainAct).timmingSendNotice(matchData.getQuotaDurationSeconds(), bundle);
     }
 
     private String formatTime(long millis) {
@@ -497,7 +497,7 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
 
             @Override
             public void success(Result<MatchData> result, Response arg1) {
-                hasQuoraReset = (result.getData().quotaReset > 0);
+                hasQuoraReset = (result.getData().getQuotaReset() > 0);
                 resetQuota();
             }
 
@@ -680,12 +680,12 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
 
         if (loader.getId() == LOADER_LOAD_MATCH) {
             if (result != null) {
-                if (result.isOk() && result.getData().list != null && result.getData().list.size() > 0) {
+                if (result.isOk() && result.getData().getList() != null && result.getData().getList().size() > 0) {
                     // 有下一批用户
-                    AppApplication.mUserList = result.getData().list;
+                    AppApplication.mUserList = result.getData().getList();
                     XL.i("HOME_KEY", "list size:" + AppApplication.mUserList.size());
                     // 设置标签的数据
-                    mainAct.setRecommendSourceMap(result.getData().recommendSourceMap);
+                    mainAct.setRecommendSourceMap(result.getData().getRecommendSourceMap());
                     Collections.shuffle(AppApplication.mUserList);
                     exitAnim.setFillAfter(true);
                     fragexitAnim.setFillAfter(true);
@@ -694,16 +694,16 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
                     mUserPhotoRoot.startAnimation(exitAnim);
                     // circle1.stopAnimation();
                     startingAloha();
-                } else if (result.getData().error == 200518) {// 当前时段没有更多匹配了，需要重置配额或者等下个时段
+                } else if (result.getData().getError() == 200518) {// 当前时段没有更多匹配了，需要重置配额或者等下个时段
                     startTimingInterface(result.getData());
                     // ToastUtil.shortToast(getActivity(), "200518");
-                } else if (result.getData().error == 200531) {// 没有搜寻到过滤条件范围内的人
+                } else if (result.getData().getError() == 200531) {// 没有搜寻到过滤条件范围内的人
                     // ToastUtil.shortToast(getActivity(), "200531");
                     showFilterResult();
-                } else if (result.getData().error == 200519) {// 没有更多了
+                } else if (result.getData().getError() == 200519) {// 没有更多了
                     // ToastUtil.shortToast(getActivity(), "200519");
                     showFilterNoResult();
-                } else if (result.getData().error == 200532) {// 服务挂了，稍候再试
+                } else if (result.getData().getError() == 200532) {// 服务挂了，稍候再试
                     // ToastUtil.shortToast(getActivity(), "200532");
                     showServerFucked();
                 } else {

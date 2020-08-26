@@ -106,7 +106,7 @@ public class ChangeNumberPart1 extends BaseFragment implements OnClickListener {
 					Bundle bundle = new Bundle();
 					bundle.putString("password", psd);
 					((BaseFragAct) getActivity()).startFragmentForResult(ChangeNumberPart2.class, bundle, true, CHANGE_NUM_REQUEST_CODE, 0, 0);
-				} else if (result.getData().error == 200509) {
+				} else if (result.getData().getError() == 200509) {
 					ToastUtil.shortToast(getActivity(), R.string.you_entered_psd_is_wrong);
 				}
 			}

@@ -94,241 +94,6 @@ public class PopupStore {
      * @author: sunkist
      * @date:2015-1-21
      */
-    public void showShareProfilePopup(final BaseFragAct baseFragAct, final User meUser, final User toUser) {
-
-        int viewId = 0;
-        LayoutInflater lInflater;
-        final PopupWindow sharePopup;
-        // FontUtil.setRegulartypeFace(mFrag.getActivity(), shareText);
-        /** 关闭弹出层 */
-        lInflater = (LayoutInflater) baseFragAct.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View newsMoreView = lInflater.inflate(R.layout.popup_news_detailed_article_share, new LinearLayout(baseFragAct), false);
-        TextView titleTv = (TextView) newsMoreView.findViewById(R.id.popup_title);
-        Button mCancelShareBtn = (Button) newsMoreView.findViewById(R.id.share_gv_btn);
-        FontUtil.setRegulartypeFace(baseFragAct, mCancelShareBtn);
-        FontUtil.setRegulartypeFace(baseFragAct, titleTv);
-        LinearLayout iconsLlTwo = (LinearLayout) newsMoreView.findViewById(R.id.icons_ll_two);
-        LinearLayout popu_outside_ll = (LinearLayout) newsMoreView.findViewById(R.id.popu_outside_ll);
-        HorizontalScrollView hsvLineTwo = (HorizontalScrollView) newsMoreView.findViewById(R.id.hsv_line_two);
-        FontUtil.setRegulartypeFace(baseFragAct, mCancelShareBtn);
-        FontUtil.setRegulartypeFace(baseFragAct, titleTv);
-        View line = newsMoreView.findViewById(R.id.line);
-        sharePopup = new PopupWindow(newsMoreView, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT, true);
-        ColorDrawable cDrawable = new ColorDrawable(00000000);
-        sharePopup.setAnimationStyle(R.style.popwin_anim_style);
-        sharePopup.setBackgroundDrawable(cDrawable);
-        sharePopup.setTouchable(true);
-        sharePopup.setFocusable(true);
-        sharePopup.setOutsideTouchable(true);
-        sharePopup.setContentView(newsMoreView);
-        int[] shareIconsTwo = new int[]{R.drawable.wechat_icon, R.drawable.circle_of_friends, R.drawable.copy, R.drawable.qq_icon, R.drawable.qzone_icon};
-        int[] shareTextsTwo = new int[]{R.string.wechat, R.string.circle_of_friends, R.string.copy_link, R.string.circle_of_qq, R.string.circle_of_qqzone};
-        final TextView[] tViewsOne = new TextView[shareTextsTwo.length];
-
-        hsvLineTwo.setVisibility(View.VISIBLE);
-        OnClickListener sharePopOnClick = new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                String url = null;
-                String title = null;
-                String body = null;
-                switch (v.getId()) {
-                    case R.id.popu_outside_ll:
-                        break;
-                    case 0:
-                        title = baseFragAct.getString(toUser == null ? R.string.share_to_wx_title : R.string.share_to_other_wx_title, toUser == null ? meUser.getName() : toUser.getName());
-                        body = StringUtil.shareDescription(toUser == null ? meUser : toUser, baseFragAct, mRegionNodeUtil);
-                        url = StringUtil.shareWebPagerUrl(meUser, toUser, toUser == null ? StringUtil.ME_PROFILE_TO_SHARE_WX : StringUtil.OTHER_PROFILE_TO_SHARE_WX);
-                        ShareStore.shareToWXHasUrl(baseFragAct, url, title, body, toUser == null ? ImageUtil.getImageUrl(meUser.getAvatarImage().getId(), ImageSize.CHAT_THUMB, CropMode.ScaleCenterCrop) : ImageUtil.getImageUrl(toUser.getAvatarImage().getId(), ImageSize.AVATAR, CropMode.ScaleCenterCrop));
-                        break;
-                    case 1:
-                        title = baseFragAct.getString(toUser == null ? R.string.share_to_wx_title : R.string.share_to_other_wx_title, toUser == null ? meUser.getName() : toUser.getName());
-                        body = StringUtil.shareDescription(toUser == null ? meUser : toUser, baseFragAct, mRegionNodeUtil);
-                        url = StringUtil.shareWebPagerUrl(meUser, toUser, toUser == null ? StringUtil.ME_PROFILE_TO_SHARE_WXF : StringUtil.OTHER_PROFILE_TO_SHARE_WXF);
-                        ShareStore.shareToFriendHasUrl(baseFragAct, url, title, body, toUser == null ? ImageUtil.getImageUrl(meUser.getAvatarImage().getId(), ImageSize.CHAT_THUMB, CropMode.ScaleCenterCrop) : ImageUtil.getImageUrl(toUser.getAvatarImage().getId(), ImageSize.AVATAR, CropMode.ScaleCenterCrop));
-                        break;
-                    case 2:
-                        title = baseFragAct.getString(R.string.share_to_other_wx_title, toUser == null ? meUser.getName() : toUser.getName());
-                        url = StringUtil.shareWebPagerUrl(meUser, toUser, toUser == null ? StringUtil.ME_PROFILE_COPY_LINK : StringUtil.OTHER_PROFILE_COPY_LINK);
-                        StringUtil.copyStringToClipboard(baseFragAct, url);
-                        break;
-                    case 3:
-                        // 分享到qq
-                        User user = null;
-                        String username = null;
-                        String imgid = null;
-                        int titleid = 0;
-                        int urlid = 0;
-
-                        if (toUser == null) {
-                            user = meUser;
-                            username = meUser.getName();
-                            imgid = meUser.getAvatarImage().getId();
-                            titleid = R.string.share_to_wx_title;
-                            urlid = StringUtil.ME_PROFILE_TO_SHARE_WX;
-                        } else {
-                            user = toUser;
-                            username = toUser.getName();
-                            imgid = toUser.getAvatarImage().getId();
-                            titleid = R.string.share_to_other_wx_title;
-                            urlid = StringUtil.OTHER_PROFILE_TO_SHARE_WX;
-                        }
-                        url = StringUtil.shareWebPagerUrl(meUser, toUser, urlid);
-                        body = StringUtil.shareDescription(user, baseFragAct, mRegionNodeUtil);
-                        title = baseFragAct.getString(titleid, username);
-                        String imgUrl = ImageUtil.getImageUrl(imgid, ImageSize.CHAT_THUMB, CropMode.ScaleCenterCrop);
-                        ShareStore.shareToQQ(baseFragAct, url, title, body, imgUrl);
-                        break;
-                    case 4:
-                        // 分享到qq空间
-                        User user2 = null;
-                        String username2 = null;
-                        String imgid2 = null;
-                        int titleid2 = 0;
-                        int urlid2 = 0;
-
-                        if (toUser == null) {
-                            user2 = meUser;
-                            username2 = meUser.getName();
-                            imgid2 = meUser.getAvatarImage().getId();
-                            titleid2 = R.string.share_to_wx_title;
-                            urlid2 = StringUtil.ME_PROFILE_TO_SHARE_WXF;
-                        } else {
-                            user2 = toUser;
-                            username2 = toUser.getName();
-                            imgid2 = toUser.getAvatarImage().getId();
-                            titleid2 = R.string.share_to_other_wx_title;
-                            urlid2 = StringUtil.OTHER_PROFILE_TO_SHARE_WXF;
-                        }
-                        url = StringUtil.shareWebPagerUrl(meUser, toUser, urlid2);
-                        body = StringUtil.shareDescription(user2, baseFragAct, mRegionNodeUtil);
-                        title = baseFragAct.getString(titleid2, username2);
-                        String imgUrl2 = ImageUtil.getImageUrl(imgid2, ImageSize.CHAT_THUMB, CropMode.ScaleCenterCrop);
-                        ArrayList<String> imgurls = new ArrayList<String>();
-                        imgurls.add(imgUrl2);
-                        ShareStore.shareToQzone(baseFragAct, url, title, body, imgurls);
-                        break;
-                    case R.drawable.report:
-                        report(toUser);
-                        break;
-                    case R.drawable.blacklist:
-                        if (toUser.getBlock()) {
-                            removeFromBlack(toUser);
-                        } else {
-                            openGuideDialog(baseFragAct, toUser, sharePopup);
-                        }
-                        break;
-                }
-                if (sharePopup != null && sharePopup.isShowing()) {
-                    sharePopup.dismiss();
-                }
-            }
-        };
-        mCancelShareBtn.setOnClickListener(sharePopOnClick);
-        popu_outside_ll.setOnClickListener(sharePopOnClick);
-        mCancelShareBtn.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, (int) (baseFragAct.mScreenHeight * 0.07 + 0.5f)));
-        LinearLayout.LayoutParams lLParams = new LinearLayout.LayoutParams((int) (baseFragAct.mScreenHeight * 0.16 + 0.5f), LinearLayout.LayoutParams.WRAP_CONTENT);
-        int[] shareIconsOne = new int[]{R.drawable.report, R.drawable.blacklist};
-        int[] shareTextsOne = new int[]{R.string.report, R.string.add_to_black_list};
-        float textSize = 12f;
-        // float textSize = (float) (baseFragAct.mScreenWidth * 0.013 + 0.5f);
-        Resources resources = baseFragAct.getResources();
-        int shareTextColor = resources.getColor(R.color.black_text);
-        LinearLayout iconsLlOne = (LinearLayout) newsMoreView.findViewById(R.id.icons_ll_one);
-
-        int leftPadding = (int) (baseFragAct.mScreenHeight * 0.008 + 0.5f);
-        int rightPadding = (int) (baseFragAct.mScreenHeight * 0.008 + 0.5f);
-        int bottomPadding = (int) (baseFragAct.mScreenHeight * 0.001 + 0.5f);
-        titleTv.setText(baseFragAct.getString(R.string.share_my_profile));
-
-        boolean isHaveLine = true;
-        if (toUser == null || !toUser.getHasPrivacy()) {
-            for (int i = 0; i < shareIconsTwo.length; i++) {
-                Drawable drawable = resources.getDrawable(shareIconsTwo[i]);
-                String shareTvStr = resources.getString(shareTextsTwo[i]);
-                TextView shareTv = new TextView(baseFragAct);
-                shareTv.setSingleLine(true);
-                shareTv.setLayoutParams(lLParams);
-                shareTv.setGravity(Gravity.CENTER);
-                shareTv.setPadding(leftPadding, 0, rightPadding, bottomPadding);
-                shareTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-                shareTv.setText(shareTvStr);
-                shareTv.setTextColor(shareTextColor);
-                shareTv.setClickable(true);
-                shareTv.setId(viewId++);
-                shareTv.setOnClickListener(sharePopOnClick);
-                drawable.setBounds(0, 0, (int) (drawable.getMinimumWidth() / 1.0), (int) (drawable.getMinimumHeight() / 1.0));
-                shareTv.setCompoundDrawablePadding((int) (baseFragAct.mScreenHeight * 0.01 + 0.5f));
-                shareTv.setCompoundDrawables(null, drawable, null, null);
-                FontUtil.setRegulartypeFace(baseFragAct, shareTv);
-                iconsLlOne.addView(shareTv);
-                tViewsOne[i] = shareTv;
-            }
-        } else {
-            titleTv.setVisibility(View.GONE);
-            isHaveLine = false;
-        }
-
-        HorizontalScrollView hsvLineOne = (HorizontalScrollView) newsMoreView.findViewById(R.id.hsv_line_one);
-        hsvLineOne.setVisibility(View.VISIBLE);
-        if (toUser != null) {// 显示举报、、
-            titleTv.setText(R.string.share_my_profile);
-            line.setVisibility(View.VISIBLE);
-            for (int i = 0; i < shareIconsOne.length; i++) {
-                Drawable drawable = resources.getDrawable(shareIconsOne[i]);
-                String shareTvStr = resources.getString(shareTextsOne[i]);
-                TextView shareTv = new TextView(baseFragAct);
-                shareTv.setLayoutParams(lLParams);
-                shareTv.setSingleLine(true);
-                shareTv.setGravity(Gravity.CENTER);
-                shareTv.setPadding(leftPadding, 0, rightPadding, bottomPadding);
-                shareTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-
-                // 如果是加入黑名单（这的逻辑太乱）
-                if (i == 1 && toUser.getBlock()) {
-                    shareTv.setText(resources.getString(R.string.remove_from_black_list));
-                } else {
-                    shareTv.setText(shareTvStr);
-                }
-
-                shareTv.setTextColor(shareTextColor);
-                shareTv.setClickable(true);
-                shareTv.setId(shareIconsOne[i]);
-                shareTv.setOnClickListener(sharePopOnClick);
-                drawable.setBounds(0, 0, (int) (drawable.getMinimumWidth() / 1.0), (int) (drawable.getMinimumHeight() / 1.0));
-                shareTv.setCompoundDrawablePadding((int) (baseFragAct.mScreenHeight * 0.01 + 0.5f));
-                shareTv.setCompoundDrawables(null, drawable, null, null);
-                FontUtil.setRegulartypeFace(baseFragAct, shareTv);
-                iconsLlTwo.addView(shareTv);
-                tViewsOne[i] = shareTv;
-            }
-        } else {
-            isHaveLine = false;
-        }
-
-        if (isHaveLine) {
-            line.setVisibility(View.VISIBLE);
-        } else {
-            line.setVisibility(View.GONE);
-
-        }
-        sharePopup.showAtLocation(newsMoreView, Gravity.BOTTOM, 0, 0);
-        sharePopup.update();
-    }
-
-    /**
-     * baseFragAct
-     * meUser      用户的User对象
-     * toUser      查看的User对象
-     *
-     * @Description:分享profile的弹出层
-     * @see:
-     * @since:
-     * @description
-     * @author: sunkist
-     * @date:2015-1-21
-     */
     public void showShareProfilePopup(final BaseFragAct baseFragAct, int resId, final User meUser, final User toUser) {
 
         int viewId = 0;
@@ -608,13 +373,13 @@ public class PopupStore {
                         title = baseFragAct.getString(toUser == null ? R.string.share_to_wx_title : R.string.share_to_other_wx_title, toUser == null ? meUser.getName() : toUser.getName());
                         body = StringUtil.shareDescription(toUser == null ? meUser : toUser, baseFragAct, mRegionNodeUtil);
                         url = StringUtil.shareUserWebUrl(meUser.getId(), toUser.getId(), toUser == null ? StringUtil.ME_PROFILE_TO_SHARE_WX : StringUtil.OTHER_PROFILE_TO_SHARE_WX);
-                        ShareStore.shareToWXHasUrl(baseFragAct, url, title, body, toUser == null ? meUser.getAvatarCommonImage().getUrlSquare(ImageSize.AVATAR) : toUser.getAvatarCommonImage().getUrlSquare(ImageSize.AVATAR));
+                        ShareStore.shareToWXHasUrl(baseFragAct, url, title, body, toUser == null ? meUser.getAvatarImage().getUrlSquare(ImageSize.AVATAR) : toUser.getAvatarImage().getUrlSquare(ImageSize.AVATAR));
                         break;
                     case 1:
                         title = baseFragAct.getString(toUser == null ? R.string.share_to_wx_title : R.string.share_to_other_wx_title, toUser == null ? meUser.getName() : toUser.getName());
                         body = StringUtil.shareDescription(toUser == null ? meUser : toUser, baseFragAct, mRegionNodeUtil);
                         url = StringUtil.shareUserWebUrl(meUser.getId(), toUser.getId(), toUser == null ? StringUtil.ME_PROFILE_TO_SHARE_WXF : StringUtil.OTHER_PROFILE_TO_SHARE_WXF);
-                        ShareStore.shareToFriendHasUrl(baseFragAct, url, title, body, toUser == null ? meUser.getAvatarCommonImage().getUrlSquare(ImageSize.AVATAR) : toUser.getAvatarCommonImage().getUrlSquare(ImageSize.AVATAR));
+                        ShareStore.shareToFriendHasUrl(baseFragAct, url, title, body, toUser == null ? meUser.getAvatarImage().getUrlSquare(ImageSize.AVATAR) : toUser.getAvatarImage().getUrlSquare(ImageSize.AVATAR));
                         break;
                     case 2:
                         title = baseFragAct.getString(R.string.share_to_other_wx_title, toUser == null ? meUser.getName() : toUser.getName());
@@ -672,7 +437,7 @@ public class PopupStore {
                         report(toUser);
                         break;
                     case R.drawable.blacklist:
-                        if (toUser.isBlock()) {
+                        if (toUser.getBlock()) {
                             removeFromBlack(toUser);
                         } else {
                             openGuideDialog(baseFragAct, toUser, sharePopup);
@@ -745,7 +510,7 @@ public class PopupStore {
                 shareTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
 
                 // 如果是加入黑名单（这的逻辑太乱）
-                if (i == 1 && toUser.isBlock()) {
+                if (i == 1 && toUser.getBlock()) {
                     shareTv.setText(resources.getString(R.string.remove_from_black_list));
                 } else {
                     shareTv.setText(shareTvStr);
@@ -1281,33 +1046,6 @@ public class PopupStore {
     }
 
     /**
-     * 设定文件
-     *
-     * @return void 返回类型
-     * @throws
-     * @Title: black
-     * @Description: 加入黑名单
-     */
-    private void black(final User user2) {
-        mUserService.blackUser(user2.getId(), new Callback<Result<ResultData>>() {
-
-            @Override
-            public void success(Result<ResultData> arg0, Response arg1) {
-                // ToastUtil.shortToast(context, "成功加入");
-                XL.i("PopupStore", "black success");
-                user2.block();
-                ToastUtil.longToast(mContext, R.string.add_to_black_list_success);
-            }
-
-            @Override
-            public void failure(RetrofitError arg0) {
-                XL.i("PopupStore", "black user:failure-----" + arg0.getMessage());
-                ToastUtil.longToast(mContext, R.string.network_error);
-            }
-        });
-    }
-
-    /**
      * context
      *
      * @return
@@ -1401,56 +1139,6 @@ public class PopupStore {
 
     }
 
-    public void openGuideDialog(BaseFragAct baseAct, final User user2, PopupWindow sharePopup) {
-        if (sharePopup != null && sharePopup.isShowing()) {
-            sharePopup.dismiss();
-        }
-        View view = LayoutInflater.from(baseAct).inflate(R.layout.dialog_first_aloha_time, new LinearLayout(baseAct), false);
-        TextView title = (TextView) view.findViewById(R.id.first_aloha_title);
-        TextView message = (TextView) view.findViewById(R.id.first_aloha_message);
-        TextView close = (TextView) view.findViewById(R.id.close_tv);
-        TextView close02 = (TextView) view.findViewById(R.id.close_tv_02);
-        FontUtil.setRegulartypeFace(baseAct, message);
-        FontUtil.setRegulartypeFace(baseAct, close02);
-        FontUtil.setRegulartypeFace(baseAct, title);
-        FontUtil.setRegulartypeFace(baseAct, close);
-
-        title.setText(R.string.add_to_black_confirm);
-        message.setText(R.string.add_to_black_rule);
-        message.setGravity(Gravity.CENTER);
-        close.setText(R.string.cancel);
-        close.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (alertDialog != null && alertDialog.isShowing()) {
-                    alertDialog.dismiss();
-                }
-            }
-        });
-
-        close02.setVisibility(View.VISIBLE);
-        close02.setText(R.string.add);
-
-        close02.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (alertDialog != null && alertDialog.isShowing()) {
-                    alertDialog.dismiss();
-                }
-                black(user2);
-            }
-        });
-
-        alertDialog = new AlertDialog.Builder(baseAct)//
-                .setView(view)//
-                .setCancelable(false) //
-                .create();
-        alertDialog.show();
-
-    }
-
     /**
      * 设定文件
      *
@@ -1482,61 +1170,11 @@ public class PopupStore {
      *
      * @return void 返回类型
      * @throws
-     * @Title: black
-     * @Description: 移除黑名单
-     */
-    private void removeFromBlack(final User user2) {
-        mUserService.unblock(user2.getId(), new Callback<Result<ResultData>>() {
-
-            @Override
-            public void failure(RetrofitError arg0) {
-                XL.i(TAG, "移除黑名單失敗");
-                ToastUtil.longToast(mContext, R.string.network_error);
-            }
-
-            @Override
-            public void success(Result<ResultData> result, Response arg1) {
-                user2.removeBlock();
-                ;
-                ToastUtil.longToast(mContext, R.string.remove_from_black_list_success);
-                XL.i(TAG, "移除黑名單成功");
-            }
-        });
-    }
-
-    /**
-     * 设定文件
-     *
-     * @return void 返回类型
-     * @throws
      * @Title: report
      * @Description: 举报用户或FEED
      */
     private void report(User user) {
         mUserService.reportUser(user.getId(), null, new Callback<Result<ResultData>>() {
-
-            @Override
-            public void success(Result<ResultData> arg0, Response arg1) {
-                ToastUtil.longToast(mContext, R.string.report_inappropriate_success);
-            }
-
-            @Override
-            public void failure(RetrofitError arg0) {
-                ToastUtil.longToast(mContext, R.string.network_error);
-            }
-        });
-    }
-
-    /**
-     * 设定文件
-     *
-     * @return void 返回类型
-     * @throws
-     * @Title: report
-     * @Description: 举报用户或FEED
-     */
-    private void report(User user2) {
-        mUserService.reportUser(user2.getId(), null, new Callback<Result<ResultData>>() {
 
             @Override
             public void success(Result<ResultData> arg0, Response arg1) {
