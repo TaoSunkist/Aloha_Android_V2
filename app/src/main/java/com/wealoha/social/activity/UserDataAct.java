@@ -219,6 +219,7 @@ public class UserDataAct extends BaseFragAct implements OnClickListener {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent result) {
         // 改善了照片选择的代码阅读
+        super.onActivityResult(requestCode, resultCode, result);
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case GlobalConstants.AppConstact.CAMERA_WITH_DATA:
