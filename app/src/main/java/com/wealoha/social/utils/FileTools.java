@@ -72,6 +72,9 @@ public class FileTools {
         return ALOHA_FILE_FOLDER.getAbsolutePath();
     }
 
+    public static File getDownloadFolderImageOutputFile(final String suffix) {
+        return new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsoluteFile() + File.separator + suffix + ".jpg");
+    }
     public static String getFileImgNameHasDir(User user) {
         StringBuilder sBuilder = null;
         if (initAlohaFolder()) {

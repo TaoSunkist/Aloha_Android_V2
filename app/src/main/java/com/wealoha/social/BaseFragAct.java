@@ -736,9 +736,7 @@ public abstract class BaseFragAct extends FragmentActivity implements HasCache, 
         if (status.equals(Environment.MEDIA_MOUNTED)) {// 如果媒体存在
             try {
                 Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                User currentUser = contextUtil.getCurrentUser();
-                String tempFilepath = FileTools.getFileImgNameHasDir(currentUser);
-                mCameraImgFile = new File(tempFilepath);
+                mCameraImgFile = FileTools.getDownloadFolderImageOutputFile(String.valueOf(System.currentTimeMillis()));
                 Uri u = FileProvider.getUriForFile(this, getPackageName() + ".provider", mCameraImgFile);
                 intent.putExtra("orientation", 0);
                 intent.putExtra("output", u);

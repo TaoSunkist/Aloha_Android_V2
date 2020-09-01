@@ -51,6 +51,8 @@ import com.wealoha.social.commons.AlohaThreadPool;
 import com.wealoha.social.commons.AlohaThreadPool.ENUM_Thread_Level;
 import com.wealoha.social.commons.GlobalConstants;
 
+import static com.wealoha.social.utils.DebugToolsKt.printf;
+
 /**
  * 图片相关功能
  *
@@ -1045,8 +1047,8 @@ public class ImageUtil {
         BitmapFactory.Options opts = new BitmapFactory.Options();
         opts.inJustDecodeBounds = true;
         Bitmap bitmap2 = BitmapFactory.decodeFile(path, opts);
-        int srcWidth = opts.outWidth; // 获取图片的原始宽度
-        int srcHeight = opts.outHeight; // 获取图片原始高度
+        int srcWidth = w; // 获取图片的原始宽度
+        int srcHeight = h; // 获取图片原始高度
         XL.d(TAG, "获取缩略图，原图尺寸: " + srcWidth + "x" + srcHeight);
 
         float ratOrig = srcWidth / (float) srcHeight;
@@ -1096,8 +1098,11 @@ public class ImageUtil {
         // 缩放的比例
         opts.inSampleSize = sampleSize;
         Bitmap decodeFile = BitmapFactory.decodeFile(path, opts);
+        File destFile = new File(path);
+        boolean destFileExsit = destFile.exists();
+        printf("taohui", destFileExsit);
 
-        ExifOrientation orientation = ImageUtil.getOrientation(path);
+        ExifOrientation orientation = ImageUtil.getOrientation(destFile.getPath());
         cb.getSize(srcWidth, srcHeight, sampleW, sampleH, 1 / (float) sampleSize, orientation);
         if (orientation != null && (orientation.flip || orientation.angle != 0)) {
             // 需要旋转
