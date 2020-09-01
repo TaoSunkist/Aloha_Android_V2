@@ -46,6 +46,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.PopupWindow;
 
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentActivity;
 
 import butterknife.ButterKnife;
@@ -734,9 +735,11 @@ public abstract class BaseFragAct extends FragmentActivity implements HasCache, 
         String status = Environment.getExternalStorageState();
         if (status.equals(Environment.MEDIA_MOUNTED)) {// 如果媒体存在
             try {
-                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                mCameraImgFile = new File(FileTools.getFileImgNameHasDir(contextUtil.getCurrentUser()));
-                Uri u = Uri.fromFile(mCameraImgFile);
+                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                User currentUser = contextUtil.getCurrentUser();
+                String tempFilepath = FileTools.getFileImgNameHasDir(currentUser);
+                mCameraImgFile = new File(tempFilepath);
+                Uri u = FileProvider.getUriForFile(this, getPackageName() + ".provider", mCameraImgFile);
                 intent.putExtra("orientation", 0);
                 intent.putExtra("output", u);
                 baseFragAct.startActivityForResult(intent, GlobalConstants.AppConstact.CAMERA_WITH_DATA);

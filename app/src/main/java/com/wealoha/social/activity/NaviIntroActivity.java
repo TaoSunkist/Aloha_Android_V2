@@ -110,6 +110,7 @@ public class NaviIntroActivity extends BaseFragAct implements ViewPager.OnPageCh
                 if (currentUser.getProfileIncomplete()) {
                     // 资料不完整，跳到完善资料
                     uri = GlobalConstants.IntentAction.INTENT_URI_USER_DATA;
+                    startActivityAndCleanTask(uri, null);
                 } else {
                     boolean showInvitation = ContextConfig.getInstance().getBooleanWithDefValue(GlobalConstants.AppConstact.SHOW_INVITATION_CODE_INPUT, false);
                     if (showInvitation) {

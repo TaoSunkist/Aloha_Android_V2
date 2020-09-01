@@ -4,11 +4,19 @@ import java.io.File;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.rxkotlin.DisposableKt;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.mime.TypedFile;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -19,6 +27,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,6 +41,7 @@ import butterknife.OnClick;
 
 import com.lidroid.xutils.ViewUtils;
 import com.squareup.picasso.Picasso;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.wealoha.social.ActivityManager;
 import com.wealoha.social.BaseFragAct;
 import com.wealoha.social.ContextConfig;
@@ -53,6 +63,8 @@ import com.wealoha.social.view.custom.CircleImageView;
 import com.wealoha.social.view.custom.dialog.BasePickerDialog;
 import com.wealoha.social.view.custom.dialog.BasePickerDialog.ReturnSomethingListener;
 import com.wealoha.social.view.custom.dialog.TimePickerDialog;
+
+import static com.wealoha.social.utils.DebugToolsKt.printf;
 
 public class UserDataAct extends BaseFragAct implements OnClickListener {
 
@@ -108,6 +120,7 @@ public class UserDataAct extends BaseFragAct implements OnClickListener {
     private int defaultWeight = 75;
     private int defaultHeight = 180;
     private Dialog openCarmeraDialog;
+    final RxPermissions rxPermissions = new RxPermissions(this); // where this is an Activity or Fragment instance
 
     @Inject
     ContextUtil contextUtil;
@@ -190,27 +203,31 @@ public class UserDataAct extends BaseFragAct implements OnClickListener {
         View view = getLayoutInflater().inflate(R.layout.open_carmera_dialog, null);
         TextView openCarmera = (TextView) view.findViewById(R.id.open_carmera);
         TextView openLocaPics = (TextView) view.findViewById(R.id.open_location_photo);
-        openCarmera.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                openCamera(UserDataAct.this);
-                if (openCarmeraDialog != null && openCarmeraDialog.isShowing()) {
-                    openCarmeraDialog.dismiss();
-                }
+        openCarmera.setOnClickListener(v -> {
+            openCamera(UserDataAct.this);
+            if (openCarmeraDialog != null && openCarmeraDialog.isShowing()) {
+                openCarmeraDialog.dismiss();
             }
         });
-        openLocaPics.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                openImgPick(UserDataAct.this);
-                if (openCarmeraDialog != null && openCarmeraDialog.isShowing()) {
-                    openCarmeraDialog.dismiss();
-                }
+        openLocaPics.setOnClickListener(v -> {
+            openImgPick(UserDataAct.this);
+            if (openCarmeraDialog != null && openCarmeraDialog.isShowing()) {
+                openCarmeraDialog.dismiss();
             }
         });
-        openCarmeraDialog = new AlertDialog.Builder(this).setView(view).show();
+        printf("taohui ", "dasdsd");
+
+        compositeDisposable.add(rxPermissions.request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(granted -> {
+                    if (granted) {
+                        openCarmeraDialog = new AlertDialog.Builder(this).setView(view).show();
+                    } else {
+                        ToastUtil.shortToast(this, getString(R.string.failed));
+                    }
+                }));
+
     }
 
     public int titleHeight;

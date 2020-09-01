@@ -1044,7 +1044,7 @@ public class ImageUtil {
 
         BitmapFactory.Options opts = new BitmapFactory.Options();
         opts.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(path, opts);
+        Bitmap bitmap2 = BitmapFactory.decodeFile(path, opts);
         int srcWidth = opts.outWidth; // 获取图片的原始宽度
         int srcHeight = opts.outHeight; // 获取图片原始高度
         XL.d(TAG, "获取缩略图，原图尺寸: " + srcWidth + "x" + srcHeight);

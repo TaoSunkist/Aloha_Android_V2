@@ -74,7 +74,16 @@
         -->
         <!-- name,value必须在一行或者两行紧挨着 -->
         <!-- 必须在一行 -->
-
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.wealoha.social.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <!-- ressource file to create -->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
         <!-- 配置发布的应用商店。注意！！打包前一定要修改成对应的商店 -->
         <meta-data
