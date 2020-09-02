@@ -1,6 +1,6 @@
 package com.wealoha.social.activity;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -57,7 +57,7 @@ public class FragmentWrapperActivity extends BaseFragAct implements OnClickListe
 		setContentView(R.layout.act_fragment_wrapper);
 		if (mFragment != null) {
 			// 使用指定的Fragment显示
-			getFragmentManager().beginTransaction().add(R.id.act_frag_wrapper_root_rl, mFragment).commit();
+			getSupportFragmentManager().beginTransaction().add(R.id.act_frag_wrapper_root_rl, mFragment).commit();
 		}
 	}
 

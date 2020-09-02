@@ -22,10 +22,10 @@ import retrofit.mime.TypedFile;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
+import androidx.loader.content.Loader;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
@@ -67,6 +67,7 @@ import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.ProfileData;
 import com.wealoha.social.commons.GlobalConstants;
 import com.wealoha.social.commons.GlobalConstants.ImageSize;
+import com.wealoha.social.ui.dialogue.DialogueActivity;
 import com.wealoha.social.utils.ContextUtil;
 import com.wealoha.social.utils.FontUtil;
 import com.wealoha.social.utils.FontUtil.Font;
@@ -91,7 +92,7 @@ import com.wealoha.social.view.custom.dialog.TimePickerDialog;
  * @see
  * @since
  */
-public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<ApiResponse<ProfileData>> {
+public class ConfigDetailsAct extends BaseFragAct implements LoaderManager.LoaderCallbacks<ApiResponse<ProfileData>> {
 
     public static final String TAG = ConfigDetailsAct.class.getSimpleName();
     /**
@@ -250,7 +251,7 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Api
         com.wealoha.social.ActivityManager.push(this);
         mContext = this;
         mLoadingDialog = new FlippingLoadingDialog(mContext, R.layout.popup_prompt, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        getLoaderManager().restartLoader(LOADER_GET_PROFILE, null, this);
+        LoaderManager.getInstance(this).restartLoader(LOADER_GET_PROFILE, null, this);
         initView();
     }
 
@@ -326,7 +327,7 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Api
             case R.id.config_details_height:
                 // 身高
                 pikerDialog = new BasePickerDialog(this, 140, 250);
-                pikerDialog.show(getFragmentManager(), "");
+                pikerDialog.show(getSupportFragmentManager(), "");
                 String value = (String) mHeightTv.getTag();
                 if (value != null && value.trim().length() > 0) {
                     pikerDialog.setCurrentValue(Integer.parseInt(value));
@@ -346,7 +347,7 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Api
             case R.id.config_details_weight:
                 // 体重
                 pikerDialog = new BasePickerDialog(this, 40, 150);
-                pikerDialog.show(getFragmentManager(), "");
+                pikerDialog.show(getSupportFragmentManager(), "");
                 value = (String) mWeightTv.getTag();
                 if (value != null && value.trim().length() > 0) {
                     pikerDialog.setCurrentValue(Integer.parseInt(value.trim()));
@@ -365,7 +366,7 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Api
             case R.id.config_details_age:
                 // 年龄
                 TimePickerDialog tp = new TimePickerDialog();
-                tp.show(getFragmentManager(), "d");
+                tp.show(getSupportFragmentManager(), "d");
                 String birthday = (String) mAgeTv.getTag();
                 if (birthday != null) {
                     // 设置当前日期
@@ -780,6 +781,7 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Api
         // // mAreaTv.setText(areaStr);
         // // mAreaTv.setTag(result.getExtras().getString("region"));
         // }
+        super.onActivityResult(requestCode, resultCode, result);
         if (requestCode == FLAG && resultCode == 0 && result != null) {
             mIntroductionTv.setText(result.getExtras().getString("introduction"));
         }

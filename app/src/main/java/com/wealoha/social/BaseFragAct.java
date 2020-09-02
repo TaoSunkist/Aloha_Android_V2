@@ -22,7 +22,9 @@ import android.app.Activity;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
+
+import androidx.fragment.app.Fragment;
+
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -54,6 +56,7 @@ import butterknife.ButterKnife;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.squareup.otto.Bus;
 import com.squareup.picasso.Picasso;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.wealoha.social.activity.FeedNoticeAct;
 import com.wealoha.social.activity.FragmentWrapperActivity;
 import com.wealoha.social.activity.FragmentWrapperActivity.ActivityResultCallback;
@@ -232,11 +235,14 @@ public abstract class BaseFragAct extends FragmentActivity implements HasCache, 
         });
     }
 
+    public RxPermissions rxPermissions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
+        rxPermissions = new RxPermissions(this);
         mContext = this;
         mResources = getResources();
         mPopupStore = new PopupStore();

@@ -10,9 +10,10 @@ import javax.inject.Inject;
 import retrofit.RetrofitError;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageInfo;
+
+import androidx.fragment.app.Fragment;
 
 import com.lidroid.xutils.http.RequestParams;
 import com.wealoha.social.AppApplication;

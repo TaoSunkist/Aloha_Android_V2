@@ -2,9 +2,10 @@ package com.wealoha.social.fragment;
 
 import javax.inject.Inject;
 
-import android.app.LoaderManager;
 import android.content.Context;
-import android.content.Loader;
+
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;

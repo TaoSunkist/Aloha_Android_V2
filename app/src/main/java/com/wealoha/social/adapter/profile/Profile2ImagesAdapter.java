@@ -3,7 +3,7 @@ package com.wealoha.social.adapter.profile;
 import java.util.Collections;
 import java.util.List;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;

@@ -1,6 +1,6 @@
 package com.wealoha.social.adapter.profile;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.wealoha.social.adapter.feed.Feed2Adapter;
 import com.wealoha.social.api.Feed2ListApiService;

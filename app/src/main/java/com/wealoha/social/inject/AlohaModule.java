@@ -108,7 +108,6 @@ import com.wealoha.social.beans.PostTagNotify2DTO;
 import com.wealoha.social.api.Notify2ListApiService;
 import com.wealoha.social.api.PostService;
 import com.wealoha.social.api.TopicPostService;
-import com.wealoha.social.api.TopicService;
 import com.wealoha.social.api.UserService;
 import com.wealoha.social.api.ConstantsService;
 import com.wealoha.social.api.CountService;
@@ -336,7 +335,7 @@ import dagger.Provides;
                 Profile2Adapter.class,//
                 Profile2ListApiService.class,//
                 Profile2ImagesAdapter.class,//
-                Profile2InfoHolder.class, TopicService.class,//
+                Profile2InfoHolder.class,
 // ProfileArrayAdaper.class,//
                 TopicPostService.class,//
                 Notify2ListApiService.class, // 通知2

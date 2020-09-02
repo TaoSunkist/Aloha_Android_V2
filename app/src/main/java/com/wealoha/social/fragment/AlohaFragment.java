@@ -8,10 +8,8 @@ import retrofit.client.Response;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Loader;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -39,6 +37,9 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -87,7 +88,7 @@ import com.wealoha.social.view.custom.dialog.ListItemDialog.ListItemType;
  * @copyright wealoha.com
  * @Date:2014-10-31
  */
-public class AlohaFragment extends BaseFragment implements LoaderCallbacks<ApiResponse<ResultData>>, ListItemCallback {
+public class AlohaFragment extends BaseFragment implements LoaderManager.LoaderCallbacks<ApiResponse<ResultData>>, ListItemCallback {
 
     public static final String TAG = AlohaFragment.class.getSimpleName();
     static public final int nope = 1111;

@@ -1,7 +1,6 @@
 package com.wealoha.social.fragment;
 
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +10,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.fragment.app.DialogFragment;
 
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.wealoha.social.BaseFragAct;

@@ -2,7 +2,7 @@ package com.wealoha.social.adapter.feed;
 
 import javax.inject.Inject;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.media.AudioManager;

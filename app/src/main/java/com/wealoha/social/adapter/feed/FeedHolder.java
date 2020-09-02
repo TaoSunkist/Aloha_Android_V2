@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 
 import javax.inject.Inject;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;

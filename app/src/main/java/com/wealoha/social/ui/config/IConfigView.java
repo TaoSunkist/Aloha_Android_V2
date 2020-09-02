@@ -1,7 +1,8 @@
 package com.wealoha.social.ui.config;
 
-import android.app.LoaderManager;
 import android.view.View.OnClickListener;
+
+import androidx.loader.app.LoaderManager;
 
 import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.instagram.InstagramResult;

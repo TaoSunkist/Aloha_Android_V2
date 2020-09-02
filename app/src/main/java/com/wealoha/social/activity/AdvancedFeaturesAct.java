@@ -2,9 +2,10 @@ package com.wealoha.social.activity;
 
 import javax.inject.Inject;
 
-import android.app.LoaderManager;
 import android.content.Intent;
-import android.content.Loader;
+
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;

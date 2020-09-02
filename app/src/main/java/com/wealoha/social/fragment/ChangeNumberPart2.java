@@ -232,7 +232,6 @@ public class ChangeNumberPart2 extends BaseFragment implements OnClickListener, 
 	 * loading 弹层
 	 * 
 	 * @param isShow
-	 * @param where
 	 * @return void
 	 */
 	public void showDialog(boolean isShow) {

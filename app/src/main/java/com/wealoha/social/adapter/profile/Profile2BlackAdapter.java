@@ -1,6 +1,6 @@
 package com.wealoha.social.adapter.profile;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;

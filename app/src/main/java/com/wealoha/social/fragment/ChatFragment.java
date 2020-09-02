@@ -13,12 +13,10 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.Loader;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -33,6 +31,9 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
 import butterknife.InjectView;
 
@@ -82,7 +83,7 @@ import com.wealoha.social.view.custom.dialog.ListItemDialog.ListItemType;
  * @see
  * @since
  */
-public class ChatFragment extends BaseFragment implements ListItemCallback, OnItemClickListener, LoaderCallbacks<ApiResponse<InboxSessionResult>>, SmsNoticeCallBack {
+public class ChatFragment extends BaseFragment implements ListItemCallback, OnItemClickListener, LoaderManager.LoaderCallbacks<ApiResponse<InboxSessionResult>>, SmsNoticeCallBack {
 
     public static final String TAG = ChatFragment.class.getSimpleName();
     public static final int DELETE_SESSION_SUCCESS = 100;

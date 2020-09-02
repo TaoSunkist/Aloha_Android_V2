@@ -157,7 +157,7 @@ public class UserDataAct extends BaseFragAct implements OnClickListener {
             case R.id.usercenter_weight_rl:
                 mPickerDialog = new BasePickerDialog(this, 40, 150);
                 mPickerDialog.setCurrentValue(defaultWeight);
-                mPickerDialog.show(getFragmentManager(), "");
+                mPickerDialog.show(getSupportFragmentManager(), "");
                 mPickerDialog.setOnReturnSomethingListener(new ReturnSomethingListener() {
 
                     @Override
@@ -170,7 +170,7 @@ public class UserDataAct extends BaseFragAct implements OnClickListener {
             case R.id.usercenter_height_rl:
                 mPickerDialog = new BasePickerDialog(this, 140, 250);
                 mPickerDialog.setCurrentValue(defaultHeight);
-                mPickerDialog.show(getFragmentManager(), "");
+                mPickerDialog.show(getSupportFragmentManager(), "");
                 mPickerDialog.setOnReturnSomethingListener(new ReturnSomethingListener() {
 
                     @Override
@@ -183,7 +183,7 @@ public class UserDataAct extends BaseFragAct implements OnClickListener {
             case R.id.usercenter_birthday_rl:
                 mTimePicdialog = new TimePickerDialog();
                 mTimePicdialog.setCurrentDate(defaultBir);
-                mTimePicdialog.show(getFragmentManager(), "");
+                mTimePicdialog.show(getSupportFragmentManager(), "");
                 mTimePicdialog.setOnReturnSomethingListener(new ReturnSomethingListener() {
 
                     @Override

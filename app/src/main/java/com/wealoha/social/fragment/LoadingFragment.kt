@@ -1,18 +1,13 @@
 package com.wealoha.social.fragment
 
+import android.Manifest
 import android.app.AlertDialog
 import android.app.Dialog
-import android.app.LoaderManager
 import android.content.Intent
-import android.content.Loader
-import android.graphics.Bitmap
 import android.graphics.Color
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.TransitionDrawable
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -23,12 +18,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.Loader
 import butterknife.ButterKnife
 import butterknife.InjectView
 import butterknife.OnClick
-import com.lidroid.xutils.bitmap.BitmapDisplayConfig
-import com.lidroid.xutils.bitmap.callback.BitmapLoadFrom
-import com.lidroid.xutils.bitmap.callback.DefaultBitmapLoadCallBack
 import com.squareup.picasso.Picasso
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.wealoha.social.ActivityManager
@@ -48,6 +42,8 @@ import com.wealoha.social.utils.AMapUtil.LocationCallback
 import com.wealoha.social.utils.ImageUtil.CropMode
 import com.wealoha.social.view.custom.CircleImageView
 import com.wealoha.social.view.custom.WaterView
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.addTo
 import retrofit.Callback
 import retrofit.RetrofitError
 import retrofit.client.Response
@@ -64,7 +60,7 @@ import javax.inject.Inject
  * @Date:2014-10-30
  */
 class LoadingFragment : BaseFragment(),
-    LoaderManager.LoaderCallbacks<ApiResponse<MatchData>?> {
+    LoaderManager.LoaderCallbacks<ApiResponse<MatchData>> {
     @JvmField
     @Inject
     var matchService: ServerApi? = null
@@ -139,6 +135,7 @@ class LoadingFragment : BaseFragment(),
     private var appApplication: AppApplication? = null
     private var mMyCounter: MyCounter? = null
     private var mCountDownTimer: Timer? = null
+    private lateinit var rxPermissions: RxPermissions
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -147,7 +144,8 @@ class LoadingFragment : BaseFragment(),
             startingAloha()
         }
         aMapUtil = AMapUtil()
-        appApplication = activity.application as AppApplication
+        appApplication = activity?.application as AppApplication
+        rxPermissions = RxPermissions(this)
     }
 
 
@@ -204,8 +202,7 @@ class LoadingFragment : BaseFragment(),
                     ),
                     CropMode.ScaleCenterCrop
                 )
-            ) //
-                .placeholder(R.drawable.default_photo) //
+            ).placeholder(R.drawable.default_photo)
                 .into(userPhoto)
         }
     }
@@ -216,7 +213,18 @@ class LoadingFragment : BaseFragment(),
             bus.post(MonitorMainUiBottomTagPostion(0))
         } catch (e: Throwable) {
         }
-        loadData()
+        rxPermissions.request(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ).observeOn(
+            AndroidSchedulers.mainThread()
+        ).subscribe {
+            if (it) {
+                loadData()
+            } else {
+                ToastUtil.shortToast(context, R.string.failed)
+            }
+        }.addTo(compositeDisposable = compositeDisposable)
     }
 
     fun loadData() {
@@ -418,7 +426,7 @@ class LoadingFragment : BaseFragment(),
                         val intent = Intent(activity, ProFeatureAct::class.java)
                         intent.putExtra(PromotionGetData.TAG, r)
                         startActivity(intent)
-                        activity.overridePendingTransition(R.anim.left_in, R.anim.stop)
+                        activity?.overridePendingTransition(R.anim.left_in, R.anim.stop)
 
                         // Bundle bundle = new Bundle();
                         // bundle.putSerializable(PromotionGetData.TAG, r);
@@ -548,7 +556,18 @@ class LoadingFragment : BaseFragment(),
                 val btnType = view.tag as Int
                 // 点了重置配额
                 if (btnType == null || btnType == TIME_DOWN) {
-                    resetQuotaLoad()
+                    rxPermissions.request(
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ).observeOn(
+                        AndroidSchedulers.mainThread()
+                    ).subscribe {
+                        if (it) {
+                            resetQuotaLoad()
+                        } else {
+                            ToastUtil.shortToast(context, R.string.failed)
+                        }
+                    }.addTo(compositeDisposable = compositeDisposable)
                 } else if (btnType == OPEN_FILTER) {
                     openFilterSetting()
                 } else if (btnType == OPEN_PRIVACY) {
@@ -560,37 +579,34 @@ class LoadingFragment : BaseFragment(),
         }
     }
 
-    override fun onCreateLoader(loaderId: Int, bundle: Bundle): Loader<ApiResponse<MatchData>?>? {
-        if (!fragmentVisible) {
-            return null
+    override fun onCreateLoader(loaderId: Int, bundle: Bundle?): Loader<ApiResponse<MatchData>> {
+        if (!fragmentVisible || loaderId == LOADER_LOAD_MATCH) {
+            return Loader(context)
         }
-        XL.d(Companion.TAG, "onCreateLoader")
         val latitude: Double =
             if (appApplication != null) appApplication!!.locationXY[0] else 0.toDouble()
         val longitude: Double =
             if (appApplication != null) appApplication!!.locationXY[1] else 0.toDouble()
-        return if (loaderId == LOADER_LOAD_MATCH) {
-            object : AsyncLoader<ApiResponse<MatchData>>(activity) {
-                override fun loadInBackground(): ApiResponse<MatchData> {
-                    // 开始加载下一批数据..
-                    return if (bundle != null && bundle.getBoolean("reset")) {
-                        XL.d(Companion.TAG, "reset")
-                        // 重置配额
-                        // matchService!!.findWithResetQuota(latitude, longitude, true)
-                        shared.findWithResetQuota(latitude, longitude, true).blockingGet()
-                    } else {
-                        XL.d(Companion.TAG, "unreset")
-                        shared.findRandom(latitude, longitude).blockingGet()
-                    }
+        return object : AsyncLoader<ApiResponse<MatchData>>(activity) {
+            override fun loadInBackground(): ApiResponse<MatchData> {
+                // 开始加载下一批数据..
+                return if (bundle != null && bundle.getBoolean("reset")) {
+                    XL.d(Companion.TAG, "reset")
+                    // 重置配额
+                    // matchService!!.findWithResetQuota(latitude, longitude, true)
+                    shared.findWithResetQuota(latitude, longitude, true).blockingGet()
+                } else {
+                    XL.d(Companion.TAG, "unreset")
+                    shared.findRandom(latitude, longitude).blockingGet()
                 }
             }
-        } else null
+        }
     }
 
-    override fun onLoaderReset(arg0: Loader<ApiResponse<MatchData>?>) {}
+    override fun onLoaderReset(arg0: Loader<ApiResponse<MatchData>>) {}
     override fun onLoadFinished(
-        loader: Loader<ApiResponse<MatchData>?>,
-        apiResponse: ApiResponse<MatchData>?
+        loader: Loader<ApiResponse<MatchData>>,
+        apiResponse: ApiResponse<MatchData>
     ) {
         XL.d(Companion.TAG, "加载下一批数据完成: $apiResponse")
         if (!isVisible) {
@@ -743,8 +759,8 @@ class LoadingFragment : BaseFragment(),
     private fun openPrivacy() {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = GlobalConstants.IntentAction.INTENT_URI_PRIVACY
-        activity.startActivity(intent)
-        activity.overridePendingTransition(R.anim.left_in, R.anim.stop)
+        activity?.startActivity(intent)
+        activity?.overridePendingTransition(R.anim.left_in, R.anim.stop)
     }
 
     /**

@@ -19,9 +19,10 @@ import retrofit.client.Response;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -205,7 +206,7 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 		ActivityManager.push(this);
 		initXiaomiPushConfig();
 		mContext = this;
-		mFm = getFragmentManager();
+		mFm = getSupportFragmentManager();
 		Intent intent = getIntent();
 		if (intent != null) {
 			openTab = intent.getStringExtra("openTab");
@@ -305,7 +306,7 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 			f = false;
 		}
 		mLoadingFragment = new LoadingFragment();
-		mFm = getFragmentManager();
+		mFm = getSupportFragmentManager();
 		// }
 		GlobalConstants.AppConstact.IS_LAST_USER = true;
 		Bundle bundle = new Bundle();
@@ -873,11 +874,11 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 	private static final int EXIT_BACK_NOTICE = 111;
 
 	public void switchContent(Fragment fragment) {
-		getFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
+		getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
 	}
 
 	public void switchContentAllowStateLoss(Fragment fragment) {
-		getFragmentManager().beginTransaction().replace(R.id.content, fragment).commitAllowingStateLoss();
+		getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commitAllowingStateLoss();
 	}
 
 	protected void onRestart() {
@@ -1178,7 +1179,7 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 			mToUser = (User) bundle.getParcelable(User.TAG);
 			AppApplication.mUserList.add(0, mToUser);
 			fragment = new AlohaFragment();
-			getFragmentManager().beginTransaction().setCustomAnimations(R.animator.slide_fragment_horizontal_right_in, R.animator.slide_fragment_horizontal_left_out).replace(R.id.content, fragment).commit();
+			getSupportFragmentManager().beginTransaction().setCustomAnimations(R.animator.slide_fragment_horizontal_right_in, R.animator.slide_fragment_horizontal_left_out).replace(R.id.content, fragment).commit();
 		} else {
 			mToUser = null;
 		}

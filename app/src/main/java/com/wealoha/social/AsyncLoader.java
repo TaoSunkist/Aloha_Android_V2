@@ -2,6 +2,8 @@ package com.wealoha.social;
 
 import android.content.Context;
 
+import androidx.loader.content.AsyncTaskLoader;
+
 /**
  * 
  * 
@@ -14,7 +16,7 @@ import android.content.Context;
  *            data type
  * @author Alexander Blom (me@alexanderblom.se)
  */
-public abstract class AsyncLoader<D> extends android.content.AsyncTaskLoader<D> {
+public abstract class AsyncLoader<D> extends AsyncTaskLoader<D> {
 
 	private D data;
 

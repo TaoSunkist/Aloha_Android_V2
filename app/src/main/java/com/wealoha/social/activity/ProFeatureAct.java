@@ -2,8 +2,6 @@ package com.wealoha.social.activity;
 
 import java.util.ArrayList;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
@@ -13,6 +11,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import butterknife.OnClick;
 
 import com.wealoha.social.BaseFragAct;
@@ -54,14 +56,14 @@ public class ProFeatureAct extends BaseFragAct implements OnClickListener {
 	 */
 	private void initView(PromotionGetData data) {
 		TextView ruleTv = (TextView) findViewById(R.id.rule_of_profeature);
-		ruleTv.setText(getString(R.string.invite_a_friend_to_get_the_invitation_code, data.quotaPerPerson));
+		ruleTv.setText(getString(R.string.invite_a_friend_to_get_the_invitation_code, String.valueOf(data.quotaPerPerson)));
 		FontUtil.setSemiBoldTypeFace(mContext, findViewById(R.id.title_tv));// 标题字体
 	}
 
 	/**
 	 * 初始化高级界面布局
 	 * 
-	 * @param listview
+	 *  listview
 	 * @return void
 	 */
 	private void initProFeatureLayout(ArrayList<Profeature> features) {
@@ -140,7 +142,7 @@ public class ProFeatureAct extends BaseFragAct implements OnClickListener {
 	/**
 	 * 配置高级功能的内容
 	 * 
-	 * @param proGetData
+	 *  proGetData
 	 * @return void
 	 */
 	private void initFeatureListData(PromotionGetData proGetData) {
@@ -162,7 +164,7 @@ public class ProFeatureAct extends BaseFragAct implements OnClickListener {
 
 		String title = null;
 		if (proGetData.quotaReset != 0) {
-			title = getString(R.string.label_invite_quota_reset_str, proGetData.quotaReset);
+			title = getString(R.string.label_invite_quota_reset_str, String.valueOf(proGetData.quotaReset));
 		}
 		addProfeature(title,//
 						getString(R.string.match_rightnow),//
@@ -197,7 +199,7 @@ public class ProFeatureAct extends BaseFragAct implements OnClickListener {
 	ShareDialogFragment shareDialog;
 
 	private void showDialog() {
-		FragmentManager fm = getFragmentManager();
+		FragmentManager fm = getSupportFragmentManager();
 		shareDialog = new ShareDialogFragment();
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(PromotionGetData.TAG, mPromotionGetData);
@@ -215,7 +217,7 @@ public class ProFeatureAct extends BaseFragAct implements OnClickListener {
 		// super.onBackPressed();
 		if (shareDialog != null && shareDialog.isVisible()) {
 			shareDialog.closeFragment();
-			// getFragmentManager().popBackStack();
+			// getSupportFragmentManager().popBackStack();
 		} else {
 			super.onBackPressed();
 		}

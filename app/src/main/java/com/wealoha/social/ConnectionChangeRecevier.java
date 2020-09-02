@@ -2,7 +2,7 @@ package com.wealoha.social;
 
 import javax.inject.Inject;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;

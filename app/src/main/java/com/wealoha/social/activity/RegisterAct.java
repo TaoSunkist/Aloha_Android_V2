@@ -86,7 +86,7 @@ public class RegisterAct extends BaseFragAct implements OnClickListener {
 			break;
 		case R.id.areacode:
 			paf = new PhoneAreaFragment(mAreaPosition);
-			paf.show(getFragmentManager(), "phone_area_dialog");
+			paf.show(getSupportFragmentManager(), "phone_area_dialog");
 			break;
 		case R.id.url:
 			break;
@@ -227,7 +227,6 @@ public class RegisterAct extends BaseFragAct implements OnClickListener {
 	/**
 	 * @Title: popInputMethod
 	 * @Description: 自動彈出輸入法
-	 * @param 设定文件
 	 * @return void 返回类型
 	 * @throws
 	 */
@@ -237,7 +236,6 @@ public class RegisterAct extends BaseFragAct implements OnClickListener {
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 				imm.showSoftInput(phoneNumber, 0);
 			}

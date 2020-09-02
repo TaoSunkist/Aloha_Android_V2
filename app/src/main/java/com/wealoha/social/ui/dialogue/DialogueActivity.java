@@ -18,7 +18,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -37,6 +36,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -174,7 +176,7 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
                     });
                 } else {
                     mNextCursorId = null;
-                    getLoaderManager().restartLoader(LOADER_LOAD_MESSAGES, null, DialogueActivity.this);
+                    LoaderManager.getInstance(DialogueActivity.this).restartLoader(LOADER_LOAD_MESSAGES, null, DialogueActivity.this);
                     if (mDialogueP.getDialogueHolder().getToUser() != null) {
                         mMessageService.clearUnread(mDialogueP.getDialogueHolder().getToUser().getId(), new Callback<ApiResponse<ResultData>>() {
 
@@ -504,7 +506,7 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
             @Override
             public void onRefresh() {
                 if (mHasMore) {
-                    getLoaderManager().restartLoader(LOADER_LOAD_MESSAGES, null, DialogueActivity.this);
+                    LoaderManager.getInstance(DialogueActivity.this).restartLoader(LOADER_LOAD_MESSAGES, null, DialogueActivity.this);
                 } else {
                     mListView.stopRefresh();
                 }
@@ -531,7 +533,7 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
             }
         });
         mAdapter.cacheRestore();
-        getLoaderManager().restartLoader(LOADER_LOAD_MESSAGES, null, this);
+        LoaderManager.getInstance(DialogueActivity.this).restartLoader(LOADER_LOAD_MESSAGES, null, this);
         mEditTextContent.setOnTouchListener(this);
         mListView.setSelection(mListView.getBottom());
     }

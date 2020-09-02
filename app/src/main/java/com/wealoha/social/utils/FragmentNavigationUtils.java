@@ -3,7 +3,7 @@ package com.wealoha.social.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.wealoha.social.fragment.BaseFragment;
 

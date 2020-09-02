@@ -9,10 +9,10 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 import android.app.Activity;
-import android.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
+import androidx.loader.content.Loader;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -69,7 +69,7 @@ import com.wealoha.social.utils.XL;
 import com.wealoha.social.view.custom.dialog.ReportBlackAlohaPopup;
 import com.wealoha.social.view.custom.listitem.ProfileHeaderHolder;
 
-public class ProfileTestFragment extends BaseFragment implements OnClickListener, LoaderCallbacks<ApiResponse<ProfileData>>, SwipeRefreshLayout.OnRefreshListener, ReportBlackAlohaPopup.RefreshData, OnScrollListener {
+public class ProfileTestFragment extends BaseFragment implements OnClickListener, LoaderManager.LoaderCallbacks<ApiResponse<ProfileData>>, SwipeRefreshLayout.OnRefreshListener, ReportBlackAlohaPopup.RefreshData, OnScrollListener {
 
     @Inject
     RegionNodeUtil regionNodeUtil;
@@ -261,7 +261,7 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
             if (isRefreshHeadIcon) {
                 BaseFragAct.isRefreshHeadIcon = !isRefreshHeadIcon;
                 bundle.putString("userId", user.getId());
-                getLoaderManager().restartLoader(LOADER_REFRESH_ONRESUME, bundle, ProfileTestFragment.this);
+                LoaderManager.getInstance(this).restartLoader(LOADER_REFRESH_ONRESUME, bundle, ProfileTestFragment.this);
                 profileHeader.loadHeadCache(1);
             }
         }

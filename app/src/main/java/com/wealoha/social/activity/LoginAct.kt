@@ -129,7 +129,7 @@ class LoginAct : BaseFragAct(), View.OnClickListener {
             R.id.forgot_pw -> forgot()
             R.id.areacode -> {
                 paf = PhoneAreaFragment(mAreaPosition)
-                paf!!.show(fragmentManager, "phone_area_dialog")
+                paf!!.show(supportFragmentManager, "phone_area_dialog")
             }
         }
     }

@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;

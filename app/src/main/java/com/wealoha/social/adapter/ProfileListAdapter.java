@@ -8,7 +8,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;

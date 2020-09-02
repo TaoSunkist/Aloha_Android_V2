@@ -2,7 +2,6 @@ package com.wealoha.social.view.custom.dialog;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -11,6 +10,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.fragment.app.DialogFragment;
 
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.wealoha.social.R;
@@ -50,7 +51,6 @@ public class BasePickerDialog extends DialogFragment {
 	/**
 	 * @Title: saveLogin
 	 * @Description: 生成x~y之间的number picker
-	 * @param 设定文件
 	 * @return void 返回类型
 	 * @throws
 	 */

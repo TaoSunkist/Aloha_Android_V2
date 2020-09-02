@@ -2,7 +2,6 @@ package com.wealoha.social.fragment;
 
 import javax.inject.Inject;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,7 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
 import butterknife.ButterKnife;
+import io.reactivex.disposables.CompositeDisposable;
 
 import com.squareup.otto.Bus;
 import com.wealoha.social.BaseFragAct;
@@ -62,6 +64,7 @@ public abstract class BaseFragment extends Fragment implements HasCache, Activit
     protected Frag2HolderCallback frag2HolderCallback;
     protected ActivityResultCallback mActivityResultCallback;
 
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,6 +94,7 @@ public abstract class BaseFragment extends Fragment implements HasCache, Activit
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        compositeDisposable.clear();
         ButterKnife.reset(this);
     }
 
