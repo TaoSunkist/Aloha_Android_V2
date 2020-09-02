@@ -10,6 +10,7 @@ import android.app.Application;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -110,7 +111,11 @@ public class AppApplication extends Application implements UncaughtExceptionHand
         XL.i(TAG, "start LaunchService");
         Intent serviceIntent = new Intent(this, LaunchService.class);
         // Starts the IntentService
-        startService(serviceIntent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(serviceIntent);
+        }else{
+            startService(serviceIntent);
+        }
 
         // 接收App呼起服务发出的广播
         IntentFilter intentFilter = new IntentFilter(LaunchService.BROADCAST_ACTION);

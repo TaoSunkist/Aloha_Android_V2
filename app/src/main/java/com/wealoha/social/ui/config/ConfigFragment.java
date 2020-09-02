@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -536,7 +537,11 @@ public class ConfigFragment extends BaseFragment implements IConfigView {
 	@Override
 	public void startUpdateApp() {
 		Intent intent = new Intent(getActivity(), DownloadService.class);
-		getActivity().startService(intent);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			getActivity().startForegroundService(intent);
+		}else{
+			getActivity().startService(intent);
+		}
 		DownloadService.downNewFile(getActivity(), "http://wealoha.com/get/android", 351, "Aloha");
 	}
 

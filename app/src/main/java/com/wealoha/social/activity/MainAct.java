@@ -654,7 +654,13 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 
 	private void startDownloadService() {
 		Intent intent = new Intent(mContext, DownloadService.class);
-		startService(intent);
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			startForegroundService(intent);
+		}else{
+			startService(intent);
+		}
+
 		// 正式版使用这个地址
 		DownloadService.downNewFile(mContext, "http://wealoha.com/get/android", 351, "Aloha");
 	}
