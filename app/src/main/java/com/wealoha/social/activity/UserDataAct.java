@@ -216,16 +216,19 @@ public class UserDataAct extends BaseFragAct implements OnClickListener {
                 openCarmeraDialog.dismiss();
             }
         });
-
-        compositeDisposable.add(rxPermissions.request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(granted -> {
-                    if (granted) {
-                        openCarmeraDialog = new AlertDialog.Builder(this).setView(view).show();
-                    } else {
-                        ToastUtil.shortToast(this, getString(R.string.failed));
-                    }
-                }));
+        compositeDisposable.add(rxPermissions.request(
+                Manifest.permission.CAMERA,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+        ).observeOn(
+                AndroidSchedulers.mainThread()
+        ).subscribe(granted -> {
+            if (granted) {
+                openCarmeraDialog = new AlertDialog.Builder(this).setView(view).show();
+            } else {
+                ToastUtil.shortToast(this, getString(R.string.failed));
+            }
+        }));
 
     }
 
