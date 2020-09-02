@@ -60,7 +60,7 @@ data class User(
         @kotlin.jvm.JvmField
         val TAG = User::class.java.simpleName
 
-        fun fake(): User {
+        fun fake(me: Boolean = false, isAuthentication: Boolean = true): User {
             val avatarImage = Image.fake();
             return User(
                 id = System.currentTimeMillis().toString(),
@@ -70,7 +70,7 @@ data class User(
                 age = System.currentTimeMillis().toInt(),
                 height = System.currentTimeMillis().toInt(),
                 weight = System.currentTimeMillis().toInt(),
-                me = (0..1).random() == 1,
+                me = me,
                 regionCode = System.currentTimeMillis().toString(),
                 region = (0..4).map { Fakeit.app().name() },
                 zodiac = System.currentTimeMillis().toString(),
@@ -80,7 +80,7 @@ data class User(
                 avatarImage = avatarImage,
                 avatarImageId = avatarImage.id,
                 createTimeMillis = System.currentTimeMillis(),
-                profileIncomplete = (0..1).random() == 1,
+                profileIncomplete = isAuthentication,
                 alohaCount = (0..1000).random(),
                 alohaGetCount = (0..1000).random(),
                 aloha = (0..1).random() == 1,
@@ -96,7 +96,7 @@ data class User(
         }
 
         fun init(userDto: UserDTO): User {
-            val user = fake()
+            val user = fake(true, false)
             user.age = userDto.age
             user.aloha = userDto.aloha
             user.alohaCount = userDto.alohaCount

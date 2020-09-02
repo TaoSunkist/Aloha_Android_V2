@@ -634,7 +634,7 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Api
      * @return 一个临时用户，保存了需要修改的属性
      */
     private User fillParams() {
-        mTempUser = User.Companion.fake();
+        mTempUser = User.Companion.fake(true, false);
         // 姓名
         String username = mUserName.getText().toString();
         if (!TextUtils.isEmpty(username) && username.length() >= 2) {

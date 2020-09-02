@@ -2,19 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="290dp"
-    android:orientation="vertical"
-    android:gravity="center" >
+    android:gravity="center"
+    android:orientation="vertical">
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="center"
-        android:contentDescription="@null"
         android:layout_margin="10dp"
-        android:src="@drawable/profile_block"/>
-	<TextView 
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="@string/the_profile_block"
-	    android:textColor="@color/gray_text"
-	    android:textSize="12sp" />
+        android:contentDescription="@null"
+        android:scaleType="center"
+        android:src="@drawable/profile_block" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/the_profile_block"
+        android:textColor="@color/gray_text"
+        android:textSize="12sp" />
 </LinearLayout>

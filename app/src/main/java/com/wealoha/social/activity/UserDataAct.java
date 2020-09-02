@@ -134,7 +134,7 @@ public class UserDataAct extends BaseFragAct implements OnClickListener {
         user = (User) getIntent().getParcelableExtra(User.TAG);
 
         if (user == null) {
-            user = User.Companion.fake();
+            user = User.Companion.fake(true, false);
         }
         fontUtil.changeFonts(layout, Font.ENCODESANSCOMPRESSED_600_SEMIBOLD);
         // 可以输入邀请了

@@ -64,7 +64,7 @@ public class AppApplication extends Application implements UncaughtExceptionHand
         mInstance = this;
         config = ContextConfig.getInstance();
         config.init(mInstance);
-        user = User.Companion.fake();
+        user = User.Companion.fake(true, false);
         config.getDefaultAccount(mInstance, user);
         Injector.init(new RootModule());
         // startService(service)

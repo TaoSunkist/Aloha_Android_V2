@@ -262,7 +262,7 @@ public class ReportBlackAlohaPopup implements OnClickListener {
 				mBlack.setText(R.string.add_to_black_list);
 			}
 		} else {
-			mUser =  User.Companion.fake();
+			mUser =  User.Companion.fake(true, false);
 		}
 
 		// 举报user

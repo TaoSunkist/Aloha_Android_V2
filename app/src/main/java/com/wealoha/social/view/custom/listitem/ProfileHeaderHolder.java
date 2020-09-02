@@ -255,7 +255,7 @@ public class ProfileHeaderHolder {
         // 默认选项
         // mGridPic.setChecked(true);
         if (user == null) {
-            mUser = User.Companion.fake();
+            mUser = User.Companion.fake(true, false);
         }
         mUser = user;
         mIsMe = isMe;

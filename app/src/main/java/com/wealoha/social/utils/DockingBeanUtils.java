@@ -15,7 +15,7 @@ import com.wealoha.social.beans.User;
 public class DockingBeanUtils {
 
     public static User transUser(User apiUser) {
-        User user = User.Companion.fake();
+        User user = User.Companion.fake(true, false);
         user.setAge(apiUser.getAge());
         user.setAlohaCount(apiUser.getAlohaCount());
         user.setAlohaGetCount(apiUser.getAlohaGetCount());

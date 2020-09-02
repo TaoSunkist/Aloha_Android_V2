@@ -150,7 +150,7 @@ public class Profile2Fragment extends BaseFragment implements ProfileHeader2Frag
         initOnTouchEvent();
         openInstagramSub();
 
-        if (mUser.hasPrivacy()) {
+        if (mUser.hasPrivacy() && !mUser.getMe()) {
             blackUserCallback();
         }
     }

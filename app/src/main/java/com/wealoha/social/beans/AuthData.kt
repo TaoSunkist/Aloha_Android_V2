@@ -6,7 +6,7 @@ data class AuthData(
 ) : ResultData() {
     companion object {
         fun fake(): AuthData {
-            val user = User.fake()
+            val user = User.fake(me = true, isAuthentication = false)
             return AuthData(t = System.currentTimeMillis().toString(), user = user)
         }
     }

@@ -1,7 +1,9 @@
 package com.wealoha.social.beans
 
+import android.os.Parcelable
 import com.wealoha.social.beans.User.Companion.fromDTO
 import com.wealoha.social.beans.feed.UserTags
+import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 import java.util.*
 
@@ -11,6 +13,7 @@ import java.util.*
  * @author javamonk
  * @createTime 2015年2月25日 上午10:49:44
  */
+@Parcelize
 data class Post(
     val postId: String,
     val type: FeedType?,
@@ -38,7 +41,7 @@ data class Post(
     val recentComment: List<PostComment>?,
     val hashTag: HashTag?,
     private val hasMoreComment: Boolean
-) : Serializable {
+) : Serializable, Parcelable {
 
     /***
      * 移除当前用户的tag后数据刷新

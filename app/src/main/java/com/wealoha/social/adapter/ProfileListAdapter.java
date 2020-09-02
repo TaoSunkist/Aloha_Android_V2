@@ -84,7 +84,7 @@ public class ProfileListAdapter extends BaseAdapter implements OnClickListener {
         Injector.inject(this);
         mUser = user;
         if (user == null) {
-            mUser = User.Companion.fake();
+            mUser = User.Companion.fake(true, false);
         }
 
         isMe = mUser.getId().equals(contextUtil.getCurrentUser().getId());
@@ -115,7 +115,7 @@ public class ProfileListAdapter extends BaseAdapter implements OnClickListener {
     /**
      * 修改显示的方式
      *
-     * @param viewType
+     *  viewType
      */
     public void changeViewType(ViewType viewType) {
         if (mViewType == viewType) {
@@ -162,7 +162,7 @@ public class ProfileListAdapter extends BaseAdapter implements OnClickListener {
     /**
      * 拿到了新数据，更新(在底部更新数据，不清空之前的数据，新旧数据叠加)
      *
-     * @param result
+     *  result
      */
     public void notifyDataSetChanged(FeedResult result) {
         if (result != null && result.getList() != null) {
@@ -186,7 +186,7 @@ public class ProfileListAdapter extends BaseAdapter implements OnClickListener {
     /**
      * 拿到了新数据，更新(在顶部更新数据，清空之前的数据)
      *
-     * @param result
+     *  result
      */
     public void notifyTopDataSetChanged(FeedResult result) {
         if (result.getList() != null && result.getList().size() >= 0) {
@@ -357,7 +357,7 @@ public class ProfileListAdapter extends BaseAdapter implements OnClickListener {
     }
 
     /**
-     * @param 设定文件
+     *  设定文件
      * @return void 返回类型
      * @throws
      * @Title: clearConvertView
@@ -376,7 +376,7 @@ public class ProfileListAdapter extends BaseAdapter implements OnClickListener {
     }
 
     /**
-     * @param 设定文件
+     *  设定文件
      * @return void 返回类型
      * @throws
      * @Title: changePraiseCount

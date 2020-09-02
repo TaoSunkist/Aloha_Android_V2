@@ -118,7 +118,7 @@ public class MatchPopupWindow extends PopupWindow {
 
 	public void init(Bitmap b, User user) {
 		if (user == null) {
-			user = User.Companion.fake();
+			user = User.Companion.fake(true, false);
 			return;
 		}
 		mUser = user;
