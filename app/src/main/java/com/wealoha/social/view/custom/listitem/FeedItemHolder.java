@@ -85,8 +85,7 @@ public class FeedItemHolder implements OnClickListener, ListItemCallback {
     @Inject
     Context context;
 
-    @Inject
-    Picasso picasso;
+
 
     @Inject
     ContextUtil contextUtil;
@@ -333,7 +332,7 @@ public class FeedItemHolder implements OnClickListener, ListItemCallback {
         // mLocation.setText("999999");
         mUsername.setText(upperName);
         mTime.setText(TimeUtil.getDistanceTimeForApp(context, new Date().getTime(), mFeed.createTimeMillis));
-        picasso.load(ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), GlobalConstants.ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop)).noFade().into(mUserPhoto);
+        Picasso.get().load(ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), GlobalConstants.ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop)).noFade().into(mUserPhoto);
         mUserPhoto.setOnClickListener(this);
         mMore.setOnClickListener(this);
 
@@ -581,12 +580,19 @@ public class FeedItemHolder implements OnClickListener, ListItemCallback {
         // final ViewGroup.LayoutParams layoutParams =
         // mFeedImage.getLayoutParams();
         mFeedImage.setScaleType(ScaleType.FIT_CENTER);
-        picasso.load(ImageUtil.getImageUrl(imageId, feedWidth, CropMode.ScaleCenterCrop))//
+        Picasso.get().load(ImageUtil.getImageUrl(imageId, feedWidth, CropMode.ScaleCenterCrop))//
                 .placeholder(R.color.gray_text)//
                 .into(mFeedImage, new com.squareup.picasso.Callback() {
 
                     @Override
-                    public void onError() {
+                    public void onSuccess() {
+                        mFeedImgLoadError.setVisibility(View.GONE);
+                        mFeedLoadErrorRl.setVisibility(View.GONE);
+                        mFeedImage.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
                         mFeedLoadErrorRl.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, mFeedImage.getWidth()));
                         mFeedLoadErrorRl.setVisibility(View.VISIBLE);
                         mFeedImgLoadError.setVisibility(View.VISIBLE);
@@ -601,13 +607,6 @@ public class FeedItemHolder implements OnClickListener, ListItemCallback {
                                 }
                             }
                         });
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        mFeedImgLoadError.setVisibility(View.GONE);
-                        mFeedLoadErrorRl.setVisibility(View.GONE);
-                        mFeedImage.setVisibility(View.VISIBLE);
                     }
                 });
     }

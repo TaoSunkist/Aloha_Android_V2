@@ -46,7 +46,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation 'commons-io:commons-io:2.4'
 
-    implementation 'com.squareup.picasso:picasso:2.4.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.squareup.retrofit:retrofit:1.7.1' // 1.9.0
     kapt('com.squareup.dagger:dagger-compiler:1.2.2')
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'

@@ -33,8 +33,7 @@ public class ProfileInfoHolder {
 
 	@Inject
 	Context context;
-	@Inject
-	Picasso picasso;
+
 	@Inject
 	RegionNodeUtil regionNodeUtil;
 	@Inject

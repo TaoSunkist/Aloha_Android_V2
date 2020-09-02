@@ -20,8 +20,7 @@ public class LauncherImgAct extends BaseFragAct {
 
 	@Inject
 	ContextUtil contextUtil;
-	@Inject
-	Picasso picasso;
+
 	@Inject
 	Context context;
 	private ImageView launchImg;

@@ -115,8 +115,7 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
     private Handler mHandler;
     @Inject
     ContextUtil mDialogueActivityUtil;
-    @Inject
-    Picasso mPicasso;
+
     @Inject
     FontUtil mFont;
     @Inject
@@ -355,6 +354,7 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent result) {
+        super.onActivityResult(requestCode, resultCode, result);
         if (requestCode == GlobalConstants.AppConstact.PHOTO_PICKED_WITH_DATA && resultCode == RESULT_OK && result != null) {
             Uri uri = result.getData();
             String[] filePathColumn = new String[]{MediaStore.Images.Media.DATA};

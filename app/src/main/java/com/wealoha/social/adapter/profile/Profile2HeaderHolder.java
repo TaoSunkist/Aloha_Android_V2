@@ -31,6 +31,7 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.RequestCreator;
@@ -64,8 +65,7 @@ import com.wealoha.social.view.custom.CircleImageView;
 
 public class Profile2HeaderHolder implements OnTouchListener {
 
-    @Inject
-    Picasso picasso;
+
     @Inject
     UserService userService;
     ;
@@ -253,7 +253,7 @@ public class Profile2HeaderHolder implements OnTouchListener {
     }
 
     private void loadUserHeader() {
-        if (picasso == null || mUser == null || mUserPhoto == null || mLayout == null) {
+        if ( mUser == null || mUserPhoto == null || mLayout == null) {
             // ToastUtil.longToast(mFrag.getActivity(), "null----:" + mUser);
             return;
         }
@@ -275,12 +275,12 @@ public class Profile2HeaderHolder implements OnTouchListener {
         switch (tag) {
             case 0:
                 XL.i(TAG, "isnull----------------" + mUser.getAvatarImage());
-                requestCreator = picasso//
+                requestCreator = Picasso.get()//
                         .load(mUser.getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB));
                 break;
             case 1:
-                requestCreator = picasso//
-                        .load(mUser.getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB)).skipMemoryCache();
+                requestCreator = Picasso.get()//
+                        .load(mUser.getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB)).memoryPolicy(MemoryPolicy.NO_CACHE);
                 break;
         }
         //
@@ -288,12 +288,12 @@ public class Profile2HeaderHolder implements OnTouchListener {
             requestCreator.placeholder(R.drawable.default_photo).into(mUserPhoto, new com.squareup.picasso.Callback() {
 
                 @Override
-                public void onError() {
-                    XL.i("USER_PHOTO", "error");
+                public void onSuccess() {
                 }
 
                 @Override
-                public void onSuccess() {
+                public void onError(Exception e) {
+
                 }
 
             });
@@ -350,8 +350,7 @@ public class Profile2HeaderHolder implements OnTouchListener {
             }
 
             @Override
-            public void onBitmapFailed(Drawable errorDrawable) {
-
+            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
             }
 
             @Override
@@ -362,7 +361,7 @@ public class Profile2HeaderHolder implements OnTouchListener {
 
         };
 
-        picasso.load(url).placeholder(R.color.gray_text).into(blurTarget);
+        Picasso.get().load(url).placeholder(R.color.gray_text).into(blurTarget);
     }
 
     /**
@@ -843,7 +842,7 @@ public class Profile2HeaderHolder implements OnTouchListener {
         String url = mUser.getAvatarImage().getUrlSquare(ImageSize.FEED_MAX);
         // FIXME 应该先显示小图,大图家在完毕显示大图
 
-        picasso.load(url).into(avactor);
+        Picasso.get().load(url).into(avactor);
         ll.setOnClickListener(new OnClickListener() {
 
             @Override

@@ -103,8 +103,7 @@ import com.wealoha.social.view.custom.dialog.ReportBlackAlohaPopup.PostType;
  */
 public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
 
-    @Inject
-    Picasso picasso;
+
     @Inject
     ContextUtil contextUtil;
     @Inject
@@ -289,7 +288,7 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.setMessage(message);
-        picasso.load(ImageUtil.getImageUrl(viewHolder.mUser.getAvatarImage().getId(), 120, CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(viewHolder.userhead_iv);
+        Picasso.get().load(ImageUtil.getImageUrl(viewHolder.mUser.getAvatarImage().getId(), 120, CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(viewHolder.userhead_iv);
 
         if (message instanceof TextMessage) {
             viewHolder.iv_chatcontent_fl.setVisibility(View.GONE);
@@ -341,13 +340,13 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
                 viewHolder.iv_chatcontent_box.setLayoutParams(fLayoutParams);
                 viewHolder.iv_chatcontent.setLayoutParams(fLayoutParams);
                 File file = new File(imageMessage.image.getUrl());
-                picasso.load(file).transform(chatImageTransformation).into(viewHolder.iv_chatcontent);
+                Picasso.get().load(file).transform(chatImageTransformation).into(viewHolder.iv_chatcontent);
             } else {
                 RelativeLayout.LayoutParams fLayoutParams = getImageLayoutSize(imageMessage.image.getWidth(), imageMessage.image.getHeight()); // new
                 viewHolder.iv_chatcontent_box.setLayoutParams(fLayoutParams);
                 viewHolder.iv_chatcontent.setLayoutParams(fLayoutParams);
                 String imageUrl = ImageUtil.getImageUrl(imageMessage.image.getId(), ImageSize.CHAT_THUMB, null);
-                picasso.load(imageUrl).transform(chatImageTransformation).into(viewHolder.iv_chatcontent);
+                Picasso.get().load(imageUrl).transform(chatImageTransformation).into(viewHolder.iv_chatcontent);
             }
 
         }
@@ -914,11 +913,11 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
         popUpWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         popUpWindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         if (imageMessage.isLocal) {
-            picasso.load(new File(imageMessage.image.getUrl())).into(avactor);
+            Picasso.get().load(new File(imageMessage.image.getUrl())).into(avactor);
         } else {
             // 屏幕寬度
             String url = ImageUtil.getImageUrl(imageMessage.image.getId(), UiUtils.getScreenWidth(mContext), null);
-            picasso.load(url).into(avactor);
+            Picasso.get().load(url).into(avactor);
         }
         ll.setOnClickListener(new OnClickListener() {
 

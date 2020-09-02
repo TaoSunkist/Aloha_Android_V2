@@ -30,8 +30,7 @@ public class Profile2InfoHolder {
 
 	@Inject
 	Context context;
-	@Inject
-	Picasso picasso;
+
 	@Inject
 	RegionNodeUtil regionNodeUtil;
 	@Inject

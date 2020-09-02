@@ -131,8 +131,6 @@ public abstract class BaseFragAct extends FragmentActivity implements HasCache, 
     @Inject
     ContextUtil contextUtil;
     @Inject
-    Picasso picasso;
-    @Inject
     CacheManager cacheManager;
     @Inject
     PushUtil pushUtil;

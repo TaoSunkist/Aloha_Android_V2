@@ -79,8 +79,7 @@ public class WelcomeAct extends BaseFragAct implements OnClickListener {
     private Target startupTarget;
     @Inject
     ContextUtil contextUtil;
-    @Inject
-    Picasso picasso;
+
     @Inject
     ServerApi connectService;
     @Inject

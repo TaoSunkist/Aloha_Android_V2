@@ -53,6 +53,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.squareup.otto.Bus;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 import com.wealoha.social.AsyncLoader;
 import com.wealoha.social.BaseFragAct;
@@ -200,8 +201,7 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Api
     @InjectView(R.id.menu_bar)
     RelativeLayout mMenuBar;
 
-    @Inject
-    Picasso picasso;
+
     @Inject
     ContextUtil contextUtil;
     @Inject
@@ -970,7 +970,7 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Api
      * @Description: 更新头像
      */
     public void refreshPhoto(String url) {
-        picasso.load(new File(url)).skipMemoryCache().placeholder(R.drawable.default_photo).into(mUserPhoto);
+        Picasso.get().load(new File(url)).memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.default_photo).into(mUserPhoto);
         mUserPhoto.invalidate();
     }
 
@@ -979,7 +979,7 @@ public class ConfigDetailsAct extends BaseFragAct implements LoaderCallbacks<Api
         // 身高，体重，年龄都保存在tag上
         // 头像
         // ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop));
-        picasso.load(ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), ImageSize.CHAT_THUMB, CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(mUserPhoto);
+        Picasso.get().load(ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), ImageSize.CHAT_THUMB, CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(mUserPhoto);
         mUserName.setText(TextUtils.isEmpty(mUser.getName()) ? "" : mUser.getName());
 
         // 年龄

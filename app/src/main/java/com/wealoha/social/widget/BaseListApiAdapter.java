@@ -44,8 +44,7 @@ public abstract class BaseListApiAdapter<E, P> extends BaseAdapter implements Ad
 
     @Inject
     LayoutInflater inflater;
-    @Inject
-    Picasso picasso;
+
     @Inject
     Context context;
 

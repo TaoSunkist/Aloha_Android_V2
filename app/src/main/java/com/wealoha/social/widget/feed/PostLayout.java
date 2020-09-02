@@ -22,8 +22,7 @@ import com.wealoha.social.widget.BaseLayout;
 
 public class PostLayout extends BaseLayout {
 
-	@Inject
-	Picasso picasso;
+
 	@InjectView(R.id.content_root)
 	RelativeLayout contentRootView;
 	@InjectView(R.id.post_image)
@@ -80,8 +79,8 @@ public class PostLayout extends BaseLayout {
 	}
 
 	public void initViewData(Post post) {
-		picasso.load(post.getCommonImage().getUrlSquare(screenWidth)).into(postImageView);
-		picasso.load(post.getUser().getAvatarImage().getUrlSquare(screenWidth)).into(userPhotoView);
+		Picasso.get().load(post.getCommonImage().getUrlSquare(screenWidth)).into(postImageView);
+		Picasso.get().load(post.getUser().getAvatarImage().getUrlSquare(screenWidth)).into(userPhotoView);
 
 		// userNameView.setText(post.getUser().getName());
 		// timeStampView.setText(TimeUtil.howLong(mContext, post.getCreateTimeMillis()));

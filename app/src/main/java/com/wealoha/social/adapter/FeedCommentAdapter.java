@@ -29,8 +29,7 @@ import com.wealoha.social.widget.MultiListViewType;
 public class FeedCommentAdapter extends BaseListApiAdapter<PostComment, String> {
 
 	private Context mCtx;
-	@Inject
-	Picasso picasso;
+
 	@Inject
 	FontUtil fontUtil;
 
@@ -72,7 +71,7 @@ public class FeedCommentAdapter extends BaseListApiAdapter<PostComment, String> 
 		// Font.ENCODESANSCOMPRESSED_600_SEMIBOLD);
 		// fontUtil.changeViewFont(feedCommentViewHolder.mCommentBody,
 		// Font.ENCODESANSCOMPRESSED_500_MEDIUM);
-		picasso.load(item.getUser().getAvatarImage().getUrl()).placeholder(R.drawable.default_photo).into(feedCommentViewHolder.mUserHead);
+		Picasso.get().load(item.getUser().getAvatarImage().getUrl()).placeholder(R.drawable.default_photo).into(feedCommentViewHolder.mUserHead);
 
 		TextView timeStampTv = feedCommentViewHolder.mTimeStamp;
 		if (item.isWhisper()) {

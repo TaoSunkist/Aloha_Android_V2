@@ -57,8 +57,7 @@ public class FindYouAct extends BaseFragAct implements TextWatcher, OnItemClickL
 
     @Inject
     ServerApi findyouService;
-    @Inject
-    Picasso picasso;
+
     @Inject
     Context context;
     @Inject
@@ -276,7 +275,7 @@ public class FindYouAct extends BaseFragAct implements TextWatcher, OnItemClickL
             if (user != null) {
                 currentUser = user;
                 headerUserName.setText(StringUtil.foregroundHight(user.getName(), apiResponse.getData().getKeyword()));
-                picasso.load(ImageUtil.getImageUrl(user.getAvatarImage().getId(),//
+                Picasso.get().load(ImageUtil.getImageUrl(user.getAvatarImage().getId(),//
                         100, CropMode.ScaleCenterCrop))//
                         .placeholder(R.drawable.search_persion)//
                         .into(headerUserPhoto);
@@ -305,7 +304,7 @@ public class FindYouAct extends BaseFragAct implements TextWatcher, OnItemClickL
             mList.setPadding(0, 0, 0, 0);
             headerContainer.setVisibility(View.VISIBLE);
             headerUserName.setText(StringUtil.foregroundHight(keyword, keyword));
-            picasso.load(R.drawable.search_persion).into(headerUserPhoto);
+            Picasso.get().load(R.drawable.search_persion).into(headerUserPhoto);
             // 针对键盘上的搜索键给搜索请求加一把锁
             syncLastPageBool = true;
             findyouService.findYou(keyword, count, findYouCallback);

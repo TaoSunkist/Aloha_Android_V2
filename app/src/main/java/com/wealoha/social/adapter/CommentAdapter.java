@@ -50,8 +50,7 @@ public class CommentAdapter extends BaseAdapter/* implements OnSlideListener */{
 	private List<Comment> mComments = new ArrayList<Comment>();
 	private Map<String, User> mUsers = new HashMap<String, User>();
 	private Date d;
-	@Inject
-	Picasso picasso;
+
 	@Inject
 	ContextUtil contextUtil;
 	@Inject
@@ -150,7 +149,7 @@ public class CommentAdapter extends BaseAdapter/* implements OnSlideListener */{
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		Comment comment = mComments.get(position);
-		picasso.load(ImageUtil.getImageUrl(mUsers.get(comment.userId).getAvatarImage().getId(), viewHolder.userPhoto.getWidth(), CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(viewHolder.userPhoto);
+		Picasso.get().load(ImageUtil.getImageUrl(mUsers.get(comment.userId).getAvatarImage().getId(), viewHolder.userPhoto.getWidth(), CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(viewHolder.userPhoto);
 		viewHolder.userName.setText(mUsers.get(comment.userId).getName());
 		viewHolder.timeAgo.setText(TimeUtil.getDistanceTimeForApp(leaveCommentAct, d.getTime(), comment.createTimeMillis));
 

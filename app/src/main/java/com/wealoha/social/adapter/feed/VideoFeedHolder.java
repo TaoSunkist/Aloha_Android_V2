@@ -43,8 +43,7 @@ public class VideoFeedHolder extends BaseFeedHolder implements OnCompletionListe
 		OnPreparedListener, OnVideoSizeChangedListener,//
 		OnBufferingUpdateListener, OnErrorListener, OnInfoListener {
 
-	@Inject
-	Picasso picasso;
+
 	private AudioManager audioManager;
 
 	public ViewGroup rootView;
@@ -146,7 +145,7 @@ public class VideoFeedHolder extends BaseFeedHolder implements OnCompletionListe
 
 	private void setSourceData() {
 		coverRoot.setVisibility(View.VISIBLE);
-		picasso.load(mPost.getCommonImage().getUrlSquare(ImageSize.FEED_MAX)).into(videoImgView);
+		Picasso.get().load(mPost.getCommonImage().getUrlSquare(ImageSize.FEED_MAX)).into(videoImgView);
 	}
 
 	@Override

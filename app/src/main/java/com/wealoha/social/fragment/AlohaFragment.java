@@ -133,8 +133,7 @@ public class AlohaFragment extends BaseFragment implements LoaderCallbacks<ApiRe
     ProgressBar img_pb;
     @Inject
     ContextUtil ContextUtil;
-    @Inject
-    Picasso picasso;
+
     @Inject
     RegionNodeUtil regionNodeUtil;
     @Inject
@@ -476,13 +475,13 @@ public class AlohaFragment extends BaseFragment implements LoaderCallbacks<ApiRe
 
         int imageWidth = Math.min(ImageSize.FEED_MAX, mWidth);
         String imageUrl = ImageUtil.getImageUrl(user.getAvatarImage().getId(), imageWidth, CropMode.ScaleCenterCrop);
-        picasso.load(imageUrl).into(mHeadPhoto);
+        Picasso.get().load(imageUrl).into(mHeadPhoto);
 
         if (AppApplication.mUserList.size() > 1 && AppApplication.mUserList.get(1) != null) {
             // 预加载
             User nextUser = AppApplication.mUserList.get(1);
             String nextImageUrl = ImageUtil.getImageUrl(nextUser.getAvatarImage().getId(), imageWidth, CropMode.ScaleCenterCrop);
-            picasso.load(nextImageUrl).fetch();
+            Picasso.get().load(nextImageUrl).fetch();
         }
     }
 

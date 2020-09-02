@@ -20,8 +20,7 @@ public class UserListItem {
 
 	@Inject
 	Context context;
-	@Inject
-	Picasso picasso;
+
 
 	@InjectView(R.id.user_photo)
 	CircleImageView mUserPhoto;
@@ -40,7 +39,7 @@ public class UserListItem {
 			return null;
 		}
 		mUser = user;
-		picasso.load(ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), 100, CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(mUserPhoto);
+		Picasso.get().load(ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), 100, CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(mUserPhoto);
 
 		return container;
 	}

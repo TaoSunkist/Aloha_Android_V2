@@ -22,8 +22,7 @@ import com.wealoha.social.widget.MultiListViewType;
 public class Feed2Adapter extends BaseListApiAdapter<Post, String> implements
         BaseFeedHolder.Holder2AdtCallback {
 
-    @Inject
-    Picasso picasso;
+
     public static boolean isPlayerMedia = true;
     private Fragment mFrag;
     private final int mScreenWidth;

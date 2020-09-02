@@ -23,8 +23,7 @@ import com.wealoha.social.utils.UiUtils;
 
 public class ChatBigImgAct extends BaseFragAct implements OnClickListener{
 
-	@Inject
-	Picasso picasso;
+
 	@Inject
 	Context context;
 	@InjectView(R.id.chat_big_img_back)
@@ -54,9 +53,9 @@ public class ChatBigImgAct extends BaseFragAct implements OnClickListener{
 		Log.i("BIGIMAGE", "url:" + url);
 
 		if (!TextUtils.isEmpty(url)) {
-			picasso.load(url).into(mBigImg);
+			Picasso.get().load(url).into(mBigImg);
 		} else if (!TextUtils.isEmpty(imageid)) {
-			picasso.load(ImageUtil.getImageUrl(imageid, UiUtils.getScreenWidth(context), CropMode.ScaleCenterCrop)).into(mBigImg);
+			Picasso.get().load(ImageUtil.getImageUrl(imageid, UiUtils.getScreenWidth(context), CropMode.ScaleCenterCrop)).into(mBigImg);
 		}
 
 	}

@@ -32,8 +32,7 @@ import com.wealoha.social.utils.UiUtils;
 
 public class Profile2ImageHolder extends AbsViewHolder implements OnClickListener {
 
-	@Inject
-	Picasso picasso;
+
 	@Inject
 	Context context;
 	@Inject
@@ -128,7 +127,7 @@ public class Profile2ImageHolder extends AbsViewHolder implements OnClickListene
 		Post post = mPostList.get(position);
 		profile_play_image.setVisibility(FeedType.VideoPost==post.getType()?View.VISIBLE:View.GONE);
 		profile_pics_image_rl.setVisibility(ViewStub.VISIBLE);
-		picasso.load(post.getUser().getAvatarImage().getUrl()).resize(imgWidth, imgWidth).placeholder(R.color.gray_text).into(image);
+		Picasso.get().load(post.getUser().getAvatarImage().getUrl()).resize(imgWidth, imgWidth).placeholder(R.color.gray_text).into(image);
 		profile_pics_image_rl.setTag(post);
 		profile_pics_image_rl.setOnClickListener(this);
 	}
@@ -136,7 +135,7 @@ public class Profile2ImageHolder extends AbsViewHolder implements OnClickListene
 	// private void loadPhotos(ImageView image, int position) {
 	// // Log.i("PROFILE_IMAGES", "POSITION:" + position);
 	// image.setVisibility(ViewStub.VISIBLE);
-	// picasso.load(mPostList.get(position).getImage().getUrlSquare(imgWidth)).resize(imgWidth,
+	// Picasso.get().load(mPostList.get(position).getImage().getUrlSquare(imgWidth)).resize(imgWidth,
 	// imgWidth).placeholder(R.color.gray_text).into(image);
 	// image.setTag(mPostList.get(position));
 	// image.setOnClickListener(this);

@@ -103,8 +103,7 @@ public class Feed2Fragment extends BaseFragment implements IFeedsView {
     @SuppressLint("UseSparseArrays")
     public static Map<Integer, View> views = new HashMap<Integer, View>();
     FeedsPresenter mFeedsP;
-    @Inject
-    Picasso mPicasso;
+
     private static List<HashTag> hashtag = new ArrayList<>();
 
     @Override

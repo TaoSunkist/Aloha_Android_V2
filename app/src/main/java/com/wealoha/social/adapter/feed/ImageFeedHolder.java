@@ -29,8 +29,7 @@ import com.wealoha.social.view.custom.AtOnePopup2;
 
 public class ImageFeedHolder extends BaseFeedHolder implements OnClickListener {
 
-	@Inject
-	Picasso picasso;
+
 	private ViewGroup rootView;
 	private ImageView feedPhoto;
 	private ImageView praiseImg;
@@ -65,7 +64,7 @@ public class ImageFeedHolder extends BaseFeedHolder implements OnClickListener {
 	public View resetViewData(final Post post) {
 		mPost = post;
 		feedPhoto.getLayoutParams().height = imgWidth;
-		picasso.load(post.getUser().getAvatarImage().getUrl()).into(feedPhoto);
+		Picasso.get().load(post.getUser().getAvatarImage().getUrl()).into(feedPhoto);
 		if (getFeedType() == FeedHolder.TAGS_HOLDER) {
 			initAtOnePopup(post);// 直接显示tag
 		} else {

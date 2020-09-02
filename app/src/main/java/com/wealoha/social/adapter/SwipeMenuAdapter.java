@@ -30,8 +30,7 @@ public class SwipeMenuAdapter extends BaseAdapter {
 
     @Inject
     Context context;
-    @Inject
-    Picasso picasso;
+
     @Inject
     FontUtil font;
 
@@ -115,7 +114,7 @@ public class SwipeMenuAdapter extends BaseAdapter {
             // convertView = mListItem.initView(user);
             holder = (ViewHolder) convertView.getTag();
         }
-        picasso.load(ImageUtil.getImageUrl(user.getAvatarImage().getId(), GlobalConstants.ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(holder.userPhoto);
+        Picasso.get().load(ImageUtil.getImageUrl(user.getAvatarImage().getId(), GlobalConstants.ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(holder.userPhoto);
         holder.userName.setText(user.getName());
         if (showMatch && user.getMatch()) {
             holder.matchOrNot.setVisibility(View.VISIBLE);

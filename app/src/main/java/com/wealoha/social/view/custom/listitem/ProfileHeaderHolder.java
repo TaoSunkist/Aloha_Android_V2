@@ -36,6 +36,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.RequestCreator;
@@ -186,8 +187,7 @@ public class ProfileHeaderHolder {
 
     @Inject
     BlurRendererLite blurRendererLite;
-    @Inject
-    Picasso picasso;
+
     @Inject
     Context mContext;
     @Inject
@@ -342,7 +342,7 @@ public class ProfileHeaderHolder {
     }
 
     private void loadUserHeader() {
-        if (picasso == null || mUser == null || mUserPhoto == null || mLayout == null) {
+        if (mUser == null || mUserPhoto == null || mLayout == null) {
             return;
         }
 
@@ -362,12 +362,12 @@ public class ProfileHeaderHolder {
         RequestCreator requestCreator = null;
         switch (tag) {
             case 0:
-                requestCreator = picasso//
+                requestCreator = Picasso.get()//
                         .load(ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), UiUtils.dip2px(mContext, ImageSize.AVATAR_ROUND_SMALL), CropMode.ScaleCenterCrop));
                 break;
             case 1:
-                requestCreator = picasso//
-                        .load(ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), UiUtils.dip2px(mContext, ImageSize.AVATAR_ROUND_SMALL), CropMode.ScaleCenterCrop)).skipMemoryCache();
+                requestCreator = Picasso.get()//
+                        .load(ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), UiUtils.dip2px(mContext, ImageSize.AVATAR_ROUND_SMALL), CropMode.ScaleCenterCrop)).memoryPolicy(MemoryPolicy.NO_CACHE);
                 break;
         }
         //
@@ -375,13 +375,14 @@ public class ProfileHeaderHolder {
             requestCreator.placeholder(R.drawable.default_photo).into(mUserPhoto, new com.squareup.picasso.Callback() {
 
                 @Override
-                public void onError() {
-                    XL.i("USER_PHOTO", "error");
+                public void onSuccess() {
+                    isUseable = true;
                 }
 
                 @Override
-                public void onSuccess() {
-                    isUseable = true;
+                public void onError(Exception e) {
+                    XL.i("USER_PHOTO", "error");
+
                 }
 
             });
@@ -454,7 +455,7 @@ public class ProfileHeaderHolder {
             }
 
             @Override
-            public void onBitmapFailed(Drawable errorDrawable) {
+            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
             }
 
             @Override
@@ -463,7 +464,7 @@ public class ProfileHeaderHolder {
 
         };
 
-        picasso.load(url).placeholder(R.color.gray_text).into(blurTarget);
+        Picasso.get().load(url).placeholder(R.color.gray_text).into(blurTarget);
     }
 
     @OnClick({R.id.me_circleimg_v, R.id.profile_popularity_ll, R.id.profile_aloha_ll, R.id.profile_other_match, R.id.profile_other_chat, R.id.profile_grid_pic_radio_container, R.id.profile_info_radio_container, R.id.profile_list_pic_radio_container})
@@ -853,7 +854,7 @@ public class ProfileHeaderHolder {
         String url = ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), 640, CropMode.ScaleCenterCrop);
         // FIXME 应该先显示小图,大图家在完毕显示大图
 
-        picasso.load(url).into(avactor);
+        Picasso.get().load(url).into(avactor);
         ll.setOnClickListener(new OnClickListener() {
 
             @Override

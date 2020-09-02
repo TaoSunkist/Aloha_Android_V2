@@ -181,8 +181,7 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 	CountService countService;
 	@Inject
 	ConstantsService constantsService;
-	@Inject
-	Picasso picasso;
+
 	@Inject
 	ServerApi mUserAPI;
 	private Context mContext;
@@ -726,7 +725,7 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 		}
 
 		@Override
-		public void onBitmapFailed(Drawable errorDrawable) {
+		public void onBitmapFailed(Exception e, Drawable errorDrawable) {
 
 		}
 
@@ -770,7 +769,7 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 							// contextUtil.setStartupImageId(imageId);// 预加载，不显示
 							// 注意，这里预加载的图和显示的尺寸要一致！
 							String imageUrl = ImageUtil.getImageUrl(imageId, 0, null);
-							picasso.load(imageUrl).into(picTarget);
+							Picasso.get().load(imageUrl).into(picTarget);
 						}
 					} else {
 						XL.i(TAG, "清理开机画面");

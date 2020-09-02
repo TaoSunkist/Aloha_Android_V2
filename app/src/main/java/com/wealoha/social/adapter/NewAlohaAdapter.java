@@ -29,8 +29,7 @@ public class NewAlohaAdapter extends BaseAdapter {
     private LayoutInflater mLayoutInflater;
     @Inject
     FontUtil mFontUtil;
-    @Inject
-    Picasso picasso;
+
     private final boolean mIsMatcher;
     private int mCount;
 
@@ -84,7 +83,7 @@ public class NewAlohaAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         // XL.d("getUrlSquare", user.getAvatarImage().getUrl(100, 100));
-        picasso.load(user2.getAvatarImage().getUrl()).placeholder(R.drawable.default_photo).resize(100, 100).into(viewHolder.mUserPhoto);
+        Picasso.get().load(user2.getAvatarImage().getUrl()).placeholder(R.drawable.default_photo).resize(100, 100).into(viewHolder.mUserPhoto);
         viewHolder.mUserName.setText(user2.getName());
         if (mIsMatcher && user2.getMatch()) {
             viewHolder.mMatchOrNot.setVisibility(View.VISIBLE);

@@ -40,6 +40,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.lidroid.xutils.ViewUtils;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.wealoha.social.ActivityManager;
@@ -100,8 +101,7 @@ public class UserDataAct extends BaseFragAct implements OnClickListener {
     EditText mUsername;
     @InjectView(R.id.usermanager_head_icon)
     CircleImageView mUserPhoto;
-    @Inject
-    Picasso picasso;
+
     @Inject
     FontUtil fontUtil;
     @Inject
@@ -444,7 +444,7 @@ public class UserDataAct extends BaseFragAct implements OnClickListener {
                     try {
                         mHeadIconPath = (String) msg.obj;
                         uploadMethod(mHeadIconPath);
-                        picasso.load(new File(mHeadIconPath)).resize(ImageSize.CHAT_THUMB, ImageSize.CHAT_THUMB).skipMemoryCache().placeholder(R.drawable.default_photo).into(mUserPhoto);
+                        Picasso.get().load(new File(mHeadIconPath)).resize(ImageSize.CHAT_THUMB, ImageSize.CHAT_THUMB).memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.default_photo).into(mUserPhoto);
                     } catch (Exception e) {
                     }
                     break;

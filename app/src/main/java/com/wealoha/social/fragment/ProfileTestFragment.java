@@ -83,8 +83,7 @@ public class ProfileTestFragment extends BaseFragment implements OnClickListener
     Context context;
     @Inject
     ServerApi mFeedService;
-    @Inject
-    Picasso picasso;
+
     @Inject
     FontUtil fontUtil;
     @Inject

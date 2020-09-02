@@ -89,8 +89,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 		OnItemClickListener, OnItemLongClickListener, ListItemCallback, FeedCommentAdapterCallback,//
 		OnScrollListener, OnTouchListener, Holder2FragCallback {
 
-	@Inject
-	Picasso picasso;
+
 	@Inject
 	Feed2ListApiService feedService;
 	@Inject
@@ -380,7 +379,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 			}
 			CircleImageView circleImage = new CircleImageView(mcontext);
 			String url = user2s.get(i).getAvatarImage().getUrlSquare(radiu);
-			picasso.load(url).into(circleImage);
+			Picasso.get().load(url).into(circleImage);
 			circleImage.setTag(user2s.get(i));// 保存这个头像的用户信息
 			XL.i("user_type", "user--:" + user2s.get(i).getClass().getName());
 			circleImage.setLayoutParams(params);

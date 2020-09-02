@@ -41,8 +41,7 @@ import com.wealoha.social.utils.UiUtils;
 
 public class MatchPopupWindow extends PopupWindow {
 
-	@Inject
-	Picasso picasso;
+
 	@Inject
 	ContextUtil contextUtil;
 	@Inject
@@ -133,11 +132,11 @@ public class MatchPopupWindow extends PopupWindow {
 
 		// Log.i("ALOHA_MATCHPOPUP", userphoto);
 		int px = UiUtils.dip2px(mContext, 130);
-		picasso.load(ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), px, CropMode.ScaleCenterCrop))//
+		Picasso.get().load(ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), px, CropMode.ScaleCenterCrop))//
 				.placeholder(R.color.gray_text)//
 				.into(mUserPhoto);
 		if (contextUtil.getCurrentUser() != null) {
-			picasso.load(ImageUtil.getImageUrl(contextUtil.getCurrentUser().getAvatarImage().getId(), px, CropMode.ScaleCenterCrop))//
+			Picasso.get().load(ImageUtil.getImageUrl(contextUtil.getCurrentUser().getAvatarImage().getId(), px, CropMode.ScaleCenterCrop))//
 					.placeholder(R.color.gray_text)//
 					.into(mMyPhoto);
 		}

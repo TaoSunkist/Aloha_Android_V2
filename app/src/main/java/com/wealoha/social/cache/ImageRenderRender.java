@@ -38,7 +38,7 @@ public class ImageRenderRender {
 			}
 
 			@Override
-			public void onBitmapFailed(Drawable errorDrawable) {
+			public void onBitmapFailed(Exception e, Drawable errorDrawable) {
 
 			}
 

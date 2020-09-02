@@ -142,8 +142,7 @@ public class ConfigFragment extends BaseFragment implements IConfigView {
 	RelativeLayout mTagedList;
 	@InjectView(R.id.config_advanced_tv)
 	TextView mAdvancedTv;
-	@Inject
-	Picasso picasso;
+
 	@Inject
 	ChatUtil chatUtil;
 	@Inject
@@ -193,7 +192,7 @@ public class ConfigFragment extends BaseFragment implements IConfigView {
 		}
 		mConfigP.clacCacheSize();
 		if (mUser != null) {
-			picasso.load(ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(mUserPhoto);
+			Picasso.get().load(ImageUtil.getImageUrl(mUser.getAvatarImage().getId(), ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(mUserPhoto);
 			mUserName.setText(mUser.getName());
 			mVersionTv.setText(packageInfo.versionName);
 		}

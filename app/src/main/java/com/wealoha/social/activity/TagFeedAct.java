@@ -42,8 +42,7 @@ import com.wealoha.social.view.custom.popup.AtOnePopup.AtOnePopupCallback;
 
 public class TagFeedAct extends BaseFragAct implements OnTouchListener, OnClickListener, AtOnePopupCallback {
 
-	@Inject
-	Picasso picasso;
+
 	@Inject
 	FontUtil fontUtil;
 	@InjectView(R.id.photo)
@@ -111,10 +110,10 @@ public class TagFeedAct extends BaseFragAct implements OnTouchListener, OnClickL
 			}
 			mTagsContainer.post(new CreatPopupRunnable());
 			if (TextUtils.isEmpty(imgId)) {
-				picasso.load(new File(imgPath)).into(mPhoto);
+				Picasso.get().load(new File(imgPath)).into(mPhoto);
 			} else {
 				String imgTempId = ImageUtil.getImageUrl(imgId, 360, CropMode.ScaleCenterCrop);
-				picasso.load(imgTempId).into(mPhoto);
+				Picasso.get().load(imgTempId).into(mPhoto);
 			}
 		}
 	}

@@ -84,8 +84,7 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 	RegionNodeUtil regionNodeUtil;
 	@Inject
 	FontUtil fontUtil;
-	@Inject
-	Picasso picasso;
+
 	@Inject
 	Context mContext;
 
@@ -409,7 +408,7 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 		} else {
 			userLocation.setVisibility(View.GONE);
 		}
-		picasso.load(post.getUser().getAvatarImage().getUrlSquare(ImageSize.AVATAR_ROUND_SMALL))//
+		Picasso.get().load(post.getUser().getAvatarImage().getUrlSquare(ImageSize.AVATAR_ROUND_SMALL))//
 		.placeholder(R.drawable.default_photo).into(userPhoto);
 		changeColor(mPost.isLiked());
 

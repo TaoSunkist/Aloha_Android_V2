@@ -32,8 +32,7 @@ import com.wealoha.social.utils.UiUtils;
 
 public class ProfileImagesHolder implements OnClickListener {
 
-    @Inject
-    Picasso picasso;
+
     @Inject
     Context context;
     @Inject
@@ -126,7 +125,7 @@ public class ProfileImagesHolder implements OnClickListener {
 
         }
         profile_pics_image_rl.setVisibility(ViewStub.VISIBLE);
-        picasso.load(ImageUtil.getImageUrl(feed.imageId, 240, CropMode.ScaleCenterCrop)).resize(imgWidth, imgWidth).placeholder(R.color.gray_text).into(image);
+        Picasso.get().load(ImageUtil.getImageUrl(feed.imageId, 240, CropMode.ScaleCenterCrop)).resize(imgWidth, imgWidth).placeholder(R.color.gray_text).into(image);
         profile_pics_image_rl.setTag(mItems.get(position).postId);
         profile_pics_image_rl.setOnClickListener(this);
     }

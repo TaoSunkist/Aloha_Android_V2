@@ -78,8 +78,7 @@ public class LeaveCommentAct extends BaseFragAct implements OnItemClickListener,
 
     @Inject
     ContextUtil contextUtil;
-    @Inject
-    Picasso picasso;
+
     @Inject
     ServerApi mCommentService;
     public static final String TAG = LeaveCommentAct.class.getSimpleName();

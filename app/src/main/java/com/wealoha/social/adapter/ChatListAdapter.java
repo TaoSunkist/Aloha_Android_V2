@@ -40,8 +40,7 @@ public class ChatListAdapter extends BaseAdapter/* implements OnSlideListener */
 	// 里面保存了信息的数量，来自noticebarcontroller
 	private Map<String, Message> mMessageMap;
 	private ListView mListView;
-	@Inject
-	Picasso picasso;
+
 	@Inject
 	LayoutInflater layoutInflater;
 	@Inject
@@ -96,7 +95,7 @@ public class ChatListAdapter extends BaseAdapter/* implements OnSlideListener */
 		}
 		InboxSession session = getItem(position);
 		Image image = session.user.getAvatarImage();
-		picasso.load(ImageUtil.getImageUrl(image.getId(), GlobalConstants.ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(chatListHolder.item_chat_user_photo);
+		Picasso.get().load(ImageUtil.getImageUrl(image.getId(), GlobalConstants.ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(chatListHolder.item_chat_user_photo);
 		chatListHolder.item_chat_user_name.setText(mSessionList.get(position).user.getName());
 		chatListHolder.item_chat_time_stamp.setText(TimeUtil.getDistanceTimeForApp(mMainAct, new Date().getTime(), session.updateTimeMillis));
 		String userid = mSessionList.get(position).user.getId();

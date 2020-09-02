@@ -51,8 +51,7 @@ public class FeedNoticeAdapter extends BaseAdapter {
 
     private LayoutInflater mLayoutInflater;
     private FeedNoticeAct mParent;
-    @Inject
-    Picasso picasso;
+
     @Inject
     ContextUtil contextUtil;
     @Inject
@@ -171,7 +170,7 @@ public class FeedNoticeAdapter extends BaseAdapter {
                 final PostLikeNotify2 postLikeNotify2 = (PostLikeNotify2) notify2;
                 postLikeViewHolder.mTimeStamp.setText(TimeUtil.getDistanceTimeForApp(mParent, //
                         new Date().getTime(), postLikeNotify2.getPost().getCreateTimeMillis()));
-                picasso.load(postLikeNotify2.getPost().getUser().getAvatarImage().getUrl())//
+                Picasso.get().load(postLikeNotify2.getPost().getUser().getAvatarImage().getUrl())//
                         .into(postLikeViewHolder.mFeedImg);
 
                 if (postLikeNotify2.getUsers().size() == 1) {
@@ -228,9 +227,9 @@ public class FeedNoticeAdapter extends BaseAdapter {
                 postCommentViewHolder.mUserName.setText(postCommentNotify2.getFromUser().getName());
                 postCommentViewHolder.mStamp.setText(TimeUtil.getDistanceTimeForApp(mParent, //
                         new Date().getTime(), postCommentNotify2.getPost().getCreateTimeMillis()));
-                picasso.load(postCommentNotify2.getFromUser().getAvatarImage().getUrl()).//
+                Picasso.get().load(postCommentNotify2.getFromUser().getAvatarImage().getUrl()).//
                         placeholder(R.drawable.default_photo).into(postCommentViewHolder.mUserHead);
-                picasso.load(postCommentNotify2.getPost().getUser().getAvatarImage().getUrl()).//
+                Picasso.get().load(postCommentNotify2.getPost().getUser().getAvatarImage().getUrl()).//
                         into(postCommentViewHolder.mFeedImg);
 
                 postCommentViewHolder.mUserHead.setOnClickListener(new OnClickListener(postCommentNotify2));
@@ -241,9 +240,9 @@ public class FeedNoticeAdapter extends BaseAdapter {
                 break;
             case Notify2.POST_TAG_VIEW_TYPE:// 圈人的通知
                 PostTagNotify2 postTagNotify2 = (PostTagNotify2) notify2;
-                picasso.load(postTagNotify2.getFromUser().getAvatarImage().getUrl()).//
+                Picasso.get().load(postTagNotify2.getFromUser().getAvatarImage().getUrl()).//
                         placeholder(R.drawable.default_photo).into(postTagViewHolder.mUserHead);
-                picasso.load(postTagNotify2.getPost().getUser().getAvatarImage().getUrl()).//
+                Picasso.get().load(postTagNotify2.getPost().getUser().getAvatarImage().getUrl()).//
                         into(postTagViewHolder.mFeedImg);
                 String format = String.format(mParent.getResources().getString(R.string.item_feed_notice_post_tag_body),//
                         postTagNotify2.getFromUser().getName());
@@ -311,7 +310,7 @@ public class FeedNoticeAdapter extends BaseAdapter {
                 if (i < count) {
                     CircleImageView circleImageView = new CircleImageView(mParent);
                     circleImageView.setLayoutParams(layoutParams2);
-                    picasso.load(user2s.get(i).getAvatarImage().getUrlSquare(80)).placeholder(R.drawable.default_photo)//
+                    Picasso.get().load(user2s.get(i).getAvatarImage().getUrlSquare(80)).placeholder(R.drawable.default_photo)//
                             .into(circleImageView);
                     postLikeViewHolder.mWrapUsers.addView(circleImageView);
                     circleImageView.setClickable(true);
@@ -337,7 +336,7 @@ public class FeedNoticeAdapter extends BaseAdapter {
                 if (i < count) {
                     CircleImageView circleImageView = new CircleImageView(mParent);
                     circleImageView.setLayoutParams(layoutParams2);
-                    picasso.load(user2s.get(i).getAvatarImage().getUrlSquare(80)).//
+                    Picasso.get().load(user2s.get(i).getAvatarImage().getUrlSquare(80)).//
                             placeholder(R.drawable.default_photo).into(circleImageView);
                     newAlohaViewHolder.mWrapUsers.addView(circleImageView);
                 } else {

@@ -19,27 +19,26 @@ import com.wealoha.social.inject.Injector;
  */
 public class ImageRender {
 
-	@Inject
-	Picasso picasso;
+
 
 	public ImageRender() {
 		Injector.inject(this);
 	}
 
 	public ImageRenderRender load(File file) {
-		return new ImageRenderRender(picasso.load(file));
+		return new ImageRenderRender(Picasso.get().load(file));
 	}
 
 	public ImageRenderRender load(int resourceId) {
-		return new ImageRenderRender(picasso.load(resourceId));
+		return new ImageRenderRender(Picasso.get().load(resourceId));
 	}
 
 	public ImageRenderRender load(String path) {
-		return new ImageRenderRender(picasso.load(path));
+		return new ImageRenderRender(Picasso.get().load(path));
 	}
 
 	public ImageRenderRender load(Uri uri) {
-		return new ImageRenderRender(picasso.load(uri));
+		return new ImageRenderRender(Picasso.get().load(uri));
 	}
 
 }

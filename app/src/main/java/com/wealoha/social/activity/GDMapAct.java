@@ -23,8 +23,7 @@ import com.wealoha.social.inject.Injector;
 
 public class GDMapAct extends Activity {
 
-	@Inject
-	Picasso picasso;
+
 	private ProgressDialog progDialog = null;
 	private AMap aMap;
 	private MapView mapView;

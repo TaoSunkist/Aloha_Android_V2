@@ -100,8 +100,7 @@ public class FeedFragment extends BaseFragment implements OnClickListener,
     ServerApi feedService;
     @Inject
     RemoteLogUtil logUtil;
-    @Inject
-    Picasso picasso;
+
     @Inject
     Notify2ListApiService notify2Service;
     @Inject
@@ -642,8 +641,8 @@ public class FeedFragment extends BaseFragment implements OnClickListener,
         for (int i = first; i < end - 2; i++) {
             Log.i("LOAD_MEMORY", "++++++" + i);
             Feed feed = mResult.getList().get(i);
-            picasso.load(ImageUtil.getImageUrl(feed.imageId, mImageWidth, CropMode.ScaleCenterCrop)).fetch();
-            picasso.load(ImageUtil.getImageUrl(mResult.getUserMap().get(feed.userId).getAvatarImageId(), GlobalConstants.ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop)).fetch();
+            Picasso.get().load(ImageUtil.getImageUrl(feed.imageId, mImageWidth, CropMode.ScaleCenterCrop)).fetch();
+            Picasso.get().load(ImageUtil.getImageUrl(mResult.getUserMap().get(feed.userId).getAvatarImageId(), GlobalConstants.ImageSize.AVATAR_ROUND_SMALL, CropMode.ScaleCenterCrop)).fetch();
         }
     }
 

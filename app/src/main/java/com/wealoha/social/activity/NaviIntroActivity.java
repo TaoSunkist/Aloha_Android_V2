@@ -53,8 +53,7 @@ public class NaviIntroActivity extends BaseFragAct implements ViewPager.OnPageCh
     ContextUtil contextUtil;
     @Inject
     ConstantsService constantsService;
-    @Inject
-    Picasso picasso;
+
     @Inject
     ServerApi mUserAPI;
     @Inject

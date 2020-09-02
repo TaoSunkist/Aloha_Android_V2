@@ -118,7 +118,7 @@ import com.wealoha.social.beans.message.MessageSerializer;
 import com.wealoha.social.beans.message.TextMessage;
 import com.wealoha.social.cache.ImageRender;
 import com.wealoha.social.commons.CacheManager;
-import com.wealoha.social.commons.CustomHttpDownloader;
+//import com.wealoha.social.commons.CustomHttpDownloader;
 import com.wealoha.social.commons.FileCacheManager;
 import com.wealoha.social.commons.JsonController;
 import com.wealoha.social.endpoint.ApiEndpoint;
@@ -444,57 +444,57 @@ public class AlohaModule {
         return new RemoteLogUtil();
     }
 
-    @Provides
-    @Singleton
-    Picasso providePicasso(final Context context, LruCache lrucache, //
-                           final RemoteLogUtil remoteLogUtil, final ContextUtil contextUtil, //
-                           final UserAgentProvider userAgentProvider) {
-
-        boolean curlSupported = false;
-
-        Downloader theDownloader = null;
-        if (curlSupported) {
-            final boolean useProxy = isSystemProxyOK();
-
-            // downloader
-            // PicassoCurlDownloader
-            try {
-                // 优先使用sd卡
-                // <sd card>/aloha/cache
-                File cacheParent = new File(FileTools.getExternalStorage(remoteLogUtil), "aloha");
-
-            } catch (IOException e1) {
-                XL.w(TAG, "无法存取本地sd卡路径, 使用较小的内部存储");
-                File cacheDir = context.getFileStreamPath("image_cache");
-
-            }
-
-        } else {
-            try {
-                theDownloader = new CustomHttpDownloader(new File( //
-                        FileTools.getExternalStorage(remoteLogUtil), "aloha"), contextUtil);
-            } catch (Exception e) {
-                XL.w(TAG, "存储不可用", e);
-                XL.w(TAG, "无法存取本地sd卡路径, 使用较小的内部存储");
-                File cacheDir = context.getFileStreamPath("image_cache");
-                theDownloader = new CustomHttpDownloader(cacheDir, contextUtil);
-            }
-        }
-
-        return new Picasso.Builder(context)//
-                .listener((picasso, uri, e) -> {
-                    // 通用的错误处理
-                    XL.d(TAG, "fail to load: " + uri.toString(), e);
-                    // Crashlytics.log(Log.ERROR, TAG, e.getMessage());
-                    if (!(e instanceof IOException)) {
-                        remoteLogUtil.log("PICASSO_LISTENER--URL:" + uri.toString(), e);
-                    }
-                }) //
-                .memoryCache(lrucache) //
-                 .indicatorsEnabled(true) // 调试用角标
-                .downloader(theDownloader) //
-                .build();
-    }
+//    @Provides
+//    @Singleton
+//    Picasso providePicasso(final Context context, LruCache lrucache, //
+//                           final RemoteLogUtil remoteLogUtil, final ContextUtil contextUtil, //
+//                           final UserAgentProvider userAgentProvider) {
+//
+//        boolean curlSupported = false;
+//
+//        Downloader theDownloader = null;
+//        if (curlSupported) {
+//            final boolean useProxy = isSystemProxyOK();
+//
+//            // downloader
+//            // PicassoCurlDownloader
+//            try {
+//                // 优先使用sd卡
+//                // <sd card>/aloha/cache
+//                File cacheParent = new File(FileTools.getExternalStorage(remoteLogUtil), "aloha");
+//
+//            } catch (IOException e1) {
+//                XL.w(TAG, "无法存取本地sd卡路径, 使用较小的内部存储");
+//                File cacheDir = context.getFileStreamPath("image_cache");
+//
+//            }
+//
+//        } else {
+//            try {
+//                theDownloader = new CustomHttpDownloader(new File( //
+//                        FileTools.getExternalStorage(remoteLogUtil), "aloha"), contextUtil);
+//            } catch (Exception e) {
+//                XL.w(TAG, "存储不可用", e);
+//                XL.w(TAG, "无法存取本地sd卡路径, 使用较小的内部存储");
+//                File cacheDir = context.getFileStreamPath("image_cache");
+//                theDownloader = new CustomHttpDownloader(cacheDir, contextUtil);
+//            }
+//        }
+//
+//        return new Picasso.Builder(context)//
+//                .listener((picasso, uri, e) -> {
+//                    // 通用的错误处理
+//                    XL.d(TAG, "fail to load: " + uri.toString(), e);
+//                    // Crashlytics.log(Log.ERROR, TAG, e.getMessage());
+//                    if (!(e instanceof IOException)) {
+//                        remoteLogUtil.log("PICASSO_LISTENER--URL:" + uri.toString(), e);
+//                    }
+//                }) //
+//                .memoryCache(lrucache) //
+//                 .indicatorsEnabled(true) // 调试用角标
+//                .downloader(theDownloader) //
+//                .build();
+//    }
 
     @Provides
     @Singleton
@@ -723,7 +723,7 @@ public class AlohaModule {
 
     @Provides
     @Singleton
-    ImageRender provideImageRender(Picasso picasso) {
+    ImageRender provideImageRender() {
         return new ImageRender();
     }
 

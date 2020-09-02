@@ -44,8 +44,7 @@ import com.wealoha.social.view.custom.SlideView.OnSlideListener;
 
 public class BlackListFragment extends BaseFragment implements OnSlideListener, OnClickListener {
 
-    @Inject
-    Picasso picasso;
+
     @Inject
     ContextUtil contextUtil;
 
@@ -195,7 +194,7 @@ public class BlackListFragment extends BaseFragment implements OnSlideListener, 
             // 确认默认状态
             slideView.shrink();
             int i = mBTUsers.size() - 1 - position;// 倒序，最新消息显示在最上面
-            picasso.load(ImageUtil.getImageUrl(mBTUsers.get(i).getAvatarImage().getId(), viewHolder.userPhoto.getWidth(), CropMode.ScaleCenterCrop)).placeholder(R.drawable.myotee2).into(viewHolder.userPhoto);
+            Picasso.get().load(ImageUtil.getImageUrl(mBTUsers.get(i).getAvatarImage().getId(), viewHolder.userPhoto.getWidth(), CropMode.ScaleCenterCrop)).placeholder(R.drawable.myotee2).into(viewHolder.userPhoto);
             viewHolder.userName.setText(mBTUsers.get(i).getName());
             viewHolder.delete.setOnClickListener(BlackListFragment.this);
 

@@ -59,8 +59,7 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
     private final FeedNoticeAct mParent;
     @Inject
     FontUtil mFontUtil;
-    @Inject
-    Picasso picasso;
+
 
     @Inject
     FontUtil fontUtil;
@@ -153,7 +152,7 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 
                 postLikeViewHolder.mTimeStamp.setText(TimeUtil.getDistanceTimeForApp(mParent, //
                         new Date().getTime(), postLikeNotify2.getUpdateTimeMillis()));
-                picasso.load(postLikeNotify2.getPost().getCommonImage().getUrl(80, 80))//
+                Picasso.get().load(postLikeNotify2.getPost().getCommonImage().getUrl(80, 80))//
                         .into(postLikeViewHolder.mFeedImg);
 
                 if (postLikeNotify2.getUsers().size() == 1) {
@@ -193,9 +192,9 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
                 }
                 postCommentViewHolder.mStamp.setText(TimeUtil.getDistanceTimeForApp(mParent, //
                         new Date().getTime(), postCommentNotify2.getUpdateTimeMillis()));
-                picasso.load(postCommentNotify2.getFromUser().getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB)).//
+                Picasso.get().load(postCommentNotify2.getFromUser().getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB)).//
                         placeholder(R.drawable.default_photo).into(postCommentViewHolder.mUserHead);
-                picasso.load(postCommentNotify2.getPost().getCommonImage().getUrl(80, 80)).//
+                Picasso.get().load(postCommentNotify2.getPost().getCommonImage().getUrl(80, 80)).//
                         into(postCommentViewHolder.mFeedImg);
 
                 postCommentViewHolder.mUserName.setText(postCommentNotify2.getFromUser().getName());
@@ -216,9 +215,9 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
                 } else {
                     postTagViewHolder.mRootView.setBackgroundResource(R.drawable.layout_silde_01);
                 }
-                picasso.load(postTagNotify2.getFromUser().getAvatarImage().getUrl()).//
+                Picasso.get().load(postTagNotify2.getFromUser().getAvatarImage().getUrl()).//
                         placeholder(R.drawable.default_photo).into(postTagViewHolder.mUserHead);
-                picasso.load(postTagNotify2.getPost().getCommonImage().getUrl(100, 100)).//
+                Picasso.get().load(postTagNotify2.getPost().getCommonImage().getUrl(100, 100)).//
                         into(postTagViewHolder.mFeedImg);
                 String format = String.format(mParent.getResources().getString(R.string.item_feed_notice_post_tag_body),//
                         postTagNotify2.getFromUser().getName());
@@ -277,9 +276,9 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
                 postCommentReplyOnMyPostViewHolder.mCommentBody.setText(postCommentReplyOnMyPost.getComment());
                 postCommentReplyOnMyPostViewHolder.mStamp.setText(TimeUtil.getDistanceTimeForApp(mParent, //
                         new Date().getTime(), postCommentReplyOnMyPost.getUpdateTimeMillis()));
-                picasso.load(postCommentReplyOnMyPost.getFromUser().getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB)).//
+                Picasso.get().load(postCommentReplyOnMyPost.getFromUser().getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB)).//
                         placeholder(R.drawable.default_photo).into(postCommentReplyOnMyPostViewHolder.mUserHead);
-                picasso.load(postCommentReplyOnMyPost.getPost().getCommonImage().getUrl(80, 80)).//
+                Picasso.get().load(postCommentReplyOnMyPost.getPost().getCommonImage().getUrl(80, 80)).//
                         into(postCommentReplyOnMyPostViewHolder.mFeedImg);
 
                 postCommentReplyOnMyPostViewHolder.mUserName.setText(postCommentReplyOnMyPost.getFromUser().getName());
@@ -303,9 +302,9 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
                 postCommentReplyOnOthersPostViewHolder.mCommentBody.setText(postCommentReplyOnOthersPost.getComment());
                 postCommentReplyOnOthersPostViewHolder.mStamp.setText(TimeUtil.getDistanceTimeForApp(mParent, //
                         new Date().getTime(), postCommentReplyOnOthersPost.getUpdateTimeMillis()));
-                picasso.load(postCommentReplyOnOthersPost.getFromUser().getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB)).//
+                Picasso.get().load(postCommentReplyOnOthersPost.getFromUser().getAvatarImage().getUrlSquare(ImageSize.CHAT_THUMB)).//
                         placeholder(R.drawable.default_photo).into(postCommentReplyOnOthersPostViewHolder.mUserHead);
-                picasso.load(postCommentReplyOnOthersPost.getPost().getCommonImage().getUrl(80, 80)).//
+                Picasso.get().load(postCommentReplyOnOthersPost.getPost().getCommonImage().getUrl(80, 80)).//
                         into(postCommentReplyOnOthersPostViewHolder.mFeedImg);
 
                 postCommentReplyOnOthersPostViewHolder.mUserName.setText(postCommentReplyOnOthersPost.getFromUser().getName());
@@ -433,7 +432,7 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
                 CircleImageView circleImageView = new CircleImageView(mParent);
 
                 circleImageView.setLayoutParams(userIconLayoutParams);
-                picasso.load(user2s.get(i).getAvatarImage().getUrlSquare(80)).placeholder(R.drawable.default_photo)//
+                Picasso.get().load(user2s.get(i).getAvatarImage().getUrlSquare(80)).placeholder(R.drawable.default_photo)//
                         .into(circleImageView);
                 postLikeViewHolder.mWrapUsers.addView(circleImageView);
             }
@@ -449,7 +448,7 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
                 } else {
                     circleImageView.setLayoutParams(userIconLayoutParams);
                 }
-                picasso.load(user2s.get(i).getAvatarImage().getUrlSquare(80)).//
+                Picasso.get().load(user2s.get(i).getAvatarImage().getUrlSquare(80)).//
                         placeholder(R.drawable.default_photo).into(circleImageView);
                 newAlohaViewHolder.mWrapUsers.addView(circleImageView);
             }

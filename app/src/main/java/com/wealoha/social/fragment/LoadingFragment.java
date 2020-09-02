@@ -99,8 +99,6 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
     @Inject
     ContextUtil contextUtil;
     @Inject
-    Picasso picasso;
-    @Inject
     ServerApi userPromotionService;
     // @InjectView(R.id.match_no_more_ll)
     // LinearLayout linearLayout;
@@ -210,7 +208,7 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
 
     private void loadUserPhoto() {
         if (contextUtil.getCurrentUser() != null) {
-            picasso.load(ImageUtil.getImageUrl(contextUtil.getCurrentUser().getAvatarImage().getId(), UiUtils.dip2px(context, GlobalConstants.ImageSize.AVATAR_ROUND_SMALL), CropMode.ScaleCenterCrop))//
+            Picasso.get().load(ImageUtil.getImageUrl(contextUtil.getCurrentUser().getAvatarImage().getId(), UiUtils.dip2px(context, GlobalConstants.ImageSize.AVATAR_ROUND_SMALL), CropMode.ScaleCenterCrop))//
                     .placeholder(R.drawable.default_photo)//
                     .into(userPhoto);
         }

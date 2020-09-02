@@ -28,9 +28,6 @@ open class Feed2ListApiService : AbsBaseListApiService<Post, String>() {
     @Inject
     var context: Context? = null
 
-    @Inject
-    lateinit var picasso: Picasso
-
     private var postList: List<Post> = arrayListOf()
 
 
@@ -173,8 +170,8 @@ open class Feed2ListApiService : AbsBaseListApiService<Post, String>() {
         for (i in first until end - 2) {
             Log.i("LOAD_MEMORY", "++++++$i")
             val post = postList!![i]
-            picasso!!.load(post!!.commonImage!!.getUrlSquare(mScreenWidth)).fetch()
-            picasso!!.load(post.user!!.avatarImage.getUrlSquare(ImageSize.AVATAR_ROUND_SMALL))
+            Picasso.get().load(post!!.commonImage!!.getUrlSquare(mScreenWidth)).fetch()
+            Picasso.get().load(post.user!!.avatarImage.getUrlSquare(ImageSize.AVATAR_ROUND_SMALL))
                 .fetch()
         }
     }

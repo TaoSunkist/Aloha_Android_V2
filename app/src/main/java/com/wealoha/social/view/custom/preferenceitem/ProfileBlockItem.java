@@ -33,7 +33,7 @@ public class ProfileBlockItem extends SimpleBlockItem {
 		View firstSub = itemroot.findViewById(R.id.first_sub);
 
 		Context context = itemClickCallback.getContext();
-		Picasso.with(context).load(imageUrl).placeholder(R.drawable.default_photo).into(userPhotoImg);
+		Picasso.get().load(imageUrl).placeholder(R.drawable.default_photo).into(userPhotoImg);
 		titleText.setText(title);
 		nameText.setText(username);
 		isViewVisibility(hasFirstTag, firstSub);

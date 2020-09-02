@@ -39,8 +39,7 @@ public class FeedLvAdapter extends BaseAdapter implements OnClickListener {
 	public Map<String, User> mUserList;
 
 	private List<ImageView> mFeedPraiseList;
-	@Inject
-	Picasso picasso;
+
 	@Inject
 	ImageRender imageRender;
 

@@ -76,8 +76,7 @@ public class PicSendActivity extends BaseFragAct implements OnClickListener, Lis
 	ContextUtil contextUtil;
 	@Inject
 	ServerApi feedService;
-	@Inject
-	Picasso picasso;
+
 	@Inject
 	FontUtil fontUtil;
 	@InjectView(R.id.pic_feed_summary)
@@ -494,7 +493,7 @@ public class PicSendActivity extends BaseFragAct implements OnClickListener, Lis
 	 */
 	private void initPhotoByShared(String imageId) {
 		mImageId = imageId;
-		picasso.load(ImageUtil.getImageUrl(imageId, 60, CropMode.ScaleCenterCrop)).into(mPic);
+		Picasso.get().load(ImageUtil.getImageUrl(imageId, 60, CropMode.ScaleCenterCrop)).into(mPic);
 	}
 
 	@Override

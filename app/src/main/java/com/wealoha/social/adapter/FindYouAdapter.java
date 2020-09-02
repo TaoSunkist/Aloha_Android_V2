@@ -30,8 +30,7 @@ public class FindYouAdapter extends BaseAdapter {
 
     @Inject
     FontUtil font;
-    @Inject
-    Picasso picasso;
+
     @Inject
     Context context;
 
@@ -102,7 +101,7 @@ public class FindYouAdapter extends BaseAdapter {
             // convertView = mListItem.initView(user);
             holder = (ViewHolder) convertView.getTag();
         }
-        picasso.load(ImageUtil.getImageUrl(user.getAvatarImage().getId(), 100, CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(holder.userPhoto);
+        Picasso.get().load(ImageUtil.getImageUrl(user.getAvatarImage().getId(), 100, CropMode.ScaleCenterCrop)).placeholder(R.drawable.default_photo).into(holder.userPhoto);
         // 标出高亮
         if (mHighlightMap == null || mHighlightMap.size() <= 0) {
             holder.userName.setText(user.getName());

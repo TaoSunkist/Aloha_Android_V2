@@ -21,8 +21,7 @@ import com.wealoha.social.widget.MultiListViewType;
 
 public class UserListAdapter extends BaseListApiAdapter<User, String> {
 
-	@Inject
-	Picasso picasso;
+
 	private BaseFragAct mParent;
 
 	public UserListAdapter(BaseFragAct parent, BaseListApiService<User, String> service) {
@@ -57,7 +56,7 @@ public class UserListAdapter extends BaseListApiAdapter<User, String> {
 	@Override
 	protected void fillView(AbsViewHolder holder, User item, int position, View convertView) {
 		UserListHodler userlistHolder = (UserListHodler) holder;
-		picasso.load(item.getAvatarImage().getUrl())//
+		Picasso.get().load(item.getAvatarImage().getUrl())//
 		.into(userlistHolder.userPhoto);
 		userlistHolder.userName.setText(item.getName());
 		userlistHolder.userPhotoCount.setText(String.valueOf(item.getPostCount()) + mParent.getString(R.string.photo));
