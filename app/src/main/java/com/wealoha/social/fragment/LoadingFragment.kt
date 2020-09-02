@@ -30,6 +30,7 @@ import com.lidroid.xutils.bitmap.BitmapDisplayConfig
 import com.lidroid.xutils.bitmap.callback.BitmapLoadFrom
 import com.lidroid.xutils.bitmap.callback.DefaultBitmapLoadCallBack
 import com.squareup.picasso.Picasso
+import com.tbruyelle.rxpermissions2.RxPermissions
 import com.wealoha.social.ActivityManager
 import com.wealoha.social.AppApplication
 import com.wealoha.social.AsyncLoader
@@ -340,7 +341,7 @@ class LoadingFragment : BaseFragment(),
     }
 
     fun openGuideDialog() {
-        if (currentContextUtil?.getCurrentUser() != null && currentContextUtil?.getCurrentUser()?.isShowAlohaTimeDialog == false) {
+        if (currentContextUtil?.currentUser != null && currentContextUtil?.currentUser?.isShowAlohaTimeDialog == false) {
             val view = LayoutInflater.from(activity)
                 .inflate(R.layout.dialog_first_aloha_time, LinearLayout(activity), false)
             val close = view.findViewById<View>(R.id.close_tv) as TextView
@@ -561,26 +562,25 @@ class LoadingFragment : BaseFragment(),
 
     override fun onCreateLoader(loaderId: Int, bundle: Bundle): Loader<ApiResponse<MatchData>?>? {
         if (!fragmentVisible) {
-            XL.d(Companion.TAG, "视图不在了，忽略请求")
             return null
         }
+        XL.d(Companion.TAG, "onCreateLoader")
         val latitude: Double =
             if (appApplication != null) appApplication!!.locationXY[0] else 0.toDouble()
         val longitude: Double =
             if (appApplication != null) appApplication!!.locationXY[1] else 0.toDouble()
         return if (loaderId == LOADER_LOAD_MATCH) {
             object : AsyncLoader<ApiResponse<MatchData>>(activity) {
-                override fun loadInBackground(): ApiResponse<MatchData>? {
+                override fun loadInBackground(): ApiResponse<MatchData> {
                     // 开始加载下一批数据..
-                    return try {
-                        if (bundle != null && bundle.getBoolean("reset")) {
-                            // 重置配额
-                            matchService!!.findWithResetQuota(latitude, longitude, true)
-                        } else {
-                            shared.findRandom(latitude, longitude).blockingGet()
-                        }
-                    } catch (e: Exception) {
-                        null
+                    return if (bundle != null && bundle.getBoolean("reset")) {
+                        XL.d(Companion.TAG, "reset")
+                        // 重置配额
+                        // matchService!!.findWithResetQuota(latitude, longitude, true)
+                        shared.findWithResetQuota(latitude, longitude, true).blockingGet()
+                    } else {
+                        XL.d(Companion.TAG, "unreset")
+                        shared.findRandom(latitude, longitude).blockingGet()
                     }
                 }
             }

@@ -34,7 +34,7 @@ class MatchData(
             val imageMap = hashMapOf<String, Image>()
             val recommendSourceMap = hashMapOf<String, String>()
 
-            (0..20).forEach {
+            (0..10).forEach {
                 val user = User.fake(true, false)
                 userList.add(user)
                 imageMap.put(user.avatarImageId, Image.fake())
@@ -42,9 +42,9 @@ class MatchData(
             }
 
             return MatchData(
-                quotaDurationSeconds = listOf(15, 30, 45, 60).random(),
+                quotaDurationSeconds = listOf(30, 45, 60).random(),
                 quotaResetSeconds = listOf(5, 10, 15).random(),
-                quotaReset = (0..3).random(),
+                quotaReset = (1..3).random(),
                 list = userList,
                 imageMap = imageMap,
                 recommendSourceMap = recommendSourceMap
