@@ -545,7 +545,7 @@ public class ProfileHeaderHolder {
                     if (apiResponse.getData().getList() != null && apiResponse.getData().getList().size() != 0) {
                         InboxSession inboxSession = apiResponse.getData().getList().get(0);
                         Bundle inboxSessionBundle = new Bundle();
-                        inboxSessionBundle.putString("sessionId", inboxSession.id);
+                        inboxSessionBundle.putString("sessionId", inboxSession.getId());
                         if (contextUtil.getForegroundAct() != null) {
                             ((BaseFragAct) contextUtil.getForegroundAct()).startActivity(GlobalConstants.IntentAction.INTENT_URI_DIALOGUE, inboxSessionBundle);
                         }
@@ -571,7 +571,7 @@ public class ProfileHeaderHolder {
                                             if (arg0.getData().getList() != null && arg0.getData().getList().size() != 0) {
                                                 InboxSession inboxSession = arg0.getData().getList().get(0);
                                                 Bundle inboxSessionBundle = new Bundle();
-                                                inboxSessionBundle.putString("sessionId", inboxSession.id);
+                                                inboxSessionBundle.putString("sessionId", inboxSession.getId());
                                                 if (contextUtil.getForegroundAct() != null) {
                                                     ((BaseFragAct) contextUtil.getForegroundAct()).startActivity(GlobalConstants.IntentAction.INTENT_URI_DIALOGUE, inboxSessionBundle);
                                                 }

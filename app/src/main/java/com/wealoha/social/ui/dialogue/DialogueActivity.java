@@ -398,21 +398,20 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
             ToastUtil.shortToast(this, R.string.cant_find_image);
             return;
         }
-        ImageMessage message = new ImageMessage();
-        message.image = Image.Companion.fake();
-        message.image.setUrl(ImageUtil.saveToLocal(bitmap3, FileTools.getFileImgNameHasDir(mContextUtil.getCurrentUser())));
-        if (TextUtils.isEmpty(message.image.getUrl())) {
+        ImageMessage message = ImageMessage.Companion.fake(userid, true);
+        message.setImage(Image.Companion.fake());
+        message.getImage().setUrl(ImageUtil.saveToLocal(bitmap3, FileTools.getFileImgNameHasDir(mContextUtil.getCurrentUser())));
+        if (TextUtils.isEmpty(message.getImage().getUrl())) {
             ToastUtil.shortToast(DialogueActivity.this, R.string.upload_failure_please_retry);
             return;
         }
 
-        message.image.setWidth(mWidth);
-        message.image.setHeight(mHeight);
-        message.mine = true;
-        message.isLocal = true;
-        message.smsStatus = 0;
+        message.getImage().setWidth(mWidth);
+        message.getImage().setHeight(mHeight);
+        message.setLocal(true);
+        message.setSmsStatus(0);
         if (mAdapter != null) {
-            mAdapter.addSendImg(message, new File(message.image.getUrl()));
+            mAdapter.addSendImg(message, new File(message.getImage().getUrl()));
         }
     }
 
@@ -429,10 +428,10 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
             return;
         }
 
-        TextMessage textMessage = new TextMessage();
-        textMessage.smsStatus = 0;
-        textMessage.isLocal = true;
-        textMessage.text = contString;
+        TextMessage textMessage = TextMessage.Companion.fake(userid, true);
+        textMessage.setSmsStatus(0);
+        textMessage.setLocal(true);
+        textMessage.setText(contString);
         // mMessage = textMessage;
         mAdapter.addSendText(textMessage);
     }

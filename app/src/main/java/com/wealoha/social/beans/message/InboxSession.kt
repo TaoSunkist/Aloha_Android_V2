@@ -1,12 +1,24 @@
 package com.wealoha.social.beans.message
 
+import android.os.Parcelable
+import com.mooveit.library.Fakeit
 import com.wealoha.social.beans.User
+import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
+import java.lang.IllegalArgumentException
 
 /**
  * Created by walker on 14-4-14.
  */
-class InboxSession : Serializable {
+@Parcelize
+data class InboxSession(
+    var id: String,
+    var user: User,
+    val type: String,
+    var updateTimeMillis: Long = 0,
+    var unread: Int = 0,
+    var showMatchHint: Boolean = false
+) : Serializable, Parcelable {
     override fun hashCode(): Int {
         val prime = 31
         var result = 1
@@ -25,23 +37,36 @@ class InboxSession : Serializable {
         return true
     }
 
-    @kotlin.jvm.JvmField
-    var id: String? = null
-    var type: String? = null
-    @kotlin.jvm.JvmField
-    var user: User? = null
-    @kotlin.jvm.JvmField
-    var updateTimeMillis: Long = 0
-    @kotlin.jvm.JvmField
-    var unread = 0
-    @kotlin.jvm.JvmField
-    var showMatchHint = false
-
     companion object {
         /**
          *
          */
         private const val serialVersionUID = 3234191364565823058L
         val TAG = InboxSession::class.java.simpleName
+
+        fun fake(): InboxSession {
+            return InboxSession(
+                id = System.currentTimeMillis().toString(),
+                user = User.fake(me = false, isAuthentication = true),
+                updateTimeMillis = System.currentTimeMillis(),
+                unread = (0..1000).random(),
+                type = when ((0..1).random()) {
+                    0 -> {
+                        TextMessage.TYPE
+                    }
+                    1 -> {
+                        ImageMessage.TYPE
+                    }
+                    else -> throw IllegalArgumentException("")
+                },
+                showMatchHint = (0..1).random() == 1
+            )
+        }
+
+        fun fakeForList(): List<InboxSession> {
+            return (0..10).map {
+                fake()
+            }.toList()
+        }
     }
 }

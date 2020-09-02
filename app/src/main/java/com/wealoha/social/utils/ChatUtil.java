@@ -54,7 +54,7 @@ public class ChatUtil {
 		long t = System.currentTimeMillis();
 		try {
 			if (message instanceof TextMessage) {
-				String text = ((TextMessage) message).text;
+				String text = ((TextMessage) message).getText();
 				if (text != null && !"".equals(text)) {
 					return text;
 				}
@@ -88,8 +88,8 @@ public class ChatUtil {
 					for (InboxSession inboxS : apiResponse.getData().getList()) {
 						if (inboxS != null) {
 							inboxSession = inboxS;
-							inboxSessionBundle.putString("sessionId", inboxSession.id);
-							inboxSessionBundle.putParcelable("toUser", inboxSession.user);
+							inboxSessionBundle.putString("sessionId", inboxSession.getId());
+							inboxSessionBundle.putParcelable("toUser", inboxSession.getUser());
 							contextUtil.getMainAct().startActivity(GlobalConstants.IntentAction.INTENT_URI_DIALOGUE, inboxSessionBundle);
 							break;
 						}
@@ -125,8 +125,8 @@ public class ChatUtil {
 					for (InboxSession inboxS : apiResponse.getData().getList()) {
 						if (inboxS != null) {
 							inboxSession = inboxS;
-							inboxSessionBundle.putString("sessionId", inboxSession.id);
-							inboxSessionBundle.putParcelable("toUser", inboxSession.user);
+							inboxSessionBundle.putString("sessionId", inboxSession.getId());
+							inboxSessionBundle.putParcelable("toUser", inboxSession.getUser());
 							if (contextUtil.getForegroundAct() != null) {
 								((BaseFragAct) contextUtil.getForegroundAct()).startActivity(GlobalConstants.IntentAction.INTENT_URI_DIALOGUE, inboxSessionBundle);
 							}

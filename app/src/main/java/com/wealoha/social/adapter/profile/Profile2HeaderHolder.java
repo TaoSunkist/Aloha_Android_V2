@@ -723,7 +723,7 @@ public class Profile2HeaderHolder implements OnTouchListener {
                     if (apiResponse.getData().getList() != null && apiResponse.getData().getList().size() != 0) {
                         InboxSession inboxSession = apiResponse.getData().getList().get(0);
                         Bundle inboxSessionBundle = new Bundle();
-                        inboxSessionBundle.putString("sessionId", inboxSession.id);
+                        inboxSessionBundle.putString("sessionId", inboxSession.getId());
                         ((BaseFragAct) mFrag.getActivity()).startActivity(GlobalConstants.IntentAction.INTENT_URI_DIALOGUE, inboxSessionBundle);
                     } else {
                         mMessageService.post(id, new Callback<ApiResponse<InboxSessionResult>>() {
@@ -747,7 +747,7 @@ public class Profile2HeaderHolder implements OnTouchListener {
                                             if (arg0.getData().getList() != null && arg0.getData().getList().size() != 0) {
                                                 InboxSession inboxSession = arg0.getData().getList().get(0);
                                                 Bundle inboxSessionBundle = new Bundle();
-                                                inboxSessionBundle.putString("sessionId", inboxSession.id);
+                                                inboxSessionBundle.putString("sessionId", inboxSession.getId());
                                                 ((BaseFragAct) mFrag.getActivity()).startActivity(GlobalConstants.IntentAction.INTENT_URI_DIALOGUE, inboxSessionBundle);
                                             }
                                         }

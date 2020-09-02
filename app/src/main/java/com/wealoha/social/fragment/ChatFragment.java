@@ -49,6 +49,7 @@ import com.wealoha.social.AsyncLoader;
 import com.wealoha.social.R;
 import com.wealoha.social.activity.MainAct;
 import com.wealoha.social.adapter.ChatListAdapter;
+import com.wealoha.social.api.AlohaService;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.ApiResponse;
 import com.wealoha.social.beans.ResultData;
@@ -83,7 +84,10 @@ import com.wealoha.social.view.custom.dialog.ListItemDialog.ListItemType;
  * @see
  * @since
  */
-public class ChatFragment extends BaseFragment implements ListItemCallback, OnItemClickListener, LoaderManager.LoaderCallbacks<ApiResponse<InboxSessionResult>>, SmsNoticeCallBack {
+public class ChatFragment extends BaseFragment implements ListItemCallback,
+        OnItemClickListener,
+        LoaderManager.LoaderCallbacks<ApiResponse<InboxSessionResult>>,
+        SmsNoticeCallBack {
 
     public static final String TAG = ChatFragment.class.getSimpleName();
     public static final int DELETE_SESSION_SUCCESS = 100;
@@ -156,8 +160,8 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
                     }.getType());
                     if (apiResponse != null && apiResponse.isOk()) {
                         mHandler.sendEmptyMessage(DELETE_SESSION_SUCCESS);
-                        InboxSession s = new InboxSession();
-                        s.id = sessionId;
+                        InboxSession s = InboxSession.Companion.fake();
+                        s.setId(sessionId);
                         int index = inboxSessions.indexOf(s);
                         if (index != -1) {
                             inboxSessions.remove(index);
@@ -181,7 +185,7 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
         int sum = 0;
         if (inboxSessions != null && inboxSessions.size() > 0) {
             for (InboxSession s : inboxSessions) {
-                sum += s.unread;
+                sum += s.getUnread();
             }
         }
         return sum;
@@ -227,12 +231,12 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 InboxSession inboxSession = (InboxSession) parent.getItemAtPosition(position);
                 if (inboxSession != null) {
-                    sessionIdTemp = inboxSession.id;
-                    new ListItemDialog(getActivity(), (ViewGroup) view).showListItemPopup(ChatFragment.this, inboxSession.user.getName(), ListItemType.DELETE);
+                    sessionIdTemp = inboxSession.getId();
+                    new ListItemDialog(getActivity(), (ViewGroup) view).showListItemPopup(ChatFragment.this, inboxSession.getUser().getName(), ListItemType.DELETE);
                     // new ReportBlackAlohaPopup().showPopup(PopupType.DELETE,
                     // PostType.SESSION,
-                    // inboxSession.id, inboxSession.User.getName(),
-                    // inboxSession.user);
+                    // inboxSession.getId(), inboxSession.getUser().getName(),
+                    // inboxSession.getUser());
                 } else {
                     ToastUtil.shortToast(getActivity(), R.string.is_not_work);
                 }
@@ -301,13 +305,13 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
         // 获取当前的inboxSession
         final InboxSession inboxSession = (InboxSession) parent.getAdapter().getItem(position);
         // 清空通知栏中push过来的sessionID通知
-        NoticeBarController.getInstance(mMainAct).removeSession(inboxSession.user.getId());
+        NoticeBarController.getInstance(mMainAct).removeSession(inboxSession.getUser().getId());
         // 通过bundle传递到对话界面
         Bundle bundle = new Bundle();
-        bundle.putString("sessionId", inboxSession.id);
-        bundle.putBoolean("showMatchHint", inboxSession.showMatchHint);
-        bundle.putParcelable("toUser", inboxSession.user);
-        int count = getUnreadCount() - inboxSession.unread;
+        bundle.putString("sessionId", inboxSession.getId());
+        bundle.putBoolean("showMatchHint", inboxSession.getShowMatchHint());
+        bundle.putParcelable("toUser", inboxSession.getUser());
+        int count = getUnreadCount() - inboxSession.getUnread();
         bundle.putInt("unreadCount", count); // 除了当前会话，还有多少未读
         // 先清除本地的未读会话
         startActivityHasAnim(mMainAct, GlobalConstants.IntentAction.INTENT_URI_DIALOGUE, bundle, R.anim.left_in, R.anim.stop);
@@ -324,7 +328,7 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
                     public ApiResponse<InboxSessionResult> loadInBackground() {
                         try {
                             nextPageLoading = true;
-                            return messageService.sessions(mNextCursorId, 10);
+                            return AlohaService.Companion.getShared().sessions(mNextCursorId, 10).blockingGet();
                         } catch (Exception e) {
                             // FIXME 提示错误
                             // XL.d(TAG, "加载inbox session失败", e);
@@ -517,8 +521,8 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
                 }.getType());
                 if (apiResponse != null && apiResponse.isOk()) {
                     mHandler.sendEmptyMessage(DELETE_SESSION_SUCCESS);
-                    InboxSession s = new InboxSession();
-                    s.id = sessionId;
+                    InboxSession s = InboxSession.Companion.fake();
+                    s.setId(sessionId);
                     int index = inboxSessions.indexOf(s);
                     if (index != -1) {
                         inboxSessions.remove(index);
@@ -550,7 +554,7 @@ public class ChatFragment extends BaseFragment implements ListItemCallback, OnIt
                             Iterator<InboxSession> it = inboxSessions.iterator();
                             while (it.hasNext()) {
                                 InboxSession s = it.next();
-                                if (s.id.equals(session.id)) {
+                                if (s.getId().equals(session.getId())) {
                                     it.remove();
                                     break;
                                 }

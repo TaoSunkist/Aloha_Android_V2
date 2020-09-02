@@ -257,7 +257,7 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
     @Override
     public int getItemViewType(int position) {
         Message message = mMessageList.get(position);
-        if (message.mine) {
+        if (message.getMine()) {
             return IMsgViewType.IMVT_TO_MSG;
         } else {
             return IMsgViewType.IMVT_COM_MSG;
@@ -272,7 +272,7 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = null;
         Message message = mMessageList.get(position);
-        boolean isComMsg = message.mine;
+        boolean isComMsg = message.getMine();
         if (convertView == null) {
             viewHolder = new ViewHolder();
             if (isComMsg) {
@@ -293,17 +293,17 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
         if (message instanceof TextMessage) {
             viewHolder.iv_chatcontent_fl.setVisibility(View.GONE);
             viewHolder.tv_chatcontent_fl.setVisibility(View.VISIBLE);
-            dealTvLink(viewHolder.tv_chatcontent, ((TextMessage) message).text);
+            dealTvLink(viewHolder.tv_chatcontent, ((TextMessage) message).getText());
             if (isComMsg) {
-                viewHolder.resend_iv.setTag(message.state);
-                if (message.sending) {
+                viewHolder.resend_iv.setTag(message.getState());
+                if (message.getSending()) {
                     viewHolder.right_pb_tv.setVisibility(View.VISIBLE);
                     viewHolder.right_pb.setVisibility(View.GONE);
                 } else {
                     viewHolder.right_pb_tv.setVisibility(View.GONE);
                     viewHolder.right_pb.setVisibility(View.GONE);
                 }
-                if (message.sendFail) {
+                if (message.getSendFail()) {
                     viewHolder.resend_tv.setVisibility(View.VISIBLE);
                     viewHolder.resend_iv.setVisibility(View.GONE);
                 } else {
@@ -313,15 +313,15 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
             }
         } else if (message instanceof ImageMessage) {
             if (isComMsg) {// 如果是自己的
-                viewHolder.resend_iv.setTag(message.state);
-                if (message.sending) {
+                viewHolder.resend_iv.setTag(message.getState());
+                if (message.getSending()) {
                     viewHolder.right_pb.setVisibility(View.VISIBLE);
                     viewHolder.right_pb_tv.setVisibility(View.GONE);
                 } else {
                     viewHolder.right_pb.setVisibility(View.GONE);
                     viewHolder.right_pb_tv.setVisibility(View.GONE);
                 }
-                if (message.sendFail) {// 失败
+                if (message.getSendFail()) {// 失败
                     viewHolder.resend_iv.setVisibility(View.VISIBLE);
                     viewHolder.resend_tv.setVisibility(View.GONE);
                 } else {
@@ -334,25 +334,25 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
             final ImageMessage imageMessage = (ImageMessage) message;
             viewHolder.iv_chatcontent_box.setOnClickListener(this);
             viewHolder.iv_chatcontent_box.setTag(message);
-            if (imageMessage.isLocal && !(TextUtils.isEmpty(imageMessage.image.getUrl()))) {// 如果是本地的图片
-                Dimension size = ImageUtil.getImageSize(imageMessage.image.getUrl());
+            if (imageMessage.isLocal() && !(TextUtils.isEmpty(imageMessage.getImage().getUrl()))) {// 如果是本地的图片
+                Dimension size = ImageUtil.getImageSize(imageMessage.getImage().getUrl());
                 RelativeLayout.LayoutParams fLayoutParams = getImageLayoutSize(size.width, size.height);
                 viewHolder.iv_chatcontent_box.setLayoutParams(fLayoutParams);
                 viewHolder.iv_chatcontent.setLayoutParams(fLayoutParams);
-                File file = new File(imageMessage.image.getUrl());
+                File file = new File(imageMessage.getImage().getUrl());
                 Picasso.get().load(file).transform(chatImageTransformation).into(viewHolder.iv_chatcontent);
             } else {
-                RelativeLayout.LayoutParams fLayoutParams = getImageLayoutSize(imageMessage.image.getWidth(), imageMessage.image.getHeight()); // new
+                RelativeLayout.LayoutParams fLayoutParams = getImageLayoutSize(imageMessage.getImage().getWidth(), imageMessage.getImage().getHeight()); // new
                 viewHolder.iv_chatcontent_box.setLayoutParams(fLayoutParams);
                 viewHolder.iv_chatcontent.setLayoutParams(fLayoutParams);
-                String imageUrl = ImageUtil.getImageUrl(imageMessage.image.getId(), ImageSize.CHAT_THUMB, null);
+                String imageUrl = ImageUtil.getImageUrl(imageMessage.getImage().getId(), ImageSize.CHAT_THUMB, null);
                 Picasso.get().load(imageUrl).transform(chatImageTransformation).into(viewHolder.iv_chatcontent);
             }
 
         }
-        if (message.showTimestamp) { // 控制时间戳的现显示
+        if (message.getShowTimestamp()) { // 控制时间戳的现显示
             viewHolder.tvSendTime.setVisibility(View.VISIBLE);
-            viewHolder.tvSendTime.setText(TimeUtil.getStrdateyearmonthday(message.createTimeMillis));
+            viewHolder.tvSendTime.setText(TimeUtil.getStrdateyearmonthday(message.getCreateTimeMillis()));
         } else {
             viewHolder.tvSendTime.setVisibility(View.GONE);
         }
@@ -429,10 +429,10 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
      * @date:2014-11-17
      */
     public void uploadSms(Message message, File file, final ViewHolder viewHolder) {
-        final String state = message.state;
+        final String state = message.getState();
         if (message instanceof TextMessage) {
             try {
-                mMessageService.sendMsgText(((TextMessage) message).text, toUser.getId(), state, new SmsSendDealCallBack(viewHolder, state));
+                mMessageService.sendMsgText(((TextMessage) message).getText(), toUser.getId(), state, new SmsSendDealCallBack(viewHolder, state));
             } catch (Exception e) {
                 // TODO 國際化
                 // ToastUtil.shortToast(mContext, "消息發送失敗");
@@ -458,11 +458,11 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
             for (int i = mMessageList.size() - 1; i >= 0; i--) {
                 Message m = mMessageList.get(i);
                 if (previousMessage != null) {
-                    if (Math.abs(previousMessage.createTimeMillis - m.createTimeMillis) < 90 * 1000) {
+                    if (Math.abs(previousMessage.getCreateTimeMillis() - m.getCreateTimeMillis()) < 90 * 1000) {
                         // 不打时间戳
-                        previousMessage.showTimestamp = false;
+                        previousMessage.setShowTimestamp(false);
                     } else {
-                        previousMessage.showTimestamp = true;
+                        previousMessage.setShowTimestamp(true);
                     }
                 }
                 previousMessage = m;
@@ -470,7 +470,7 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
 
             if (previousMessage != null) {
                 // 最早的一条永远显示
-                previousMessage.showTimestamp = true;
+                previousMessage.setShowTimestamp(true);
             }
         }
     }
@@ -496,8 +496,8 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
             // 本地消息
             Map<String, Message> localMessageMap = new HashMap<String, Message>();
             for (Message m : mMessageList) {
-                if (m.mine && m.isLocal) {
-                    localMessageMap.put(m.state, m);
+                if (m.getMine() && m.getSending()) {
+                    localMessageMap.put(m.getState(), m);
                 }
             }
 
@@ -506,20 +506,20 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
                 // 合并
                 Set<String> removeMessages = new HashSet<String>();
                 for (Message m : messageList) {
-                    if (!m.mine) {
+                    if (!m.getMine()) {
                         continue;
                     }
 
-                    Message mLocal = localMessageMap.get(m.state);
+                    Message mLocal = localMessageMap.get(m.getState());
                     if (mLocal != null) {
                         // XL.d(TAG, "找到本地消息: " + mLocal);
                     }
                     if (mLocal != null //
-                            && mLocal.state.equals(m.state) //
+                            && mLocal.getState().equals(m.getState()) //
                             && mLocal.getClass().equals(m.getClass())) {
                         // 不判断时间了，有可能很久才点重发
-                        // XL.d(TAG, "取回Server发送成功的，丢弃本地的: " + m.state);
-                        removeMessages.add(m.state);
+                        // XL.d(TAG, "取回Server发送成功的，丢弃本地的: " + m.getState());
+                        removeMessages.add(m.getState());
                     }
                 }
 
@@ -528,7 +528,7 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
                     Iterator<Message> it = mMessageList.iterator();
                     while (it.hasNext()) {
                         Message m = it.next();
-                        if (m.mine && m.isLocal && removeMessages.contains(m.state)) {
+                        if (m.getMine() && m.getSending() && removeMessages.contains(m.getState())) {
                             it.remove();
                         }
                     }
@@ -562,7 +562,7 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
             if (firstPage) {
                 List<Message> localMessage = new ArrayList<Message>();
                 for (Message m : mMessageList) {
-                    if (m.isLocal) {
+                    if (m.getSending()) {
                         localMessage.add(m);
                     }
                 }
@@ -599,7 +599,7 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
             // 倒序排，缓存最新的数据
             for (int i = mMessageList.size() - 1; i >= 0; i--) {
                 Message m = mMessageList.get(i);
-                if (m.mine && (m.sending || m.sendFail || m.isLocal)) {
+                if (m.getMine() && (m.getSending() || m.getSendFail() || m.getSending())) {
                     localMessage.add(m);
                 } else if (firstPageMessage.size() < CACHE_SIZE) {
                     firstPageMessage.add(m);
@@ -640,12 +640,12 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
     }
 
     private void sendingMessage(Message message, File file) {
-        message.mine = true;
-        message.isLocal = true;
-        message.sendFail = false;
-        message.sending = true;
-        message.createTimeMillis = System.currentTimeMillis();
-        message.state = Integer.toHexString(mStateCounter.getAndIncrement());
+        message.setMine(true);
+        message.setLocal(true);
+        message.setSendFail(false);
+        message.setSending(true);
+        message.setCreateTimeMillis(System.currentTimeMillis());
+        message.setState(Integer.toHexString(mStateCounter.getAndIncrement()));
 
         // 放到最尾
         synchronized (mMessageList) {
@@ -667,14 +667,14 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
         synchronized (mMessageList) {
             for (int i = mMessageList.size() - 1; i >= 0; i--) {
                 Message m = mMessageList.get(i);
-                if (m.mine && message.state.equals(m.state)) {
+                if (m.getMine() && message.getState().equals(m.getState())) {
                     if (message instanceof ImageMessage) {
                         // 图片需要暂时保持不变，避免抖动
-                        m.sendFail = false;
-                        m.sending = false;
-                        m.isLocal = true;
-                        m.id = message.id;
-                        m.createTimeMillis = message.createTimeMillis;
+                        m.setSendFail(false);
+                        m.setSending(false);
+                        m.setLocal(true);
+                        m.setId(message.getId());
+                        m.setCreateTimeMillis(message.getCreateTimeMillis());
                     } else {
                         mMessageList.set(i, message);
                     }
@@ -695,10 +695,10 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
     private void sendingMessageFail(final String state) {
         for (int i = mMessageList.size() - 1; i >= 0; i--) {
             Message m = mMessageList.get(i);
-            if (m.mine && state.equals(m.state)) {
+            if (m.getMine() && state.equals(m.getState())) {
                 // XL.d(TAG, "标记发送失败的消息: " + state);
-                m.sendFail = true;
-                m.sending = false;
+                m.setSendFail(true);
+                m.setSending(false);
                 this.notifyDataSetChanged();
                 // 失败时缓存下
                 cacheSave();
@@ -709,11 +709,11 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
 
     private void resendFailMessage(String state) {
         for (Message m : mMessageList) {
-            if (m.isLocal && !m.sending && m.sendFail && state.equals(m.state)) {
-                m.sendFail = false;
-                m.sending = true;
+            if (m.getSending() && !m.getSending() && m.getSendFail() && state.equals(m.getState())) {
+                m.setSendFail(false);
+                m.setSending(true);
                 // 发送
-                File file = m instanceof ImageMessage ? new File(((ImageMessage) m).image.getUrl()) : null;
+                File file = m instanceof ImageMessage ? new File(((ImageMessage) m).getImage().getUrl()) : null;
                 uploadSms(m, file, null);
                 this.notifyDataSetChanged();
                 break;
@@ -912,11 +912,11 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
         popUpWindow.setTouchable(true);
         popUpWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         popUpWindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
-        if (imageMessage.isLocal) {
-            Picasso.get().load(new File(imageMessage.image.getUrl())).into(avactor);
+        if (imageMessage.isLocal()) {
+            Picasso.get().load(new File(imageMessage.getImage().getUrl())).into(avactor);
         } else {
             // 屏幕寬度
-            String url = ImageUtil.getImageUrl(imageMessage.image.getId(), UiUtils.getScreenWidth(mContext), null);
+            String url = ImageUtil.getImageUrl(imageMessage.getImage().getId(), UiUtils.getScreenWidth(mContext), null);
             Picasso.get().load(url).into(avactor);
         }
         ll.setOnClickListener(new OnClickListener() {
@@ -947,9 +947,9 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
             uploadSms(cViewHolder.mMessage, null, cViewHolder);
         } else {
             ImageMessage message = (ImageMessage) cViewHolder.mMessage;
-            if (message.isLocal) {
+            if (message.isLocal()) {
                 try {
-                    File file = new File(message.image.getUrl());
+                    File file = new File(message.getImage().getUrl());
                     uploadSms(cViewHolder.mMessage, file, cViewHolder);
                 } catch (Throwable e) {
                 }
@@ -1037,8 +1037,7 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
 
     /**
      * @param viewHolder
-     * @param position
-     *  isTextMsg
+     * @param position   isTextMsg
      * @Description:删除单条的文本信息
      * @see:
      * @since:
@@ -1047,13 +1046,13 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
      * @date:2015-1-5
      */
     private void delSingleSms(final ViewHolder viewHolder, final int position) {
-        if (viewHolder.getMessage().isLocal) {// 如果Message是本地的.
+        if (viewHolder.getMessage().getSending()) {// 如果Message是本地的.
             mMessageList.remove(mMessageList.indexOf(viewHolder.getMessage()));
             cacheSave();
             cacheRestore();
             return;
         } else {
-            mMessageService.delSingleSms(mSessionId, viewHolder.getMessage().id, new Callback<ApiResponse<ResultData>>() {
+            mMessageService.delSingleSms(mSessionId, viewHolder.getMessage().getId(), new Callback<ApiResponse<ResultData>>() {
 
                 @Override
                 public void failure(RetrofitError arg0) {
@@ -1085,7 +1084,7 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnClickListener {
     private void isTextCopy(ViewHolder viewHolder) {
         try {
             TextMessage textMessage = (TextMessage) viewHolder.getMessage();
-            String text = textMessage.text;
+            String text = textMessage.getText();
             ClipboardManager cmb = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
             ToastUtil.shortToast(mContext, R.string.is_work);
             cmb.setPrimaryClip(ClipData.newPlainText(null, text));
