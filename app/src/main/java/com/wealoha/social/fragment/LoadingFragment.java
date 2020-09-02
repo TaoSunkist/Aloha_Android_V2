@@ -62,6 +62,7 @@ import com.wealoha.social.activity.ProFeatureAct;
 import com.wealoha.social.api.AlohaService;
 import com.wealoha.social.api.ServerApi;
 import com.wealoha.social.beans.ApiResponse;
+import com.wealoha.social.beans.IResultDataErrorCode;
 import com.wealoha.social.beans.ResultData;
 import com.wealoha.social.beans.User;
 import com.wealoha.social.beans.MatchData;
@@ -318,7 +319,7 @@ public class LoadingFragment extends BaseFragment implements LoaderCallbacks<com
 
         this.hasQuoraReset = matchData == null ? false : matchData.getQuotaReset() > 0;
 
-        if (matchData.getError() == ResultData.ERROR_MATCH_NO_MORE_TODAY) {
+        if (matchData.getError() == IResultDataErrorCode.ERROR_MATCH_NO_MORE_TODAY) {
             // 有倒计时和加速
             sendTimingNotice(matchData);
             mCountdown.setVisibility(View.VISIBLE);
