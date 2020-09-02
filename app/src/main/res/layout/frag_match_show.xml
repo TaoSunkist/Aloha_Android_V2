@@ -2,18 +2,18 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#ffffff"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <FrameLayout
             android:id="@+id/viewImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/myotee2" >
+            android:src="@drawable/myotee2">
 
             <ImageView
                 android:id="@+id/ms_head_photo_iv"
@@ -21,8 +21,8 @@
                 android:layout_height="wrap_content"
                 android:background="#00000000"
                 android:clickable="true"
-                android:scaleType="fitXY"
-                android:contentDescription="@null" />
+                android:contentDescription="@null"
+                android:scaleType="centerCrop" />
 
             <ProgressBar
                 android:id="@+id/img_pb"
@@ -36,8 +36,8 @@
                 android:layout_height="60dp"
                 android:layout_gravity="bottom"
                 android:background="@drawable/match_photo_bottom_gradients"
-                android:scaleType="fitXY"
-                android:contentDescription="@null" />
+                android:contentDescription="@null"
+                android:scaleType="fitXY" />
 
             <TextView
                 android:id="@+id/ms_des_tv"
@@ -60,11 +60,11 @@
                 android:layout_margin="10dp"
                 android:clickable="true"
                 android:gravity="center|bottom"
-                android:visibility="gone"
                 android:padding="2dp"
                 android:text="@string/aloha_time_photo_count"
                 android:textColor="#7dffffff"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:visibility="gone" />
         </FrameLayout>
 
         <View
@@ -76,7 +76,7 @@
             android:id="@+id/viewAloha"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/nope_btn_container"
@@ -86,14 +86,14 @@
                 android:clickable="true"
                 android:gravity="center"
                 android:longClickable="true"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
+                    android:contentDescription="@null"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/aloha_nope"
-                    android:contentDescription="@null" />
+                    android:src="@drawable/aloha_nope" />
 
                 <Button
                     android:id="@+id/nope_btn"
@@ -105,6 +105,7 @@
                     android:textColor="@color/black_text"
                     android:textSize="20sp" />
             </LinearLayout>
+
             <View
                 android:layout_width="1px"
                 android:layout_height="match_parent"
@@ -116,14 +117,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
+                    android:contentDescription="@null"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/aloha_heart"
-                    android:contentDescription="@null" />
+                    android:src="@drawable/aloha_heart" />
 
                 <Button
                     android:id="@+id/aloha_btn"
@@ -146,32 +147,32 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#eeeeee"
-            android:scrollbars="none" >
+            android:scrollbars="none">
 
             <LinearLayout
                 android:id="@+id/details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="20dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:paddingBottom="20dp" >
+                android:orientation="vertical"
+                android:paddingBottom="20dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    android:minHeight="20dp" >
+                    android:minHeight="20dp">
 
                     <TextView
                         android:id="@+id/textUserName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
-                        android:layout_marginRight="10dp"
+                        android:layout_alignParentLeft="true"
                         android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
                         android:ellipsize="end"
                         android:maxLength="10"
                         android:textColor="@color/black_text"
@@ -181,8 +182,8 @@
                         android:id="@+id/ms_report_iv_container"
                         android:layout_width="40dp"
                         android:layout_height="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true" >
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true">
 
                         <ImageView
                             android:id="@+id/ms_report_iv"
@@ -190,9 +191,9 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentTop="true"
                             android:layout_centerInParent="true"
+                            android:contentDescription="@null"
                             android:scaleType="center"
-                            android:src="@drawable/profile_report"
-                            android:contentDescription="@null" />
+                            android:src="@drawable/profile_report" />
                     </RelativeLayout>
                 </RelativeLayout>
 
@@ -237,7 +238,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF"
-        android:visibility="gone" >
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/img_view"

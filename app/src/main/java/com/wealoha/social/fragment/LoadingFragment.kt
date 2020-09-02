@@ -195,14 +195,7 @@ class LoadingFragment : BaseFragment(),
     private fun loadUserPhoto() {
         if (currentContextUtil?.getCurrentUser() != null) {
             Picasso.get().load(
-                ImageUtil.getImageUrl(
-                    currentContextUtil?.getCurrentUser()?.avatarImage?.id,
-                    UiUtils.dip2px(
-                        activity,
-                        GlobalConstants.ImageSize.AVATAR_ROUND_SMALL.toFloat()
-                    ),
-                    CropMode.ScaleCenterCrop
-                )
+                currentContextUtil?.getCurrentUser()?.avatarImage?.url
             ).placeholder(R.drawable.default_photo)
                 .into(userPhoto)
         }

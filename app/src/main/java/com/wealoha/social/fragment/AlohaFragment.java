@@ -475,7 +475,7 @@ public class AlohaFragment extends BaseFragment implements LoaderManager.LoaderC
         }
 
         int imageWidth = Math.min(ImageSize.FEED_MAX, mWidth);
-        String imageUrl = ImageUtil.getImageUrl(user.getAvatarImage().getId(), imageWidth, CropMode.ScaleCenterCrop);
+        String imageUrl = user.getAvatarImage().getUrl();// ImageUtil.getImageUrl(user.getAvatarImage().getId(), imageWidth, CropMode.ScaleCenterCrop);
         Picasso.get().load(imageUrl).into(mHeadPhoto);
 
         if (AppApplication.mUserList.size() > 1 && AppApplication.mUserList.get(1) != null) {
