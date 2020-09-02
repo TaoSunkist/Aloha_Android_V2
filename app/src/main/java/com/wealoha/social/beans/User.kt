@@ -61,7 +61,7 @@ data class User(
         val TAG = User::class.java.simpleName
 
         fun fake(me: Boolean = false, isAuthentication: Boolean = true): User {
-            val avatarImage = Image.fake();
+            val avatarImage = Image.fake()
             return User(
                 id = System.currentTimeMillis().toString(),
                 type = System.currentTimeMillis().toString(),

@@ -1,6 +1,7 @@
 package com.wealoha.social.fragment
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
@@ -132,7 +133,7 @@ class LoadingFragment : BaseFragment(),
     private var endOfScheduleRunble: Runnable? = null
     private var endOfScheduleHandler: Handler? = null
     private var aMapUtil: AMapUtil? = null
-    private var appApplication: AppApplication? = null
+    private lateinit var appApplication: AppApplication
     private var mMyCounter: MyCounter? = null
     private var mCountDownTimer: Timer? = null
     private lateinit var rxPermissions: RxPermissions
@@ -319,6 +320,8 @@ class LoadingFragment : BaseFragment(),
     }
 
     private var moveX = 0f
+
+    @SuppressLint("ClickableViewAccessibility")
     private fun returnLastUser() {
         val bundle = arguments
         if (bundle != null) {
@@ -449,15 +452,15 @@ class LoadingFragment : BaseFragment(),
             aMapUtil!!.getLocation(activity, object : LocationCallback {
                 override fun locaSuccess() {
                     resetQuotaLoadResquest(
-                        appApplication!!.locationXY[0],
-                        appApplication!!.locationXY[1]
+                        appApplication.locationXY[0],
+                        appApplication.locationXY[1]
                     )
                 }
 
                 override fun locaError() {
                     resetQuotaLoadResquest(
-                        appApplication!!.locationXY[0],
-                        appApplication!!.locationXY[0]
+                        appApplication.locationXY[0],
+                        appApplication.locationXY[0]
                     )
                 }
             })
@@ -519,7 +522,6 @@ class LoadingFragment : BaseFragment(),
             val bundle = Bundle()
             bundle.putBoolean("reset", true)
             val baseFragAct = ActivityManager.current()
-            // FIXME no attach activity
             if (isDetached) return@Runnable
             val restartLoader = loaderManager
             if (isAdded && restartLoader != null && !(baseFragAct as MainAct).isDestory) {
@@ -528,17 +530,13 @@ class LoadingFragment : BaseFragment(),
                     aMapUtil!!.getLocation(activity, object : LocationCallback {
                         override fun locaSuccess() {
                             restartLoader.restartLoader(
-                                LOADER_LOAD_MATCH,
-                                bundle,
-                                this@LoadingFragment
+                                LOADER_LOAD_MATCH, bundle, this@LoadingFragment
                             )
                         }
 
                         override fun locaError() {
                             restartLoader.restartLoader(
-                                LOADER_LOAD_MATCH,
-                                bundle,
-                                this@LoadingFragment
+                                LOADER_LOAD_MATCH, bundle, this@LoadingFragment
                             )
                         }
                     })
@@ -580,23 +578,21 @@ class LoadingFragment : BaseFragment(),
     }
 
     override fun onCreateLoader(loaderId: Int, bundle: Bundle?): Loader<ApiResponse<MatchData>> {
-        if (!fragmentVisible || loaderId == LOADER_LOAD_MATCH) {
+        if (!fragmentVisible || loaderId != LOADER_LOAD_MATCH) {
             return Loader(context)
         }
-        val latitude: Double =
-            if (appApplication != null) appApplication!!.locationXY[0] else 0.toDouble()
-        val longitude: Double =
-            if (appApplication != null) appApplication!!.locationXY[1] else 0.toDouble()
+        val latitude: Double = appApplication.locationXY[0] ?: 0.0
+        val longitude: Double = appApplication.locationXY[1] ?: 0.0
+        XL.d(Companion.TAG, "onCreateLoader begin, latitude: $latitude, longitude: $longitude")
+
         return object : AsyncLoader<ApiResponse<MatchData>>(activity) {
             override fun loadInBackground(): ApiResponse<MatchData> {
                 // 开始加载下一批数据..
                 return if (bundle != null && bundle.getBoolean("reset")) {
-                    XL.d(Companion.TAG, "reset")
                     // 重置配额
                     // matchService!!.findWithResetQuota(latitude, longitude, true)
                     shared.findWithResetQuota(latitude, longitude, true).blockingGet()
                 } else {
-                    XL.d(Companion.TAG, "unreset")
                     shared.findRandom(latitude, longitude).blockingGet()
                 }
             }

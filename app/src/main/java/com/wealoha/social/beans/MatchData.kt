@@ -35,10 +35,10 @@ class MatchData(
             val recommendSourceMap = hashMapOf<String, String>()
 
             (0..10).forEach {
-                val user = User.fake(true, false)
+                val user = User.fake()
                 userList.add(user)
-                imageMap.put(user.avatarImageId, Image.fake())
-                recommendSourceMap.put(user.id, Fakeit.book().title())
+                imageMap[user.avatarImageId] = Image.fake()
+                recommendSourceMap[user.id] = Fakeit.book().title()
             }
 
             return MatchData(
