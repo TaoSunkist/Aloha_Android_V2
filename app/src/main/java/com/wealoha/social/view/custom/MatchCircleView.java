@@ -14,9 +14,9 @@ import android.view.View;
 import com.wealoha.social.R;
 
 /**
-* @author javamonk
-* @createTime 14-9-27 下午9:08
-*/
+ * @author javamonk
+ * @createTime 14-9-27 下午9:08
+ */
 public class MatchCircleView extends View {
 
     private final static String TAG = "MatchCircleView";
@@ -40,12 +40,11 @@ public class MatchCircleView extends View {
     }
 
     /**
-     *
      * @param canvas
      * @param circleX
      * @param circleY
      * @param radius
-     * @see http://stackoverflow.com/questions/4159959/android-circular-gradient-alpha-mask
+     * @link {http://stackoverflow.com/questions/4159959/android-circular-gradient-alpha-mask}
      */
     private void drawFoggyWindowWithTransparentCircle(Canvas canvas, int width, int height,
                                                       float circleX, float circleY, float radius) {

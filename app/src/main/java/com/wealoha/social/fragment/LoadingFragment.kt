@@ -23,7 +23,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import butterknife.ButterKnife
 import butterknife.InjectView
 import butterknife.OnClick
@@ -63,11 +62,8 @@ import javax.inject.Inject
  * @copyright wealoha.com
  * @Date:2014-10-30
  */
-class LoadingFragment : BaseFragment()
-    ,
-    LoaderManager.LoaderCallbacks<ApiResponse<MatchData>?>
-{
-
+class LoadingFragment : BaseFragment(),
+    LoaderManager.LoaderCallbacks<ApiResponse<MatchData>?> {
     @JvmField
     @Inject
     var matchService: ServerApi? = null
@@ -85,7 +81,7 @@ class LoadingFragment : BaseFragment()
     @InjectView(R.id.circle1)
     var circle1: WaterView? = null
 
-//     @InjectView(R.id.circle2)
+    //     @InjectView(R.id.circle2)
 //     MatchCircleView circle2;
     @JvmField
     @InjectView(R.id.user_photo)
@@ -140,16 +136,18 @@ class LoadingFragment : BaseFragment()
     private var endOfScheduleHandler: Handler? = null
     private var aMapUtil: AMapUtil? = null
     private var appApplication: AppApplication? = null
+    private var mMyCounter: MyCounter? = null
+    private var mCountDownTimer: Timer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (AppApplication.mUserList != null && AppApplication.mUserList.size > 0) {
             // 还有用户没看完，继续
-//            startingAloha()
+            startingAloha()
         }
         aMapUtil = AMapUtil()
         appApplication = activity.application as AppApplication
     }
-
 
 
     override fun onCreateView(
@@ -158,11 +156,8 @@ class LoadingFragment : BaseFragment()
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.frag_loading, container, false)
-//         mPhotoContainer = (RelativeLayout)
-//         view.findViewById(R.id.photo_container);
         mainAct = activity as MainAct
         ButterKnife.inject(this, view)
-        Log.i("TIMER", "onCreateView:")
         return view
     }
 
@@ -267,40 +262,6 @@ class LoadingFragment : BaseFragment()
     fun random(fromInclusive: Int, toExclusive: Int): Long {
         val r = Random(System.currentTimeMillis())
         return (fromInclusive + r.nextInt(toExclusive - fromInclusive)).toLong()
-    }
-
-    inner class CustomBitmapLoadCallBack : DefaultBitmapLoadCallBack<ImageView>() {
-        override fun onLoading(
-            container: ImageView,
-            uri: String,
-            config: BitmapDisplayConfig,
-            total: Long,
-            current: Long
-        ) {
-        }
-
-        override fun onLoadCompleted(
-            container: ImageView,
-            uri: String,
-            bitmap: Bitmap,
-            config: BitmapDisplayConfig,
-            from: BitmapLoadFrom
-        ) {
-            fadeInDisplay(container, bitmap)
-        }
-    }
-
-    private var mMyCounter: MyCounter? = null
-    private var mCountDownTimer: Timer? = null
-    private fun fadeInDisplay(imageView: ImageView, bitmap: Bitmap) {
-        val transitionDrawable = TransitionDrawable(
-            arrayOf(
-                TRANSPARENT_DRAWABLE,
-                BitmapDrawable(imageView.resources, ImageUtil.toRoundCorner(bitmap, 240))
-            )
-        )
-        imageView.setImageDrawable(transitionDrawable)
-        transitionDrawable.startTransition(500)
     }
 
     /**
