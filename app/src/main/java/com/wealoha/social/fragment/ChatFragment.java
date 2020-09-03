@@ -114,7 +114,7 @@ public class ChatFragment extends BaseFragment implements ListItemCallback,
     /**
      * 是否还有最新数据
      */
-    private String mNextCursorId;
+    private String mNextCursorId = "";
     private List<InboxSession> inboxSessions;
     private Map<String, Message> newMessagMap;
     private boolean nextPageLoading;
@@ -319,7 +319,7 @@ public class ChatFragment extends BaseFragment implements ListItemCallback,
 
     @Override
     public Loader<ApiResponse<InboxSessionResult>> onCreateLoader(int id, Bundle args) {
-        Log.i("CHAT_LOAD", "CREAT-----");
+        Log.i(TAG, "CREAT-----");
         switch (id) {
             case LOADER_GET_SESSION_LIST:
                 return new AsyncLoader<ApiResponse<InboxSessionResult>>(context) {
@@ -328,10 +328,12 @@ public class ChatFragment extends BaseFragment implements ListItemCallback,
                     public ApiResponse<InboxSessionResult> loadInBackground() {
                         try {
                             nextPageLoading = true;
-                            return AlohaService.Companion.getShared().sessions(mNextCursorId, 10).blockingGet();
+                            XL.d(TAG, "加载inbox session成功");
+//                            return AlohaService.Companion.getShared().sessions(mNextCursorId, 10).blockingGet();
+                            return AlohaService.Companion.getShared().sessions("", 10).blockingGet();
                         } catch (Exception e) {
                             // FIXME 提示错误
-                            // XL.d(TAG, "加载inbox session失败", e);
+                            XL.d(TAG, "加载inbox session失败", e);
                             return null;
                         }
                     }
@@ -352,7 +354,7 @@ public class ChatFragment extends BaseFragment implements ListItemCallback,
                     // 缓存第一页
                     save(CacheKey.FirstPageInboxSession, apiResponse.getData());
                     inboxSessions = apiResponse.getData().getList();
-                    newMessagMap = (Map<String, Message>) apiResponse.getData().getNewMessageMap();
+                    newMessagMap = apiResponse.getData().getNewMessageMap();
                 } else {
                     inboxSessions.addAll(apiResponse.getData().getList());
                     newMessagMap.putAll(apiResponse.getData().getNewMessageMap());

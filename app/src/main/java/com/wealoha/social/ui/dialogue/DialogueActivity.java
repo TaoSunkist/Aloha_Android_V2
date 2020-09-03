@@ -542,7 +542,7 @@ public class DialogueActivity extends BaseFragAct implements IDialogueView {
         return super.onTouchEvent(event);
     }
 
-    public String userid;
+    public String userid = "";
 
     // private Message mMessage;
 
