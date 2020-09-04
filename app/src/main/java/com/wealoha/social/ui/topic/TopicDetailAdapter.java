@@ -240,8 +240,8 @@ public class TopicDetailAdapter extends BaseAdapter implements OnClickListener {
             return;
         }
         bundle.putString(GlobalConstants.TAGS.TOPIC_DETAIL_TAG, GlobalConstants.TAGS.TOPIC_DETAIL_TAG);
-        bundle.putSerializable(GlobalConstants.TAGS.POST_TAG, post);
-        // bundle.putSerializable(com.wealoha.social.api.user.bean.User.TAG,post.getUser());
+        bundle.putParcelable(GlobalConstants.TAGS.POST_TAG, post);
+        // bundle.putParcelable(com.wealoha.social.api.user.bean.User.TAG,post.getUser());
         baseFragAct.startFragmentForResult(FeedCommentFragment.class,//
                 bundle,//
                 true,//

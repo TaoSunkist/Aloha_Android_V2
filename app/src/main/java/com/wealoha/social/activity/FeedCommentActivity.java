@@ -125,8 +125,8 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 	private boolean getData() {
 		Bundle bundle = getIntent().getExtras();
 		if (bundle != null) {
-			mPost = (Post) bundle.getSerializable(GlobalConstants.TAGS.POST_TAG);
-			mUser = (User) bundle.getSerializable(User.TAG);
+			mPost = (Post) bundle.getParcelable(GlobalConstants.TAGS.POST_TAG);
+			mUser = (User) bundle.getParcelable(User.TAG);
 			return true;
 		}
 		return false;
@@ -498,7 +498,7 @@ public class FeedCommentActivity extends BaseFragAct implements OnClickListener,
 	@Override
 	public void openSomeoneProfile(User user2) {
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(user2));
+		bundle.putParcelable(User.TAG, DockingBeanUtils.transUser(user2));
 		startFragment(Profile2Fragment.class, bundle, true);
 	}
 

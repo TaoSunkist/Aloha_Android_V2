@@ -42,7 +42,7 @@ open class Feed2ListApiService : AbsBaseListApiService<Post, String>() {
             data = FeedGetData.fake(
                 cursor = cursor,
                 direct = direct,
-                userid = userid,
+                userID = userid,
                 count = count
             )
         )

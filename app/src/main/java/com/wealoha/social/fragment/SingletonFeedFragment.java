@@ -247,7 +247,7 @@ public class SingletonFeedFragment extends BaseFragment implements Holder2FragCa
 		Intent intent = new Intent(getActivity(), PicSendActivity.class);
 		Bundle bundle = new Bundle();
 		bundle.putString(PicSendActivityBundleKey.PIC_SEND_TYPE, PicSendActivity.SHARE_FEED);
-		bundle.putSerializable(Post.TAG, post);
+		bundle.putParcelable(Post.TAG, post);
 		intent.putExtras(bundle);
 		getActivity().startActivityForResult(intent, OPEN_PIC_SEND_REQUESTCODE);
 	}

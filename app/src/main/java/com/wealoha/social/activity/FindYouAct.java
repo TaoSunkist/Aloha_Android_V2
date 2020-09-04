@@ -346,7 +346,7 @@ public class FindYouAct extends BaseFragAct implements TextWatcher, OnItemClickL
      */
     private void startFragment(User user) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(User.TAG, user);
+        bundle.putParcelable(User.TAG, user);
         bundle.putString("refer_key", GlobalConstants.WhereIsComeFrom.SEARCH_TO_PROFILE);
         if (!TextUtils.isEmpty(mFindYouActType) && FindYouActBundleKey.TAGS_SOMEONE.equals(mFindYouActType)) {
             Intent intent = new Intent();

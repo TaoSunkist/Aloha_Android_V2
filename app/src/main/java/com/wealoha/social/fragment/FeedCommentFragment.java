@@ -171,7 +171,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 		String tag = bundle.getString(GlobalConstants.TAGS.TOPIC_DETAIL_TAG);
 		if (GlobalConstants.TAGS.TOPIC_DETAIL_TAG.equals(tag)) {
 			mContentEdit.setFocusableInTouchMode(false);
-			mPost = (Post) bundle.getSerializable(GlobalConstants.TAGS.POST_TAG);
+			mPost = (Post) bundle.getParcelable(GlobalConstants.TAGS.POST_TAG);
 			mFeed2API.singleFeed(mPost.getPostId(), new Callback<ApiResponse<FeedGetData>>() {
 
 				@Override
@@ -192,7 +192,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 				}
 			});
 		} else {
-			mPost = (Post) bundle.getSerializable(GlobalConstants.TAGS.POST_TAG);
+			mPost = (Post) bundle.getParcelable(GlobalConstants.TAGS.POST_TAG);
 			isPopSoftInputKey = bundle.getBoolean(IS_POP_SOFTINPUT_KEY);
 			if (isPopSoftInputKey) {
 				mContentEdit.requestFocus();
@@ -202,7 +202,7 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	}
 
 	private void initView(final Bundle bundle) {
-		mUser = (User) bundle.getSerializable(User.TAG);
+		mUser = (User) bundle.getParcelable(User.TAG);
 		initHeadView();
 		mFeedCommentAdapter = new FeedCommentAdapter(getActivity(), mComment2Service, this);
 		if (isPopSoftInputKey) {
@@ -769,8 +769,8 @@ public class FeedCommentFragment extends BaseFragment implements OnClickListener
 	@Override
 	public void openSomeoneProfile(User user2) {
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(User.TAG, user2);
-		// bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(user));
+		bundle.putParcelable(User.TAG, user2);
+		// bundle.putParcelable(User.TAG, DockingBeanUtils.transUser(user));
 		((BaseFragAct) getActivity()).startFragment(Profile2Fragment.class, bundle, true);
 	}
 

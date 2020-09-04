@@ -1,5 +1,7 @@
 package com.wealoha.social.beans
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
 /**
@@ -8,14 +10,15 @@ import java.io.Serializable
  * @author javamonk
  * @createTime 2015年2月25日 下午12:23:34
  */
-class NewAlohaNotify2(
-    type: Notify2Type,
-    unread: Boolean,
-    notifyid: String?,
-    updateTimeMillis: Long,
+@Parcelize
+data class NewAlohaNotify2(
+    override var type: Notify2Type,
+    val unread: Boolean,
+    val notifyid: String?,
+    override var updateTimeMillis: Long,
     private var count: Int,
     private val user2s: List<User>
-) : AbsNotify2(type, unread, notifyid, updateTimeMillis), Serializable {
+) : AbsNotify2(type, unread, notifyid, updateTimeMillis), Serializable, Parcelable {
     fun getCount(): Int {
         return count
     }

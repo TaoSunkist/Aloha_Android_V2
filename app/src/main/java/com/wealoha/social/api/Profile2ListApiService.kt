@@ -6,6 +6,9 @@ import com.wealoha.social.beans.Direct
 import com.wealoha.social.beans.FeedGetData
 import com.wealoha.social.beans.Post
 import com.wealoha.social.beans.ApiResponse
+import com.wealoha.social.extension.observeOnMainThread
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import retrofit.Callback
 import retrofit.RetrofitError
 import retrofit.client.Response
@@ -20,7 +23,18 @@ class Profile2ListApiService : Feed2ListApiService() {
         userid: String,
         callback: ApiListCallback<Post?>
     ) {
-        feed2Api!!.getUserPosts(userid!!, cursor!!, count, object : Callback<ApiResponse<FeedGetData>> {
+        AlohaService.shared.getUserPosts(userid, cursor, count).observeOnMainThread(onSuccess = {
+            if (it == null || !it.isOk) {
+                callback.fail(fromResult(it), null)
+            } else {
+                callback.success(transResult2List(it.data!!, userid), it.data!!.nextCursorId)
+            }
+        }, onError = {
+            callback.fail(null, RetrofitError.unexpectedError("", it))
+        }, onTerminate = {
+        }).addTo(compositeDisposable = CompositeDisposable())
+
+        /*, object : Callback<ApiResponse<FeedGetData>> {
             override fun failure(error: RetrofitError) {
                 callback.fail(null, error)
             }
@@ -35,6 +49,6 @@ class Profile2ListApiService : Feed2ListApiService() {
                     )
                 }
             }
-        })
+        }*/
     }
 }

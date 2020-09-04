@@ -445,7 +445,7 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 		} else if ("profile".equals(openTab)) {
 			Profile2Fragment mProfileFrag = new Profile2Fragment();
 			Bundle bundle = new Bundle();
-			bundle.putSerializable(User.TAG, contextUtil.getCurrentUser());
+			bundle.putParcelable(User.TAG, contextUtil.getCurrentUser());
 			mProfileFrag.setArguments(bundle);
 			mTabsFirstFragments.put(R.id.profile_frag_rb, mProfileFrag);
 			mFm.beginTransaction().replace(R.id.content, mProfileFrag).commit();
@@ -470,7 +470,7 @@ public class MainAct extends BaseFragAct implements OnClickListener, OnSlideList
 			ContextConfig.getInstance().putBooleanWithFilename(OPEN_GESTURE_FROM_PUSH_KEY, true);
 			Bundle bundle = new Bundle();
 			bundle.putInt("listtype", SwipeMenuListFragment.LISTTYPE_POPULARITY);
-			bundle.putSerializable(User.TAG, contextUtil.getCurrentUser());
+			bundle.putParcelable(User.TAG, contextUtil.getCurrentUser());
 			Profile2Fragment mProfileTestFrag = new Profile2Fragment();
 			mProfileTestFrag.setArguments(bundle);
 			mFm.beginTransaction().replace(R.id.content, mProfileTestFrag).commit();

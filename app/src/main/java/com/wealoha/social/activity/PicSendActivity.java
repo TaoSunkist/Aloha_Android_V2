@@ -443,7 +443,7 @@ public class PicSendActivity extends BaseFragAct implements OnClickListener, Lis
 			if (PicSendActivity.PIC_SEND.equals(actType)) {
 				initPhotoByPicSend(bundle);
 			} else {// 分享feed
-				mSharePost = (Post) bundle.getSerializable(Post.TAG);
+				mSharePost = (Post) bundle.getParcelable(Post.TAG);
 				mUserTagsList = Post.Companion.transTagsToOldVer(mSharePost.getUserTags(), mSharePost.isTagMe());
 
 				// 初始化地理信息

@@ -50,10 +50,10 @@ public abstract class BaseListApiAdapter<E, P> extends BaseAdapter implements Ad
 
     protected final List<E> listData;
 
-    private String earlyCursorId="";
+    private String earlyCursorId = "";
 
     // 向上翻的状态
-    private String lateCursorId="";
+    private String lateCursorId = "";
 
     private Object lock = new Object();
 
@@ -316,90 +316,86 @@ public abstract class BaseListApiAdapter<E, P> extends BaseAdapter implements Ad
      * 如果当前的调用被忽略，callback不会被回调，仅当数据成功加载后才回调
      */
     public void loadEarlyPage(int pageSize, P param, final LoadCallback callback) {
+        XL.d(TAG, "数据加载到最顶部了");
         if (reachHead) {
-            XL.d(TAG, "数据加载到最顶部了");
             return;
         }
         loadNextPage(pageSize, param, Direct.Early, callback);
     }
 
     public void loadNextPage(int pageSize, P param, final Direct direct, final LoadCallback callback) {
+        XL.d(TAG, "数据加载中..");
         if (loading) {
-            XL.d(TAG, "数据加载中..");
             return;
         }
 
-        synchronized (lock) {
-            if (!loading) {
-                loading = true;
-                final int version = ++dataVersion;
-                String cursor = (direct == Direct.Early ? earlyCursorId : lateCursorId);
-                service.getList(cursor, pageSize, direct, param, new BaseListApiService.ApiListCallback<E>() {
+        loading = true;
+        final int version = ++dataVersion;
+        String cursor = (direct == Direct.Early ? earlyCursorId : lateCursorId);
+        service.getList(cursor, pageSize, direct, param, new BaseListApiService.ApiListCallback<E>() {
 
-                    @Override
-                    public void success(@NotNull List<? extends E> list, @NotNull String cursorId) {
-                        if (version != dataVersion) {
-                            // 如果加载过程中数据被更新了，就丢弃(比如reset了，但是下一页还在加载中)
-                            XL.w(TAG, "丢弃不一致的数据，期待版本: " + version + ", 当前版本: " + dataVersion);
-                            callback.fail(null, null);
-                            return;
-                        }
-                        resetDataListDelay();// 延时重载数据
-                        // 更新下一页游标
+            @Override
+            public void success(@NotNull List<? extends E> list, @NotNull String cursorId) {
+                if (version != dataVersion) {
+                    // 如果加载过程中数据被更新了，就丢弃(比如reset了，但是下一页还在加载中)
+                    XL.w(TAG, "丢弃不一致的数据，期待版本: " + version + ", 当前版本: " + dataVersion);
+                    callback.fail(null, null);
+                    return;
+                }
+                resetDataListDelay();// 延时重载数据
+                // 更新下一页游标
+                if (direct == Direct.Early) {
+                    if (TextUtils.isEmpty(cursorId)) {
+                        reachHead = true;
+                    } else {
+                        BaseListApiAdapter.this.earlyCursorId = cursorId;
+                    }
+                } else {
+                    if (TextUtils.isEmpty(cursorId)) {
+                        reachEnd = true;
+                    } else {
+                        BaseListApiAdapter.this.lateCursorId = cursorId;
+                    }
+                }
+
+                XL.v(TAG, "取到数据: " + list.size());
+                if (CollectionUtils.isNotEmpty(list)) {
+                    if (service.needReverse() && direct == Direct.Early) {
+                        // asc的顺序是对的，不用反转
+                        List<E> tmp = new ArrayList<E>();
+                        tmp.addAll(list);
+                        Collections.reverse(tmp);
+                        list = tmp;
+                    }
+                    synchronized (listData) {
                         if (direct == Direct.Early) {
-                            if (TextUtils.isEmpty(cursorId)) {
-                                reachHead = true;
+                            if (service.appendToHeader()) {
+                                listData.addAll(0, list);
                             } else {
-                                BaseListApiAdapter.this.earlyCursorId = cursorId;
+                                listData.addAll(list);
                             }
                         } else {
-                            if (TextUtils.isEmpty(cursorId)) {
-                                reachEnd = true;
-                            } else {
-                                BaseListApiAdapter.this.lateCursorId = cursorId;
-                            }
+                            // TODO asc的数据如何放置
+                            listData.addAll(list);
                         }
-
-                        XL.v(TAG, "取到数据: " + list.size());
-                        if (CollectionUtils.isNotEmpty(list)) {
-                            if (service.needReverse() && direct == Direct.Early) {
-                                // asc的顺序是对的，不用反转
-                                List<E> tmp = new ArrayList<E>();
-                                tmp.addAll(list);
-                                Collections.reverse(tmp);
-                                list = tmp;
-                            }
-                            synchronized (listData) {
-                                if (direct == Direct.Early) {
-                                    if (service.appendToHeader()) {
-                                        listData.addAll(0, list);
-                                    } else {
-                                        listData.addAll(list);
-                                    }
-                                } else {
-                                    // TODO asc的数据如何放置
-                                    listData.addAll(list);
-                                }
-                            }
-                        }
-                        // 失败后也要重置状态
-                        loading = false;
-
-                        // 通知ui
-                        notifyDataSetChanged();
-                        callback.success(!reachHead, !reachEnd);
-                        returnListDataState(callback);
                     }
+                }
+                // 失败后也要重置状态
+                loading = false;
 
-                    @Override
-                    public void fail(ApiErrorCode code, Exception exception) {
-                        callback.fail(code, exception);
-                        loading = false;
-                    }
-                });
-
+                // 通知ui
+                notifyDataSetChanged();
+                callback.success(!reachHead, !reachEnd);
+                returnListDataState(callback);
             }
-        }
+
+            @Override
+            public void fail(ApiErrorCode code, Exception exception) {
+                callback.fail(code, exception);
+                loading = false;
+            }
+        });
+
     }
 
     /***

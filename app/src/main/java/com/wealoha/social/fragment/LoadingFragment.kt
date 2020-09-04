@@ -376,7 +376,7 @@ class LoadingFragment : BaseFragment(),
      */
     private fun sendTimingNotice(matchData: MatchData?) {
         val bundle = Bundle()
-        bundle.putSerializable(MatchData.TAG, matchData)
+        bundle.putParcelable(MatchData.TAG, matchData)
         bundle.putInt(
             GlobalConstants.AppConstact.ALARM_REQUEST_CODE,
             GlobalConstants.AppConstact.LOADING_SEND_TIMING_NOTICE
@@ -418,14 +418,14 @@ class LoadingFragment : BaseFragment(),
                     }
                     if (apiResponse.isOk) {
                         val r = apiResponse.data
-                        currentContextUtil?.setProfeatureEnable(!r!!.alohaGetLocked)
+                        currentContextUtil?.profeatureEnable = !r!!.alohaGetLocked
                         val intent = Intent(activity, ProFeatureAct::class.java)
                         intent.putExtra(PromotionGetData.TAG, r)
                         startActivity(intent)
                         activity?.overridePendingTransition(R.anim.left_in, R.anim.stop)
 
                         // Bundle bundle = new Bundle();
-                        // bundle.putSerializable(PromotionGetData.TAG, r);
+                        // bundle.putParcelable(PromotionGetData.TAG, r);
                         // startActivity(GlobalConstants.IntentAction.INTENT_URI_ADVANCEDFEATURED, bundle);
                         // contextUtil.getMainAct().Accelerate(null, bundle);
                     }

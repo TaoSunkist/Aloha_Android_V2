@@ -1,7 +1,9 @@
 package com.wealoha.social.beans
 
+import android.os.Parcelable
 import com.mooveit.library.Fakeit
 import com.wealoha.social.beans.imagemap.HasImageMap
+import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
 /**
@@ -12,7 +14,8 @@ import java.io.Serializable
  * @since
  * @date 2014-10-29 下午4:44:17
  */
-class MatchData(
+@Parcelize
+data class MatchData(
     var list: List<User>? = null,
 
     /** 还需要多少秒才能刷下一批  */
@@ -25,7 +28,7 @@ class MatchData(
     var quotaReset: Int = 0,
     override var imageMap: Map<String, Image> = hashMapOf(),
     var recommendSourceMap: Map<String, String> = hashMapOf()
-) : ResultData(), Serializable, HasImageMap {
+) : ResultData(), Serializable, HasImageMap, Parcelable {
 
     companion object {
         fun fake(): MatchData {

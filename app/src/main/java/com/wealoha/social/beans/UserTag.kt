@@ -1,16 +1,19 @@
 package com.wealoha.social.beans
 
+import android.os.Parcelable
 import com.wealoha.social.beans.User.Companion.fromDTO
+import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 import java.util.*
 
+@Parcelize
 data class UserTag(
     val tagAnchorX: Double?,
     val tagAnchorY: Double?,
     val tagCenterX: Double?,
     val tagCenterY: Double?,
     val user: User
-) : Serializable {
+) : Serializable, Parcelable {
 
     companion object {
         /**

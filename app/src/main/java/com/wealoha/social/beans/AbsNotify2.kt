@@ -9,9 +9,9 @@ import java.io.Serializable
  *
  * @author javamonk
  * @createTime 2015年2月25日 上午10:44:54
+ * // FIXME api应当返回notifyId，暂时用这个开发调试
  */
-abstract class AbsNotify2 // FIXME api应当返回notifyId，暂时用这个开发调试
-    (
+abstract class AbsNotify2(
     override val type: Notify2Type,
     // 未读，不是final，用来重新渲染视图
     override var isUnread: Boolean,

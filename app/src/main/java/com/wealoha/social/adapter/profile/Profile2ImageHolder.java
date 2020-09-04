@@ -150,7 +150,7 @@ public class Profile2ImageHolder extends AbsViewHolder implements OnClickListene
 		Bundle bundle = new Bundle();
 		Post post = (Post) v.getTag();
 		if (post != null) {
-			bundle.putSerializable(GlobalConstants.TAGS.POST_TAG, post);
+			bundle.putParcelable(GlobalConstants.TAGS.POST_TAG, post);
 		}
 		int position = holderPosition * 3;
 		if (v.getId() == R.id.profile_pics_image_rl01) {

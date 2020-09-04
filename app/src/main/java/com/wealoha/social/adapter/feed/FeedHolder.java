@@ -286,7 +286,7 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 	 */
 	public void startUserProfile(User user2) {
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(User.TAG, user2);
+		bundle.putParcelable(User.TAG, user2);
 		((BaseFragAct) mFrag.getActivity()).startFragment(Profile2Fragment.class, bundle, false);
 
 	}
@@ -614,7 +614,7 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 		}
 
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(GlobalConstants.TAGS.POST_TAG, mPost);
+		bundle.putParcelable(GlobalConstants.TAGS.POST_TAG, mPost);
 		bundle.putBoolean("isPopSoftInputKey", isPopSoftInput);
 		((BaseFragAct) mFrag.getActivity()).startFragmentForResult(FeedCommentFragment.class,//
 																	bundle, true, START_FEEDCOMMENT_REQUESTCODE, //
@@ -627,7 +627,7 @@ public class FeedHolder extends BaseFeedHolder implements OnClickListener, ListI
 	 */
 	public void openProfile() {
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(User.TAG, mPost.getUser());
+		bundle.putParcelable(User.TAG, mPost.getUser());
 		((BaseFragAct) mFrag.getActivity()).startFragment(Profile2Fragment.class, bundle, true);
 	}
 

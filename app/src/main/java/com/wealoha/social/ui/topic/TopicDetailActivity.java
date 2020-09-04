@@ -110,7 +110,7 @@ public class TopicDetailActivity extends BaseFragAct implements ITopicDetailView
         mTopicDetailAdapter = new TopicDetailAdapter(this, this, null);
         mListView.setAdapter(mTopicDetailAdapter);
         if (GlobalConstants.TAGS.IS_FEED_HEAD_HASHTAG.equals(tag)) {// 完整的数据
-            HashTag hashTagObj = (HashTag) bundle.getSerializable(GlobalConstants.TAGS.IS_HASHTAG_OBJ);
+            HashTag hashTagObj = (HashTag) bundle.getParcelable(GlobalConstants.TAGS.IS_HASHTAG_OBJ);
             hashtagId = hashTagObj.getItemId();
             initSummary(hashTagObj);
             mTopicDetailP.getTopicData(hashTagObj.getItemId());

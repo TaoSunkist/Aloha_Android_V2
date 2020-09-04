@@ -234,7 +234,7 @@ public class LaunchBroadcastReceiver extends BroadcastReceiver {
                 Bundle bundle = new Bundle();
 
                 if (list != null && list.get(0) != null) {
-                    bundle.putSerializable(Post.TAG, (Post) list.get(0));
+                    bundle.putParcelable(Post.TAG, (Post) list.get(0));
                 }
                 startFragment(SingletonFeedFragment.class, bundle);
             }

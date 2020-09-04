@@ -356,7 +356,7 @@ public abstract class BaseFragment extends Fragment implements HasCache, Activit
     public void openTopic(HashTag hashTag) {
         Bundle bundle = new Bundle();
         bundle.putString(GlobalConstants.TAGS.OPEN_HASH_TAG_TYPE, GlobalConstants.TAGS.IS_FEED_HEAD_HASHTAG);
-        bundle.putSerializable(GlobalConstants.TAGS.IS_HASHTAG_OBJ, hashTag);
+        bundle.putParcelable(GlobalConstants.TAGS.IS_HASHTAG_OBJ, hashTag);
         startActivityHasAnim(GlobalConstants.IntentAction.INTENT_URI_TOPIC,//
                 bundle, R.anim.left_in, R.anim.stop);
     }

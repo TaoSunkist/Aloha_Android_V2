@@ -31,7 +31,7 @@ class SingletonFeedListApiService : Feed2ListApiService() {
                     FeedGetData.fake(
                         cursor = cursor,
                         direct = direct,
-                        userid = postId,
+                        userID = postId,
                         count = count
                     )
                 )

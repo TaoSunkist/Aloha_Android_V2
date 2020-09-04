@@ -199,7 +199,7 @@ public class ShareDialogFragment extends Fragment implements IWeiboHandler.Respo
 	}
 
 	private void initViews() {
-		contentTv.setText(Html.fromHtml(getString(R.string.introduction_of_advanced_functions_str, data.promotionCode)));
+		contentTv.setText(Html.fromHtml(getString(R.string.introduction_of_advanced_functions_str, data.getPromotionCode())));
 	}
 
 	private void fillAppsRoot() {
@@ -284,7 +284,7 @@ public class ShareDialogFragment extends Fragment implements IWeiboHandler.Respo
 		popup.show();
 		Bundle bundle = new Bundle();
 		bundle.putString("permalink", "http://wealoha.com/get");
-		bundle.putString("code", data.promotionCode);
+		bundle.putString("code", data.getPromotionCode());
 		bundle.putString("imgUrl", ImageUtil.getImageUrl(contextUtil.getCurrentUser().getAvatarImage().getId(), UiUtils.dip2px(//
 		getActivity(), GlobalConstants.ImageSize.AVATAR_ROUND_SMALL), CropMode.ScaleCenterCrop));
 		ShareStore.shareSina(getActivity(), bundle, this, new ShareCallbackImpl() {
@@ -382,11 +382,11 @@ public class ShareDialogFragment extends Fragment implements IWeiboHandler.Respo
 			isTimelineCb = true;
 		}
 		WXTextObject textObj = new WXTextObject();
-		textObj.text = getString(R.string.advance_features_gay_aloha_Invitation, data.promotionCode, "http://wealoha.com/get");
+		textObj.text = getString(R.string.advance_features_gay_aloha_Invitation, data.getPromotionCode(), "http://wealoha.com/get");
 
 		WXMediaMessage msg = new WXMediaMessage();
 		msg.mediaObject = textObj;
-		msg.description = getString(R.string.advance_features_gay_aloha_Invitation, data.promotionCode, "http://wealoha.com/get");
+		msg.description = getString(R.string.advance_features_gay_aloha_Invitation, data.getPromotionCode(), "http://wealoha.com/get");
 
 		SendMessageToWX.Req req = new SendMessageToWX.Req();
 		req.message = msg;
@@ -399,7 +399,7 @@ public class ShareDialogFragment extends Fragment implements IWeiboHandler.Respo
 		Intent sendIntent = new Intent(Intent.ACTION_VIEW, smsToUri);
 		// FIXME 分享邀请码的东西
 		// try {
-		sendIntent.putExtra("sms_body", getResources().getString(R.string.advance_features_gay_aloha_Invitation, data.promotionCode, "http://wealoha.com/get"));
+		sendIntent.putExtra("sms_body", getResources().getString(R.string.advance_features_gay_aloha_Invitation, data.getPromotionCode(), "http://wealoha.com/get"));
 		startActivity(sendIntent);
 	}
 

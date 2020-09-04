@@ -1,8 +1,11 @@
 package com.wealoha.social.beans
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
-class HashTag(
+@Parcelize
+data class HashTag(
     val itemId: String?,
     val name: String?,
     val backgroundImage: CommonImage?,
@@ -11,7 +14,7 @@ class HashTag(
     val url: String?,
     val type: String?,
     val userCount: Int
-) : Serializable {
+) : Serializable, Parcelable {
 
     companion object {
         /**

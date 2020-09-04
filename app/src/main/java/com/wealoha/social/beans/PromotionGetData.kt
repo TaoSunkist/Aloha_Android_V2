@@ -1,27 +1,26 @@
 package com.wealoha.social.beans
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
 /**
  * @author javamonk
  * @createTime 14-10-16 PM12:02
  */
-class PromotionGetData : ResultData(), Serializable {
-    @kotlin.jvm.JvmField
-    var promotionCode: String? = null
-    @kotlin.jvm.JvmField
-    var quotaReset = 0
-    var inviteNewUserCount = 0
-    @kotlin.jvm.JvmField
-    var alohaGetLocked = false
-    var alohaGetUnlockInviteNeed = 0
-    var alohaGetUnlockMoreInviteNeed = 0
-    var alohaGetUnlockMax = 0
-    @kotlin.jvm.JvmField
-    var quotaPerPerson = 0
+@Parcelize
+data class PromotionGetData(
+    var promotionCode: String? = null,
+    var quotaReset: Int = 0,
+    var inviteNewUserCount: Int = 0,
+    var alohaGetLocked: Boolean = false,
+    var alohaGetUnlockInviteNeed: Int = 0,
+    var alohaGetUnlockMoreInviteNeed: Int = 0,
+    var alohaGetUnlockMax: Int = 0,
+    var quotaPerPerson: Int = 0
+) : ResultData(),  Parcelable {
 
     companion object {
-        private const val serialVersionUID = -6138532041290176835L
         @kotlin.jvm.JvmField
         val TAG = PromotionGetData::class.java.simpleName
     }

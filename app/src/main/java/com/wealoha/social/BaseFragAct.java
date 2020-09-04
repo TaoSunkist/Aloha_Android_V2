@@ -944,7 +944,7 @@ public abstract class BaseFragAct extends FragmentActivity implements HasCache, 
     public void toProfileLogin(User user) {
         com.wealoha.social.beans.User user2 = DockingBeanUtils.transUser(user);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(User.TAG, user2);
+        bundle.putParcelable(User.TAG, user2);
         startFragment(Profile2Fragment.class, bundle, true);
     }
 

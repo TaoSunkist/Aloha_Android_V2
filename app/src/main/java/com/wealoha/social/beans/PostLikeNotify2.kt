@@ -1,20 +1,24 @@
 package com.wealoha.social.beans
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 /**
  *
  *
  * @author javamonk
  * @createTime 2015年2月25日 上午10:57:11
  */
-class PostLikeNotify2(
-    type: Notify2Type,
-    unread: Boolean,
-    notifyid: String?,
-    updateTimeMillis: Long,
+@Parcelize
+data class PostLikeNotify2(
+    override var type: Notify2Type,
+    val unread: Boolean = false,
+    var notifyid: String?,
+    override var updateTimeMillis: Long,
     private val post: Post,
     private val user2s: List<User>,
     private var count: Int
-) : AbsNotify2(type, unread, notifyid, updateTimeMillis) {
+) : AbsNotify2(type, unread, notifyid, updateTimeMillis), Parcelable {
     fun getCount(): Int {
         return count
     }

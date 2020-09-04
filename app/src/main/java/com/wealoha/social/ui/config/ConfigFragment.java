@@ -476,7 +476,7 @@ public class ConfigFragment extends BaseFragment implements IConfigView {
 		if (loaderId == REQUEST_CODE_CODE_LOAD) {
 			PromotionGetData r = (PromotionGetData) apiResponse.getData();
 			if (apiResponse.isOk()) {
-				contextUtil.setProfeatureEnable(!r.alohaGetLocked);
+				contextUtil.setProfeatureEnable(!r.getAlohaGetLocked());
 				Intent intent = new Intent(getActivity(), ProFeatureAct.class);
 				intent.putExtra(PromotionGetData.TAG, r);
 				startActivity(intent);

@@ -595,7 +595,7 @@ public class ProfileHeaderHolder {
     public void openPopularityList() {
         bundle = new Bundle();
         bundle.putInt("listtype", SwipeMenuListFragment.LISTTYPE_POPULARITY);
-        // bundle.putSerializable(UserListResult.TAG, result);
+        // bundle.putParcelable(UserListResult.TAG, result);
         bt = (BaseFragAct) contextUtil.getForegroundAct();
         if (bt != null) {
             bt.startFragment(SwipeMenuListFragment.class, bundle, true);

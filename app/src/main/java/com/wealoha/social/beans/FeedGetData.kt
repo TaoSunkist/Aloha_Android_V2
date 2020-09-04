@@ -15,7 +15,7 @@ data class FeedGetData(
             cursor: String,
             count: Int,
             direct: Direct,
-            userid: String
+            userID: String
         ): FeedGetData {
 
 

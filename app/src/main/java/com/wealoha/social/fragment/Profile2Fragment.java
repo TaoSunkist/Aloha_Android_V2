@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -99,7 +100,7 @@ public class Profile2Fragment extends BaseFragment implements ProfileHeader2Frag
     private Profile2HeaderHolder proHeadHld;
     private User mUser;
 
-    private static final int PAGE_SIZE = 30;
+    private static final int PAGE_SIZE = 50;
 
     /**
      * profile 的 类型
@@ -176,6 +177,7 @@ public class Profile2Fragment extends BaseFragment implements ProfileHeader2Frag
      *
      * @return void
      */
+    @SuppressLint("ClickableViewAccessibility")
     private void initOnTouchEvent() {
         mConfigLayout.setOnTouchListener(this);
         mStartMenuPopup.setOnClickListener(this);

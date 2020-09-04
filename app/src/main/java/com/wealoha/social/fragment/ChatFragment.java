@@ -367,22 +367,18 @@ public class ChatFragment extends BaseFragment implements ListItemCallback,
                 // FIXME 如果数据完全一致,则不考虑去再次渲染界面;
                 mChatListAdapter.notifyDataChage(inboxSessions, newMessagMap);
                 computeUnread();
-                mHandler.post(new Runnable() {
+                mHandler.post(() -> {
+                    if (!fragmentVisible) {
+                        XL.d(TAG, "视图不在了，忽略返回结果");
+                        return;
+                    }
 
-                    @Override
-                    public void run() {
-                        if (!fragmentVisible) {
-                            XL.d(TAG, "视图不在了，忽略返回结果");
-                            return;
-                        }
-
-                        if (inboxSessions == null || inboxSessions.size() <= 0) {
-                            frag_chat_obj_list.setVisibility(View.GONE);
-                            chat_bg_no_chat_data_rl.setVisibility(View.VISIBLE);
-                        } else {
-                            frag_chat_obj_list.setVisibility(View.VISIBLE);
-                            chat_bg_no_chat_data_rl.setVisibility(View.GONE);
-                        }
+                    if (inboxSessions == null || inboxSessions.size() <= 0) {
+                        frag_chat_obj_list.setVisibility(View.GONE);
+                        chat_bg_no_chat_data_rl.setVisibility(View.VISIBLE);
+                    } else {
+                        frag_chat_obj_list.setVisibility(View.VISIBLE);
+                        chat_bg_no_chat_data_rl.setVisibility(View.GONE);
                     }
                 });
         }

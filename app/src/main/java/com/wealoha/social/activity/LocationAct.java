@@ -104,7 +104,7 @@ public class LocationAct extends BaseFragAct implements OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(RegionNode.TAG, regionNodes.get(keys.get(position)));
+                bundle.putParcelable(RegionNode.TAG, regionNodes.get(keys.get(position)));
                 bundle.putBoolean(FROM_SERVER, true);
                 Intent intent = new Intent();
                 // 去掉*

@@ -42,7 +42,7 @@ public class NewAlohaActivity extends BaseFragAct {
 		Bundle bundle = getIntent().getExtras();
 
 		if (bundle != null) {
-			Notify2 notify2 = (Notify2) bundle.getSerializable("Users");
+			Notify2 notify2 = (Notify2) bundle.getParcelable("Users");
 			if (notify2 != null) {
 				initData(notify2);
 			} else {

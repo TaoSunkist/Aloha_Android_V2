@@ -380,7 +380,7 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
 
     private void openCommentFragment(Post post, boolean popInputMethod) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(GlobalConstants.TAGS.POST_TAG, post);
+        bundle.putParcelable(GlobalConstants.TAGS.POST_TAG, post);
 //		bundle.putString(GlobalConstants.TAGS.COMMENT_ID, commentId);
         bundle.putBoolean(FeedCommentFragment.IS_POP_SOFTINPUT_KEY, popInputMethod);
         mParent.startFragment(FeedCommentFragment.class, bundle, true);
@@ -394,7 +394,7 @@ public class Notify2Apapter extends BaseListApiAdapter<Notify2, Boolean> {
     private void openSomeoneProfile(User user2) {
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(user2));
+        bundle.putParcelable(User.TAG, DockingBeanUtils.transUser(user2));
         mParent.startFragment(Profile2Fragment.class, bundle, true);
     }
 

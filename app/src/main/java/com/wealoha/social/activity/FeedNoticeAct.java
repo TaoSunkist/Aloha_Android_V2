@@ -333,7 +333,7 @@ public class FeedNoticeAct extends BaseFragAct implements OnClickListener, OnIte
 		if (mNotify2 instanceof PostTagNotify2) {
 			PostTagNotify2 postTagNotify2 = (PostTagNotify2) mNotify2;
 			Bundle bundle = new Bundle();
-			bundle.putSerializable(Post.TAG, postTagNotify2.getPost());
+			bundle.putParcelable(Post.TAG, postTagNotify2.getPost());
 			bundle.putInt(SingletonFeedFragment.TAG, FeedHolder.TAGS_HOLDER);
 			startFragment(SingletonFeedFragment.class, bundle, true);
 		} else if (mNotify2 instanceof PostCommentNotify2) {
@@ -352,7 +352,7 @@ public class FeedNoticeAct extends BaseFragAct implements OnClickListener, OnIte
 				openSomeoneProfile(postLikeNotify2.getUsers().get(0));
 			} else {
 				Bundle bundle = new Bundle();
-				bundle.putSerializable("Users", postLikeNotify2);
+				bundle.putParcelable("Users", postLikeNotify2);
 				Intent intent = new Intent(this, NewAlohaActivity.class);
 				intent.putExtras(bundle);
 				startActivity(intent);
@@ -364,7 +364,7 @@ public class FeedNoticeAct extends BaseFragAct implements OnClickListener, OnIte
 				openSomeoneProfile(newAlohaNotify2.getUsers().get(0));
 			} else {
 				Bundle bundle = new Bundle();
-				bundle.putSerializable("Users", newAlohaNotify2);
+				bundle.putParcelable("Users", newAlohaNotify2);
 				Intent intent = new Intent(this, NewAlohaActivity.class);
 				intent.putExtras(bundle);
 				startActivity(intent);
@@ -374,7 +374,7 @@ public class FeedNoticeAct extends BaseFragAct implements OnClickListener, OnIte
 	
 	public void openFeedCommentFragment(Post post, String commentId){
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(GlobalConstants.TAGS.POST_TAG, post);
+		bundle.putParcelable(GlobalConstants.TAGS.POST_TAG, post);
 		bundle.putString(GlobalConstants.TAGS.COMMENT_ID, commentId);
 		startFragment(FeedCommentFragment.class, bundle, true);
 	}
@@ -410,12 +410,13 @@ public class FeedNoticeAct extends BaseFragAct implements OnClickListener, OnIte
 	public void startSingleTagsFeed(Post post, int feedFragType) {
 		Bundle bundle = new Bundle();
 		bundle.putInt(SingletonFeedFragment.TAG, feedFragType);
-		bundle.putSerializable(Post.TAG, post);
+		bundle.putParcelable(Post.TAG, post);
 		startFragmentForResult(SingletonFeedFragment.class, bundle, true, START_SINGLETON_FEED, R.anim.left_in, R.anim.stop);
 	}
 
 	@Override
 	protected void onActivityResult(int requestcode, int resultcode, Intent result) {
+		super.onActivityResult(requestcode, resultcode, result);
 		if (resultcode == RESULT_OK) {
 			if (requestcode == START_SINGLETON_FEED) {
 				setResult(RESULT_OK);
@@ -433,7 +434,7 @@ public class FeedNoticeAct extends BaseFragAct implements OnClickListener, OnIte
 	private void openSomeoneProfile(User user2) {
 
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(user2));
+		bundle.putParcelable(User.TAG, DockingBeanUtils.transUser(user2));
 		startFragment(Profile2Fragment.class, bundle, true);
 	}
 

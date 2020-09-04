@@ -57,7 +57,7 @@ public class Feed2Adapter extends BaseListApiAdapter<Post, String> implements
     protected BaseFeedHolder getFeedHolder(FeedType type, LayoutInflater inflater, ViewGroup parent) {
         BaseFeedHolder feedcontentHolder;
         FeedHolder feedHolder = new FeedHolder(mFrag, inflater, parent);
-        switch ((FeedType) type) {
+        switch (type) {
             case VideoPost:
                 feedcontentHolder = new VideoFeedHolder(inflater, parent, mFrag);
                 break;

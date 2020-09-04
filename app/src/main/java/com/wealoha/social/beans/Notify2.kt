@@ -9,8 +9,9 @@ package com.wealoha.social.beans
 interface Notify2 {
     val type: Notify2Type
     val isUnread: Boolean
-    fun changeReadState(isread: Boolean)
     val updateTimeMillis: Long
+
+    fun changeReadState(isread: Boolean)
 
     companion object {
         /**

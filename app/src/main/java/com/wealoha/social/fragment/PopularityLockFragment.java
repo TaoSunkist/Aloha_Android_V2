@@ -67,7 +67,7 @@ public class PopularityLockFragment extends BaseFragment implements OnClickListe
 					if (apiResponse.isOk()) {
 						PromotionGetData r = (PromotionGetData) apiResponse.getData();
 						Bundle bundle = new Bundle();
-						bundle.putSerializable(PromotionGetData.TAG, r);
+						bundle.putParcelable(PromotionGetData.TAG, r);
 						startActivity(GlobalConstants.IntentAction.INTENT_URI_ADVANCEDFEATURED, bundle);
 						// contextUtil.getMainAct().Accelerate(null, bundle);
 					}

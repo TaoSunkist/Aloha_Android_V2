@@ -320,7 +320,7 @@ public class FeedNoticeAdapter extends BaseAdapter {
                         @Override
                         public void onClick(View v) {
                             Bundle bundle = new Bundle();
-                            bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(user2));
+                            bundle.putParcelable(User.TAG, DockingBeanUtils.transUser(user2));
                             mParent.startFragment(Profile2Fragment.class, bundle, true);
                         }
                     });
@@ -482,7 +482,7 @@ public class FeedNoticeAdapter extends BaseAdapter {
                     break;
                 case R.id.item_feed_notice_comment_userhead_cv:// 评论Feed的User头像
                     bundle = new Bundle();
-                    bundle.putSerializable(User.TAG, DockingBeanUtils.transUser(((PostCommentNotify2) mNotify2).getFromUser()));
+                    bundle.putParcelable(User.TAG, DockingBeanUtils.transUser(((PostCommentNotify2) mNotify2).getFromUser()));
                     mParent.startFragment(Profile2Fragment.class, bundle, true);
                     return;
                 case R.id.item_feed_notice_post_tag_userhead_cv:// 圈人的用户头像
