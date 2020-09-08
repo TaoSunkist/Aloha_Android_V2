@@ -64,8 +64,6 @@ public class SwipeMenuListFragment extends BaseFragment implements ListItemCallb
     @Inject
     ServerApi mProfileService;
     @Inject
-    Context mContext;
-    @Inject
     FontUtil fontUtil;
     @InjectView(R.id.swipe_list)
     ListView mSwipeList;
@@ -262,7 +260,7 @@ public class SwipeMenuListFragment extends BaseFragment implements ListItemCallb
 
         mSwipeList.setOnScrollListener(this);
 
-        footerView = LayoutInflater.from(context).inflate(R.layout.list_loader_footer, new ListView(mContext), false);
+        footerView = LayoutInflater.from(context).inflate(R.layout.list_loader_footer, new ListView(context), false);
         footerProgress = (ProgressBar) footerView.findViewById(R.id.reload_progress);
         footerImg = (TextView) footerView.findViewById(R.id.reload_img);
         footerView.setOnClickListener(new OnClickListener() {
