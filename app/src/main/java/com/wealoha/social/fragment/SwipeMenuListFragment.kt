@@ -18,16 +18,19 @@ import com.squareup.otto.Subscribe
 import com.wealoha.social.BaseFragAct
 import com.wealoha.social.R
 import com.wealoha.social.adapter.SwipeMenuAdapter
+import com.wealoha.social.api.AlohaService
 import com.wealoha.social.api.ServerApi
 import com.wealoha.social.beans.*
 import com.wealoha.social.commons.GlobalConstants
 import com.wealoha.social.event.ControlUserEvent
+import com.wealoha.social.extension.observeOnMainThread
 import com.wealoha.social.utils.FontUtil
 import com.wealoha.social.utils.ToastUtil
 import com.wealoha.social.utils.XL
 import com.wealoha.social.view.custom.dialog.ListItemDialog
 import com.wealoha.social.view.custom.dialog.ListItemDialog.ListItemCallback
 import com.wealoha.social.view.custom.dialog.ListItemDialog.ListItemType
+import io.reactivex.rxkotlin.addTo
 import retrofit.Callback
 import retrofit.RetrofitError
 import retrofit.client.Response
@@ -41,10 +44,6 @@ class SwipeMenuListFragment : BaseFragment(), ListItemCallback, OnItemClickListe
     @JvmField
     @Inject
     var mUserService: ServerApi? = null
-
-    @JvmField
-    @Inject
-    var mFeedService: ServerApi? = null
 
     @JvmField
     @Inject
@@ -128,7 +127,7 @@ class SwipeMenuListFragment : BaseFragment(), ListItemCallback, OnItemClickListe
     var myHandler: Handler = MenuListHandler(this)
     var userlistCallback: Callback<ApiResponse<UserListResult>> =
         object : Callback<ApiResponse<UserListResult>> {
-            override fun failure(arg0: RetrofitError) {
+            override fun failure(arg0: RetrofitError?) {
                 syncLastPageBool = true
                 addFooterView(false)
                 ToastUtil.longToast(context, R.string.network_error)
@@ -136,7 +135,7 @@ class SwipeMenuListFragment : BaseFragment(), ListItemCallback, OnItemClickListe
 
             override fun success(
                 apiResponse: ApiResponse<UserListResult>?,
-                arg1: Response
+                arg1: Response?
             ) {
                 if (!isVisible) {
                     return
@@ -319,12 +318,15 @@ class SwipeMenuListFragment : BaseFragment(), ListItemCallback, OnItemClickListe
         }
         XL.i(TAG, "loadPopularityList")
         val postId = bundle!!.getString("postId")
-        mFeedService!!.likeFeedPersons(
+        AlohaService.shared.likeFeedPersons(
             postId!!,
             cursor,
-            pageCount.toString() + "",
-            userlistCallback
-        )
+            pageCount.toString() + ""
+        ).observeOnMainThread(onSuccess = {
+            userlistCallback.success(it, null)
+        }, onError = {
+            userlistCallback.failure(null)
+        }).addTo(compositeDisposable = compositeDisposable)
     }
 
     private fun loadSwipeDeleteUI() {

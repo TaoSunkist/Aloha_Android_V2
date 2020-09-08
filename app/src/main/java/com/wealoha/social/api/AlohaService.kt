@@ -1,10 +1,7 @@
 package com.wealoha.social.api
 
 import android.util.Log
-import com.wealoha.social.beans.ApiResponse
-import com.wealoha.social.beans.Direct
-import com.wealoha.social.beans.FeedGetData
-import com.wealoha.social.beans.MatchData
+import com.wealoha.social.beans.*
 import com.wealoha.social.beans.message.InboxSessionResult
 import io.reactivex.Single
 import retrofit.Callback
@@ -59,6 +56,16 @@ class AlohaService {
                     )
                 )
             )
+        }
+    }
+
+    fun likeFeedPersons(
+        postId: String,
+        cursor: String,
+        s: String
+    ): Single<ApiResponse<UserListResult>> {
+        return Single.create<ApiResponse<UserListResult>> {
+            it.onSuccess(ApiResponse.success(UserListResult.fake()))
         }
     }
 }

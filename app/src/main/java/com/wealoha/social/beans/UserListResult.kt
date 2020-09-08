@@ -18,5 +18,23 @@ data class UserListResult(
          */
         private const val serialVersionUID = 8456520717379285862L
         val TAG = UserListResult::class.java.simpleName
+
+        fun fake(): UserListResult {
+            val list = arrayListOf<User>()
+            val imageMap = hashMapOf<String, Image>()
+            (0..10).map {
+                val user = User.fake()
+                list.add(user)
+                imageMap.put(user.id, Image.fake())
+                user
+            }.toList()
+            return UserListResult(
+                list = list,
+                imageMap = imageMap,
+                nextCursorId = Direct.Early.value,
+                alohaGetLocked = false,
+                alohaGetUnlockCount = 0
+            )
+        }
     }
 }
