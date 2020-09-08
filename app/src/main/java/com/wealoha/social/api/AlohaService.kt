@@ -68,4 +68,49 @@ class AlohaService {
             it.onSuccess(ApiResponse.success(UserListResult.fake()))
         }
     }
+
+    fun singleFeed(
+        postId: String
+    ): Single<ApiResponse<FeedGetData>> {
+        return Single.create<ApiResponse<FeedGetData>> {
+            it.onSuccess(
+                ApiResponse.success(
+                    FeedGetData.fake(
+                        cursor = "",
+                        count = 1,
+                        direct = Direct.Early,
+                        userID = ""
+                    )
+                )
+            )
+        }
+    }
+
+    fun postComment(
+        postId: String,
+        replyUserId: String,
+        comment: String,
+        callback: Callback<ApiResponse<Comment2GetData>>
+    ): Single<ApiResponse<Comment2GetData>> {
+        return Single.create<ApiResponse<Comment2GetData>> {
+            it.onSuccess(
+                ApiResponse.success(
+                    Comment2GetData.fake()
+                )
+            )
+        }
+    }
+
+    fun deleteComment(
+        postId: String,
+        commentId: String
+    ): Single<ApiResponse<ResultData>> {
+        return Single.create<ApiResponse<ResultData>> {
+            it.onSuccess(
+                ApiResponse.success(
+                    ResultData(error = 200)
+                )
+            )
+        }
+    }
 }

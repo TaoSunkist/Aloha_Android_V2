@@ -99,9 +99,10 @@ class Comment2ListApiService : AbsBaseListApiService<PostComment, String>() {
             return emptyList()
         }
         val result: MutableList<PostComment> = ArrayList(
-            data.list!!.size
+            data.list.size
         )
-        data.list?.map { commentDTO ->
+        data.list.map { commentDTO ->
+            /* 根据userid拿取userinfo */
             val user2 = getUser(commentDTO.userId, data.userMap, data.imageMap)
             val replyUser = getUser(commentDTO.replyUserId, data.userMap, data.imageMap)
             result.add(fromCommentDTO(commentDTO, replyUser, user2))

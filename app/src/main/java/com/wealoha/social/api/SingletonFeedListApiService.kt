@@ -5,7 +5,10 @@ import com.wealoha.social.beans.Direct
 import com.wealoha.social.beans.FeedGetData
 import com.wealoha.social.beans.Post
 import com.wealoha.social.beans.ApiResponse
+import com.wealoha.social.extension.observeOnMainThread
 import com.wealoha.social.utils.XL
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import retrofit.Callback
 import retrofit.RetrofitError
 import retrofit.client.Response
@@ -20,27 +23,22 @@ class SingletonFeedListApiService : Feed2ListApiService() {
         postId: String,
         callback: ApiListCallback<Post?>
     ) {
-        feed2Api!!.singleFeed(postId, object : Callback<ApiResponse<FeedGetData>> {
-            override fun failure(error: RetrofitError) {
-                XL.i("Feed2Fragment", error.message)
-                callback.fail(null, error)
-            }
-
-            override fun success(apiResponse: ApiResponse<FeedGetData>, arg1: Response) {
-                val _result = ApiResponse.success(
-                    FeedGetData.fake(
-                        cursor = cursor,
-                        direct = direct,
-                        userID = postId,
-                        count = count
-                    )
+        AlohaService.shared.singleFeed(postId).observeOnMainThread(onSuccess = {
+            val _result = ApiResponse.success(
+                FeedGetData.fake(
+                    cursor = cursor,
+                    direct = direct,
+                    userID = postId,
+                    count = count
                 )
-                callback.success(
-                    transResult2List(_result.data!!, ""),
-                    _result.data!!.nextCursorId
-                )
-            }
-        })
+            )
+            callback.success(
+                transResult2List(_result.data!!, ""),
+                _result.data!!.nextCursorId
+            )
+        }, onError = {
+            callback.fail(null, null)
+        }).addTo(compositeDisposable = CompositeDisposable())
     }
 
     companion object {

@@ -42,4 +42,21 @@ data class CommentDTO(
         } else if (id != other.id) return false
         return true
     }
+
+    companion object {
+        fun fakeForList(toUserDTO: UserDTO, fromUserDTO: UserDTO): CommentDTO {
+            return CommentDTO(
+                createTimeMillis = 0,
+                userId = "",
+                mine = false,
+                id = "",
+                type = null,
+                comment = "",
+                replyUserId = "",
+                whisper = false,
+                user = fromUserDTO,
+                replyUser = toUserDTO
+            )
+        }
+    }
 }

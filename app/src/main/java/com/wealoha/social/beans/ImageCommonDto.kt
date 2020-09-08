@@ -43,6 +43,17 @@ data class ImageCommonDto(
             }
             return map
         }
+
+        fun init(avatarImage: ImageCommonDto): ImageCommonDto {
+            return ImageCommonDto(
+                imageId = avatarImage.imageId,
+                width = 0,
+                height = 0,
+                urlPatternWidth = null,
+                urlPatternWidthHeight = null,
+                type = ""
+            )
+        }
     }
 
     /**
