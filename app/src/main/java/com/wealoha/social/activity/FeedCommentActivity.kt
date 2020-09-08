@@ -1,5 +1,6 @@
 package com.wealoha.social.activity
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -129,6 +130,7 @@ class FeedCommentActivity : BaseFragAct(), View.OnClickListener,
      * @ listview
      * @return void
      */
+    @SuppressLint("ClickableViewAccessibility")
     private fun initHeadView() {
         headView =
             layoutInflater.inflate(R.layout.item_feed_comment_head, mContentListView, false)
@@ -142,7 +144,7 @@ class FeedCommentActivity : BaseFragAct(), View.OnClickListener,
             headView.findViewById<View>(R.id.item_feed_comment_head_load_tv) as TextView
         mProgressBar =
             headView.findViewById<View>(R.id.item_feed_comment_pb) as ProgressBar
-        headView.setVisibility(View.INVISIBLE)
+        headView.visibility = View.INVISIBLE
         mContentListView!!.addHeaderView(headView)
     }
 
