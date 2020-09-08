@@ -112,10 +112,8 @@ class FeedCommentActivity : BaseFragAct(), View.OnClickListener,
         private get() {
             val bundle = intent.extras
             if (bundle != null) {
-                mPost =
-                    bundle.getParcelable<Parcelable>(GlobalConstants.TAGS.POST_TAG) as Post?
-                mUser =
-                    bundle.getParcelable<Parcelable>(User.TAG) as User?
+                mPost = bundle.getParcelable<Parcelable>(GlobalConstants.TAGS.POST_TAG) as Post?
+                mUser = bundle.getParcelable<Parcelable>(User.TAG) as User?
                 return true
             }
             return false
