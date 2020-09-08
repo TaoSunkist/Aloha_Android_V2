@@ -1,9 +1,12 @@
 package com.wealoha.social.beans
 
+import android.os.Parcelable
 import com.wealoha.social.beans.User.Companion.fromDTO
+import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 import java.util.*
 
+@Parcelize
 data class PostComment(
     val createTimeMillis: Long,
     val id: String?,
@@ -11,7 +14,7 @@ data class PostComment(
     val replyUser: User,
     val user: User,
     val whisper: Boolean
-) : Serializable {
+) : Serializable, Parcelable {
 
 
     fun isWhisper(): Boolean {

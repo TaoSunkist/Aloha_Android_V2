@@ -150,9 +150,6 @@ class SwipeMenuListFragment : BaseFragment(), ListItemCallback, OnItemClickListe
                     }
                     mApiResponse = apiResponse
                     myHandler.sendMessage(msg)
-                    if (mUsers == null) {
-                        mUsers = ArrayList()
-                    }
                     mUsers.addAll(apiResponse.data!!.list!!)
                     cursor = apiResponse.data!!.nextCursorId ?: ""
                     if (TextUtils.isEmpty(cursor) || "null" == cursor) {
@@ -423,7 +420,7 @@ class SwipeMenuListFragment : BaseFragment(), ListItemCallback, OnItemClickListe
         } else if (mListType == LISTTYPE_LIKE) {
             requestcode = PROFIEL_REQUESTCODE
         }
-        (activity as BaseFragAct?)!!.startFragmentForResult(
+        (activity as BaseFragAct).startFragmentForResult(
             Profile2Fragment::class.java, bundle, true, requestcode,  //
             R.anim.left_in, R.anim.stop
         )
@@ -432,32 +429,30 @@ class SwipeMenuListFragment : BaseFragment(), ListItemCallback, OnItemClickListe
     override fun onActivityResultCallback(
         requestcode: Int,
         resultcode: Int,
-        result: Intent
+        result: Intent?
     ) {
-        if (resultcode == Activity.RESULT_OK) {
-            when (requestcode) {
-                PROFIEL_REQUESTCODE -> {
-                    XL.i("UNALOHA_SOMEONE", "userid" + result.getStringExtra("userid"))
-                    val userid = result.getStringExtra("userid")
-                    if (mUsers != null) {
+        result?.let {
+            if (resultcode == Activity.RESULT_OK) {
+                when (requestcode) {
+                    PROFIEL_REQUESTCODE -> {
+                        val userid = result.getStringExtra("userid")
                         var i = 0
-                        while (i < mUsers!!.size) {
-                            val (id) = mUsers!![i]
+                        while (i < mUsers.size) {
+                            val (id) = mUsers[i]
                             if (id == userid) {
                                 mUsers.removeAt(i)
                                 break
                             }
                             i++
                         }
-                    }
-                    mSwipeAdapter!!.notifyDataSetChangedByList(mUsers)
-                    if (mCurrentUser!!.alohaCount > 0) {
-                        mCurrentUser!!.alohaCount = mCurrentUser!!.alohaCount - 1
-                        mTitle!!.text = resources.getString(
-                            R.string.profile_aloha_title,
-                            mCurrentUser!!.alohaCount
-                        )
-                        contextUtil.currentUser = mCurrentUser
+                        mSwipeAdapter!!.notifyDataSetChangedByList(mUsers)
+                        if (mCurrentUser.alohaCount > 0) {
+                            mCurrentUser.alohaCount = mCurrentUser.alohaCount - 1
+                            mTitle!!.text = resources.getString(
+                                R.string.profile_aloha_title, mCurrentUser.alohaCount
+                            )
+                            contextUtil.currentUser = mCurrentUser
+                        }
                     }
                 }
             }
